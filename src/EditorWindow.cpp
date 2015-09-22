@@ -38,12 +38,15 @@
 
 #include "Editor.h"
 #include "GoToLineWindow.h"
+#include "Languages.h"
 #include "Preferences.h"
+#include "Styler.h"
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "EditorWindow"
 
 Preferences* EditorWindow::fPreferences = NULL;
+Styler* EditorWindow::fStyler = NULL;
 
 EditorWindow::EditorWindow()
 	:
@@ -85,10 +88,17 @@ EditorWindow::EditorWindow()
 		.AddMenu(B_TRANSLATE("Search"))
 			.AddItem(B_TRANSLATE("Go to line" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_GOTOLINE, ',')
 		.End()
+		.AddMenu(B_TRANSLATE("Language"))
+			.AddItem("Dummy", MAINMENU_LANGUAGE)
+		.End()
 		.AddMenu(B_TRANSLATE("Help"))
 			.AddItem(B_TRANSLATE("About" B_UTF8_ELLIPSIS), B_ABOUT_REQUESTED)
 		.End();
-	
+
+	BMenu *languageMenu = fMainMenu->FindItem(MAINMENU_LANGUAGE)->Menu();
+	languageMenu->RemoveItem((int32) 0);
+	_PopulateLanguageMenu(languageMenu);
+
 	fEditor = new Editor();
 
 	BGroupLayout *layout = new BGroupLayout(B_VERTICAL, 0);
@@ -111,6 +121,8 @@ EditorWindow::EditorWindow()
 	
 	fEditor->SendMessage(SCI_USEPOPUP, 0, 0);
 	
+	fStyler->ApplyGlobal(fEditor);
+
 	RefreshTitle();
 }
 
@@ -247,6 +259,15 @@ EditorWindow::QuitRequested()
 void
 EditorWindow::MessageReceived(BMessage* message)
 {
+	if(message->what >= MAINMENU_LANGUAGE && message->what < MAINMENU_LANGUAGE + LANGUAGE_COUNT) {
+		uint32 lang = message->what - MAINMENU_LANGUAGE;
+		Languages languages;
+		LanguageDefinition& langDef = languages.GetLanguage(static_cast<LanguageType>(lang));
+		fEditor->SendMessage(SCI_SETLEXER, static_cast<uptr_t>(langDef.fLexerID), 0);
+		fStyler->ApplyLanguage(fEditor, langDef.fLexerName.String());
+		languages.ApplyLanguage(fEditor, "data/langs.xml", langDef.fLexerName.String());
+		return;
+	}
 	switch(message->what) {
 		case MAINMENU_FILE_NEW:
 			New();
@@ -323,5 +344,18 @@ EditorWindow::MessageReceived(BMessage* message)
 		default:
 			BWindow::MessageReceived(message);
 		break;
+	}
+}
+
+
+void
+EditorWindow::_PopulateLanguageMenu(BMenu* languageMenu)
+{
+	Languages languages;
+	languages.SortAlphabetically();
+	for(int i = 0; i < LANGUAGE_COUNT; ++i) {
+		LanguageDefinition& langDef = languages.GetLanguages().at(i);
+		BMenuItem *menuItem = new BMenuItem(langDef.fShortName, new BMessage(MAINMENU_LANGUAGE + langDef.fType));
+		languageMenu->AddItem(menuItem);
 	}
 }

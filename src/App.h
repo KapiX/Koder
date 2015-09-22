@@ -27,6 +27,7 @@
 class AppPreferencesWindow;
 class EditorWindow;
 class Preferences;
+class Styler;
 
 class App : public BApplication {
 public:
@@ -43,6 +44,7 @@ private:
 	EditorWindow*				fLastActiveWindow;
 	AppPreferencesWindow*		fAppPreferencesWindow;
 	Preferences*				fPreferences;
+	Styler*						fStyler;
 };
 
 #endif // APP_H

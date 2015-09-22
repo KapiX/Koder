@@ -27,17 +27,22 @@
 #include "AppPreferencesWindow.h"
 #include "EditorWindow.h"
 #include "Preferences.h"
+#include "Styler.h"
 
 App::App()
 	:
 	BApplication(gAppMime),
 	fLastActiveWindow(NULL),
-	fPreferences(NULL)
+	fPreferences(NULL),
+	fStyler(NULL)
 {
 	// TODO: use BPathFinder
 	fPreferences = new Preferences("/boot/home/config/settings/Koder");
 	fPreferences->Load();
 	EditorWindow::SetPreferences(fPreferences);
+
+	fStyler = new Styler("data/styles/default.xml");
+	EditorWindow::SetStyler(fStyler);
 }
 
 App::~App()
@@ -52,6 +57,7 @@ App::~App()
 	}
 	
 	delete fPreferences;
+	delete fStyler;
 }
 
 void

@@ -28,11 +28,13 @@
 
 struct entry_ref;
 class BFilePanel;
+class BMenu;
 class BMenuBar;
 class BPath;
 class Editor;
 class GoToLineWindow;
 class Preferences;
+class Styler;
 
 
 const BString gAppName = "Koder";
@@ -45,15 +47,17 @@ enum {
 	MAINMENU_FILE_SAVE			= 'msav',
 	MAINMENU_FILE_SAVEAS		= 'msva',
 	MAINMENU_FILE_QUIT			= 'mqut',
-	
+
 	MAINMENU_EDIT_FILE_PREFERENCES	= 'mefp',
 	MAINMENU_EDIT_APP_PREFERENCES	= 'meap',
-	
+
 	MAINMENU_SEARCH_GOTOLINE	= 'msgl',
-	
+
 	MAINMENU_VIEW_LINEHIGHLIGHT	= 'mlhl',
 	MAINMENU_VIEW_LINENUMBERS	= 'mvln',
-	
+
+	MAINMENU_LANGUAGE			= 'ml00',
+
 	FILE_OPEN					= 'flop',
 	FILE_SAVE					= 'flsv',
 
@@ -64,16 +68,17 @@ enum {
 class EditorWindow : public BWindow {
 public:
 				EditorWindow();
-	
+
 	void		New();
 	void		OpenFile(entry_ref* entry);
 	void		RefreshTitle();
 	void		SaveFile(BPath* path);
-	
+
 	bool		QuitRequested();
 	void		MessageReceived(BMessage* message);
-	
+
 	static void	SetPreferences(Preferences* preferences) { fPreferences = preferences; }
+	static void	SetStyler(Styler* styler) { fStyler = styler; }
 private:
 	BMenuBar*	fMainMenu;
 	BPath*		fOpenedFilePath;
@@ -81,10 +86,13 @@ private:
 	Editor*		fEditor;
 	BFilePanel*	fOpenPanel;
 	BFilePanel*	fSavePanel;
-	
+
 	GoToLineWindow*	fGoToLineWindow;
-	
+
 	static Preferences*	fPreferences;
+	static Styler*		fStyler;
+
+	void _PopulateLanguageMenu(BMenu* languageMenu);
 };
 
 #endif // EDITORWINDOW_H

@@ -35,6 +35,7 @@ SRCS = \
 	src/Editor.cpp \
 	src/EditorWindow.cpp \
 	src/GoToLineWindow.cpp \
+	src/Languages.cpp \
 	src/Preferences.cpp \
 	src/Styler.cpp
 
@@ -62,7 +63,7 @@ RSRCS =
 #	- 	if your library does not follow the standard library naming scheme,
 #		you need to specify the path to the library and it's name.
 #		(e.g. for mylib.a, specify "mylib.a" or "path/mylib.a")
-LIBS = $(STDCPPLIBS) be tracker localestub xml2 Scintilla/scintilla.a
+LIBS = $(STDCPPLIBS) be tracker localestub xml2 scintilla
 
 #	Specify additional paths to directories following the standard libXXX.so
 #	or libXXX.a naming scheme. You can specify full paths or paths relative
@@ -74,7 +75,9 @@ LIBPATHS =
 #	Additional paths to look for system headers. These use the form
 #	"#include <header>". Directories that contain the files in SRCS are
 #	NOT auto-included here.
-SYSTEM_INCLUDE_PATHS = Scintilla $(shell finddir B_SYSTEM_HEADERS_DIRECTORY)/libxml2
+SYSTEM_INCLUDE_PATHS = \
+	$(shell findpaths -r "libxml2_devel" B_FIND_PATH_HEADERS_DIRECTORY)/libxml2 \
+	$(shell findpaths -r "scintilla_devel" B_FIND_PATH_HEADERS_DIRECTORY)/scintilla
 
 #	Additional paths paths to look for local headers. These use the form
 #	#include "header". Directories that contain the files in SRCS are
@@ -112,7 +115,7 @@ SYMBOLS :=
 DEBUGGER := 
 
 #	Specify any additional compiler flags to be used.
-COMPILER_FLAGS = 
+COMPILER_FLAGS = -std=c++11 -g
 
 #	Specify any additional linker flags to be used.
 LINKER_FLAGS = 
