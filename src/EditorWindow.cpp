@@ -146,8 +146,9 @@ EditorWindow::OpenFile(entry_ref* ref)
 	BFile file(&entry, B_READ_ONLY);
 	off_t size;
 	file.GetSize(&size);
-	char* buffer = new char[size];
+	char* buffer = new char[size + 1];
 	file.Read(buffer, size);
+	buffer[size] = 0;
 	fEditor->SetText(buffer);
 	fEditor->SendMessage(SCI_SETSAVEPOINT, 0, 0);
 	delete []buffer;
