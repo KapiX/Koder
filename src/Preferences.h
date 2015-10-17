@@ -23,6 +23,7 @@
 
 #include <File.h>
 #include <Message.h>
+#include <Path.h>
 #include <String.h>
 
 class Preferences {
@@ -33,6 +34,8 @@ public:
 	void						Load();
 	void						Save();
 	
+	BPath						fSettingsPath;
+
 	// file specific
 	uint8						fTabWidth;
 	bool						fTabsToSpaces;
@@ -40,6 +43,7 @@ public:
 	bool						fLineHighlighting;
 	bool						fLineNumbers;
 	uint8						fIndentationGuides;
+	BString						fStyleFile;
 	
 private:
 	BString						fPath;

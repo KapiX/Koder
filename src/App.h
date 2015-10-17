@@ -34,6 +34,8 @@ public:
 								App();
 								~App();
 
+	void						Init();
+
 	void						AboutRequested();
 	bool						QuitRequested();
 	void						ReadyToRun();

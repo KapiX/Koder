@@ -24,6 +24,7 @@ int
 main()
 {
 	App* app = new App();
+	app->Init();
 	app->Run();
 	delete app;
 	

@@ -266,7 +266,9 @@ EditorWindow::MessageReceived(BMessage* message)
 		LanguageDefinition& langDef = languages.GetLanguage(static_cast<LanguageType>(lang));
 		fEditor->SendMessage(SCI_SETLEXER, static_cast<uptr_t>(langDef.fLexerID), 0);
 		fStyler->ApplyLanguage(fEditor, langDef.fLexerName.String());
-		languages.ApplyLanguage(fEditor, "data/langs.xml", langDef.fLexerName.String());
+		BPath langsPath(fPreferences->fSettingsPath);
+		langsPath.Append("langs.xml");
+		languages.ApplyLanguage(fEditor, langsPath.Path(), langDef.fLexerName.String());
 		return;
 	}
 	switch(message->what) {

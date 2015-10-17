@@ -98,6 +98,9 @@ Preferences::Load()
 	if(storage.FindInt8("indentationGuides", (int8*) &fIndentationGuides) != B_OK) {
 		fIndentationGuides = 1;
 	}
+	if(storage.FindString("styleFile", &fStyleFile) != B_OK) {
+		fStyleFile = "default.xml";
+	}
 	
 	delete file;
 }
@@ -153,6 +156,7 @@ Preferences::Save()
 	storage.AddBool("lineHighlighting", fLineHighlighting);
 	storage.AddBool("lineNumbers", fLineNumbers);
 	storage.AddInt8("indentationGuides", fIndentationGuides);
+	storage.AddString("styleFile", fStyleFile);
 	storage.Flatten(file);
 	
 	delete file;

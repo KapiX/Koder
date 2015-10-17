@@ -76,8 +76,8 @@ LIBPATHS =
 #	"#include <header>". Directories that contain the files in SRCS are
 #	NOT auto-included here.
 SYSTEM_INCLUDE_PATHS = \
-	$(shell findpaths -r "libxml2_devel" B_FIND_PATH_HEADERS_DIRECTORY)/libxml2 \
-	$(shell findpaths -r "scintilla_devel" B_FIND_PATH_HEADERS_DIRECTORY)/scintilla
+	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY libxml2) \
+	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY scintilla)
 
 #	Additional paths paths to look for local headers. These use the form
 #	#include "header". Directories that contain the files in SRCS are

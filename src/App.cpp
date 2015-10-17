@@ -21,8 +21,11 @@
 #include "App.h"
 
 #include <Alert.h>
+#include <Directory.h>
 #include <Entry.h>
 #include <File.h>
+#include <FindDirectory.h>
+#include <Path.h>
 
 #include "AppPreferencesWindow.h"
 #include "EditorWindow.h"
@@ -36,13 +39,6 @@ App::App()
 	fPreferences(NULL),
 	fStyler(NULL)
 {
-	// TODO: use BPathFinder
-	fPreferences = new Preferences("/boot/home/config/settings/Koder");
-	fPreferences->Load();
-	EditorWindow::SetPreferences(fPreferences);
-
-	fStyler = new Styler("data/styles/default.xml");
-	EditorWindow::SetStyler(fStyler);
 }
 
 App::~App()
@@ -58,6 +54,29 @@ App::~App()
 	
 	delete fPreferences;
 	delete fStyler;
+}
+
+void
+App::Init()
+{
+	BPath settingsPath;
+	find_directory(B_USER_SETTINGS_DIRECTORY, &settingsPath);
+	settingsPath.Append("Koder");
+	BDirectory preferencesDir(settingsPath.Path());
+	if(preferencesDir.InitCheck() == B_ENTRY_NOT_FOUND) {
+		preferencesDir.CreateDirectory(".", nullptr);
+	}
+
+	BPath preferencesFile(&preferencesDir, "settings");
+	fPreferences = new Preferences(preferencesFile.Path());
+	fPreferences->Load();
+	fPreferences->fSettingsPath = settingsPath;
+	EditorWindow::SetPreferences(fPreferences);
+
+	BPath styleFile(&preferencesDir, "styles");
+	styleFile.Append(fPreferences->fStyleFile);
+	fStyler = new Styler(styleFile.Path());
+	EditorWindow::SetStyler(fStyler);
 }
 
 void
