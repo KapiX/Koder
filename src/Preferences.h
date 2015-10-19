@@ -26,6 +26,7 @@
 #include <Path.h>
 #include <String.h>
 
+
 class Preferences {
 public:
 								Preferences(const char* path);
@@ -42,6 +43,8 @@ public:
 	// broadcast to all editors
 	bool						fLineHighlighting;
 	bool						fLineNumbers;
+	bool						fEOLVisible;
+	bool						fWhiteSpaceVisible;
 	uint8						fIndentationGuides;
 	BString						fStyleFile;
 	

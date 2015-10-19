@@ -85,6 +85,12 @@ EditorWindow::EditorWindow()
 			.AddItem(B_TRANSLATE("File preferences" B_UTF8_ELLIPSIS), MAINMENU_EDIT_FILE_PREFERENCES)
 			.AddItem(B_TRANSLATE("Application preferences" B_UTF8_ELLIPSIS), MAINMENU_EDIT_APP_PREFERENCES)
 		.End()
+		.AddMenu(B_TRANSLATE("View"))
+			.AddMenu(B_TRANSLATE("Special symbols"))
+				.AddItem(B_TRANSLATE("Show white space"), MAINMENU_VIEW_SPECIAL_WHITESPACE)
+				.AddItem(B_TRANSLATE("Show EOLs"), MAINMENU_VIEW_SPECIAL_EOL)
+			.End()
+		.End()
 		.AddMenu(B_TRANSLATE("Search"))
 			.AddItem(B_TRANSLATE("Go to line" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_GOTOLINE, ',')
 		.End()
@@ -107,6 +113,10 @@ EditorWindow::EditorWindow()
 	layout->AddView(fEditor);
 	
 	if(fPreferences != NULL) {
+		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
+		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
+		fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
+		fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
 		fEditor->SendMessage(SCI_SETTABWIDTH, fPreferences->fTabWidth, 0);
 		fEditor->SendMessage(SCI_SETUSETABS, !fPreferences->fTabsToSpaces, 0);
 		fEditor->SendMessage(SCI_SETCARETLINEVISIBLE, fPreferences->fLineHighlighting, 0);
@@ -300,6 +310,16 @@ EditorWindow::MessageReceived(BMessage* message)
 				fGoToLineWindow = new GoToLineWindow(this);
 			}
 			fGoToLineWindow->ShowCentered(Frame());
+		} break;
+		case MAINMENU_VIEW_SPECIAL_WHITESPACE: {
+			fPreferences->fWhiteSpaceVisible = !fPreferences->fWhiteSpaceVisible;
+			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fWhiteSpaceVisible);
+			fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
+		} break;
+		case MAINMENU_VIEW_SPECIAL_EOL: {
+			fPreferences->fEOLVisible = !fPreferences->fEOLVisible;
+			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fEOLVisible);
+			fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
 		} break;
 		case B_SAVE_REQUESTED: {
 			entry_ref ref;

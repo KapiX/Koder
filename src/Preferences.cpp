@@ -98,6 +98,12 @@ Preferences::Load()
 	if(storage.FindInt8("indentationGuides", (int8*) &fIndentationGuides) != B_OK) {
 		fIndentationGuides = 1;
 	}
+	if(storage.FindBool("whiteSpaceVisible", &fWhiteSpaceVisible) != B_OK) {
+		fWhiteSpaceVisible = false;
+	}
+	if(storage.FindBool("EOLVisible", &fEOLVisible) != B_OK) {
+		fEOLVisible = false;
+	}
 	if(storage.FindString("styleFile", &fStyleFile) != B_OK) {
 		fStyleFile = "default.xml";
 	}
@@ -155,6 +161,8 @@ Preferences::Save()
 	storage.AddBool("tabsToSpaces", fTabsToSpaces);
 	storage.AddBool("lineHighlighting", fLineHighlighting);
 	storage.AddBool("lineNumbers", fLineNumbers);
+	storage.AddBool("whiteSpaceVisible", fWhiteSpaceVisible);
+	storage.AddBool("EOLVisible", fEOLVisible);
 	storage.AddInt8("indentationGuides", fIndentationGuides);
 	storage.AddString("styleFile", fStyleFile);
 	storage.Flatten(file);
