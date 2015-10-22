@@ -25,6 +25,8 @@
 #include <String.h>
 #include <Window.h>
 
+#include "Languages.h"
+
 
 struct entry_ref;
 class BFilePanel;
@@ -96,6 +98,7 @@ private:
 	static Styler*		fStyler;
 
 	void _PopulateLanguageMenu(BMenu* languageMenu);
+	void _SetLanguage(LanguageType lang);
 };
 
 #endif // EDITORWINDOW_H

@@ -41,6 +41,7 @@ public:
 	uint8						fTabWidth;
 	bool						fTabsToSpaces;
 	// broadcast to all editors
+	BMessage					fExtensions;
 	bool						fLineHighlighting;
 	bool						fLineNumbers;
 	bool						fEOLVisible;

@@ -166,6 +166,18 @@ EditorWindow::OpenFile(entry_ref* ref)
 	fEditor->SendMessage(SCI_GOTOPOS, caretPos, 0);
 	fOpenedFileMimeType.SetTo(mimeType);
 	
+	char name[B_FILE_NAME_LENGTH];
+	entry.GetName(name);
+	char* extension = strrchr(name, '.') + 1;
+	if((int) extension == 1) {
+		extension = name;
+	}
+
+	uint32 lang;
+	if(fPreferences->fExtensions.FindUInt32(extension, &lang) == B_OK) {
+		_SetLanguage(static_cast<LanguageType>(lang));
+	}
+
 	be_roster->AddToRecentDocuments(ref, gAppMime);
 	
 	if(fOpenedFilePath == NULL)
@@ -272,13 +284,7 @@ EditorWindow::MessageReceived(BMessage* message)
 {
 	if(message->what >= MAINMENU_LANGUAGE && message->what < MAINMENU_LANGUAGE + LANGUAGE_COUNT) {
 		uint32 lang = message->what - MAINMENU_LANGUAGE;
-		Languages languages;
-		LanguageDefinition& langDef = languages.GetLanguage(static_cast<LanguageType>(lang));
-		fEditor->SendMessage(SCI_SETLEXER, static_cast<uptr_t>(langDef.fLexerID), 0);
-		fStyler->ApplyLanguage(fEditor, langDef.fLexerName.String());
-		BPath langsPath(fPreferences->fSettingsPath);
-		langsPath.Append("langs.xml");
-		languages.ApplyLanguage(fEditor, langsPath.Path(), langDef.fLexerName.String());
+		_SetLanguage(static_cast<LanguageType>(lang));
 		return;
 	}
 	switch(message->what) {
@@ -381,4 +387,17 @@ EditorWindow::_PopulateLanguageMenu(BMenu* languageMenu)
 		BMenuItem *menuItem = new BMenuItem(langDef.fShortName, new BMessage(MAINMENU_LANGUAGE + langDef.fType));
 		languageMenu->AddItem(menuItem);
 	}
+}
+
+
+void
+EditorWindow::_SetLanguage(LanguageType lang)
+{
+	Languages languages;
+	LanguageDefinition& langDef = languages.GetLanguage(static_cast<LanguageType>(lang));
+	fEditor->SendMessage(SCI_SETLEXER, static_cast<uptr_t>(langDef.fLexerID), 0);
+	fStyler->ApplyLanguage(fEditor, langDef.fLexerName.String());
+	BPath langsPath(fPreferences->fSettingsPath);
+	langsPath.Append("langs.xml");
+	languages.ApplyLanguage(fEditor, langsPath.Path(), langDef.fLexerName.String());
 }

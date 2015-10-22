@@ -1,0 +1,26 @@
+resource app_signature "application/x-vnd.KapiX-Koder";
+resource app_flags B_SINGLE_LAUNCH;
+
+resource app_version {
+	major  = 0,
+	middle = 0,
+	minor  = 1,
+
+	variety = B_APPV_DEVELOPMENT,
+	internal = 1,
+
+	short_info = "Koder",
+	long_info = "Code editor for Haiku."
+};
+
+resource file_types message {
+	"types" = "text",
+	"types" = "text/plain",
+	"types" = "text/x-source-code",
+	"types" = "text/x-makefile",
+	"types" = "text/x-rez",
+	"types" = "text/x-jamfile",
+	"types" = "application/xhtml+xml",
+	"types" = "application/x-mw-project",
+	"types" = "text/x-vnd.dw-Paladin.Project"
+};

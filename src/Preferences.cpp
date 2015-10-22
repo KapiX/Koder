@@ -22,6 +22,8 @@
 
 #include <Alert.h>
 
+#include "Languages.h"
+
 // TODO: B_TRANSLATE
 
 Preferences::Preferences(const char* path)
@@ -107,6 +109,15 @@ Preferences::Load()
 	if(storage.FindString("styleFile", &fStyleFile) != B_OK) {
 		fStyleFile = "default.xml";
 	}
+	if(storage.FindMessage("extensions", &fExtensions) != B_OK) {
+		fExtensions.AddUInt32("c", LANGUAGE_C);
+		fExtensions.AddUInt32("h", LANGUAGE_CPP);
+		fExtensions.AddUInt32("cpp", LANGUAGE_CPP);
+		fExtensions.AddUInt32("hpp", LANGUAGE_CPP);
+		fExtensions.AddUInt32("makefile", LANGUAGE_MAKEFILE);
+		fExtensions.AddUInt32("Makefile", LANGUAGE_MAKEFILE);
+		fExtensions.AddUInt32("py", LANGUAGE_PYTHON);
+	}
 	
 	delete file;
 }
@@ -165,6 +176,7 @@ Preferences::Save()
 	storage.AddBool("EOLVisible", fEOLVisible);
 	storage.AddInt8("indentationGuides", fIndentationGuides);
 	storage.AddString("styleFile", fStyleFile);
+	storage.AddMessage("extensions", &fExtensions);
 	storage.Flatten(file);
 	
 	delete file;
