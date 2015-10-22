@@ -161,6 +161,7 @@ EditorWindow::OpenFile(entry_ref* ref)
 	buffer[size] = 0;
 	fEditor->SetText(buffer);
 	fEditor->SendMessage(SCI_SETSAVEPOINT, 0, 0);
+	fEditor->SendMessage(SCI_EMPTYUNDOBUFFER, 0, 0);
 	delete []buffer;
 	
 	fEditor->SendMessage(SCI_GOTOPOS, caretPos, 0);
