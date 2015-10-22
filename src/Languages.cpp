@@ -27,10 +27,9 @@
 
 #include <SciLexer.h>
 
-#include <libxml/parser.h>
-#include <libxml/xpath.h>
-
 #include "Editor.h"
+#include "XmlDocument.h"
+#include "XmlNode.h"
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Languages"
@@ -122,48 +121,24 @@ Languages::ApplyLanguage(Editor* editor, const char* path, const char* lang)
 {
 	BString xpath("/NotepadPlus/Languages/Language[@name='%s']/Keywords");
 	xpath.ReplaceFirst("%s", lang);
-	xmlDocPtr doc;
-	xmlXPathContextPtr context;
-	xmlXPathObjectPtr keywords;
-	
-	doc = xmlParseFile(path);
-	
-	if(doc == NULL) {
-	}
-	
-	context = xmlXPathNewContext(doc);
-	if(context == NULL) {	
-	}
-	
-	keywords = xmlXPathEvalExpression((const xmlChar*) xpath.String(), context);
-	
-	xmlXPathFreeContext(context);
-	
-	if(keywords == NULL) {	
-	}
-	
-	if(xmlXPathNodeSetIsEmpty(keywords->nodesetval)) {
-		xmlXPathFreeObject(keywords);
-	}
-	
-	for(int i = 0; i < keywords->nodesetval->nodeNr; i++) {
-		xmlNodePtr node = keywords->nodesetval->nodeTab[i];	
-		xmlChar* name;
-		xmlChar* content;
-		name = xmlGetProp(node, (xmlChar*) "name");
-		content = xmlNodeGetContent(node);
-		if(name != NULL) {
-			if(xmlStrcmp(name, (xmlChar*) "instre1") == 0) editor->SendMessage(SCI_SETKEYWORDS, 0, (sptr_t) content);
-			else if(xmlStrcmp(name, (xmlChar*) "instre2") == 0) editor->SendMessage(SCI_SETKEYWORDS, 2, (sptr_t) content);
-			else if(xmlStrcmp(name, (xmlChar*) "type1") == 0) editor->SendMessage(SCI_SETKEYWORDS, 1, (sptr_t) content);
-			else if(xmlStrcmp(name, (xmlChar*) "type2") == 0) editor->SendMessage(SCI_SETKEYWORDS, 3, (sptr_t) content);
-			else if(xmlStrcmp(name, (xmlChar*) "type3") == 0) editor->SendMessage(SCI_SETKEYWORDS, 4, (sptr_t) content);
-			else if(xmlStrcmp(name, (xmlChar*) "type4") == 0) editor->SendMessage(SCI_SETKEYWORDS, 5, (sptr_t) content);
-			else if(xmlStrcmp(name, (xmlChar*) "type5") == 0) editor->SendMessage(SCI_SETKEYWORDS, 6, (sptr_t) content);
+	XmlDocument document(path);
+
+	uint32 count;
+	XmlNode* nodes = document.GetNodesByXPath(xpath, &count);
+
+	for(int i = 0; i < count; i++) {
+		BString name = nodes[i].GetAttribute("name");
+		BString content = nodes[i].GetContent();
+		if(!name.IsEmpty()) {
+			if(name == "instre1") editor->SendMessage(SCI_SETKEYWORDS, 0, (sptr_t) content.String());
+			else if(name == "instre2") editor->SendMessage(SCI_SETKEYWORDS, 2, (sptr_t) content.String());
+			else if(name == "type1") editor->SendMessage(SCI_SETKEYWORDS, 1, (sptr_t) content.String());
+			else if(name == "type2") editor->SendMessage(SCI_SETKEYWORDS, 3, (sptr_t) content.String());
+			else if(name == "type3") editor->SendMessage(SCI_SETKEYWORDS, 4, (sptr_t) content.String());
+			else if(name == "type4") editor->SendMessage(SCI_SETKEYWORDS, 5, (sptr_t) content.String());
+			else if(name == "type5") editor->SendMessage(SCI_SETKEYWORDS, 6, (sptr_t) content.String());
 		}
-		xmlFree(name);
-		xmlFree(content);
 	}
-	xmlXPathFreeObject(keywords);
-	xmlFreeDoc(doc);
+
+	delete []nodes;
 }

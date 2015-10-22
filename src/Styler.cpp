@@ -27,99 +27,69 @@
 #include <String.h>
 
 #include "Editor.h"
+#include "XmlDocument.h"
+#include "XmlNode.h"
 
 Styler::Styler(const char* path)
+	:
+	fDocument(new XmlDocument(path))
 {
-	fPath = strdup(path);
 }
 
 Styler::~Styler()
 {
-	delete[] fPath;
+	delete fDocument;
 }
 
 void
 Styler::ApplyGlobal(Editor* editor)
 {
-	const xmlChar* globalOverridePath = (xmlChar*) "/NotepadPlus/GlobalStyles/WidgetStyle[@styleID='32']";
-	const xmlChar* globalStylePath = (xmlChar*) "/NotepadPlus/GlobalStyles/WidgetStyle";
-	xmlDocPtr doc;
-	xmlXPathContextPtr context;
-	xmlXPathObjectPtr defaultStyle, globalStyle;
-	
-	doc = xmlParseFile(fPath);
-	
-	if(doc == NULL) {
-	}
-	
-	context = xmlXPathNewContext(doc);
-	if(context == NULL) {	
-	}
-	
-	defaultStyle = xmlXPathEvalExpression((const xmlChar*) globalOverridePath, context);
-	globalStyle = xmlXPathEvalExpression((const xmlChar*) globalStylePath, context);
-	
-	xmlXPathFreeContext(context);
-	
-	if(defaultStyle == NULL) {	
-	}
-	
-	if(xmlXPathNodeSetIsEmpty(defaultStyle->nodesetval)) {
-		xmlXPathFreeObject(defaultStyle);
-	}
-	
-	if(globalStyle == NULL) {	
-	}
-	
-	if(xmlXPathNodeSetIsEmpty(globalStyle->nodesetval)) {
-		xmlXPathFreeObject(globalStyle);
-	}
+	uint32 count;
+	XmlNode* defaultStyle = fDocument->GetNodesByXPath("/NotepadPlus/GlobalStyles/WidgetStyle[@styleID='32']", &count);
 	
 	int id, fg, bg, fs;
-	xmlNodePtr node = defaultStyle->nodesetval->nodeTab[0];
-	_GetAttributes(node, &id, &fg, &bg, &fs);
+	_GetAttributesFromNode(defaultStyle[0], &id, &fg, &bg, &fs);
 	
 	editor->SendMessage(SCI_STYLESETFONT, id, (sptr_t) "DejaVu Sans Mono");
-	_SetAttributes(editor, id, fg, bg, fs);
+	_SetAttributesInEditor(editor, id, fg, bg, fs);
 	editor->SendMessage(SCI_STYLECLEARALL, 0, 0);
 
-	xmlXPathFreeObject(defaultStyle);
+	delete []defaultStyle;
 	
-	for(int i = 0; i < globalStyle->nodesetval->nodeNr; i++) {
-		node = globalStyle->nodesetval->nodeTab[i];
-		_GetAttributes(node, &id, &fg, &bg, &fs);
+	XmlNode* globalStyle = fDocument->GetNodesByXPath("/NotepadPlus/GlobalStyles/WidgetStyle", &count);
+
+	for(int i = 0; i < count; i++) {
+		_GetAttributesFromNode(globalStyle[i], &id, &fg, &bg, &fs);
+		printf("%d, %d, %d, %d\n", id, fg, bg, fs);
 		
 		if(id != 0 && id != 2069) {
-			_SetAttributes(editor, id, fg, bg, fs);
+			_SetAttributesInEditor(editor, id, fg, bg, fs);
 		}
 		else
 		{
-			xmlChar* name = xmlGetProp(node, (xmlChar*) "name");
-			if(xmlStrcmp(name, (xmlChar*) "Current line background colour") == 0) {
+			BString name = globalStyle[i].GetAttribute("name");
+			if(name == "Current line background colour") {
 				editor->SendMessage(SCI_SETCARETLINEBACK, bg, 0);
 				//editor->SendMessage(SCI_SETCARETLINEBACKALPHA, 128, 0);
 			}
-			else if(xmlStrcmp(name, (xmlChar*) "White space symbol") == 0) {
+			else if(name == "White space symbol") {
 				editor->SendMessage(SCI_SETWHITESPACEFORE, true, fg);
 				editor->SendMessage(SCI_SETWHITESPACEBACK, true, bg);
 			}
-			else if(xmlStrcmp(name, (xmlChar*) "Selected text colour") == 0) {
+			else if(name == "Selected text colour") {
 				editor->SendMessage(SCI_SETSELFORE, true, fg);
 				editor->SendMessage(SCI_SETSELBACK, true, bg);
 			}
-			else if(xmlStrcmp(name, (xmlChar*) "Caret colour") == 0) {
+			else if(name == "Caret colour") {
 				editor->SendMessage(SCI_SETCARETFORE, fg, 0);
 			}
-			else if(xmlStrcmp(name, (xmlChar*) "Edge colour") == 0) {
+			else if(name == "Edge colour") {
 				editor->SendMessage(SCI_SETEDGECOLOUR, bg, 0);
 			}
-			xmlFree(name);
 		}
 	}
-	
-	xmlXPathFreeObject(globalStyle);
-	
-	xmlFreeDoc(doc);
+
+	delete []globalStyle;
 }
 
 void
@@ -127,67 +97,28 @@ Styler::ApplyLanguage(Editor* editor, const char* lang)
 {
 	BString xpath("/NotepadPlus/LexerStyles/LexerType[@name='%s']/WordsStyle");
 	xpath.ReplaceFirst("%s", lang);
-	xmlDocPtr doc;
-	xmlXPathContextPtr context;
-	xmlXPathObjectPtr lexerStyle;
-	
-	doc = xmlParseFile(fPath);
-	
-	if(doc == NULL) {
-	}
-	
-	context = xmlXPathNewContext(doc);
-	if(context == NULL) {	
-	}
-	
-	lexerStyle = xmlXPathEvalExpression((const xmlChar*) xpath.String(), context);
-	
-	xmlXPathFreeContext(context);
-	
-	if(lexerStyle == NULL) {	
-	}
-	
-	if(xmlXPathNodeSetIsEmpty(lexerStyle->nodesetval)) {
-		xmlXPathFreeObject(lexerStyle);
-	}
-	
+	uint32 count;
+	XmlNode* nodes = fDocument->GetNodesByXPath(xpath.String(), &count);
 	int id, fg, bg, fs;
-	for(int i = 0; i < lexerStyle->nodesetval->nodeNr; i++) {
-		xmlNodePtr node = lexerStyle->nodesetval->nodeTab[i];
-		_GetAttributes(node, &id, &fg, &bg, &fs);
-		_SetAttributes(editor, id, fg, bg, fs);
+	for(int i = 0; i < count; i++) {
+		_GetAttributesFromNode(nodes[i], &id, &fg, &bg, &fs);
+		_SetAttributesInEditor(editor, id, fg, bg, fs);
 	}
-	
-	xmlXPathFreeObject(lexerStyle);
-	xmlFreeDoc(doc);
+
+	delete []nodes;
 }
 
 void
-Styler::_GetAttributes(xmlNodePtr node, int* styleId, int* fgColor, int* bgColor, int* fontStyle)
+Styler::_GetAttributesFromNode(XmlNode &node, int* styleId, int* fgColor, int* bgColor, int* fontStyle)
 {
-	xmlChar* id;
-	xmlChar* fg;
-	xmlChar* bg;
-	xmlChar* fs;
-
-	id = xmlGetProp(node, (xmlChar*) "styleID");
-	fg = xmlGetProp(node, (xmlChar*) "fgColor");
-	bg = xmlGetProp(node, (xmlChar*) "bgColor");
-	fs = xmlGetProp(node, (xmlChar*) "fontStyle");
-	
-	if(id != NULL) *styleId = strtol((char*) id, NULL, 10);
-	if(fg != NULL) *fgColor = strtol((char*) fg, NULL, 16);
-	if(bg != NULL) *bgColor = strtol((char*) bg, NULL, 16);
-	if(fs != NULL) *fontStyle = strtol((char*) fs, NULL, 10);
-	
-	xmlFree(id);
-	xmlFree(fg);
-	xmlFree(bg);
-	xmlFree(fs);
+	*styleId = strtol(node.GetAttribute("styleID").String(), NULL, 10);
+	*fgColor = strtol(node.GetAttribute("fgColor").String(), NULL, 16);
+	*bgColor = strtol(node.GetAttribute("bgColor").String(), NULL, 16);
+	*fontStyle = strtol(node.GetAttribute("fontStyle").String(), NULL, 10);
 }
 
 void
-Styler::_SetAttributes(Editor* editor, int styleId, int fgColor, int bgColor, int fontStyle)
+Styler::_SetAttributesInEditor(Editor* editor, int styleId, int fgColor, int bgColor, int fontStyle)
 {
 	editor->SendMessage(SCI_STYLESETFORE, styleId, fgColor);
 	editor->SendMessage(SCI_STYLESETBACK, styleId, bgColor);

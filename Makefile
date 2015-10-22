@@ -37,7 +37,9 @@ SRCS = \
 	src/GoToLineWindow.cpp \
 	src/Languages.cpp \
 	src/Preferences.cpp \
-	src/Styler.cpp
+	src/Styler.cpp \
+	src/XmlDocument.cpp \
+	src/XmlNode.cpp
 
 #	Specify the resource definition files to use. Full or relative paths can be
 #	used.

@@ -1,7 +1,7 @@
 /*
  * Koder is a code editor for Haiku based on Scintilla.
  *
- * Copyright (C) 2014-2015 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright (C) 2015 Kacper Kasper <kacperkasper@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,28 +17,47 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-
-#ifndef STYLER_H
-#define STYLER_H
-
-class Editor;
-class XmlDocument;
-class XmlNode;
-
-/* uses Notepad++ syntax */
-class Styler {
-public:
-	Styler(const char* path);
-	~Styler();
-
-	void			ApplyGlobal(Editor* editor);
-	void			ApplyLanguage(Editor* editor, const char* lang);
-private:
-	XmlDocument*	fDocument;
-	
-	void			_GetAttributesFromNode(XmlNode& node, int* styleId, int* fgColor, int* bgColor, int* fontStyle);
-	void			_SetAttributesInEditor(Editor* editor, int styleId, int fgColor, int bgColor, int fontStyle);
-};
+#include "XmlNode.h"
 
 
-#endif // STYLER_H
+XmlNode::XmlNode()
+	:
+	fNode(nullptr)
+{
+}
+
+
+XmlNode::~XmlNode()
+{
+	xmlFreeNodeList(fNode);
+}
+
+
+void
+XmlNode::Init(xmlNodePtr node)
+{
+	fNode = xmlCopyNodeList(node);
+
+	if(fNode == NULL) {
+	}
+}
+
+
+BString
+XmlNode::GetContent()
+{
+	xmlChar* content = xmlNodeGetContent(fNode);
+	const BString temp(reinterpret_cast<char*>(content));
+	xmlFree(content);
+	return temp;
+}
+
+
+BString
+XmlNode::GetAttribute(const char* name)
+{
+	xmlChar* attr = xmlGetProp(fNode, reinterpret_cast<const xmlChar*>(name));
+	const BString temp(reinterpret_cast<char*>(attr));
+	xmlFree(attr);
+	return temp;
+}

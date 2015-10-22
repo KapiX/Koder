@@ -1,7 +1,7 @@
 /*
  * Koder is a code editor for Haiku based on Scintilla.
  *
- * Copyright (C) 2014-2015 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright (C) 2015 Kacper Kasper <kacperkasper@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,28 +17,29 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+#ifndef XMLNODE_H
+#define XMLNODE_H
 
-#ifndef STYLER_H
-#define STYLER_H
 
-class Editor;
-class XmlDocument;
-class XmlNode;
+#include <String.h>
 
-/* uses Notepad++ syntax */
-class Styler {
+#include <libxml/parser.h>
+
+
+class BString;
+
+
+class XmlNode {
 public:
-	Styler(const char* path);
-	~Styler();
+					XmlNode();
+					~XmlNode();
 
-	void			ApplyGlobal(Editor* editor);
-	void			ApplyLanguage(Editor* editor, const char* lang);
+	void			Init(xmlNodePtr node);
+	BString			GetContent();
+	BString			GetAttribute(const char* name);
 private:
-	XmlDocument*	fDocument;
-	
-	void			_GetAttributesFromNode(XmlNode& node, int* styleId, int* fgColor, int* bgColor, int* fontStyle);
-	void			_SetAttributesInEditor(Editor* editor, int styleId, int fgColor, int bgColor, int fontStyle);
+	xmlNodePtr		fNode;
 };
 
 
-#endif // STYLER_H
+#endif // XMLNODE_H
