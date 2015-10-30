@@ -113,10 +113,15 @@ Preferences::Load()
 		fExtensions.AddUInt32("c", LANGUAGE_C);
 		fExtensions.AddUInt32("h", LANGUAGE_CPP);
 		fExtensions.AddUInt32("cpp", LANGUAGE_CPP);
+		fExtensions.AddUInt32("cxx", LANGUAGE_CPP);
 		fExtensions.AddUInt32("hpp", LANGUAGE_CPP);
+		fExtensions.AddUInt32("hxx", LANGUAGE_CPP);
 		fExtensions.AddUInt32("makefile", LANGUAGE_MAKEFILE);
 		fExtensions.AddUInt32("Makefile", LANGUAGE_MAKEFILE);
 		fExtensions.AddUInt32("py", LANGUAGE_PYTHON);
+	}
+	if(storage.FindRect("windowRect", &fWindowRect) != B_OK) {
+		fWindowRect.Set(50, 50, 450, 450);
 	}
 	
 	delete file;
@@ -177,6 +182,7 @@ Preferences::Save()
 	storage.AddInt8("indentationGuides", fIndentationGuides);
 	storage.AddString("styleFile", fStyleFile);
 	storage.AddMessage("extensions", &fExtensions);
+	storage.AddRect("windowRect", fWindowRect);
 	storage.Flatten(file);
 	
 	delete file;

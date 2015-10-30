@@ -46,6 +46,9 @@ App::~App()
 	EditorWindow* window;
 	while(fWindows.CountItems() > 0) {
 		window = fWindows.RemoveItemAt(0);
+		if(fWindows.CountItems() == 0) {
+			fPreferences->fWindowRect = window->Frame();
+		}
 		if(window->LockLooper())
 		{
 			window->Quit();
@@ -133,6 +136,7 @@ App::MessageReceived(BMessage* message)
 			fWindows.RemoveItem(window);
 		}
 		if(fWindows.CountItems() == 0) {
+			fPreferences->fWindowRect = window->Frame();
 			Quit();
 		}
 	} break;

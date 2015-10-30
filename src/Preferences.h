@@ -48,6 +48,7 @@ public:
 	bool						fWhiteSpaceVisible;
 	uint8						fIndentationGuides;
 	BString						fStyleFile;
+	BRect						fWindowRect;
 	
 private:
 	BString						fPath;

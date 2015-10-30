@@ -60,7 +60,6 @@ Styler::ApplyGlobal(Editor* editor)
 
 	for(int i = 0; i < count; i++) {
 		_GetAttributesFromNode(globalStyle[i], &id, &fg, &bg, &fs);
-		printf("%d, %d, %d, %d\n", id, fg, bg, fs);
 		
 		if(id != 0 && id != 2069) {
 			_SetAttributesInEditor(editor, id, fg, bg, fs);

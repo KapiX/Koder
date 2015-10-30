@@ -50,7 +50,7 @@ Styler* EditorWindow::fStyler = NULL;
 
 EditorWindow::EditorWindow()
 	:
-	BWindow(BRect(200, 200, 605, 605), gAppName, B_DOCUMENT_WINDOW, 0)
+	BWindow(fPreferences->fWindowRect, gAppName, B_DOCUMENT_WINDOW, 0)
 {
 	fGoToLineWindow = NULL;
 	fOpenedFilePath = NULL;
