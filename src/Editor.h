@@ -24,16 +24,33 @@
 #include <ScintillaView.h>
 #include <SciLexer.h>
 
+
+class Preferences;
+
+
 enum {
 	EDITOR_SAVEPOINT_LEFT		= 'svpl',
 	EDITOR_SAVEPOINT_REACHED	= 'svpr'
 };
 
+
 class Editor : public BScintillaView {
 public:
+	enum Margin {
+		NUMBER 		= 0,
+		FOLD
+	};
+
 			Editor();
 
 	void	NotificationReceived(SCNotification* notification);
+
+	void	SetPreferences(Preferences* preferences) { fPreferences = preferences; }
+
+private:
+	void	_UpdateLineNumberWidth();
+
+	Preferences*	fPreferences;
 };
 
 #endif // EDITOR_H

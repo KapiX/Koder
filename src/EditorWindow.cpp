@@ -106,6 +106,7 @@ EditorWindow::EditorWindow()
 	_PopulateLanguageMenu(languageMenu);
 
 	fEditor = new Editor();
+	fEditor->SetPreferences(fPreferences);
 
 	BGroupLayout *layout = new BGroupLayout(B_VERTICAL, 0);
 	SetLayout(layout);
@@ -121,8 +122,7 @@ EditorWindow::EditorWindow()
 		fEditor->SendMessage(SCI_SETUSETABS, !fPreferences->fTabsToSpaces, 0);
 		fEditor->SendMessage(SCI_SETCARETLINEVISIBLE, fPreferences->fLineHighlighting, 0);
 		if(fPreferences->fLineNumbers) {
-			fEditor->SendMessage(SCI_SETMARGINTYPEN, 0, (long int) SC_MARGIN_NUMBER);
-			fEditor->SendMessage(SCI_SETMARGINWIDTHN, 0, 50);
+			fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::NUMBER, (long int) SC_MARGIN_NUMBER);
 		}
 		fEditor->SendMessage(SCI_SETINDENTATIONGUIDES, fPreferences->fIndentationGuides, 0);
 	}

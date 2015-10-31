@@ -22,6 +22,10 @@
 
 #include <Messenger.h>
 
+#include <algorithm>
+
+#include "Preferences.h"
+
 Editor::Editor()
 	:
 	BScintillaView("EditorView", 0, true, true)
@@ -39,5 +43,46 @@ Editor::NotificationReceived(SCNotification* notification)
 		case SCN_SAVEPOINTREACHED:
 			window_msg.SendMessage(EDITOR_SAVEPOINT_REACHED);
 		break;
+		case SCN_PAINTED:
+			_UpdateLineNumberWidth();
+		break;
+	}
+}
+
+// borrowed from Notepad++
+void
+Editor::_UpdateLineNumberWidth()
+{
+	if(fPreferences->fLineNumbers) {
+		int linesVisible = SendMessage(SCI_LINESONSCREEN, 0, 0);
+		if(linesVisible) {
+			int firstVisibleLineVis = SendMessage(SCI_GETFIRSTVISIBLELINE, 0, 0);
+			int lastVisibleLineVis = linesVisible + firstVisibleLineVis + 1;
+
+			if(SendMessage(SCI_GETWRAPMODE, 0, 0) != SC_WRAP_NONE) {
+				int numLinesDoc = SendMessage(SCI_GETLINECOUNT, 0, 0);
+				int prevLineDoc = SendMessage(SCI_DOCLINEFROMVISIBLE, firstVisibleLineVis, 0);
+				for(int i = firstVisibleLineVis + 1; i <= lastVisibleLineVis; ++i) {
+					int lineDoc = SendMessage(SCI_DOCLINEFROMVISIBLE, i, 0);
+					if(lineDoc == numLinesDoc)
+						break;
+					if(lineDoc == prevLineDoc)
+						lastVisibleLineVis++;
+					prevLineDoc = lineDoc;
+				}
+			}
+
+			int lastVisibleLineDoc = SendMessage(SCI_DOCLINEFROMVISIBLE, lastVisibleLineVis, 0);
+			int i = 0;
+
+			while(lastVisibleLineDoc) {
+				lastVisibleLineDoc /= 10;
+				++i;
+			}
+
+			i = std::max(i, 3);
+			int pixelWidth = 8 + i * SendMessage(SCI_TEXTWIDTH, STYLE_LINENUMBER, (sptr_t) "8");
+			SendMessage(SCI_SETMARGINWIDTHN, Margin::NUMBER, pixelWidth);
+		}
 	}
 }
