@@ -48,9 +48,14 @@ public:
 	void	SetPreferences(Preferences* preferences) { fPreferences = preferences; }
 
 private:
+	void	_MaintainIndentation(char ch);
 	void	_UpdateLineNumberWidth();
 
-	Preferences*	fPreferences;
+	void				_SetLineIndentation(int line, int indent);
+	Sci_CharacterRange	_GetSelection();
+	void				_SetSelection(int anchor, int currentPos);
+
+	Preferences*		fPreferences;
 };
 
 #endif // EDITOR_H

@@ -26,11 +26,13 @@
 
 #include "Preferences.h"
 
+
 Editor::Editor()
 	:
 	BScintillaView("EditorView", 0, true, true)
 {
 }
+
 
 void
 Editor::NotificationReceived(SCNotification* notification)
@@ -46,8 +48,34 @@ Editor::NotificationReceived(SCNotification* notification)
 		case SCN_PAINTED:
 			_UpdateLineNumberWidth();
 		break;
+		case SCN_CHARADDED:
+			char ch = static_cast<char>(notification->ch);
+			_MaintainIndentation(ch);
+		break;
 	}
 }
+
+
+// borrowed from SciTE
+void
+Editor::_MaintainIndentation(char ch)
+{
+	int eolMode = SendMessage(SCI_GETEOLMODE, 0, 0);
+	int currentLine = SendMessage(SCI_LINEFROMPOSITION, SendMessage(SCI_GETCURRENTPOS, 0, 0), 0);
+	int lastLine = currentLine - 1;
+
+	if(((eolMode == SC_EOL_CRLF || eolMode == SC_EOL_LF) && ch == '\n') ||
+		(eolMode == SC_EOL_CR && ch == '\r')) {
+		int indentAmount = 0;
+		if(lastLine >= 0) {
+			indentAmount = SendMessage(SCI_GETLINEINDENTATION, lastLine, 0);
+		}
+		if(indentAmount > 0) {
+			_SetLineIndentation(currentLine, indentAmount);
+		}
+	}
+}
+
 
 // borrowed from Notepad++
 void
@@ -85,4 +113,63 @@ Editor::_UpdateLineNumberWidth()
 			SendMessage(SCI_SETMARGINWIDTHN, Margin::NUMBER, pixelWidth);
 		}
 	}
+}
+
+
+// borrowed from SciTE
+void
+Editor::_SetLineIndentation(int line, int indent)
+{
+	if(indent < 0)
+		return;
+
+	Sci_CharacterRange crange = _GetSelection();
+	Sci_CharacterRange crangeStart = crange;
+	int posBefore = SendMessage(SCI_GETLINEINDENTPOSITION, line, 0);
+	SendMessage(SCI_SETLINEINDENTATION, line, indent);
+	int posAfter = SendMessage(SCI_GETLINEINDENTPOSITION, line, 0);
+	int posDifference = posAfter - posBefore;
+	if(posAfter > posBefore) {
+		if(crange.cpMin >= posBefore) {
+			crange.cpMin += posDifference;
+		}
+		if(crange.cpMax >= posBefore) {
+			crange.cpMax += posDifference;
+		}
+	} else if(posAfter < posBefore) {
+		if(crange.cpMin >= posAfter) {
+			if(crange.cpMin >= posBefore) {
+				crange.cpMin += posDifference;
+			} else {
+				crange.cpMin = posAfter;
+			}
+		}
+		if(crange.cpMax >= posAfter) {
+			if(crange.cpMax >= posBefore) {
+				crange.cpMax += posDifference;
+			} else {
+				crange.cpMax = posAfter;
+			}
+		}
+	}
+	if((crangeStart.cpMin != crange.cpMin) || (crangeStart.cpMax != crange.cpMax)) {
+		_SetSelection(static_cast<int>(crange.cpMin), static_cast<int>(crange.cpMax));
+	}
+}
+
+
+Sci_CharacterRange
+Editor::_GetSelection()
+{
+	Sci_CharacterRange crange;
+	crange.cpMin = SendMessage(SCI_GETSELECTIONSTART, 0, 0);
+	crange.cpMax = SendMessage(SCI_GETSELECTIONEND, 0, 0);
+	return crange;
+}
+
+
+void
+Editor::_SetSelection(int anchor, int currentPos)
+{
+	SendMessage(SCI_SETSEL, anchor, currentPos);
 }
