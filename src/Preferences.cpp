@@ -21,28 +21,17 @@
 #include "Preferences.h"
 
 #include <Alert.h>
+#include <File.h>
 
 #include "Languages.h"
 
 // TODO: B_TRANSLATE
 
-Preferences::Preferences(const char* path)
-	:
-	fPath(path)
-{
-}
-
-
-Preferences::~Preferences()
-{
-	Save();
-}
-
 
 void
-Preferences::Load()
+Preferences::Load(const char* filename)
 {
-	BFile *file = new BFile(fPath.String(), B_READ_ONLY);
+	BFile *file = new BFile(filename, B_READ_ONLY);
 	status_t result = file->InitCheck();
 	switch (result) {
 		case B_BAD_VALUE:
@@ -129,9 +118,9 @@ Preferences::Load()
 
 
 void
-Preferences::Save()
+Preferences::Save(const char* filename)
 {
-	BFile* file = new BFile(fPath.String(), B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
+	BFile* file = new BFile(filename, B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
 	status_t result = file->InitCheck();
 	switch (result) {
 		case B_BAD_VALUE:
@@ -186,4 +175,21 @@ Preferences::Save()
 	storage.Flatten(file);
 	
 	delete file;
+}
+
+
+Preferences&
+Preferences::operator =(Preferences p)
+{
+	fSettingsPath = p.fSettingsPath;
+	fTabWidth = p.fTabWidth;
+	fTabsToSpaces = p.fTabsToSpaces;
+	fExtensions = p.fExtensions;
+	fLineHighlighting = p.fLineHighlighting;
+	fLineNumbers = p.fLineNumbers;
+	fEOLVisible = p.fEOLVisible;
+	fWhiteSpaceVisible = p.fWhiteSpaceVisible;
+	fIndentationGuides = p.fIndentationGuides;
+	fStyleFile = p.fStyleFile;
+	fWindowRect = p.fWindowRect;
 }

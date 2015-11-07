@@ -23,6 +23,7 @@
 
 #include <Application.h>
 #include <ObjectList.h>
+#include <Path.h>
 
 class AppPreferencesWindow;
 class EditorWindow;
@@ -47,6 +48,8 @@ private:
 	AppPreferencesWindow*		fAppPreferencesWindow;
 	Preferences*				fPreferences;
 	Styler*						fStyler;
+
+	BPath						fPreferencesFile;
 };
 
 #endif // APP_H

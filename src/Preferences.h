@@ -29,29 +29,25 @@
 
 class Preferences {
 public:
-								Preferences(const char* path);
-								~Preferences();
-								
-	void						Load();
-	void						Save();
+	void			Load(const char* filename);
+	void			Save(const char* filename);
 	
-	BPath						fSettingsPath;
+	Preferences&	operator =(Preferences p);
+
+	BPath			fSettingsPath;
 
 	// file specific
-	uint8						fTabWidth;
-	bool						fTabsToSpaces;
+	uint8			fTabWidth;
+	bool			fTabsToSpaces;
 	// broadcast to all editors
-	BMessage					fExtensions;
-	bool						fLineHighlighting;
-	bool						fLineNumbers;
-	bool						fEOLVisible;
-	bool						fWhiteSpaceVisible;
-	uint8						fIndentationGuides;
-	BString						fStyleFile;
-	BRect						fWindowRect;
-	
-private:
-	BString						fPath;
+	BMessage		fExtensions;
+	bool			fLineHighlighting;
+	bool			fLineNumbers;
+	bool			fEOLVisible;
+	bool			fWhiteSpaceVisible;
+	uint8			fIndentationGuides;
+	BString			fStyleFile;
+	BRect			fWindowRect;
 };
 
 #endif // PREFERENCES_H

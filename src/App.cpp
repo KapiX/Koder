@@ -55,6 +55,7 @@ App::~App()
 		}
 	}
 	
+	fPreferences->Save(fPreferencesFile.Path());
 	delete fPreferences;
 	delete fStyler;
 }
@@ -70,9 +71,9 @@ App::Init()
 		preferencesDir.CreateDirectory(".", nullptr);
 	}
 
-	BPath preferencesFile(&preferencesDir, "settings");
-	fPreferences = new Preferences(preferencesFile.Path());
-	fPreferences->Load();
+	fPreferencesFile.SetTo(&preferencesDir, "settings");
+	fPreferences = new Preferences();
+	fPreferences->Load(fPreferencesFile.Path());
 	fPreferences->fSettingsPath = settingsPath;
 	EditorWindow::SetPreferences(fPreferences);
 
