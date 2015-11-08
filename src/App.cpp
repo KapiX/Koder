@@ -122,6 +122,12 @@ void
 App::MessageReceived(BMessage* message)
 {
 	switch(message->what) {
+	case APP_PREFERENCES_CHANGED: {
+		for(uint32 i = 0, count = fWindows.CountItems(); i < count; i++) {
+			BMessenger messenger((BWindow*) fWindows.ItemAt(i));
+			messenger.SendMessage(message);
+		}
+	} break;
 	case MAINMENU_EDIT_APP_PREFERENCES: {
 		fAppPreferencesWindow = new AppPreferencesWindow(fPreferences);
 		fAppPreferencesWindow->Show();

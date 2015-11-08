@@ -46,6 +46,9 @@ public:
 	bool			fEOLVisible;
 	bool			fWhiteSpaceVisible;
 	uint8			fIndentationGuides;
+	bool			fLineLimitShow;
+	uint8			fLineLimitMode;
+	uint32			fLineLimitColumn;
 	BString			fStyleFile;
 	BRect			fWindowRect;
 };

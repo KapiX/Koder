@@ -83,7 +83,7 @@ Styler::ApplyGlobal(Editor* editor)
 				editor->SendMessage(SCI_SETCARETFORE, fg, 0);
 			}
 			else if(name == "Edge colour") {
-				editor->SendMessage(SCI_SETEDGECOLOUR, bg, 0);
+				editor->SendMessage(SCI_SETEDGECOLOUR, fg, 0);
 			}
 		}
 	}

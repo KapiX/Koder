@@ -24,13 +24,66 @@
 
 #include <Window.h>
 
+
+class BBox;
+class BButton;
+class BCheckBox;
+class BMessage;
+class BRadioButton;
+class BStringView;
+class BTextControl;
+class BView;
 class Preferences;
+
+const uint32 APP_PREFERENCES_CHANGED = 'apch';
 
 class AppPreferencesWindow : public BWindow {
 public:
-	AppPreferencesWindow(Preferences* preferences);
-	~AppPreferencesWindow();
+					AppPreferencesWindow(Preferences* preferences);
+					~AppPreferencesWindow();
+
+	void			MessageReceived(BMessage* message);
 private:
+	enum Actions {
+		TABS_TO_SPACES			= 'ttsp',
+		LINE_HIGHLIGHTING		= 'lhlt',
+		LINE_NUMBERS			= 'lnum',
+
+		LINELIMIT_COLUMN		= 'llcl',
+		LINELIMIT_SHOW			= 'llsh',
+		LINELIMIT_BACKGROUND	= 'llbk',
+		LINELIMIT_LINE			= 'llln',
+
+		APPLY					= 'appl',
+		REVERT					= 'rvrt'
+	};
+	void			_InitInterface();
+	void			_SyncPreferences(Preferences* preferences);
+
+	void			_PreferencesModified();
+	void			_SetLineLimitBoxEnabled(bool enabled);
+
+	Preferences*	fStartPreferences;
+	Preferences*	fCurrentPreferences;
+	Preferences*	fTempPreferences;
+
+	BBox*			fEditorBox;
+	BCheckBox*		fTabsToSpacesCB;
+	BCheckBox*		fLineHighlightingCB;
+	BCheckBox*		fLineNumbersCB;
+
+	BView*			fLineLimitHeaderView;
+	BCheckBox*		fLineLimitShowCB;
+	BTextControl*	fLineLimitColumnTC;
+	BStringView*	fLineLimitText;
+
+	BBox*			fLineLimitBox;
+
+	BRadioButton*	fLineLimitBackgroundRadio;
+	BRadioButton*	fLineLimitLineRadio;
+
+	BButton*		fApplyButton;
+	BButton*		fRevertButton;
 };
 
 

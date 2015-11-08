@@ -36,6 +36,7 @@
 #include <Roster.h>
 #include <String.h>
 
+#include "AppPreferencesWindow.h"
 #include "Editor.h"
 #include "GoToLineWindow.h"
 #include "Languages.h"
@@ -113,19 +114,7 @@ EditorWindow::EditorWindow()
 	layout->AddView(fMainMenu);
 	layout->AddView(fEditor);
 	
-	if(fPreferences != NULL) {
-		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
-		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
-		fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
-		fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
-		fEditor->SendMessage(SCI_SETTABWIDTH, fPreferences->fTabWidth, 0);
-		fEditor->SendMessage(SCI_SETUSETABS, !fPreferences->fTabsToSpaces, 0);
-		fEditor->SendMessage(SCI_SETCARETLINEVISIBLE, fPreferences->fLineHighlighting, 0);
-		if(fPreferences->fLineNumbers) {
-			fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::NUMBER, (long int) SC_MARGIN_NUMBER);
-		}
-		fEditor->SendMessage(SCI_SETINDENTATIONGUIDES, fPreferences->fIndentationGuides, 0);
-	}
+	_SyncWithPreferences();
 
 	fEditor->SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true, 0);
 	fEditor->SendMessage(SCI_STYLESETFONT, STYLE_DEFAULT, (sptr_t) "DejaVu Sans Mono");
@@ -290,6 +279,9 @@ EditorWindow::MessageReceived(BMessage* message)
 		return;
 	}
 	switch(message->what) {
+		case APP_PREFERENCES_CHANGED: {
+			_SyncWithPreferences();
+		} break;
 		case MAINMENU_FILE_NEW:
 			New();
 		break;
@@ -402,4 +394,34 @@ EditorWindow::_SetLanguage(LanguageType lang)
 	BPath langsPath(fPreferences->fSettingsPath);
 	langsPath.Append("langs.xml");
 	languages.ApplyLanguage(fEditor, langsPath.Path(), langDef.fLexerName.String());
+}
+
+
+void
+EditorWindow::_SyncWithPreferences()
+{
+	if(fPreferences != NULL) {
+		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
+		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
+
+		fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
+		fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
+		fEditor->SendMessage(SCI_SETTABWIDTH, fPreferences->fTabWidth, 0);
+		fEditor->SendMessage(SCI_SETUSETABS, !fPreferences->fTabsToSpaces, 0);
+		fEditor->SendMessage(SCI_SETCARETLINEVISIBLE, fPreferences->fLineHighlighting, 0);
+		fEditor->SendMessage(SCI_SETINDENTATIONGUIDES, fPreferences->fIndentationGuides, 0);
+
+		if(fPreferences->fLineNumbers == true) {
+			fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::NUMBER, (long int) SC_MARGIN_NUMBER);
+		} else {
+			fEditor->SendMessage(SCI_SETMARGINWIDTHN, Editor::Margin::NUMBER, 0);
+		}
+
+		if(fPreferences->fLineLimitShow == true) {
+			fEditor->SendMessage(SCI_SETEDGEMODE, fPreferences->fLineLimitMode, 0);
+			fEditor->SendMessage(SCI_SETEDGECOLUMN, fPreferences->fLineLimitColumn, 0);
+		} else {
+			fEditor->SendMessage(SCI_SETEDGEMODE, 0, 0);
+		}
+	}
 }

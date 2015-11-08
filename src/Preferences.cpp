@@ -95,6 +95,15 @@ Preferences::Load(const char* filename)
 	if(storage.FindBool("EOLVisible", &fEOLVisible) != B_OK) {
 		fEOLVisible = false;
 	}
+	if(storage.FindBool("lineLimitShow", &fLineLimitShow) != B_OK) {
+		fLineLimitShow = false;
+	}
+	if(storage.FindInt8("lineLimitMode", (int8*) &fLineLimitMode) != B_OK) {
+		fLineLimitMode = 1; // EDGE_LINE
+	}
+	if(storage.FindInt32("lineLimitColumn", (int32*) &fLineLimitColumn) != B_OK) {
+		fLineLimitColumn = 80;
+	}
 	if(storage.FindString("styleFile", &fStyleFile) != B_OK) {
 		fStyleFile = "default.xml";
 	}
@@ -169,6 +178,9 @@ Preferences::Save(const char* filename)
 	storage.AddBool("whiteSpaceVisible", fWhiteSpaceVisible);
 	storage.AddBool("EOLVisible", fEOLVisible);
 	storage.AddInt8("indentationGuides", fIndentationGuides);
+	storage.AddBool("lineLimitShow", fLineLimitShow);
+	storage.AddInt8("lineLimitMode", fLineLimitMode);
+	storage.AddInt32("lineLimitColumn", fLineLimitColumn);
 	storage.AddString("styleFile", fStyleFile);
 	storage.AddMessage("extensions", &fExtensions);
 	storage.AddRect("windowRect", fWindowRect);
@@ -190,6 +202,9 @@ Preferences::operator =(Preferences p)
 	fEOLVisible = p.fEOLVisible;
 	fWhiteSpaceVisible = p.fWhiteSpaceVisible;
 	fIndentationGuides = p.fIndentationGuides;
+	fLineLimitShow = p.fLineLimitShow;
+	fLineLimitMode = p.fLineLimitMode;
+	fLineLimitColumn = p.fLineLimitColumn;
 	fStyleFile = p.fStyleFile;
 	fWindowRect = p.fWindowRect;
 }

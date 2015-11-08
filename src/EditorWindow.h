@@ -99,6 +99,7 @@ private:
 
 	void _PopulateLanguageMenu(BMenu* languageMenu);
 	void _SetLanguage(LanguageType lang);
+	void _SyncWithPreferences();
 };
 
 #endif // EDITORWINDOW_H
