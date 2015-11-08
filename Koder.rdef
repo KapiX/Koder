@@ -16,11 +16,11 @@ resource app_version {
 resource file_types message {
 	"types" = "text",
 	"types" = "text/plain",
+	"types" = "text/xml",
+	"types" = "text/x-patch",
 	"types" = "text/x-source-code",
 	"types" = "text/x-makefile",
 	"types" = "text/x-rez",
 	"types" = "text/x-jamfile",
-	"types" = "application/xhtml+xml",
-	"types" = "application/x-mw-project",
-	"types" = "text/x-vnd.dw-Paladin.Project"
+	"types" = "application/xhtml+xml"
 };
