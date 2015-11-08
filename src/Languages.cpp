@@ -131,7 +131,7 @@ Languages::ApplyLanguage(Editor* editor, const char* path, const char* lang, Xml
 	XmlNode* language = document->GetNodesByXPath(xpath, &count);
 	BString derive = language[0].GetAttribute("derive");
 	if(derive.IsEmpty() == false) {
-		ApplyLanguage(editor, path, lang, document);
+		ApplyLanguage(editor, path, derive, document);
 	}
 	xpath.Append("/Keywords");
 	XmlNode* nodes = document->GetNodesByXPath(xpath, &count);
