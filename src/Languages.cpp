@@ -42,7 +42,7 @@ std::vector<LanguageDefinition> Languages::sLanguages = {
 	LANGDEF(C, "c", "C", "C source file", SCLEX_CPP),
 	LANGDEF(CPP, "cpp", "C++", "C++ source file", SCLEX_CPP),
 	LANGDEF(CS, "cs", "C#", "C# source file", SCLEX_CPP),
-	LANGDEF(OBJC, "objc", "Objective-C", "Objective-C source file", SCLEX_NULL),
+	LANGDEF(OBJC, "objc", "Objective-C", "Objective-C source file", SCLEX_CPP),
 	LANGDEF(JAVA, "java", "Java", "Java source file", SCLEX_CPP),
 	LANGDEF(RC, "rc", "RC", "Windows Resource file", SCLEX_CPP),
 	LANGDEF(HTML, "html", "HTML", "Hyper Text Markup Language file", SCLEX_HTML),
@@ -117,28 +117,35 @@ Languages::SortAlphabetically()
 
 
 void
-Languages::ApplyLanguage(Editor* editor, const char* path, const char* lang)
+Languages::ApplyLanguage(Editor* editor, const char* path, const char* lang, XmlDocument* doc)
 {
-	BString xpath("/NotepadPlus/Languages/Language[@name='%s']/Keywords");
-	xpath.ReplaceFirst("%s", lang);
-	XmlDocument document(path);
+	XmlDocument* document;
+	if(doc == nullptr)
+		document = new XmlDocument(path);
+	else
+		document = doc;
 
+	BString xpath("/Koder/Languages/Language[@name='%s']");
+	xpath.ReplaceFirst("%s", lang);
 	uint32 count;
-	XmlNode* nodes = document.GetNodesByXPath(xpath, &count);
+	XmlNode* language = document->GetNodesByXPath(xpath, &count);
+	BString derive = language[0].GetAttribute("derive");
+	if(derive.IsEmpty() == false) {
+		ApplyLanguage(editor, path, lang, document);
+	}
+	xpath.Append("/Keywords");
+	XmlNode* nodes = document->GetNodesByXPath(xpath, &count);
 
 	for(int i = 0; i < count; i++) {
 		BString name = nodes[i].GetAttribute("name");
 		BString content = nodes[i].GetContent();
 		if(!name.IsEmpty()) {
-			if(name == "instre1") editor->SendMessage(SCI_SETKEYWORDS, 0, (sptr_t) content.String());
-			else if(name == "instre2") editor->SendMessage(SCI_SETKEYWORDS, 2, (sptr_t) content.String());
-			else if(name == "type1") editor->SendMessage(SCI_SETKEYWORDS, 1, (sptr_t) content.String());
-			else if(name == "type2") editor->SendMessage(SCI_SETKEYWORDS, 3, (sptr_t) content.String());
-			else if(name == "type3") editor->SendMessage(SCI_SETKEYWORDS, 4, (sptr_t) content.String());
-			else if(name == "type4") editor->SendMessage(SCI_SETKEYWORDS, 5, (sptr_t) content.String());
-			else if(name == "type5") editor->SendMessage(SCI_SETKEYWORDS, 6, (sptr_t) content.String());
+			int list = atoi(name.String());
+			editor->SendMessage(SCI_SETKEYWORDS, list, (sptr_t) content.String());
 		}
 	}
 
 	delete []nodes;
+	if(doc == nullptr)
+		delete document;
 }

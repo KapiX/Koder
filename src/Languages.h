@@ -28,6 +28,7 @@
 
 
 class Editor;
+class XmlDocument;
 
 
 enum LanguageType {
@@ -107,7 +108,7 @@ public:
 	LanguageDefinition& GetLanguage(LanguageType lang);
 	std::vector<LanguageDefinition>& GetLanguages() { return sLanguages; }
 	void SortAlphabetically();
-	void ApplyLanguage(Editor* editor, const char* path, const char* lang);
+	void ApplyLanguage(Editor* editor, const char* path, const char* lang, XmlDocument* doc = nullptr);
 	
 private:
 	static std::vector<LanguageDefinition> sLanguages;

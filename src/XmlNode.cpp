@@ -46,6 +46,8 @@ XmlNode::Init(xmlNodePtr node)
 BString
 XmlNode::GetContent()
 {
+	if(fNode == nullptr) return BString();
+
 	xmlChar* content = xmlNodeGetContent(fNode);
 	const BString temp(reinterpret_cast<char*>(content));
 	xmlFree(content);
@@ -56,6 +58,8 @@ XmlNode::GetContent()
 BString
 XmlNode::GetAttribute(const char* name)
 {
+	if(fNode == nullptr) return BString();
+
 	xmlChar* attr = xmlGetProp(fNode, reinterpret_cast<const xmlChar*>(name));
 	const BString temp(reinterpret_cast<char*>(attr));
 	xmlFree(attr);

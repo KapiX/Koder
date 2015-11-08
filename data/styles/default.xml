@@ -164,6 +164,7 @@ About:
             <WordsStyle name="OPERATOR" styleID="10" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
             <WordsStyle name="VERBATIM" styleID="13" fgColor="646464" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
             <WordsStyle name="REGEX" styleID="14" fgColor="646464" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="GLOBAL CLASS" styleID="19" fgColor="B4438F" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
             <WordsStyle name="COMMENT" styleID="1" fgColor="3F7F5F" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
             <WordsStyle name="COMMENT LINE" styleID="2" fgColor="3F7F5F" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
             <WordsStyle name="COMMENT DOC" styleID="3" fgColor="3F5FBF" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" />
