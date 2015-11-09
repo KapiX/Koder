@@ -50,7 +50,9 @@ Styler::ApplyGlobal(Editor* editor)
 	int id, fg, bg, fs;
 	_GetAttributesFromNode(defaultStyle[0], &id, &fg, &bg, &fs);
 	
-	editor->SendMessage(SCI_STYLESETFONT, id, (sptr_t) "DejaVu Sans Mono");
+	font_family fixed;
+	be_fixed_font->GetFamilyAndStyle(&fixed, NULL);
+	editor->SendMessage(SCI_STYLESETFONT, id, (sptr_t) fixed);
 	_SetAttributesInEditor(editor, id, fg, bg, fs);
 	editor->SendMessage(SCI_STYLECLEARALL, 0, 0);
 
