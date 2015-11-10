@@ -74,12 +74,20 @@ Styler::ApplyGlobal(Editor* editor)
 				//editor->SendMessage(SCI_SETCARETLINEBACKALPHA, 128, 0);
 			}
 			else if(name == "White space symbol") {
-				editor->SendMessage(SCI_SETWHITESPACEFORE, true, fg);
-				editor->SendMessage(SCI_SETWHITESPACEBACK, true, bg);
+				if(fg != -1) {
+					editor->SendMessage(SCI_SETWHITESPACEFORE, true, fg);
+				}
+				if(bg != -1) {
+					editor->SendMessage(SCI_SETWHITESPACEBACK, true, bg);
+				}
 			}
 			else if(name == "Selected text colour") {
-				editor->SendMessage(SCI_SETSELFORE, true, fg);
-				editor->SendMessage(SCI_SETSELBACK, true, bg);
+				if(fg != -1) {
+					editor->SendMessage(SCI_SETSELFORE, true, fg);
+				}
+				if(bg != -1) {
+					editor->SendMessage(SCI_SETSELBACK, true, bg);
+				}
 			}
 			else if(name == "Caret colour") {
 				editor->SendMessage(SCI_SETCARETFORE, fg, 0);
@@ -112,24 +120,48 @@ Styler::ApplyLanguage(Editor* editor, const char* lang)
 void
 Styler::_GetAttributesFromNode(XmlNode &node, int* styleId, int* fgColor, int* bgColor, int* fontStyle)
 {
-	*styleId = strtol(node.GetAttribute("styleID").String(), NULL, 10);
-	*fgColor = strtol(node.GetAttribute("fgColor").String(), NULL, 16);
-	*bgColor = strtol(node.GetAttribute("bgColor").String(), NULL, 16);
-	*fontStyle = strtol(node.GetAttribute("fontStyle").String(), NULL, 10);
+	*styleId = -1;
+	*fgColor = -1;
+	*bgColor = -1;
+	*fontStyle = -1;
+
+	BString temp;
+	temp = node.GetAttribute("styleID");
+	if(temp.IsEmpty() == false) {
+		*styleId = strtol(temp.String(), NULL, 10);
+	}
+	temp = node.GetAttribute("fgColor");
+	if(temp.IsEmpty() == false) {
+		*fgColor = strtol(temp.String(), NULL, 16);
+	}
+	temp = node.GetAttribute("bgColor");
+	if(temp.IsEmpty() == false) {
+		*bgColor = strtol(temp.String(), NULL, 16);
+	}
+	temp = node.GetAttribute("fontStyle");
+	if(temp.IsEmpty() == false) {
+		*fontStyle = strtol(temp.String(), NULL, 10);
+	}
 }
 
 void
 Styler::_SetAttributesInEditor(Editor* editor, int styleId, int fgColor, int bgColor, int fontStyle)
 {
-	editor->SendMessage(SCI_STYLESETFORE, styleId, fgColor);
-	editor->SendMessage(SCI_STYLESETBACK, styleId, bgColor);
-	if(fontStyle & 1) {
-		editor->SendMessage(SCI_STYLESETBOLD, styleId, true);
+	if(fgColor != -1) {
+		editor->SendMessage(SCI_STYLESETFORE, styleId, fgColor);
 	}
-	if(fontStyle & 2) {
-		editor->SendMessage(SCI_STYLESETITALIC, styleId, true);
+	if(bgColor != -1) {
+		editor->SendMessage(SCI_STYLESETBACK, styleId, bgColor);
 	}
-	if(fontStyle & 4) {
-		editor->SendMessage(SCI_STYLESETUNDERLINE, styleId, true);
+	if(fontStyle != -1) {
+		if(fontStyle & 1) {
+			editor->SendMessage(SCI_STYLESETBOLD, styleId, true);
+		}
+		if(fontStyle & 2) {
+			editor->SendMessage(SCI_STYLESETITALIC, styleId, true);
+		}
+		if(fontStyle & 4) {
+			editor->SendMessage(SCI_STYLESETUNDERLINE, styleId, true);
+		}
 	}
 }
