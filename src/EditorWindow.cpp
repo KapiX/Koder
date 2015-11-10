@@ -117,7 +117,6 @@ EditorWindow::EditorWindow()
 	_SyncWithPreferences();
 
 	fEditor->SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true, 0);
-	fEditor->SendMessage(SCI_STYLESETFONT, STYLE_DEFAULT, (sptr_t) "DejaVu Sans Mono");
 	
 	fEditor->SendMessage(SCI_USEPOPUP, 0, 0);
 	
