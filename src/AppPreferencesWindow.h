@@ -46,6 +46,7 @@ public:
 private:
 	enum Actions {
 		TABS_TO_SPACES			= 'ttsp',
+		TAB_WIDTH				= 'tbwd',
 		LINE_HIGHLIGHTING		= 'lhlt',
 		LINE_NUMBERS			= 'lnum',
 
@@ -69,6 +70,8 @@ private:
 
 	BBox*			fEditorBox;
 	BCheckBox*		fTabsToSpacesCB;
+	BTextControl*	fTabWidthTC;
+	BStringView*	fTabWidthText;
 	BCheckBox*		fLineHighlightingCB;
 	BCheckBox*		fLineNumbersCB;
 

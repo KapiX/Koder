@@ -64,6 +64,15 @@ void
 AppPreferencesWindow::MessageReceived(BMessage* message)
 {
 	switch(message->what) {
+		case Actions::TABS_TO_SPACES: {
+			fTempPreferences->fTabsToSpaces =
+				(fTabsToSpacesCB->Value() == B_CONTROL_ON ? true : false);
+			_PreferencesModified();
+		} break;
+		case Actions::TAB_WIDTH: {
+			fTempPreferences->fTabWidth = atoi(fTabWidthTC->Text());
+			_PreferencesModified();
+		} break;
 		case Actions::LINE_HIGHLIGHTING: {
 			fTempPreferences->fLineHighlighting =
 				(fLineHighlightingCB->Value() == B_CONTROL_ON ? true : false);
@@ -118,6 +127,8 @@ AppPreferencesWindow::_InitInterface()
 	fEditorBox = new BBox("editorPrefs");
 	fEditorBox->SetLabel("Editor");
 	fTabsToSpacesCB = new BCheckBox("tabsToSpaces", "Convert tabs to spaces", new BMessage((uint32) Actions::TABS_TO_SPACES));
+	fTabWidthTC = new BTextControl("tabWidth", "Tab width: ", "4", new BMessage((uint32) Actions::TAB_WIDTH));
+	fTabWidthText = new BStringView("tabWidthText", " characters");
 	fLineHighlightingCB = new BCheckBox("lineHighlighting", "Highlight current line", new BMessage((uint32) Actions::LINE_HIGHLIGHTING));
 	fLineNumbersCB = new BCheckBox("lineNumbers", "Display line numbers", new BMessage((uint32) Actions::LINE_NUMBERS));
 
@@ -148,7 +159,11 @@ AppPreferencesWindow::_InitInterface()
 	fRevertButton->SetEnabled(false);
 
 	BLayoutBuilder::Group<>(fEditorBox, B_VERTICAL, 5)
-		//.Add(fTabsToSpacesCB)
+		.Add(fTabsToSpacesCB)
+		.AddGroup(B_HORIZONTAL)
+			.Add(fTabWidthTC)
+			.Add(fTabWidthText)
+		.End()
 		.Add(fLineHighlightingCB)
 		.Add(fLineNumbersCB)
 		.Add(fLineLimitBox)
@@ -169,6 +184,16 @@ AppPreferencesWindow::_InitInterface()
 void
 AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 {
+	if(preferences->fTabsToSpaces == true) {
+		fTabsToSpacesCB->SetValue(B_CONTROL_ON);
+	} else {
+		fTabsToSpacesCB->SetValue(B_CONTROL_OFF);
+	}
+
+	BString tabWidthString;
+	tabWidthString << preferences->fTabWidth;
+	fTabWidthTC->SetText(tabWidthString.String());
+
 	if(preferences->fLineNumbers == true) {
 		fLineNumbersCB->SetValue(B_CONTROL_ON);
 	} else {
