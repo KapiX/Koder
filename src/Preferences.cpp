@@ -71,7 +71,7 @@ Preferences::Load(const char* filename)
 		default:
 			break;
 	}
-	
+
 	BMessage storage;
 	storage.Unflatten(file);
 	if(storage.FindInt8("tabWidth", (int8*) &fTabWidth) != B_OK) {
@@ -86,8 +86,11 @@ Preferences::Load(const char* filename)
 	if(storage.FindBool("lineNumbers", &fLineNumbers) != B_OK) {
 		fLineNumbers = true;
 	}
-	if(storage.FindInt8("indentationGuides", (int8*) &fIndentationGuides) != B_OK) {
-		fIndentationGuides = 1;
+	if(storage.FindBool("indentGuidesShow", &fIndentGuidesShow) != B_OK) {
+		fIndentGuidesShow = true;
+	}
+	if(storage.FindInt8("indentGuidesMode", (int8*) &fIndentGuidesMode) != B_OK) {
+		fIndentGuidesMode = 1; // SC_IV_REAL
 	}
 	if(storage.FindBool("whiteSpaceVisible", &fWhiteSpaceVisible) != B_OK) {
 		fWhiteSpaceVisible = false;
@@ -249,7 +252,7 @@ Preferences::Load(const char* filename)
 	if(storage.FindRect("windowRect", &fWindowRect) != B_OK) {
 		fWindowRect.Set(50, 50, 450, 450);
 	}
-	
+
 	delete file;
 }
 
@@ -297,7 +300,7 @@ Preferences::Save(const char* filename)
 		default:
 			break;
 	}
-	
+
 	BMessage storage;
 	storage.AddInt8("tabWidth", fTabWidth);
 	storage.AddBool("tabsToSpaces", fTabsToSpaces);
@@ -305,7 +308,8 @@ Preferences::Save(const char* filename)
 	storage.AddBool("lineNumbers", fLineNumbers);
 	storage.AddBool("whiteSpaceVisible", fWhiteSpaceVisible);
 	storage.AddBool("EOLVisible", fEOLVisible);
-	storage.AddInt8("indentationGuides", fIndentationGuides);
+	storage.AddBool("indentGuidesShow", fIndentGuidesShow);
+	storage.AddInt8("indentGuidesMode", fIndentGuidesMode);
 	storage.AddBool("lineLimitShow", fLineLimitShow);
 	storage.AddInt8("lineLimitMode", fLineLimitMode);
 	storage.AddInt32("lineLimitColumn", fLineLimitColumn);
@@ -313,7 +317,7 @@ Preferences::Save(const char* filename)
 	storage.AddMessage("extensions", &fExtensions);
 	storage.AddRect("windowRect", fWindowRect);
 	storage.Flatten(file);
-	
+
 	delete file;
 }
 
@@ -329,7 +333,8 @@ Preferences::operator =(Preferences p)
 	fLineNumbers = p.fLineNumbers;
 	fEOLVisible = p.fEOLVisible;
 	fWhiteSpaceVisible = p.fWhiteSpaceVisible;
-	fIndentationGuides = p.fIndentationGuides;
+	fIndentGuidesShow = p.fIndentGuidesShow;
+	fIndentGuidesMode = p.fIndentGuidesMode;
 	fLineLimitShow = p.fLineLimitShow;
 	fLineLimitMode = p.fLineLimitMode;
 	fLineLimitColumn = p.fLineLimitColumn;

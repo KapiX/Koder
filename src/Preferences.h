@@ -45,7 +45,8 @@ public:
 	bool			fLineNumbers;
 	bool			fEOLVisible;
 	bool			fWhiteSpaceVisible;
-	uint8			fIndentationGuides;
+	bool			fIndentGuidesShow;
+	uint8			fIndentGuidesMode;
 	bool			fLineLimitShow;
 	uint8			fLineLimitMode;
 	uint32			fLineLimitColumn;

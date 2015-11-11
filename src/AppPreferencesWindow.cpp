@@ -31,12 +31,15 @@
 #include <RadioButton.h>
 #include <StringView.h>
 
+#include <Scintilla.h>
+
 #include "Preferences.h"
 
 
 AppPreferencesWindow::AppPreferencesWindow(Preferences* preferences)
 	:
-	BWindow(BRect(0, 0, 400, 300), "Application preferences", B_TITLED_WINDOW, 0, 0)
+	BWindow(BRect(0, 0, 400, 300), "Application preferences", B_TITLED_WINDOW,
+		B_NOT_ZOOMABLE | B_AUTO_UPDATE_SIZE_LIMITS, 0)
 {
 	fCurrentPreferences = preferences;
 
@@ -95,11 +98,29 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			_PreferencesModified();
 		} break;
 		case Actions::LINELIMIT_BACKGROUND: {
-			fTempPreferences->fLineLimitMode = 2;
+			fTempPreferences->fLineLimitMode = EDGE_BACKGROUND;
 			_PreferencesModified();
 		} break;
 		case Actions::LINELIMIT_LINE: {
-			fTempPreferences->fLineLimitMode = 1;
+			fTempPreferences->fLineLimitMode = EDGE_LINE;
+			_PreferencesModified();
+		} break;
+		case Actions::INDENTGUIDES_SHOW: {
+			bool show = (fIndentGuidesShowCB->Value() == B_CONTROL_ON ? true : false);
+			fTempPreferences->fIndentGuidesShow = show;
+			_SetIndentGuidesBoxEnabled(show);
+			_PreferencesModified();
+		} break;
+		case Actions::INDENTGUIDES_REAL: {
+			fTempPreferences->fIndentGuidesMode = SC_IV_REAL;
+			_PreferencesModified();
+		} break;
+		case Actions::INDENTGUIDES_FORWARD: {
+			fTempPreferences->fIndentGuidesMode = SC_IV_LOOKFORWARD;
+			_PreferencesModified();
+		} break;
+		case Actions::INDENTGUIDES_BOTH: {
+			fTempPreferences->fIndentGuidesMode = SC_IV_LOOKBOTH;
 			_PreferencesModified();
 		} break;
 		case Actions::APPLY: {
@@ -152,6 +173,19 @@ AppPreferencesWindow::_InitInterface()
 		.SetInsets(10, 25, 15, 10);
 	fLineLimitBox->SetLabel(fLineLimitHeaderView);
 
+	fIndentGuidesBox = new BBox("indentGuidesPrefs");
+	fIndentGuidesShowCB = new BCheckBox("indentGuidesShow", "Show indentation guides", new BMessage((uint32) Actions::INDENTGUIDES_SHOW));
+	fIndentGuidesRealRadio = new BRadioButton("indentGuidesReal", "Real", new BMessage((uint32) Actions::INDENTGUIDES_REAL));
+	fIndentGuidesLookForwardRadio = new BRadioButton("indentGuidesForward", "Up to the next non-empty line", new BMessage((uint32) Actions::INDENTGUIDES_FORWARD));
+	fIndentGuidesLookBothRadio = new BRadioButton("indentGuidesBoth", "Up to the next/previous non-empty line", new BMessage((uint32) Actions::INDENTGUIDES_BOTH));
+
+	BLayoutBuilder::Group<>(fIndentGuidesBox, B_VERTICAL, 5)
+		.Add(fIndentGuidesRealRadio)
+		.Add(fIndentGuidesLookForwardRadio)
+		.Add(fIndentGuidesLookBothRadio)
+		.SetInsets(10, 25, 15, 10);
+	fIndentGuidesBox->SetLabel(fIndentGuidesShowCB);
+
 	fApplyButton = new BButton("Apply", new BMessage((uint32) Actions::APPLY));
 	fRevertButton = new BButton("Revert", new BMessage((uint32) Actions::REVERT));
 
@@ -160,13 +194,14 @@ AppPreferencesWindow::_InitInterface()
 
 	BLayoutBuilder::Group<>(fEditorBox, B_VERTICAL, 5)
 		.Add(fTabsToSpacesCB)
-		.AddGroup(B_HORIZONTAL)
+		.AddGroup(B_HORIZONTAL, 0)
 			.Add(fTabWidthTC)
 			.Add(fTabWidthText)
 		.End()
 		.Add(fLineHighlightingCB)
 		.Add(fLineNumbersCB)
 		.Add(fLineLimitBox)
+		.Add(fIndentGuidesBox)
 		.AddGlue()
 		.SetInsets(10, 15, 15, 10);
 
@@ -216,6 +251,14 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 		fLineLimitShowCB->SetValue(B_CONTROL_OFF);
 		_SetLineLimitBoxEnabled(false);
 	}
+
+	if(preferences->fIndentGuidesShow == true) {
+		fIndentGuidesShowCB->SetValue(B_CONTROL_ON);
+		_SetIndentGuidesBoxEnabled(true);
+	} else {
+		fIndentGuidesShowCB->SetValue(B_CONTROL_OFF);
+		_SetIndentGuidesBoxEnabled(false);
+	}
 }
 
 
@@ -240,6 +283,27 @@ AppPreferencesWindow::_SetLineLimitBoxEnabled(bool enabled)
 		break;
 		case 2:
 			fLineLimitBackgroundRadio->SetValue(B_CONTROL_ON);
+		break;
+	}
+}
+
+
+void
+AppPreferencesWindow::_SetIndentGuidesBoxEnabled(bool enabled)
+{
+	fIndentGuidesRealRadio->SetEnabled(enabled);
+	fIndentGuidesLookForwardRadio->SetEnabled(enabled);
+	fIndentGuidesLookBothRadio->SetEnabled(enabled);
+
+	switch(fTempPreferences->fIndentGuidesMode) {
+		case 1:
+			fIndentGuidesRealRadio->SetValue(B_CONTROL_ON);
+		break;
+		case 2:
+			fIndentGuidesLookForwardRadio->SetValue(B_CONTROL_ON);
+		break;
+		case 3:
+			fIndentGuidesLookBothRadio->SetValue(B_CONTROL_ON);
 		break;
 	}
 }

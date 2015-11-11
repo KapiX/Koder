@@ -56,11 +56,11 @@ EditorWindow::EditorWindow()
 	fGoToLineWindow = NULL;
 	fOpenedFilePath = NULL;
 	fOpenedFileMimeType.SetTo("text/plain");
-	
+
 	BMessenger* windowMessenger = new BMessenger(this);
 	fOpenPanel = new BFilePanel();
 	fSavePanel = new BFilePanel(B_SAVE_PANEL, windowMessenger, NULL, 0, false);
-	
+
 	fMainMenu = new BMenuBar("MainMenu");
 	BLayoutBuilder::Menu<>(fMainMenu)
 		.AddMenu(B_TRANSLATE("File"))
@@ -113,13 +113,13 @@ EditorWindow::EditorWindow()
 	SetLayout(layout);
 	layout->AddView(fMainMenu);
 	layout->AddView(fEditor);
-	
+
 	_SyncWithPreferences();
 
 	fEditor->SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true, 0);
-	
+
 	fEditor->SendMessage(SCI_USEPOPUP, 0, 0);
-	
+
 	fStyler->ApplyGlobal(fEditor);
 
 	RefreshTitle();
@@ -408,7 +408,6 @@ EditorWindow::_SyncWithPreferences()
 		fEditor->SendMessage(SCI_SETTABWIDTH, fPreferences->fTabWidth, 0);
 		fEditor->SendMessage(SCI_SETUSETABS, !fPreferences->fTabsToSpaces, 0);
 		fEditor->SendMessage(SCI_SETCARETLINEVISIBLE, fPreferences->fLineHighlighting, 0);
-		fEditor->SendMessage(SCI_SETINDENTATIONGUIDES, fPreferences->fIndentationGuides, 0);
 
 		if(fPreferences->fLineNumbers == true) {
 			fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::NUMBER, (long int) SC_MARGIN_NUMBER);
@@ -421,6 +420,12 @@ EditorWindow::_SyncWithPreferences()
 			fEditor->SendMessage(SCI_SETEDGECOLUMN, fPreferences->fLineLimitColumn, 0);
 		} else {
 			fEditor->SendMessage(SCI_SETEDGEMODE, 0, 0);
+		}
+
+		if(fPreferences->fIndentGuidesShow == true) {
+			fEditor->SendMessage(SCI_SETINDENTATIONGUIDES, fPreferences->fIndentGuidesMode, 0);
+		} else {
+			fEditor->SendMessage(SCI_SETINDENTATIONGUIDES, 0, 0);
 		}
 	}
 }

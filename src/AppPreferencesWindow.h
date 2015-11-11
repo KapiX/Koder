@@ -55,6 +55,11 @@ private:
 		LINELIMIT_BACKGROUND	= 'llbk',
 		LINELIMIT_LINE			= 'llln',
 
+		INDENTGUIDES_SHOW		= 'igsh',
+		INDENTGUIDES_REAL		= 'igrl',
+		INDENTGUIDES_FORWARD	= 'igfw',
+		INDENTGUIDES_BOTH		= 'igbo',
+
 		APPLY					= 'appl',
 		REVERT					= 'rvrt'
 	};
@@ -63,6 +68,7 @@ private:
 
 	void			_PreferencesModified();
 	void			_SetLineLimitBoxEnabled(bool enabled);
+	void			_SetIndentGuidesBoxEnabled(bool enabled);
 
 	Preferences*	fStartPreferences;
 	Preferences*	fCurrentPreferences;
@@ -84,6 +90,12 @@ private:
 
 	BRadioButton*	fLineLimitBackgroundRadio;
 	BRadioButton*	fLineLimitLineRadio;
+
+	BBox*			fIndentGuidesBox;
+	BCheckBox*		fIndentGuidesShowCB;
+	BRadioButton*	fIndentGuidesRealRadio;
+	BRadioButton*	fIndentGuidesLookForwardRadio;
+	BRadioButton*	fIndentGuidesLookBothRadio;
 
 	BButton*		fApplyButton;
 	BButton*		fRevertButton;
