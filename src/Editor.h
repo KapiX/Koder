@@ -50,6 +50,8 @@ public:
 private:
 	void	_MaintainIndentation(char ch);
 	void	_UpdateLineNumberWidth();
+	void	_BraceHighlight();
+	bool	_BraceMatch(int pos);
 
 	void				_SetLineIndentation(int line, int indent);
 	Sci_CharacterRange	_GetSelection();

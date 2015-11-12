@@ -50,6 +50,7 @@ public:
 	bool			fLineLimitShow;
 	uint8			fLineLimitMode;
 	uint32			fLineLimitColumn;
+	bool			fBracesHighlighting;
 	BString			fStyleFile;
 	BRect			fWindowRect;
 };

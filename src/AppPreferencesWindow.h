@@ -60,6 +60,8 @@ private:
 		INDENTGUIDES_FORWARD	= 'igfw',
 		INDENTGUIDES_BOTH		= 'igbo',
 
+		BRACES_HIGHLIGHTING		= 'bhlt',
+
 		APPLY					= 'appl',
 		REVERT					= 'rvrt'
 	};
@@ -96,6 +98,8 @@ private:
 	BRadioButton*	fIndentGuidesRealRadio;
 	BRadioButton*	fIndentGuidesLookForwardRadio;
 	BRadioButton*	fIndentGuidesLookBothRadio;
+
+	BCheckBox*		fBracesHighlightingCB;
 
 	BButton*		fApplyButton;
 	BButton*		fRevertButton;

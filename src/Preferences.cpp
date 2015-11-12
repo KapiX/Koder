@@ -107,6 +107,9 @@ Preferences::Load(const char* filename)
 	if(storage.FindInt32("lineLimitColumn", (int32*) &fLineLimitColumn) != B_OK) {
 		fLineLimitColumn = 80;
 	}
+	if(storage.FindBool("bracesHighlighting", &fBracesHighlighting) != B_OK) {
+		fBracesHighlighting = true;
+	}
 	if(storage.FindString("styleFile", &fStyleFile) != B_OK) {
 		fStyleFile = "default.xml";
 	}
@@ -313,6 +316,7 @@ Preferences::Save(const char* filename)
 	storage.AddBool("lineLimitShow", fLineLimitShow);
 	storage.AddInt8("lineLimitMode", fLineLimitMode);
 	storage.AddInt32("lineLimitColumn", fLineLimitColumn);
+	storage.AddBool("bracesHighlighting", fBracesHighlighting);
 	storage.AddString("styleFile", fStyleFile);
 	storage.AddMessage("extensions", &fExtensions);
 	storage.AddRect("windowRect", fWindowRect);
@@ -338,6 +342,7 @@ Preferences::operator =(Preferences p)
 	fLineLimitShow = p.fLineLimitShow;
 	fLineLimitMode = p.fLineLimitMode;
 	fLineLimitColumn = p.fLineLimitColumn;
+	fBracesHighlighting = p.fBracesHighlighting;
 	fStyleFile = p.fStyleFile;
 	fWindowRect = p.fWindowRect;
 }

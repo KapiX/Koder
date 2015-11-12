@@ -123,6 +123,11 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			fTempPreferences->fIndentGuidesMode = SC_IV_LOOKBOTH;
 			_PreferencesModified();
 		} break;
+		case Actions::BRACES_HIGHLIGHTING: {
+			fTempPreferences->fBracesHighlighting =
+				(fBracesHighlightingCB->Value() == B_CONTROL_ON ? true : false);
+			_PreferencesModified();
+		} break;
 		case Actions::APPLY: {
 			*fCurrentPreferences = *fTempPreferences;
 			fApplyButton->SetEnabled(false);
@@ -186,6 +191,8 @@ AppPreferencesWindow::_InitInterface()
 		.SetInsets(10, 25, 15, 10);
 	fIndentGuidesBox->SetLabel(fIndentGuidesShowCB);
 
+	fBracesHighlightingCB = new BCheckBox("bracesHighlighting", "Highlight braces", new BMessage((uint32) Actions::BRACES_HIGHLIGHTING));
+
 	fApplyButton = new BButton("Apply", new BMessage((uint32) Actions::APPLY));
 	fRevertButton = new BButton("Revert", new BMessage((uint32) Actions::REVERT));
 
@@ -202,6 +209,7 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fLineNumbersCB)
 		.Add(fLineLimitBox)
 		.Add(fIndentGuidesBox)
+		.Add(fBracesHighlightingCB)
 		.AddGlue()
 		.SetInsets(10, 15, 15, 10);
 
@@ -258,6 +266,12 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 	} else {
 		fIndentGuidesShowCB->SetValue(B_CONTROL_OFF);
 		_SetIndentGuidesBoxEnabled(false);
+	}
+
+	if(preferences->fBracesHighlighting == true) {
+		fBracesHighlightingCB->SetValue(B_CONTROL_ON);
+	} else {
+		fBracesHighlightingCB->SetValue(B_CONTROL_OFF);
 	}
 }
 

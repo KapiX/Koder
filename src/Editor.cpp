@@ -48,9 +48,12 @@ Editor::NotificationReceived(SCNotification* notification)
 		case SCN_PAINTED:
 			_UpdateLineNumberWidth();
 		break;
-		case SCN_CHARADDED:
+		case SCN_CHARADDED: {
 			char ch = static_cast<char>(notification->ch);
 			_MaintainIndentation(ch);
+		} break;
+		case SCN_UPDATEUI:
+			_BraceHighlight();
 		break;
 	}
 }
@@ -113,6 +116,39 @@ Editor::_UpdateLineNumberWidth()
 			SendMessage(SCI_SETMARGINWIDTHN, Margin::NUMBER, pixelWidth);
 		}
 	}
+}
+
+
+void
+Editor::_BraceHighlight()
+{
+	if(fPreferences->fBracesHighlighting == true) {
+		int pos = SendMessage(SCI_GETCURRENTPOS, 0, 0);
+		if(_BraceMatch(pos - 1) == false) {
+			_BraceMatch(pos);
+		}
+	} else {
+		SendMessage(SCI_BRACEBADLIGHT, -1, 0);
+	}
+}
+
+
+bool
+Editor::_BraceMatch(int pos)
+{
+	char ch = SendMessage(SCI_GETCHARAT, pos, 0);
+	if(ch == '(' || ch == ')' || ch == '[' || ch == ']' || ch == '{' || ch == '}') {
+		int match = SendMessage(SCI_BRACEMATCH, pos, 0);
+		if(match == -1) {
+			SendMessage(SCI_BRACEBADLIGHT, pos, 0);
+		} else {
+			SendMessage(SCI_BRACEHIGHLIGHT, pos, match);
+		}
+	} else {
+		SendMessage(SCI_BRACEBADLIGHT, -1, 0);
+		return false;
+	}
+	return true;
 }
 
 
