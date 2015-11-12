@@ -113,6 +113,8 @@ EditorWindow::EditorWindow()
 	SetLayout(layout);
 	layout->AddView(fMainMenu);
 	layout->AddView(fEditor);
+	layout->SetInsets(0, 0, -1, -1);
+	SetKeyMenuBar(fMainMenu);
 
 	_SyncWithPreferences();
 

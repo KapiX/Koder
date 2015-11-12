@@ -29,7 +29,7 @@
 
 Editor::Editor()
 	:
-	BScintillaView("EditorView", 0, true, true)
+	BScintillaView("EditorView", 0, true, true, B_NO_BORDER)
 {
 }
 
