@@ -74,45 +74,19 @@ Preferences::Load(const char* filename)
 
 	BMessage storage;
 	storage.Unflatten(file);
-	if(storage.FindInt8("tabWidth", (int8*) &fTabWidth) != B_OK) {
-		fTabWidth = 4;
-	}
-	if(storage.FindBool("tabsToSpaces", &fTabsToSpaces) != B_OK) {
-		fTabsToSpaces = false;
-	}
-	if(storage.FindBool("lineHighlighting", &fLineHighlighting) != B_OK) {
-		fLineHighlighting = true;
-	}
-	if(storage.FindBool("lineNumbers", &fLineNumbers) != B_OK) {
-		fLineNumbers = true;
-	}
-	if(storage.FindBool("indentGuidesShow", &fIndentGuidesShow) != B_OK) {
-		fIndentGuidesShow = true;
-	}
-	if(storage.FindInt8("indentGuidesMode", (int8*) &fIndentGuidesMode) != B_OK) {
-		fIndentGuidesMode = 1; // SC_IV_REAL
-	}
-	if(storage.FindBool("whiteSpaceVisible", &fWhiteSpaceVisible) != B_OK) {
-		fWhiteSpaceVisible = false;
-	}
-	if(storage.FindBool("EOLVisible", &fEOLVisible) != B_OK) {
-		fEOLVisible = false;
-	}
-	if(storage.FindBool("lineLimitShow", &fLineLimitShow) != B_OK) {
-		fLineLimitShow = false;
-	}
-	if(storage.FindInt8("lineLimitMode", (int8*) &fLineLimitMode) != B_OK) {
-		fLineLimitMode = 1; // EDGE_LINE
-	}
-	if(storage.FindInt32("lineLimitColumn", (int32*) &fLineLimitColumn) != B_OK) {
-		fLineLimitColumn = 80;
-	}
-	if(storage.FindBool("bracesHighlighting", &fBracesHighlighting) != B_OK) {
-		fBracesHighlighting = true;
-	}
-	if(storage.FindString("styleFile", &fStyleFile) != B_OK) {
-		fStyleFile = "default.xml";
-	}
+	fTabWidth = storage.GetUInt8("tabWidth", 4);
+	fTabsToSpaces = storage.GetBool("tabsToSpaces", false);
+	fLineHighlighting = storage.GetBool("lineHighlighting", true);
+	fLineNumbers = storage.GetBool("lineNumbers", true);
+	fIndentGuidesShow = storage.GetBool("indentGuidesShow", true);
+	fIndentGuidesMode = storage.GetUInt8("indentGuidesMode", 1); // SC_IV_REAL
+	fWhiteSpaceVisible = storage.GetBool("whiteSpaceVisible", false);
+	fEOLVisible = storage.GetBool("EOLVisible", false);
+	fLineLimitShow = storage.GetBool("lineLimitShow", false);
+	fLineLimitMode = storage.GetUInt8("lineLimitMode", 1); // EDGE_LINE
+	fLineLimitColumn = storage.GetUInt32("lineLimitColumn", 80);
+	fBracesHighlighting = storage.GetBool("bracesHighlighting", true);
+	fStyleFile = storage.GetString("styleFile", "default.xml");
 	if(storage.FindMessage("extensions", &fExtensions) != B_OK) {
 		fExtensions.AddUInt32("as", LANGUAGE_FLASH);
 		fExtensions.AddUInt32("mx", LANGUAGE_FLASH);
@@ -252,9 +226,7 @@ Preferences::Load(const char* filename)
 		fExtensions.AddUInt32("yml", LANGUAGE_YAML);
 		fExtensions.AddUInt32("yaml", LANGUAGE_YAML);
 	}
-	if(storage.FindRect("windowRect", &fWindowRect) != B_OK) {
-		fWindowRect.Set(50, 50, 450, 450);
-	}
+	fWindowRect = storage.GetRect("windowRect", BRect(50, 50, 450, 450));
 
 	delete file;
 }
