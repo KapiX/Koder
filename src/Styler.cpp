@@ -95,6 +95,14 @@ Styler::ApplyGlobal(Editor* editor)
 			else if(name == "Edge colour") {
 				editor->SendMessage(SCI_SETEDGECOLOUR, fg, 0);
 			}
+			else if(name == "Fold") {
+				if(fg != -1) {
+					editor->SendMessage(SCI_SETFOLDMARGINHICOLOUR, true, fg);
+				}
+				if(bg != -1) {
+					editor->SendMessage(SCI_SETFOLDMARGINCOLOUR, true, bg);
+				}
+			}
 		}
 	}
 

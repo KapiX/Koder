@@ -55,6 +55,9 @@ Editor::NotificationReceived(SCNotification* notification)
 		case SCN_UPDATEUI:
 			_BraceHighlight();
 		break;
+		case SCN_MARGINCLICK:
+			_MarginClick(notification->margin, notification->position);
+		break;
 	}
 }
 
@@ -149,6 +152,18 @@ Editor::_BraceMatch(int pos)
 		return false;
 	}
 	return true;
+}
+
+
+void
+Editor::_MarginClick(int margin, int pos)
+{
+	switch(margin) {
+		case Margin::FOLD: {
+			int lineNumber = SendMessage(SCI_LINEFROMPOSITION, pos, 0);
+			SendMessage(SCI_TOGGLEFOLD, lineNumber, 0);
+		} break;
+	}
 }
 
 
