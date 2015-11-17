@@ -362,6 +362,7 @@ EditorWindow::MessageReceived(BMessage* message)
 		case GTLW_GO: {
 			int32 line;
 			if(message->FindInt32("line", &line) == B_OK) {
+				fEditor->SendMessage(SCI_ENSUREVISIBLEENFORCEPOLICY, line - 1, 0);
 				fEditor->SendMessage(SCI_GOTOLINE, line - 1, 0);
 			}
 		} break;
