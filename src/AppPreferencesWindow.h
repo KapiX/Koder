@@ -45,6 +45,7 @@ public:
 	void			MessageReceived(BMessage* message);
 private:
 	enum Actions {
+		FULL_PATH_IN_TITLE		= 'fpit',
 		TABS_TO_SPACES			= 'ttsp',
 		TAB_WIDTH				= 'tbwd',
 		LINE_HIGHLIGHTING		= 'lhlt',
@@ -77,6 +78,7 @@ private:
 	Preferences*	fTempPreferences;
 
 	BBox*			fEditorBox;
+	BCheckBox*		fFullPathInTitleCB;
 	BCheckBox*		fTabsToSpacesCB;
 	BTextControl*	fTabWidthTC;
 	BStringView*	fTabWidthText;

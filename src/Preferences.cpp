@@ -86,6 +86,7 @@ Preferences::Load(const char* filename)
 	fLineLimitMode = storage.GetUInt8("lineLimitMode", 1); // EDGE_LINE
 	fLineLimitColumn = storage.GetUInt32("lineLimitColumn", 80);
 	fBracesHighlighting = storage.GetBool("bracesHighlighting", true);
+	fFullPathInTitle = storage.GetBool("fullPathInTitle", true);
 	fStyleFile = storage.GetString("styleFile", "default.xml");
 	if(storage.FindMessage("extensions", &fExtensions) != B_OK) {
 		fExtensions.AddUInt32("as", LANGUAGE_FLASH);
@@ -289,6 +290,7 @@ Preferences::Save(const char* filename)
 	storage.AddInt8("lineLimitMode", fLineLimitMode);
 	storage.AddInt32("lineLimitColumn", fLineLimitColumn);
 	storage.AddBool("bracesHighlighting", fBracesHighlighting);
+	storage.AddBool("fullPathInTitle", fFullPathInTitle);
 	storage.AddString("styleFile", fStyleFile);
 	storage.AddMessage("extensions", &fExtensions);
 	storage.AddRect("windowRect", fWindowRect);
@@ -315,6 +317,7 @@ Preferences::operator =(Preferences p)
 	fLineLimitMode = p.fLineLimitMode;
 	fLineLimitColumn = p.fLineLimitColumn;
 	fBracesHighlighting = p.fBracesHighlighting;
+	fFullPathInTitle = p.fFullPathInTitle;
 	fStyleFile = p.fStyleFile;
 	fWindowRect = p.fWindowRect;
 }

@@ -190,7 +190,11 @@ EditorWindow::RefreshTitle()
 	if(fEditor->SendMessage(SCI_GETMODIFY, 0, 0))
 		title << "*";
 	if(fOpenedFilePath != NULL)
-		title << fOpenedFilePath->Path();
+		if(fPreferences->fFullPathInTitle == true) {
+			title << fOpenedFilePath->Path();
+		} else {
+			title << fOpenedFilePath->Leaf();
+		}
 	else {
 		title << B_TRANSLATE("Untitled");
 	}
@@ -464,5 +468,7 @@ EditorWindow::_SyncWithPreferences()
 		fEditor->SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERTAIL, SC_MARK_EMPTY);
 
 		fEditor->SendMessage(SCI_SETFOLDFLAGS, 16, 0);
+
+		RefreshTitle();
 	}
 }
