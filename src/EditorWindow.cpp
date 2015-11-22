@@ -83,6 +83,12 @@ EditorWindow::EditorWindow()
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Select all"), B_SELECT_ALL, 'A')
 			.AddSeparator()
+			.AddMenu(B_TRANSLATE("Convert EOLs"))
+				.AddItem(B_TRANSLATE("Unix format"), MAINMENU_EDIT_CONVERTEOLS_UNIX)
+				.AddItem(B_TRANSLATE("Windows format"), MAINMENU_EDIT_CONVERTEOLS_WINDOWS)
+				.AddItem(B_TRANSLATE("Old Mac format"), MAINMENU_EDIT_CONVERTEOLS_MAC)
+			.End()
+			.AddSeparator()
 			.AddItem(B_TRANSLATE("File preferences" B_UTF8_ELLIPSIS), MAINMENU_EDIT_FILE_PREFERENCES)
 			.AddItem(B_TRANSLATE("Application preferences" B_UTF8_ELLIPSIS), MAINMENU_EDIT_APP_PREFERENCES, ',')
 		.End()
@@ -302,6 +308,18 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case MAINMENU_FILE_QUIT: {
 			be_app->PostMessage(B_QUIT_REQUESTED);
+		} break;
+		case MAINMENU_EDIT_CONVERTEOLS_UNIX: {
+			fEditor->SendMessage(SCI_CONVERTEOLS, SC_EOL_LF, 0);
+			fEditor->SendMessage(SCI_SETEOLMODE, SC_EOL_LF, 0);
+		} break;
+		case MAINMENU_EDIT_CONVERTEOLS_WINDOWS: {
+			fEditor->SendMessage(SCI_CONVERTEOLS, SC_EOL_CRLF, 0);
+			fEditor->SendMessage(SCI_SETEOLMODE, SC_EOL_CRLF, 0);
+		} break;
+		case MAINMENU_EDIT_CONVERTEOLS_MAC: {
+			fEditor->SendMessage(SCI_CONVERTEOLS, SC_EOL_CR, 0);
+			fEditor->SendMessage(SCI_SETEOLMODE, SC_EOL_CR, 0);
 		} break;
 		case MAINMENU_EDIT_APP_PREFERENCES: {
 			be_app->PostMessage(message);
