@@ -45,6 +45,7 @@ public:
 	void			MessageReceived(BMessage* message);
 private:
 	enum Actions {
+		COMPACT_LANG_MENU		= 'clnm',
 		FULL_PATH_IN_TITLE		= 'fpit',
 		TABS_TO_SPACES			= 'ttsp',
 		TAB_WIDTH				= 'tbwd',
@@ -78,6 +79,7 @@ private:
 	Preferences*	fTempPreferences;
 
 	BBox*			fEditorBox;
+	BCheckBox*		fCompactLangMenuCB;
 	BCheckBox*		fFullPathInTitleCB;
 	BCheckBox*		fTabsToSpacesCB;
 	BTextControl*	fTabWidthTC;

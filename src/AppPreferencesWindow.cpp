@@ -67,6 +67,11 @@ void
 AppPreferencesWindow::MessageReceived(BMessage* message)
 {
 	switch(message->what) {
+		case Actions::COMPACT_LANG_MENU: {
+			fTempPreferences->fCompactLangMenu =
+				(fCompactLangMenuCB->Value() == B_CONTROL_ON ? true : false);
+			_PreferencesModified();
+		} break;
 		case Actions::FULL_PATH_IN_TITLE: {
 			fTempPreferences->fFullPathInTitle =
 				(fFullPathInTitleCB->Value() == B_CONTROL_ON ? true : false);
@@ -157,6 +162,7 @@ AppPreferencesWindow::_InitInterface()
 {
 	fEditorBox = new BBox("editorPrefs");
 	fEditorBox->SetLabel("Editor");
+	fCompactLangMenuCB = new BCheckBox("compactLangMenu", "Compact language menu", new BMessage((uint32) Actions::COMPACT_LANG_MENU));
 	fFullPathInTitleCB = new BCheckBox("fullPathInTitle", "Show full path in title", new BMessage((uint32) Actions::FULL_PATH_IN_TITLE));
 	fTabsToSpacesCB = new BCheckBox("tabsToSpaces", "Convert tabs to spaces", new BMessage((uint32) Actions::TABS_TO_SPACES));
 	fTabWidthTC = new BTextControl("tabWidth", "Tab width: ", "4", new BMessage((uint32) Actions::TAB_WIDTH));
@@ -206,6 +212,7 @@ AppPreferencesWindow::_InitInterface()
 	fRevertButton->SetEnabled(false);
 
 	BLayoutBuilder::Group<>(fEditorBox, B_VERTICAL, 5)
+		.Add(fCompactLangMenuCB)
 		.Add(fFullPathInTitleCB)
 		.Add(fTabsToSpacesCB)
 		.AddGroup(B_HORIZONTAL, 0)
@@ -234,11 +241,18 @@ AppPreferencesWindow::_InitInterface()
 void
 AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 {
+	if(preferences->fCompactLangMenu == true) {
+		fCompactLangMenuCB->SetValue(B_CONTROL_ON);
+	} else {
+		fCompactLangMenuCB->SetValue(B_CONTROL_OFF);
+	}
+
 	if(preferences->fFullPathInTitle == true) {
 		fFullPathInTitleCB->SetValue(B_CONTROL_ON);
 	} else {
 		fFullPathInTitleCB->SetValue(B_CONTROL_OFF);
 	}
+
 	if(preferences->fTabsToSpaces == true) {
 		fTabsToSpacesCB->SetValue(B_CONTROL_ON);
 	} else {

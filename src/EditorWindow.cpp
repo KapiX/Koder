@@ -32,6 +32,7 @@
 #include <MimeType.h>
 #include <Node.h>
 #include <NodeInfo.h>
+#include <ObjectList.h>
 #include <Path.h>
 #include <Roster.h>
 #include <String.h>
@@ -108,9 +109,8 @@ EditorWindow::EditorWindow()
 			.AddItem(B_TRANSLATE("About" B_UTF8_ELLIPSIS), B_ABOUT_REQUESTED)
 		.End();
 
-	BMenu *languageMenu = fMainMenu->FindItem(MAINMENU_LANGUAGE)->Menu();
-	languageMenu->RemoveItem((int32) 0);
-	_PopulateLanguageMenu(languageMenu);
+	fLanguageMenu = fMainMenu->FindItem(MAINMENU_LANGUAGE)->Menu();
+	_PopulateLanguageMenu(fLanguageMenu);
 
 	fEditor = new Editor();
 	fEditor->SetPreferences(fPreferences);
@@ -398,12 +398,38 @@ EditorWindow::MessageReceived(BMessage* message)
 void
 EditorWindow::_PopulateLanguageMenu(BMenu* languageMenu)
 {
+	// Clear the menu first
+	int32 count = languageMenu->CountItems();
+	languageMenu->RemoveItems(0, count, true);
+
 	Languages languages;
 	languages.SortAlphabetically();
-	for(int i = 0; i < LANGUAGE_COUNT; ++i) {
+	char submenuName[] = "\0";
+	BObjectList<BMenu> menus;
+	for(int32 i = 0; i < LANGUAGE_COUNT; ++i) {
 		LanguageDefinition& langDef = languages.GetLanguages().at(i);
 		BMenuItem *menuItem = new BMenuItem(langDef.fShortName, new BMessage(MAINMENU_LANGUAGE + langDef.fType));
-		languageMenu->AddItem(menuItem);
+
+		if(fPreferences->fCompactLangMenu == true) {
+			if(submenuName[0] != langDef.fShortName[0]) {
+				submenuName[0] = langDef.fShortName[0];
+				BMenu *submenu = new BMenu(submenuName);
+				menus.AddItem(submenu);
+			}
+			menus.LastItem()->AddItem(menuItem);
+		} else {
+			languageMenu->AddItem(menuItem);
+		}
+	}
+	if(fPreferences->fCompactLangMenu == true) {
+		int32 menusCount = menus.CountItems();
+		for(int32 i = 0; i < menusCount; i++) {
+			if(menus.ItemAt(i)->CountItems() > 1) {
+				languageMenu->AddItem(menus.ItemAt(i));
+			} else {
+				languageMenu->AddItem(menus.ItemAt(i)->RemoveItem((int32) 0));
+			}
+		}
 	}
 }
 
@@ -470,5 +496,8 @@ EditorWindow::_SyncWithPreferences()
 		fEditor->SendMessage(SCI_SETFOLDFLAGS, 16, 0);
 
 		RefreshTitle();
+
+		// TODO Do this only if language menu preference has changed
+		_PopulateLanguageMenu(fLanguageMenu);
 	}
 }

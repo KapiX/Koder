@@ -95,6 +95,7 @@ private:
 	Editor*		fEditor;
 	BFilePanel*	fOpenPanel;
 	BFilePanel*	fSavePanel;
+	BMenu*		fLanguageMenu;
 
 	GoToLineWindow*	fGoToLineWindow;
 

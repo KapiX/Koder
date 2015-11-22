@@ -52,6 +52,7 @@ public:
 	uint32			fLineLimitColumn;
 	bool			fBracesHighlighting;
 	bool			fFullPathInTitle;
+	bool			fCompactLangMenu;
 	BString			fStyleFile;
 	BRect			fWindowRect;
 };
