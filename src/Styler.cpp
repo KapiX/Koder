@@ -53,6 +53,7 @@ Styler::ApplyGlobal(Editor* editor)
 	font_family fixed;
 	be_fixed_font->GetFamilyAndStyle(&fixed, NULL);
 	editor->SendMessage(SCI_STYLESETFONT, id, (sptr_t) fixed);
+	editor->SendMessage(SCI_STYLESETSIZE, id, (sptr_t) be_fixed_font->Size());
 	_SetAttributesInEditor(editor, id, fg, bg, fs);
 	editor->SendMessage(SCI_STYLECLEARALL, 0, 0);
 
