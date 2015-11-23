@@ -302,6 +302,11 @@ EditorWindow::MessageReceived(BMessage* message)
 			New();
 		break;
 		case MAINMENU_FILE_OPEN: {
+			if(fOpenedFilePath != NULL) {
+				BPath parent(*fOpenedFilePath);
+				parent.GetParent(&parent);
+				fOpenPanel->SetPanelDirectory(parent.Path());
+			}
 			fOpenPanel->Show();
 		} break;
 		case MAINMENU_FILE_SAVE: {
@@ -313,6 +318,11 @@ EditorWindow::MessageReceived(BMessage* message)
 			}
 		} break;
 		case MAINMENU_FILE_SAVEAS: {
+			if(fOpenedFilePath != NULL) {
+				BPath parent(*fOpenedFilePath);
+				parent.GetParent(&parent);
+				fSavePanel->SetPanelDirectory(parent.Path());
+			}
 			fSavePanel->Show();
 		} break;
 		case MAINMENU_FILE_QUIT: {
