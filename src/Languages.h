@@ -89,9 +89,10 @@ enum LanguageType {
 	LANGUAGE_COFFEESCRIPT,
 	LANGUAGE_RECIPE,
 	LANGUAGE_RUST,
-	
+
 	LANGUAGE_COUNT
 };
+
 
 struct LanguageDefinition {
 	LanguageType fType;
@@ -102,16 +103,17 @@ struct LanguageDefinition {
 	BString fKeywords[9];
 };
 
-class Languages
-{
+
+class Languages {
 public:
-	LanguageDefinition& GetLanguage(LanguageType lang);
-	std::vector<LanguageDefinition>& GetLanguages() { return sLanguages; }
-	void SortAlphabetically();
-	void ApplyLanguage(Editor* editor, const char* path, const char* lang, XmlDocument* doc = nullptr);
-	
+			LanguageDefinition&					GetLanguage(LanguageType lang);
+			std::vector<LanguageDefinition>&	GetLanguages() { return sLanguages; }
+			void								SortAlphabetically();
+			void								ApplyLanguage(Editor* editor, const char* path, const char* lang, XmlDocument* doc = nullptr);
+
 private:
-	static std::vector<LanguageDefinition> sLanguages;
+	static	std::vector<LanguageDefinition>		sLanguages;
 };
+
 
 #endif // LANGUAGES_H

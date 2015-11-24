@@ -35,7 +35,9 @@ class BTextControl;
 class BView;
 class Preferences;
 
+
 const uint32 APP_PREFERENCES_CHANGED = 'apch';
+
 
 class AppPreferencesWindow : public BWindow {
 public:
@@ -43,6 +45,7 @@ public:
 					~AppPreferencesWindow();
 
 	void			MessageReceived(BMessage* message);
+
 private:
 	enum Actions {
 		COMPACT_LANG_MENU		= 'clnm',
@@ -67,6 +70,7 @@ private:
 		APPLY					= 'appl',
 		REVERT					= 'rvrt'
 	};
+
 	void			_InitInterface();
 	void			_SyncPreferences(Preferences* preferences);
 

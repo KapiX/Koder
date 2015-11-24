@@ -21,6 +21,7 @@
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
 
+
 #include <File.h>
 #include <Message.h>
 #include <Path.h>
@@ -56,5 +57,6 @@ public:
 	BString			fStyleFile;
 	BRect			fWindowRect;
 };
+
 
 #endif // PREFERENCES_H

@@ -21,14 +21,17 @@
 #ifndef APP_H
 #define APP_H
 
+
 #include <Application.h>
 #include <ObjectList.h>
 #include <Path.h>
+
 
 class AppPreferencesWindow;
 class EditorWindow;
 class Preferences;
 class Styler;
+
 
 class App : public BApplication {
 public:
@@ -42,6 +45,7 @@ public:
 	void						ReadyToRun();
 	void						RefsReceived(BMessage* message);
 	void						MessageReceived(BMessage* message);
+
 private:
 	BObjectList<EditorWindow>	fWindows;
 	EditorWindow*				fLastActiveWindow;
@@ -51,5 +55,6 @@ private:
 
 	BPath						fPreferencesFile;
 };
+
 
 #endif // APP_H

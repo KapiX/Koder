@@ -30,26 +30,29 @@
 #include "XmlDocument.h"
 #include "XmlNode.h"
 
+
 Styler::Styler(const char* path)
 	:
 	fDocument(new XmlDocument(path))
 {
 }
 
+
 Styler::~Styler()
 {
 	delete fDocument;
 }
+
 
 void
 Styler::ApplyGlobal(Editor* editor)
 {
 	uint32 count;
 	XmlNode* defaultStyle = fDocument->GetNodesByXPath("/NotepadPlus/GlobalStyles/WidgetStyle[@styleID='32']", &count);
-	
+
 	int id, fg, bg, fs;
 	_GetAttributesFromNode(defaultStyle[0], &id, &fg, &bg, &fs);
-	
+
 	font_family fixed;
 	be_fixed_font->GetFamilyAndStyle(&fixed, NULL);
 	editor->SendMessage(SCI_STYLESETFONT, id, (sptr_t) fixed);
@@ -58,7 +61,7 @@ Styler::ApplyGlobal(Editor* editor)
 	editor->SendMessage(SCI_STYLECLEARALL, 0, 0);
 
 	delete []defaultStyle;
-	
+
 	XmlNode* globalStyle = fDocument->GetNodesByXPath("/NotepadPlus/GlobalStyles/WidgetStyle", &count);
 
 	for(int i = 0; i < count; i++) {
@@ -110,6 +113,7 @@ Styler::ApplyGlobal(Editor* editor)
 	delete []globalStyle;
 }
 
+
 void
 Styler::ApplyLanguage(Editor* editor, const char* lang)
 {
@@ -126,8 +130,10 @@ Styler::ApplyLanguage(Editor* editor, const char* lang)
 	delete []nodes;
 }
 
+
 void
-Styler::_GetAttributesFromNode(XmlNode &node, int* styleId, int* fgColor, int* bgColor, int* fontStyle)
+Styler::_GetAttributesFromNode(XmlNode &node, int* styleId, int* fgColor,
+	int* bgColor, int* fontStyle)
 {
 	*styleId = -1;
 	*fgColor = -1;
@@ -153,8 +159,10 @@ Styler::_GetAttributesFromNode(XmlNode &node, int* styleId, int* fgColor, int* b
 	}
 }
 
+
 void
-Styler::_SetAttributesInEditor(Editor* editor, int styleId, int fgColor, int bgColor, int fontStyle)
+Styler::_SetAttributesInEditor(Editor* editor, int styleId, int fgColor,
+	int bgColor, int fontStyle)
 {
 	if(fgColor != -1) {
 		editor->SendMessage(SCI_STYLESETFORE, styleId, fgColor);

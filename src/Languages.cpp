@@ -31,10 +31,13 @@
 #include "XmlDocument.h"
 #include "XmlNode.h"
 
+
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Languages"
 
+
 #define LANGDEF(t, l, shrt, lng, lex) { LANGUAGE_##t, BString(l), BString(B_TRANSLATE(shrt)), BString(B_TRANSLATE(lng)), lex, { "", "", "", "", "", "", "", "", "" } }
+
 
 std::vector<LanguageDefinition> Languages::sLanguages = {
 	LANGDEF(TEXT, "normal", "Normal text", "Normal text file", SCLEX_NULL),
@@ -98,10 +101,12 @@ std::vector<LanguageDefinition> Languages::sLanguages = {
 
 
 LanguageDefinition&
-Languages::GetLanguage(LanguageType lang) {
-	auto it = std::find_if(sLanguages.begin(), sLanguages.end(), [lang](const LanguageDefinition& a) {
-		return a.fType == lang;
-	});
+Languages::GetLanguage(LanguageType lang)
+{
+	auto it = std::find_if(sLanguages.begin(), sLanguages.end(),
+		[lang](const LanguageDefinition& a) {
+			return a.fType == lang;
+		});
 	return (*it);
 }
 
@@ -109,15 +114,16 @@ Languages::GetLanguage(LanguageType lang) {
 void
 Languages::SortAlphabetically()
 {
-	auto compareFunc = [](const LanguageDefinition& a, const LanguageDefinition& b) {
-		return a.fShortName.ICompare(b.fShortName) < 0;
-	};
-	std::sort(sLanguages.begin(), sLanguages.end(), compareFunc);
+	std::sort(sLanguages.begin(), sLanguages.end(),
+		[](const LanguageDefinition& a, const LanguageDefinition& b) {
+			return a.fShortName.ICompare(b.fShortName) < 0;
+		});
 }
 
 
 void
-Languages::ApplyLanguage(Editor* editor, const char* path, const char* lang, XmlDocument* doc)
+Languages::ApplyLanguage(Editor* editor, const char* path, const char* lang,
+	XmlDocument* doc)
 {
 	XmlDocument* document;
 	if(doc == nullptr)

@@ -20,6 +20,7 @@
 
 #include "App.h"
 
+
 int
 main()
 {
@@ -27,7 +28,6 @@ main()
 	app->Init();
 	app->Run();
 	delete app;
-	
+
 	return 0;
 }
-

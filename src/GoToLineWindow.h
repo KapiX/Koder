@@ -21,8 +21,10 @@
 #ifndef GOTOLINEWINDOW_H
 #define GOTOLINEWINDOW_H
 
+
 #include <MessageFilter.h>
 #include <Window.h>
+
 
 class BButton;
 class BTextControl;
@@ -42,12 +44,14 @@ public:
 			void			ShowCentered(BRect ownerRect);
 			void			WindowActivated(bool active);
 	
-	static	filter_result	KeyDownFilter(BMessage* message, BHandler** target, BMessageFilter* messageFilter);
+	static	filter_result	KeyDownFilter(BMessage* message, BHandler** target,
+								BMessageFilter* messageFilter);
+
 private:
 			BTextControl*	fLine;
 			BButton*		fGo;
 			BButton*		fCancel;
-	
+
 			BWindow*		fOwner;
 };
 

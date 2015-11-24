@@ -44,11 +44,14 @@
 #include "Preferences.h"
 #include "Styler.h"
 
+
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "EditorWindow"
 
+
 Preferences* EditorWindow::fPreferences = NULL;
 Styler* EditorWindow::fStyler = NULL;
+
 
 EditorWindow::EditorWindow()
 	:
@@ -133,23 +136,25 @@ EditorWindow::EditorWindow()
 	RefreshTitle();
 }
 
+
 void
 EditorWindow::New()
 {
 	be_app->PostMessage(WINDOW_NEW);
 }
 
+
 void
 EditorWindow::OpenFile(entry_ref* ref)
 {
 	BEntry entry(ref);
-	
+
 	char mimeType[256];
 	int32 caretPos = 0;
 	BNode node(&entry);
 	node.ReadAttr("be:caret_position", B_INT32_TYPE, 0, &caretPos, 4);
 	node.ReadAttr("BEOS:TYPE", B_MIME_TYPE, 0, mimeType, 256);
-	
+
 	BFile file(&entry, B_READ_ONLY);
 	off_t size;
 	file.GetSize(&size);
@@ -160,10 +165,10 @@ EditorWindow::OpenFile(entry_ref* ref)
 	fEditor->SendMessage(SCI_SETSAVEPOINT, 0, 0);
 	fEditor->SendMessage(SCI_EMPTYUNDOBUFFER, 0, 0);
 	delete []buffer;
-	
+
 	fEditor->SendMessage(SCI_GOTOPOS, caretPos, 0);
 	fOpenedFileMimeType.SetTo(mimeType);
-	
+
 	char name[B_FILE_NAME_LENGTH];
 	entry.GetName(name);
 	char* extension = strrchr(name, '.') + 1;
@@ -183,6 +188,7 @@ EditorWindow::OpenFile(entry_ref* ref)
 	RefreshTitle();
 }
 
+
 void
 EditorWindow::RefreshTitle()
 {
@@ -201,6 +207,7 @@ EditorWindow::RefreshTitle()
 	SetTitle(title);
 }
 
+
 void
 EditorWindow::SaveFile(BPath* path)
 {
@@ -217,16 +224,16 @@ EditorWindow::SaveFile(BPath* path)
 	file.Write(buffer, length - 1);
 	fEditor->SendMessage(SCI_SETSAVEPOINT, 0, 0);
 	delete []buffer;
-	
+
 	const char* mimeType = fOpenedFileMimeType.Type();
 	BNode node(path->Path());
 	BNodeInfo nodeInfo(&node);
 	nodeInfo.SetType(mimeType);
-	
+
 	if(fOpenedFilePath != NULL && *fOpenedFilePath == *path) {
 		backup.Remove();
 	}
-	
+
 	if(fOpenedFilePath == NULL) {
 		fOpenedFilePath = new BPath(*path);
 	} else if(*fOpenedFilePath != *path) {
@@ -234,6 +241,7 @@ EditorWindow::SaveFile(BPath* path)
 	}
 	RefreshTitle();
 }
+
 
 bool
 EditorWindow::QuitRequested()
@@ -278,13 +286,14 @@ EditorWindow::QuitRequested()
 		
 		delete fOpenPanel;
 		delete fSavePanel;
-		
+
 		BMessage closing(WINDOW_CLOSE);
 		closing.AddPointer("window", this);
 		be_app->PostMessage(&closing);
 	}
 	return close;
 }
+
 
 void
 EditorWindow::MessageReceived(BMessage* message)
@@ -407,6 +416,20 @@ EditorWindow::MessageReceived(BMessage* message)
 			BWindow::MessageReceived(message);
 		break;
 	}
+}
+
+
+/* static */ void
+EditorWindow::SetPreferences(Preferences* preferences)
+{
+	fPreferences = preferences;
+}
+
+
+/* static */ void
+EditorWindow::SetStyler(Styler* styler)
+{
+	fStyler = styler;
 }
 
 

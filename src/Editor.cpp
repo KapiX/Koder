@@ -62,6 +62,13 @@ Editor::NotificationReceived(SCNotification* notification)
 }
 
 
+void
+Editor::SetPreferences(Preferences* preferences)
+{
+	fPreferences = preferences;
+}
+
+
 // borrowed from SciTE
 void
 Editor::_MaintainIndentation(char ch)

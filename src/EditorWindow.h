@@ -44,67 +44,70 @@ const BString gAppMime = "application/x-vnd.KapiX-Koder";
 
 
 enum {
-	MAINMENU_FILE_NEW			= 'mnew',
-	MAINMENU_FILE_OPEN			= 'mopn',
-	MAINMENU_FILE_SAVE			= 'msav',
-	MAINMENU_FILE_SAVEAS		= 'msva',
-	MAINMENU_FILE_QUIT			= 'mqut',
+	MAINMENU_FILE_NEW					= 'mnew',
+	MAINMENU_FILE_OPEN					= 'mopn',
+	MAINMENU_FILE_SAVE					= 'msav',
+	MAINMENU_FILE_SAVEAS				= 'msva',
+	MAINMENU_FILE_QUIT					= 'mqut',
 
 	MAINMENU_EDIT_CONVERTEOLS_UNIX		= 'ceun',
 	MAINMENU_EDIT_CONVERTEOLS_WINDOWS	= 'cewi',
 	MAINMENU_EDIT_CONVERTEOLS_MAC		= 'cema',
 
-	MAINMENU_EDIT_FILE_PREFERENCES	= 'mefp',
-	MAINMENU_EDIT_APP_PREFERENCES	= 'meap',
+	MAINMENU_EDIT_FILE_PREFERENCES		= 'mefp',
+	MAINMENU_EDIT_APP_PREFERENCES		= 'meap',
 
 	MAINMENU_VIEW_SPECIAL_WHITESPACE	= 'vsws',
 	MAINMENU_VIEW_SPECIAL_EOL			= 'vseo',
 
-	MAINMENU_SEARCH_GOTOLINE	= 'msgl',
+	MAINMENU_SEARCH_GOTOLINE			= 'msgl',
 
-	MAINMENU_VIEW_LINEHIGHLIGHT	= 'mlhl',
-	MAINMENU_VIEW_LINENUMBERS	= 'mvln',
+	MAINMENU_VIEW_LINEHIGHLIGHT			= 'mlhl',
+	MAINMENU_VIEW_LINENUMBERS			= 'mvln',
 
-	MAINMENU_LANGUAGE			= 'ml00',
+	MAINMENU_LANGUAGE					= 'ml00',
 
-	FILE_OPEN					= 'flop',
-	FILE_SAVE					= 'flsv',
+	FILE_OPEN							= 'flop',
+	FILE_SAVE							= 'flsv',
 
-	WINDOW_NEW					= 'ewnw',
-	WINDOW_CLOSE				= 'ewcl',
+	WINDOW_NEW							= 'ewnw',
+	WINDOW_CLOSE						= 'ewcl',
 };
+
 
 class EditorWindow : public BWindow {
 public:
-				EditorWindow();
+						EditorWindow();
 
-	void		New();
-	void		OpenFile(entry_ref* entry);
-	void		RefreshTitle();
-	void		SaveFile(BPath* path);
+			void			New();
+			void			OpenFile(entry_ref* entry);
+			void			RefreshTitle();
+			void			SaveFile(BPath* path);
 
-	bool		QuitRequested();
-	void		MessageReceived(BMessage* message);
+			bool			QuitRequested();
+			void			MessageReceived(BMessage* message);
 
-	static void	SetPreferences(Preferences* preferences) { fPreferences = preferences; }
-	static void	SetStyler(Styler* styler) { fStyler = styler; }
+	static	void			SetPreferences(Preferences* preferences);
+	static	void			SetStyler(Styler* styler);
+
 private:
-	BMenuBar*	fMainMenu;
-	BPath*		fOpenedFilePath;
-	BMimeType	fOpenedFileMimeType;
-	Editor*		fEditor;
-	BFilePanel*	fOpenPanel;
-	BFilePanel*	fSavePanel;
-	BMenu*		fLanguageMenu;
+			BMenuBar*		fMainMenu;
+			BPath*			fOpenedFilePath;
+			BMimeType		fOpenedFileMimeType;
+			Editor*			fEditor;
+			BFilePanel*		fOpenPanel;
+			BFilePanel*		fSavePanel;
+			BMenu*			fLanguageMenu;
 
-	GoToLineWindow*	fGoToLineWindow;
+			GoToLineWindow*	fGoToLineWindow;
 
-	static Preferences*	fPreferences;
-	static Styler*		fStyler;
+	static	Preferences*	fPreferences;
+	static	Styler*			fStyler;
 
-	void _PopulateLanguageMenu(BMenu* languageMenu);
-	void _SetLanguage(LanguageType lang);
-	void _SyncWithPreferences();
+			void			_PopulateLanguageMenu(BMenu* languageMenu);
+			void			_SetLanguage(LanguageType lang);
+			void			_SyncWithPreferences();
 };
+
 
 #endif // EDITORWINDOW_H

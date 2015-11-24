@@ -32,6 +32,7 @@
 #include "Preferences.h"
 #include "Styler.h"
 
+
 App::App()
 	:
 	BApplication(gAppMime),
@@ -40,6 +41,7 @@ App::App()
 	fStyler(NULL)
 {
 }
+
 
 App::~App()
 {
@@ -54,11 +56,12 @@ App::~App()
 			window->Quit();
 		}
 	}
-	
+
 	fPreferences->Save(fPreferencesFile.Path());
 	delete fPreferences;
 	delete fStyler;
 }
+
 
 void
 App::Init()
@@ -83,12 +86,14 @@ App::Init()
 	EditorWindow::SetStyler(fStyler);
 }
 
+
 void
 App::AboutRequested()
 {
 	BAlert* alert = new BAlert("About", "Koder\nAuthor: Kacper Kasper", "Close", NULL, NULL, B_WIDTH_AS_USUAL, B_INFO_ALERT);
 	alert->Go();
 }
+
 
 bool
 App::QuitRequested()
@@ -98,6 +103,7 @@ App::QuitRequested()
 	//       from Tracker
 }
 
+
 void
 App::ReadyToRun()
 {
@@ -105,6 +111,7 @@ App::ReadyToRun()
 		PostMessage(WINDOW_NEW);
 	}
 }
+
 
 void
 App::RefsReceived(BMessage* message)
@@ -117,6 +124,7 @@ App::RefsReceived(BMessage* message)
 		fWindows.AddItem(window);
 	}
 }
+
 
 void
 App::MessageReceived(BMessage* message)

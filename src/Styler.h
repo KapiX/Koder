@@ -21,23 +21,28 @@
 #ifndef STYLER_H
 #define STYLER_H
 
+
 class Editor;
 class XmlDocument;
 class XmlNode;
 
-/* uses Notepad++ syntax */
+
+// uses Notepad++ syntax
 class Styler {
 public:
-	Styler(const char* path);
-	~Styler();
+					Styler(const char* path);
+					~Styler();
 
 	void			ApplyGlobal(Editor* editor);
 	void			ApplyLanguage(Editor* editor, const char* lang);
+
 private:
 	XmlDocument*	fDocument;
-	
-	void			_GetAttributesFromNode(XmlNode& node, int* styleId, int* fgColor, int* bgColor, int* fontStyle);
-	void			_SetAttributesInEditor(Editor* editor, int styleId, int fgColor, int bgColor, int fontStyle);
+
+	void			_GetAttributesFromNode(XmlNode& node, int* styleId,
+						int* fgColor, int* bgColor, int* fontStyle);
+	void			_SetAttributesInEditor(Editor* editor, int styleId,
+						int fgColor, int bgColor, int fontStyle);
 };
 
 
