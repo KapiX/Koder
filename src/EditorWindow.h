@@ -77,7 +77,7 @@ enum {
 
 class EditorWindow : public BWindow {
 public:
-						EditorWindow();
+							EditorWindow();
 
 			void			New();
 			void			OpenFile(entry_ref* entry);
@@ -91,6 +91,11 @@ public:
 	static	void			SetStyler(Styler* styler);
 
 private:
+	enum ModifiedAlertResult {
+		CANCEL	= 0,
+		DISCARD	= 1,
+		SAVE	= 2
+	};
 			BMenuBar*		fMainMenu;
 			BPath*			fOpenedFilePath;
 			BMimeType		fOpenedFileMimeType;
@@ -107,6 +112,8 @@ private:
 			void			_PopulateLanguageMenu(BMenu* languageMenu);
 			void			_SetLanguage(LanguageType lang);
 			void			_SyncWithPreferences();
+			int32			_ShowModifiedAlert();
+			void			_Save();
 };
 
 

@@ -62,7 +62,7 @@ EditorWindow::EditorWindow()
 	fOpenedFileMimeType.SetTo("text/plain");
 
 	BMessenger* windowMessenger = new BMessenger(this);
-	fOpenPanel = new BFilePanel();
+	fOpenPanel = new BFilePanel(B_OPEN_PANEL, windowMessenger);
 	fSavePanel = new BFilePanel(B_SAVE_PANEL, windowMessenger, NULL, 0, false);
 
 	fMainMenu = new BMenuBar("MainMenu");
@@ -185,6 +185,8 @@ EditorWindow::OpenFile(entry_ref* ref)
 	
 	if(fOpenedFilePath == NULL)
 		fOpenedFilePath = new BPath(&entry);
+	else
+		fOpenedFilePath->SetTo(&entry);
 	RefreshTitle();
 }
 
@@ -248,26 +250,16 @@ EditorWindow::QuitRequested()
 {
 	bool close = true;
 	if(fEditor->SendMessage(SCI_GETMODIFY, 0, 0)) {
-		int32 result;
-		BAlert* modifiedAlert = new BAlert(B_TRANSLATE("Unsaved changes"),
-			B_TRANSLATE("The file contains unsaved changes. What do you "
-				"want to do?"),
-			"Cancel", "Discard", "Save", B_WIDTH_AS_USUAL, B_OFFSET_SPACING,
-			B_STOP_ALERT);
-		modifiedAlert->SetShortcut(0, B_ESCAPE);
-		result = modifiedAlert->Go();
+		int32 result = _ShowModifiedAlert();
 		switch(result) {
-		case 0:
+		case ModifiedAlertResult::CANCEL:
 			close = false;
 		break;
-		case 1:
+		case ModifiedAlertResult::DISCARD:
 			close = true;
 		break;
-		case 2:
-			if(fOpenedFilePath == NULL)
-				fSavePanel->Show();
-			else
-				SaveFile(fOpenedFilePath);
+		case ModifiedAlertResult::SAVE:
+			_Save();
 			close = true;
 		break;
 		}
@@ -320,10 +312,7 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case MAINMENU_FILE_SAVE: {
 			if(fEditor->SendMessage(SCI_GETMODIFY, 0, 0)) {
-				if(fOpenedFilePath == NULL)
-					fSavePanel->Show();
-				else
-					SaveFile(fOpenedFilePath);
+				_Save();
 			}
 		} break;
 		case MAINMENU_FILE_SAVEAS: {
@@ -405,6 +394,20 @@ EditorWindow::MessageReceived(BMessage* message)
 		case B_ABOUT_REQUESTED:
 			be_app->PostMessage(message);
 		break;
+		case B_REFS_RECEIVED: {
+			entry_ref ref;
+			if(message->FindRef("refs", &ref) == B_OK) {
+				int32 result = _ShowModifiedAlert();
+				switch(result) {
+				case ModifiedAlertResult::CANCEL: break;
+				case ModifiedAlertResult::SAVE:
+					_Save();
+				case ModifiedAlertResult::DISCARD:
+					OpenFile(&ref);
+				break;
+				}
+			}
+		}
 		case GTLW_GO: {
 			int32 line;
 			if(message->FindInt32("line", &line) == B_OK) {
@@ -538,4 +541,26 @@ EditorWindow::_SyncWithPreferences()
 		// TODO Do this only if language menu preference has changed
 		_PopulateLanguageMenu(fLanguageMenu);
 	}
+}
+
+
+int32
+EditorWindow::_ShowModifiedAlert()
+{
+	BAlert* modifiedAlert = new BAlert(B_TRANSLATE("Unsaved changes"),
+		B_TRANSLATE("The file contains unsaved changes. What do you want to do?"),
+		B_TRANSLATE("Cancel"), B_TRANSLATE("Discard"), B_TRANSLATE("Save"),
+		B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_STOP_ALERT);
+	modifiedAlert->SetShortcut(0, B_ESCAPE);
+	return modifiedAlert->Go();
+}
+
+
+void
+EditorWindow::_Save()
+{
+	if(fOpenedFilePath == NULL)
+		fSavePanel->Show();
+	else
+		SaveFile(fOpenedFilePath);
 }
