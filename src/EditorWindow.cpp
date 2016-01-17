@@ -395,14 +395,18 @@ EditorWindow::MessageReceived(BMessage* message)
 		case B_REFS_RECEIVED: {
 			entry_ref ref;
 			if(message->FindRef("refs", &ref) == B_OK) {
-				int32 result = _ShowModifiedAlert();
-				switch(result) {
-				case ModifiedAlertResult::CANCEL: break;
-				case ModifiedAlertResult::SAVE:
-					_Save();
-				case ModifiedAlertResult::DISCARD:
+				if(fEditor->SendMessage(SCI_GETMODIFY, 0, 0)) {
+					int32 result = _ShowModifiedAlert();
+					switch(result) {
+					case ModifiedAlertResult::CANCEL: break;
+					case ModifiedAlertResult::SAVE:
+						_Save();
+					case ModifiedAlertResult::DISCARD:
+						OpenFile(&ref);
+					break;
+					}
+				} else {
 					OpenFile(&ref);
-				break;
 				}
 			}
 		}
