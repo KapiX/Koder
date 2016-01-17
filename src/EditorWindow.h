@@ -86,6 +86,7 @@ public:
 
 			bool			QuitRequested();
 			void			MessageReceived(BMessage* message);
+			void			WindowActivated(bool active);
 
 	static	void			SetPreferences(Preferences* preferences);
 	static	void			SetStyler(Styler* styler);
