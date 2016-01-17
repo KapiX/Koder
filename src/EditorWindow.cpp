@@ -255,11 +255,9 @@ EditorWindow::QuitRequested()
 		case ModifiedAlertResult::CANCEL:
 			close = false;
 		break;
-		case ModifiedAlertResult::DISCARD:
-			close = true;
-		break;
 		case ModifiedAlertResult::SAVE:
 			_Save();
+		case ModifiedAlertResult::DISCARD:
 			close = true;
 		break;
 		}
