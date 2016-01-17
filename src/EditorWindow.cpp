@@ -480,6 +480,9 @@ EditorWindow::_SetLanguage(LanguageType lang)
 	LanguageDefinition& langDef = languages.GetLanguage(static_cast<LanguageType>(lang));
 	fEditor->SendMessage(SCI_SETLEXER, static_cast<uptr_t>(langDef.fLexerID), 0);
 	fEditor->SendMessage(SCI_SETPROPERTY, (uptr_t) "fold", (sptr_t) "1");
+	if(langDef.fLexerID == SCLEX_CPP) {
+		fEditor->SendMessage(SCI_SETPROPERTY, (uptr_t) "lexer.cpp.track.preprocessor", (sptr_t) "0");
+	}
 	fStyler->ApplyLanguage(fEditor, langDef.fLexerName.String());
 	BPath langsPath(fPreferences->fSettingsPath);
 	langsPath.Append("langs.xml");
