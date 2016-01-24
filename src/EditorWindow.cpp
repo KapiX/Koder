@@ -637,6 +637,7 @@ EditorWindow::_SetLanguage(LanguageType lang)
 	fEditor->SendMessage(SCI_SETPROPERTY, (uptr_t) "fold", (sptr_t) "1");
 	if(langDef.fLexerID == SCLEX_CPP) {
 		fEditor->SendMessage(SCI_SETPROPERTY, (uptr_t) "lexer.cpp.track.preprocessor", (sptr_t) "0");
+		fEditor->SendMessage(SCI_SETPROPERTY, (uptr_t) "styling.within.preprocessor", (sptr_t) "1");
 	}
 	fStyler->ApplyLanguage(fEditor, langDef.fLexerName.String());
 	BPath langsPath(fPreferences->fSettingsPath);
