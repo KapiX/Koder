@@ -117,6 +117,8 @@ private:
 
 			GoToLineWindow*	fGoToLineWindow;
 
+			bool			fActivatedGuard;
+
 	static	Preferences*	fPreferences;
 	static	Styler*			fStyler;
 

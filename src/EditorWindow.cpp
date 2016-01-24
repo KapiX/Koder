@@ -58,6 +58,8 @@ EditorWindow::EditorWindow()
 	:
 	BWindow(fPreferences->fWindowRect, gAppName, B_DOCUMENT_WINDOW, 0)
 {
+	fActivatedGuard = false;
+
 	fSearchLastResultStart = -1;
 	fSearchLastResultEnd = -1;
 
@@ -445,18 +447,17 @@ EditorWindow::MessageReceived(BMessage* message)
 void
 EditorWindow::WindowActivated(bool active)
 {
-	// Ensure that caret will be visible after opening file in a new window
-	// GOTOPOS in OpenFile does not do that, because in that time Scintilla
-	// view does not have proper dimensions, and the control cannot calculate
-	// scroll position correctly.
-	// After the window is activated for the first time, we are sure layouting
-	// has been completed.
-	static bool once = false;
-	if(once == false && active == true) {
-		fEditor->SendMessage(SCI_SCROLLCARET, 0, 0);
-		once = true;
-	}
 	if(active == true) {
+		if(fActivatedGuard == false) {
+			// Ensure that caret will be visible after opening file in a new
+			// window GOTOPOS in OpenFile does not do that, because in that time
+			// Scintilla view does not have proper dimensions, and the control
+			// cannot calculate scroll position correctly.
+			// After the window is activated for the first time, we are sure
+			// layouting has been completed.
+			fEditor->SendMessage(SCI_SCROLLCARET, 0, 0);
+			fActivatedGuard = true;
+		}
 		BMessage message(ACTIVE_WINDOW_CHANGED);
 		message.AddPointer("window", this);
 		be_app->PostMessage(&message);
