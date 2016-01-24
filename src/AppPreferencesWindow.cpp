@@ -158,6 +158,15 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 
 
 void
+AppPreferencesWindow::Quit()
+{
+	be_app->PostMessage(APP_PREFERENCES_QUITTING);
+
+	BWindow::Quit();
+}
+
+
+void
 AppPreferencesWindow::_InitInterface()
 {
 	fEditorBox = new BBox("editorPrefs");

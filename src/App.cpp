@@ -144,6 +144,9 @@ App::MessageReceived(BMessage* message)
 			messenger.SendMessage(message);
 		}
 	} break;
+	case APP_PREFERENCES_QUITTING: {
+		fAppPreferencesWindow = nullptr;
+	} break;
 	case FINDWINDOW_FIND:
 	case FINDWINDOW_REPLACE:
 	case FINDWINDOW_REPLACEFIND:
@@ -158,8 +161,11 @@ App::MessageReceived(BMessage* message)
 		fFindWindow = nullptr;
 	} break;
 	case MAINMENU_EDIT_APP_PREFERENCES: {
-		fAppPreferencesWindow = new AppPreferencesWindow(fPreferences);
+		if(fAppPreferencesWindow == nullptr) {
+			fAppPreferencesWindow = new AppPreferencesWindow(fPreferences);
+		}
 		fAppPreferencesWindow->Show();
+		fAppPreferencesWindow->Activate();
 	} break;
 	case MAINMENU_SEARCH_FINDREPLACE: {
 		if(fFindWindow == nullptr) {

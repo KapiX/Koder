@@ -37,6 +37,7 @@ class Preferences;
 
 
 const uint32 APP_PREFERENCES_CHANGED = 'apch';
+const uint32 APP_PREFERENCES_QUITTING = 'APQU';
 
 
 class AppPreferencesWindow : public BWindow {
@@ -45,6 +46,7 @@ public:
 					~AppPreferencesWindow();
 
 	void			MessageReceived(BMessage* message);
+	void			Quit();
 
 private:
 	enum Actions {
