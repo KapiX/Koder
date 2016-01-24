@@ -34,6 +34,7 @@ SRCS = \
 	src/AppPreferencesWindow.cpp \
 	src/Editor.cpp \
 	src/EditorWindow.cpp \
+	src/FindWindow.cpp \
 	src/GoToLineWindow.cpp \
 	src/Languages.cpp \
 	src/Preferences.cpp \

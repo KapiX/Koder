@@ -29,6 +29,7 @@
 
 class AppPreferencesWindow;
 class EditorWindow;
+class FindWindow;
 class Preferences;
 class Styler;
 
@@ -50,6 +51,7 @@ private:
 	BObjectList<EditorWindow>	fWindows;
 	EditorWindow*				fLastActiveWindow;
 	AppPreferencesWindow*		fAppPreferencesWindow;
+	FindWindow*					fFindWindow;
 	Preferences*				fPreferences;
 	Styler*						fStyler;
 

@@ -25,6 +25,8 @@
 #include <String.h>
 #include <Window.h>
 
+#include <ScintillaView.h>
+
 #include "Languages.h"
 
 
@@ -41,6 +43,8 @@ class Styler;
 
 const BString gAppName = "Koder";
 const BString gAppMime = "application/x-vnd.KapiX-Koder";
+
+const uint32 ACTIVE_WINDOW_CHANGED = 'AWCH';
 
 
 enum {
@@ -60,6 +64,7 @@ enum {
 	MAINMENU_VIEW_SPECIAL_WHITESPACE	= 'vsws',
 	MAINMENU_VIEW_SPECIAL_EOL			= 'vseo',
 
+	MAINMENU_SEARCH_FINDREPLACE			= 'msfr',
 	MAINMENU_SEARCH_GOTOLINE			= 'msgl',
 
 	MAINMENU_VIEW_LINEHIGHLIGHT			= 'mlhl',
@@ -105,11 +110,17 @@ private:
 			BFilePanel*		fSavePanel;
 			BMenu*			fLanguageMenu;
 
+			Sci_Position	fSearchTargetStart;
+			Sci_Position	fSearchTargetEnd;
+			Sci_Position	fSearchLastResultStart;
+			Sci_Position	fSearchLastResultEnd;
+
 			GoToLineWindow*	fGoToLineWindow;
 
 	static	Preferences*	fPreferences;
 	static	Styler*			fStyler;
 
+			void			_FindReplace(BMessage* message);
 			void			_PopulateLanguageMenu(BMenu* languageMenu);
 			void			_SetLanguage(LanguageType lang);
 			void			_SyncWithPreferences();

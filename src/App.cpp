@@ -29,6 +29,7 @@
 
 #include "AppPreferencesWindow.h"
 #include "EditorWindow.h"
+#include "FindWindow.h"
 #include "Preferences.h"
 #include "Styler.h"
 
@@ -37,6 +38,8 @@ App::App()
 	:
 	BApplication(gAppMime),
 	fLastActiveWindow(NULL),
+	fAppPreferencesWindow(nullptr),
+	fFindWindow(nullptr),
 	fPreferences(NULL),
 	fStyler(NULL)
 {
@@ -130,15 +133,40 @@ void
 App::MessageReceived(BMessage* message)
 {
 	switch(message->what) {
+	case ACTIVE_WINDOW_CHANGED: {
+		if(message->FindPointer("window", (void**) &fLastActiveWindow) != B_OK) {
+			fLastActiveWindow = nullptr;
+		}
+	} break;
 	case APP_PREFERENCES_CHANGED: {
 		for(uint32 i = 0, count = fWindows.CountItems(); i < count; i++) {
 			BMessenger messenger((BWindow*) fWindows.ItemAt(i));
 			messenger.SendMessage(message);
 		}
 	} break;
+	case FINDWINDOW_FIND:
+	case FINDWINDOW_REPLACE:
+	case FINDWINDOW_REPLACEFIND:
+	case FINDWINDOW_REPLACEALL: {
+		// TODO: == nullptr should never happen, alert if it somehow does?
+		if(fLastActiveWindow != nullptr) {
+			BMessenger messenger((BWindow*) fLastActiveWindow);
+			messenger.SendMessage(message);
+		}
+	} break;
+	case FINDWINDOW_QUITTING: {
+		fFindWindow = nullptr;
+	} break;
 	case MAINMENU_EDIT_APP_PREFERENCES: {
 		fAppPreferencesWindow = new AppPreferencesWindow(fPreferences);
 		fAppPreferencesWindow->Show();
+	} break;
+	case MAINMENU_SEARCH_FINDREPLACE: {
+		if(fFindWindow == nullptr) {
+			fFindWindow = new FindWindow();
+		}
+		fFindWindow->Show();
+		fFindWindow->Activate();
 	} break;
 	case WINDOW_NEW: {
 		EditorWindow* window = new EditorWindow();

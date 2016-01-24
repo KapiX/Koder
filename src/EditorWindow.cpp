@@ -39,6 +39,7 @@
 
 #include "AppPreferencesWindow.h"
 #include "Editor.h"
+#include "FindWindow.h"
 #include "GoToLineWindow.h"
 #include "Languages.h"
 #include "Preferences.h"
@@ -57,6 +58,9 @@ EditorWindow::EditorWindow()
 	:
 	BWindow(fPreferences->fWindowRect, gAppName, B_DOCUMENT_WINDOW, 0)
 {
+	fSearchLastResultStart = -1;
+	fSearchLastResultEnd = -1;
+
 	fGoToLineWindow = NULL;
 	fOpenedFilePath = NULL;
 	fOpenedFileMimeType.SetTo("text/plain");
@@ -103,6 +107,8 @@ EditorWindow::EditorWindow()
 			.End()
 		.End()
 		.AddMenu(B_TRANSLATE("Search"))
+			.AddItem(B_TRANSLATE("Find/Replace" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_FINDREPLACE, 'F')
+			.AddSeparator()
 			.AddItem(B_TRANSLATE("Go to line" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_GOTOLINE, 'G')
 		.End()
 		.AddMenu(B_TRANSLATE("Language"))
@@ -336,7 +342,8 @@ EditorWindow::MessageReceived(BMessage* message)
 			fEditor->SendMessage(SCI_CONVERTEOLS, SC_EOL_CR, 0);
 			fEditor->SendMessage(SCI_SETEOLMODE, SC_EOL_CR, 0);
 		} break;
-		case MAINMENU_EDIT_APP_PREFERENCES: {
+		case MAINMENU_EDIT_APP_PREFERENCES:
+		case MAINMENU_SEARCH_FINDREPLACE: {
 			be_app->PostMessage(message);
 		} break;
 		case MAINMENU_SEARCH_GOTOLINE: {
@@ -417,6 +424,17 @@ EditorWindow::MessageReceived(BMessage* message)
 				fEditor->SendMessage(SCI_GOTOLINE, line - 1, 0);
 			}
 		} break;
+		case FINDWINDOW_FIND:
+		case FINDWINDOW_REPLACE:
+		case FINDWINDOW_REPLACEALL: {
+			_FindReplace(message);
+		} break;
+		case FINDWINDOW_REPLACEFIND: {
+			message->what = FINDWINDOW_REPLACE;
+			_FindReplace(message);
+			message->what = FINDWINDOW_FIND;
+			_FindReplace(message);
+		}
 		default:
 			BWindow::MessageReceived(message);
 		break;
@@ -438,6 +456,11 @@ EditorWindow::WindowActivated(bool active)
 		fEditor->SendMessage(SCI_SCROLLCARET, 0, 0);
 		once = true;
 	}
+	if(active == true) {
+		BMessage message(ACTIVE_WINDOW_CHANGED);
+		message.AddPointer("window", this);
+		be_app->PostMessage(&message);
+	}
 }
 
 
@@ -452,6 +475,116 @@ EditorWindow::SetPreferences(Preferences* preferences)
 EditorWindow::SetStyler(Styler* styler)
 {
 	fStyler = styler;
+}
+
+
+void
+EditorWindow::_FindReplace(BMessage* message)
+{
+	bool newSearch = message->GetBool("newSearch");
+	bool inSelection = message->GetBool("inSelection");
+	bool matchCase = message->GetBool("matchCase");
+	bool matchWord = message->GetBool("matchWord");
+	bool wrapAround = message->GetBool("wrapAround");
+	bool backwards = message->GetBool("backwards");
+	const char* findText = message->GetString("findText", "");
+	const char* replaceText = message->GetString("replaceText", "");
+
+	int searchFlags = 0;
+	if(matchCase == true)
+		searchFlags |= SCFIND_MATCHCASE;
+	if(matchWord == true)
+		searchFlags |= SCFIND_WHOLEWORD;
+	fEditor->SendMessage(SCI_SETSEARCHFLAGS, searchFlags, 0);
+
+	if(message->what != FINDWINDOW_REPLACEALL) {
+		// Detect if user has changed cursor position
+		Sci_Position anchor = fEditor->SendMessage(SCI_GETANCHOR, 0, 0);
+		Sci_Position current = fEditor->SendMessage(SCI_GETCURRENTPOS, 0, 0);
+		if(anchor != fSearchLastResultStart || current != fSearchLastResultEnd) {
+			newSearch = true;
+		}
+
+		if(newSearch == true) {
+			if(inSelection == true) {
+				if(backwards == false) {
+					fSearchTargetStart = fEditor->SendMessage(SCI_GETSELECTIONSTART, 0, 0);
+					fSearchTargetEnd = fEditor->SendMessage(SCI_GETSELECTIONEND, 0, 0);
+				} else {
+					fSearchTargetStart = fEditor->SendMessage(SCI_GETSELECTIONEND, 0, 0);
+					fSearchTargetEnd = fEditor->SendMessage(SCI_GETSELECTIONSTART, 0, 0);
+				}
+			} else {
+				if(backwards == true) {
+					fSearchTargetStart = anchor;
+					fSearchTargetEnd = 0;
+				} else {
+					fSearchTargetStart = current;
+					fSearchTargetEnd = fEditor->SendMessage(SCI_GETLENGTH, 0, 0);
+				}
+			}
+			fEditor->SendMessage(SCI_SETTARGETRANGE, fSearchTargetStart, fSearchTargetEnd);
+		}
+
+		switch(message->what) {
+			case FINDWINDOW_FIND: {
+				Sci_Position pos = fEditor->SendMessage(SCI_SEARCHINTARGET, (uptr_t) strlen(findText), (sptr_t) findText);
+				if(pos != -1) {
+					fSearchLastResultStart = pos;
+					fSearchLastResultEnd = pos + strlen(findText);
+					fEditor->SendMessage(SCI_SETSEL, fSearchLastResultStart, fSearchLastResultEnd);
+					fEditor->SendMessage(SCI_SETTARGETRANGE, (backwards == false ? pos + strlen(findText) : pos), fSearchTargetEnd);
+				} else {
+					// TODO: _method?
+					BAlert* alert = new BAlert(B_TRANSLATE("Searching finished"),
+						B_TRANSLATE("End of document was reached. No results found."),
+						B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_INFO_ALERT);
+					alert->SetShortcut(0, B_ESCAPE);
+					alert->Go();
+					if(wrapAround == true) {
+						Sci_Position s;
+						if(inSelection == true) {
+							s = fSearchTargetStart;
+						} else {
+							if(backwards == true) {
+								s = fEditor->SendMessage(SCI_GETLENGTH, 0, 0);
+							} else {
+								s = 0;
+							}
+						}
+						fEditor->SendMessage(SCI_SETTARGETRANGE, s, fSearchTargetEnd);
+					}
+				}
+			} break;
+			case FINDWINDOW_REPLACE: {
+				if(fSearchLastResultStart != -1 && fSearchLastResultEnd != -1) {
+					fEditor->SendMessage(SCI_SETSEL, fSearchLastResultStart, fSearchLastResultEnd);
+					fEditor->SendMessage(SCI_REPLACESEL, 0, (sptr_t) replaceText);
+					fSearchLastResultStart = -1;
+					fSearchLastResultEnd = -1;
+				}
+			} break;
+		}
+	} else {
+		if(inSelection == true) {
+			fEditor->SendMessage(SCI_TARGETFROMSELECTION, 0, 0);
+		} else {
+			fEditor->SendMessage(SCI_TARGETWHOLEDOCUMENT, 0, 0);
+		}
+		Sci_Position pos;
+		Sci_Position targetEnd = fEditor->SendMessage(SCI_GETTARGETEND, 0, 0);
+		fEditor->SendMessage(SCI_BEGINUNDOACTION, 0, 0);
+		do {
+			pos = fEditor->SendMessage(SCI_SEARCHINTARGET, (uptr_t) strlen(findText), (sptr_t) findText);
+			if(pos != -1) {
+				fEditor->SendMessage(SCI_REPLACETARGET, -1, (sptr_t) replaceText);
+				fEditor->SendMessage(SCI_SETTARGETRANGE, pos + strlen(replaceText), targetEnd);
+			}
+		} while(pos != -1);
+		fEditor->SendMessage(SCI_ENDUNDOACTION, 0, 0);
+		fSearchLastResultStart = -1;
+		fSearchLastResultEnd = -1;
+	}
 }
 
 
