@@ -222,12 +222,7 @@ void
 EditorWindow::SaveFile(BPath* path)
 {
 	// TODO error checking
-	BEntry backup;
-	if(fOpenedFilePath != NULL && *fOpenedFilePath == *path) {
-		backup.SetTo(path->Path());
-		backup.Rename(BString(path->Path()).Append("~"));
-	}
-	BFile file(path->Path(), B_WRITE_ONLY | B_CREATE_FILE);
+	BFile file(path->Path(), B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
 	int length = fEditor->TextLength() + 1;
 	char* buffer = new char[length];
 	fEditor->GetText(0, length, buffer);
@@ -239,10 +234,6 @@ EditorWindow::SaveFile(BPath* path)
 	BNode node(path->Path());
 	BNodeInfo nodeInfo(&node);
 	nodeInfo.SetType(mimeType);
-
-	if(fOpenedFilePath != NULL && *fOpenedFilePath == *path) {
-		backup.Remove();
-	}
 
 	if(fOpenedFilePath == NULL) {
 		fOpenedFilePath = new BPath(*path);
