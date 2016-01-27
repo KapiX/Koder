@@ -22,6 +22,7 @@
 #define EDITORWINDOW_H
 
 #include <MimeType.h>
+#include <Statable.h>
 #include <String.h>
 #include <Window.h>
 
@@ -105,6 +106,9 @@ private:
 			BMenuBar*		fMainMenu;
 			BPath*			fOpenedFilePath;
 			BMimeType		fOpenedFileMimeType;
+			time_t			fOpenedFileModificationTime;
+			bool			fModifiedOutside;
+			bool			fModified;
 			Editor*			fEditor;
 			BFilePanel*		fOpenPanel;
 			BFilePanel*		fSavePanel;
@@ -123,8 +127,11 @@ private:
 	static	Styler*			fStyler;
 
 			void			_FindReplace(BMessage* message);
+			status_t		_MonitorFile(BStatable* file, bool enable);
 			void			_PopulateLanguageMenu(BMenu* languageMenu);
+			void			_ReloadFile(entry_ref* ref = nullptr);
 			void			_SetLanguage(LanguageType lang);
+			void			_SetLanguageByFilename(const char* filename);
 			void			_SyncWithPreferences();
 			int32			_ShowModifiedAlert();
 			void			_Save();

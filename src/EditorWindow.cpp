@@ -32,6 +32,7 @@
 #include <MimeType.h>
 #include <Node.h>
 #include <NodeInfo.h>
+#include <NodeMonitor.h>
 #include <ObjectList.h>
 #include <Path.h>
 #include <Roster.h>
@@ -59,6 +60,9 @@ EditorWindow::EditorWindow()
 	BWindow(fPreferences->fWindowRect, gAppName, B_DOCUMENT_WINDOW, 0)
 {
 	fActivatedGuard = false;
+
+	fModifiedOutside = false;
+	fModified = false;
 
 	fSearchLastResultStart = -1;
 	fSearchLastResultEnd = -1;
@@ -155,7 +159,16 @@ EditorWindow::New()
 void
 EditorWindow::OpenFile(entry_ref* ref)
 {
+	// stop watching previously opened file
+	if(fOpenedFilePath != NULL) {
+		BEntry open(fOpenedFilePath->Path());
+		_MonitorFile(&open, false);
+	}
+
 	BEntry entry(ref);
+	_MonitorFile(&entry, true);
+	entry.GetModificationTime(&fOpenedFileModificationTime);
+	fModifiedOutside = false;
 
 	char mimeType[256];
 	int32 caretPos = 0;
@@ -179,15 +192,7 @@ EditorWindow::OpenFile(entry_ref* ref)
 
 	char name[B_FILE_NAME_LENGTH];
 	entry.GetName(name);
-	char* extension = strrchr(name, '.') + 1;
-	if((int) extension == 1) {
-		extension = name;
-	}
-
-	uint32 lang;
-	if(fPreferences->fExtensions.FindUInt32(extension, &lang) == B_OK) {
-		_SetLanguage(static_cast<LanguageType>(lang));
-	}
+	_SetLanguageByFilename(name);
 
 	be_roster->AddToRecentDocuments(ref, gAppMime);
 	
@@ -203,7 +208,7 @@ void
 EditorWindow::RefreshTitle()
 {
 	BString title;
-	if(fEditor->SendMessage(SCI_GETMODIFY, 0, 0))
+	if(fModified == true)
 		title << "*";
 	if(fOpenedFilePath != NULL)
 		if(fPreferences->fFullPathInTitle == true) {
@@ -222,6 +227,8 @@ void
 EditorWindow::SaveFile(BPath* path)
 {
 	// TODO error checking
+	BNode node(path->Path());
+	_MonitorFile(&node, false);
 	BFile file(path->Path(), B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
 	int length = fEditor->TextLength() + 1;
 	char* buffer = new char[length];
@@ -231,7 +238,9 @@ EditorWindow::SaveFile(BPath* path)
 	delete []buffer;
 
 	const char* mimeType = fOpenedFileMimeType.Type();
-	BNode node(path->Path());
+	_MonitorFile(&node, true);
+	node.GetModificationTime(&fOpenedFileModificationTime);
+	fModifiedOutside = false;
 	BNodeInfo nodeInfo(&node);
 	nodeInfo.SetType(mimeType);
 
@@ -248,7 +257,7 @@ bool
 EditorWindow::QuitRequested()
 {
 	bool close = true;
-	if(fEditor->SendMessage(SCI_GETMODIFY, 0, 0)) {
+	if(fModified == true) {
 		int32 result = _ShowModifiedAlert();
 		switch(result) {
 		case ModifiedAlertResult::CANCEL:
@@ -308,7 +317,7 @@ EditorWindow::MessageReceived(BMessage* message)
 			fOpenPanel->Show();
 		} break;
 		case MAINMENU_FILE_SAVE: {
-			if(fEditor->SendMessage(SCI_GETMODIFY, 0, 0)) {
+			if(fModified == true) {
 				_Save();
 			}
 		} break;
@@ -385,17 +394,21 @@ EditorWindow::MessageReceived(BMessage* message)
 		case B_REDO: {
 			fEditor->SendMessage(SCI_REDO, 0, 0);
 		} break;
-		case EDITOR_SAVEPOINT_LEFT:
-		case EDITOR_SAVEPOINT_REACHED:
+		case EDITOR_SAVEPOINT_LEFT: {
+			fModified = true;
 			RefreshTitle();
-		break;
+		} break;
+		case EDITOR_SAVEPOINT_REACHED: {
+			fModified = false;
+			RefreshTitle();
+		} break;
 		case B_ABOUT_REQUESTED:
 			be_app->PostMessage(message);
 		break;
 		case B_REFS_RECEIVED: {
 			entry_ref ref;
 			if(message->FindRef("refs", &ref) == B_OK) {
-				if(fEditor->SendMessage(SCI_GETMODIFY, 0, 0)) {
+				if(fModified == true) {
 					int32 result = _ShowModifiedAlert();
 					switch(result) {
 					case ModifiedAlertResult::CANCEL: break;
@@ -410,6 +423,33 @@ EditorWindow::MessageReceived(BMessage* message)
 				}
 			}
 		}
+		case B_NODE_MONITOR: {
+			int32 opcode = message->GetInt32("opcode", 0);
+			if(opcode == B_STAT_CHANGED) {
+				BEntry entry;
+				entry.SetTo(fOpenedFilePath->Path());
+				time_t mt;
+				entry.GetModificationTime(&mt);
+				if(mt > fOpenedFileModificationTime) {
+					fModifiedOutside = true;
+					fOpenedFileModificationTime = mt;
+				}
+				// Notification about this is sent when window is activated
+			} else if(opcode == B_ENTRY_MOVED) {
+				entry_ref ref;
+				const char* name;
+				message->FindInt32("device", &ref.device);
+				message->FindInt64("to directory", &ref.directory);
+				message->FindString("name", &name);
+				ref.set_name(name);
+				_ReloadFile(&ref);
+			} else if(opcode == B_ENTRY_REMOVED) {
+				delete fOpenedFilePath;
+				fOpenedFilePath = NULL;
+				fModified = true;
+				RefreshTitle();
+			}
+		} break;
 		case GTLW_GO: {
 			int32 line;
 			if(message->FindInt32("line", &line) == B_OK) {
@@ -452,6 +492,19 @@ EditorWindow::WindowActivated(bool active)
 		BMessage message(ACTIVE_WINDOW_CHANGED);
 		message.AddPointer("window", this);
 		be_app->PostMessage(&message);
+
+		if(fModifiedOutside == true) {
+			// reload opened file
+			BAlert* alert = new BAlert(B_TRANSLATE("File modified"),
+				B_TRANSLATE("File has been modified outside of this editor. What do you want to do?"),
+				B_TRANSLATE("Reload"), B_TRANSLATE("Nothing"), nullptr, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_INFO_ALERT);
+			alert->SetShortcut(0, B_ESCAPE);
+			int result = alert->Go();
+			if(result == 0) {
+				_ReloadFile();
+			}
+			fModifiedOutside = false;
+		}
 	}
 }
 
@@ -580,6 +633,16 @@ EditorWindow::_FindReplace(BMessage* message)
 }
 
 
+status_t
+EditorWindow::_MonitorFile(BStatable* file, bool enable)
+{
+	uint32 flags = (enable == true ? B_WATCH_NAME | B_WATCH_STAT : B_STOP_WATCHING);
+	node_ref nref;
+	file->GetNodeRef(&nref);
+	return watch_node(&nref, flags, this);
+}
+
+
 void
 EditorWindow::_PopulateLanguageMenu(BMenu* languageMenu)
 {
@@ -620,6 +683,28 @@ EditorWindow::_PopulateLanguageMenu(BMenu* languageMenu)
 
 
 void
+EditorWindow::_ReloadFile(entry_ref* ref)
+{
+	if(ref == nullptr) {
+		// reload file from current location
+		entry_ref e;
+		BEntry entry(fOpenedFilePath->Path());
+		entry.GetRef(&e);
+		OpenFile(&e);
+	} else {
+		// file has been moved
+		BEntry entry(ref);
+		char name[B_FILE_NAME_LENGTH];
+		entry.GetName(name);
+		_SetLanguageByFilename(name);
+
+		fOpenedFilePath->SetTo(&entry);
+		RefreshTitle();
+	}
+}
+
+
+void
 EditorWindow::_SetLanguage(LanguageType lang)
 {
 	Languages languages;
@@ -634,6 +719,21 @@ EditorWindow::_SetLanguage(LanguageType lang)
 	BPath langsPath(fPreferences->fSettingsPath);
 	langsPath.Append("langs.xml");
 	languages.ApplyLanguage(fEditor, langsPath.Path(), langDef.fLexerName.String());
+}
+
+
+void
+EditorWindow::_SetLanguageByFilename(const char* filename)
+{
+	const char* extension = strrchr(filename, '.') + 1;
+	if((int) extension == 1) {
+		extension = filename;
+	}
+
+	uint32 lang;
+	if(fPreferences->fExtensions.FindUInt32(extension, &lang) == B_OK) {
+		_SetLanguage(static_cast<LanguageType>(lang));
+	}
 }
 
 
