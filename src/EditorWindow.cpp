@@ -503,7 +503,7 @@ EditorWindow::MessageReceived(BMessage* message)
 			_FindReplace(message);
 			message->what = FINDWINDOW_FIND;
 			_FindReplace(message);
-		}
+		} break;
 		default:
 			BWindow::MessageReceived(message);
 		break;
@@ -533,11 +533,14 @@ EditorWindow::WindowActivated(bool active)
 			// reload opened file
 			BAlert* alert = new BAlert(B_TRANSLATE("File modified"),
 				B_TRANSLATE("File has been modified outside of this editor. What do you want to do?"),
-				B_TRANSLATE("Reload"), B_TRANSLATE("Nothing"), nullptr, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_INFO_ALERT);
-			alert->SetShortcut(0, B_ESCAPE);
+				B_TRANSLATE("Reload"), B_TRANSLATE("Nothing"), nullptr, B_WIDTH_AS_USUAL, B_EVEN_SPACING, B_INFO_ALERT);
+			alert->SetShortcut(1, B_ESCAPE);
 			int result = alert->Go();
 			if(result == 0) {
 				_ReloadFile();
+			} else {
+				fModified = true;
+				RefreshTitle();
 			}
 			fModifiedOutside = false;
 		}
