@@ -86,9 +86,9 @@ public:
 							EditorWindow();
 
 			void			New();
-			void			OpenFile(entry_ref* entry);
+			void			OpenFile(entry_ref* ref);
 			void			RefreshTitle();
-			void			SaveFile(BPath* path);
+			void			SaveFile(entry_ref* ref);
 
 			bool			QuitRequested();
 			void			MessageReceived(BMessage* message);
@@ -109,6 +109,7 @@ private:
 			time_t			fOpenedFileModificationTime;
 			bool			fModifiedOutside;
 			bool			fModified;
+			bool			fReadOnly;
 			Editor*			fEditor;
 			BFilePanel*		fOpenPanel;
 			BFilePanel*		fSavePanel;
@@ -126,6 +127,7 @@ private:
 	static	Preferences*	fPreferences;
 	static	Styler*			fStyler;
 
+			bool			_CheckPermissions(BStatable* file, mode_t permissions);
 			void			_FindReplace(BMessage* message);
 			status_t		_MonitorFile(BStatable* file, bool enable);
 			void			_PopulateLanguageMenu(BMenu* languageMenu);

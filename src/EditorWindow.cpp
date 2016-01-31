@@ -63,6 +63,7 @@ EditorWindow::EditorWindow()
 
 	fModifiedOutside = false;
 	fModified = false;
+	fReadOnly = false;
 
 	fSearchLastResultStart = -1;
 	fSearchLastResultEnd = -1;
@@ -159,8 +160,10 @@ EditorWindow::New()
 void
 EditorWindow::OpenFile(entry_ref* ref)
 {
-	// stop watching previously opened file
+	fEditor->SendMessage(SCI_SETREADONLY, false, 0);
+		// let us load new file
 	if(fOpenedFilePath != NULL) {
+		// stop watching previously opened file
 		BEntry open(fOpenedFilePath->Path());
 		_MonitorFile(&open, false);
 	}
@@ -175,6 +178,18 @@ EditorWindow::OpenFile(entry_ref* ref)
 	BNode node(&entry);
 	node.ReadAttr("be:caret_position", B_INT32_TYPE, 0, &caretPos, 4);
 	node.ReadAttr("BEOS:TYPE", B_MIME_TYPE, 0, mimeType, 256);
+
+	fReadOnly = true;
+	bool canWrite = _CheckPermissions(&node, S_IWUSR | S_IWGRP | S_IWOTH);
+	if(canWrite) {
+		fReadOnly = false;
+	} else {
+		BAlert* alert = new BAlert(B_TRANSLATE("Warning"),
+			B_TRANSLATE("You don't have permissions to edit this file. The editor will be set to read-only mode."),
+			B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
+		alert->SetShortcut(0, B_ESCAPE);
+		alert->Go();
+	}
 
 	BFile file(&entry, B_READ_ONLY);
 	off_t size;
@@ -193,6 +208,8 @@ EditorWindow::OpenFile(entry_ref* ref)
 	char name[B_FILE_NAME_LENGTH];
 	entry.GetName(name);
 	_SetLanguageByFilename(name);
+
+	fEditor->SendMessage(SCI_SETREADONLY, fReadOnly, 0);
 
 	be_roster->AddToRecentDocuments(ref, gAppMime);
 	
@@ -219,17 +236,27 @@ EditorWindow::RefreshTitle()
 	else {
 		title << B_TRANSLATE("Untitled");
 	}
+	if(fReadOnly) {
+		title << " " << B_TRANSLATE("[read-only]");
+	}
 	SetTitle(title);
 }
 
 
 void
-EditorWindow::SaveFile(BPath* path)
+EditorWindow::SaveFile(entry_ref* ref)
 {
 	// TODO error checking
-	BNode node(path->Path());
+	BFile file(ref, B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
+	if(file.InitCheck() == B_PERMISSION_DENIED) {
+		BAlert* alert = new BAlert(B_TRANSLATE("Access denied"),
+			B_TRANSLATE("You don't have sufficient permissions to edit this file."),
+			B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_STOP_ALERT);
+		alert->SetShortcut(0, B_ESCAPE);
+		return;
+	}
+	BNode node(ref);
 	_MonitorFile(&node, false);
-	BFile file(path->Path(), B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
 	int length = fEditor->TextLength() + 1;
 	char* buffer = new char[length];
 	fEditor->GetText(0, length, buffer);
@@ -244,11 +271,10 @@ EditorWindow::SaveFile(BPath* path)
 	BNodeInfo nodeInfo(&node);
 	nodeInfo.SetType(mimeType);
 
-	if(fOpenedFilePath == NULL) {
-		fOpenedFilePath = new BPath(*path);
-	} else if(*fOpenedFilePath != *path) {
-		*fOpenedFilePath = *path;
+	if(fOpenedFilePath != NULL) {
+		delete fOpenedFilePath;
 	}
+	fOpenedFilePath = new BPath(ref);
 	RefreshTitle();
 }
 
@@ -318,7 +344,11 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case MAINMENU_FILE_SAVE: {
 			if(fModified == true) {
-				_Save();
+				if(fReadOnly == true) {
+					// TODO: alert
+				} else {
+					_Save();
+				}
 			}
 		} break;
 		case MAINMENU_FILE_SAVEAS: {
@@ -371,8 +401,9 @@ EditorWindow::MessageReceived(BMessage* message)
 				message->FindString("name", &name);
 				BPath path(&ref);
 				path.Append(name);
-				
-				SaveFile(&path);
+				BEntry entry(path.Path());
+				entry.GetRef(&ref);
+				SaveFile(&ref);
 			}
 		} break;
 		case B_CUT: {
@@ -434,6 +465,11 @@ EditorWindow::MessageReceived(BMessage* message)
 					fModifiedOutside = true;
 					fOpenedFileModificationTime = mt;
 				}
+
+				bool canWrite = _CheckPermissions(&entry, S_IWUSR | S_IWGRP | S_IWOTH);
+				fReadOnly = !canWrite;
+				fEditor->SendMessage(SCI_SETREADONLY, fReadOnly, 0);
+				RefreshTitle();
 				// Notification about this is sent when window is activated
 			} else if(opcode == B_ENTRY_MOVED) {
 				entry_ref ref;
@@ -520,6 +556,26 @@ EditorWindow::SetPreferences(Preferences* preferences)
 EditorWindow::SetStyler(Styler* styler)
 {
 	fStyler = styler;
+}
+
+
+bool
+EditorWindow::_CheckPermissions(BStatable* file, mode_t permissions)
+{
+	mode_t perms;
+	if(file->GetPermissions(&perms) < B_OK) {
+		BAlert* alert = new BAlert(B_TRANSLATE("Error"),
+			B_TRANSLATE("Could not read file permissions."),
+			B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_STOP_ALERT);
+		alert->SetShortcut(0, B_ESCAPE);
+		alert->Go();
+		return false;
+	}
+
+	if(perms & permissions) {
+		return true;
+	}
+	return false;
 }
 
 
@@ -795,10 +851,20 @@ EditorWindow::_SyncWithPreferences()
 int32
 EditorWindow::_ShowModifiedAlert()
 {
+	const char* alertText;
+	const char* button0 = B_TRANSLATE("Cancel");
+	const char* button1 = B_TRANSLATE("Discard");
+	const char* button2;
+	if(fReadOnly == true) {
+		alertText = B_TRANSLATE("The file contains unsaved changes, but is read-only. What do you want to do?");
+		//button2 = B_TRANSLATE("Save as" B_UTF8_ELLIPSIS);
+			// FIXME: Race condition when opening file
+	} else {
+		alertText = B_TRANSLATE("The file contains unsaved changes. What do you want to do?");
+		button2 = B_TRANSLATE("Save");
+	}
 	BAlert* modifiedAlert = new BAlert(B_TRANSLATE("Unsaved changes"),
-		B_TRANSLATE("The file contains unsaved changes. What do you want to do?"),
-		B_TRANSLATE("Cancel"), B_TRANSLATE("Discard"), B_TRANSLATE("Save"),
-		B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_STOP_ALERT);
+		alertText, button0, button1, button2, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_STOP_ALERT);
 	modifiedAlert->SetShortcut(0, B_ESCAPE);
 	return modifiedAlert->Go();
 }
@@ -807,8 +873,12 @@ EditorWindow::_ShowModifiedAlert()
 void
 EditorWindow::_Save()
 {
-	if(fOpenedFilePath == NULL)
+	if(fOpenedFilePath == NULL || fReadOnly == true)
 		fSavePanel->Show();
-	else
-		SaveFile(fOpenedFilePath);
+	else {
+		BEntry entry(fOpenedFilePath->Path());
+		entry_ref ref;
+		entry.GetRef(&ref);
+		SaveFile(&ref);
+	}
 }
