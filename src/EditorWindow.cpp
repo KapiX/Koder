@@ -141,10 +141,13 @@ EditorWindow::EditorWindow()
 	_SyncWithPreferences();
 
 	fEditor->SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true, 0);
+	fEditor->SendMessage(SCI_SETIMEINTERACTION, SC_IME_INLINE, 0);
 
 	fEditor->SendMessage(SCI_USEPOPUP, 0, 0);
 
 	fStyler->ApplyGlobal(fEditor);
+	fEditor->SendMessage(SCI_STYLESETFORE, 253, 0xFF00000);
+	fEditor->SendMessage(SCI_STYLESETFORE, 254, 0x00000FF);
 
 	RefreshTitle();
 }
