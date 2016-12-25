@@ -45,7 +45,8 @@ class Styler;
 const BString gAppName = "Koder";
 const BString gAppMime = "application/x-vnd.KapiX-Koder";
 
-const uint32 ACTIVE_WINDOW_CHANGED = 'AWCH';
+const uint32 ACTIVE_WINDOW_CHANGED	= 'AWCH';
+const uint32 SAVE_FILE				= 'SVFL';
 
 
 enum {
@@ -93,6 +94,9 @@ public:
 			bool			QuitRequested();
 			void			MessageReceived(BMessage* message);
 			void			WindowActivated(bool active);
+
+			bool			IsModified() { return fModified; }
+			const char*		OpenedFilePath();
 
 	static	void			SetPreferences(Preferences* preferences);
 	static	void			SetStyler(Styler* styler);

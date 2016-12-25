@@ -38,6 +38,7 @@ SRCS = \
 	src/GoToLineWindow.cpp \
 	src/Languages.cpp \
 	src/Preferences.cpp \
+	src/QuitAlert.cpp \
 	src/Styler.cpp \
 	src/XmlDocument.cpp \
 	src/XmlNode.cpp

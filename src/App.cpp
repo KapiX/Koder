@@ -27,11 +27,15 @@
 #include <FindDirectory.h>
 #include <Path.h>
 
+#include <string>
+#include <vector>
+
 #include "AppPreferencesWindow.h"
 #include "EditorWindow.h"
 #include "FindWindow.h"
 #include "Preferences.h"
 #include "Styler.h"
+#include "QuitAlert.h"
 
 
 App::App()
@@ -101,9 +105,33 @@ App::AboutRequested()
 bool
 App::QuitRequested()
 {
-	// TODO: Window asking to save changes in many windows
-	//       will usually be called when application closing
-	//       from Tracker
+	BObjectList<EditorWindow> unsaved;
+	std::vector<std::string> unsavedPaths;
+	EditorWindow* current;
+	for(int i = 0; current = fWindows.ItemAt(i); ++i) {
+		if(current->IsModified()) {
+			unsaved.AddItem(current);
+			unsavedPaths.push_back(std::string(current->OpenedFilePath()));
+		}
+	}
+	if(unsaved.IsEmpty()) {
+		return true;
+	}
+	QuitAlert* quitAlert = new QuitAlert(unsavedPaths);
+	auto filesToSave = quitAlert->Go();
+	if(filesToSave.empty()) {
+		fLastActiveWindow->Activate();
+		return false;
+	}
+	for(int i = 0; current = unsaved.ItemAt(i); ++i) {
+		if(filesToSave[i] == false) continue;
+		BMessage reply;
+		BMessage save(SAVE_FILE);
+		BMessenger messenger((BWindow*) current);
+		messenger.SendMessage(&save, &reply);
+			// FIXME: this is smelly
+	}
+	return true;
 }
 
 

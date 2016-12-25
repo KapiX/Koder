@@ -331,6 +331,11 @@ EditorWindow::MessageReceived(BMessage* message)
 		return;
 	}
 	switch(message->what) {
+		case SAVE_FILE: {
+			_Save();
+			message->SendReply((uint32) B_OK);
+				// TODO: error handling
+		} break;
 		case APP_PREFERENCES_CHANGED: {
 			_SyncWithPreferences();
 		} break;
@@ -548,6 +553,15 @@ EditorWindow::WindowActivated(bool active)
 			fModifiedOutside = false;
 		}
 	}
+}
+
+
+const char*
+EditorWindow::OpenedFilePath()
+{
+	if(fOpenedFilePath != nullptr)
+		return fOpenedFilePath->Path();
+	return "Untitled";
 }
 
 
@@ -887,4 +901,6 @@ EditorWindow::_Save()
 		entry.GetRef(&ref);
 		SaveFile(&ref);
 	}
+	// block until user has chosen location
+	while(fSavePanel->IsShowing()) UpdateIfNeeded();
 }
