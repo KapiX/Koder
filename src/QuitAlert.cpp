@@ -34,7 +34,7 @@
 
 
 #undef B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT "QuitWindow"
+#define B_TRANSLATION_CONTEXT "QuitAlert"
 
 
 namespace {
