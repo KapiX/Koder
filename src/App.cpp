@@ -20,7 +20,9 @@
 
 #include "App.h"
 
+#include <AboutWindow.h>
 #include <Alert.h>
+#include <Catalog.h>
 #include <Directory.h>
 #include <Entry.h>
 #include <File.h>
@@ -36,6 +38,10 @@
 #include "Preferences.h"
 #include "Styler.h"
 #include "QuitAlert.h"
+
+
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "App"
 
 
 App::App()
@@ -97,8 +103,18 @@ App::Init()
 void
 App::AboutRequested()
 {
-	BAlert* alert = new BAlert("About", "Koder\nAuthor: Kacper Kasper", "Close", NULL, NULL, B_WIDTH_AS_USUAL, B_INFO_ALERT);
-	alert->Go();
+	const char* specialThanks[] = {
+		B_TRANSLATE("Neil Hodgson, for Scintilla editing component and SciTE editor."),
+		nullptr
+	};
+
+	BAboutWindow* window = new BAboutWindow(gAppName, gAppMime);
+	window->AddCopyright(2016, "Kacper Kasper");
+	window->AddDescription(
+		B_TRANSLATE("Code editor for Haiku based on Scintilla editing component."));
+	window->AddSpecialThanks(specialThanks);
+	window->AddExtraInfo(B_TRANSLATE("Distributed on GPL v3 license terms."));
+	window->Show();
 }
 
 
