@@ -161,6 +161,22 @@ App::ReadyToRun()
 
 
 void
+App::ArgvReceived(int32 argc, char** argv)
+{
+	entry_ref ref;
+	BEntry entry;
+	for(int32 i = 1; i < argc; ++i) {
+		entry.SetTo(argv[i]);
+		entry.GetRef(&ref);
+		EditorWindow* window = new EditorWindow();
+		window->OpenFile(&ref);
+		window->Show();
+		fWindows.AddItem(window);
+	}
+}
+
+
+void
 App::RefsReceived(BMessage* message)
 {
 	entry_ref ref;
