@@ -179,12 +179,18 @@ App::ArgvReceived(int32 argc, char** argv)
 void
 App::RefsReceived(BMessage* message)
 {
+	int32 count;
+	if(message->GetInfo("refs", nullptr, &count) != B_OK) {
+		return;
+	}
 	entry_ref ref;
-	if(message->FindRef("refs", &ref) == B_OK) {
-		EditorWindow* window = new EditorWindow();
-		window->OpenFile(&ref);
-		window->Show();
-		fWindows.AddItem(window);
+	for(int32 i = 0; i < count; ++i) {
+		if(message->FindRef("refs", i, &ref) == B_OK) {
+			EditorWindow* window = new EditorWindow();
+			window->OpenFile(&ref);
+			window->Show();
+			fWindows.AddItem(window);
+		}
 	}
 }
 
