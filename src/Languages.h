@@ -1,7 +1,7 @@
 /*
  * Koder is a code editor for Haiku based on Scintilla.
  *
- * Copyright (C) 2015 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright (C) 2015-2016 Kacper Kasper <kacperkasper@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,97 +22,31 @@
 #define LANGUAGES_H
 
 
+#include <map>
+#include <string>
 #include <vector>
 
-#include <String.h>
 
-
+class BPath;
 class Editor;
-class XmlDocument;
-
-
-enum LanguageType {
-	LANGUAGE_TEXT = 0,
-	LANGUAGE_PHP,
-	LANGUAGE_C,
-	LANGUAGE_CPP,
-	LANGUAGE_CS,
-	LANGUAGE_OBJC,
-	LANGUAGE_JAVA,
-	LANGUAGE_RC,
-	LANGUAGE_HTML,
-	LANGUAGE_XML,
-	LANGUAGE_MAKEFILE,
-	LANGUAGE_PASCAL,
-	LANGUAGE_BATCH,
-	LANGUAGE_INI,
-	LANGUAGE_ASCII,
-	LANGUAGE_ASP,
-	LANGUAGE_SQL,
-	LANGUAGE_VB,
-	LANGUAGE_JS,
-	LANGUAGE_CSS,
-	LANGUAGE_PERL,
-	LANGUAGE_PYTHON,
-	LANGUAGE_LUA,
-	LANGUAGE_TEX,
-	LANGUAGE_FORTRAN,
-	LANGUAGE_BASH,
-	LANGUAGE_FLASH,
-	LANGUAGE_NSIS,
-	LANGUAGE_TCL,
-	LANGUAGE_LISP,
-	LANGUAGE_SCHEME,
-	LANGUAGE_ASM,
-	LANGUAGE_DIFF,
-	LANGUAGE_PROPS,
-	LANGUAGE_POSTSCRIPT,
-	LANGUAGE_RUBY,
-	LANGUAGE_SMALLTALK,
-	LANGUAGE_VHDL,
-	LANGUAGE_KIX,
-	LANGUAGE_AU3,
-	LANGUAGE_CAML,
-	LANGUAGE_ADA,
-	LANGUAGE_VERILOG,
-	LANGUAGE_MATLAB,
-	LANGUAGE_HASKELL,
-	LANGUAGE_INNO,
-	LANGUAGE_CMAKE,
-	LANGUAGE_YAML,
-	LANGUAGE_COBOL,
-	LANGUAGE_GUI4CLI,
-	LANGUAGE_D,
-	LANGUAGE_POWERSHELL,
-	LANGUAGE_R,
-	LANGUAGE_JSP,
-	LANGUAGE_COFFEESCRIPT,
-	LANGUAGE_RECIPE,
-	LANGUAGE_RUST,
-
-	LANGUAGE_COUNT
-};
-
-
-struct LanguageDefinition {
-	LanguageType fType;
-	BString fLexerName;
-	BString fShortName;
-	BString fLongName;
-	int fLexerID;
-	BString fKeywords[9];
-};
 
 
 class Languages {
 public:
-			LanguageDefinition&					GetLanguage(LanguageType lang);
-			std::vector<LanguageDefinition>&	GetLanguages() { return sLanguages; }
-			void								SortAlphabetically();
-			void								ApplyLanguage(Editor* editor, const char* path, const char* lang, XmlDocument* doc = nullptr);
+	static	size_t								GetCount() { return sLanguages.size(); }
+	static	std::string							GetLanguage(int index) { return sLanguages[index]; }
+	static	std::string							GetMenuItemName(std::string lang) { return sMenuItems[lang]; }
+	static	std::string							GetLanguageForExtension(std::string ext) { if(sExtensions.count(ext)) return sExtensions[ext]; return "text"; }
+	static	void								SortAlphabetically();
+	static	void								ApplyLanguage(Editor* editor, const char* lang);
+	static	void								LoadLanguages();
 
 private:
-	static	std::vector<LanguageDefinition>		sLanguages;
+	static	void								_LoadLanguages(const BPath& path);
+	static	void								_ApplyLanguage(Editor* editor, const char* lang, const BPath &path);
+	static	std::vector<std::string>			sLanguages;
+	static	std::map<std::string, std::string>	sMenuItems;
+	static	std::map<std::string, std::string> 	sExtensions;
 };
 
 

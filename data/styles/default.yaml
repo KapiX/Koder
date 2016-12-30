@@ -1,0 +1,53 @@
+# based on Eclipse theme for Notepad++
+# Copyright (c) 2009 Fesenko Alexander <http://return0x000.blogspot.com/>
+# MIT licensed
+Default:
+    id: 32
+    background: ffffff
+    foreground: 000000
+Current line:
+    background: e8f2fe
+Whitespace:
+    foreground: 7f9fbf
+Selected text:
+    background: d4d4d4
+Caret:
+    foreground: 000000
+Edge:
+    foreground: 80ffff
+Fold:
+    foreground: 808080
+    background: f3f3f3
+Indent guideline:
+    id: 37
+    foreground: c0c0c0
+    background: ffffff
+Brace highlight:
+    id: 34
+    foreground: ff0000
+    background: ffffff
+    style: [ bold ]
+Bad brace:
+    id: 35
+    foreground: 0000ff
+    background: ffffff
+    style: [ bold ]
+Line number:
+    id: 33
+    foreground: 808080
+    background: e4e4e4
+Smart highlight:
+    id: 29
+    background: a3a3a3
+Find mark:
+    id: 31
+    background: ff0000
+Incremental highlight:
+    id: 28
+    background: ffff00
+Tags match highlight:
+    id: 27
+    background: ffff00
+Tags attributes:
+    id: 26
+    background: ffffff

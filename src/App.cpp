@@ -50,8 +50,7 @@ App::App()
 	fLastActiveWindow(NULL),
 	fAppPreferencesWindow(nullptr),
 	fFindWindow(nullptr),
-	fPreferences(NULL),
-	fStyler(NULL)
+	fPreferences(NULL)
 {
 }
 
@@ -72,7 +71,6 @@ App::~App()
 
 	fPreferences->Save(fPreferencesFile.Path());
 	delete fPreferences;
-	delete fStyler;
 }
 
 
@@ -81,7 +79,7 @@ App::Init()
 {
 	BPath settingsPath;
 	find_directory(B_USER_SETTINGS_DIRECTORY, &settingsPath);
-	settingsPath.Append("Koder");
+	settingsPath.Append(gAppName);
 	BDirectory preferencesDir(settingsPath.Path());
 	if(preferencesDir.InitCheck() == B_ENTRY_NOT_FOUND) {
 		preferencesDir.CreateDirectory(".", nullptr);
@@ -93,10 +91,7 @@ App::Init()
 	fPreferences->fSettingsPath = settingsPath;
 	EditorWindow::SetPreferences(fPreferences);
 
-	BPath styleFile(&preferencesDir, "styles");
-	styleFile.Append(fPreferences->fStyleFile);
-	fStyler = new Styler(styleFile.Path());
-	EditorWindow::SetStyler(fStyler);
+	Languages::LoadLanguages();
 }
 
 

@@ -28,6 +28,8 @@
 
 #include <ScintillaView.h>
 
+#include <string>
+
 #include "Languages.h"
 
 
@@ -39,7 +41,6 @@ class BPath;
 class Editor;
 class GoToLineWindow;
 class Preferences;
-class Styler;
 
 
 const BString gAppName = "Koder";
@@ -99,7 +100,6 @@ public:
 			const char*		OpenedFilePath();
 
 	static	void			SetPreferences(Preferences* preferences);
-	static	void			SetStyler(Styler* styler);
 
 private:
 	enum ModifiedAlertResult {
@@ -129,14 +129,13 @@ private:
 			bool			fActivatedGuard;
 
 	static	Preferences*	fPreferences;
-	static	Styler*			fStyler;
 
 			bool			_CheckPermissions(BStatable* file, mode_t permissions);
 			void			_FindReplace(BMessage* message);
 			status_t		_MonitorFile(BStatable* file, bool enable);
 			void			_PopulateLanguageMenu(BMenu* languageMenu);
 			void			_ReloadFile(entry_ref* ref = nullptr);
-			void			_SetLanguage(LanguageType lang);
+			void			_SetLanguage(std::string lang);
 			void			_SetLanguageByFilename(const char* filename);
 			void			_SyncWithPreferences();
 			int32			_ShowModifiedAlert();

@@ -1,0 +1,4 @@
+# Python
+lexer: 2 # SCLEX_PYTHON
+keywords:
+    0: and as assert break class continue def del elif else except exec False finally for from global if import in is lambda None not or pass print raise return triple True try while with yield

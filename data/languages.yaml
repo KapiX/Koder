@@ -1,0 +1,35 @@
+text:
+    name: Text file
+    extensions: [ txt ]
+bash:
+    name: Bash
+    extensions: [ sh, bash, bsh, csh, recipe ]
+c:
+    name: C
+    extensions: [ c ]
+cmake:
+    name: CMake
+    extensions: [ cmake, CMakeLists.txt ]
+cpp:
+    name: C++
+    extensions: [ cc, cpp, cxx, h, hh, hxx ]
+diff:
+    name: Diff
+    extensions: [ diff, patch, patchset ]
+makefile:
+    name: Makefile
+    extensions: [ mak, Makefile, makefile ]
+python:
+    name: Python
+    extensions: [ py, pyw ]
+xml:
+    name: XML
+    extensions: [ xml, xaml, xsl, xslt, xsd, xul, kml, svg, mxml, xsml, wsdl,
+                  xlf, xliff, xbl, sxbl, pimx, config, vsixmanifest, manifest,
+                  proj, csproj, vbproj, fsproj, vcproj, vcxproj, nproj, pyproj,
+                  javaproj, wixproj, filters, settings, testsettings, vsmdi,
+                  ruleset, rules, targets, props, vsprops, propdesc, resx,
+                  rdlc rdl swidtag gml gtt gpx ]
+yaml:
+    name: YAML
+    extensions: [ yml, yaml ]

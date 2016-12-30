@@ -38,6 +38,9 @@
 #include <Roster.h>
 #include <String.h>
 
+#include <string>
+#include <yaml.h>
+
 #include "AppPreferencesWindow.h"
 #include "Editor.h"
 #include "FindWindow.h"
@@ -52,7 +55,6 @@
 
 
 Preferences* EditorWindow::fPreferences = NULL;
-Styler* EditorWindow::fStyler = NULL;
 
 
 EditorWindow::EditorWindow()
@@ -145,7 +147,7 @@ EditorWindow::EditorWindow()
 
 	fEditor->SendMessage(SCI_USEPOPUP, 0, 0);
 
-	fStyler->ApplyGlobal(fEditor);
+	Styler::ApplyGlobal(fEditor, fPreferences->fStyle);
 	fEditor->SendMessage(SCI_STYLESETFORE, 253, 0xFF00000);
 	fEditor->SendMessage(SCI_STYLESETFORE, 254, 0x00000FF);
 
@@ -325,11 +327,6 @@ EditorWindow::QuitRequested()
 void
 EditorWindow::MessageReceived(BMessage* message)
 {
-	if(message->what >= MAINMENU_LANGUAGE && message->what < MAINMENU_LANGUAGE + LANGUAGE_COUNT) {
-		uint32 lang = message->what - MAINMENU_LANGUAGE;
-		_SetLanguage(static_cast<LanguageType>(lang));
-		return;
-	}
 	switch(message->what) {
 		case SAVE_FILE: {
 			_Save();
@@ -401,6 +398,9 @@ EditorWindow::MessageReceived(BMessage* message)
 			fPreferences->fEOLVisible = !fPreferences->fEOLVisible;
 			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fEOLVisible);
 			fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
+		} break;
+		case MAINMENU_LANGUAGE: {
+			_SetLanguage(message->GetString("lang", "text"));
 		} break;
 		case B_SAVE_REQUESTED: {
 			entry_ref ref;
@@ -572,13 +572,6 @@ EditorWindow::SetPreferences(Preferences* preferences)
 }
 
 
-/* static */ void
-EditorWindow::SetStyler(Styler* styler)
-{
-	fStyler = styler;
-}
-
-
 bool
 EditorWindow::_CheckPermissions(BStatable* file, mode_t permissions)
 {
@@ -726,17 +719,20 @@ EditorWindow::_PopulateLanguageMenu(BMenu* languageMenu)
 	int32 count = languageMenu->CountItems();
 	languageMenu->RemoveItems(0, count, true);
 
-	Languages languages;
-	languages.SortAlphabetically();
+	Languages::SortAlphabetically();
 	char submenuName[] = "\0";
 	BObjectList<BMenu> menus;
-	for(int32 i = 0; i < LANGUAGE_COUNT; ++i) {
-		LanguageDefinition& langDef = languages.GetLanguages().at(i);
-		BMenuItem *menuItem = new BMenuItem(langDef.fShortName, new BMessage(MAINMENU_LANGUAGE + langDef.fType));
+	for(int32 i = 0; i < Languages::GetCount(); ++i) {
+		std::string lang = Languages::GetLanguage(i);
+		std::string name = Languages::GetMenuItemName(lang);
+
+		BMessage *msg = new BMessage(MAINMENU_LANGUAGE);
+		msg->AddString("lang", lang.c_str());
+		BMenuItem *menuItem = new BMenuItem(name.c_str(), msg);
 
 		if(fPreferences->fCompactLangMenu == true) {
-			if(submenuName[0] != langDef.fShortName[0]) {
-				submenuName[0] = langDef.fShortName[0];
+			if(submenuName[0] != name[0]) {
+				submenuName[0] = name[0];
 				BMenu *submenu = new BMenu(submenuName);
 				menus.AddItem(submenu);
 			}
@@ -781,20 +777,11 @@ EditorWindow::_ReloadFile(entry_ref* ref)
 
 
 void
-EditorWindow::_SetLanguage(LanguageType lang)
+EditorWindow::_SetLanguage(std::string lang)
 {
-	Languages languages;
-	LanguageDefinition& langDef = languages.GetLanguage(static_cast<LanguageType>(lang));
-	fEditor->SendMessage(SCI_SETLEXER, static_cast<uptr_t>(langDef.fLexerID), 0);
-	fEditor->SendMessage(SCI_SETPROPERTY, (uptr_t) "fold", (sptr_t) "1");
-	if(langDef.fLexerID == SCLEX_CPP) {
-		fEditor->SendMessage(SCI_SETPROPERTY, (uptr_t) "lexer.cpp.track.preprocessor", (sptr_t) "0");
-		fEditor->SendMessage(SCI_SETPROPERTY, (uptr_t) "styling.within.preprocessor", (sptr_t) "1");
-	}
-	fStyler->ApplyLanguage(fEditor, langDef.fLexerName.String());
-	BPath langsPath(fPreferences->fSettingsPath);
-	langsPath.Append("langs.xml");
-	languages.ApplyLanguage(fEditor, langsPath.Path(), langDef.fLexerName.String());
+	Languages::ApplyLanguage(fEditor, lang.c_str());
+	Styler::ApplyGlobal(fEditor, fPreferences->fStyle);
+	Styler::ApplyLanguage(fEditor, fPreferences->fStyle, lang.c_str());
 }
 
 
@@ -806,10 +793,7 @@ EditorWindow::_SetLanguageByFilename(const char* filename)
 		extension = filename;
 	}
 
-	uint32 lang;
-	if(fPreferences->fExtensions.FindUInt32(extension, &lang) == B_OK) {
-		_SetLanguage(static_cast<LanguageType>(lang));
-	}
+	_SetLanguage(Languages::GetLanguageForExtension(extension));
 }
 
 

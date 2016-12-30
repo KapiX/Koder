@@ -1,0 +1,30 @@
+# Diff
+Default:
+    id: 0
+    foreground: 000000
+    background: ffffff
+Comment:
+    id: 1
+    foreground: 3f7f5f
+    background: ffffff
+Command:
+    id: 2
+    foreground: 7f0055
+    background: ffffff
+    style: [ bold ]
+Header:
+    id: 3
+    foreground: 0000c0
+    background: ffffff
+Position:
+    id: 4
+    foreground: 7f7f9f
+    background: ffffff
+Deleted:
+    id: 5
+    foreground: 646464
+    background: ffffff
+Added:
+    id: 6
+    foreground: 3f5fbf
+    background: ffffff

@@ -1,0 +1,68 @@
+# CMake
+Default:
+    id: 0
+    foreground: 000000
+    background: ffffff
+Comment:
+    id: 1
+    foreground: 3f7f5f
+    background: ffffff
+String D:
+    id: 2
+    foreground: 2a00ff
+    background: ffffff
+String L:
+    id: 3
+    foreground: 2a00ff
+    background: ffffff
+    style: [ italic ]
+String R:
+    id: 4
+    foreground: 2a00ff
+    background: ffffff
+    style: [ underline ]
+Command:
+    id: 5
+    foreground: 7f0055
+    background: ffffff
+    style: [ bold ]
+Parameter:
+    id: 6
+    foreground: 0000c0
+    background: ffffff
+Variable:
+    id: 7
+    foreground: 0000c0
+    background: ffffff
+User defined:
+    id: 8
+    foreground: 646464
+    background: ffffff
+Whiledef:
+    id: 9
+    foreground: 7f0055
+    background: ffffff
+    style: [ bold ]
+Foreachdef:
+    id: 10
+    foreground: 7f0055
+    background: ffffff
+    style: [ bold ]
+Ifdef:
+    id: 11
+    foreground: 7f0055
+    background: ffffff
+    style: [ bold ]
+Macrodef:
+    id: 12
+    foreground: 7f9fbf
+    background: ffffff
+    style: [ bold ]
+String variable:
+    id: 13
+    foreground: 0000c0
+    background: ffffff
+Number:
+    id: 14
+    foreground: af0f91
+    background: ffffff

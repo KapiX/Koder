@@ -41,7 +41,6 @@ public:
 	uint8			fTabWidth;
 	bool			fTabsToSpaces;
 	// broadcast to all editors
-	BMessage		fExtensions;
 	bool			fLineHighlighting;
 	bool			fLineNumbers;
 	bool			fEOLVisible;
@@ -54,7 +53,7 @@ public:
 	bool			fBracesHighlighting;
 	bool			fFullPathInTitle;
 	bool			fCompactLangMenu;
-	BString			fStyleFile;
+	BString			fStyle;
 	BRect			fWindowRect;
 };
 

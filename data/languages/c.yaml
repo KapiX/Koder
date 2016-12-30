@@ -1,0 +1,9 @@
+# C
+lexer: 3 # SCLEX_CPP
+properties:
+    fold: 1
+    lexer.cpp.track.preprocessor: 0
+    styling.within.preprocessor: 1
+keywords:
+    0: if else switch case default break goto return for while do continue typedef sizeof NULL
+    1: void struct union enum char short int long double float signed unsigned const static extern auto register volatile
