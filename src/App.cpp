@@ -67,7 +67,7 @@ App::Init()
 	settingsPath.Append(gAppName);
 	BDirectory preferencesDir(settingsPath.Path());
 	if(preferencesDir.InitCheck() == B_ENTRY_NOT_FOUND) {
-		preferencesDir.CreateDirectory(".", nullptr);
+		preferencesDir.CreateDirectory(settingsPath.Path(), &preferencesDir);
 	}
 
 	fPreferencesFile.SetTo(&preferencesDir, "settings");

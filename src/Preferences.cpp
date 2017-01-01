@@ -28,8 +28,7 @@ Preferences::Load(const char* filename)
 				"Your personal settings will not be loaded. Sorry.", "Continue", NULL, NULL,
 				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
-			
-			return;
+			break;
 		}
 		case B_PERMISSION_DENIED:
 		{
@@ -40,8 +39,7 @@ Preferences::Load(const char* filename)
 				"to find out which directory it is and try changing its permissions.", "Continue",
 				NULL, NULL, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
-			
-			return;
+			break;
 		}
 		case B_NO_MEMORY:
 		{
@@ -51,15 +49,15 @@ Preferences::Load(const char* filename)
 				"applications and restart Koder.", "Continue", NULL, NULL,
 				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
-			
-			return;
+			break;
 		}
 		default:
 			break;
 	}
 
 	BMessage storage;
-	storage.Unflatten(file);
+	if(result == B_OK)
+		storage.Unflatten(file);
 	fTabWidth = storage.GetUInt8("tabWidth", 4);
 	fTabsToSpaces = storage.GetBool("tabsToSpaces", false);
 	fLineHighlighting = storage.GetBool("lineHighlighting", true);
@@ -95,8 +93,7 @@ Preferences::Save(const char* filename)
 				"Your personal settings will not be saved. Sorry.", "Continue", NULL, NULL,
 				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
-			
-			return;
+			break;
 		}
 		case B_PERMISSION_DENIED:
 		{
@@ -107,8 +104,7 @@ Preferences::Save(const char* filename)
 				"to find out which directory it is and try changing its permissions.", "Continue",
 				NULL, NULL, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
-			
-			return;
+			break;
 		}
 		case B_NO_MEMORY:
 		{
@@ -118,8 +114,7 @@ Preferences::Save(const char* filename)
 				"applications and try again.", "Continue", NULL, NULL,
 				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
-			
-			return;
+			break;
 		}
 		default:
 			break;
