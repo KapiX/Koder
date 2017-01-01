@@ -78,7 +78,7 @@ LIBPATHS =
 #	"#include <header>". Directories that contain the files in SRCS are
 #	NOT auto-included here.
 SYSTEM_INCLUDE_PATHS = \
-	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY private/interface) \
+	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/interface) \
 	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY scintilla) \
 	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY yaml-cpp)
 
