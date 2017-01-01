@@ -1,0 +1,98 @@
+1	Polish	application/x-vnd.KapiX-Koder	728254238
+Search	EditorWindow		Znajdź
+File	EditorWindow		Plik
+Unsaved files	QuitAlert		Niezapisane pliki
+Convert EOLs	EditorWindow		Konwertuj zakończenia linii
+Mark lines exceeding 	AppPreferencesWindow		Zaznacz linie przekraczające 
+Unix format	EditorWindow		Format Uniksa
+Close	EditorWindow		Zamknij
+Redo	EditorWindow		Ponów
+Distributed on MIT license terms.	App		Rozprowadzany na warunkach licencji MIT.
+You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nie masz uprawnień do edycji tego pliku. Edytor zostanie ustawiony w tryb tylko do odczytu.
+Special symbols	EditorWindow		Symbole specjalne
+Direction	FindWindow		Kierunek
+ characters	AppPreferencesWindow		 znaków
+Replace all	FindWindow		Zastąp wszystkie
+Old Mac format	EditorWindow		Format starego Mac OS
+Cancel	GoToLineWindow		Anuluj
+Wrap around	FindWindow		Zapętlaj
+The file contains unsaved changes, but is read-only. What do you want to do?	EditorWindow		Plik zawiera niezapisane zmiany, ale jest tylko do odczytu. Co chcesz zrobić?
+Match case	FindWindow		Dopasuj wielkość liter
+Access denied	EditorWindow		Odmowa dostępu
+File modified	EditorWindow		Plik zmodyfikowany
+Apply	AppPreferencesWindow		Zastosuj
+Untitled	EditorWindow		Bez nazwy
+Line	AppPreferencesWindow		Linia
+Show full path in title	AppPreferencesWindow		Pokazuj pełną ścieżkę na pasku tytułu
+Editor	AppPreferencesWindow		Edytor
+Display line numbers	AppPreferencesWindow		Wyświetlanie numerów linii
+End of document was reached. No results found.	EditorWindow		Koniec dokumentu. Brak wyników.
+Tab width: 	AppPreferencesWindow		Szerokość tabulacji: 
+Copy	EditorWindow		Kopiuj
+Windows format	EditorWindow		Format Windows
+Open	EditorWindow		Otwórz
+Save selected	QuitAlert		Zapisz zaznaczone
+Down	FindWindow		W dół
+Discard	EditorWindow		Odrzuć
+Real	AppPreferencesWindow		Rzeczywiste
+You don't have sufficient permissions to edit this file.	EditorWindow		Nie masz wystarczających uprawnień do edycji tego pliku
+Show indentation guides	AppPreferencesWindow		Pokazuj prowadnice wcięć
+Select all	EditorWindow		Zaznacz wszystko
+In selection	FindWindow		W zaznaczeniu
+Go to line:	GoToLineWindow		Skok do linii:
+Cut	EditorWindow		Wytnij
+Find:	FindWindow		Znajdź:
+Highlight braces	AppPreferencesWindow		Podświetl nawiasy
+View	EditorWindow		Widok
+Go	GoToLineWindow		Skocz
+Edit	EditorWindow		Edycja
+Revert	AppPreferencesWindow		Cofnij
+Up to the next non-empty line	AppPreferencesWindow		Do następnej niepustej linii
+Save as…	EditorWindow		Zapisz jako…
+Paste	EditorWindow		Wklej
+Could not read file permissions.	EditorWindow		Nie można odczytać uprawnień pliku.
+Find/Replace…	EditorWindow		Znajdź/Zastąp…
+The file contains unsaved changes. What do you want to do?	EditorWindow		Plik zawiera niezapisane zmiany. Co chcesz zrobić?
+Don't save	QuitAlert		Nie zapisuj
+Files listed below contain unsaved changes.\nWhich ones do you want to save?	QuitAlert		Pliki podane poniżej zawierają niezapisane zmiany.\nKtóre z nich chcesz zachować?
+Code editor for Haiku based on Scintilla editing component.	App		Edytor kodu dla Haiku oparty na kontrolce Scintilla.
+Find/Replace	FindWindow		Znajdź/zastąp
+Convert tabs to spaces	AppPreferencesWindow		Konwersja tabulacji na spacje
+Replace:	FindWindow		Zastąp:
+Up	FindWindow		W górę
+Match entire words	FindWindow		Dopasuj całe słowa
+Help	EditorWindow		Pomoc
+Show EOLs	EditorWindow		Pokazuj zakończenia linii
+Nothing	EditorWindow		Nic
+Application preferences	AppPreferencesWindow		Ustawienia aplikacji
+Compact language menu	AppPreferencesWindow		Kompaktowe menu języków
+File has been modified outside of this editor. What do you want to do?	EditorWindow		Plik został zmodyfikowany poza tym edytorem. Co chcesz zrobić?
+[read-only]	EditorWindow		[tylko do odczytu]
+Koder	System name		Koder
+Highlight current line	AppPreferencesWindow		Podświetl edytowaną linię
+Reload	EditorWindow		Przeładuj
+Warning	EditorWindow		Uwaga
+Up to the next/previous non-empty line	AppPreferencesWindow		Do następnej/poprzedniej niepustej linii
+Replace	FindWindow		Zastąp
+Undo	EditorWindow		Cofnij
+Background	AppPreferencesWindow		Tło
+File preferences…	EditorWindow		Ustawienia pliku…
+Quit	EditorWindow		Zakończ
+Save all	QuitAlert		Zapisz wszystkie
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neila Hodgsona, za kontrolkę Scintilla i edytor SciTE.
+Find	FindWindow		Znajdź
+Replace and find	FindWindow		Zastąp i znajdź
+Error	EditorWindow		Błąd
+Language	EditorWindow		Język
+Cancel	QuitAlert		Anuluj
+Save	EditorWindow		Zapisz
+About…	EditorWindow		O programie…
+OK	EditorWindow		OK
+Go to line…	EditorWindow		Skocz do linii…
+Cancel	EditorWindow		Anuluj
+New	EditorWindow		Nowy
+Unsaved changes	EditorWindow		Niezapisane zmiany
+Go to line	GoToLineWindow		Skocz do linii
+Searching finished	EditorWindow		Wyszukiwanie zakończone
+Show white space	EditorWindow		Pokazuj białe znaki
+Application preferences…	EditorWindow		Ustawienia aplikacji…

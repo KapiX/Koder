@@ -6,6 +6,7 @@
 #ifndef EDITORWINDOW_H
 #define EDITORWINDOW_H
 
+#include <Catalog.h>
 #include <MimeType.h>
 #include <Statable.h>
 #include <String.h>
@@ -28,7 +29,7 @@ class GoToLineWindow;
 class Preferences;
 
 
-const BString gAppName = "Koder";
+const BString gAppName = B_TRANSLATE_SYSTEM_NAME("Koder");
 const BString gAppMime = "application/x-vnd.KapiX-Koder";
 
 const uint32 ACTIVE_WINDOW_CHANGED	= 'AWCH';

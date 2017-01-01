@@ -1,0 +1,98 @@
+1	English	x-vnd.KapiX-Koder	728254238
+Search	EditorWindow		Search
+File	EditorWindow		File
+Unsaved files	QuitAlert		Unsaved files
+Convert EOLs	EditorWindow		Convert EOLs
+Mark lines exceeding 	AppPreferencesWindow		Mark lines exceeding 
+Unix format	EditorWindow		Unix format
+Close	EditorWindow		Close
+Redo	EditorWindow		Redo
+Distributed on MIT license terms.	App		Distributed on MIT license terms.
+You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		You don't have permissions to edit this file. The editor will be set to read-only mode.
+Special symbols	EditorWindow		Special symbols
+Direction	FindWindow		Direction
+ characters	AppPreferencesWindow		 characters
+Replace all	FindWindow		Replace all
+Old Mac format	EditorWindow		Old Mac format
+Cancel	GoToLineWindow		Cancel
+Wrap around	FindWindow		Wrap around
+The file contains unsaved changes, but is read-only. What do you want to do?	EditorWindow		The file contains unsaved changes, but is read-only. What do you want to do?
+Match case	FindWindow		Match case
+Access denied	EditorWindow		Access denied
+File modified	EditorWindow		File modified
+Apply	AppPreferencesWindow		Apply
+Untitled	EditorWindow		Untitled
+Line	AppPreferencesWindow		Line
+Show full path in title	AppPreferencesWindow		Show full path in title
+Editor	AppPreferencesWindow		Editor
+Display line numbers	AppPreferencesWindow		Display line numbers
+End of document was reached. No results found.	EditorWindow		End of document was reached. No results found.
+Tab width: 	AppPreferencesWindow		Tab width: 
+Copy	EditorWindow		Copy
+Windows format	EditorWindow		Windows format
+Open	EditorWindow		Open
+Save selected	QuitAlert		Save selected
+Down	FindWindow		Down
+Discard	EditorWindow		Discard
+Real	AppPreferencesWindow		Real
+You don't have sufficient permissions to edit this file.	EditorWindow		You don't have sufficient permissions to edit this file.
+Show indentation guides	AppPreferencesWindow		Show indentation guides
+Select all	EditorWindow		Select all
+In selection	FindWindow		In selection
+Go to line:	GoToLineWindow		Go to line:
+Cut	EditorWindow		Cut
+Find:	FindWindow		Find:
+Highlight braces	AppPreferencesWindow		Highlight braces
+View	EditorWindow		View
+Go	GoToLineWindow		Go
+Edit	EditorWindow		Edit
+Revert	AppPreferencesWindow		Revert
+Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
+Save as…	EditorWindow		Save as…
+Paste	EditorWindow		Paste
+Could not read file permissions.	EditorWindow		Could not read file permissions.
+Find/Replace…	EditorWindow		Find/Replace…
+The file contains unsaved changes. What do you want to do?	EditorWindow		The file contains unsaved changes. What do you want to do?
+Don't save	QuitAlert		Don't save
+Files listed below contain unsaved changes.\nWhich ones do you want to save?	QuitAlert		Files listed below contain unsaved changes.\nWhich ones do you want to save?
+Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
+Find/Replace	FindWindow		Find/Replace
+Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
+Replace:	FindWindow		Replace:
+Up	FindWindow		Up
+Match entire words	FindWindow		Match entire words
+Help	EditorWindow		Help
+Show EOLs	EditorWindow		Show EOLs
+Nothing	EditorWindow		Nothing
+Application preferences	AppPreferencesWindow		Application preferences
+Compact language menu	AppPreferencesWindow		Compact language menu
+File has been modified outside of this editor. What do you want to do?	EditorWindow		File has been modified outside of this editor. What do you want to do?
+[read-only]	EditorWindow		[read-only]
+Koder	System name		Koder
+Highlight current line	AppPreferencesWindow		Highlight current line
+Reload	EditorWindow		Reload
+Warning	EditorWindow		Warning
+Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
+Replace	FindWindow		Replace
+Undo	EditorWindow		Undo
+Background	AppPreferencesWindow		Background
+File preferences…	EditorWindow		File preferences…
+Quit	EditorWindow		Quit
+Save all	QuitAlert		Save all
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
+Find	FindWindow		Find
+Replace and find	FindWindow		Replace and find
+Error	EditorWindow		Error
+Language	EditorWindow		Language
+Cancel	QuitAlert		Cancel
+Save	EditorWindow		Save
+About…	EditorWindow		About…
+OK	EditorWindow		OK
+Go to line…	EditorWindow		Go to line…
+Cancel	EditorWindow		Cancel
+New	EditorWindow		New
+Unsaved changes	EditorWindow		Unsaved changes
+Go to line	GoToLineWindow		Go to line
+Searching finished	EditorWindow		Searching finished
+Show white space	EditorWindow		Show white space
+Application preferences…	EditorWindow		Application preferences…
