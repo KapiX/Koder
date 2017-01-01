@@ -44,6 +44,19 @@ std::vector<std::string>			Languages::sLanguages;
 std::map<std::string, std::string>	Languages::sMenuItems;
 std::map<std::string, std::string> 	Languages::sExtensions;
 
+#include <cstdio>
+/* static */ bool
+Languages::GetLanguageForExtension(const std::string ext, std::string& lang)
+{
+	lang = "text";
+	fprintf(stderr, "ext: %s\n", ext.c_str());
+	if(sExtensions.count(ext) > 0) {
+		lang = sExtensions[ext];
+		return true;
+	}
+	return false;
+}
+
 
 /* static */ void
 Languages::SortAlphabetically()

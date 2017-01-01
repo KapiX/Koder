@@ -788,12 +788,15 @@ EditorWindow::_SetLanguage(std::string lang)
 void
 EditorWindow::_SetLanguageByFilename(const char* filename)
 {
-	const char* extension = strrchr(filename, '.') + 1;
-	if((int) extension == 1) {
-		extension = filename;
+	std::string lang;
+	// try to match whole filename first, this is needed for e.g. CMake
+	bool found = Languages::GetLanguageForExtension(filename, lang);
+	if(found == false) {
+		const char* extension = strrchr(filename, '.');
+		if(extension != nullptr)
+			Languages::GetLanguageForExtension(extension + 1, lang);
 	}
-
-	_SetLanguage(Languages::GetLanguageForExtension(extension));
+	_SetLanguage(lang);
 }
 
 

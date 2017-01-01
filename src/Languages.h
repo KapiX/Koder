@@ -36,7 +36,7 @@ public:
 	static	size_t								GetCount() { return sLanguages.size(); }
 	static	std::string							GetLanguage(int index) { return sLanguages[index]; }
 	static	std::string							GetMenuItemName(std::string lang) { return sMenuItems[lang]; }
-	static	std::string							GetLanguageForExtension(std::string ext) { if(sExtensions.count(ext)) return sExtensions[ext]; return "text"; }
+	static	bool								GetLanguageForExtension(const std::string ext, std::string& lang);
 	static	void								SortAlphabetically();
 	static	void								ApplyLanguage(Editor* editor, const char* lang);
 	static	void								LoadLanguages();
