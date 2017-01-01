@@ -77,7 +77,7 @@ LIBPATHS =
 #	Additional paths to look for system headers. These use the form
 #	"#include <header>". Directories that contain the files in SRCS are
 #	NOT auto-included here.
-ifeq (CPU, x86)
+ifeq ($(shell uname -p), x86)
 SYSTEM_INCLUDE_PATHS = \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/interface) \
 	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY scintilla) \
