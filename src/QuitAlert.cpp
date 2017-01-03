@@ -50,7 +50,7 @@ QuitAlert::~QuitAlert()
 void
 QuitAlert::_InitInterface()
 {
-	fMessageString = new BStringView("message", B_TRANSLATE("Files listed below contain unsaved changes.\nWhich ones do you want to save?"));
+	fMessageString = new BStringView("message", B_TRANSLATE("There are unsaved changes.\nSelect the files to save."));
 	fSaveAll = new BButton(B_TRANSLATE("Save all"), new BMessage((uint32) Actions::SAVE_ALL));
 	fSaveSelected = new BButton(B_TRANSLATE("Save selected"), new BMessage((uint32) Actions::SAVE_SELECTED));
 	fDontSave = new BButton(B_TRANSLATE("Don't save"), new BMessage((uint32) Actions::DONT_SAVE));

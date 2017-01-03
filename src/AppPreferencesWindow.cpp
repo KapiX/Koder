@@ -28,7 +28,7 @@
 
 AppPreferencesWindow::AppPreferencesWindow(Preferences* preferences)
 	:
-	BWindow(BRect(0, 0, 400, 300), B_TRANSLATE("Application preferences"), B_TITLED_WINDOW,
+	BWindow(BRect(0, 0, 400, 300), B_TRANSLATE("Koder preferences"), B_TITLED_WINDOW,
 		B_NOT_ZOOMABLE | B_AUTO_UPDATE_SIZE_LIMITS, 0)
 {
 	fCurrentPreferences = preferences;
@@ -167,7 +167,7 @@ AppPreferencesWindow::_InitInterface()
 	fTabWidthTC = new BTextControl("tabWidth", B_TRANSLATE("Tab width: "), "4", new BMessage((uint32) Actions::TAB_WIDTH));
 	fTabWidthText = new BStringView("tabWidthText", B_TRANSLATE(" characters"));
 	fLineHighlightingCB = new BCheckBox("lineHighlighting", B_TRANSLATE("Highlight current line"), new BMessage((uint32) Actions::LINE_HIGHLIGHTING));
-	fLineNumbersCB = new BCheckBox("lineNumbers", B_TRANSLATE("Display line numbers"), new BMessage((uint32) Actions::LINE_NUMBERS));
+	fLineNumbersCB = new BCheckBox("lineNumbers", B_TRANSLATE("Show line numbers"), new BMessage((uint32) Actions::LINE_NUMBERS));
 
 	fLineLimitHeaderView = new BView("lineLimitHeader", 0);
 	fLineLimitShowCB = new BCheckBox("lineLimitShow", B_TRANSLATE("Mark lines exceeding "), new BMessage((uint32) Actions::LINELIMIT_SHOW));
@@ -191,7 +191,7 @@ AppPreferencesWindow::_InitInterface()
 
 	fIndentGuidesBox = new BBox("indentGuidesPrefs");
 	fIndentGuidesShowCB = new BCheckBox("indentGuidesShow", B_TRANSLATE("Show indentation guides"), new BMessage((uint32) Actions::INDENTGUIDES_SHOW));
-	fIndentGuidesRealRadio = new BRadioButton("indentGuidesReal", B_TRANSLATE("Real"), new BMessage((uint32) Actions::INDENTGUIDES_REAL));
+	fIndentGuidesRealRadio = new BRadioButton("indentGuidesReal", B_TRANSLATE("Only in actually indented lines"), new BMessage((uint32) Actions::INDENTGUIDES_REAL));
 	fIndentGuidesLookForwardRadio = new BRadioButton("indentGuidesForward", B_TRANSLATE("Up to the next non-empty line"), new BMessage((uint32) Actions::INDENTGUIDES_FORWARD));
 	fIndentGuidesLookBothRadio = new BRadioButton("indentGuidesBoth", B_TRANSLATE("Up to the next/previous non-empty line"), new BMessage((uint32) Actions::INDENTGUIDES_BOTH));
 

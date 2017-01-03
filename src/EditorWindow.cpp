@@ -85,19 +85,19 @@ EditorWindow::EditorWindow()
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Select all"), B_SELECT_ALL, 'A')
 			.AddSeparator()
-			.AddMenu(B_TRANSLATE("Convert EOLs"))
+			.AddMenu(B_TRANSLATE("Line endings"))
 				.AddItem(B_TRANSLATE("Unix format"), MAINMENU_EDIT_CONVERTEOLS_UNIX)
 				.AddItem(B_TRANSLATE("Windows format"), MAINMENU_EDIT_CONVERTEOLS_WINDOWS)
 				.AddItem(B_TRANSLATE("Old Mac format"), MAINMENU_EDIT_CONVERTEOLS_MAC)
 			.End()
 			.AddSeparator()
 			//.AddItem(B_TRANSLATE("File preferences" B_UTF8_ELLIPSIS), MAINMENU_EDIT_FILE_PREFERENCES)
-			.AddItem(B_TRANSLATE("Application preferences" B_UTF8_ELLIPSIS), MAINMENU_EDIT_APP_PREFERENCES, ',')
+			.AddItem(B_TRANSLATE("Koder preferences" B_UTF8_ELLIPSIS), MAINMENU_EDIT_APP_PREFERENCES, ',')
 		.End()
 		.AddMenu(B_TRANSLATE("View"))
 			.AddMenu(B_TRANSLATE("Special symbols"))
 				.AddItem(B_TRANSLATE("Show white space"), MAINMENU_VIEW_SPECIAL_WHITESPACE)
-				.AddItem(B_TRANSLATE("Show EOLs"), MAINMENU_VIEW_SPECIAL_EOL)
+				.AddItem(B_TRANSLATE("Show line endings"), MAINMENU_VIEW_SPECIAL_EOL)
 			.End()
 		.End()
 		.AddMenu(B_TRANSLATE("Search"))
@@ -202,7 +202,7 @@ EditorWindow::OpenFile(entry_ref* ref)
 	fEditor->SendMessage(SCI_SETREADONLY, fReadOnly, 0);
 
 	be_roster->AddToRecentDocuments(ref, gAppMime);
-	
+
 	if(fOpenedFilePath == NULL)
 		fOpenedFilePath = new BPath(&entry);
 	else
@@ -297,7 +297,7 @@ EditorWindow::QuitRequested()
 			fGoToLineWindow->LockLooper();
 			fGoToLineWindow->Quit();
 		}
-		
+
 		delete fOpenPanel;
 		delete fSavePanel;
 
@@ -525,8 +525,8 @@ EditorWindow::WindowActivated(bool active)
 		if(fModifiedOutside == true) {
 			// reload opened file
 			BAlert* alert = new BAlert(B_TRANSLATE("File modified"),
-				B_TRANSLATE("File has been modified outside of this editor. What do you want to do?"),
-				B_TRANSLATE("Reload"), B_TRANSLATE("Nothing"), nullptr, B_WIDTH_AS_USUAL, B_EVEN_SPACING, B_INFO_ALERT);
+				B_TRANSLATE("The file has been modified by another application. What to do?"),
+				B_TRANSLATE("Reload"), B_TRANSLATE("Do nothing"), nullptr, B_WIDTH_AS_USUAL, B_EVEN_SPACING, B_INFO_ALERT);
 			alert->SetShortcut(1, B_ESCAPE);
 			int result = alert->Go();
 			if(result == 0) {
@@ -563,7 +563,7 @@ EditorWindow::_CheckPermissions(BStatable* file, mode_t permissions)
 	mode_t perms;
 	if(file->GetPermissions(&perms) < B_OK) {
 		BAlert* alert = new BAlert(B_TRANSLATE("Error"),
-			B_TRANSLATE("Could not read file permissions."),
+			B_TRANSLATE("Failed to read file permissions."),
 			B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_STOP_ALERT);
 		alert->SetShortcut(0, B_ESCAPE);
 		alert->Go();
@@ -636,7 +636,7 @@ EditorWindow::_FindReplace(BMessage* message)
 				} else {
 					// TODO: _method?
 					BAlert* alert = new BAlert(B_TRANSLATE("Searching finished"),
-						B_TRANSLATE("End of document was reached. No results found."),
+						B_TRANSLATE("Reached the end of the document. No results found."),
 						B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_INFO_ALERT);
 					alert->SetShortcut(0, B_ESCAPE);
 					alert->Go();
@@ -848,11 +848,11 @@ EditorWindow::_ShowModifiedAlert()
 	const char* button1 = B_TRANSLATE("Discard");
 	const char* button2;
 	if(fReadOnly == true) {
-		alertText = B_TRANSLATE("The file contains unsaved changes, but is read-only. What do you want to do?");
+		alertText = B_TRANSLATE("The file contains unsaved changes, but is read-only. What to do?");
 		//button2 = B_TRANSLATE("Save as" B_UTF8_ELLIPSIS);
 			// FIXME: Race condition when opening file
 	} else {
-		alertText = B_TRANSLATE("The file contains unsaved changes. What do you want to do?");
+		alertText = B_TRANSLATE("The file contains unsaved changes. What to do?");
 		button2 = B_TRANSLATE("Save");
 	}
 	BAlert* modifiedAlert = new BAlert(B_TRANSLATE("Unsaved changes"),
