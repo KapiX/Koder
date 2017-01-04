@@ -1,0 +1,99 @@
+1	Hungarian	x-vnd.KapiX-Koder	728254238
+Search	EditorWindow		Keresés
+File	EditorWindow		Fájl
+Unsaved files	QuitAlert		Nem mentett fájlok
+Convert EOLs	EditorWindow		Sorvég konverzió
+Mark lines exceeding 	AppPreferencesWindow		Hosszú sorok megjelölése
+Unix format	EditorWindow		Unix formátum
+Close	EditorWindow		Bezárás
+Redo	EditorWindow		Újra
+Distributed on MIT license terms.	App		MIT licenc alatt terjeszthető.
+You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nem módosíthatod ezt a fájlt, ezért írásvédett módban lesz megnyitva.
+Special symbols	EditorWindow		Speciális jelek
+Direction	FindWindow		Irány
+ characters	AppPreferencesWindow		 karakter
+Replace all	FindWindow		Összes cseréje
+Old Mac format	EditorWindow		Régi Mac formátum
+Cancel	GoToLineWindow		Mégsem
+Wrap around	FindWindow		Körben
+The file contains unsaved changes, but is read-only. What do you want to do?	EditorWindow		A fájl mentetlen változtatásokat tartalmaz. Mit szeretne tenni?
+Match case	FindWindow		Betűméret érzékeny
+Access denied	EditorWindow		Hozzáférés megtagadva
+File modified	EditorWindow		Módosított fájl
+Apply	AppPreferencesWindow		Alkalmaz
+Untitled	EditorWindow		Névtelen
+Line	AppPreferencesWindow		Sor
+Show full path in title	AppPreferencesWindow		Teljes elérési út a címsorban
+Editor	AppPreferencesWindow		Szerkesztő
+Display line numbers	AppPreferencesWindow		Sorszámozás
+End of document was reached. No results found.	EditorWindow		A dokumentum végére értünk. Nem volt találat.
+Tab width: 	AppPreferencesWindow		Tab szélessége: 
+Copy	EditorWindow		Másolás
+Windows format	EditorWindow		Windows formátum
+Open	EditorWindow		Megnyitás
+Save selected	QuitAlert		Kiválasztott mentése
+Down	FindWindow		Le
+Discard	EditorWindow		Elvetés
+Real	AppPreferencesWindow		Valódi
+You don't have sufficient permissions to edit this file.	EditorWindow		Nincs elegendő jogosultsága a fájl megváltoztatásához.
+Show indentation guides	AppPreferencesWindow		Behúzási segédvonal megjelenítése
+Select all	EditorWindow		Mind kijelölése
+In selection	FindWindow		Kijelölésben
+Go to line:	GoToLineWindow		Sorra ugrás:
+Cut	EditorWindow		Kivágás
+Find:	FindWindow		Keresés:
+Highlight braces	AppPreferencesWindow		Zárójelek kiemelése
+View	EditorWindow		Nézet
+Go	GoToLineWindow		Ugrás
+Edit	EditorWindow		Szerkeszt
+Revert	AppPreferencesWindow		Visszaállít
+Up to the next non-empty line	AppPreferencesWindow		Fel a következő nem üres sorig
+Save as…	EditorWindow		Mentés másként...
+Paste	EditorWindow		Beillesztés
+Could not read file permissions.	EditorWindow		A fájl jogosultságai nem olvashatóak.
+Find/Replace…	EditorWindow		Keres/Csere…
+The file contains unsaved changes. What do you want to do?	EditorWindow		A fájl mentetlen változtatásokat tartalmaz. Mit szeretne tenni?
+Don't save	QuitAlert		Ne mentse
+Files listed below contain unsaved changes.\nWhich ones do you want to save?	QuitAlert		Az alábbi fájlok mentetlen változtatásokat tartalmaznak.\nMelyeket akarja menteni?
+Code editor for Haiku based on Scintilla editing component.	App		A Scintilla szerkesztőkomponensre épülő kódszerkesztő Haikuhoz.
+Find/Replace	FindWindow		Keres/Csere
+Convert tabs to spaces	AppPreferencesWindow		Tabok szóközökké alakítása
+Replace:	FindWindow		Csere:
+Up	FindWindow		Fel
+Match entire words	FindWindow		Egész szavakra egyezés
+Help	EditorWindow		Súgó
+Show EOLs	EditorWindow		Sorvég megjelenítése
+Nothing	EditorWindow		Semmi
+Application preferences	AppPreferencesWindow		Alkalmazás beállításai
+Compact language menu	AppPreferencesWindow		Rövid nyelvi menü
+File has been modified outside of this editor. What do you want to do?	EditorWindow		A fájl módosult a szerkesztőn kívül Mit szeretne tenni?
+[read-only]	EditorWindow		[írásvédett]
+Koder	System name		Koder
+Highlight current line	AppPreferencesWindow		Aktuális sor kiemelése
+Reload	EditorWindow		Újratöltés
+Warning	EditorWindow		Figyelmeztetés
+Up to the next/previous non-empty line	AppPreferencesWindow		A következő/előző nem üres sorig
+Replace	FindWindow		Csere
+Undo	EditorWindow		Visszavonás
+Background	AppPreferencesWindow		Háttér
+File preferences…	EditorWindow		Fájl beállítások…
+Quit	EditorWindow		Kilépés
+Save all	QuitAlert		Mindent ment
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, a Scintilla szerkesztő komponensért és a SciTE szerkesztőért.
+Find	FindWindow		Keres
+Replace and find	FindWindow		Cserél és keres
+Error	EditorWindow		Hiba
+Language	EditorWindow		Nyelv
+Cancel	QuitAlert		Mégsem
+Save	EditorWindow		Mentés
+About…	EditorWindow		Névjegy…
+OK	EditorWindow		OK
+Go to line…	EditorWindow		Sorra ugrás…
+Cancel	EditorWindow		Mégsem
+New	EditorWindow		Új
+Unsaved changes	EditorWindow		Nem mentett módosítások
+Go to line	GoToLineWindow		Sorra ugrás
+Searching finished	EditorWindow		Keresés befejeződött
+Show white space	EditorWindow		Szóközök megjelenítése
+Application preferences…	EditorWindow		Alkalmazás beállításai…
+			
