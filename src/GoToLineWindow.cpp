@@ -27,7 +27,7 @@ GoToLineWindow::GoToLineWindow(BWindow* owner)
 	fOwner(owner)
 {
 	fLine = new BTextControl("GoToLineTC", B_TRANSLATE("Go to line:"), "1", NULL);
-	fGo = new BButton("GoButton", B_TRANSLATE("Go"), new BMessage(GTLW_GO));
+	fGo = new BButton("GoButton", B_TRANSLATE("OK"), new BMessage(GTLW_GO));
 	fGo->MakeDefault(true);
 	fCancel = new BButton("CancelButton", B_TRANSLATE("Cancel"), new BMessage(GTLW_CANCEL));
 

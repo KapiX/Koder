@@ -74,14 +74,12 @@ private:
 	BCheckBox*		fFullPathInTitleCB;
 	BCheckBox*		fTabsToSpacesCB;
 	BTextControl*	fTabWidthTC;
-	BStringView*	fTabWidthText;
 	BCheckBox*		fLineHighlightingCB;
 	BCheckBox*		fLineNumbersCB;
 
 	BView*			fLineLimitHeaderView;
 	BCheckBox*		fLineLimitShowCB;
 	BTextControl*	fLineLimitColumnTC;
-	BStringView*	fLineLimitText;
 
 	BBox*			fLineLimitBox;
 

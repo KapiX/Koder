@@ -12,6 +12,7 @@
 #include <Button.h>
 #include <Catalog.h>
 #include <CheckBox.h>
+#include <ControlLook.h>
 #include <LayoutBuilder.h>
 #include <Message.h>
 #include <RadioButton.h>
@@ -28,7 +29,7 @@
 
 AppPreferencesWindow::AppPreferencesWindow(Preferences* preferences)
 	:
-	BWindow(BRect(0, 0, 400, 300), B_TRANSLATE("Application preferences"), B_TITLED_WINDOW,
+	BWindow(BRect(0, 0, 400, 300), B_TRANSLATE("Koder preferences"), B_TITLED_WINDOW,
 		B_NOT_ZOOMABLE | B_AUTO_UPDATE_SIZE_LIMITS, 0)
 {
 	fCurrentPreferences = preferences;
@@ -164,42 +165,41 @@ AppPreferencesWindow::_InitInterface()
 	fCompactLangMenuCB = new BCheckBox("compactLangMenu", B_TRANSLATE("Compact language menu"), new BMessage((uint32) Actions::COMPACT_LANG_MENU));
 	fFullPathInTitleCB = new BCheckBox("fullPathInTitle", B_TRANSLATE("Show full path in title"), new BMessage((uint32) Actions::FULL_PATH_IN_TITLE));
 	fTabsToSpacesCB = new BCheckBox("tabsToSpaces", B_TRANSLATE("Convert tabs to spaces"), new BMessage((uint32) Actions::TABS_TO_SPACES));
-	fTabWidthTC = new BTextControl("tabWidth", B_TRANSLATE("Tab width: "), "4", new BMessage((uint32) Actions::TAB_WIDTH));
-	fTabWidthText = new BStringView("tabWidthText", B_TRANSLATE(" characters"));
+	fTabWidthTC = new BTextControl("tabWidth", B_TRANSLATE("Spaces per tab:"), "4", new BMessage((uint32) Actions::TAB_WIDTH));
 	fLineHighlightingCB = new BCheckBox("lineHighlighting", B_TRANSLATE("Highlight current line"), new BMessage((uint32) Actions::LINE_HIGHLIGHTING));
-	fLineNumbersCB = new BCheckBox("lineNumbers", B_TRANSLATE("Display line numbers"), new BMessage((uint32) Actions::LINE_NUMBERS));
+	fLineNumbersCB = new BCheckBox("lineNumbers", B_TRANSLATE("Show line numbers"), new BMessage((uint32) Actions::LINE_NUMBERS));
 
 	fLineLimitHeaderView = new BView("lineLimitHeader", 0);
-	fLineLimitShowCB = new BCheckBox("lineLimitShow", B_TRANSLATE("Mark lines exceeding "), new BMessage((uint32) Actions::LINELIMIT_SHOW));
-	fLineLimitColumnTC = new BTextControl("lineLimitColumn", "", "80", new BMessage((uint32) Actions::LINELIMIT_COLUMN));
-	fLineLimitText = new BStringView("lineLimitText", B_TRANSLATE(" characters"));
+	fLineLimitShowCB = new BCheckBox("lineLimitShow", B_TRANSLATE("Mark overly long lines"), new BMessage((uint32) Actions::LINELIMIT_SHOW));
 
 	BLayoutBuilder::Group<>(fLineLimitHeaderView, B_HORIZONTAL, 0)
-		.Add(fLineLimitShowCB)
-		.Add(fLineLimitColumnTC)
-		.Add(fLineLimitText);
+		.Add(fLineLimitShowCB);
 
 	fLineLimitBox = new BBox("lineLimitPrefs");
+	fLineLimitColumnTC = new BTextControl("lineLimitColumn", "Max. characters per line:", "80", new BMessage((uint32) Actions::LINELIMIT_COLUMN));
 	fLineLimitBackgroundRadio = new BRadioButton("lineLimitRadio", B_TRANSLATE("Background"), new BMessage((uint32) Actions::LINELIMIT_BACKGROUND));
 	fLineLimitLineRadio = new BRadioButton("lineLimitRadio", B_TRANSLATE("Line"), new BMessage((uint32) Actions::LINELIMIT_LINE));
 
-	BLayoutBuilder::Group<>(fLineLimitBox, B_VERTICAL, 5)
+	BLayoutBuilder::Group<>(fLineLimitBox, B_VERTICAL, 0)
+		.AddStrut(B_USE_ITEM_SPACING)
 		.Add(fLineLimitBackgroundRadio)
 		.Add(fLineLimitLineRadio)
-		.SetInsets(10, 25, 15, 10);
+		.Add(fLineLimitColumnTC)
+		.SetInsets(B_USE_ITEM_INSETS);
 	fLineLimitBox->SetLabel(fLineLimitHeaderView);
 
 	fIndentGuidesBox = new BBox("indentGuidesPrefs");
 	fIndentGuidesShowCB = new BCheckBox("indentGuidesShow", B_TRANSLATE("Show indentation guides"), new BMessage((uint32) Actions::INDENTGUIDES_SHOW));
-	fIndentGuidesRealRadio = new BRadioButton("indentGuidesReal", B_TRANSLATE("Real"), new BMessage((uint32) Actions::INDENTGUIDES_REAL));
+	fIndentGuidesRealRadio = new BRadioButton("indentGuidesReal", B_TRANSLATE("Only in actually indented lines"), new BMessage((uint32) Actions::INDENTGUIDES_REAL));
 	fIndentGuidesLookForwardRadio = new BRadioButton("indentGuidesForward", B_TRANSLATE("Up to the next non-empty line"), new BMessage((uint32) Actions::INDENTGUIDES_FORWARD));
 	fIndentGuidesLookBothRadio = new BRadioButton("indentGuidesBoth", B_TRANSLATE("Up to the next/previous non-empty line"), new BMessage((uint32) Actions::INDENTGUIDES_BOTH));
 
-	BLayoutBuilder::Group<>(fIndentGuidesBox, B_VERTICAL, 5)
+	BLayoutBuilder::Group<>(fIndentGuidesBox, B_VERTICAL, 0)
+		.AddStrut(B_USE_ITEM_SPACING)
 		.Add(fIndentGuidesRealRadio)
 		.Add(fIndentGuidesLookForwardRadio)
 		.Add(fIndentGuidesLookBothRadio)
-		.SetInsets(10, 25, 15, 10);
+		.SetInsets(B_USE_ITEM_INSETS);
 	fIndentGuidesBox->SetLabel(fIndentGuidesShowCB);
 
 	fBracesHighlightingCB = new BCheckBox("bracesHighlighting", B_TRANSLATE("Highlight braces"), new BMessage((uint32) Actions::BRACES_HIGHLIGHTING));
@@ -210,30 +210,30 @@ AppPreferencesWindow::_InitInterface()
 	fApplyButton->SetEnabled(false);
 	fRevertButton->SetEnabled(false);
 
-	BLayoutBuilder::Group<>(fEditorBox, B_VERTICAL, 5)
-		.Add(fCompactLangMenuCB)
-		.Add(fFullPathInTitleCB)
-		.Add(fTabsToSpacesCB)
-		.AddGroup(B_HORIZONTAL, 0)
+	BLayoutBuilder::Group<>(fEditorBox, B_VERTICAL, B_USE_DEFAULT_SPACING)
+		.AddStrut(B_USE_HALF_ITEM_SPACING)
+		.AddGroup(B_VERTICAL, 0)
+			.Add(fCompactLangMenuCB)
+			.Add(fFullPathInTitleCB)
+			.Add(fLineNumbersCB)
+			.Add(fLineHighlightingCB)
+			.Add(fTabsToSpacesCB)
 			.Add(fTabWidthTC)
-			.Add(fTabWidthText)
-		.End()
-		.Add(fLineHighlightingCB)
-		.Add(fLineNumbersCB)
+			.End()
 		.Add(fLineLimitBox)
 		.Add(fIndentGuidesBox)
 		.Add(fBracesHighlightingCB)
 		.AddGlue()
-		.SetInsets(10, 15, 15, 10);
+		.SetInsets(B_USE_ITEM_INSETS);
 
-	BLayoutBuilder::Group<>(this, B_VERTICAL, 5)
+	BLayoutBuilder::Group<>(this, B_VERTICAL, B_USE_DEFAULT_SPACING)
 		.Add(fEditorBox)
-		.AddGroup(B_HORIZONTAL, 5)
+		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
 			.Add(fRevertButton)
 			.AddGlue()
 			.Add(fApplyButton)
 		.End()
-		.SetInsets(5, 5, 5, 5);
+		.SetInsets(B_USE_SMALL_INSETS);
 }
 
 
