@@ -153,6 +153,7 @@ Styler::_ApplyLanguage(Editor* editor, const char* style, const char* lang, cons
 		_GetAttributesFromNode(language[name], &id, &fg, &bg, &fs);
 		_SetAttributesInEditor(editor, id, fg, bg, fs);
 	}
+	editor->SendMessage(SCI_COLOURISE, 0, -1);
 }
 
 
