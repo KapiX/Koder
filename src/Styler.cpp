@@ -62,6 +62,9 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 		editor->SendMessage(SCI_STYLESETSIZE, id, (sptr_t) be_fixed_font->Size());
 		_SetAttributesInEditor(editor, id, fg, bg, fs);
 		editor->SendMessage(SCI_STYLECLEARALL, 0, 0);
+		editor->SendMessage(SCI_STYLESETFONT, 36, (sptr_t) fixed);
+		editor->SendMessage(SCI_STYLESETSIZE, 36, (sptr_t) (be_fixed_font->Size() / 1.3));
+		editor->SendMessage(SCI_SETWHITESPACESIZE, be_fixed_font->Size() / 6, 0);
 	}
 	for(YAML::const_iterator it = global.begin(); it != global.end(); ++it) {
 		std::string name = it->first.as<std::string>();
