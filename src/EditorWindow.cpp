@@ -451,17 +451,19 @@ EditorWindow::MessageReceived(BMessage* message)
 			int32 opcode = message->GetInt32("opcode", 0);
 			if(opcode == B_STAT_CHANGED) {
 				BEntry entry;
-				entry.SetTo(fOpenedFilePath->Path());
-				time_t mt;
-				entry.GetModificationTime(&mt);
-				if(mt > fOpenedFileModificationTime) {
-					fModifiedOutside = true;
-					fOpenedFileModificationTime = mt;
-				}
+				if(fOpenedFilePath != nullptr) {
+					entry.SetTo(fOpenedFilePath->Path());
+					time_t mt;
+					entry.GetModificationTime(&mt);
+					if(mt > fOpenedFileModificationTime) {
+						fModifiedOutside = true;
+						fOpenedFileModificationTime = mt;
+					}
 
-				bool canWrite = _CheckPermissions(&entry, S_IWUSR | S_IWGRP | S_IWOTH);
-				fReadOnly = !canWrite;
-				fEditor->SendMessage(SCI_SETREADONLY, fReadOnly, 0);
+					bool canWrite = _CheckPermissions(&entry, S_IWUSR | S_IWGRP | S_IWOTH);
+					fReadOnly = !canWrite;
+					fEditor->SendMessage(SCI_SETREADONLY, fReadOnly, 0);
+				}
 				RefreshTitle();
 				// Notification about this is sent when window is activated
 			} else if(opcode == B_ENTRY_MOVED) {
@@ -473,8 +475,9 @@ EditorWindow::MessageReceived(BMessage* message)
 				ref.set_name(name);
 				_ReloadFile(&ref);
 			} else if(opcode == B_ENTRY_REMOVED) {
-				delete fOpenedFilePath;
-				fOpenedFilePath = NULL;
+				// Do not delete fOpenedFilePath here.
+				// git removes the file when changing branches. Losing the path
+				// because of that is not useful.
 				fModified = true;
 				RefreshTitle();
 			}
