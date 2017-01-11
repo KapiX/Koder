@@ -12,13 +12,13 @@ cmake:
     extensions: [ cmake, CMakeLists.txt, CMakeCache.txt ]
 cpp:
     name: C++
-    extensions: [ cc, cpp, cxx, h, hh, hxx ]
+    extensions: [ cc, cpp, cxx, h, hh, hpp, hxx ]
 diff:
     name: Diff
     extensions: [ diff, patch, patchset ]
 makefile:
     name: Makefile
-    extensions: [ mak, Makefile, makefile ]
+    extensions: [ mk, mak, Makefile, Makefile.am, makefile ]
 python:
     name: Python
     extensions: [ py, pyw ]
