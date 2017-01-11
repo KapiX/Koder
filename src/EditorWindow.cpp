@@ -129,6 +129,7 @@ EditorWindow::EditorWindow()
 
 	fEditor->SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true, 0);
 	fEditor->SendMessage(SCI_SETIMEINTERACTION, SC_IME_INLINE, 0);
+	fEditor->SendMessage(SCI_SETSCROLLWIDTHTRACKING, true, 0);
 
 	fEditor->SendMessage(SCI_USEPOPUP, 0, 0);
 
