@@ -22,7 +22,7 @@ Editor::Editor()
 void
 Editor::NotificationReceived(SCNotification* notification)
 {
-	BMessenger window_msg(NULL, (BLooper*) Window());
+	BMessenger window_msg(nullptr, (BLooper*) Window());
 	switch(notification->nmhdr.code) {
 		case SCN_SAVEPOINTLEFT:
 			window_msg.SendMessage(EDITOR_SAVEPOINT_LEFT);

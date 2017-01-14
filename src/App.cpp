@@ -32,10 +32,10 @@
 App::App()
 	:
 	BApplication(gAppMime),
-	fLastActiveWindow(NULL),
+	fLastActiveWindow(nullptr),
 	fAppPreferencesWindow(nullptr),
 	fFindWindow(nullptr),
-	fPreferences(NULL)
+	fPreferences(nullptr)
 {
 }
 

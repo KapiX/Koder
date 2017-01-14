@@ -27,7 +27,7 @@ Preferences::Load(const char* filename)
 			BAlert* alert = new BAlert(B_TRANSLATE("Configuration file"),
 				B_TRANSLATE("Couldn't open configuration file because the path is not specified. It usually "
 				"means that the programmer made a mistake. There is nothing you can do about it. "
-				"Your personal settings will not be loaded. Sorry."), B_TRANSLATE("OK"), NULL, NULL,
+				"Your personal settings will not be loaded. Sorry."), B_TRANSLATE("OK"), nullptr, nullptr,
 				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
 			break;
@@ -39,7 +39,7 @@ Preferences::Load(const char* filename)
 				"means that you don't have read permissions to your settings directory. "
 				"If you want to have your personal settings loaded, check your OS documentation "
 				"to find out which directory it is and try changing its permissions."), B_TRANSLATE("OK"),
-				NULL, NULL, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
+				nullptr, nullptr, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
 			break;
 		}
@@ -48,7 +48,7 @@ Preferences::Load(const char* filename)
 			BAlert* alert = new BAlert(B_TRANSLATE("Configuration file"),
 				B_TRANSLATE("There is not enough memory available on your system to load the configuration "
 				"file. If you want to have your personal settings loaded, try closing few "
-				"applications and restart Koder."), B_TRANSLATE("OK"), NULL, NULL,
+				"applications and restart Koder."), B_TRANSLATE("OK"), nullptr, nullptr,
 				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
 			break;
@@ -92,7 +92,7 @@ Preferences::Save(const char* filename)
 			BAlert* alert = new BAlert(B_TRANSLATE("Configuration file"),
 				B_TRANSLATE("Couldn't open configuration file because the path is not specified. It usually "
 				"means that the programmer made a mistake. There is nothing you can do about it. "
-				"Your personal settings will not be saved. Sorry."), B_TRANSLATE("OK"), NULL, NULL,
+				"Your personal settings will not be saved. Sorry."), B_TRANSLATE("OK"), nullptr, nullptr,
 				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
 			break;
@@ -104,7 +104,7 @@ Preferences::Save(const char* filename)
 				"means that you don't have write permissions to your settings directory. "
 				"If you want to have your personal settings loaded, check your OS documentation "
 				"to find out which directory it is and try changing its permissions."), B_TRANSLATE("OK"),
-				NULL, NULL, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
+				nullptr, nullptr, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
 			break;
 		}
@@ -113,7 +113,7 @@ Preferences::Save(const char* filename)
 			BAlert* alert = new BAlert(B_TRANSLATE("Configuration file"),
 				B_TRANSLATE("There is not enough memory available on your system to save the configuration "
 				"file. If you want to have your personal settings saved, try closing few "
-				"applications and try again."), B_TRANSLATE("OK"), NULL, NULL,
+				"applications and try again."), B_TRANSLATE("OK"), nullptr, nullptr,
 				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
 			alert->Go();
 			break;

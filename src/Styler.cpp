@@ -57,7 +57,7 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 		_GetAttributesFromNode(global["Default"], &id, &fg, &bg, &fs);
 
 		font_family fixed;
-		be_fixed_font->GetFamilyAndStyle(&fixed, NULL);
+		be_fixed_font->GetFamilyAndStyle(&fixed, nullptr);
 		editor->SendMessage(SCI_STYLESETFONT, id, (sptr_t) fixed);
 		editor->SendMessage(SCI_STYLESETSIZE, id, (sptr_t) be_fixed_font->Size());
 		_SetAttributesInEditor(editor, id, fg, bg, fs);
@@ -170,10 +170,10 @@ Styler::_GetAttributesFromNode(const YAML::Node &node, int* styleId, int* fgColo
 		*styleId = node["id"].as<int>();
 	}
 	if(node["foreground"]) {
-		*fgColor = strtol(node["foreground"].as<std::string>().c_str(), NULL, 16);
+		*fgColor = strtol(node["foreground"].as<std::string>().c_str(), nullptr, 16);
 	}
 	if(node["background"]) {
-		*bgColor = strtol(node["background"].as<std::string>().c_str(), NULL, 16);
+		*bgColor = strtol(node["background"].as<std::string>().c_str(), nullptr, 16);
 	}
 	if(node["style"]) {
 		*fontStyle = 0;

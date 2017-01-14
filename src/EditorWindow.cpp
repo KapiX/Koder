@@ -39,7 +39,7 @@
 #define B_TRANSLATION_CONTEXT "EditorWindow"
 
 
-Preferences* EditorWindow::fPreferences = NULL;
+Preferences* EditorWindow::fPreferences = nullptr;
 
 
 EditorWindow::EditorWindow()
@@ -55,13 +55,13 @@ EditorWindow::EditorWindow()
 	fSearchLastResultStart = -1;
 	fSearchLastResultEnd = -1;
 
-	fGoToLineWindow = NULL;
-	fOpenedFilePath = NULL;
+	fGoToLineWindow = nullptr;
+	fOpenedFilePath = nullptr;
 	fOpenedFileMimeType.SetTo("text/plain");
 
 	BMessenger* windowMessenger = new BMessenger(this);
 	fOpenPanel = new BFilePanel(B_OPEN_PANEL, windowMessenger);
-	fSavePanel = new BFilePanel(B_SAVE_PANEL, windowMessenger, NULL, 0, false);
+	fSavePanel = new BFilePanel(B_SAVE_PANEL, windowMessenger, nullptr, 0, false);
 
 	fMainMenu = new BMenuBar("MainMenu");
 	BLayoutBuilder::Menu<>(fMainMenu)
@@ -153,7 +153,7 @@ EditorWindow::OpenFile(entry_ref* ref)
 {
 	fEditor->SendMessage(SCI_SETREADONLY, false, 0);
 		// let us load new file
-	if(fOpenedFilePath != NULL) {
+	if(fOpenedFilePath != nullptr) {
 		// stop watching previously opened file
 		BEntry open(fOpenedFilePath->Path());
 		_MonitorFile(&open, false);
@@ -204,7 +204,7 @@ EditorWindow::OpenFile(entry_ref* ref)
 
 	be_roster->AddToRecentDocuments(ref, gAppMime);
 
-	if(fOpenedFilePath == NULL)
+	if(fOpenedFilePath == nullptr)
 		fOpenedFilePath = new BPath(&entry);
 	else
 		fOpenedFilePath->SetTo(&entry);
@@ -218,7 +218,7 @@ EditorWindow::RefreshTitle()
 	BString title;
 	if(fModified == true)
 		title << "*";
-	if(fOpenedFilePath != NULL)
+	if(fOpenedFilePath != nullptr)
 		if(fPreferences->fFullPathInTitle == true) {
 			title << fOpenedFilePath->Path();
 		} else {
@@ -262,7 +262,7 @@ EditorWindow::SaveFile(entry_ref* ref)
 	BNodeInfo nodeInfo(&node);
 	nodeInfo.SetType(mimeType);
 
-	if(fOpenedFilePath != NULL) {
+	if(fOpenedFilePath != nullptr) {
 		delete fOpenedFilePath;
 	}
 	fOpenedFilePath = new BPath(ref);
@@ -288,13 +288,13 @@ EditorWindow::QuitRequested()
 		}
 	}
 	if(close == true) {
-		if(fOpenedFilePath != NULL) {
+		if(fOpenedFilePath != nullptr) {
 			int32 caretPos = fEditor->SendMessage(SCI_GETCURRENTPOS, 0, 0);
 			BNode node(fOpenedFilePath->Path());
 			node.WriteAttr("be:caret_position", B_INT32_TYPE, 0, &caretPos, 4);
 		}
 
-		if(fGoToLineWindow != NULL) {
+		if(fGoToLineWindow != nullptr) {
 			fGoToLineWindow->LockLooper();
 			fGoToLineWindow->Quit();
 		}
@@ -326,7 +326,7 @@ EditorWindow::MessageReceived(BMessage* message)
 			New();
 		break;
 		case MAINMENU_FILE_OPEN: {
-			if(fOpenedFilePath != NULL) {
+			if(fOpenedFilePath != nullptr) {
 				BPath parent(*fOpenedFilePath);
 				parent.GetParent(&parent);
 				fOpenPanel->SetPanelDirectory(parent.Path());
@@ -343,7 +343,7 @@ EditorWindow::MessageReceived(BMessage* message)
 			}
 		} break;
 		case MAINMENU_FILE_SAVEAS: {
-			if(fOpenedFilePath != NULL) {
+			if(fOpenedFilePath != nullptr) {
 				BPath parent(*fOpenedFilePath);
 				parent.GetParent(&parent);
 				fSavePanel->SetPanelDirectory(parent.Path());
@@ -370,7 +370,7 @@ EditorWindow::MessageReceived(BMessage* message)
 			be_app->PostMessage(message);
 		} break;
 		case MAINMENU_SEARCH_GOTOLINE: {
-			if(fGoToLineWindow == NULL) {
+			if(fGoToLineWindow == nullptr) {
 				fGoToLineWindow = new GoToLineWindow(this);
 			}
 			fGoToLineWindow->ShowCentered(Frame());
@@ -792,7 +792,7 @@ EditorWindow::_SetLanguageByFilename(const char* filename)
 void
 EditorWindow::_SyncWithPreferences()
 {
-	if(fPreferences != NULL) {
+	if(fPreferences != nullptr) {
 		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
 		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
 
@@ -869,7 +869,7 @@ EditorWindow::_ShowModifiedAlert()
 void
 EditorWindow::_Save()
 {
-	if(fOpenedFilePath == NULL || fReadOnly == true)
+	if(fOpenedFilePath == nullptr || fReadOnly == true)
 		fSavePanel->Show();
 	else {
 		BEntry entry(fOpenedFilePath->Path());

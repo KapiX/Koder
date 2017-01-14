@@ -90,11 +90,11 @@ QuitAlert::Go()
 
 	// Get the originating window, if it exists
 	BWindow* window = dynamic_cast<BWindow*>(
-		BLooper::LooperForThread(find_thread(NULL)));
+		BLooper::LooperForThread(find_thread(nullptr)));
 
 	Show();
 
-	if (window != NULL) {
+	if (window != nullptr) {
 		status_t status;
 		for (;;) {
 			do {

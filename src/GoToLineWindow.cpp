@@ -26,7 +26,7 @@ GoToLineWindow::GoToLineWindow(BWindow* owner)
 		B_NOT_RESIZABLE | B_NOT_MOVABLE | B_AUTO_UPDATE_SIZE_LIMITS),
 	fOwner(owner)
 {
-	fLine = new BTextControl("GoToLineTC", B_TRANSLATE("Go to line:"), "1", NULL);
+	fLine = new BTextControl("GoToLineTC", B_TRANSLATE("Go to line:"), "1", nullptr);
 	fGo = new BButton("GoButton", B_TRANSLATE("OK"), new BMessage(GTLW_GO));
 	fGo->MakeDefault(true);
 	fCancel = new BButton("CancelButton", B_TRANSLATE("Cancel"), new BMessage(GTLW_CANCEL));
