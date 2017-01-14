@@ -14,7 +14,7 @@ Selected text:
 Caret:
     foreground: 000000
 Edge:
-    foreground: 80ffff
+    foreground: 7f9fbf
 Fold:
     foreground: 808080
     background: f3f3f3
