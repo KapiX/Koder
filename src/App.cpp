@@ -146,10 +146,32 @@ App::ArgvReceived(int32 argc, char** argv)
 	entry_ref ref;
 	BEntry entry;
 	for(int32 i = 1; i < argc; ++i) {
-		entry.SetTo(argv[i]);
+		Sci_Position line = -1;
+		Sci_Position column = -1;
+		BString argument(argv[i]);
+		BString filename;
+		BString lineStr, columnStr;
+		// first :
+		int32 pos = argument.FindFirst(':');
+		if(pos != B_ERROR) {
+			argument.CopyInto(filename, 0, pos);
+			// second :
+			int32 pos2 = argument.FindFirst(':', pos + 1);
+			if(pos2 != B_ERROR) {
+				argument.CopyInto(lineStr, pos + 1, pos2);
+				argument.CopyInto(columnStr, pos2 + 1, argument.Length());
+			} else {
+				argument.CopyInto(lineStr, pos + 1, argument.Length());
+			}
+			line = strtol(lineStr.String(), nullptr, 10) - 1;
+			column = strtol(columnStr.String(), nullptr, 10) - 1;
+		} else {
+			filename = argument;
+		}
+		entry.SetTo(filename);
 		entry.GetRef(&ref);
 		EditorWindow* window = new EditorWindow();
-		window->OpenFile(&ref);
+		window->OpenFile(&ref, line, column);
 		window->Show();
 		fWindows.AddItem(window);
 	}

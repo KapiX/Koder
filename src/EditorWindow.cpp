@@ -149,7 +149,7 @@ EditorWindow::New()
 
 
 void
-EditorWindow::OpenFile(entry_ref* ref)
+EditorWindow::OpenFile(entry_ref* ref, Sci_Position line, Sci_Position column)
 {
 	fEditor->SendMessage(SCI_SETREADONLY, false, 0);
 		// let us load new file
@@ -193,7 +193,18 @@ EditorWindow::OpenFile(entry_ref* ref)
 	fEditor->SendMessage(SCI_EMPTYUNDOBUFFER, 0, 0);
 	delete []buffer;
 
-	fEditor->SendMessage(SCI_GOTOPOS, caretPos, 0);
+	Sci_Position gotoPos;
+	if(line != -1) {
+		Sci_Position linePos = fEditor->SendMessage(SCI_POSITIONFROMLINE, line, 0);
+		if(column != -1) {
+			gotoPos = linePos + column;
+		} else {
+			gotoPos = linePos;
+		}
+	} else {
+		gotoPos = caretPos;
+	}
+	fEditor->SendMessage(SCI_GOTOPOS, gotoPos, 0);
 	fOpenedFileMimeType.SetTo(mimeType);
 
 	char name[B_FILE_NAME_LENGTH];
