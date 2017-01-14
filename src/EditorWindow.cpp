@@ -313,6 +313,12 @@ EditorWindow::QuitRequested()
 void
 EditorWindow::MessageReceived(BMessage* message)
 {
+	if(message->WasDropped()) {
+		BMessage refsReceived(*message);
+		refsReceived.what = B_REFS_RECEIVED;
+		be_app->PostMessage(&refsReceived);
+		return;
+	}
 	switch(message->what) {
 		case SAVE_FILE: {
 			_Save();
@@ -447,7 +453,7 @@ EditorWindow::MessageReceived(BMessage* message)
 					OpenFile(&ref);
 				}
 			}
-		}
+		} break;
 		case B_NODE_MONITOR: {
 			int32 opcode = message->GetInt32("opcode", 0);
 			if(opcode == B_STAT_CHANGED) {
