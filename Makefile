@@ -72,7 +72,7 @@ LIBS = be tracker localestub scintilla yaml-cpp $(STDCPPLIBS)
 #	to the Makefile. The paths included are not parsed recursively, so
 #	include all of the paths where libraries must be found. Directories where
 #	source files were specified are	automatically included.
-LIBPATHS =
+LIBPATHS = $(shell findpaths -a x86 B_FIND_PATH_DEVELOP_LIB_DIRECTORY)
 
 #	Additional paths to look for system headers. These use the form
 #	"#include <header>". Directories that contain the files in SRCS are
