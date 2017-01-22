@@ -72,7 +72,11 @@ LIBS = be tracker localestub scintilla yaml-cpp $(STDCPPLIBS)
 #	to the Makefile. The paths included are not parsed recursively, so
 #	include all of the paths where libraries must be found. Directories where
 #	source files were specified are	automatically included.
+ifeq ($(shell uname -p), x86)
 LIBPATHS = $(shell findpaths -a x86 B_FIND_PATH_DEVELOP_LIB_DIRECTORY)
+else
+LIBPATHS = $(shell findpaths B_FIND_PATH_DEVELOP_LIB_DIRECTORY)
+endif
 
 #	Additional paths to look for system headers. These use the form
 #	"#include <header>". Directories that contain the files in SRCS are
@@ -103,7 +107,7 @@ OPTIMIZE :=
 # 	will recreate only the "locales/en.catkeys" file. Use it as a template
 # 	for creating catkeys for other languages. All localization files must be
 # 	placed in the "locales" subdirectory.
-LOCALES = de en es hu pl uk
+LOCALES = de en es hu pl ru uk
 
 #	Specify all the preprocessor symbols to be defined. The symbols will not
 #	have their values set automatically; you must supply the value (if any) to
