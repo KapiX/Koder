@@ -188,8 +188,10 @@ App::RefsReceived(BMessage* message)
 	entry_ref ref;
 	for(int32 i = 0; i < count; ++i) {
 		if(message->FindRef("refs", i, &ref) == B_OK) {
+			Sci_Position line = message->GetInt32("be:line", 0) - 1;
+			Sci_Position column = message->GetInt32("be:column", 0) - 1;
 			EditorWindow* window = new EditorWindow();
-			window->OpenFile(&ref);
+			window->OpenFile(&ref, line, column);
 			window->Show();
 			fWindows.AddItem(window);
 		}
