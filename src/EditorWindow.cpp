@@ -85,6 +85,9 @@ EditorWindow::EditorWindow()
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Select all"), B_SELECT_ALL, 'A')
 			.AddSeparator()
+			.AddItem(B_TRANSLATE("Comment line"), MAINMENU_EDIT_COMMENTLINE, '/')
+			.AddItem(B_TRANSLATE("Comment block"), MAINMENU_EDIT_COMMENTBLOCK, '/', B_SHIFT_KEY)
+			.AddSeparator()
 			.AddMenu(B_TRANSLATE("Line endings"))
 				.AddItem(B_TRANSLATE("Unix format"), MAINMENU_EDIT_CONVERTEOLS_UNIX)
 				.AddItem(B_TRANSLATE("Windows format"), MAINMENU_EDIT_CONVERTEOLS_WINDOWS)
@@ -369,6 +372,16 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case MAINMENU_FILE_QUIT: {
 			be_app->PostMessage(B_QUIT_REQUESTED);
+		} break;
+		case MAINMENU_EDIT_COMMENTLINE: {
+			Sci_Position start = fEditor->SendMessage(SCI_GETSELECTIONSTART, 0, 0);
+			Sci_Position end = fEditor->SendMessage(SCI_GETSELECTIONEND, 0, 0);
+			fEditor->CommentLine(start, end);
+		} break;
+		case MAINMENU_EDIT_COMMENTBLOCK: {
+			Sci_Position start = fEditor->SendMessage(SCI_GETSELECTIONSTART, 0, 0);
+			Sci_Position end = fEditor->SendMessage(SCI_GETSELECTIONEND, 0, 0);
+			fEditor->CommentBlock(start, end);
 		} break;
 		case MAINMENU_EDIT_CONVERTEOLS_UNIX: {
 			fEditor->SendMessage(SCI_CONVERTEOLS, SC_EOL_LF, 0);
@@ -788,6 +801,9 @@ EditorWindow::_SetLanguage(std::string lang)
 	Languages::ApplyLanguage(fEditor, lang.c_str());
 	Styler::ApplyGlobal(fEditor, fPreferences->fStyle);
 	Styler::ApplyLanguage(fEditor, fPreferences->fStyle, lang.c_str());
+
+	fMainMenu->FindItem(MAINMENU_EDIT_COMMENTLINE)->SetEnabled(fEditor->CanCommentLine());
+	fMainMenu->FindItem(MAINMENU_EDIT_COMMENTBLOCK)->SetEnabled(fEditor->CanCommentBlock());
 }
 
 

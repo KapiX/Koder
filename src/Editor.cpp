@@ -14,7 +14,10 @@
 
 Editor::Editor()
 	:
-	BScintillaView("EditorView", 0, true, true, B_NO_BORDER)
+	BScintillaView("EditorView", 0, true, true, B_NO_BORDER),
+	fCommentLineToken(""),
+	fCommentBlockStartToken(""),
+	fCommentBlockEndToken("")
 {
 }
 
@@ -49,6 +52,116 @@ void
 Editor::SetPreferences(Preferences* preferences)
 {
 	fPreferences = preferences;
+}
+
+
+void
+Editor::CommentLine(Sci_Position start, Sci_Position end)
+{
+	if(end < start) return;
+
+	SendMessage(SCI_BEGINUNDOACTION, 0, 0);
+	Sci_Position targetStart = SendMessage(SCI_GETTARGETSTART, 0, 0);
+	Sci_Position targetEnd = SendMessage(SCI_GETTARGETEND, 0, 0);
+	int startLine = SendMessage(SCI_LINEFROMPOSITION, start, 0);
+	int endLine = SendMessage(SCI_LINEFROMPOSITION, end, 0);
+	Sci_Position lineStartPos = SendMessage(SCI_POSITIONFROMLINE, startLine, 0);
+	const size_t tokenLength = fCommentLineToken.length();
+	const char* token = fCommentLineToken.c_str();
+
+	// check for comment tokens at the beggining of the lines
+	SendMessage(SCI_SETTARGETRANGE, lineStartPos, end);
+	Sci_Position pos = SendMessage(SCI_SEARCHINTARGET, (uptr_t) tokenLength, (sptr_t) token);
+	// check only the first line here, so fragments with one line comments can
+	// be commented
+	Sci_Position maxPos = SendMessage(SCI_GETLINEINDENTPOSITION, startLine, 0);
+	if(pos != -1 && pos <= maxPos) {
+		int charactersRemoved = 0;
+		int line = startLine;
+		while(pos != -1) {
+			SendMessage(SCI_SETTARGETRANGE, SendMessage(SCI_POSITIONFROMLINE, line, 0), end - charactersRemoved);
+			pos = SendMessage(SCI_SEARCHINTARGET, (uptr_t) tokenLength, (sptr_t) token);
+			maxPos = SendMessage(SCI_GETLINEINDENTPOSITION, line, 0);
+			line++;
+			if(pos != -1 && pos <= maxPos) {
+				SendMessage(SCI_REPLACETARGET, 0, (sptr_t) "");
+				charactersRemoved += 2;
+			}
+		}
+	} else {
+		int addedCharacters = 0;
+		while(startLine <= endLine) {
+			Sci_Position linePos = SendMessage(SCI_POSITIONFROMLINE, startLine, 0);
+			SendMessage(SCI_INSERTTEXT, linePos, (sptr_t) token);
+			addedCharacters += tokenLength;
+			startLine++;
+		}
+		_SetSelection(start + tokenLength, end + addedCharacters);
+	}
+	SendMessage(SCI_SETTARGETRANGE, targetStart, targetEnd);
+	SendMessage(SCI_ENDUNDOACTION, 0, 0);
+}
+
+
+void
+Editor::CommentBlock(Sci_Position start, Sci_Position end)
+{
+	if(start == end || end < start) return;
+
+	const size_t startTokenLen = fCommentBlockStartToken.length();
+	const size_t endTokenLen = fCommentBlockEndToken.length();
+	bool startTokenPresent = true;
+	bool endTokenPresent = true;
+	for(int i = 0; i < startTokenLen; i++) {
+		if(SendMessage(SCI_GETCHARAT, start + i, 0) != fCommentBlockStartToken[i])
+			startTokenPresent = false;
+	}
+	for(int i = 0; i < endTokenLen; i++) {
+		if(SendMessage(SCI_GETCHARAT, end - endTokenLen + i, 0) != fCommentBlockEndToken[i])
+			endTokenPresent = false;
+	}
+
+	SendMessage(SCI_BEGINUNDOACTION, 0, 0);
+	if(startTokenPresent && endTokenPresent) {
+		// order is important here
+		SendMessage(SCI_DELETERANGE, end - endTokenLen, endTokenLen);
+		SendMessage(SCI_DELETERANGE, start, startTokenLen);
+		_SetSelection(start, end - startTokenLen - endTokenLen);
+	} else {
+		SendMessage(SCI_INSERTTEXT, start, (sptr_t) fCommentBlockStartToken.c_str());
+		SendMessage(SCI_INSERTTEXT, end + startTokenLen, (sptr_t) fCommentBlockEndToken.c_str());
+		_SetSelection(start, end + startTokenLen + endTokenLen);
+	}
+	SendMessage(SCI_ENDUNDOACTION, 0, 0);
+}
+
+
+void
+Editor::SetCommentLineToken(std::string token)
+{
+	fCommentLineToken = token;
+}
+
+
+void
+Editor::SetCommentBlockTokens(std::string start, std::string end)
+{
+	fCommentBlockStartToken = start;
+	fCommentBlockEndToken = end;
+}
+
+
+bool
+Editor::CanCommentLine()
+{
+	return fCommentLineToken != "";
+}
+
+
+bool
+Editor::CanCommentBlock()
+{
+	return fCommentBlockStartToken != "" && fCommentBlockEndToken != "";
 }
 
 

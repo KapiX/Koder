@@ -100,6 +100,16 @@ Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
 		auto words = it->second.as<std::string>();
 		editor->SendMessage(SCI_SETKEYWORDS, num, (sptr_t) words.c_str());
 	}
+
+	const YAML::Node comments = language["comments"];
+	if(comments) {
+		const YAML::Node line = comments["line"];
+		if(line)
+			editor->SetCommentLineToken(line.as<std::string>());
+		const YAML::Node block = comments["block"];
+		if(block && block.IsSequence())
+			editor->SetCommentBlockTokens(block[0].as<std::string>(), block[1].as<std::string>());
+	}
 }
 
 

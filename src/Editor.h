@@ -10,6 +10,8 @@
 #include <ScintillaView.h>
 #include <SciLexer.h>
 
+#include <string>
+
 
 class Preferences;
 
@@ -33,6 +35,15 @@ public:
 
 	void				SetPreferences(Preferences* preferences);
 
+	void				CommentLine(Sci_Position start, Sci_Position end);
+	void				CommentBlock(Sci_Position start, Sci_Position end);
+
+	void				SetCommentLineToken(std::string token);
+	void				SetCommentBlockTokens(std::string start, std::string end);
+
+	bool				CanCommentLine();
+	bool				CanCommentBlock();
+
 private:
 	void				_MaintainIndentation(char ch);
 	void				_UpdateLineNumberWidth();
@@ -45,6 +56,10 @@ private:
 	void				_SetSelection(int anchor, int currentPos);
 
 	Preferences*		fPreferences;
+
+	std::string			fCommentLineToken;
+	std::string			fCommentBlockStartToken;
+	std::string			fCommentBlockEndToken;
 };
 
 
