@@ -1,2 +1,4 @@
 # Makefile
 lexer: 11 # SCLEX_MAKEFILE
+comments:
+    line: "#"

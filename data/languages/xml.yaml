@@ -1,2 +1,4 @@
 # XML
 lexer: 5 # SCLEX_XML
+comments:
+    block: [ "<!--", "-->" ]
