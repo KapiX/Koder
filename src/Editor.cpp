@@ -204,7 +204,12 @@ void
 Editor::_BraceHighlight()
 {
 	if(fPreferences->fBracesHighlighting == true) {
-		int pos = SendMessage(SCI_GETCURRENTPOS, 0, 0);
+		Sci_Position pos = SendMessage(SCI_GETCURRENTPOS, 0, 0);
+		// highlight indent guide
+		int line = SendMessage(SCI_LINEFROMPOSITION, pos, 0);
+		int indentation = SendMessage(SCI_GETLINEINDENTATION, line, 0);
+		SendMessage(SCI_SETHIGHLIGHTGUIDE, indentation, 0);
+		// highlight braces
 		if(_BraceMatch(pos - 1) == false) {
 			_BraceMatch(pos);
 		}
