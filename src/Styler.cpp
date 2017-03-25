@@ -5,7 +5,6 @@
 
 #include "Styler.h"
 
-#include <cstdlib>
 #include <yaml.h>
 
 #include <Directory.h>
@@ -206,10 +205,10 @@ Styler::_GetAttributesFromNode(const YAML::Node &node, int* styleId, int* fgColo
 		*styleId = node["id"].as<int>();
 	}
 	if(node["foreground"]) {
-		*fgColor = strtol(node["foreground"].as<std::string>().c_str(), nullptr, 16);
+		*fgColor = _CSSToInt(node["foreground"].as<std::string>());
 	}
 	if(node["background"]) {
-		*bgColor = strtol(node["background"].as<std::string>().c_str(), nullptr, 16);
+		*bgColor = _CSSToInt(node["background"].as<std::string>());
 	}
 	if(node["style"]) {
 		*fontStyle = 0;
@@ -244,4 +243,18 @@ Styler::_SetAttributesInEditor(Editor* editor, int styleId, int fgColor,
 			editor->SendMessage(SCI_STYLESETUNDERLINE, styleId, true);
 		}
 	}
+}
+
+
+/* static */ int
+Styler::_CSSToInt(const std::string cssColor)
+{
+	if(cssColor[0] != '#' || cssColor.length() != 7)
+		return -1;
+
+	std::string red = cssColor.substr(1, 2);
+	std::string green = cssColor.substr(3, 2);
+	std::string blue = cssColor.substr(5, 2);
+
+	return std::stoi(blue + green + red, nullptr, 16);
 }

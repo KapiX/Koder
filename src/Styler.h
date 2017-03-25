@@ -32,6 +32,7 @@ private:
 						int* fgColor, int* bgColor, int* fontStyle);
 	static	void	_SetAttributesInEditor(Editor* editor, int styleId,
 						int fgColor, int bgColor, int fontStyle);
+	static	int		_CSSToInt(const std::string cssColor);
 };
 
 

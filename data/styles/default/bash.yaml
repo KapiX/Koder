@@ -1,61 +1,61 @@
 # Bash
 Default:
     id: 0
-    foreground: 000000
-    background: ffffff
+    foreground: "#000000"
+    background: "#ffffff"
 Error:
     id: 1
-    foreground: 000000
-    background: ffffff
+    foreground: "#000000"
+    background: "#ffffff"
 Instruction word:
     id: 4
-    foreground: 7f0055
-    background: ffffff
+    foreground: "#7f0055"
+    background: "#ffffff"
     style: [ bold ]
 Number:
     id: 3
-    foreground: af0f91
-    background: ffffff
+    foreground: "#af0f91"
+    background: "#ffffff"
 String:
     id: 5
-    foreground: 2a00ff
-    background: ffffff
+    foreground: "#2a00ff"
+    background: "#ffffff"
 Character:
     id: 6
-    foreground: 2a00ff
-    background: ffffff
+    foreground: "#2a00ff"
+    background: "#ffffff"
 Operator:
     id: 7
-    foreground: 000000
-    background: ffffff
+    foreground: "#000000"
+    background: "#ffffff"
 Identifier:
     id: 8
-    foreground: 000000
-    background: ffffff
+    foreground: "#000000"
+    background: "#ffffff"
 Scalar:
     id: 9
-    foreground: 0000c0
-    background: ffffff
+    foreground: "#0000c0"
+    background: "#ffffff"
     style: [ italic ]
 Comment line:
     id: 2
-    foreground: 3f7f5f
-    background: ffffff
+    foreground: "#3f7f5f"
+    background: "#ffffff"
 Parameter:
     id: 10
-    foreground: 7f9fbf
-    background: ffffff
+    foreground: "#7f9fbf"
+    background: "#ffffff"
     style: [ bold ]
 Backticks:
     id: 11
-    foreground: 646464
-    background: ffffff
+    foreground: "#646464"
+    background: "#ffffff"
     style: [ bold ]
 Here delim:
     id: 12
-    foreground: 646464
-    background: ffffff
+    foreground: "#646464"
+    background: "#ffffff"
 Here Q:
     id: 13
-    foreground: 646464
-    background: ffffff
+    foreground: "#646464"
+    background: "#ffffff"
