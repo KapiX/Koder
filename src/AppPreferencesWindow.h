@@ -13,6 +13,8 @@
 class BBox;
 class BButton;
 class BCheckBox;
+class BPopUpMenu;
+class BMenuField;
 class BMessage;
 class BRadioButton;
 class BStringView;
@@ -54,6 +56,8 @@ private:
 
 		BRACES_HIGHLIGHTING		= 'bhlt',
 
+		EDITOR_STYLE			= 'styl',
+
 		APPLY					= 'appl',
 		REVERT					= 'rvrt'
 	};
@@ -64,6 +68,7 @@ private:
 	void			_PreferencesModified();
 	void			_SetLineLimitBoxEnabled(bool enabled);
 	void			_SetIndentGuidesBoxEnabled(bool enabled);
+	void			_PopulateStylesMenu();
 
 	Preferences*	fStartPreferences;
 	Preferences*	fCurrentPreferences;
@@ -93,6 +98,9 @@ private:
 	BRadioButton*	fIndentGuidesLookBothRadio;
 
 	BCheckBox*		fBracesHighlightingCB;
+
+	BPopUpMenu*		fEditorStyleMenu;
+	BMenuField*		fEditorStyleMF;
 
 	BButton*		fApplyButton;
 	BButton*		fRevertButton;

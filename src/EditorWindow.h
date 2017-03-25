@@ -107,6 +107,7 @@ private:
 			BFilePanel*		fOpenPanel;
 			BFilePanel*		fSavePanel;
 			BMenu*			fLanguageMenu;
+			std::string		fCurrentLanguage;
 
 			Sci_Position	fSearchTargetStart;
 			Sci_Position	fSearchTargetEnd;

@@ -59,6 +59,8 @@ EditorWindow::EditorWindow()
 	fOpenedFilePath = nullptr;
 	fOpenedFileMimeType.SetTo("text/plain");
 
+	fCurrentLanguage = "text";
+
 	BMessenger* windowMessenger = new BMessenger(this);
 	fOpenPanel = new BFilePanel(B_OPEN_PANEL, windowMessenger);
 	fSavePanel = new BFilePanel(B_SAVE_PANEL, windowMessenger, nullptr, 0, false);
@@ -798,6 +800,7 @@ EditorWindow::_ReloadFile(entry_ref* ref)
 void
 EditorWindow::_SetLanguage(std::string lang)
 {
+	fCurrentLanguage = lang;
 	Languages::ApplyLanguage(fEditor, lang.c_str());
 	Styler::ApplyGlobal(fEditor, fPreferences->fStyle);
 	Styler::ApplyLanguage(fEditor, fPreferences->fStyle, lang.c_str());
@@ -828,6 +831,9 @@ EditorWindow::_SyncWithPreferences()
 	if(fPreferences != nullptr) {
 		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
 		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
+
+		// reapply styles
+		_SetLanguage(fCurrentLanguage);
 
 		fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
 		fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);

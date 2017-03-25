@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <yaml.h>
 
+#include <Directory.h>
 #include <FindDirectory.h>
 #include <Path.h>
 #include <String.h>
@@ -154,6 +155,41 @@ Styler::_ApplyLanguage(Editor* editor, const char* style, const char* lang, cons
 		_SetAttributesInEditor(editor, id, fg, bg, fs);
 	}
 	editor->SendMessage(SCI_COLOURISE, 0, -1);
+}
+
+
+/* static */ void
+Styler::GetAvailableStyles(std::set<std::string> &styles)
+{
+	BPath dataPath;
+	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
+	_GetAvailableStyles(styles, dataPath);
+	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
+	_GetAvailableStyles(styles, dataPath);
+	find_directory(B_SYSTEM_NONPACKAGED_DATA_DIRECTORY, &dataPath);
+	_GetAvailableStyles(styles, dataPath);
+	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
+	_GetAvailableStyles(styles, dataPath);
+}
+
+
+/* static */ void
+Styler::_GetAvailableStyles(std::set<std::string> &styles, const BPath &path)
+{
+	BPath p(path);
+	p.Append(gAppName);
+	p.Append("styles");
+	BDirectory directory(p.Path());
+	BEntry entry;
+	char name[B_FILE_NAME_LENGTH];
+	while(directory.GetNextEntry(&entry) == B_OK) {
+		entry.GetName(name);
+		const std::string filename(name);
+		size_t pos = filename.rfind('.');
+		if(pos != std::string::npos && filename.substr(pos + 1) == "yaml") {
+			styles.insert(filename.substr(0, pos));
+		}
+	}
 }
 
 

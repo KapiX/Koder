@@ -7,6 +7,9 @@
 #define STYLER_H
 
 
+#include <string>
+#include <set>
+
 #include <yaml.h>
 
 
@@ -19,9 +22,12 @@ public:
 	static	void	ApplyGlobal(Editor* editor, const char* style);
 	static	void	ApplyLanguage(Editor* editor, const char* style, const char* lang);
 
+	static	void	GetAvailableStyles(std::set<std::string> &styles);
+
 private:
 	static	void	_ApplyGlobal(Editor* editor, const char* style, const BPath &path);
 	static	void	_ApplyLanguage(Editor* editor, const char* style, const char* lang, const BPath &path);
+	static	void	_GetAvailableStyles(std::set<std::string> &styles, const BPath &path);
 	static	void	_GetAttributesFromNode(const YAML::Node &node, int* styleId,
 						int* fgColor, int* bgColor, int* fontStyle);
 	static	void	_SetAttributesInEditor(Editor* editor, int styleId,

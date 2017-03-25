@@ -6,6 +6,8 @@
 #include "AppPreferencesWindow.h"
 
 #include <stdlib.h>
+#include <set>
+#include <string>
 
 #include <Application.h>
 #include <Box.h>
@@ -14,6 +16,8 @@
 #include <CheckBox.h>
 #include <ControlLook.h>
 #include <LayoutBuilder.h>
+#include <PopUpMenu.h>
+#include <MenuField.h>
 #include <Message.h>
 #include <RadioButton.h>
 #include <StringView.h>
@@ -21,6 +25,7 @@
 #include <Scintilla.h>
 
 #include "Preferences.h"
+#include "Styler.h"
 
 
 #undef B_TRANSLATION_CONTEXT
@@ -129,6 +134,10 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 				(fBracesHighlightingCB->Value() == B_CONTROL_ON ? true : false);
 			_PreferencesModified();
 		} break;
+		case Actions::EDITOR_STYLE: {
+			fTempPreferences->fStyle = message->GetString("style", "default");
+			_PreferencesModified();
+		} break;
 		case Actions::APPLY: {
 			*fCurrentPreferences = *fTempPreferences;
 			fApplyButton->SetEnabled(false);
@@ -204,6 +213,9 @@ AppPreferencesWindow::_InitInterface()
 
 	fBracesHighlightingCB = new BCheckBox("bracesHighlighting", B_TRANSLATE("Highlight braces"), new BMessage((uint32) Actions::BRACES_HIGHLIGHTING));
 
+	fEditorStyleMenu = new BPopUpMenu("style");
+	fEditorStyleMF = new BMenuField("style", B_TRANSLATE("Style"), fEditorStyleMenu);
+
 	fApplyButton = new BButton(B_TRANSLATE("Apply"), new BMessage((uint32) Actions::APPLY));
 	fRevertButton = new BButton(B_TRANSLATE("Revert"), new BMessage((uint32) Actions::REVERT));
 
@@ -223,6 +235,7 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fLineLimitBox)
 		.Add(fIndentGuidesBox)
 		.Add(fBracesHighlightingCB)
+		.Add(fEditorStyleMF)
 		.AddGlue()
 		.SetInsets(B_USE_ITEM_INSETS);
 
@@ -234,6 +247,8 @@ AppPreferencesWindow::_InitInterface()
 			.Add(fApplyButton)
 		.End()
 		.SetInsets(B_USE_SMALL_INSETS);
+
+	_PopulateStylesMenu();
 }
 
 
@@ -344,5 +359,21 @@ AppPreferencesWindow::_SetIndentGuidesBoxEnabled(bool enabled)
 		case 3:
 			fIndentGuidesLookBothRadio->SetValue(B_CONTROL_ON);
 		break;
+	}
+}
+
+
+void
+AppPreferencesWindow::_PopulateStylesMenu()
+{
+	std::set<std::string> styles;
+	Styler::GetAvailableStyles(styles);
+	for(auto& style : styles) {
+		BMessage* msg = new BMessage(EDITOR_STYLE);
+		msg->AddString("style", style.c_str());
+		BMenuItem* menuItem = new BMenuItem(style.c_str(), msg);
+		if(style == fTempPreferences->fStyle.String())
+			menuItem->SetMarked(true);
+		fEditorStyleMenu->AddItem(menuItem);
 	}
 }
