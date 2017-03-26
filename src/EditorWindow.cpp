@@ -5,8 +5,11 @@
 
 #include "EditorWindow.h"
 
+#include <string>
+
 #include <Alert.h>
 #include <Application.h>
+#include <Bitmap.h>
 #include <Catalog.h>
 #include <Entry.h>
 #include <File.h>
@@ -22,8 +25,8 @@
 #include <Path.h>
 #include <Roster.h>
 #include <String.h>
+#include <ToolBar.h>
 
-#include <string>
 #include <yaml.h>
 
 #include "AppPreferencesWindow.h"
@@ -38,6 +41,9 @@
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "EditorWindow"
+
+
+using BToolBar = BPrivate::BToolBar;
 
 
 Preferences* EditorWindow::fPreferences = nullptr;
@@ -124,13 +130,44 @@ EditorWindow::EditorWindow()
 	fEditor = new Editor();
 	fEditor->SetPreferences(fPreferences);
 
+	BBitmap icon(BRect(0, 0, 23, 23), 0, B_RGBA32);
+	fToolbar = new BToolBar(B_HORIZONTAL);
+	GetVectorIcon("open", &icon);
+	fToolbar->AddAction(MAINMENU_FILE_OPEN, this, &icon);
+	GetVectorIcon("save", &icon);
+	fToolbar->AddAction(MAINMENU_FILE_SAVE, this, &icon);
+	GetVectorIcon("save as", &icon);
+	fToolbar->AddAction(MAINMENU_FILE_SAVEAS, this, &icon);
+	fToolbar->AddSeparator();
+	GetVectorIcon("undo", &icon);
+	fToolbar->AddAction(B_UNDO, this, &icon);
+	GetVectorIcon("redo", &icon);
+	fToolbar->AddAction(B_REDO, this, &icon);
+	fToolbar->AddSeparator();
+	GetVectorIcon("cut", &icon);
+	fToolbar->AddAction(B_CUT, this, &icon);
+	GetVectorIcon("copy", &icon);
+	fToolbar->AddAction(B_COPY, this, &icon);
+	GetVectorIcon("paste", &icon);
+	fToolbar->AddAction(B_PASTE, this, &icon);
+	GetVectorIcon("select all", &icon);
+	fToolbar->AddAction(B_SELECT_ALL, this, &icon);
+	fToolbar->AddSeparator();
+	GetVectorIcon("find", &icon);
+	fToolbar->AddAction(MAINMENU_SEARCH_FINDREPLACE, this, &icon);
+	fToolbar->AddGlue();
+
 	BGroupLayout *layout = new BGroupLayout(B_VERTICAL, 0);
 	SetLayout(layout);
 	layout->AddView(fMainMenu);
+	layout->AddView(fToolbar);
 	layout->AddView(fEditor);
 	layout->SetInsets(0, 0, -1, -1);
 	SetKeyMenuBar(fMainMenu);
 
+	// needed for toolbar setting to work properly
+	if(fPreferences->fToolbar == true)
+		fToolbar->Hide();
 	_SyncWithPreferences();
 
 	fEditor->SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true, 0);
@@ -875,6 +912,11 @@ EditorWindow::_SyncWithPreferences()
 		fEditor->SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERTAIL, SC_MARK_EMPTY);
 
 		fEditor->SendMessage(SCI_SETFOLDFLAGS, 16, 0);
+
+		if(fPreferences->fToolbar == true)
+			fToolbar->Show();
+		else
+			fToolbar->Hide();
 
 		RefreshTitle();
 

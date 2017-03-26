@@ -6,6 +6,8 @@
 #ifndef EDITORWINDOW_H
 #define EDITORWINDOW_H
 
+#include <string>
+
 #include <Catalog.h>
 #include <MimeType.h>
 #include <Statable.h>
@@ -13,8 +15,6 @@
 #include <Window.h>
 
 #include <ScintillaView.h>
-
-#include <string>
 
 #include "Languages.h"
 
@@ -27,6 +27,10 @@ class BPath;
 class Editor;
 class GoToLineWindow;
 class Preferences;
+
+namespace BPrivate {
+	class BToolBar;
+}
 
 
 const BString gAppName = B_TRANSLATE_SYSTEM_NAME("Koder");
@@ -108,6 +112,7 @@ private:
 			BFilePanel*		fSavePanel;
 			BMenu*			fLanguageMenu;
 			std::string		fCurrentLanguage;
+			BPrivate::BToolBar*	fToolbar;
 
 			Sci_Position	fSearchTargetStart;
 			Sci_Position	fSearchTargetEnd;

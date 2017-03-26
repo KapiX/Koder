@@ -10,8 +10,13 @@
 #include <string>
 
 
+class BBitmap;
+
+
 std::string GetFileName(const std::string filename);
 std::string GetFileExtension(const std::string filename);
+// Gets an icon from executable's resources
+void GetVectorIcon(const std::string icon, BBitmap* bitmap);
 
 
 #endif // UTILS_H

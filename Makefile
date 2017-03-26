@@ -66,7 +66,7 @@ RSRCS =
 #	- 	if your library does not follow the standard library naming scheme,
 #		you need to specify the path to the library and it's name.
 #		(e.g. for mylib.a, specify "mylib.a" or "path/mylib.a")
-LIBS = be tracker localestub scintilla yaml-cpp $(STDCPPLIBS)
+LIBS = be tracker shared localestub scintilla yaml-cpp $(STDCPPLIBS)
 
 #	Specify additional paths to directories following the standard libXXX.so
 #	or libXXX.a naming scheme. You can specify full paths or paths relative
@@ -85,11 +85,13 @@ endif
 ifeq ($(shell uname -p), x86)
 SYSTEM_INCLUDE_PATHS = \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/interface) \
+	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/shared) \
 	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY scintilla) \
 	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY yaml-cpp)
 else
 SYSTEM_INCLUDE_PATHS = \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/interface) \
+	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/shared) \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY scintilla) \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY yaml-cpp)
 endif

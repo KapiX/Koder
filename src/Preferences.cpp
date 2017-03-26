@@ -74,6 +74,7 @@ Preferences::Load(const char* filename)
 	fBracesHighlighting = storage.GetBool("bracesHighlighting", true);
 	fFullPathInTitle = storage.GetBool("fullPathInTitle", true);
 	fCompactLangMenu = storage.GetBool("compactLangMenu", true);
+	fToolbar = storage.GetBool("toolbar", true);
 	fStyle = storage.GetString("style", "default");
 	fWindowRect = storage.GetRect("windowRect", BRect(50, 50, 450, 450));
 
@@ -137,6 +138,7 @@ Preferences::Save(const char* filename)
 	storage.AddBool("bracesHighlighting", fBracesHighlighting);
 	storage.AddBool("fullPathInTitle", fFullPathInTitle);
 	storage.AddBool("compactLangMenu", fCompactLangMenu);
+	storage.AddBool("toolbar", fToolbar);
 	storage.AddString("style", fStyle.c_str());
 	storage.AddRect("windowRect", fWindowRect);
 	storage.Flatten(file);
@@ -163,6 +165,7 @@ Preferences::operator =(Preferences p)
 	fBracesHighlighting = p.fBracesHighlighting;
 	fFullPathInTitle = p.fFullPathInTitle;
 	fCompactLangMenu = p.fCompactLangMenu;
+	fToolbar = p.fToolbar;
 	fStyle = p.fStyle;
 	fWindowRect = p.fWindowRect;
 }

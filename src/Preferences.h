@@ -39,6 +39,7 @@ public:
 	bool			fBracesHighlighting;
 	bool			fFullPathInTitle;
 	bool			fCompactLangMenu;
+	bool			fToolbar;
 	std::string		fStyle;
 	BRect			fWindowRect;
 };

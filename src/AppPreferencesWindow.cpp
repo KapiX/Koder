@@ -67,6 +67,11 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 				(fCompactLangMenuCB->Value() == B_CONTROL_ON ? true : false);
 			_PreferencesModified();
 		} break;
+		case Actions::TOOLBAR: {
+			fTempPreferences->fToolbar =
+				(fToolbarCB->Value() == B_CONTROL_ON ? true : false);
+			_PreferencesModified();
+		} break;
 		case Actions::FULL_PATH_IN_TITLE: {
 			fTempPreferences->fFullPathInTitle =
 				(fFullPathInTitleCB->Value() == B_CONTROL_ON ? true : false);
@@ -171,6 +176,7 @@ AppPreferencesWindow::_InitInterface()
 	fEditorBox = new BBox("editorPrefs");
 	fEditorBox->SetLabel(B_TRANSLATE("Editor"));
 	fCompactLangMenuCB = new BCheckBox("compactLangMenu", B_TRANSLATE("Compact language menu"), new BMessage((uint32) Actions::COMPACT_LANG_MENU));
+	fToolbarCB = new BCheckBox("toolbar", B_TRANSLATE("Show toolbar"), new BMessage((uint32) Actions::TOOLBAR));
 	fFullPathInTitleCB = new BCheckBox("fullPathInTitle", B_TRANSLATE("Show full path in title"), new BMessage((uint32) Actions::FULL_PATH_IN_TITLE));
 	fTabsToSpacesCB = new BCheckBox("tabsToSpaces", B_TRANSLATE("Convert tabs to spaces"), new BMessage((uint32) Actions::TABS_TO_SPACES));
 	fTabWidthTC = new BTextControl("tabWidth", B_TRANSLATE("Spaces per tab:"), "4", new BMessage((uint32) Actions::TAB_WIDTH));
@@ -225,6 +231,7 @@ AppPreferencesWindow::_InitInterface()
 		.AddStrut(B_USE_HALF_ITEM_SPACING)
 		.AddGroup(B_VERTICAL, 0)
 			.Add(fCompactLangMenuCB)
+			.Add(fToolbarCB)
 			.Add(fFullPathInTitleCB)
 			.Add(fLineNumbersCB)
 			.Add(fLineHighlightingCB)
@@ -258,6 +265,12 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 		fCompactLangMenuCB->SetValue(B_CONTROL_ON);
 	} else {
 		fCompactLangMenuCB->SetValue(B_CONTROL_OFF);
+	}
+
+	if(preferences->fToolbar == true) {
+		fToolbarCB->SetValue(B_CONTROL_ON);
+	} else {
+		fToolbarCB->SetValue(B_CONTROL_OFF);
 	}
 
 	if(preferences->fFullPathInTitle == true) {

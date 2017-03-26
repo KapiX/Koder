@@ -38,6 +38,7 @@ public:
 private:
 	enum Actions {
 		COMPACT_LANG_MENU		= 'clnm',
+		TOOLBAR					= 'tlbr',
 		FULL_PATH_IN_TITLE		= 'fpit',
 		TABS_TO_SPACES			= 'ttsp',
 		TAB_WIDTH				= 'tbwd',
@@ -76,6 +77,7 @@ private:
 
 	BBox*			fEditorBox;
 	BCheckBox*		fCompactLangMenuCB;
+	BCheckBox*		fToolbarCB;
 	BCheckBox*		fFullPathInTitleCB;
 	BCheckBox*		fTabsToSpacesCB;
 	BTextControl*	fTabWidthTC;
