@@ -137,7 +137,7 @@ Preferences::Save(const char* filename)
 	storage.AddBool("bracesHighlighting", fBracesHighlighting);
 	storage.AddBool("fullPathInTitle", fFullPathInTitle);
 	storage.AddBool("compactLangMenu", fCompactLangMenu);
-	storage.AddString("style", fStyle);
+	storage.AddString("style", fStyle.c_str());
 	storage.AddRect("windowRect", fWindowRect);
 	storage.Flatten(file);
 

@@ -5,7 +5,7 @@
 
 #include "GoToLineWindow.h"
 
-#include <cstdlib>
+#include <string>
 
 #include <Button.h>
 #include <Catalog.h>
@@ -53,7 +53,7 @@ GoToLineWindow::MessageReceived(BMessage* message)
 {
 	switch(message->what) {
 	case GTLW_GO: {
-		int32 line = atoi(fLine->Text());
+		int32 line = std::stoi(fLine->Text());
 		message->AddInt32("line", line);
 		fOwner->PostMessage(message);
 	}

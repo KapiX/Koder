@@ -7,10 +7,11 @@
 #define PREFERENCES_H
 
 
+#include <string>
+
 #include <File.h>
 #include <Message.h>
 #include <Path.h>
-#include <String.h>
 
 
 class Preferences {
@@ -38,7 +39,7 @@ public:
 	bool			fBracesHighlighting;
 	bool			fFullPathInTitle;
 	bool			fCompactLangMenu;
-	BString			fStyle;
+	std::string		fStyle;
 	BRect			fWindowRect;
 };
 

@@ -33,6 +33,7 @@
 #include "Languages.h"
 #include "Preferences.h"
 #include "Styler.h"
+#include "Utils.h"
 
 
 #undef B_TRANSLATION_CONTEXT
@@ -118,7 +119,7 @@ EditorWindow::EditorWindow()
 		.End();
 
 	fLanguageMenu = fMainMenu->FindItem(MAINMENU_LANGUAGE)->Menu();
-	_PopulateLanguageMenu(fLanguageMenu);
+	_PopulateLanguageMenu();
 
 	fEditor = new Editor();
 	fEditor->SetPreferences(fPreferences);
@@ -138,7 +139,7 @@ EditorWindow::EditorWindow()
 
 	fEditor->SendMessage(SCI_USEPOPUP, 0, 0);
 
-	Styler::ApplyGlobal(fEditor, fPreferences->fStyle);
+	Styler::ApplyGlobal(fEditor, fPreferences->fStyle.c_str());
 	fEditor->SendMessage(SCI_STYLESETFORE, 253, 0xFF00000);
 	fEditor->SendMessage(SCI_STYLESETFORE, 254, 0x00000FF);
 
@@ -734,11 +735,11 @@ EditorWindow::_MonitorFile(BStatable* file, bool enable)
 
 
 void
-EditorWindow::_PopulateLanguageMenu(BMenu* languageMenu)
+EditorWindow::_PopulateLanguageMenu()
 {
 	// Clear the menu first
-	int32 count = languageMenu->CountItems();
-	languageMenu->RemoveItems(0, count, true);
+	int32 count = fLanguageMenu->CountItems();
+	fLanguageMenu->RemoveItems(0, count, true);
 
 	Languages::SortAlphabetically();
 	char submenuName[] = "\0";
@@ -759,16 +760,16 @@ EditorWindow::_PopulateLanguageMenu(BMenu* languageMenu)
 			}
 			menus.LastItem()->AddItem(menuItem);
 		} else {
-			languageMenu->AddItem(menuItem);
+			fLanguageMenu->AddItem(menuItem);
 		}
 	}
 	if(fPreferences->fCompactLangMenu == true) {
 		int32 menusCount = menus.CountItems();
 		for(int32 i = 0; i < menusCount; i++) {
 			if(menus.ItemAt(i)->CountItems() > 1) {
-				languageMenu->AddItem(menus.ItemAt(i));
+				fLanguageMenu->AddItem(menus.ItemAt(i));
 			} else {
-				languageMenu->AddItem(menus.ItemAt(i)->RemoveItem((int32) 0));
+				fLanguageMenu->AddItem(menus.ItemAt(i)->RemoveItem((int32) 0));
 			}
 		}
 	}
@@ -802,8 +803,8 @@ EditorWindow::_SetLanguage(std::string lang)
 {
 	fCurrentLanguage = lang;
 	Languages::ApplyLanguage(fEditor, lang.c_str());
-	Styler::ApplyGlobal(fEditor, fPreferences->fStyle);
-	Styler::ApplyLanguage(fEditor, fPreferences->fStyle, lang.c_str());
+	Styler::ApplyGlobal(fEditor, fPreferences->fStyle.c_str());
+	Styler::ApplyLanguage(fEditor, fPreferences->fStyle.c_str(), lang.c_str());
 
 	fMainMenu->FindItem(MAINMENU_EDIT_COMMENTLINE)->SetEnabled(fEditor->CanCommentLine());
 	fMainMenu->FindItem(MAINMENU_EDIT_COMMENTBLOCK)->SetEnabled(fEditor->CanCommentBlock());
@@ -817,9 +818,9 @@ EditorWindow::_SetLanguageByFilename(const char* filename)
 	// try to match whole filename first, this is needed for e.g. CMake
 	bool found = Languages::GetLanguageForExtension(filename, lang);
 	if(found == false) {
-		const char* extension = strrchr(filename, '.');
-		if(extension != nullptr)
-			Languages::GetLanguageForExtension(extension + 1, lang);
+		const std::string extension = GetFileExtension(filename);
+		if(!extension.empty())
+			Languages::GetLanguageForExtension(extension.c_str(), lang);
 	}
 	_SetLanguage(lang);
 }
@@ -878,7 +879,7 @@ EditorWindow::_SyncWithPreferences()
 		RefreshTitle();
 
 		// TODO Do this only if language menu preference has changed
-		_PopulateLanguageMenu(fLanguageMenu);
+		_PopulateLanguageMenu();
 	}
 }
 

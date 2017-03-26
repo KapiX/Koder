@@ -14,6 +14,7 @@
 
 #include "Editor.h"
 #include "EditorWindow.h"
+#include "Utils.h"
 
 
 /* static */ void
@@ -182,11 +183,11 @@ Styler::_GetAvailableStyles(std::set<std::string> &styles, const BPath &path)
 	BEntry entry;
 	char name[B_FILE_NAME_LENGTH];
 	while(directory.GetNextEntry(&entry) == B_OK) {
+		if(entry.IsDirectory())
+			continue;
 		entry.GetName(name);
-		const std::string filename(name);
-		size_t pos = filename.rfind('.');
-		if(pos != std::string::npos && filename.substr(pos + 1) == "yaml") {
-			styles.insert(filename.substr(0, pos));
+		if(GetFileExtension(name) == "yaml") {
+			styles.insert(GetFileName(name));
 		}
 	}
 }

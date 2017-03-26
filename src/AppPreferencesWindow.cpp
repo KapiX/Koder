@@ -5,7 +5,6 @@
 
 #include "AppPreferencesWindow.h"
 
-#include <stdlib.h>
 #include <set>
 #include <string>
 
@@ -79,7 +78,7 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			_PreferencesModified();
 		} break;
 		case Actions::TAB_WIDTH: {
-			fTempPreferences->fTabWidth = atoi(fTabWidthTC->Text());
+			fTempPreferences->fTabWidth = std::stoi(fTabWidthTC->Text());
 			_PreferencesModified();
 		} break;
 		case Actions::LINE_HIGHLIGHTING: {
@@ -94,7 +93,7 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 		} break;
 		case Actions::LINELIMIT_COLUMN: {
 			fTempPreferences->fLineLimitColumn =
-				atoi(fLineLimitColumnTC->Text());
+				std::stoi(fLineLimitColumnTC->Text());
 			_PreferencesModified();
 		} break;
 		case Actions::LINELIMIT_SHOW: {
@@ -372,7 +371,7 @@ AppPreferencesWindow::_PopulateStylesMenu()
 		BMessage* msg = new BMessage(EDITOR_STYLE);
 		msg->AddString("style", style.c_str());
 		BMenuItem* menuItem = new BMenuItem(style.c_str(), msg);
-		if(style == fTempPreferences->fStyle.String())
+		if(style == fTempPreferences->fStyle)
 			menuItem->SetMarked(true);
 		fEditorStyleMenu->AddItem(menuItem);
 	}

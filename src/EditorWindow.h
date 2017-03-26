@@ -123,7 +123,7 @@ private:
 			bool			_CheckPermissions(BStatable* file, mode_t permissions);
 			void			_FindReplace(BMessage* message);
 			status_t		_MonitorFile(BStatable* file, bool enable);
-			void			_PopulateLanguageMenu(BMenu* languageMenu);
+			void			_PopulateLanguageMenu();
 			void			_ReloadFile(entry_ref* ref = nullptr);
 			void			_SetLanguage(std::string lang);
 			void			_SetLanguageByFilename(const char* filename);
