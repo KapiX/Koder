@@ -243,6 +243,13 @@ App::MessageReceived(BMessage* message)
 		}
 		fFindWindow->Show();
 		fFindWindow->Activate();
+		std::string findText = message->GetString("selection", "");
+		if(findText.empty() == false) {
+			if(fFindWindow->LockLooper()) {
+				fFindWindow->SetFindText(findText);
+				fFindWindow->UnlockLooper();
+			}
+		}
 	} break;
 	case WINDOW_NEW: {
 		EditorWindow* window = new EditorWindow();

@@ -437,6 +437,12 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case MAINMENU_EDIT_APP_PREFERENCES:
 		case MAINMENU_SEARCH_FINDREPLACE: {
+			if(fEditor->SendMessage(SCI_GETSELECTIONEMPTY, 0, 0) == false) {
+				int length = fEditor->SendMessage(SCI_GETSELTEXT, 0, 0);
+				std::string selection(length, '\0');
+				fEditor->SendMessage(SCI_GETSELTEXT, 0, (sptr_t) &selection[0]);
+				message->AddString("selection", selection.c_str());
+			}
 			be_app->PostMessage(message);
 		} break;
 		case MAINMENU_SEARCH_GOTOLINE: {

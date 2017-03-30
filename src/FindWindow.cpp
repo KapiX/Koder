@@ -104,6 +104,13 @@ FindWindow::Quit()
 
 
 void
+FindWindow::SetFindText(const std::string text)
+{
+	fFindTC->SetText(text.c_str());
+}
+
+
+void
 FindWindow::_InitInterface()
 {
 	fFindString = new BStringView("findString", B_TRANSLATE("Find:"));

@@ -7,6 +7,8 @@
 #define FINDWINDOW_H
 
 
+#include <string>
+
 #include <String.h>
 #include <Window.h>
 
@@ -37,6 +39,8 @@ public:
 	void			MessageReceived(BMessage* message);
 	void			WindowActivated(bool active);
 	void			Quit();
+
+	void			SetFindText(const std::string text);
 
 private:
 	enum Actions {
