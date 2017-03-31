@@ -1,6 +1,9 @@
 text:
     name: Text file
     extensions: [ txt ]
+awk:
+    name: AWK
+    extensions: [ awk ]
 bash:
     name: Bash
     extensions: [ sh, bash, bsh, csh, recipe ]
