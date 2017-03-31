@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	2330945001
+1	English	x-vnd.KapiX-Koder	2285835744
 ArmanHayots, for Russian translation.	App		ArmanHayots, for Russian translation.
 Code editor for Haiku based on Scintilla editing component.	App		Редактор коду для Haiku на основі компонента редагування Scintilla.
 damoklas, for Lithuanian translation.	App		damoklas, for Lithuanian translation.
@@ -19,6 +19,7 @@ Highlight current line	AppPreferencesWindow		Підсвічувати поточ
 Koder preferences	AppPreferencesWindow		Koder preferences
 Line	AppPreferencesWindow		Рядок
 Mark overly long lines	AppPreferencesWindow		Mark overly long lines
+Max. characters per line:	AppPreferencesWindow		Max. characters per line:
 Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
 Revert	AppPreferencesWindow		Повернути
 Show full path in title	AppPreferencesWindow		Показувати повний шлях у заголовку

@@ -190,7 +190,7 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fLineLimitShowCB);
 
 	fLineLimitBox = new BBox("lineLimitPrefs");
-	fLineLimitColumnTC = new BTextControl("lineLimitColumn", "Max. characters per line:", "80", new BMessage((uint32) Actions::LINELIMIT_COLUMN));
+	fLineLimitColumnTC = new BTextControl("lineLimitColumn", B_TRANSLATE("Max. characters per line:"), "80", new BMessage((uint32) Actions::LINELIMIT_COLUMN));
 	fLineLimitBackgroundRadio = new BRadioButton("lineLimitRadio", B_TRANSLATE("Background"), new BMessage((uint32) Actions::LINELIMIT_BACKGROUND));
 	fLineLimitLineRadio = new BRadioButton("lineLimitRadio", B_TRANSLATE("Line"), new BMessage((uint32) Actions::LINELIMIT_LINE));
 
