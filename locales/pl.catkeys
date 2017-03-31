@@ -1,13 +1,13 @@
 1	English	x-vnd.KapiX-Koder	3252024328
-ArmanHayots, for Russian translation.	App		ArmanHayots, for Russian translation.
+ArmanHayots, for Russian translation.	App		ArmanHayots, za tłumaczenie na rosyjski.
 Code editor for Haiku based on Scintilla editing component.	App		Edytor kodu dla Haiku oparty na kontrolce Scintilla.
 Distributed on MIT license terms.	App		Rozprowadzany na warunkach licencji MIT.
-humdinger, for German translation and GUI design tips.	App		humdinger, for German translation and GUI design tips.
-Lan72, for Ukrainian translation.	App		Lan72, for Ukrainian translation.
-miqlas, for Hungarian translation and app icon.	App		miqlas, for Hungarian translation and app icon.
+humdinger, for German translation and GUI design tips.	App		humdingera, za tłumaczenie na niemiecki i porady w kwestii interfejsu.
+Lan72, for Ukrainian translation.	App		Lan72, za tłumaczenie na ukraiński.
+miqlas, for Hungarian translation and app icon.	App		miqlasa, za tłumaczenie na węgierski oraz ikonę aplikacji.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neila Hodgsona, za kontrolkę Scintilla i edytor SciTE.
-un_spacyar, for Spanish translation.	App		un_spacyar, for Spanish translation.
-zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
+un_spacyar, for Spanish translation.	App		un_spacyara, za tłumaczenie na hiszpański.
+zuMi, for toolbar icons.	App		zuMi, za ikony paska narzędzi.
 Apply	AppPreferencesWindow		Zastosuj
 Background	AppPreferencesWindow		Tło
 Compact language menu	AppPreferencesWindow		Kompaktowe menu języków
@@ -17,15 +17,15 @@ Highlight braces	AppPreferencesWindow		Podświetl nawiasy
 Highlight current line	AppPreferencesWindow		Podświetl edytowaną linię
 Koder preferences	AppPreferencesWindow		Koder preferences
 Line	AppPreferencesWindow		Linia
-Mark overly long lines	AppPreferencesWindow		Mark overly long lines
-Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
+Mark overly long lines	AppPreferencesWindow		Oznacz zbyt długie linie
+Only in actually indented lines	AppPreferencesWindow		Tylko dla właściwych wcięć
 Revert	AppPreferencesWindow		Cofnij
 Show full path in title	AppPreferencesWindow		Pokazuj pełną ścieżkę na pasku tytułu
 Show indentation guides	AppPreferencesWindow		Pokazuj prowadnice wcięć
-Show line numbers	AppPreferencesWindow		Show line numbers
-Show toolbar	AppPreferencesWindow		Show toolbar
-Spaces per tab:	AppPreferencesWindow		Spaces per tab:
-Style	AppPreferencesWindow		Style
+Show line numbers	AppPreferencesWindow		Pokazuj numery linii
+Show toolbar	AppPreferencesWindow		Pokazuj pasek narzędzie
+Spaces per tab:	AppPreferencesWindow		Spacje na tabulację:
+Style	AppPreferencesWindow		Styl
 Up to the next non-empty line	AppPreferencesWindow		Do następnej niepustej linii
 Up to the next/previous non-empty line	AppPreferencesWindow		Do następnej/poprzedniej niepustej linii
 [read-only]	EditorWindow		[tylko do odczytu]
@@ -33,30 +33,30 @@ About…	EditorWindow		O programie…
 Access denied	EditorWindow		Odmowa dostępu
 Cancel	EditorWindow		Anuluj
 Close	EditorWindow		Zamknij
-Comment block	EditorWindow		Comment block
-Comment line	EditorWindow		Comment line
+Comment block	EditorWindow		Zakomentuj blok
+Comment line	EditorWindow		Zakomentuj linię
 Copy	EditorWindow		Kopiuj
 Cut	EditorWindow		Wytnij
 Discard	EditorWindow		Odrzuć
-Do nothing	EditorWindow		Do nothing
+Do nothing	EditorWindow		Nic
 Edit	EditorWindow		Edycja
 Error	EditorWindow		Błąd
-Failed to read file permissions.	EditorWindow		Failed to read file permissions.
+Failed to read file permissions.	EditorWindow		Nie można odczytać uprawnień do pliku.
 File	EditorWindow		Plik
 File modified	EditorWindow		Plik zmodyfikowany
 Find/Replace…	EditorWindow		Znajdź/Zastąp…
 Go to line…	EditorWindow		Skocz do linii…
 Help	EditorWindow		Pomoc
-Koder preferences…	EditorWindow		Koder preferences…
+Koder preferences…	EditorWindow		Ustawienia Kodera…
 Language	EditorWindow		Język
-Line endings	EditorWindow		Line endings
+Line endings	EditorWindow		Zakończenia linii
 New	EditorWindow		Nowy
 OK	EditorWindow		OK
 Old Mac format	EditorWindow		Format starego Mac OS
 Open	EditorWindow		Otwórz
 Paste	EditorWindow		Wklej
 Quit	EditorWindow		Zakończ
-Reached the end of the document. No results found.	EditorWindow		Reached the end of the document. No results found.
+Reached the end of the document. No results found.	EditorWindow		Osiągnięto koniec dokumentu. Nie znaleziono rezultatów.
 Redo	EditorWindow		Ponów
 Reload	EditorWindow		Przeładuj
 Save	EditorWindow		Zapisz
@@ -64,21 +64,21 @@ Save as…	EditorWindow		Zapisz jako…
 Search	EditorWindow		Znajdź
 Searching finished	EditorWindow		Wyszukiwanie zakończone
 Select all	EditorWindow		Zaznacz wszystko
-Show line endings	EditorWindow		Show line endings
+Show line endings	EditorWindow		Pokazuj zakończenia linii
 Show white space	EditorWindow		Pokazuj białe znaki
 Special symbols	EditorWindow		Symbole specjalne
-The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
-The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
-The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Plik zawiera niezapisane zmiany, ale jest tylko do odczytu. Co zrobić?
+The file contains unsaved changes. What to do?	EditorWindow		Plik zawiera niezapisane zmiany. Co zrobić?
+The file has been modified by another application. What to do?	EditorWindow		Plik został zmodyfikowany przez inną aplikację. Co zrobić?
 Undo	EditorWindow		Cofnij
-Unix format	EditorWindow		Format Uniksa
+Unix format	EditorWindow		Format Unix
 Unsaved changes	EditorWindow		Niezapisane zmiany
 Untitled	EditorWindow		Bez nazwy
 View	EditorWindow		Widok
 Warning	EditorWindow		Uwaga
 Windows format	EditorWindow		Format Windows
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nie masz uprawnień do edycji tego pliku. Edytor zostanie ustawiony w tryb tylko do odczytu.
-You don't have sufficient permissions to edit this file.	EditorWindow		Nie masz wystarczających uprawnień do edycji tego pliku
+You don't have sufficient permissions to edit this file.	EditorWindow		Nie masz wystarczających uprawnień do edycji tego pliku.
 Direction	FindWindow		Kierunek
 Down	FindWindow		W dół
 Find	FindWindow		Znajdź
@@ -97,18 +97,18 @@ Cancel	GoToLineWindow		Anuluj
 Go to line	GoToLineWindow		Skocz do linii
 Go to line:	GoToLineWindow		Skok do linii:
 OK	GoToLineWindow		OK
-Configuration file	Preferences		Configuration file
-Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
-Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.
+Configuration file	Preferences		Plik konfiguracyjny
+Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Nie można otworzyć pliku konfiguracyjnego z powodu odmowy dostępu. Zazwyczaj oznacza to, że nie ma uprawnień do odczytu katalogu ustawień. Jeśli chcesz załadować swoje ustawienia, sprawdź w dokumentacji systemu, jaki to katalog i spróbuj zmienić jego uprawnienia.
+Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Nie można otworzyć pliku konfiguracyjnego z powodu odmowy dostępu. Zazwyczaj oznacza to, że nie ma uprawnień do zapisu katalogu ustawień. Jeśli chcesz załadować swoje ustawienia, sprawdź w dokumentacji systemu, jaki to katalog i spróbuj zmienić jego uprawnienia.
+Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Nie można otworzyć pliku konfiguracyjnego z powodu braku ścieżki. To może oznaczać, że programista popełnił błąd. Nie możesz nic na to poradzić. Twoje ustawienia nie zostaną załadowane. Wybacz.
+Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Nie można otworzyć pliku konfiguracyjnego z powodu braku ścieżki. To może oznaczać, że programista popełnił błąd. Nie możesz nic na to poradzić. Twoje ustawienia nie zostaną zapisane. Wybacz.
 OK	Preferences		OK
-There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.
-There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.
+There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		Brakuje pamięci do wczytania pliku konfiguracyjnego. Jeśli chcesz aby twoje ustawienia zostały wczytane, spróbuj zamknąć kilka aplikacji i zrestartuj Kodera.
+There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		Brakuje pamięci do zapisu pliku konfiguracyjnego. Jeśli chcesz aby twoje ustawienia zostały zapisane, spróbuj zamknąć kilka aplikacji i spróbuj ponownie.
 Cancel	QuitAlert		Anuluj
 Don't save	QuitAlert		Nie zapisuj
 Save all	QuitAlert		Zapisz wszystkie
 Save selected	QuitAlert		Zapisz zaznaczone
-There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Istnieją niezapisane zmiany.\nWybierz pliki do zapisania.
 Unsaved files	QuitAlert		Niezapisane pliki
 Koder	System name		Koder
