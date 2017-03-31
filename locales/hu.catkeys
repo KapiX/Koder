@@ -1,98 +1,114 @@
-1	Hungarian	x-vnd.KapiX-Koder	728254238
-Search	EditorWindow		Keresés
-File	EditorWindow		Fájl
-Unsaved files	QuitAlert		Nem mentett fájlok
-Convert EOLs	EditorWindow		Sorvég konverzió
-Mark lines exceeding 	AppPreferencesWindow		Hosszú sorok megjelölése
-Unix format	EditorWindow		Unix formátum
-Close	EditorWindow		Bezárás
-Redo	EditorWindow		Újra
-Distributed on MIT license terms.	App		MIT licenc alatt terjeszthető.
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nem módosíthatod ezt a fájlt, ezért írásvédett módban lesz megnyitva.
-Special symbols	EditorWindow		Speciális jelek
-Direction	FindWindow		Irány
- characters	AppPreferencesWindow		 karakter
-Replace all	FindWindow		Összes cseréje
-Old Mac format	EditorWindow		Régi Mac formátum
-Cancel	GoToLineWindow		Mégsem
-Wrap around	FindWindow		Körben
-The file contains unsaved changes, but is read-only. What do you want to do?	EditorWindow		A fájl mentetlen változtatásokat tartalmaz. Mit szeretne tenni?
-Match case	FindWindow		Betűméret érzékeny
-Access denied	EditorWindow		Hozzáférés megtagadva
-File modified	EditorWindow		Módosított fájl
-Apply	AppPreferencesWindow		Alkalmaz
-Untitled	EditorWindow		Névtelen
-Line	AppPreferencesWindow		Sor
-Show full path in title	AppPreferencesWindow		Teljes elérési út a címsorban
-Editor	AppPreferencesWindow		Szerkesztő
-Display line numbers	AppPreferencesWindow		Sorszámozás
-End of document was reached. No results found.	EditorWindow		A dokumentum végére értünk. Nem volt találat.
-Tab width: 	AppPreferencesWindow		Tab szélessége: 
-Copy	EditorWindow		Másolás
-Windows format	EditorWindow		Windows formátum
-Open	EditorWindow		Megnyitás
-Save selected	QuitAlert		Kiválasztott mentése
-Down	FindWindow		Le
-Discard	EditorWindow		Elvetés
-Real	AppPreferencesWindow		Valódi
-You don't have sufficient permissions to edit this file.	EditorWindow		Nincs elegendő jogosultsága a fájl megváltoztatásához.
-Show indentation guides	AppPreferencesWindow		Behúzási segédvonal megjelenítése
-Select all	EditorWindow		Mind kijelölése
-In selection	FindWindow		Kijelölésben
-Go to line:	GoToLineWindow		Sorra ugrás:
-Cut	EditorWindow		Kivágás
-Find:	FindWindow		Keresés:
-Highlight braces	AppPreferencesWindow		Zárójelek kiemelése
-View	EditorWindow		Nézet
-Go	GoToLineWindow		Ugrás
-Edit	EditorWindow		Szerkeszt
-Revert	AppPreferencesWindow		Visszaállít
-Up to the next non-empty line	AppPreferencesWindow		Fel a következő nem üres sorig
-Save as…	EditorWindow		Mentés másként...
-Paste	EditorWindow		Beillesztés
-Could not read file permissions.	EditorWindow		A fájl jogosultságai nem olvashatóak.
-Find/Replace…	EditorWindow		Keres/Csere…
-The file contains unsaved changes. What do you want to do?	EditorWindow		A fájl mentetlen változtatásokat tartalmaz. Mit szeretne tenni?
-Don't save	QuitAlert		Ne mentse
-Files listed below contain unsaved changes.\nWhich ones do you want to save?	QuitAlert		Az alábbi fájlok mentetlen változtatásokat tartalmaznak.\nMelyeket akarja menteni?
+1	English	x-vnd.KapiX-Koder	3252024328
+ArmanHayots, for Russian translation.	App		ArmanHayots, for Russian translation.
 Code editor for Haiku based on Scintilla editing component.	App		A Scintilla szerkesztőkomponensre épülő kódszerkesztő Haikuhoz.
-Find/Replace	FindWindow		Keres/Csere
+Distributed on MIT license terms.	App		MIT licenc alatt terjeszthető.
+humdinger, for German translation and GUI design tips.	App		humdinger, for German translation and GUI design tips.
+Lan72, for Ukrainian translation.	App		Lan72, for Ukrainian translation.
+miqlas, for Hungarian translation and app icon.	App		miqlas, for Hungarian translation and app icon.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, a Scintilla szerkesztő komponensért és a SciTE szerkesztőért.
+un_spacyar, for Spanish translation.	App		un_spacyar, for Spanish translation.
+zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
+Apply	AppPreferencesWindow		Alkalmaz
+Background	AppPreferencesWindow		Háttér
+Compact language menu	AppPreferencesWindow		Rövid nyelvi menü
 Convert tabs to spaces	AppPreferencesWindow		Tabok szóközökké alakítása
+Editor	AppPreferencesWindow		Szerkesztő
+Highlight braces	AppPreferencesWindow		Zárójelek kiemelése
+Highlight current line	AppPreferencesWindow		Aktuális sor kiemelése
+Koder preferences	AppPreferencesWindow		Koder preferences
+Line	AppPreferencesWindow		Sor
+Mark overly long lines	AppPreferencesWindow		Mark overly long lines
+Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
+Revert	AppPreferencesWindow		Visszaállít
+Show full path in title	AppPreferencesWindow		Teljes elérési út a címsorban
+Show indentation guides	AppPreferencesWindow		Behúzási segédvonal megjelenítése
+Show line numbers	AppPreferencesWindow		Show line numbers
+Show toolbar	AppPreferencesWindow		Show toolbar
+Spaces per tab:	AppPreferencesWindow		Spaces per tab:
+Style	AppPreferencesWindow		Style
+Up to the next non-empty line	AppPreferencesWindow		Fel a következő nem üres sorig
+Up to the next/previous non-empty line	AppPreferencesWindow		A következő/előző nem üres sorig
+[read-only]	EditorWindow		[írásvédett]
+About…	EditorWindow		Névjegy…
+Access denied	EditorWindow		Hozzáférés megtagadva
+Cancel	EditorWindow		Mégsem
+Close	EditorWindow		Bezárás
+Comment block	EditorWindow		Comment block
+Comment line	EditorWindow		Comment line
+Copy	EditorWindow		Másolás
+Cut	EditorWindow		Kivágás
+Discard	EditorWindow		Elvetés
+Do nothing	EditorWindow		Do nothing
+Edit	EditorWindow		Szerkeszt
+Error	EditorWindow		Hiba
+Failed to read file permissions.	EditorWindow		Failed to read file permissions.
+File	EditorWindow		Fájl
+File modified	EditorWindow		Módosított fájl
+Find/Replace…	EditorWindow		Keres/Csere…
+Go to line…	EditorWindow		Sorra ugrás…
+Help	EditorWindow		Súgó
+Koder preferences…	EditorWindow		Koder preferences…
+Language	EditorWindow		Nyelv
+Line endings	EditorWindow		Line endings
+New	EditorWindow		Új
+OK	EditorWindow		OK
+Old Mac format	EditorWindow		Régi Mac formátum
+Open	EditorWindow		Megnyitás
+Paste	EditorWindow		Beillesztés
+Quit	EditorWindow		Kilépés
+Reached the end of the document. No results found.	EditorWindow		Reached the end of the document. No results found.
+Redo	EditorWindow		Újra
+Reload	EditorWindow		Újratöltés
+Save	EditorWindow		Mentés
+Save as…	EditorWindow		Mentés másként...
+Search	EditorWindow		Keresés
+Searching finished	EditorWindow		Keresés befejeződött
+Select all	EditorWindow		Mind kijelölése
+Show line endings	EditorWindow		Show line endings
+Show white space	EditorWindow		Szóközök megjelenítése
+Special symbols	EditorWindow		Speciális jelek
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
+The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
+The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
+Undo	EditorWindow		Visszavonás
+Unix format	EditorWindow		Unix formátum
+Unsaved changes	EditorWindow		Nem mentett módosítások
+Untitled	EditorWindow		Névtelen
+View	EditorWindow		Nézet
+Warning	EditorWindow		Figyelmeztetés
+Windows format	EditorWindow		Windows formátum
+You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nem módosíthatod ezt a fájlt, ezért írásvédett módban lesz megnyitva.
+You don't have sufficient permissions to edit this file.	EditorWindow		Nincs elegendő jogosultsága a fájl megváltoztatásához.
+Direction	FindWindow		Irány
+Down	FindWindow		Le
+Find	FindWindow		Keres
+Find:	FindWindow		Keresés:
+Find/Replace	FindWindow		Keres/Csere
+In selection	FindWindow		Kijelölésben
+Match case	FindWindow		Betűméret érzékeny
+Match entire words	FindWindow		Egész szavakra egyezés
+Replace	FindWindow		Csere
+Replace all	FindWindow		Összes cseréje
+Replace and find	FindWindow		Cserél és keres
 Replace:	FindWindow		Csere:
 Up	FindWindow		Fel
-Match entire words	FindWindow		Egész szavakra egyezés
-Help	EditorWindow		Súgó
-Show EOLs	EditorWindow		Sorvég megjelenítése
-Nothing	EditorWindow		Semmi
-Application preferences	AppPreferencesWindow		Alkalmazás beállításai
-Compact language menu	AppPreferencesWindow		Rövid nyelvi menü
-File has been modified outside of this editor. What do you want to do?	EditorWindow		A fájl módosult a szerkesztőn kívül Mit szeretne tenni?
-[read-only]	EditorWindow		[írásvédett]
-Koder	System name		Koder
-Highlight current line	AppPreferencesWindow		Aktuális sor kiemelése
-Reload	EditorWindow		Újratöltés
-Warning	EditorWindow		Figyelmeztetés
-Up to the next/previous non-empty line	AppPreferencesWindow		A következő/előző nem üres sorig
-Replace	FindWindow		Csere
-Undo	EditorWindow		Visszavonás
-Background	AppPreferencesWindow		Háttér
-File preferences…	EditorWindow		Fájl beállítások…
-Quit	EditorWindow		Kilépés
-Save all	QuitAlert		Mindent ment
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, a Scintilla szerkesztő komponensért és a SciTE szerkesztőért.
-Find	FindWindow		Keres
-Replace and find	FindWindow		Cserél és keres
-Error	EditorWindow		Hiba
-Language	EditorWindow		Nyelv
-Cancel	QuitAlert		Mégsem
-Save	EditorWindow		Mentés
-About…	EditorWindow		Névjegy…
-OK	EditorWindow		OK
-Go to line…	EditorWindow		Sorra ugrás…
-Cancel	EditorWindow		Mégsem
-New	EditorWindow		Új
-Unsaved changes	EditorWindow		Nem mentett módosítások
+Wrap around	FindWindow		Körben
+Cancel	GoToLineWindow		Mégsem
 Go to line	GoToLineWindow		Sorra ugrás
-Searching finished	EditorWindow		Keresés befejeződött
-Show white space	EditorWindow		Szóközök megjelenítése
-Application preferences…	EditorWindow		Alkalmazás beállításai…
+Go to line:	GoToLineWindow		Sorra ugrás:
+OK	GoToLineWindow		OK
+Configuration file	Preferences		Configuration file
+Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
+Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
+Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.
+Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.
+OK	Preferences		OK
+There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.
+There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.
+Cancel	QuitAlert		Mégsem
+Don't save	QuitAlert		Ne mentse
+Save all	QuitAlert		Mindent ment
+Save selected	QuitAlert		Kiválasztott mentése
+There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
+Unsaved files	QuitAlert		Nem mentett fájlok
+Koder	System name		Koder

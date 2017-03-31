@@ -1,98 +1,114 @@
-1	Ukrainian	application/x-vnd.KapiX-Koder	728254238
-Search	EditorWindow		Пошук
-File	EditorWindow		Файл
-Unsaved files	QuitAlert		Незбережені файли
-Convert EOLs	EditorWindow		Конвертувати кінці рядків
-Mark lines exceeding 	AppPreferencesWindow		Відмічати рядкі довші
-Unix format	EditorWindow		Формат Unix
-Close	EditorWindow		Закрити
-Redo	EditorWindow		Відновити
-Distributed on MIT license terms.	App		Розповсюджується за ліцензією MIT.
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		У вас немає дозволів на редагування цього файлу. Редактор встановлений в режим тільки читання.
-Special symbols	EditorWindow		Спеціальні символи
-Direction	FindWindow		Напрямок
- characters	AppPreferencesWindow		 знаків
-Replace all	FindWindow		Замінити все
-Old Mac format	EditorWindow		Формат старої Mac OS
-Cancel	GoToLineWindow		Скасувати
-Wrap around	FindWindow		Циклічно
-The file contains unsaved changes, but is read-only. What do you want to do?	EditorWindow		Файл містить незбережені зміни, але він тільки для читання. Що бажаєте зробити?
-Match case	FindWindow		Враховувати регістр
-Access denied	EditorWindow		Відмова у доступі
-File modified	EditorWindow		Файл змінений
-Apply	AppPreferencesWindow		Застосувати
-Untitled	EditorWindow		Безіменний
-Line	AppPreferencesWindow		Рядок
-Show full path in title	AppPreferencesWindow		Показувати повний шлях у заголовку
-Editor	AppPreferencesWindow		Редактор
-Display line numbers	AppPreferencesWindow		Показувати номери рядків
-End of document was reached. No results found.	EditorWindow		Досягнуто кінець документа. Результатів не знайдено.
-Tab width: 	AppPreferencesWindow		Ширина табуляції: 
-Copy	EditorWindow		Копіювати
-Windows format	EditorWindow		Формат Windows
-Open	EditorWindow		Відкрити
-Save selected	QuitAlert		Зберегти виділене
-Down	FindWindow		Вниз
-Discard	EditorWindow		Відкинути
-Real	AppPreferencesWindow		Реальний
-You don't have sufficient permissions to edit this file.	EditorWindow		Ви не маєте достатньо прав для редагування цього файлу.
-Show indentation guides	AppPreferencesWindow		Показувати підказки відступу
-Select all	EditorWindow		Виділити все
-In selection	FindWindow		У виділеному
-Go to line:	GoToLineWindow		Перейти до рядка:
-Cut	EditorWindow		Вирізати
-Find:	FindWindow		Знайти:
-Highlight braces	AppPreferencesWindow		Підсвічувати дужки
-View	EditorWindow		Вигляд
-Go	GoToLineWindow		Перейти
-Edit	EditorWindow		Редагувати
-Revert	AppPreferencesWindow		Повернути
-Up to the next non-empty line	AppPreferencesWindow		До наступного непустого рядка
-Save as…	EditorWindow		Зберегти як…
-Paste	EditorWindow		Вставити
-Could not read file permissions.	EditorWindow		Неможливо прочитати права доступу до файлу.
-Find/Replace…	EditorWindow		Знайти/замінити…
-The file contains unsaved changes. What do you want to do?	EditorWindow		Файл містить незбережені зміни. Що бажаєте зробити?
-Don't save	QuitAlert		Не зберігати
-Files listed below contain unsaved changes.\nWhich ones do you want to save?	QuitAlert		Перераховані нижче файли містять незбережені зміни.\nЯкі з них ви бажаєте зберегти?
+1	English	x-vnd.KapiX-Koder	3252024328
+ArmanHayots, for Russian translation.	App		ArmanHayots, for Russian translation.
 Code editor for Haiku based on Scintilla editing component.	App		Редактор коду для Haiku на основі компонента редагування Scintilla.
-Find/Replace	FindWindow		Знайти/замінити
+Distributed on MIT license terms.	App		Розповсюджується за ліцензією MIT.
+humdinger, for German translation and GUI design tips.	App		humdinger, for German translation and GUI design tips.
+Lan72, for Ukrainian translation.	App		Lan72, for Ukrainian translation.
+miqlas, for Hungarian translation and app icon.	App		miqlas, for Hungarian translation and app icon.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, за компонент редагування Scintilla i редактор SciTE.
+un_spacyar, for Spanish translation.	App		un_spacyar, for Spanish translation.
+zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
+Apply	AppPreferencesWindow		Застосувати
+Background	AppPreferencesWindow		Фон
+Compact language menu	AppPreferencesWindow		Компактне мовне меню
 Convert tabs to spaces	AppPreferencesWindow		Перетворювати табуляції в пробіли
+Editor	AppPreferencesWindow		Редактор
+Highlight braces	AppPreferencesWindow		Підсвічувати дужки
+Highlight current line	AppPreferencesWindow		Підсвічувати поточний рядок
+Koder preferences	AppPreferencesWindow		Koder preferences
+Line	AppPreferencesWindow		Рядок
+Mark overly long lines	AppPreferencesWindow		Mark overly long lines
+Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
+Revert	AppPreferencesWindow		Повернути
+Show full path in title	AppPreferencesWindow		Показувати повний шлях у заголовку
+Show indentation guides	AppPreferencesWindow		Показувати підказки відступу
+Show line numbers	AppPreferencesWindow		Show line numbers
+Show toolbar	AppPreferencesWindow		Show toolbar
+Spaces per tab:	AppPreferencesWindow		Spaces per tab:
+Style	AppPreferencesWindow		Style
+Up to the next non-empty line	AppPreferencesWindow		До наступного непустого рядка
+Up to the next/previous non-empty line	AppPreferencesWindow		До наступного/попереднього непустого рядка
+[read-only]	EditorWindow		[тільки для читання]
+About…	EditorWindow		Про програму…
+Access denied	EditorWindow		Відмова у доступі
+Cancel	EditorWindow		Скасувати
+Close	EditorWindow		Закрити
+Comment block	EditorWindow		Comment block
+Comment line	EditorWindow		Comment line
+Copy	EditorWindow		Копіювати
+Cut	EditorWindow		Вирізати
+Discard	EditorWindow		Відкинути
+Do nothing	EditorWindow		Do nothing
+Edit	EditorWindow		Редагувати
+Error	EditorWindow		Помилка
+Failed to read file permissions.	EditorWindow		Failed to read file permissions.
+File	EditorWindow		Файл
+File modified	EditorWindow		Файл змінений
+Find/Replace…	EditorWindow		Знайти/замінити…
+Go to line…	EditorWindow		Перейти до рядка…
+Help	EditorWindow		Довідка
+Koder preferences…	EditorWindow		Koder preferences…
+Language	EditorWindow		Мова
+Line endings	EditorWindow		Line endings
+New	EditorWindow		Новий
+OK	EditorWindow		OK
+Old Mac format	EditorWindow		Формат старої Mac OS
+Open	EditorWindow		Відкрити
+Paste	EditorWindow		Вставити
+Quit	EditorWindow		Вийти
+Reached the end of the document. No results found.	EditorWindow		Reached the end of the document. No results found.
+Redo	EditorWindow		Відновити
+Reload	EditorWindow		Перезавантажити
+Save	EditorWindow		Зберегти
+Save as…	EditorWindow		Зберегти як…
+Search	EditorWindow		Пошук
+Searching finished	EditorWindow		Пошук завершений
+Select all	EditorWindow		Виділити все
+Show line endings	EditorWindow		Show line endings
+Show white space	EditorWindow		Показати пробіли
+Special symbols	EditorWindow		Спеціальні символи
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
+The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
+The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
+Undo	EditorWindow		Скасувати
+Unix format	EditorWindow		Формат Unix
+Unsaved changes	EditorWindow		Незбережені зміни
+Untitled	EditorWindow		Безіменний
+View	EditorWindow		Вигляд
+Warning	EditorWindow		Увага
+Windows format	EditorWindow		Формат Windows
+You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		У вас немає дозволів на редагування цього файлу. Редактор встановлений в режим тільки читання.
+You don't have sufficient permissions to edit this file.	EditorWindow		Ви не маєте достатньо прав для редагування цього файлу.
+Direction	FindWindow		Напрямок
+Down	FindWindow		Вниз
+Find	FindWindow		Знайти
+Find:	FindWindow		Знайти:
+Find/Replace	FindWindow		Знайти/замінити
+In selection	FindWindow		У виділеному
+Match case	FindWindow		Враховувати регістр
+Match entire words	FindWindow		Слово цілком
+Replace	FindWindow		Замінити
+Replace all	FindWindow		Замінити все
+Replace and find	FindWindow		Знайти і замінити
 Replace:	FindWindow		Замінити:
 Up	FindWindow		Вгору
-Match entire words	FindWindow		Слово цілком
-Help	EditorWindow		Довідка
-Show EOLs	EditorWindow		Показати кінці рядків
-Nothing	EditorWindow		Нічого
-Application preferences	AppPreferencesWindow		Налаштування програми
-Compact language menu	AppPreferencesWindow		Компактне мовне меню
-File has been modified outside of this editor. What do you want to do?	EditorWindow		Файл був змінений поза цим редактором. Що бажаєте зробити?
-[read-only]	EditorWindow		[тільки для читання]
-Koder	System name		Koder
-Highlight current line	AppPreferencesWindow		Підсвічувати поточний рядок
-Reload	EditorWindow		Перезавантажити
-Warning	EditorWindow		Увага
-Up to the next/previous non-empty line	AppPreferencesWindow		До наступного/попереднього непустого рядка
-Replace	FindWindow		Замінити
-Undo	EditorWindow		Скасувати
-Background	AppPreferencesWindow		Фон
-File preferences…	EditorWindow		Налаштування файлу…
-Quit	EditorWindow		Вийти
-Save all	QuitAlert		Зберегти все
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, за компонент редагування Scintilla i редактор SciTE.
-Find	FindWindow		Знайти
-Replace and find	FindWindow		Знайти і замінити
-Error	EditorWindow		Помилка
-Language	EditorWindow		Мова
-Cancel	QuitAlert		Скасувати
-Save	EditorWindow		Зберегти
-About…	EditorWindow		Про програму…
-OK	EditorWindow		OK
-Go to line…	EditorWindow		Перейти до рядка…
-Cancel	EditorWindow		Скасувати
-New	EditorWindow		Новий
-Unsaved changes	EditorWindow		Незбережені зміни
+Wrap around	FindWindow		Циклічно
+Cancel	GoToLineWindow		Скасувати
 Go to line	GoToLineWindow		Перейти до рядка
-Searching finished	EditorWindow		Пошук завершений
-Show white space	EditorWindow		Показати пробіли
-Application preferences…	EditorWindow		Налаштування програми…
+Go to line:	GoToLineWindow		Перейти до рядка:
+OK	GoToLineWindow		OK
+Configuration file	Preferences		Configuration file
+Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
+Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
+Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.
+Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.
+OK	Preferences		OK
+There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.
+There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.
+Cancel	QuitAlert		Скасувати
+Don't save	QuitAlert		Не зберігати
+Save all	QuitAlert		Зберегти все
+Save selected	QuitAlert		Зберегти виділене
+There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
+Unsaved files	QuitAlert		Незбережені файли
+Koder	System name		Koder

@@ -1,98 +1,114 @@
-1	English	x-vnd.KapiX-Koder	728254238
-Search	EditorWindow		Buscar
-File	EditorWindow		Archivo
-Unsaved files	QuitAlert		Archivos sin guardar
-Convert EOLs	EditorWindow		Modificar salto de línea
-Mark lines exceeding 	AppPreferencesWindow		Marcar líneas que exceden
-Unix format	EditorWindow		Formato Unix
-Close	EditorWindow		Cerrar
-Redo	EditorWindow		Rehacer
-Distributed on MIT license terms.	App		Distribuido bajo los términos de la licencia MIT.
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		No posee permisos para editar este archivo. El editor será seteado en modo solo-lectura.
-Special symbols	EditorWindow		Símbolos especiales
-Direction	FindWindow		Dirección
- characters	AppPreferencesWindow		 caracteres
-Replace all	FindWindow		Reemplazar todo
-Old Mac format	EditorWindow		Antiguo formato Mac
-Cancel	GoToLineWindow		Cancelar
-Wrap around	FindWindow		En todo el archivo
-The file contains unsaved changes, but is read-only. What do you want to do?	EditorWindow		El archivo posee cambios sin guardar, pero es de solo-lectura. ¿Qué desea hacer?
-Match case	FindWindow		Coincidir mayúsculas y minúsculas
-Access denied	EditorWindow		Acceso denegado
-File modified	EditorWindow		Archivo modificado
-Apply	AppPreferencesWindow		Aplicar
-Untitled	EditorWindow		Sin titulo
-Line	AppPreferencesWindow		Línea
-Show full path in title	AppPreferencesWindow		Mostrar ruta completa en el título.
-Editor	AppPreferencesWindow		Editor
-Display line numbers	AppPreferencesWindow		Mostrar número de línea
-End of document was reached. No results found.	EditorWindow		Se ha alcanzado el final del documento. No se han encontrado resultados.
-Tab width: 	AppPreferencesWindow		Ancho tabulador: 
-Copy	EditorWindow		Copiar
-Windows format	EditorWindow		Formato Windows
-Open	EditorWindow		Abrir
-Save selected	QuitAlert		Guardar seleccionado
-Down	FindWindow		Abajo
-Discard	EditorWindow		Descartar
-Real	AppPreferencesWindow		Real
-You don't have sufficient permissions to edit this file.	EditorWindow		No tiene suficientes permisos para editar este archivo.
-Show indentation guides	AppPreferencesWindow		Mostrar guías de indentación
-Select all	EditorWindow		Seleccionar todo
-In selection	FindWindow		En selección
-Go to line:	GoToLineWindow		Ir a la línea:
-Cut	EditorWindow		Cortar
-Find:	FindWindow		Buscar:
-Highlight braces	AppPreferencesWindow		Resaltar llaves
-View	EditorWindow		Ver
-Go	GoToLineWindow		Ir
-Edit	EditorWindow		Editar
-Revert	AppPreferencesWindow		Deshacer
-Up to the next non-empty line	AppPreferencesWindow		Hasta la siguiente linea no-vacia
-Save as…	EditorWindow		Guardar como…
-Paste	EditorWindow		Pegar
-Could not read file permissions.	EditorWindow		No se pudo leer los permisos del archivo.
-Find/Replace…	EditorWindow		Buscar/Reemplazar…
-The file contains unsaved changes. What do you want to do?	EditorWindow		El archivo contiene cambios sin guardar. ¿Qué desea hacer?
-Don't save	QuitAlert		No guardar
-Files listed below contain unsaved changes.\nWhich ones do you want to save?	QuitAlert		Los archivos listados debajo contienen cambios sin guardar. \n¿Cuáles desea guardar?
+1	English	x-vnd.KapiX-Koder	3252024328
+ArmanHayots, for Russian translation.	App		ArmanHayots, for Russian translation.
 Code editor for Haiku based on Scintilla editing component.	App		Editor de código para Haiku, basado en Scintilla.
-Find/Replace	FindWindow		Buscar/Reemplazar
+Distributed on MIT license terms.	App		Distribuido bajo los términos de la licencia MIT.
+humdinger, for German translation and GUI design tips.	App		humdinger, for German translation and GUI design tips.
+Lan72, for Ukrainian translation.	App		Lan72, for Ukrainian translation.
+miqlas, for Hungarian translation and app icon.	App		miqlas, for Hungarian translation and app icon.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, por el componente de edición Scintilla y el editor SciTE.
+un_spacyar, for Spanish translation.	App		un_spacyar, for Spanish translation.
+zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
+Apply	AppPreferencesWindow		Aplicar
+Background	AppPreferencesWindow		Fondo
+Compact language menu	AppPreferencesWindow		Compactar menu de lenguaje
 Convert tabs to spaces	AppPreferencesWindow		Convertir tabulador a espacios
+Editor	AppPreferencesWindow		Editor
+Highlight braces	AppPreferencesWindow		Resaltar llaves
+Highlight current line	AppPreferencesWindow		Resaltar línea actual
+Koder preferences	AppPreferencesWindow		Koder preferences
+Line	AppPreferencesWindow		Línea
+Mark overly long lines	AppPreferencesWindow		Mark overly long lines
+Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
+Revert	AppPreferencesWindow		Deshacer
+Show full path in title	AppPreferencesWindow		Mostrar ruta completa en el título.
+Show indentation guides	AppPreferencesWindow		Mostrar guías de indentación
+Show line numbers	AppPreferencesWindow		Show line numbers
+Show toolbar	AppPreferencesWindow		Show toolbar
+Spaces per tab:	AppPreferencesWindow		Spaces per tab:
+Style	AppPreferencesWindow		Style
+Up to the next non-empty line	AppPreferencesWindow		Hasta la siguiente linea no-vacia
+Up to the next/previous non-empty line	AppPreferencesWindow		Hasta la siguiente/previa linea no-vacia
+[read-only]	EditorWindow		[solo-lectura]
+About…	EditorWindow		Acerca de…
+Access denied	EditorWindow		Acceso denegado
+Cancel	EditorWindow		Cancelar
+Close	EditorWindow		Cerrar
+Comment block	EditorWindow		Comment block
+Comment line	EditorWindow		Comment line
+Copy	EditorWindow		Copiar
+Cut	EditorWindow		Cortar
+Discard	EditorWindow		Descartar
+Do nothing	EditorWindow		Do nothing
+Edit	EditorWindow		Editar
+Error	EditorWindow		Error
+Failed to read file permissions.	EditorWindow		Failed to read file permissions.
+File	EditorWindow		Archivo
+File modified	EditorWindow		Archivo modificado
+Find/Replace…	EditorWindow		Buscar/Reemplazar…
+Go to line…	EditorWindow		Ir a la línea…
+Help	EditorWindow		Ayuda
+Koder preferences…	EditorWindow		Koder preferences…
+Language	EditorWindow		Lenguaje
+Line endings	EditorWindow		Line endings
+New	EditorWindow		Nuevo
+OK	EditorWindow		OK
+Old Mac format	EditorWindow		Antiguo formato Mac
+Open	EditorWindow		Abrir
+Paste	EditorWindow		Pegar
+Quit	EditorWindow		Salir
+Reached the end of the document. No results found.	EditorWindow		Reached the end of the document. No results found.
+Redo	EditorWindow		Rehacer
+Reload	EditorWindow		Recargar
+Save	EditorWindow		Guardar
+Save as…	EditorWindow		Guardar como…
+Search	EditorWindow		Buscar
+Searching finished	EditorWindow		Búsqueda finalizada
+Select all	EditorWindow		Seleccionar todo
+Show line endings	EditorWindow		Show line endings
+Show white space	EditorWindow		Mostrar espacios
+Special symbols	EditorWindow		Símbolos especiales
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
+The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
+The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
+Undo	EditorWindow		Deshacer
+Unix format	EditorWindow		Formato Unix
+Unsaved changes	EditorWindow		Cambios sin guardar
+Untitled	EditorWindow		Sin titulo
+View	EditorWindow		Ver
+Warning	EditorWindow		Advertencia
+Windows format	EditorWindow		Formato Windows
+You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		No posee permisos para editar este archivo. El editor será seteado en modo solo-lectura.
+You don't have sufficient permissions to edit this file.	EditorWindow		No tiene suficientes permisos para editar este archivo.
+Direction	FindWindow		Dirección
+Down	FindWindow		Abajo
+Find	FindWindow		Buscar
+Find:	FindWindow		Buscar:
+Find/Replace	FindWindow		Buscar/Reemplazar
+In selection	FindWindow		En selección
+Match case	FindWindow		Coincidir mayúsculas y minúsculas
+Match entire words	FindWindow		Encontrar palabras completas
+Replace	FindWindow		Reemplazar
+Replace all	FindWindow		Reemplazar todo
+Replace and find	FindWindow		Reemplazar y buscar
 Replace:	FindWindow		Reemplazar:
 Up	FindWindow		Arriba
-Match entire words	FindWindow		Encontrar palabras completas
-Help	EditorWindow		Ayuda
-Show EOLs	EditorWindow		Mostrar salto de línea
-Nothing	EditorWindow		Nada
-Application preferences	AppPreferencesWindow		Preferencias de programa
-Compact language menu	AppPreferencesWindow		Compactar menu de lenguaje
-File has been modified outside of this editor. What do you want to do?	EditorWindow		El archivo fue modificado desde fuera del programa. ¿Qué desea hacer?
-[read-only]	EditorWindow		[solo-lectura]
-Koder	System name		Koder
-Highlight current line	AppPreferencesWindow		Resaltar línea actual
-Reload	EditorWindow		Recargar
-Warning	EditorWindow		Advertencia
-Up to the next/previous non-empty line	AppPreferencesWindow		Hasta la siguiente/previa linea no-vacia
-Replace	FindWindow		Reemplazar
-Undo	EditorWindow		Deshacer
-Background	AppPreferencesWindow		Fondo
-File preferences…	EditorWindow		Preferencias de archivo…
-Quit	EditorWindow		Salir
-Save all	QuitAlert		Guardar todo
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, por el componente de edición Scintilla y el editor SciTE.
-Find	FindWindow		Buscar
-Replace and find	FindWindow		Reemplazar y buscar
-Error	EditorWindow		Error
-Language	EditorWindow		Lenguaje
-Cancel	QuitAlert		Cancelar
-Save	EditorWindow		Guardar
-About…	EditorWindow		Acerca de…
-OK	EditorWindow		OK
-Go to line…	EditorWindow		Ir a la línea…
-Cancel	EditorWindow		Cancelar
-New	EditorWindow		Nuevo
-Unsaved changes	EditorWindow		Cambios sin guardar
+Wrap around	FindWindow		En todo el archivo
+Cancel	GoToLineWindow		Cancelar
 Go to line	GoToLineWindow		Ir a la línea
-Searching finished	EditorWindow		Búsqueda finalizada
-Show white space	EditorWindow		Mostrar espacios
-Application preferences…	EditorWindow		Preferencias de aplicación…
+Go to line:	GoToLineWindow		Ir a la línea:
+OK	GoToLineWindow		OK
+Configuration file	Preferences		Configuration file
+Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
+Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
+Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.
+Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.
+OK	Preferences		OK
+There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.
+There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.
+Cancel	QuitAlert		Cancelar
+Don't save	QuitAlert		No guardar
+Save all	QuitAlert		Guardar todo
+Save selected	QuitAlert		Guardar seleccionado
+There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
+Unsaved files	QuitAlert		Archivos sin guardar
+Koder	System name		Koder
