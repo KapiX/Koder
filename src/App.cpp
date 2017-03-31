@@ -88,6 +88,7 @@ App::AboutRequested()
 		B_TRANSLATE("zuMi, for toolbar icons."),
 		B_TRANSLATE("humdinger, for German translation and GUI design tips."),
 		B_TRANSLATE("miqlas, for Hungarian translation and app icon."),
+		B_TRANSLATE("damoklas, for Lithuanian translation."),
 		B_TRANSLATE("ArmanHayots, for Russian translation."),
 		B_TRANSLATE("un_spacyar, for Spanish translation."),
 		B_TRANSLATE("Lan72, for Ukrainian translation."),

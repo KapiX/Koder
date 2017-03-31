@@ -1,0 +1,115 @@
+1	English	x-vnd.KapiX-Koder	2330945001
+ArmanHayots, for Russian translation.	App		ArmanHayots’ą, už vertimą į rusų kalbą.
+Code editor for Haiku based on Scintilla editing component.	App		Haiku skaitmenų rengyklė naudoją Scintilla taisymo dėmenį.
+damoklas, for Lithuanian translation.	App		damoklą, už vertimą į lietuvių kalbą.
+Distributed on MIT license terms.	App		Platinama vadovaujantis MIT leidimais.
+humdinger, for German translation and GUI design tips.	App		humdinger’į, už vertimą į vokiečių kalbą ir už vaizdinės sąsajos rengimo patarimus.
+Lan72, for Ukrainian translation.	App		Lan72’ą, už vertimą į ukrainiečių kalbą.
+miqlas, for Hungarian translation and app icon.	App		miqlas, for Hungarian translation and app icon.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil’ą Hodgson’ą, už taisymo dėmenį Scintilla bei rengyklę SciTE.
+un_spacyar, for Spanish translation.	App		un_spacyar’ą, už vertimą į ispanų kalbą.
+zuMi, for toolbar icons.	App		zuMi’į, už įrankinės ženkliukus.
+Apply	AppPreferencesWindow		Pritaikyti
+Background	AppPreferencesWindow		Laukas
+Compact language menu	AppPreferencesWindow		Glaustas kalbų sąrašas
+Convert tabs to spaces	AppPreferencesWindow		Versti Tab’ą tarpeliais
+Editor	AppPreferencesWindow		Rengyklė
+Highlight braces	AppPreferencesWindow		Išryškinti sliaustus
+Highlight current line	AppPreferencesWindow		Išryškinti esamą eilutę
+Koder preferences	AppPreferencesWindow		Koder’io parankos
+Line	AppPreferencesWindow		Eilutė
+Mark overly long lines	AppPreferencesWindow		Žėmėti perilgas eilutes
+Only in actually indented lines	AppPreferencesWindow		Tik įtrauktąsias eilutes
+Revert	AppPreferencesWindow		Grąžinti
+Show full path in title	AppPreferencesWindow		Antraštėje rodyti pilną kelią
+Show indentation guides	AppPreferencesWindow		Rodyti gaires
+Show line numbers	AppPreferencesWindow		Rodyti eilučių skaičius
+Show toolbar	AppPreferencesWindow		Rodyti įrankinę
+Spaces per tab:	AppPreferencesWindow		Tarpelių per Tab’ą:
+Style	AppPreferencesWindow		Braižas
+Up to the next non-empty line	AppPreferencesWindow		Iki kitos netuščios eilutės
+Up to the next/previous non-empty line	AppPreferencesWindow		Iki kitos/ankstesnės netuščios eilutės
+[read-only]	EditorWindow		[tik skaitymui]
+About…	EditorWindow		Apie...
+Access denied	EditorWindow		Prieiga uždrausta
+Cancel	EditorWindow		Nutraukti
+Close	EditorWindow		Uždaryti
+Comment block	EditorWindow		Pastabų skiltis
+Comment line	EditorWindow		Pastabų eilutė
+Copy	EditorWindow		Nurašyti
+Cut	EditorWindow		Iškirpti
+Discard	EditorWindow		Atmesti
+Do nothing	EditorWindow		Nieko nedaryti
+Edit	EditorWindow		Taisa
+Error	EditorWindow		Klaida
+Failed to read file permissions.	EditorWindow		Nepavyko perskaityti bylos leidimų.
+File	EditorWindow		Byla
+File modified	EditorWindow		Byla pakeista
+Find/Replace…	EditorWindow		Rasti/Pakeisti…
+Go to line…	EditorWindow		Pereiti į eilutę…
+Help	EditorWindow		Pagalba
+Koder preferences…	EditorWindow		Koder’io parankos…
+Language	EditorWindow		Kalba
+Line endings	EditorWindow		Eilučių baigmės
+New	EditorWindow		Nauja
+OK	EditorWindow		Gerai
+Old Mac format	EditorWindow		Senasis Mac pavidalas
+Open	EditorWindow		Atidaryti
+Paste	EditorWindow		Įterpti
+Quit	EditorWindow		Baigti
+Reached the end of the document. No results found.	EditorWindow		Rašinys peržvelgtas iki galo. Radinių nėra.
+Redo	EditorWindow		Atkurti
+Reload	EditorWindow		Perkrauti
+Save	EditorWindow		Išsaugoti
+Save as…	EditorWindow		Išsaugoti kaip…
+Search	EditorWindow		Ieška
+Searching finished	EditorWindow		Ieška baigta
+Select all	EditorWindow		Žymėti viską
+Show line endings	EditorWindow		Rodyti eilučių baigmes
+Show white space	EditorWindow		Rodyti tarpų ženklus
+Special symbols	EditorWindow		Ypatingieji ženklai
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Byloje yra pakeitimų, bet byla tik skaitymui. Ką daryti?
+The file contains unsaved changes. What to do?	EditorWindow		Byloje yra neišsaugotų pakeitimų. Ką daryti?
+The file has been modified by another application. What to do?	EditorWindow		Byla pakeista kita priemone. Ką daryti?
+Undo	EditorWindow		Atšaukti
+Unix format	EditorWindow		Unix pavidalas
+Unsaved changes	EditorWindow		Neišsaugoti keitimai
+Untitled	EditorWindow		Bevardis
+View	EditorWindow		Vaizdas
+Warning	EditorWindow		Perspėjimas
+Windows format	EditorWindow		Windows pavidalas
+You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Neturite leidimų šios bylos taisymui. Rengyklė bus paleista tik skaitymui. 
+You don't have sufficient permissions to edit this file.	EditorWindow		Neturite pakankamai leidimų taisyti šią bylą.
+Direction	FindWindow		Kryptis
+Down	FindWindow		Žemyn
+Find	FindWindow		Rasti
+Find:	FindWindow		Rasti:
+Find/Replace	FindWindow		Rasti/Pakeisti
+In selection	FindWindow		Pažymėtame
+Match case	FindWindow		Paisyti raidžių dydžių
+Match entire words	FindWindow		Paisyti žodžių
+Replace	FindWindow		Pakeisti
+Replace all	FindWindow		Pakeisti viską
+Replace and find	FindWindow		Pakeisti ir rasti
+Replace:	FindWindow		Pakeisti:
+Up	FindWindow		Viršun
+Wrap around	FindWindow		Ratu
+Cancel	GoToLineWindow		Nutraukti
+Go to line	GoToLineWindow		Pereiti į eilutę
+Go to line:	GoToLineWindow		Pereiti į eilutę:
+OK	GoToLineWindow		Gerai
+Configuration file	Preferences		Sąrankos byla
+Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Nepavyko atidaryti sąrankos bylos, nes leidimai uždrausti. Paprastai tai reiškia, kad neturite leidimo skaityti savo nustatymų aplanko. Jeigu norite įkrauti savo asmeninius nustatymus, pasiaiškinkite savos OS aprašyme, kuriame aplanke yra tie nustatymai ir bandykite keisti to aplanko leidimus.
+Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Nepavyko atidaryti sąrankos bylos, nes leidimai uždrausti. Paprastai tai reiškia, kad neturite leidimo rašyti į savo nustatymų aplanką. Jeigu norite įkrauti savo asmeninius nustatymus, pasiaiškinkite savos OS aprašyme, kuriame aplanke yra tie nustatymai ir bandykite keisti to aplanko leidimus.
+Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Nepavyko atidaryti sąrankos bylos, nes nenurodytas kelias. Paprastai tai reiškia, kad tai yra skaitmeninės įrangos kūrėjo klaida. Nieko nepadarysite. Jūsų asmeninai nustatymai nebus įkrauti. Atleiskite.
+Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Nepavyko atidaryti sąrankos bylos, nes nenurodytas kelias. Paprastai tai reiškia, kad tai yra skaitmeninės įrangos kūrėjo klaida. Nieko nepadarysite. Jūsų asmeninai nustatymai nebus išsaugoti. Atleiskite.
+OK	Preferences		Gerai
+There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		Neturite pakankamai atminties sąrankos bylos įkrovimui. Jeigu norite įkrauti savo asmeninius nustatymus, bandykite uždaryti kitą kokią paleistą skaitmeninę įrangą ir perlesti Koder’į.
+There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		Neturite pakankamai atminties sąrankos bylos išsaugojimui. Jeigu norite išsaugoti savo asmeninius nustatymus, bandykite uždaryti kitą kokią paleistą skaitmeninę įrangą ir bandykite vėl.
+Cancel	QuitAlert		Nutraukti
+Don't save	QuitAlert		Neišsaugoti
+Save all	QuitAlert		Išsaugoti viską
+Save selected	QuitAlert		Išsaugoti pažymėtuosius
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Čia yra neišsaugotų pakeitimų.\nPažymėkite bylas išsaugojimui.
+Unsaved files	QuitAlert		Neišsaugotos bylos
+Koder	System name		Koder
