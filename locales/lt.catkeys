@@ -1,6 +1,6 @@
 1	English	x-vnd.KapiX-Koder	2285835744
 ArmanHayots, for Russian translation.	App		ArmanHayots’ą, už vertimą į rusų kalbą.
-Code editor for Haiku based on Scintilla editing component.	App		Haiku skaitmenų rengyklė naudoją Scintilla taisymo dėmenį.
+Code editor for Haiku based on Scintilla editing component.	App		Haiku skaitmenų rengyklė naudoja Scintilla taisymo dėmenį.
 damoklas, for Lithuanian translation.	App		damoklą, už vertimą į lietuvių kalbą.
 Distributed on MIT license terms.	App		Platinama vadovaujantis MIT leidimais.
 humdinger, for German translation and GUI design tips.	App		humdinger’į, už vertimą į vokiečių kalbą ir už vaizdinės sąsajos rengimo patarimus.
@@ -14,12 +14,12 @@ Background	AppPreferencesWindow		Laukas
 Compact language menu	AppPreferencesWindow		Glaustas kalbų sąrašas
 Convert tabs to spaces	AppPreferencesWindow		Versti Tab’ą tarpeliais
 Editor	AppPreferencesWindow		Rengyklė
-Highlight braces	AppPreferencesWindow		Išryškinti sliaustus
+Highlight braces	AppPreferencesWindow		Išryškinti skliaustus
 Highlight current line	AppPreferencesWindow		Išryškinti esamą eilutę
 Koder preferences	AppPreferencesWindow		Koder’io parankos
 Line	AppPreferencesWindow		Eilutė
-Mark overly long lines	AppPreferencesWindow		Žėmėti perilgas eilutes
-Max. characters per line:	AppPreferencesWindow		Max. characters per line:
+Mark overly long lines	AppPreferencesWindow		Žymėti perilgas eilutes
+Max. characters per line:	AppPreferencesWindow		Daugiausia ženklų eilutėje:
 Only in actually indented lines	AppPreferencesWindow		Tik įtrauktąsias eilutes
 Revert	AppPreferencesWindow		Grąžinti
 Show full path in title	AppPreferencesWindow		Antraštėje rodyti pilną kelią
@@ -87,8 +87,8 @@ Find	FindWindow		Rasti
 Find:	FindWindow		Rasti:
 Find/Replace	FindWindow		Rasti/Pakeisti
 In selection	FindWindow		Pažymėtame
-Match case	FindWindow		Paisyti raidžių dydžių
-Match entire words	FindWindow		Paisyti žodžių
+Match case	FindWindow		Paisyti raidžių dydžio
+Match entire words	FindWindow		Paisyti ištisų žodžių
 Replace	FindWindow		Pakeisti
 Replace all	FindWindow		Pakeisti viską
 Replace and find	FindWindow		Pakeisti ir rasti
