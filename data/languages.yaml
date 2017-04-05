@@ -6,7 +6,7 @@ awk:
     extensions: [ awk ]
 bash:
     name: Bash
-    extensions: [ sh, bash, bsh, csh, recipe ]
+    extensions: [ sh, bash, bsh, csh, ksh, recipe, configure ]
 c:
     name: C
     extensions: [ c ]
@@ -22,9 +22,18 @@ diff:
 makefile:
     name: Makefile
     extensions: [ mk, mak, Makefile, Makefile.am, makefile ]
+perl:
+    name: Perl
+    extensions: [ pl, pm, pod ]
 python:
     name: Python
     extensions: [ py, pyw ]
+ruby:
+    name: Ruby
+    extensions: [ rb, rbw, rake, rjs, Rakefile ]
+rust:
+    name: Rust
+    extensions: [ rs ]
 xml:
     name: XML
     extensions: [ xml, xaml, xsl, xslt, xsd, xul, kml, svg, mxml, xsml, wsdl,

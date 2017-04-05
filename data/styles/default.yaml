@@ -37,17 +37,12 @@ Line number:
     foreground: "#808080"
     background: "#e4e4e4"
 Smart highlight:
-    id: 29
     background: "#a3a3a3"
 Find mark:
-    id: 31
     background: "#0000ff"
 Incremental highlight:
-    id: 28
     background: "#00ffff"
 Tags match highlight:
-    id: 27
     background: "#00ffff"
 Tags attributes:
-    id: 26
     background: "#ffffff"

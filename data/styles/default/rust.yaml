@@ -1,0 +1,101 @@
+# Rust
+Preprocessor:
+    id: 19
+    foreground: "#7f7f9f"
+    background: "#ffffff"
+    style: [ bold ]
+Default:
+    id: 0
+    foreground: "#000000"
+    background: "#ffffff"
+Error:
+    id: 20
+    foreground: "#0000ff"
+    background: "#ffffff"
+Keyword 1:
+    id: 6
+    foreground: "#7f0055"
+    background: "#ffffff"
+    style: [ bold ]
+Keyword 2:
+    id: 7
+    foreground: "#7f0055"
+    background: "#ffffff"
+    style: [ bold ]
+Keyword 3:
+    id: 8
+    foreground: "#7f0055"
+    background: "#ffffff"
+    style: [ bold ]
+Keyword 4:
+    id: 9
+    foreground: "#7f0055"
+    background: "#ffffff"
+    style: [ bold ]
+Keyword 5:
+    id: 10
+    foreground: "#7f0055"
+    background: "#ffffff"
+    style: [ bold ]
+Keyword 6:
+    id: 11
+    foreground: "#7f0055"
+    background: "#ffffff"
+    style: [ bold ]
+Keyword 7:
+    id: 12
+    foreground: "#7f0055"
+    background: "#ffffff"
+    style: [ bold ]
+Number:
+    id: 5
+    foreground: "#af0f91"
+    background: "#ffffff"
+String:
+    id: 6
+    foreground: "#2a00ff"
+    background: "#ffffff"
+Raw string:
+    id: 14
+    foreground: "#2a00ff"
+    background: "#ffffff"
+Byte string:
+    id: 21
+    foreground: "#2a00ff"
+    background: "#ffffff"
+Raw byte string:
+    id: 22
+    foreground: "#2a00ff"
+    background: "#ffffff"
+Character:
+    id: 15
+    foreground: "#2a00ff"
+    background: "#ffffff"
+Byte character:
+    id: 23
+    foreground: "#2a00ff"
+    background: "#ffffff"
+Operator:
+    id: 16
+    foreground: "#000000"
+    background: "#ffffff"
+Lifetime:
+    id: 18
+    foreground: "#646464"
+    background: "#ffffff"
+Comment:
+    id: 1
+    foreground: "#3f7f5f"
+    background: "#ffffff"
+Comment line:
+    id: 2
+    foreground: "#3f7f5f"
+    background: "#ffffff"
+Comment doc:
+    id: 3
+    foreground: "#3f5fbf"
+    background: "#ffffff"
+Comment line doc:
+    id: 4
+    foreground: "#3f5fbf"
+    background: "#ffffff"
