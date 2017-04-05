@@ -52,7 +52,7 @@ Number:
     foreground: "#af0f91"
     background: "#ffffff"
 String:
-    id: 6
+    id: 13
     foreground: "#2a00ff"
     background: "#ffffff"
 Raw string:
