@@ -17,7 +17,7 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 
 ## History
 
-0.2.0 - *TBD*
+0.2.0 - *15-04-2017*
 
 * Add icon.
 * Add translations.
