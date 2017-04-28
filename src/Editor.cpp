@@ -33,6 +33,9 @@ Editor::NotificationReceived(SCNotification* notification)
 		case SCN_SAVEPOINTREACHED:
 			window_msg.SendMessage(EDITOR_SAVEPOINT_REACHED);
 		break;
+		case SCN_MODIFIED:
+			window_msg.SendMessage(EDITOR_MODIFIED);
+		break;
 		case SCN_CHARADDED: {
 			char ch = static_cast<char>(notification->ch);
 			_MaintainIndentation(ch);
@@ -40,11 +43,22 @@ Editor::NotificationReceived(SCNotification* notification)
 		case SCN_UPDATEUI:
 			_BraceHighlight();
 			_UpdateLineNumberWidth();
+			window_msg.SendMessage(EDITOR_UPDATEUI);
 		break;
 		case SCN_MARGINCLICK:
 			_MarginClick(notification->margin, notification->position);
 		break;
 	}
+}
+
+
+void
+Editor::ContextMenu(BPoint point)
+{
+	BMessenger msgr(nullptr, (BLooper*) Window());
+	BMessage msg(EDITOR_CONTEXT_MENU);
+	msg.AddPoint("where", point);
+	msgr.SendMessage(&msg);
 }
 
 

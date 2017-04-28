@@ -18,7 +18,10 @@ class Preferences;
 
 enum {
 	EDITOR_SAVEPOINT_LEFT		= 'svpl',
-	EDITOR_SAVEPOINT_REACHED	= 'svpr'
+	EDITOR_SAVEPOINT_REACHED	= 'svpr',
+	EDITOR_MODIFIED				= 'modi',
+	EDITOR_CONTEXT_MENU			= 'conm',
+	EDITOR_UPDATEUI				= 'updu'
 };
 
 
@@ -32,6 +35,7 @@ public:
 						Editor();
 
 	void				NotificationReceived(SCNotification* notification);
+	void				ContextMenu(BPoint point);
 
 	void				SetPreferences(Preferences* preferences);
 

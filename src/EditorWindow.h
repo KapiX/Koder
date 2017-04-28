@@ -24,6 +24,7 @@ class BFilePanel;
 class BMenu;
 class BMenuBar;
 class BPath;
+class BPopUpMenu;
 class Editor;
 class GoToLineWindow;
 class Preferences;
@@ -51,8 +52,8 @@ enum {
 	MAINMENU_EDIT_CONVERTEOLS_WINDOWS	= 'cewi',
 	MAINMENU_EDIT_CONVERTEOLS_MAC		= 'cema',
 
-	MAINMENU_EDIT_COMMENTLINE			= 'cmtl',
-	MAINMENU_EDIT_COMMENTBLOCK			= 'cmtb',
+	EDIT_COMMENTLINE					= 'cmtl',
+	EDIT_COMMENTBLOCK					= 'cmtb',
 
 	MAINMENU_EDIT_FILE_PREFERENCES		= 'mefp',
 	MAINMENU_EDIT_APP_PREFERENCES		= 'meap',
@@ -102,6 +103,7 @@ private:
 		SAVE	= 2
 	};
 			BMenuBar*		fMainMenu;
+			BPopUpMenu*		fContextMenu;
 			BPath*			fOpenedFilePath;
 			BMimeType		fOpenedFileMimeType;
 			time_t			fOpenedFileModificationTime;
@@ -134,6 +136,7 @@ private:
 			void			_SetLanguage(std::string lang);
 			void			_SetLanguageByFilename(const char* filename);
 			void			_SyncWithPreferences();
+			void			_SyncEditMenus();
 			int32			_ShowModifiedAlert();
 			void			_Save();
 };

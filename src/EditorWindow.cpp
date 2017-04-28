@@ -23,6 +23,7 @@
 #include <NodeMonitor.h>
 #include <ObjectList.h>
 #include <Path.h>
+#include <PopUpMenu.h>
 #include <Roster.h>
 #include <String.h>
 #include <ToolBar.h>
@@ -94,8 +95,8 @@ EditorWindow::EditorWindow()
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Select all"), B_SELECT_ALL, 'A')
 			.AddSeparator()
-			.AddItem(B_TRANSLATE("Comment line"), MAINMENU_EDIT_COMMENTLINE, '/')
-			.AddItem(B_TRANSLATE("Comment block"), MAINMENU_EDIT_COMMENTBLOCK, '/', B_SHIFT_KEY)
+			.AddItem(B_TRANSLATE("Comment line"), EDIT_COMMENTLINE, '/')
+			.AddItem(B_TRANSLATE("Comment block"), EDIT_COMMENTBLOCK, '/', B_SHIFT_KEY)
 			.AddSeparator()
 			.AddMenu(B_TRANSLATE("Line endings"))
 				.AddItem(B_TRANSLATE("Unix format"), MAINMENU_EDIT_CONVERTEOLS_UNIX)
@@ -127,6 +128,21 @@ EditorWindow::EditorWindow()
 
 	fLanguageMenu = fMainMenu->FindItem(MAINMENU_LANGUAGE)->Menu();
 	_PopulateLanguageMenu();
+
+	fContextMenu = new BPopUpMenu("ContextMenu", false, false);
+	BLayoutBuilder::Menu<>(fContextMenu)
+		.AddItem(B_TRANSLATE("Undo"), B_UNDO, 'Z')
+		.AddItem(B_TRANSLATE("Redo"), B_REDO, 'Y')
+		.AddSeparator()
+		.AddItem(B_TRANSLATE("Cut"), B_CUT, 'X')
+		.AddItem(B_TRANSLATE("Copy"), B_COPY, 'C')
+		.AddItem(B_TRANSLATE("Paste"), B_PASTE, 'V')
+		.AddSeparator()
+		.AddItem(B_TRANSLATE("Select all"), B_SELECT_ALL, 'A')
+		.AddSeparator()
+		.AddItem(B_TRANSLATE("Comment line"), EDIT_COMMENTLINE, '/')
+		.AddItem(B_TRANSLATE("Comment block"), EDIT_COMMENTBLOCK, '/', B_SHIFT_KEY);
+	fContextMenu->SetTargetForItems(*windowMessenger);
 
 	fEditor = new Editor();
 	fEditor->SetPreferences(fPreferences);
@@ -414,12 +430,12 @@ EditorWindow::MessageReceived(BMessage* message)
 		case MAINMENU_FILE_QUIT: {
 			be_app->PostMessage(B_QUIT_REQUESTED);
 		} break;
-		case MAINMENU_EDIT_COMMENTLINE: {
+		case EDIT_COMMENTLINE: {
 			Sci_Position start = fEditor->SendMessage(SCI_GETSELECTIONSTART, 0, 0);
 			Sci_Position end = fEditor->SendMessage(SCI_GETSELECTIONEND, 0, 0);
 			fEditor->CommentLine(start, end);
 		} break;
-		case MAINMENU_EDIT_COMMENTBLOCK: {
+		case EDIT_COMMENTBLOCK: {
 			Sci_Position start = fEditor->SendMessage(SCI_GETSELECTIONSTART, 0, 0);
 			Sci_Position end = fEditor->SendMessage(SCI_GETSELECTIONEND, 0, 0);
 			fEditor->CommentBlock(start, end);
@@ -487,30 +503,45 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case B_CUT: {
 			fEditor->SendMessage(SCI_CUT, 0, 0);
+			_SyncEditMenus();
 		} break;
 		case B_COPY: {
 			fEditor->SendMessage(SCI_COPY, 0, 0);
 		} break;
 		case B_PASTE: {
 			fEditor->SendMessage(SCI_PASTE, 0, 0);
+			_SyncEditMenus();
 		} break;
 		case B_SELECT_ALL: {
 			fEditor->SendMessage(SCI_SELECTALL, 0, 0);
 		} break;
 		case B_UNDO: {
 			fEditor->SendMessage(SCI_UNDO, 0, 0);
-			// TODO: disable menuitem
+			_SyncEditMenus();
 		} break;
 		case B_REDO: {
 			fEditor->SendMessage(SCI_REDO, 0, 0);
+			_SyncEditMenus();
 		} break;
 		case EDITOR_SAVEPOINT_LEFT: {
 			fModified = true;
 			RefreshTitle();
+			fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
 		} break;
 		case EDITOR_SAVEPOINT_REACHED: {
 			fModified = false;
 			RefreshTitle();
+			fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
+		} break;
+		case EDITOR_UPDATEUI: {
+			_SyncEditMenus();
+		} break;
+		case EDITOR_CONTEXT_MENU: {
+			BPoint where;
+			if(message->FindPoint("where", &where) == B_OK) {
+				where = ConvertToScreen(where);
+				fContextMenu->Go(where, true, true);
+			}
 		} break;
 		case B_ABOUT_REQUESTED:
 			be_app->PostMessage(message);
@@ -858,8 +889,11 @@ EditorWindow::_SetLanguage(std::string lang)
 	Styler::ApplyGlobal(fEditor, fPreferences->fStyle.c_str());
 	Styler::ApplyLanguage(fEditor, fPreferences->fStyle.c_str(), lang.c_str());
 
-	fMainMenu->FindItem(MAINMENU_EDIT_COMMENTLINE)->SetEnabled(fEditor->CanCommentLine());
-	fMainMenu->FindItem(MAINMENU_EDIT_COMMENTBLOCK)->SetEnabled(fEditor->CanCommentBlock());
+	fMainMenu->FindItem(EDIT_COMMENTLINE)->SetEnabled(fEditor->CanCommentLine());
+	fMainMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(fEditor->CanCommentBlock());
+
+	fContextMenu->FindItem(EDIT_COMMENTLINE)->SetEnabled(fEditor->CanCommentLine());
+	fContextMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(fEditor->CanCommentBlock());
 }
 
 
@@ -938,6 +972,30 @@ EditorWindow::_SyncWithPreferences()
 
 		// TODO Do this only if language menu preference has changed
 		_PopulateLanguageMenu();
+	}
+}
+
+
+void
+EditorWindow::_SyncEditMenus()
+{
+	bool canUndo = fEditor->SendMessage(SCI_CANUNDO, 0, 0);
+	bool canRedo = fEditor->SendMessage(SCI_CANREDO, 0, 0);
+	bool canPaste = fEditor->SendMessage(SCI_CANPASTE, 0, 0);
+	bool selectionEmpty = fEditor->SendMessage(SCI_GETSELECTIONEMPTY, 0, 0);
+	fMainMenu->FindItem(B_UNDO)->SetEnabled(canUndo);
+	fMainMenu->FindItem(B_REDO)->SetEnabled(canRedo);
+	fMainMenu->FindItem(B_PASTE)->SetEnabled(canPaste);
+	fMainMenu->FindItem(B_CUT)->SetEnabled(!selectionEmpty);
+	fMainMenu->FindItem(B_COPY)->SetEnabled(!selectionEmpty);
+	fContextMenu->FindItem(B_UNDO)->SetEnabled(canUndo);
+	fContextMenu->FindItem(B_REDO)->SetEnabled(canRedo);
+	fContextMenu->FindItem(B_PASTE)->SetEnabled(canPaste);
+	fContextMenu->FindItem(B_CUT)->SetEnabled(!selectionEmpty);
+	fContextMenu->FindItem(B_COPY)->SetEnabled(!selectionEmpty);
+	if(fEditor->CanCommentBlock()) {
+		fMainMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(!selectionEmpty);
+		fContextMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(!selectionEmpty);
 	}
 }
 
