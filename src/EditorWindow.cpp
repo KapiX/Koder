@@ -111,6 +111,7 @@ EditorWindow::EditorWindow()
 				.AddItem(B_TRANSLATE("Show white space"), MAINMENU_VIEW_SPECIAL_WHITESPACE)
 				.AddItem(B_TRANSLATE("Show line endings"), MAINMENU_VIEW_SPECIAL_EOL)
 			.End()
+			.AddItem(B_TRANSLATE("Show toolbar"), MAINMENU_VIEW_TOOLBAR)
 		.End()
 		.AddMenu(B_TRANSLATE("Search"))
 			.AddItem(B_TRANSLATE("Find/Replace" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_FINDREPLACE, 'F')
@@ -460,6 +461,14 @@ EditorWindow::MessageReceived(BMessage* message)
 			fPreferences->fEOLVisible = !fPreferences->fEOLVisible;
 			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fEOLVisible);
 			fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
+		} break;
+		case MAINMENU_VIEW_TOOLBAR: {
+			fPreferences->fToolbar = !fPreferences->fToolbar;
+			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fToolbar);
+			if(fPreferences->fToolbar == true)
+				fToolbar->Show();
+			else
+				fToolbar->Hide();
 		} break;
 		case MAINMENU_LANGUAGE: {
 			_SetLanguage(message->GetString("lang", "text"));
@@ -875,6 +884,7 @@ EditorWindow::_SyncWithPreferences()
 	if(fPreferences != nullptr) {
 		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
 		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
+		fMainMenu->FindItem(MAINMENU_VIEW_TOOLBAR)->SetMarked(fPreferences->fToolbar);
 
 		// reapply styles
 		_SetLanguage(fCurrentLanguage);
