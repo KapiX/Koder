@@ -194,8 +194,6 @@ EditorWindow::EditorWindow()
 	fEditor->SendMessage(SCI_USEPOPUP, 0, 0);
 
 	Styler::ApplyGlobal(fEditor, fPreferences->fStyle.c_str());
-	fEditor->SendMessage(SCI_STYLESETFORE, 253, 0xFF00000);
-	fEditor->SendMessage(SCI_STYLESETFORE, 254, 0x00000FF);
 
 	RefreshTitle();
 }
