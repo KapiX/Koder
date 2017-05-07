@@ -7,6 +7,7 @@
 
 #include <yaml.h>
 
+#include <Alert.h>
 #include <Directory.h>
 #include <FindDirectory.h>
 #include <Path.h>
@@ -17,29 +18,48 @@
 #include "Utils.h"
 
 
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "Styler"
+
+
 /* static */ void
 Styler::ApplyGlobal(Editor* editor, const char* style)
 {
+	static bool alertShown = false;
+	bool found = false;
 	BPath dataPath;
 	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
 	try {
 		_ApplyGlobal(editor, style, dataPath);
+		found = true;
 	} catch (YAML::BadFile &) {
 	}
 	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
 	try {
 		_ApplyGlobal(editor, style, dataPath);
+		found = true;
 	} catch (YAML::BadFile &) {
 	}
 	find_directory(B_SYSTEM_NONPACKAGED_DATA_DIRECTORY, &dataPath);
 	try {
 		_ApplyGlobal(editor, style, dataPath);
+		found = true;
 	} catch (YAML::BadFile &) {
 	}
 	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
 	try {
 		_ApplyGlobal(editor, style, dataPath);
+		found = true;
 	} catch (YAML::BadFile &) {
+	}
+	if(found == false && alertShown == false) {
+		alertShown = true;
+		BAlert* alert = new BAlert(B_TRANSLATE("Style files"),
+			B_TRANSLATE("Couldn't find style files. Make sure you have them "
+				"installed in one of your data directories."),
+				B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL,
+				B_WARNING_ALERT);
+		alert->Go();
 	}
 }
 
