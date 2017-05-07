@@ -154,7 +154,8 @@ Languages::_LoadLanguages(const BPath& path)
 		for(auto extension : extensions) {
 			sExtensions[extension] = name;
 		}
-		sLanguages.push_back(name);
+		if(std::find(sLanguages.begin(), sLanguages.end(), name) == sLanguages.end())
+			sLanguages.push_back(name);
 		sMenuItems[name] = menuitem;
 	}
 }
