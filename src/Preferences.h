@@ -36,6 +36,7 @@ public:
 	bool			fLineLimitShow;
 	uint8			fLineLimitMode;
 	uint32			fLineLimitColumn;
+	bool			fWrapLines;
 	bool			fBracesHighlighting;
 	bool			fFullPathInTitle;
 	bool			fCompactLangMenu;

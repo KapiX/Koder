@@ -113,6 +113,7 @@ EditorWindow::EditorWindow()
 				.AddItem(B_TRANSLATE("Show line endings"), MAINMENU_VIEW_SPECIAL_EOL)
 			.End()
 			.AddItem(B_TRANSLATE("Show toolbar"), MAINMENU_VIEW_TOOLBAR)
+			.AddItem(B_TRANSLATE("Wrap lines"), MAINMENU_VIEW_WRAPLINES)
 		.End()
 		.AddMenu(B_TRANSLATE("Search"))
 			.AddItem(B_TRANSLATE("Find/Replace" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_FINDREPLACE, 'F')
@@ -190,6 +191,7 @@ EditorWindow::EditorWindow()
 	fEditor->SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true, 0);
 	fEditor->SendMessage(SCI_SETIMEINTERACTION, SC_IME_INLINE, 0);
 	fEditor->SendMessage(SCI_SETSCROLLWIDTHTRACKING, true, 0);
+	fEditor->SendMessage(SCI_SETWRAPVISUALFLAGS, SC_WRAPVISUALFLAG_MARGIN, 0);
 
 	fEditor->SendMessage(SCI_USEPOPUP, 0, 0);
 
@@ -483,6 +485,12 @@ EditorWindow::MessageReceived(BMessage* message)
 				fToolbar->Show();
 			else
 				fToolbar->Hide();
+		} break;
+		case MAINMENU_VIEW_WRAPLINES: {
+			fPreferences->fWrapLines = !fPreferences->fWrapLines;
+			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fWrapLines);
+			fEditor->SendMessage(SCI_SETWRAPMODE, fPreferences->fWrapLines ?
+				SC_WRAP_WORD : SC_WRAP_NONE, 0);
 		} break;
 		case MAINMENU_LANGUAGE: {
 			_SetLanguage(message->GetString("lang", "text"));
@@ -917,6 +925,7 @@ EditorWindow::_SyncWithPreferences()
 		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
 		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
 		fMainMenu->FindItem(MAINMENU_VIEW_TOOLBAR)->SetMarked(fPreferences->fToolbar);
+		fMainMenu->FindItem(MAINMENU_VIEW_WRAPLINES)->SetMarked(fPreferences->fWrapLines);
 
 		// reapply styles
 		_SetLanguage(fCurrentLanguage);
@@ -944,6 +953,12 @@ EditorWindow::_SyncWithPreferences()
 			fEditor->SendMessage(SCI_SETINDENTATIONGUIDES, fPreferences->fIndentGuidesMode, 0);
 		} else {
 			fEditor->SendMessage(SCI_SETINDENTATIONGUIDES, 0, 0);
+		}
+
+		if(fPreferences->fWrapLines == true) {
+			fEditor->SendMessage(SCI_SETWRAPMODE, SC_WRAP_WORD, 0);
+		} else {
+			fEditor->SendMessage(SCI_SETWRAPMODE, SC_WRAP_NONE, 0);
 		}
 
 		fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::FOLD, SC_MARGIN_SYMBOL);
