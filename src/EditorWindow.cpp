@@ -79,6 +79,7 @@ EditorWindow::EditorWindow()
 			.AddItem(B_TRANSLATE("New"), MAINMENU_FILE_NEW, 'N')
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Open"), MAINMENU_FILE_OPEN, 'O')
+			.AddItem(B_TRANSLATE("Reload"), MAINMENU_FILE_RELOAD)
 			.AddItem(B_TRANSLATE("Save"), MAINMENU_FILE_SAVE, 'S')
 			.AddItem(B_TRANSLATE("Save as" B_UTF8_ELLIPSIS), MAINMENU_FILE_SAVEAS)
 			.AddSeparator()
@@ -410,6 +411,20 @@ EditorWindow::MessageReceived(BMessage* message)
 			}
 			fOpenPanel->Show();
 		} break;
+		case MAINMENU_FILE_RELOAD: {
+			BAlert* alert = new BAlert(B_TRANSLATE("Unsaved changes"),
+				B_TRANSLATE("Your changes will be lost."),
+				B_TRANSLATE("Cancel"), B_TRANSLATE("Reload"), nullptr,
+				B_WIDTH_AS_USUAL, B_EVEN_SPACING, B_STOP_ALERT);
+			alert->SetShortcut(0, B_ESCAPE);
+			int32 result = alert->Go();
+			switch(result) {
+			case 0: break;
+			case 1:
+				_ReloadFile();
+			break;
+			}
+		} break;
 		case MAINMENU_FILE_SAVE: {
 			if(fModified == true) {
 				if(fReadOnly == true) {
@@ -532,11 +547,13 @@ EditorWindow::MessageReceived(BMessage* message)
 		case EDITOR_SAVEPOINT_LEFT: {
 			fModified = true;
 			RefreshTitle();
+			fMainMenu->FindItem(MAINMENU_FILE_RELOAD)->SetEnabled(fModified);
 			fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
 		} break;
 		case EDITOR_SAVEPOINT_REACHED: {
 			fModified = false;
 			RefreshTitle();
+			fMainMenu->FindItem(MAINMENU_FILE_RELOAD)->SetEnabled(fModified);
 			fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
 		} break;
 		case EDITOR_UPDATEUI: {
@@ -868,6 +885,8 @@ EditorWindow::_PopulateLanguageMenu()
 void
 EditorWindow::_ReloadFile(entry_ref* ref)
 {
+	if(fOpenedFilePath == nullptr) return;
+
 	if(ref == nullptr) {
 		// reload file from current location
 		entry_ref e;

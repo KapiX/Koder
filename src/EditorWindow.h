@@ -44,6 +44,7 @@ const uint32 SAVE_FILE				= 'SVFL';
 enum {
 	MAINMENU_FILE_NEW					= 'mnew',
 	MAINMENU_FILE_OPEN					= 'mopn',
+	MAINMENU_FILE_RELOAD				= 'mrld',
 	MAINMENU_FILE_SAVE					= 'msav',
 	MAINMENU_FILE_SAVEAS				= 'msva',
 	MAINMENU_FILE_QUIT					= 'mqut',
