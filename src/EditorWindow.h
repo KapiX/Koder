@@ -69,6 +69,8 @@ enum {
 
 	MAINMENU_LANGUAGE					= 'ml00',
 
+	TOOLBAR_SPECIAL_SYMBOLS				= 'tlss',
+
 	FILE_OPEN							= 'flop',
 	FILE_SAVE							= 'flsv',
 

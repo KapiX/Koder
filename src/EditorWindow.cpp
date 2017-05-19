@@ -10,6 +10,7 @@
 #include <Alert.h>
 #include <Application.h>
 #include <Bitmap.h>
+#include <Button.h>
 #include <Catalog.h>
 #include <Entry.h>
 #include <File.h>
@@ -78,7 +79,7 @@ EditorWindow::EditorWindow()
 		.AddMenu(B_TRANSLATE("File"))
 			.AddItem(B_TRANSLATE("New"), MAINMENU_FILE_NEW, 'N')
 			.AddSeparator()
-			.AddItem(B_TRANSLATE("Open"), MAINMENU_FILE_OPEN, 'O')
+			.AddItem(B_TRANSLATE("Open" B_UTF8_ELLIPSIS), MAINMENU_FILE_OPEN, 'O')
 			.AddItem(B_TRANSLATE("Reload"), MAINMENU_FILE_RELOAD)
 			.AddItem(B_TRANSLATE("Save"), MAINMENU_FILE_SAVE, 'S')
 			.AddItem(B_TRANSLATE("Save as" B_UTF8_ELLIPSIS), MAINMENU_FILE_SAVEAS)
@@ -152,28 +153,26 @@ EditorWindow::EditorWindow()
 	BBitmap icon(BRect(0, 0, 23, 23), 0, B_RGBA32);
 	fToolbar = new BToolBar(B_HORIZONTAL);
 	GetVectorIcon("open", &icon);
-	fToolbar->AddAction(MAINMENU_FILE_OPEN, this, &icon);
+	fToolbar->AddAction(MAINMENU_FILE_OPEN, this, &icon, B_TRANSLATE("Open" B_UTF8_ELLIPSIS));
+	GetVectorIcon("reload", &icon);
+	fToolbar->AddAction(MAINMENU_FILE_RELOAD, this, &icon, B_TRANSLATE("Reload"));
 	GetVectorIcon("save", &icon);
-	fToolbar->AddAction(MAINMENU_FILE_SAVE, this, &icon);
+	fToolbar->AddAction(MAINMENU_FILE_SAVE, this, &icon, B_TRANSLATE("Save"));
 	GetVectorIcon("save as", &icon);
-	fToolbar->AddAction(MAINMENU_FILE_SAVEAS, this, &icon);
+	fToolbar->AddAction(MAINMENU_FILE_SAVEAS, this, &icon, B_TRANSLATE("Save as" B_UTF8_ELLIPSIS));
 	fToolbar->AddSeparator();
 	GetVectorIcon("undo", &icon);
-	fToolbar->AddAction(B_UNDO, this, &icon);
+	fToolbar->AddAction(B_UNDO, this, &icon, B_TRANSLATE("Undo"));
 	GetVectorIcon("redo", &icon);
-	fToolbar->AddAction(B_REDO, this, &icon);
+	fToolbar->AddAction(B_REDO, this, &icon, B_TRANSLATE("Redo"));
 	fToolbar->AddSeparator();
-	GetVectorIcon("cut", &icon);
-	fToolbar->AddAction(B_CUT, this, &icon);
-	GetVectorIcon("copy", &icon);
-	fToolbar->AddAction(B_COPY, this, &icon);
-	GetVectorIcon("paste", &icon);
-	fToolbar->AddAction(B_PASTE, this, &icon);
-	GetVectorIcon("select all", &icon);
-	fToolbar->AddAction(B_SELECT_ALL, this, &icon);
+	GetVectorIcon("whitespace", &icon);
+	fToolbar->AddAction(TOOLBAR_SPECIAL_SYMBOLS, this, &icon, B_TRANSLATE("Special symbols"), nullptr, true);
 	fToolbar->AddSeparator();
+	GetVectorIcon("preferences", &icon);
+	fToolbar->AddAction(MAINMENU_EDIT_APP_PREFERENCES, this, &icon, B_TRANSLATE("Koder preferences" B_UTF8_ELLIPSIS));
 	GetVectorIcon("find", &icon);
-	fToolbar->AddAction(MAINMENU_SEARCH_FINDREPLACE, this, &icon);
+	fToolbar->AddAction(MAINMENU_SEARCH_FINDREPLACE, this, &icon, B_TRANSLATE("Find/Replace" B_UTF8_ELLIPSIS));
 	fToolbar->AddGlue();
 
 	BGroupLayout *layout = new BGroupLayout(B_VERTICAL, 0);
@@ -487,11 +486,15 @@ EditorWindow::MessageReceived(BMessage* message)
 			fPreferences->fWhiteSpaceVisible = !fPreferences->fWhiteSpaceVisible;
 			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fWhiteSpaceVisible);
 			fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
+			bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
+			fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, pressed);
 		} break;
 		case MAINMENU_VIEW_SPECIAL_EOL: {
 			fPreferences->fEOLVisible = !fPreferences->fEOLVisible;
 			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fEOLVisible);
 			fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
+			bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
+			fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, pressed);
 		} break;
 		case MAINMENU_VIEW_TOOLBAR: {
 			fPreferences->fToolbar = !fPreferences->fToolbar;
@@ -509,6 +512,21 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case MAINMENU_LANGUAGE: {
 			_SetLanguage(message->GetString("lang", "text"));
+		} break;
+		case TOOLBAR_SPECIAL_SYMBOLS: {
+			bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
+			if(pressed == true) {
+				fPreferences->fWhiteSpaceVisible = false;
+				fPreferences->fEOLVisible = false;
+			} else {
+				fPreferences->fWhiteSpaceVisible = true;
+				fPreferences->fEOLVisible = true;
+			}
+			fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
+			fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
+			fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
+			fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
+			fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, !pressed);
 		} break;
 		case B_SAVE_REQUESTED: {
 			entry_ref ref;
@@ -549,12 +567,16 @@ EditorWindow::MessageReceived(BMessage* message)
 			RefreshTitle();
 			fMainMenu->FindItem(MAINMENU_FILE_RELOAD)->SetEnabled(fModified);
 			fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
+			fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, fModified);
+			fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, fModified);
 		} break;
 		case EDITOR_SAVEPOINT_REACHED: {
 			fModified = false;
 			RefreshTitle();
 			fMainMenu->FindItem(MAINMENU_FILE_RELOAD)->SetEnabled(fModified);
 			fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
+			fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, fModified);
+			fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, fModified);
 		} break;
 		case EDITOR_UPDATEUI: {
 			_SyncEditMenus();
@@ -941,6 +963,8 @@ void
 EditorWindow::_SyncWithPreferences()
 {
 	if(fPreferences != nullptr) {
+		bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
+		fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, pressed);
 		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
 		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
 		fMainMenu->FindItem(MAINMENU_VIEW_TOOLBAR)->SetMarked(fPreferences->fToolbar);
@@ -1025,6 +1049,8 @@ EditorWindow::_SyncEditMenus()
 	fContextMenu->FindItem(B_PASTE)->SetEnabled(canPaste);
 	fContextMenu->FindItem(B_CUT)->SetEnabled(!selectionEmpty);
 	fContextMenu->FindItem(B_COPY)->SetEnabled(!selectionEmpty);
+	fToolbar->SetActionEnabled(B_UNDO, canUndo);
+	fToolbar->SetActionEnabled(B_REDO, canRedo);
 	if(fEditor->CanCommentBlock()) {
 		fMainMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(!selectionEmpty);
 		fContextMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(!selectionEmpty);
