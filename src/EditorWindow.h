@@ -81,7 +81,7 @@ enum {
 
 class EditorWindow : public BWindow {
 public:
-							EditorWindow();
+							EditorWindow(bool stagger = false);
 
 			void			New();
 			void			OpenFile(entry_ref* ref, Sci_Position line = -1, Sci_Position column = -1);
@@ -91,6 +91,7 @@ public:
 			bool			QuitRequested();
 			void			MessageReceived(BMessage* message);
 			void			WindowActivated(bool active);
+			void			FrameMoved(BPoint origin);
 
 			bool			IsModified() { return fModified; }
 			const char*		OpenedFilePath();

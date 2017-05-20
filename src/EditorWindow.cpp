@@ -48,10 +48,13 @@
 using BToolBar = BPrivate::BToolBar;
 
 
+const float kWindowStagger = 17.0f;
+
+
 Preferences* EditorWindow::fPreferences = nullptr;
 
 
-EditorWindow::EditorWindow()
+EditorWindow::EditorWindow(bool stagger)
 	:
 	BWindow(fPreferences->fWindowRect, gAppName, B_DOCUMENT_WINDOW, 0)
 {
@@ -70,8 +73,11 @@ EditorWindow::EditorWindow()
 
 	fCurrentLanguage = "text";
 
+	BMessage openMessage(B_REFS_RECEIVED);
+	openMessage.AddPointer("window", this);
 	BMessenger* windowMessenger = new BMessenger(this);
 	fOpenPanel = new BFilePanel(B_OPEN_PANEL, windowMessenger);
+	fOpenPanel->SetMessage(&openMessage);
 	fSavePanel = new BFilePanel(B_SAVE_PANEL, windowMessenger, nullptr, 0, false);
 
 	fMainMenu = new BMenuBar("MainMenu");
@@ -198,13 +204,19 @@ EditorWindow::EditorWindow()
 	Styler::ApplyGlobal(fEditor, fPreferences->fStyle.c_str());
 
 	RefreshTitle();
+
+	if(stagger == true) {
+		MoveBy(kWindowStagger, kWindowStagger);
+	}
 }
 
 
 void
 EditorWindow::New()
 {
-	be_app->PostMessage(WINDOW_NEW);
+	BMessage message(WINDOW_NEW);
+	message.AddPointer("window", this);
+	be_app->PostMessage(&message);
 }
 
 
@@ -594,18 +606,10 @@ EditorWindow::MessageReceived(BMessage* message)
 		case B_REFS_RECEIVED: {
 			entry_ref ref;
 			if(message->FindRef("refs", &ref) == B_OK) {
-				if(fModified == true) {
-					int32 result = _ShowModifiedAlert();
-					switch(result) {
-					case ModifiedAlertResult::CANCEL: break;
-					case ModifiedAlertResult::SAVE:
-						_Save();
-					case ModifiedAlertResult::DISCARD:
-						OpenFile(&ref);
-					break;
-					}
-				} else {
+				if(fOpenedFilePath == nullptr && fModified == false) {
 					OpenFile(&ref);
+				} else {
+					be_app->PostMessage(message);
 				}
 			}
 		} break;
@@ -703,6 +707,13 @@ EditorWindow::WindowActivated(bool active)
 			fModifiedOutside = false;
 		}
 	}
+}
+
+
+void
+EditorWindow::FrameMoved(BPoint origin)
+{
+	fPreferences->fWindowRect.OffsetTo(origin);
 }
 
 

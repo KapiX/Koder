@@ -59,6 +59,8 @@ private:
 
 		EDITOR_STYLE			= 'styl',
 
+		ATTACH_WINDOWS			= 'atwn',
+
 		APPLY					= 'appl',
 		REVERT					= 'rvrt'
 	};
@@ -103,6 +105,8 @@ private:
 
 	BPopUpMenu*		fEditorStyleMenu;
 	BMenuField*		fEditorStyleMF;
+
+	BCheckBox*		fAttachNewWindowsCB;
 
 	BButton*		fApplyButton;
 	BButton*		fRevertButton;

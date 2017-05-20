@@ -41,6 +41,7 @@ public:
 	bool			fFullPathInTitle;
 	bool			fCompactLangMenu;
 	bool			fToolbar;
+	bool			fOpenWindowsInStack;
 	std::string		fStyle;
 	BRect			fWindowRect;
 };

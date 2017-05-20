@@ -13,7 +13,9 @@
 #include <File.h>
 #include <FindDirectory.h>
 #include <Path.h>
+#include <WindowStack.h>
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -152,6 +154,7 @@ App::ArgvReceived(int32 argc, char** argv)
 {
 	entry_ref ref;
 	BEntry entry;
+	std::unique_ptr<BWindowStack> windowStack(nullptr);
 	for(int32 i = 1; i < argc; ++i) {
 		Sci_Position line = -1;
 		Sci_Position column = -1;
@@ -177,7 +180,14 @@ App::ArgvReceived(int32 argc, char** argv)
 		}
 		entry.SetTo(filename);
 		entry.GetRef(&ref);
-		EditorWindow* window = new EditorWindow();
+		bool stagger = fWindows.CountItems() > 0 && (!fPreferences->fOpenWindowsInStack || !windowStack.get());
+		EditorWindow* window = new EditorWindow(stagger);
+		if(fPreferences->fOpenWindowsInStack) {
+			if(windowStack.get() == nullptr)
+				windowStack.reset(new BWindowStack(window));
+			else
+				windowStack->AddWindow(window);
+		}
 		window->OpenFile(&ref, line, column);
 		window->Show();
 		fWindows.AddItem(window);
@@ -192,12 +202,23 @@ App::RefsReceived(BMessage* message)
 	if(message->GetInfo("refs", nullptr, &count) != B_OK) {
 		return;
 	}
+	BWindow* windowPtr = nullptr;
+	std::unique_ptr<BWindowStack> windowStack(nullptr);
+	if(message->FindPointer("window", (void**) &windowPtr) == B_OK)
+		windowStack.reset(new BWindowStack(windowPtr));
 	entry_ref ref;
 	for(int32 i = 0; i < count; ++i) {
 		if(message->FindRef("refs", i, &ref) == B_OK) {
 			Sci_Position line = message->GetInt32("be:line", 0) - 1;
 			Sci_Position column = message->GetInt32("be:column", 0) - 1;
-			EditorWindow* window = new EditorWindow();
+			bool stagger = fWindows.CountItems() > 0 && (!fPreferences->fOpenWindowsInStack || !windowStack.get());
+			EditorWindow* window = new EditorWindow(stagger);
+			if(fPreferences->fOpenWindowsInStack) {
+				if(windowStack.get() == nullptr)
+					windowStack.reset(new BWindowStack(window));
+				else
+					windowStack->AddWindow(window);
+			}
 			window->OpenFile(&ref, line, column);
 			window->Show();
 			fWindows.AddItem(window);
@@ -259,7 +280,14 @@ App::MessageReceived(BMessage* message)
 		}
 	} break;
 	case WINDOW_NEW: {
-		EditorWindow* window = new EditorWindow();
+		BWindow* windowPtr = nullptr;
+		std::unique_ptr<BWindowStack> windowStack(nullptr);
+		if(message->FindPointer("window", (void**) &windowPtr) == B_OK)
+			windowStack.reset(new BWindowStack(windowPtr));
+		bool stagger = fWindows.CountItems() > 0 && (!fPreferences->fOpenWindowsInStack || !windowStack.get());
+		EditorWindow* window = new EditorWindow(stagger);
+		if(fPreferences->fOpenWindowsInStack && windowStack.get() != nullptr)
+			windowStack->AddWindow(window);
 		window->Show();
 		fWindows.AddItem(window);
 	} break;

@@ -142,6 +142,11 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			fTempPreferences->fStyle = message->GetString("style", "default");
 			_PreferencesModified();
 		} break;
+		case Actions::ATTACH_WINDOWS: {
+			bool attach = (fAttachNewWindowsCB->Value() == B_CONTROL_ON ? true : false);
+			fTempPreferences->fOpenWindowsInStack = attach;
+			_PreferencesModified();
+		} break;
 		case Actions::APPLY: {
 			*fCurrentPreferences = *fTempPreferences;
 			fApplyButton->SetEnabled(false);
@@ -221,6 +226,8 @@ AppPreferencesWindow::_InitInterface()
 	fEditorStyleMenu = new BPopUpMenu("style");
 	fEditorStyleMF = new BMenuField("style", B_TRANSLATE("Style"), fEditorStyleMenu);
 
+	fAttachNewWindowsCB = new BCheckBox("attachWindows", B_TRANSLATE("Attach new windows to active one"), new BMessage((uint32) Actions::ATTACH_WINDOWS));
+
 	fApplyButton = new BButton(B_TRANSLATE("Apply"), new BMessage((uint32) Actions::APPLY));
 	fRevertButton = new BButton(B_TRANSLATE("Revert"), new BMessage((uint32) Actions::REVERT));
 
@@ -242,6 +249,7 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fIndentGuidesBox)
 		.Add(fBracesHighlightingCB)
 		.Add(fEditorStyleMF)
+		.Add(fAttachNewWindowsCB)
 		.AddGlue()
 		.SetInsets(B_USE_ITEM_INSETS);
 
@@ -324,6 +332,12 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 		fBracesHighlightingCB->SetValue(B_CONTROL_ON);
 	} else {
 		fBracesHighlightingCB->SetValue(B_CONTROL_OFF);
+	}
+
+	if(preferences->fOpenWindowsInStack == true) {
+		fAttachNewWindowsCB->SetValue(B_CONTROL_ON);
+	} else {
+		fAttachNewWindowsCB->SetValue(B_CONTROL_OFF);
 	}
 }
 
