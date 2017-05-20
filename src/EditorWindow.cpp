@@ -993,6 +993,7 @@ EditorWindow::_SyncWithPreferences()
 		fEditor->SendMessage(SCI_SETTABWIDTH, fPreferences->fTabWidth, 0);
 		fEditor->SendMessage(SCI_SETUSETABS, !fPreferences->fTabsToSpaces, 0);
 		fEditor->SendMessage(SCI_SETCARETLINEVISIBLE, fPreferences->fLineHighlighting, 0);
+		fEditor->SendMessage(SCI_SETCARETLINEVISIBLEALWAYS, true, 0);
 
 		if(fPreferences->fLineNumbers == true) {
 			fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::NUMBER, (long int) SC_MARGIN_NUMBER);
