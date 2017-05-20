@@ -53,6 +53,7 @@ public:
 
 	void				HighlightTrailingWhitespace();
 	void				ClearHighlightedWhitespace();
+	void				TrimTrailingWhitespace();
 
 private:
 	void				_MaintainIndentation(char ch);

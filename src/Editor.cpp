@@ -216,6 +216,34 @@ Editor::ClearHighlightedWhitespace()
 }
 
 
+void
+Editor::TrimTrailingWhitespace()
+{
+	Sci_Position oldStart = SendMessage(SCI_GETTARGETSTART, 0, 0);
+	Sci_Position oldEnd = SendMessage(SCI_GETTARGETEND, 0, 0);
+	int oldFlags = SendMessage(SCI_GETSEARCHFLAGS, 0, 0);
+
+	Sci_Position length = SendMessage(SCI_GETLENGTH, 0, 0);
+	SendMessage(SCI_SETTARGETRANGE, 0, length);
+	SendMessage(SCI_SETSEARCHFLAGS, SCFIND_REGEXP | SCFIND_CXX11REGEX, 0);
+
+	const std::string whitespace = "\\s+$";
+	int result;
+	do {
+		result = SendMessage(SCI_SEARCHINTARGET, whitespace.size(), (sptr_t) whitespace.c_str());
+		if(result != -1) {
+			SendMessage(SCI_REPLACETARGET, -1, (sptr_t) "");
+
+			Sci_Position replacedEnd = SendMessage(SCI_GETTARGETEND, 0, 0);
+			SendMessage(SCI_SETTARGETRANGE, replacedEnd, length);
+		}
+	} while(result != -1);
+
+	SendMessage(SCI_SETSEARCHFLAGS, oldFlags, 0);
+	SendMessage(SCI_SETTARGETRANGE, oldStart, oldEnd);
+}
+
+
 // borrowed from SciTE
 // Copyright (c) Neil Hodgson
 void

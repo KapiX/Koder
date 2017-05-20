@@ -56,6 +56,8 @@ enum {
 	EDIT_COMMENTLINE					= 'cmtl',
 	EDIT_COMMENTBLOCK					= 'cmtb',
 
+	MAINMENU_EDIT_TRIMWS				= 'metw',
+
 	MAINMENU_EDIT_FILE_PREFERENCES		= 'mefp',
 	MAINMENU_EDIT_APP_PREFERENCES		= 'meap',
 

@@ -106,6 +106,8 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem(B_TRANSLATE("Comment line"), EDIT_COMMENTLINE, '/')
 			.AddItem(B_TRANSLATE("Comment block"), EDIT_COMMENTBLOCK, '/', B_SHIFT_KEY)
 			.AddSeparator()
+			.AddItem(B_TRANSLATE("Trim trailing whitespace"), MAINMENU_EDIT_TRIMWS)
+			.AddSeparator()
 			.AddMenu(B_TRANSLATE("Line endings"))
 				.AddItem(B_TRANSLATE("Unix format"), MAINMENU_EDIT_CONVERTEOLS_UNIX)
 				.AddItem(B_TRANSLATE("Windows format"), MAINMENU_EDIT_CONVERTEOLS_WINDOWS)
@@ -478,6 +480,9 @@ EditorWindow::MessageReceived(BMessage* message)
 		case MAINMENU_EDIT_CONVERTEOLS_MAC: {
 			fEditor->SendMessage(SCI_CONVERTEOLS, SC_EOL_CR, 0);
 			fEditor->SendMessage(SCI_SETEOLMODE, SC_EOL_CR, 0);
+		} break;
+		case MAINMENU_EDIT_TRIMWS: {
+			fEditor->TrimTrailingWhitespace();
 		} break;
 		case MAINMENU_EDIT_APP_PREFERENCES:
 		case MAINMENU_SEARCH_FINDREPLACE: {
