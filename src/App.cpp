@@ -234,6 +234,8 @@ App::MessageReceived(BMessage* message)
 	case ACTIVE_WINDOW_CHANGED: {
 		if(message->FindPointer("window", (void**) &fLastActiveWindow) != B_OK) {
 			fLastActiveWindow = nullptr;
+		} else {
+			fPreferences->fWindowRect = fLastActiveWindow->Frame();
 		}
 	} break;
 	case APP_PREFERENCES_CHANGED: {

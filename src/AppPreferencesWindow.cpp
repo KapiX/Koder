@@ -226,7 +226,7 @@ AppPreferencesWindow::_InitInterface()
 	fEditorStyleMenu = new BPopUpMenu("style");
 	fEditorStyleMF = new BMenuField("style", B_TRANSLATE("Style"), fEditorStyleMenu);
 
-	fAttachNewWindowsCB = new BCheckBox("attachWindows", B_TRANSLATE("Attach new windows to active one"), new BMessage((uint32) Actions::ATTACH_WINDOWS));
+	fAttachNewWindowsCB = new BCheckBox("attachWindows", B_TRANSLATE("Stack new windows"), new BMessage((uint32) Actions::ATTACH_WINDOWS));
 
 	fApplyButton = new BButton(B_TRANSLATE("Apply"), new BMessage((uint32) Actions::APPLY));
 	fRevertButton = new BButton(B_TRANSLATE("Revert"), new BMessage((uint32) Actions::REVERT));
