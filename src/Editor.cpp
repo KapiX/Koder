@@ -227,6 +227,7 @@ Editor::TrimTrailingWhitespace()
 	SendMessage(SCI_SETTARGETRANGE, 0, length);
 	SendMessage(SCI_SETSEARCHFLAGS, SCFIND_REGEXP | SCFIND_CXX11REGEX, 0);
 
+	SendMessage(SCI_BEGINUNDOACTION, 0, 0);
 	const std::string whitespace = "\\s+$";
 	int result;
 	do {
@@ -238,6 +239,7 @@ Editor::TrimTrailingWhitespace()
 			SendMessage(SCI_SETTARGETRANGE, replacedEnd, length);
 		}
 	} while(result != -1);
+	SendMessage(SCI_ENDUNDOACTION, 0, 0);
 
 	SendMessage(SCI_SETSEARCHFLAGS, oldFlags, 0);
 	SendMessage(SCI_SETTARGETRANGE, oldStart, oldEnd);
