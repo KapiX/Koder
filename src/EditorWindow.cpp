@@ -334,6 +334,11 @@ EditorWindow::SaveFile(entry_ref* ref)
 	}
 	BNode node(ref);
 	_MonitorFile(&node, false);
+
+	if(fPreferences->fTrimTrailingWhitespaceOnSave == true) {
+		fEditor->TrimTrailingWhitespace();
+	}
+
 	int length = fEditor->TextLength() + 1;
 	char* buffer = new char[length];
 	fEditor->GetText(0, length, buffer);

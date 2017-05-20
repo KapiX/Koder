@@ -61,6 +61,7 @@ private:
 
 		ATTACH_WINDOWS			= 'atwn',
 		HIGHLIGHT_TRAILING_WS	= 'hltw',
+		TRIM_TRAILING_WS_SAVE	= 'ttws',
 
 		APPLY					= 'appl',
 		REVERT					= 'rvrt'
@@ -109,6 +110,7 @@ private:
 
 	BCheckBox*		fAttachNewWindowsCB;
 	BCheckBox*		fHighlightTrailingWSCB;
+	BCheckBox*		fTrimTrailingWSOnSaveCB;
 
 	BButton*		fApplyButton;
 	BButton*		fRevertButton;

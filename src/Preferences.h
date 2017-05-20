@@ -43,6 +43,7 @@ public:
 	bool			fToolbar;
 	bool			fOpenWindowsInStack;
 	bool			fHighlightTrailingWhitespace;
+	bool			fTrimTrailingWhitespaceOnSave;
 	std::string		fStyle;
 	BRect			fWindowRect;
 };

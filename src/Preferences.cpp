@@ -78,6 +78,7 @@ Preferences::Load(const char* filename)
 	fToolbar = storage.GetBool("toolbar", true);
 	fOpenWindowsInStack = storage.GetBool("openWindowsInStack", true);
 	fHighlightTrailingWhitespace = storage.GetBool("highlightTrailingWhitespace", false);
+	fTrimTrailingWhitespaceOnSave = storage.GetBool("trimTrailingWhitespaceOnSave", false);
 	fStyle = storage.GetString("style", "default");
 	fWindowRect = storage.GetRect("windowRect", BRect(50, 50, 450, 450));
 
@@ -145,6 +146,7 @@ Preferences::Save(const char* filename)
 	storage.AddBool("toolbar", fToolbar);
 	storage.AddBool("openWindowsInStack", fOpenWindowsInStack);
 	storage.AddBool("highlightTrailingWhitespace", fHighlightTrailingWhitespace);
+	storage.AddBool("trimTrailingWhitespaceOnSave", fTrimTrailingWhitespaceOnSave);
 	storage.AddString("style", fStyle.c_str());
 	storage.AddRect("windowRect", fWindowRect);
 	storage.Flatten(file);
@@ -175,6 +177,7 @@ Preferences::operator =(Preferences p)
 	fToolbar = p.fToolbar;
 	fOpenWindowsInStack = p.fOpenWindowsInStack;
 	fHighlightTrailingWhitespace = p.fHighlightTrailingWhitespace;
+	fTrimTrailingWhitespaceOnSave = p.fTrimTrailingWhitespaceOnSave;
 	fStyle = p.fStyle;
 	fWindowRect = p.fWindowRect;
 }

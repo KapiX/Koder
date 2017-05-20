@@ -152,6 +152,11 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			fTempPreferences->fHighlightTrailingWhitespace = highlight;
 			_PreferencesModified();
 		} break;
+		case Actions::TRIM_TRAILING_WS_SAVE: {
+			bool trim = (fTrimTrailingWSOnSaveCB->Value() == B_CONTROL_ON ? true : false);
+			fTempPreferences->fTrimTrailingWhitespaceOnSave = trim;
+			_PreferencesModified();
+		} break;
 		case Actions::APPLY: {
 			*fCurrentPreferences = *fTempPreferences;
 			fApplyButton->SetEnabled(false);
@@ -233,6 +238,7 @@ AppPreferencesWindow::_InitInterface()
 
 	fAttachNewWindowsCB = new BCheckBox("attachWindows", B_TRANSLATE("Stack new windows"), new BMessage((uint32) Actions::ATTACH_WINDOWS));
 	fHighlightTrailingWSCB = new BCheckBox("highlightTrailingWS", B_TRANSLATE("Highlight trailing whitespace"), new BMessage((uint32) Actions::HIGHLIGHT_TRAILING_WS));
+	fTrimTrailingWSOnSaveCB  = new BCheckBox("trimTrailingWSOnSave", B_TRANSLATE("Trim trailing whitespace on save"), new BMessage((uint32) Actions::TRIM_TRAILING_WS_SAVE));
 
 	fApplyButton = new BButton(B_TRANSLATE("Apply"), new BMessage((uint32) Actions::APPLY));
 	fRevertButton = new BButton(B_TRANSLATE("Revert"), new BMessage((uint32) Actions::REVERT));
@@ -253,6 +259,7 @@ AppPreferencesWindow::_InitInterface()
 			.Add(fBracesHighlightingCB)
 			.Add(fAttachNewWindowsCB)
 			.Add(fHighlightTrailingWSCB)
+			.Add(fTrimTrailingWSOnSaveCB)
 			.End()
 		.Add(fLineLimitBox)
 		.Add(fIndentGuidesBox)
@@ -351,6 +358,12 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 		fHighlightTrailingWSCB->SetValue(B_CONTROL_ON);
 	} else {
 		fHighlightTrailingWSCB->SetValue(B_CONTROL_OFF);
+	}
+
+	if(preferences->fTrimTrailingWhitespaceOnSave == true) {
+		fTrimTrailingWSOnSaveCB->SetValue(B_CONTROL_ON);
+	} else {
+		fTrimTrailingWSOnSaveCB->SetValue(B_CONTROL_OFF);
 	}
 }
 
