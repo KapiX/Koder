@@ -8,6 +8,7 @@
 #include <Messenger.h>
 
 #include <algorithm>
+#include <string>
 
 #include "Preferences.h"
 
@@ -17,7 +18,10 @@ Editor::Editor()
 	BScintillaView("EditorView", 0, true, true, B_NO_BORDER),
 	fCommentLineToken(""),
 	fCommentBlockStartToken(""),
-	fCommentBlockEndToken("")
+	fCommentBlockEndToken(""),
+	fHighlightedWhitespaceStart(0),
+	fHighlightedWhitespaceEnd(0),
+	fHighlightedWhitespaceCurrentPos(0)
 {
 }
 
@@ -179,6 +183,39 @@ Editor::CanCommentBlock()
 }
 
 
+void
+Editor::HighlightTrailingWhitespace()
+{
+	int length = SendMessage(SCI_GETLENGTH, 0, 0);
+	int firstVisibleLine = SendMessage(SCI_GETFIRSTVISIBLELINE, 0, 0) - 2;
+	int firstLine = std::max(firstVisibleLine, 0);
+	int lastLine = firstLine + SendMessage(SCI_LINESONSCREEN, 0, 0) + 3;
+	int firstLinePos = SendMessage(SCI_POSITIONFROMLINE, firstLine, 0);
+	// SCI_POSITIONFROMLINE returns -1 if line is above range
+	int lastLinePos = SendMessage(SCI_POSITIONFROMLINE, lastLine, 0);
+	int lastLineEndPos = std::max(lastLinePos, length);
+	_HighlightTrailingWhitespace(firstLinePos, lastLineEndPos);
+}
+
+
+void
+Editor::ClearHighlightedWhitespace()
+{
+	int oldIndicator = SendMessage(SCI_GETINDICATORCURRENT, 0, 0);
+	SendMessage(SCI_SETINDICATORCURRENT, Indicator::WHITESPACE, 0);
+
+	// cleanup after previous runs
+	SendMessage(SCI_INDICATORCLEARRANGE, fHighlightedWhitespaceStart,
+		fHighlightedWhitespaceEnd - fHighlightedWhitespaceStart);
+
+	SendMessage(SCI_SETINDICATORCURRENT, oldIndicator, 0);
+
+	fHighlightedWhitespaceStart = 0;
+	fHighlightedWhitespaceEnd = 0;
+	fHighlightedWhitespaceCurrentPos = 0;
+}
+
+
 // borrowed from SciTE
 // Copyright (c) Neil Hodgson
 void
@@ -261,6 +298,56 @@ Editor::_MarginClick(int margin, int pos)
 			SendMessage(SCI_TOGGLEFOLD, lineNumber, 0);
 		} break;
 	}
+}
+
+
+void
+Editor::_HighlightTrailingWhitespace(Sci_Position start, Sci_Position end)
+{
+	if(start == end || end < start) return;
+
+	int currentPos = SendMessage(SCI_GETCURRENTPOS, 0, 0);
+	// don't thrash the CPU
+	if(fHighlightedWhitespaceStart == start && fHighlightedWhitespaceEnd == end
+			&& fHighlightedWhitespaceCurrentPos == currentPos) {
+		return;
+	}
+
+	Sci_Position oldStart = SendMessage(SCI_GETTARGETSTART, 0, 0);
+	Sci_Position oldEnd = SendMessage(SCI_GETTARGETEND, 0, 0);
+	int oldFlags = SendMessage(SCI_GETSEARCHFLAGS, 0, 0);
+
+	SendMessage(SCI_SETTARGETRANGE, start, end);
+	SendMessage(SCI_SETSEARCHFLAGS, SCFIND_REGEXP | SCFIND_CXX11REGEX, 0);
+
+	int oldIndicator = SendMessage(SCI_GETINDICATORCURRENT, 0, 0);
+	SendMessage(SCI_SETINDICATORCURRENT, Indicator::WHITESPACE, 0);
+
+	// cleanup after previous runs
+	SendMessage(SCI_INDICATORCLEARRANGE, fHighlightedWhitespaceStart,
+		fHighlightedWhitespaceEnd - fHighlightedWhitespaceStart);
+
+	const std::string whitespace = "\\s+$";
+	int result;
+	do {
+		result = SendMessage(SCI_SEARCHINTARGET, whitespace.size(), (sptr_t) whitespace.c_str());
+		if(result != -1) {
+			Sci_Position foundStart = SendMessage(SCI_GETTARGETSTART, 0, 0);
+			Sci_Position foundEnd = SendMessage(SCI_GETTARGETEND, 0, 0);
+
+			SendMessage(SCI_INDICATORFILLRANGE, foundStart, foundEnd - foundStart);
+
+			SendMessage(SCI_SETTARGETRANGE, foundEnd + 1, end);
+		}
+	} while(result != -1);
+
+	SendMessage(SCI_SETINDICATORCURRENT, oldIndicator, 0);
+	SendMessage(SCI_SETSEARCHFLAGS, oldFlags, 0);
+	SendMessage(SCI_SETTARGETRANGE, oldStart, oldEnd);
+
+	fHighlightedWhitespaceStart = start;
+	fHighlightedWhitespaceEnd = end;
+	fHighlightedWhitespaceCurrentPos = currentPos;
 }
 
 

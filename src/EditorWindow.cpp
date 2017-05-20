@@ -592,6 +592,9 @@ EditorWindow::MessageReceived(BMessage* message)
 			fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, fModified);
 		} break;
 		case EDITOR_UPDATEUI: {
+			if(fPreferences->fHighlightTrailingWhitespace) {
+				fEditor->HighlightTrailingWhitespace();
+			}
 			_SyncEditMenus();
 		} break;
 		case EDITOR_CONTEXT_MENU: {
@@ -1014,6 +1017,12 @@ EditorWindow::_SyncWithPreferences()
 			fEditor->SendMessage(SCI_SETWRAPMODE, SC_WRAP_WORD, 0);
 		} else {
 			fEditor->SendMessage(SCI_SETWRAPMODE, SC_WRAP_NONE, 0);
+		}
+
+		if(fPreferences->fHighlightTrailingWhitespace == true) {
+			fEditor->HighlightTrailingWhitespace();
+		} else {
+			fEditor->ClearHighlightedWhitespace();
 		}
 
 		fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::FOLD, SC_MARGIN_SYMBOL);

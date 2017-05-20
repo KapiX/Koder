@@ -77,6 +77,7 @@ Preferences::Load(const char* filename)
 	fCompactLangMenu = storage.GetBool("compactLangMenu", true);
 	fToolbar = storage.GetBool("toolbar", true);
 	fOpenWindowsInStack = storage.GetBool("openWindowsInStack", true);
+	fHighlightTrailingWhitespace = storage.GetBool("highlightTrailingWhitespace", false);
 	fStyle = storage.GetString("style", "default");
 	fWindowRect = storage.GetRect("windowRect", BRect(50, 50, 450, 450));
 
@@ -143,6 +144,7 @@ Preferences::Save(const char* filename)
 	storage.AddBool("compactLangMenu", fCompactLangMenu);
 	storage.AddBool("toolbar", fToolbar);
 	storage.AddBool("openWindowsInStack", fOpenWindowsInStack);
+	storage.AddBool("highlightTrailingWhitespace", fHighlightTrailingWhitespace);
 	storage.AddString("style", fStyle.c_str());
 	storage.AddRect("windowRect", fWindowRect);
 	storage.Flatten(file);
@@ -172,6 +174,7 @@ Preferences::operator =(Preferences p)
 	fCompactLangMenu = p.fCompactLangMenu;
 	fToolbar = p.fToolbar;
 	fOpenWindowsInStack = p.fOpenWindowsInStack;
+	fHighlightTrailingWhitespace = p.fHighlightTrailingWhitespace;
 	fStyle = p.fStyle;
 	fWindowRect = p.fWindowRect;
 }

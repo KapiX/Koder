@@ -87,6 +87,11 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 		editor->SendMessage(SCI_STYLESETSIZE, 36, (sptr_t) (be_fixed_font->Size() / 1.3));
 		editor->SendMessage(SCI_SETWHITESPACESIZE, be_fixed_font->Size() / 6, 0);
 
+		// whitespace
+		editor->SendMessage(SCI_INDICSETSTYLE, 0, INDIC_ROUNDBOX);
+		editor->SendMessage(SCI_INDICSETFORE, 0, 0x0000FF);
+		editor->SendMessage(SCI_INDICSETALPHA, 0, 100);
+		// IME
 		editor->SendMessage(SCI_INDICSETSTYLE, INDIC_IME, INDIC_FULLBOX);
 		editor->SendMessage(SCI_INDICSETFORE, INDIC_IME, 0xFF0000);
 		editor->SendMessage(SCI_INDICSETSTYLE, INDIC_IME+1, INDIC_FULLBOX);

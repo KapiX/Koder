@@ -42,6 +42,7 @@ public:
 	bool			fCompactLangMenu;
 	bool			fToolbar;
 	bool			fOpenWindowsInStack;
+	bool			fHighlightTrailingWhitespace;
 	std::string		fStyle;
 	BRect			fWindowRect;
 };

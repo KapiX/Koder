@@ -147,6 +147,11 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			fTempPreferences->fOpenWindowsInStack = attach;
 			_PreferencesModified();
 		} break;
+		case Actions::HIGHLIGHT_TRAILING_WS: {
+			bool highlight = (fHighlightTrailingWSCB->Value() == B_CONTROL_ON ? true : false);
+			fTempPreferences->fHighlightTrailingWhitespace = highlight;
+			_PreferencesModified();
+		} break;
 		case Actions::APPLY: {
 			*fCurrentPreferences = *fTempPreferences;
 			fApplyButton->SetEnabled(false);
@@ -227,6 +232,7 @@ AppPreferencesWindow::_InitInterface()
 	fEditorStyleMF = new BMenuField("style", B_TRANSLATE("Style"), fEditorStyleMenu);
 
 	fAttachNewWindowsCB = new BCheckBox("attachWindows", B_TRANSLATE("Stack new windows"), new BMessage((uint32) Actions::ATTACH_WINDOWS));
+	fHighlightTrailingWSCB = new BCheckBox("highlightTrailingWS", B_TRANSLATE("Highlight trailing whitespace"), new BMessage((uint32) Actions::HIGHLIGHT_TRAILING_WS));
 
 	fApplyButton = new BButton(B_TRANSLATE("Apply"), new BMessage((uint32) Actions::APPLY));
 	fRevertButton = new BButton(B_TRANSLATE("Revert"), new BMessage((uint32) Actions::REVERT));
@@ -244,12 +250,13 @@ AppPreferencesWindow::_InitInterface()
 			.Add(fLineHighlightingCB)
 			.Add(fTabsToSpacesCB)
 			.Add(fTabWidthTC)
+			.Add(fBracesHighlightingCB)
+			.Add(fAttachNewWindowsCB)
+			.Add(fHighlightTrailingWSCB)
 			.End()
 		.Add(fLineLimitBox)
 		.Add(fIndentGuidesBox)
-		.Add(fBracesHighlightingCB)
 		.Add(fEditorStyleMF)
-		.Add(fAttachNewWindowsCB)
 		.AddGlue()
 		.SetInsets(B_USE_ITEM_INSETS);
 
@@ -338,6 +345,12 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 		fAttachNewWindowsCB->SetValue(B_CONTROL_ON);
 	} else {
 		fAttachNewWindowsCB->SetValue(B_CONTROL_OFF);
+	}
+
+	if(preferences->fHighlightTrailingWhitespace == true) {
+		fHighlightTrailingWSCB->SetValue(B_CONTROL_ON);
+	} else {
+		fHighlightTrailingWSCB->SetValue(B_CONTROL_OFF);
 	}
 }
 

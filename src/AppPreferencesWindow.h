@@ -60,6 +60,7 @@ private:
 		EDITOR_STYLE			= 'styl',
 
 		ATTACH_WINDOWS			= 'atwn',
+		HIGHLIGHT_TRAILING_WS	= 'hltw',
 
 		APPLY					= 'appl',
 		REVERT					= 'rvrt'
@@ -107,6 +108,7 @@ private:
 	BMenuField*		fEditorStyleMF;
 
 	BCheckBox*		fAttachNewWindowsCB;
+	BCheckBox*		fHighlightTrailingWSCB;
 
 	BButton*		fApplyButton;
 	BButton*		fRevertButton;

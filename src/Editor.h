@@ -31,6 +31,9 @@ public:
 		NUMBER 		= 0,
 		FOLD
 	};
+	enum Indicator {
+		WHITESPACE	= 0
+	};
 
 						Editor();
 
@@ -48,12 +51,16 @@ public:
 	bool				CanCommentLine();
 	bool				CanCommentBlock();
 
+	void				HighlightTrailingWhitespace();
+	void				ClearHighlightedWhitespace();
+
 private:
 	void				_MaintainIndentation(char ch);
 	void				_UpdateLineNumberWidth();
 	void				_BraceHighlight();
 	bool				_BraceMatch(int pos);
 	void				_MarginClick(int margin, int pos);
+	void				_HighlightTrailingWhitespace(Sci_Position start, Sci_Position end);
 
 	void				_SetLineIndentation(int line, int indent);
 	Sci_CharacterRange	_GetSelection();
@@ -64,6 +71,10 @@ private:
 	std::string			fCommentLineToken;
 	std::string			fCommentBlockStartToken;
 	std::string			fCommentBlockEndToken;
+
+	Sci_Position		fHighlightedWhitespaceStart;
+	Sci_Position		fHighlightedWhitespaceEnd;
+	Sci_Position		fHighlightedWhitespaceCurrentPos;
 };
 
 
