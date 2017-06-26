@@ -55,6 +55,15 @@ public:
 	void				ClearHighlightedWhitespace();
 	void				TrimTrailingWhitespace();
 
+	bool				Find(std::string search, bool matchCase, bool matchWord,
+							bool backwards, bool wrapAround, bool inSelection,
+							bool regex = false);
+	void				Replace(std::string replacement, bool regex = false);
+	int					ReplaceAll(std::string search, std::string replacement,
+							bool matchCase, bool matchWord, bool inSelection,
+							bool regex = false);
+	void				ResetFindReplace();
+
 private:
 	void				_MaintainIndentation(char ch);
 	void				_UpdateLineNumberWidth();
@@ -67,6 +76,10 @@ private:
 	Sci_CharacterRange	_GetSelection();
 	void				_SetSelection(int anchor, int currentPos);
 
+	bool				_Find(std::string search, Sci_Position start,
+							Sci_Position end, bool matchCase, bool matchWord,
+							bool regex = false);
+
 	Preferences*		fPreferences;
 
 	std::string			fCommentLineToken;
@@ -76,6 +89,12 @@ private:
 	Sci_Position		fHighlightedWhitespaceStart;
 	Sci_Position		fHighlightedWhitespaceEnd;
 	Sci_Position		fHighlightedWhitespaceCurrentPos;
+
+	Sci_Position		fSearchTargetStart;
+	Sci_Position		fSearchTargetEnd;
+	Sci_Position		fSearchLastResultStart;
+	Sci_Position		fSearchLastResultEnd;
+	bool				fNewSearch;
 };
 
 

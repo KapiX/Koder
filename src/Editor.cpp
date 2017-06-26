@@ -21,7 +21,11 @@ Editor::Editor()
 	fCommentBlockEndToken(""),
 	fHighlightedWhitespaceStart(0),
 	fHighlightedWhitespaceEnd(0),
-	fHighlightedWhitespaceCurrentPos(0)
+	fHighlightedWhitespaceCurrentPos(0),
+	fSearchTargetStart(-1),
+	fSearchTargetEnd(-1),
+	fSearchLastResultStart(-1),
+	fSearchLastResultEnd(-1)
 {
 }
 
@@ -246,6 +250,119 @@ Editor::TrimTrailingWhitespace()
 }
 
 
+bool
+Editor::Find(std::string search, bool matchCase, bool matchWord, bool backwards,
+	bool wrapAround, bool inSelection, bool regex)
+{
+	Sci_Position startOld = SendMessage(SCI_GETTARGETSTART);
+	Sci_Position endOld = SendMessage(SCI_GETTARGETEND);
+
+	int length = SendMessage(SCI_GETLENGTH);
+	Sci_Position anchor = SendMessage(SCI_GETANCHOR);
+	Sci_Position current = SendMessage(SCI_GETCURRENTPOS);
+
+	if(anchor != fSearchLastResultStart || current != fSearchLastResultEnd) {
+		ResetFindReplace();
+	}
+
+	if(fNewSearch == true) {
+		if(inSelection == true) {
+			fSearchTargetStart = SendMessage(SCI_GETSELECTIONSTART);
+			fSearchTargetEnd = SendMessage(SCI_GETSELECTIONEND);
+			if(backwards == true) {
+				std::swap(fSearchTargetStart, fSearchTargetEnd);
+			}
+		} else {
+			if(backwards == true) {
+				fSearchTargetStart = anchor;
+				fSearchTargetEnd = 0;
+			} else {
+				fSearchTargetStart = current;
+				fSearchTargetEnd = length;
+			}
+		}
+	}
+
+	Sci_Position start = fSearchTargetStart;
+	Sci_Position end = fSearchTargetEnd;
+
+	if(fNewSearch == false) {
+		start = (backwards ? anchor : current);
+	}
+
+	bool found;
+	found = _Find(search, start, end, matchCase, matchWord, regex);
+
+	if(found == false && wrapAround == true) {
+		Sci_Position startAgain;
+		if(inSelection == true) {
+			startAgain = fSearchTargetStart;
+		} else {
+			startAgain = (backwards ? length : 0);
+		}
+		found = _Find(search, startAgain, fSearchTargetEnd, matchCase,
+			matchWord, regex);
+	}
+	fNewSearch = false;
+	SendMessage(SCI_SETTARGETRANGE, startOld, endOld);
+	return found;
+}
+
+
+void
+Editor::Replace(std::string replacement, bool regex)
+{
+	Sci_Position startOld = SendMessage(SCI_GETTARGETSTART);
+	Sci_Position endOld = SendMessage(SCI_GETTARGETEND);
+	int replaceMsg = (regex ? SCI_REPLACETARGETRE : SCI_REPLACETARGET);
+	if(fSearchLastResultStart != -1 && fSearchLastResultEnd != -1) {
+		SendMessage(SCI_SETTARGETRANGE, fSearchLastResultStart, fSearchLastResultEnd);
+		SendMessage(replaceMsg, -1, (sptr_t) replacement.c_str());
+		fSearchLastResultStart = -1;
+		fSearchLastResultEnd = -1;
+	}
+	SendMessage(SCI_SETTARGETRANGE, startOld, endOld);
+}
+
+
+int
+Editor::ReplaceAll(std::string search, std::string replacement, bool matchCase,
+	bool matchWord, bool inSelection, bool regex)
+{
+	Sci_Position startOld = SendMessage(SCI_GETTARGETSTART);
+	Sci_Position endOld = SendMessage(SCI_GETTARGETEND);
+	SendMessage(SCI_BEGINUNDOACTION, 0, 0);
+	int replaceMsg = (regex ? SCI_REPLACETARGETRE : SCI_REPLACETARGET);
+	int occurences = 0;
+	if(inSelection == true) {
+		SendMessage(SCI_TARGETFROMSELECTION);
+	} else {
+		SendMessage(SCI_TARGETWHOLEDOCUMENT);
+	}
+	Sci_Position start = SendMessage(SCI_GETTARGETSTART);
+	Sci_Position end = SendMessage(SCI_GETTARGETEND);
+	bool found;
+	do {
+		found = _Find(search, start, end, matchCase, matchWord, regex);
+		if(found) {
+			SendMessage(replaceMsg, -1, (sptr_t) replacement.c_str());
+			start = SendMessage(SCI_GETTARGETEND);
+			occurences++;
+		}
+	} while(found);
+	SendMessage(SCI_ENDUNDOACTION, 0, 0);
+	SendMessage(SCI_SETTARGETRANGE, startOld, endOld);
+	return occurences;
+}
+
+
+void
+Editor::ResetFindReplace()
+{
+	fNewSearch = true;
+}
+
+
 // borrowed from SciTE
 // Copyright (c) Neil Hodgson
 void
@@ -438,4 +555,37 @@ void
 Editor::_SetSelection(int anchor, int currentPos)
 {
 	SendMessage(SCI_SETSEL, anchor, currentPos);
+}
+
+
+bool
+Editor::_Find(std::string search, Sci_Position start, Sci_Position end,
+	bool matchCase, bool matchWord, bool regex)
+{
+	int searchFlagsOld = SendMessage(SCI_GETSEARCHFLAGS);
+
+	bool found = false;
+
+	int searchFlags = 0;
+	if(matchCase == true)
+		searchFlags |= SCFIND_MATCHCASE;
+	if(matchWord == true)
+		searchFlags |= SCFIND_WHOLEWORD;
+	if(regex == true)
+		searchFlags |= SCFIND_REGEXP | SCFIND_CXX11REGEX;
+	SendMessage(SCI_SETSEARCHFLAGS, searchFlags);
+
+	SendMessage(SCI_SETTARGETRANGE, start, end);
+
+	Sci_Position pos = SendMessage(SCI_SEARCHINTARGET, (uptr_t) search.size(), (sptr_t) search.c_str());
+	if(pos != -1) {
+		fSearchLastResultStart = pos;
+		fSearchLastResultEnd = pos + search.size();
+		SendMessage(SCI_SETSEL, fSearchLastResultStart, fSearchLastResultEnd);
+		found = true;
+	}
+
+	SendMessage(SCI_SETSEARCHFLAGS, searchFlagsOld);
+
+	return found;
 }

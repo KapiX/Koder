@@ -18,6 +18,7 @@
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
 #include <MenuBar.h>
+#include <MessageFormat.h>
 #include <MimeType.h>
 #include <Node.h>
 #include <NodeInfo.h>
@@ -63,9 +64,6 @@ EditorWindow::EditorWindow(bool stagger)
 	fModifiedOutside = false;
 	fModified = false;
 	fReadOnly = false;
-
-	fSearchLastResultStart = -1;
-	fSearchLastResultEnd = -1;
 
 	fGoToLineWindow = nullptr;
 	fOpenedFilePath = nullptr;
@@ -779,101 +777,40 @@ EditorWindow::_FindReplace(BMessage* message)
 	const char* findText = message->GetString("findText", "");
 	const char* replaceText = message->GetString("replaceText", "");
 
-	int searchFlags = 0;
-	if(matchCase == true)
-		searchFlags |= SCFIND_MATCHCASE;
-	if(matchWord == true)
-		searchFlags |= SCFIND_WHOLEWORD;
-	fEditor->SendMessage(SCI_SETSEARCHFLAGS, searchFlags, 0);
-
-	if(message->what != FINDWINDOW_REPLACEALL) {
-		// Detect if user has changed cursor position
-		Sci_Position anchor = fEditor->SendMessage(SCI_GETANCHOR, 0, 0);
-		Sci_Position current = fEditor->SendMessage(SCI_GETCURRENTPOS, 0, 0);
-		if(anchor != fSearchLastResultStart || current != fSearchLastResultEnd) {
-			newSearch = true;
-		}
-
-		if(newSearch == true) {
-			if(inSelection == true) {
-				if(backwards == false) {
-					fSearchTargetStart = fEditor->SendMessage(SCI_GETSELECTIONSTART, 0, 0);
-					fSearchTargetEnd = fEditor->SendMessage(SCI_GETSELECTIONEND, 0, 0);
-				} else {
-					fSearchTargetStart = fEditor->SendMessage(SCI_GETSELECTIONEND, 0, 0);
-					fSearchTargetEnd = fEditor->SendMessage(SCI_GETSELECTIONSTART, 0, 0);
-				}
-			} else {
-				if(backwards == true) {
-					fSearchTargetStart = anchor;
-					fSearchTargetEnd = 0;
-				} else {
-					fSearchTargetStart = current;
-					fSearchTargetEnd = fEditor->SendMessage(SCI_GETLENGTH, 0, 0);
-				}
+	switch(message->what) {
+		case FINDWINDOW_FIND: {
+			if(newSearch == true) {
+				fEditor->ResetFindReplace();
 			}
-			fEditor->SendMessage(SCI_SETTARGETRANGE, fSearchTargetStart, fSearchTargetEnd);
-		}
-
-		switch(message->what) {
-			case FINDWINDOW_FIND: {
-				Sci_Position pos = fEditor->SendMessage(SCI_SEARCHINTARGET, (uptr_t) strlen(findText), (sptr_t) findText);
-				if(pos != -1) {
-					fSearchLastResultStart = pos;
-					fSearchLastResultEnd = pos + strlen(findText);
-					fEditor->SendMessage(SCI_SETSEL, fSearchLastResultStart, fSearchLastResultEnd);
-					fEditor->SendMessage(SCI_SETTARGETRANGE, (backwards == false ? pos + strlen(findText) : pos), fSearchTargetEnd);
-				} else {
-					// TODO: _method?
-					BAlert* alert = new BAlert(B_TRANSLATE("Searching finished"),
-						B_TRANSLATE("Reached the end of the document. No results found."),
-						B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_INFO_ALERT);
-					alert->SetShortcut(0, B_ESCAPE);
-					alert->Go();
-					if(wrapAround == true) {
-						Sci_Position s;
-						if(inSelection == true) {
-							s = fSearchTargetStart;
-						} else {
-							if(backwards == true) {
-								s = fEditor->SendMessage(SCI_GETLENGTH, 0, 0);
-							} else {
-								s = 0;
-							}
-						}
-						fEditor->SendMessage(SCI_SETTARGETRANGE, s, fSearchTargetEnd);
-					}
-				}
-			} break;
-			case FINDWINDOW_REPLACE: {
-				if(fSearchLastResultStart != -1 && fSearchLastResultEnd != -1) {
-					fEditor->SendMessage(SCI_SETSEL, fSearchLastResultStart, fSearchLastResultEnd);
-					fEditor->SendMessage(SCI_REPLACESEL, 0, (sptr_t) replaceText);
-					fSearchLastResultStart = -1;
-					fSearchLastResultEnd = -1;
-				}
-			} break;
-		}
-	} else {
-		if(inSelection == true) {
-			fEditor->SendMessage(SCI_TARGETFROMSELECTION, 0, 0);
-		} else {
-			fEditor->SendMessage(SCI_TARGETWHOLEDOCUMENT, 0, 0);
-		}
-		Sci_Position pos;
-		Sci_Position targetEnd = fEditor->SendMessage(SCI_GETTARGETEND, 0, 0);
-		fEditor->SendMessage(SCI_BEGINUNDOACTION, 0, 0);
-		do {
-			pos = fEditor->SendMessage(SCI_SEARCHINTARGET, (uptr_t) strlen(findText), (sptr_t) findText);
-			if(pos != -1) {
-				fEditor->SendMessage(SCI_REPLACETARGET, -1, (sptr_t) replaceText);
-				fEditor->SendMessage(SCI_SETTARGETRANGE, pos + strlen(replaceText), targetEnd);
+			bool found;
+			found = fEditor->Find(findText, matchCase, matchWord, backwards,
+				wrapAround, inSelection);
+			if(found == false) {
+				BAlert* alert = new BAlert(B_TRANSLATE("Searching finished"),
+					B_TRANSLATE("Reached the end of the target. No results found."),
+					B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_INFO_ALERT);
+				alert->SetShortcut(0, B_ESCAPE);
+				alert->Go();
 			}
-		} while(pos != -1);
-		fEditor->SendMessage(SCI_ENDUNDOACTION, 0, 0);
-		fSearchLastResultStart = -1;
-		fSearchLastResultEnd = -1;
+		} break;
+		case FINDWINDOW_REPLACE: {
+			fEditor->Replace(replaceText);
+		} break;
+		case FINDWINDOW_REPLACEALL: {
+			int occurences = fEditor->ReplaceAll(findText, replaceText,
+				matchCase, matchWord, inSelection);
+			BString alertMessage;
+			static BMessageFormat format(B_TRANSLATE("Replaced "
+				"{0, plural, one{# occurence} other{# occurences}}."));
+			format.Format(alertMessage, occurences);
+			BAlert* alert = new BAlert(B_TRANSLATE("Replacement finished"),
+				alertMessage, B_TRANSLATE("OK"), nullptr, nullptr,
+				B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_INFO_ALERT);
+			alert->SetShortcut(0, B_ESCAPE);
+			alert->Go();
+		} break;
 	}
+
 }
 
 

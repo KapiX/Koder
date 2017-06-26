@@ -121,11 +121,6 @@ private:
 			std::string		fCurrentLanguage;
 			BPrivate::BToolBar*	fToolbar;
 
-			Sci_Position	fSearchTargetStart;
-			Sci_Position	fSearchTargetEnd;
-			Sci_Position	fSearchLastResultStart;
-			Sci_Position	fSearchLastResultEnd;
-
 			GoToLineWindow*	fGoToLineWindow;
 
 			bool			fActivatedGuard;
