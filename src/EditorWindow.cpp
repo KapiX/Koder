@@ -669,13 +669,8 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case FINDWINDOW_FIND:
 		case FINDWINDOW_REPLACE:
-		case FINDWINDOW_REPLACEALL: {
-			_FindReplace(message);
-		} break;
+		case FINDWINDOW_REPLACEALL:
 		case FINDWINDOW_REPLACEFIND: {
-			message->what = FINDWINDOW_REPLACE;
-			_FindReplace(message);
-			message->what = FINDWINDOW_FIND;
 			_FindReplace(message);
 		} break;
 		default:
@@ -778,6 +773,10 @@ EditorWindow::_FindReplace(BMessage* message)
 	const char* replaceText = message->GetString("replaceText", "");
 
 	switch(message->what) {
+		case FINDWINDOW_REPLACE:
+		case FINDWINDOW_REPLACEFIND:
+			fEditor->Replace(replaceText);
+			if(message->what == FINDWINDOW_REPLACE) break;
 		case FINDWINDOW_FIND: {
 			if(newSearch == true) {
 				fEditor->ResetFindReplace();
@@ -793,9 +792,6 @@ EditorWindow::_FindReplace(BMessage* message)
 				alert->Go();
 			}
 		} break;
-		case FINDWINDOW_REPLACE: {
-			fEditor->Replace(replaceText);
-		} break;
 		case FINDWINDOW_REPLACEALL: {
 			int occurences = fEditor->ReplaceAll(findText, replaceText,
 				matchCase, matchWord, inSelection);
@@ -810,7 +806,6 @@ EditorWindow::_FindReplace(BMessage* message)
 			alert->Go();
 		} break;
 	}
-
 }
 
 
