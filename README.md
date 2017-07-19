@@ -1,6 +1,8 @@
-# Koder
+# **![Koder icon](./artwork/Koder_icon_64.png)** Koder
 
 Koder is a code editor built using Scintilla editing component, inspired by Notepad++.
+
+![Screenshot](./artwork/Koder.png)
 
 ## Dependencies
 
@@ -18,6 +20,23 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 ## History
 
 0.3.0 - *TBD*
+
+* New icon.
+* Add right-click menu.
+* Disable menu items according to editor state.
+* Fix multiple language entries in Language menu.
+* Show alert if styles not found.
+* Change shortcut for Go to line.
+* Add View->Wrap lines.
+* Add File->Reload.
+* Add tooltips to toolbar buttons.
+* Add option to attach windows to existing ones.
+* Cascade windows if necessary.
+* Open files in the same window only if it is new window and has not been modified.
+* Add option to highlight trailing whitespace.
+* Add option to trim trailing whitespace.
+* Add option to trim trailing whitespace automatically on save.
+* Use multiline controls in Find window.
 
 0.2.0 - *15-04-2017*
 
