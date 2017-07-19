@@ -19,7 +19,7 @@ class BCheckBox;
 class BMessage;
 class BRadioButton;
 class BStringView;
-class BTextControl;
+class BScintillaView;
 
 
 enum {
@@ -54,9 +54,9 @@ private:
 	void			_InitInterface();
 
 	BStringView*	fFindString;
-	BTextControl*	fFindTC;
+	BScintillaView*	fFindTC;
 	BStringView*	fReplaceString;
-	BTextControl*	fReplaceTC;
+	BScintillaView*	fReplaceTC;
 
 	BButton*		fFindButton;
 	BButton*		fReplaceButton;
@@ -74,8 +74,8 @@ private:
 	BRadioButton*	fDirectionDownRadio;
 
 	bool			fFlagsChanged;
-	BString			fOldFindText;
-	BString			fOldReplaceText;
+	std::string		fOldFindText;
+	std::string		fOldReplaceText;
 };
 
 

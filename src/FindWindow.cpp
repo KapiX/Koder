@@ -5,6 +5,8 @@
 
 #include "FindWindow.h"
 
+#include <ScintillaView.h>
+
 #include <Application.h>
 #include <Box.h>
 #include <Button.h>
@@ -14,7 +16,6 @@
 #include <Message.h>
 #include <RadioButton.h>
 #include <StringView.h>
-#include <TextControl.h>
 
 
 #undef B_TRANSLATION_CONTEXT
@@ -45,11 +46,17 @@ FindWindow::MessageReceived(BMessage* message)
 		case FINDWINDOW_REPLACE:
 		case FINDWINDOW_REPLACEFIND:
 		case FINDWINDOW_REPLACEALL: {
+			int32 findLength = fFindTC->TextLength() + 1;
+			int32 replaceLength = fReplaceTC->TextLength() + 1;
+			std::string findText(findLength + 1, '\0');
+			std::string replaceText(replaceLength + 1, '\0');
+			fFindTC->GetText(0, findLength, &findText[0]);
+			fReplaceTC->GetText(0, replaceLength, &replaceText[0]);
 			bool newSearch = (fFlagsChanged
-				|| fOldFindText != fFindTC->Text()
-				|| fOldReplaceText != fReplaceTC->Text());
+				|| fOldFindText != findText
+				|| fOldReplaceText != replaceText);
 			message->AddBool("newSearch", newSearch);
-			message->AddBool("inSelection", 
+			message->AddBool("inSelection",
 				(fInSelectionCB->Value() == B_CONTROL_ON ? true : false));
 			message->AddBool("matchCase",
 				(fMatchCaseCB->Value() == B_CONTROL_ON ? true : false));
@@ -59,11 +66,11 @@ FindWindow::MessageReceived(BMessage* message)
 				(fWrapAroundCB->Value() == B_CONTROL_ON ? true : false));
 			message->AddBool("backwards",
 				(fDirectionUpRadio->Value() == B_CONTROL_ON ? true : false));
-			message->AddString("findText", fFindTC->Text());
-			message->AddString("replaceText", fReplaceTC->Text());
+			message->AddString("findText", findText.c_str());
+			message->AddString("replaceText", replaceText.c_str());
 			be_app->PostMessage(message);
-			fOldFindText = fFindTC->Text();
-			fOldReplaceText = fReplaceTC->Text();
+			fOldFindText = findText;
+			fOldReplaceText = replaceText;
 			if(message->what == FINDWINDOW_REPLACEALL) {
 				fFlagsChanged = true;
 					// Force scope retargeting on next search
@@ -90,7 +97,7 @@ void
 FindWindow::WindowActivated(bool active)
 {
 	fFindTC->MakeFocus();
-	fFindTC->TextView()->SelectAll();
+	fFindTC->SendMessage(SCI_SELECTALL);
 }
 
 
@@ -115,8 +122,10 @@ FindWindow::_InitInterface()
 {
 	fFindString = new BStringView("findString", B_TRANSLATE("Find:"));
 	fReplaceString = new BStringView("replaceString", B_TRANSLATE("Replace:"));
-	fFindTC = new BTextControl("findText", "", "", nullptr);
-	fReplaceTC = new BTextControl("replaceText", "", "", nullptr);
+	fFindTC = new BScintillaView("findText", 0, true, true);
+	fFindTC->SetExplicitMinSize(BSize(200, 100));
+	fReplaceTC = new BScintillaView("replaceText", 0, true, true);
+	fReplaceTC->SetExplicitMinSize(BSize(200, 100));
 
 	fFindButton = new BButton(B_TRANSLATE("Find"), new BMessage((uint32) FINDWINDOW_FIND));
 	fFindButton->MakeDefault(true);
