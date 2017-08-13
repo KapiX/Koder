@@ -64,6 +64,8 @@ FindWindow::MessageReceived(BMessage* message)
 				(fMatchWordCB->Value() == B_CONTROL_ON ? true : false));
 			message->AddBool("wrapAround",
 				(fWrapAroundCB->Value() == B_CONTROL_ON ? true : false));
+			message->AddBool("regex",
+				(fRegexCB->Value() == B_CONTROL_ON ? true : false));
 			message->AddBool("backwards",
 				(fDirectionUpRadio->Value() == B_CONTROL_ON ? true : false));
 			message->AddString("findText", findText.c_str());
@@ -140,7 +142,8 @@ FindWindow::_InitInterface()
 	fMatchCaseCB = new BCheckBox("matchCase", B_TRANSLATE("Match case"), new BMessage((uint32) Actions::MATCH_CASE));
 	fMatchWordCB = new BCheckBox("matchWord", B_TRANSLATE("Match entire words"), new BMessage((uint32) Actions::MATCH_WORD));
 	fWrapAroundCB = new BCheckBox("wrapAround", B_TRANSLATE("Wrap around"), new BMessage((uint32) Actions::WRAP_AROUND));
-	fInSelectionCB =  new BCheckBox("inSelection", B_TRANSLATE("In selection"), new BMessage((uint32) Actions::IN_SELECTION));
+	fInSelectionCB = new BCheckBox("inSelection", B_TRANSLATE("In selection"), new BMessage((uint32) Actions::IN_SELECTION));
+	fRegexCB = new BCheckBox("regex", B_TRANSLATE("Regex"), new BMessage((uint32) Actions::REGEX));
 
 	fDirectionBox = new BBox("direction");
 	fDirectionUpRadio = new BRadioButton("directionUp", B_TRANSLATE("Up"), new BMessage((uint32) Actions::DIRECTION_UP));
@@ -167,6 +170,7 @@ FindWindow::_InitInterface()
 				.Add(fMatchWordCB, 0, 1)
 				.Add(fInSelectionCB, 1, 1)
 				.Add(fDirectionBox, 0, 2)
+				.Add(fRegexCB, 1, 2)
 			.End()
 		.End()
 		.AddGroup(B_VERTICAL, 5)

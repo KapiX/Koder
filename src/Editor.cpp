@@ -25,7 +25,9 @@ Editor::Editor()
 	fSearchTargetStart(-1),
 	fSearchTargetEnd(-1),
 	fSearchLastResultStart(-1),
-	fSearchLastResultEnd(-1)
+	fSearchLastResultEnd(-1),
+	fSearchLast(""),
+	fSearchLastFlags(0)
 {
 }
 
@@ -314,13 +316,19 @@ Editor::Replace(std::string replacement, bool regex)
 {
 	Sci_Position startOld = SendMessage(SCI_GETTARGETSTART);
 	Sci_Position endOld = SendMessage(SCI_GETTARGETEND);
+	int searchFlagsOld = SendMessage(SCI_GETSEARCHFLAGS);
 	int replaceMsg = (regex ? SCI_REPLACETARGETRE : SCI_REPLACETARGET);
 	if(fSearchLastResultStart != -1 && fSearchLastResultEnd != -1) {
+		// we need to search again, because whitespace highlighting messes with
+		// the results
+		SendMessage(SCI_SETSEARCHFLAGS, fSearchLastFlags);
 		SendMessage(SCI_SETTARGETRANGE, fSearchLastResultStart, fSearchLastResultEnd);
+		SendMessage(SCI_SEARCHINTARGET, (uptr_t) fSearchLast.size(), (sptr_t) fSearchLast.c_str());
 		SendMessage(replaceMsg, -1, (sptr_t) replacement.c_str());
 		fSearchLastResultStart = -1;
 		fSearchLastResultEnd = -1;
 	}
+	SendMessage(SCI_SETSEARCHFLAGS, searchFlagsOld);
 	SendMessage(SCI_SETTARGETRANGE, startOld, endOld);
 }
 
@@ -574,13 +582,15 @@ Editor::_Find(std::string search, Sci_Position start, Sci_Position end,
 	if(regex == true)
 		searchFlags |= SCFIND_REGEXP | SCFIND_CXX11REGEX;
 	SendMessage(SCI_SETSEARCHFLAGS, searchFlags);
+	fSearchLastFlags = searchFlags;
 
 	SendMessage(SCI_SETTARGETRANGE, start, end);
 
+	fSearchLast = search;
 	Sci_Position pos = SendMessage(SCI_SEARCHINTARGET, (uptr_t) search.size(), (sptr_t) search.c_str());
 	if(pos != -1) {
-		fSearchLastResultStart = pos;
-		fSearchLastResultEnd = pos + search.size();
+		fSearchLastResultStart = SendMessage(SCI_GETTARGETSTART);
+		fSearchLastResultEnd = SendMessage(SCI_GETTARGETEND);
 		SendMessage(SCI_SETSEL, fSearchLastResultStart, fSearchLastResultEnd);
 		found = true;
 	}

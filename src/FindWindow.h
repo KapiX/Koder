@@ -49,7 +49,8 @@ private:
 		WRAP_AROUND		= 'wrar',
 		DIRECTION_UP	= 'diru',
 		DIRECTION_DOWN	= 'dird',
-		IN_SELECTION	= 'insl'
+		IN_SELECTION	= 'insl',
+		REGEX			= 'rege'
 	};
 	void			_InitInterface();
 
@@ -68,6 +69,7 @@ private:
 	BCheckBox*		fWrapAroundCB;
 	BCheckBox*		fBackwardsCB;
 	BCheckBox*		fInSelectionCB;
+	BCheckBox*		fRegexCB;
 
 	BBox*			fDirectionBox;
 	BRadioButton*	fDirectionUpRadio;

@@ -94,6 +94,8 @@ private:
 	Sci_Position		fSearchTargetEnd;
 	Sci_Position		fSearchLastResultStart;
 	Sci_Position		fSearchLastResultEnd;
+	std::string			fSearchLast;
+	int					fSearchLastFlags;
 	bool				fNewSearch;
 };
 

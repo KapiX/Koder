@@ -769,13 +769,14 @@ EditorWindow::_FindReplace(BMessage* message)
 	bool matchWord = message->GetBool("matchWord");
 	bool wrapAround = message->GetBool("wrapAround");
 	bool backwards = message->GetBool("backwards");
+	bool regex = message->GetBool("regex");
 	const char* findText = message->GetString("findText", "");
 	const char* replaceText = message->GetString("replaceText", "");
 
 	switch(message->what) {
 		case FINDWINDOW_REPLACE:
 		case FINDWINDOW_REPLACEFIND:
-			fEditor->Replace(replaceText);
+			fEditor->Replace(replaceText, regex);
 			if(message->what == FINDWINDOW_REPLACE) break;
 		case FINDWINDOW_FIND: {
 			if(newSearch == true) {
@@ -783,7 +784,7 @@ EditorWindow::_FindReplace(BMessage* message)
 			}
 			bool found;
 			found = fEditor->Find(findText, matchCase, matchWord, backwards,
-				wrapAround, inSelection);
+				wrapAround, inSelection, regex);
 			if(found == false) {
 				BAlert* alert = new BAlert(B_TRANSLATE("Searching finished"),
 					B_TRANSLATE("Reached the end of the target. No results found."),
@@ -794,7 +795,7 @@ EditorWindow::_FindReplace(BMessage* message)
 		} break;
 		case FINDWINDOW_REPLACEALL: {
 			int occurences = fEditor->ReplaceAll(findText, replaceText,
-				matchCase, matchWord, inSelection);
+				matchCase, matchWord, inSelection, regex);
 			BString alertMessage;
 			static BMessageFormat format(B_TRANSLATE("Replaced "
 				"{0, plural, one{# occurence} other{# occurences}}."));
