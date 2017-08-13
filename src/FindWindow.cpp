@@ -126,8 +126,10 @@ FindWindow::_InitInterface()
 	fReplaceString = new BStringView("replaceString", B_TRANSLATE("Replace:"));
 	fFindTC = new BScintillaView("findText", 0, true, true);
 	fFindTC->SetExplicitMinSize(BSize(200, 100));
+	fFindTC->Target()->SetFlags(fFindTC->Target()->Flags() | B_NAVIGABLE);
 	fReplaceTC = new BScintillaView("replaceText", 0, true, true);
 	fReplaceTC->SetExplicitMinSize(BSize(200, 100));
+	fReplaceTC->Target()->SetFlags(fReplaceTC->Target()->Flags() | B_NAVIGABLE);
 
 	fFindButton = new BButton(B_TRANSLATE("Find"), new BMessage((uint32) FINDWINDOW_FIND));
 	fFindButton->MakeDefault(true);
