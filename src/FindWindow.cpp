@@ -67,7 +67,7 @@ FindWindow::MessageReceived(BMessage* message)
 			message->AddBool("regex",
 				(fRegexCB->Value() == B_CONTROL_ON ? true : false));
 			message->AddBool("backwards",
-				(fDirectionUpRadio->Value() == B_CONTROL_ON ? true : false));
+				(fBackwardsCB->Value() == B_CONTROL_ON ? true : false));
 			message->AddString("findText", findText.c_str());
 			message->AddString("replaceText", replaceText.c_str());
 			be_app->PostMessage(message);
@@ -83,8 +83,7 @@ FindWindow::MessageReceived(BMessage* message)
 		case Actions::MATCH_CASE:
 		case Actions::MATCH_WORD:
 		case Actions::WRAP_AROUND:
-		case Actions::DIRECTION_UP:
-		case Actions::DIRECTION_DOWN:
+		case Actions::BACKWARDS:
 		case Actions::IN_SELECTION: {
 			fFlagsChanged = true;
 		} break;
@@ -98,8 +97,10 @@ FindWindow::MessageReceived(BMessage* message)
 void
 FindWindow::WindowActivated(bool active)
 {
-	fFindTC->MakeFocus();
-	fFindTC->SendMessage(SCI_SELECTALL);
+	if(active == true) {
+		fFindTC->MakeFocus();
+		fFindTC->SendMessage(SCI_SELECTALL);
+	}
 }
 
 
@@ -145,42 +146,32 @@ FindWindow::_InitInterface()
 	fMatchWordCB = new BCheckBox("matchWord", B_TRANSLATE("Match entire words"), new BMessage((uint32) Actions::MATCH_WORD));
 	fWrapAroundCB = new BCheckBox("wrapAround", B_TRANSLATE("Wrap around"), new BMessage((uint32) Actions::WRAP_AROUND));
 	fInSelectionCB = new BCheckBox("inSelection", B_TRANSLATE("In selection"), new BMessage((uint32) Actions::IN_SELECTION));
+	fBackwardsCB = new BCheckBox("backwards", B_TRANSLATE("Backwards"), new BMessage((uint32) Actions::BACKWARDS));
 	fRegexCB = new BCheckBox("regex", B_TRANSLATE("Regex"), new BMessage((uint32) Actions::REGEX));
 
-	fDirectionBox = new BBox("direction");
-	fDirectionUpRadio = new BRadioButton("directionUp", B_TRANSLATE("Up"), new BMessage((uint32) Actions::DIRECTION_UP));
-	fDirectionDownRadio = new BRadioButton("directionDown", B_TRANSLATE("Down"), new BMessage((uint32) Actions::DIRECTION_DOWN));
-	fDirectionDownRadio->SetValue(B_CONTROL_ON);
-
-	BLayoutBuilder::Group<>(fDirectionBox, B_VERTICAL, 5)
-		.Add(fDirectionUpRadio)
-		.Add(fDirectionDownRadio)
-		.SetInsets(10, 25, 15, 10);
-	fDirectionBox->SetLabel(B_TRANSLATE("Direction"));
-
-	BLayoutBuilder::Group<>(this, B_HORIZONTAL, 5)
-		.AddGroup(B_VERTICAL, 5)
+	BLayoutBuilder::Group<>(this, B_VERTICAL, 5)
+		.AddGroup(B_HORIZONTAL, 5)
 			.AddGrid(1, 1)
 				.Add(fFindString, 0, 0)
 				.Add(fFindTC, 1, 0)
 				.Add(fReplaceString, 0, 1)
 				.Add(fReplaceTC, 1, 1)
 			.End()
-			.AddGrid(1, 1)
-				.Add(fMatchCaseCB, 0, 0)
-				.Add(fWrapAroundCB, 1, 0)
-				.Add(fMatchWordCB, 0, 1)
-				.Add(fInSelectionCB, 1, 1)
-				.Add(fDirectionBox, 0, 2)
-				.Add(fRegexCB, 1, 2)
+			.AddGroup(B_VERTICAL, 5)
+				.Add(fFindButton)
+				.Add(fReplaceButton)
+				.Add(fReplaceFindButton)
+				.Add(fReplaceAllButton)
+				.AddGlue()
 			.End()
 		.End()
-		.AddGroup(B_VERTICAL, 5)
-			.Add(fFindButton)
-			.Add(fReplaceButton)
-			.Add(fReplaceFindButton)
-			.Add(fReplaceAllButton)
-			.AddGlue()
+		.AddGrid(1, 1)
+			.Add(fMatchCaseCB, 0, 0)
+			.Add(fRegexCB, 1, 0)
+			.Add(fBackwardsCB, 2, 0)
+			.Add(fMatchWordCB, 0, 1)
+			.Add(fInSelectionCB, 1, 1)
+			.Add(fWrapAroundCB, 2, 1)
 		.End()
 		.SetInsets(5, 5, 5, 5);
 }

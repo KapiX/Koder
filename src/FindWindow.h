@@ -47,8 +47,7 @@ private:
 		MATCH_CASE		= 'mtcs',
 		MATCH_WORD		= 'mtwd',
 		WRAP_AROUND		= 'wrar',
-		DIRECTION_UP	= 'diru',
-		DIRECTION_DOWN	= 'dird',
+		BACKWARDS		= 'back',
 		IN_SELECTION	= 'insl',
 		REGEX			= 'rege'
 	};
@@ -70,10 +69,6 @@ private:
 	BCheckBox*		fBackwardsCB;
 	BCheckBox*		fInSelectionCB;
 	BCheckBox*		fRegexCB;
-
-	BBox*			fDirectionBox;
-	BRadioButton*	fDirectionUpRadio;
-	BRadioButton*	fDirectionDownRadio;
 
 	bool			fFlagsChanged;
 	std::string		fOldFindText;
