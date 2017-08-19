@@ -88,6 +88,8 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem(B_TRANSLATE("Save"), MAINMENU_FILE_SAVE, 'S')
 			.AddItem(B_TRANSLATE("Save as" B_UTF8_ELLIPSIS), MAINMENU_FILE_SAVEAS)
 			.AddSeparator()
+			.AddItem(B_TRANSLATE("Open corresponding" B_UTF8_ELLIPSIS), MAINMENU_FILE_OPEN_CORRESPONDING)
+			.AddSeparator()
 			.AddItem(B_TRANSLATE("Close"), B_QUIT_REQUESTED, 'W')
 			.AddItem(B_TRANSLATE("Quit"), MAINMENU_FILE_QUIT, 'Q')
 		.End()
@@ -458,6 +460,11 @@ EditorWindow::MessageReceived(BMessage* message)
 				fSavePanel->SetPanelDirectory(parent.Path());
 			}
 			fSavePanel->Show();
+		} break;
+		case MAINMENU_FILE_OPEN_CORRESPONDING: {
+			if(fOpenedFilePath != nullptr) {
+				_OpenCorrespondingFile(*fOpenedFilePath, fCurrentLanguage);
+			}
 		} break;
 		case MAINMENU_FILE_QUIT: {
 			be_app->PostMessage(B_QUIT_REQUESTED);
@@ -896,6 +903,7 @@ EditorWindow::_SetLanguage(std::string lang)
 
 	fMainMenu->FindItem(EDIT_COMMENTLINE)->SetEnabled(fEditor->CanCommentLine());
 	fMainMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(fEditor->CanCommentBlock());
+	fMainMenu->FindItem(MAINMENU_FILE_OPEN_CORRESPONDING)->SetEnabled(lang == "c" || lang == "cpp");
 
 	fContextMenu->FindItem(EDIT_COMMENTLINE)->SetEnabled(fEditor->CanCommentLine());
 	fContextMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(fEditor->CanCommentBlock());
@@ -914,6 +922,44 @@ EditorWindow::_SetLanguageByFilename(const char* filename)
 			Languages::GetLanguageForExtension(extension.c_str(), lang);
 	}
 	_SetLanguage(lang);
+}
+
+
+void
+EditorWindow::_OpenCorrespondingFile(const BPath &file, const std::string lang)
+{
+	if(lang != "c" && lang != "cpp")
+		return;
+
+	const std::vector<std::string> extensionsToTryC{"h", "hh", "hxx", "hpp"};
+	const std::vector<std::string> extensionsToTryH{"c", "cc", "cxx", "cpp"};
+	const std::vector<std::string>* extensionsToTry = &extensionsToTryC;
+	if(GetFileExtension(file.Leaf())[0] == 'h') {
+		extensionsToTry = &extensionsToTryH;
+	}
+	BPath parent;
+	if(file.GetParent(&parent) == B_OK) {
+		const BDirectory parentDir(parent.Path());
+
+		const std::string filename = GetFileName(file.Leaf());
+		for(auto &ext : *extensionsToTry) {
+			BEntry fileToTry(&parentDir, (filename + '.' + ext).c_str());
+			if(fileToTry.Exists()) {
+				BMessage openFile(B_REFS_RECEIVED);
+				entry_ref ref;
+				if(fileToTry.GetRef(&ref) == B_OK) {
+					openFile.AddRef("refs", &ref);
+					openFile.AddPointer("window", this);
+					be_app->PostMessage(&openFile);
+					return;
+				}
+			}
+		}
+		BAlert* notFoundAlert = new BAlert(B_TRANSLATE("Open corresponding file"),
+			B_TRANSLATE("Corresponding file not found."), B_TRANSLATE("OK"),
+			nullptr, nullptr, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_STOP_ALERT);
+		notFoundAlert->Go();
+	}
 }
 
 

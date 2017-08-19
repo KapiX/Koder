@@ -47,6 +47,7 @@ enum {
 	MAINMENU_FILE_RELOAD				= 'mrld',
 	MAINMENU_FILE_SAVE					= 'msav',
 	MAINMENU_FILE_SAVEAS				= 'msva',
+	MAINMENU_FILE_OPEN_CORRESPONDING	= 'mcrf',
 	MAINMENU_FILE_QUIT					= 'mqut',
 
 	MAINMENU_EDIT_CONVERTEOLS_UNIX		= 'ceun',
@@ -134,6 +135,7 @@ private:
 			void			_ReloadFile(entry_ref* ref = nullptr);
 			void			_SetLanguage(std::string lang);
 			void			_SetLanguageByFilename(const char* filename);
+			void			_OpenCorrespondingFile(const BPath &file, const std::string lang);
 			void			_SyncWithPreferences();
 			void			_SyncEditMenus();
 			int32			_ShowModifiedAlert();
