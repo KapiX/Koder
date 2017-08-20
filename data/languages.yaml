@@ -45,3 +45,6 @@ xml:
 yaml:
     name: YAML
     extensions: [ yml, yaml ]
+recipe:
+    name: Haikuporter Recipe
+    extensions: [ recipe ]
