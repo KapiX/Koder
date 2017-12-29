@@ -152,6 +152,8 @@ App::ReadyToRun()
 void
 App::ArgvReceived(int32 argc, char** argv)
 {
+	BMessage* message = CurrentMessage();
+	BString cwd = message->GetString("cwd", "~");
 	entry_ref ref;
 	BEntry entry;
 	std::unique_ptr<BWindowStack> windowStack(nullptr);
@@ -177,6 +179,10 @@ App::ArgvReceived(int32 argc, char** argv)
 			column = strtol(columnStr.String(), nullptr, 10) - 1;
 		} else {
 			filename = argument;
+		}
+		if(filename.FindFirst('/') != 0) {
+			BPath absolute(cwd.String(), filename.String(), true);
+			filename = absolute.Path();
 		}
 		entry.SetTo(filename);
 		entry.GetRef(&ref);
