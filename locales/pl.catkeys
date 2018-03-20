@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	2285835744
+1	Polish	x-vnd.KapiX-Koder	2889977837
 ArmanHayots, for Russian translation.	App		ArmanHayots, za tłumaczenie na rosyjski.
 Code editor for Haiku based on Scintilla editing component.	App		Edytor kodu dla Haiku oparty na kontrolce Scintilla.
 damoklas, for Lithuanian translation.	App		damoklasa, za tłumaczenie na litewski.
@@ -16,7 +16,8 @@ Convert tabs to spaces	AppPreferencesWindow		Konwersja tabulacji na spacje
 Editor	AppPreferencesWindow		Edytor
 Highlight braces	AppPreferencesWindow		Podświetl nawiasy
 Highlight current line	AppPreferencesWindow		Podświetl edytowaną linię
-Koder preferences	AppPreferencesWindow		Koder preferences
+Highlight trailing whitespace	AppPreferencesWindow		Podświetlaj wiodące białe znaki
+Koder preferences	AppPreferencesWindow		Preferencje Kodera
 Line	AppPreferencesWindow		Linia
 Mark overly long lines	AppPreferencesWindow		Oznacz zbyt długie linie
 Max. characters per line:	AppPreferencesWindow		Maks. liczba znaków w linii:
@@ -27,7 +28,9 @@ Show indentation guides	AppPreferencesWindow		Pokazuj prowadnice wcięć
 Show line numbers	AppPreferencesWindow		Pokazuj numery linii
 Show toolbar	AppPreferencesWindow		Pokazuj pasek narzędzie
 Spaces per tab:	AppPreferencesWindow		Spacje na tabulację:
+Stack new windows	AppPreferencesWindow		Grupuj nowe okna
 Style	AppPreferencesWindow		Styl
+Trim trailing whitespace on save	AppPreferencesWindow		Obcinaj wiodące białe znaki przy zapisywaniu
 Up to the next non-empty line	AppPreferencesWindow		Do następnej niepustej linii
 Up to the next/previous non-empty line	AppPreferencesWindow		Do następnej/poprzedniej niepustej linii
 [read-only]	EditorWindow		[tylko do odczytu]
@@ -38,6 +41,7 @@ Close	EditorWindow		Zamknij
 Comment block	EditorWindow		Zakomentuj blok
 Comment line	EditorWindow		Zakomentuj linię
 Copy	EditorWindow		Kopiuj
+Corresponding file not found.	EditorWindow		Odpowiadający plik nie znaleziony.
 Cut	EditorWindow		Wytnij
 Discard	EditorWindow		Odrzuć
 Do nothing	EditorWindow		Nic
@@ -55,23 +59,29 @@ Line endings	EditorWindow		Zakończenia linii
 New	EditorWindow		Nowy
 OK	EditorWindow		OK
 Old Mac format	EditorWindow		Format starego Mac OS
-Open	EditorWindow		Otwórz
+Open corresponding file	EditorWindow		Otwórz plik odpowiadający
+Open corresponding…	EditorWindow		Otwórz odpowiadający…
+Open…	EditorWindow		Otwórz…
 Paste	EditorWindow		Wklej
 Quit	EditorWindow		Zakończ
-Reached the end of the document. No results found.	EditorWindow		Osiągnięto koniec dokumentu. Nie znaleziono rezultatów.
+Reached the end of the target. No results found.	EditorWindow		Osiągnięto koniec zakresu. Brak wyników.
 Redo	EditorWindow		Ponów
 Reload	EditorWindow		Przeładuj
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Zastąpiono {0, plural, one{# wystąpienie} few{# wystąpienia} many{# wystąpień} other{# wystąpienia}}.
+Replacement finished	EditorWindow		Zamiana zakończona
 Save	EditorWindow		Zapisz
 Save as…	EditorWindow		Zapisz jako…
 Search	EditorWindow		Znajdź
 Searching finished	EditorWindow		Wyszukiwanie zakończone
 Select all	EditorWindow		Zaznacz wszystko
 Show line endings	EditorWindow		Pokazuj zakończenia linii
+Show toolbar	EditorWindow		Pokazuj pasek narzędzi
 Show white space	EditorWindow		Pokazuj białe znaki
 Special symbols	EditorWindow		Symbole specjalne
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Plik zawiera niezapisane zmiany, ale jest tylko do odczytu. Co zrobić?
 The file contains unsaved changes. What to do?	EditorWindow		Plik zawiera niezapisane zmiany. Co zrobić?
 The file has been modified by another application. What to do?	EditorWindow		Plik został zmodyfikowany przez inną aplikację. Co zrobić?
+Trim trailing whitespace	EditorWindow		Obetnij wiodące białe znaki
 Undo	EditorWindow		Cofnij
 Unix format	EditorWindow		Format Unix
 Unsaved changes	EditorWindow		Niezapisane zmiany
@@ -79,21 +89,22 @@ Untitled	EditorWindow		Bez nazwy
 View	EditorWindow		Widok
 Warning	EditorWindow		Uwaga
 Windows format	EditorWindow		Format Windows
+Wrap lines	EditorWindow		Zawijaj linie
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nie masz uprawnień do edycji tego pliku. Edytor zostanie ustawiony w tryb tylko do odczytu.
 You don't have sufficient permissions to edit this file.	EditorWindow		Nie masz wystarczających uprawnień do edycji tego pliku.
-Direction	FindWindow		Kierunek
-Down	FindWindow		W dół
+Your changes will be lost.	EditorWindow		Zmiany zostaną utracone.
+Backwards	FindWindow		Wstecz
 Find	FindWindow		Znajdź
 Find:	FindWindow		Znajdź:
 Find/Replace	FindWindow		Znajdź/zastąp
 In selection	FindWindow		W zaznaczeniu
 Match case	FindWindow		Dopasuj wielkość liter
 Match entire words	FindWindow		Dopasuj całe słowa
+Regex	FindWindow		Wyrażenie regularne
 Replace	FindWindow		Zastąp
 Replace all	FindWindow		Zastąp wszystkie
 Replace and find	FindWindow		Zastąp i znajdź
 Replace:	FindWindow		Zastąp:
-Up	FindWindow		W górę
 Wrap around	FindWindow		Zapętlaj
 Cancel	GoToLineWindow		Anuluj
 Go to line	GoToLineWindow		Skocz do linii
@@ -113,4 +124,7 @@ Save all	QuitAlert		Zapisz wszystkie
 Save selected	QuitAlert		Zapisz zaznaczone
 There are unsaved changes.\nSelect the files to save.	QuitAlert		Istnieją niezapisane zmiany.\nWybierz pliki do zapisania.
 Unsaved files	QuitAlert		Niezapisane pliki
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Nie znaleziono plików stylów. Upewnij się, że zostały zainstalowane w jednym z katalogów data.
+OK	Styler		OK
+Style files	Styler		Pliki stylów
 Koder	System name		Koder

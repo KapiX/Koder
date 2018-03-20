@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	2285835744
+1	Spanish	x-vnd.KapiX-Koder	2889977837
 ArmanHayots, for Russian translation.	App		ArmanHayots, por la traducción al ruso.
 Code editor for Haiku based on Scintilla editing component.	App		Editor de código para Haiku, basado en Scintilla.
 damoklas, for Lithuanian translation.	App		damoklas, por la traducción al lituano.
@@ -16,6 +16,7 @@ Convert tabs to spaces	AppPreferencesWindow		Convertir tabulador a espacios
 Editor	AppPreferencesWindow		Editor
 Highlight braces	AppPreferencesWindow		Resaltar llaves
 Highlight current line	AppPreferencesWindow		Resaltar línea actual
+Highlight trailing whitespace	AppPreferencesWindow		Resaltar espacios en blanco al final de la línea
 Koder preferences	AppPreferencesWindow		Preferencias de Koder
 Line	AppPreferencesWindow		Línea
 Mark overly long lines	AppPreferencesWindow		Marcar líneas demasiado largas
@@ -27,7 +28,9 @@ Show indentation guides	AppPreferencesWindow		Mostrar guías de indentación
 Show line numbers	AppPreferencesWindow		Mostrar número de línea
 Show toolbar	AppPreferencesWindow		Mostrar barra de herramientas
 Spaces per tab:	AppPreferencesWindow		Espacios por tabulador:
+Stack new windows	AppPreferencesWindow		Apilar nueva ventana
 Style	AppPreferencesWindow		Estilo
+Trim trailing whitespace on save	AppPreferencesWindow		Al guardar, eliminar espacios en blanco al final de la línea
 Up to the next non-empty line	AppPreferencesWindow		Hasta la siguiente linea no-vacia
 Up to the next/previous non-empty line	AppPreferencesWindow		Hasta la siguiente/previa linea no-vacia
 [read-only]	EditorWindow		[solo-lectura]
@@ -38,6 +41,7 @@ Close	EditorWindow		Cerrar
 Comment block	EditorWindow		Comentar bloque
 Comment line	EditorWindow		Comentar línea
 Copy	EditorWindow		Copiar
+Corresponding file not found.	EditorWindow		No se encontró el archivo correspondiente.
 Cut	EditorWindow		Cortar
 Discard	EditorWindow		Descartar
 Do nothing	EditorWindow		No hacer nada
@@ -53,25 +57,31 @@ Koder preferences…	EditorWindow		Preferencias de Koder…
 Language	EditorWindow		Lenguaje
 Line endings	EditorWindow		Retornos de línea
 New	EditorWindow		Nuevo
-OK	EditorWindow		OK
+OK	EditorWindow		Aceptar
 Old Mac format	EditorWindow		Antiguo formato Mac
-Open	EditorWindow		Abrir
+Open corresponding file	EditorWindow		Abrir archivo correspondiente
+Open corresponding…	EditorWindow		Abrir correspondiente…
+Open…	EditorWindow		Abrir…
 Paste	EditorWindow		Pegar
 Quit	EditorWindow		Salir
-Reached the end of the document. No results found.	EditorWindow		Se alcanzó el final del documento. No se encontraron resultados.
+Reached the end of the target. No results found.	EditorWindow		Se alcanzó el final del rango. No se han encontrado resultados.
 Redo	EditorWindow		Rehacer
 Reload	EditorWindow		Recargar
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Reemplazado {0, plural, one{# ocurrencia} other{# ocurrencias}}.
+Replacement finished	EditorWindow		Reemplazo finalizado
 Save	EditorWindow		Guardar
 Save as…	EditorWindow		Guardar como…
 Search	EditorWindow		Buscar
 Searching finished	EditorWindow		Búsqueda finalizada
 Select all	EditorWindow		Seleccionar todo
 Show line endings	EditorWindow		Mostrar retornos de línea
+Show toolbar	EditorWindow		Mostrar barra de herramientas
 Show white space	EditorWindow		Mostrar espacios
 Special symbols	EditorWindow		Símbolos especiales
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		El archivo contiene cambios sin guardar, pero es de sólo-lectura. ¿Que desea hacer?
 The file contains unsaved changes. What to do?	EditorWindow		El archivo contiene cambios sin guardar. ¿Que desea hacer?
 The file has been modified by another application. What to do?	EditorWindow		El archivo fue modificado por otra aplicación. ¿Que desea hacer?
+Trim trailing whitespace	EditorWindow		Eliminar espacios en blanco al final de la línea
 Undo	EditorWindow		Deshacer
 Unix format	EditorWindow		Formato Unix
 Unsaved changes	EditorWindow		Cambios sin guardar
@@ -79,32 +89,33 @@ Untitled	EditorWindow		Sin titulo
 View	EditorWindow		Ver
 Warning	EditorWindow		Advertencia
 Windows format	EditorWindow		Formato Windows
+Wrap lines	EditorWindow		Ajustar líneas
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		No posee permisos para editar este archivo. El editor será seteado en modo solo-lectura.
 You don't have sufficient permissions to edit this file.	EditorWindow		No tiene suficientes permisos para editar este archivo.
-Direction	FindWindow		Dirección
-Down	FindWindow		Abajo
+Your changes will be lost.	EditorWindow		Los cambios se perderán.
+Backwards	FindWindow		Hacia atrás
 Find	FindWindow		Buscar
 Find:	FindWindow		Buscar:
 Find/Replace	FindWindow		Buscar/Reemplazar
 In selection	FindWindow		En selección
 Match case	FindWindow		Coincidir mayúsculas y minúsculas
 Match entire words	FindWindow		Encontrar palabras completas
+Regex	FindWindow		Expresión regular
 Replace	FindWindow		Reemplazar
 Replace all	FindWindow		Reemplazar todo
 Replace and find	FindWindow		Reemplazar y buscar
 Replace:	FindWindow		Reemplazar:
-Up	FindWindow		Arriba
 Wrap around	FindWindow		En todo el archivo
 Cancel	GoToLineWindow		Cancelar
 Go to line	GoToLineWindow		Ir a la línea
 Go to line:	GoToLineWindow		Ir a la línea:
-OK	GoToLineWindow		OK
+OK	GoToLineWindow		Aceptar
 Configuration file	Preferences		Archivo de configuración
 Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		No se pudo abrir el archivo de configuración debido a ausencia de permisos. Esto usualmente significa que no posee permisos de lectura en el directorio de configuración. Si desea cargar su configuración personal, revise la documentación de su sistema operativo para determinar qué directorio se está usando e intentar modificar sus permisos.
 Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		No se pudo abrir el archivo de configuración debido a ausencia de permisos. Esto usualmente significa que no posee permisos de escritura en el directorio de configuración. Si desea cargar su configuración personal, revise la documentación de su sistema operativo para determinar qué directorio se está usando e intentar modificar sus permisos.
 Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		No se pudo abrir el archivo de configuración debido a que la ruta al mismo no ha sido especificada. Esto usualmente significa que el programador ha cometido un error. No hay nada que usted pueda hacer al respecto. Su configuración personal no será cargada. Lo siento!
 Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		No se pudo abrir el archivo de configuración debido a que la ruta al mismo no ha sido especificada. Esto usualmente significa que el programador ha cometido un error. No hay nada que usted pueda hacer al respecto. Su configuración personal no será guardada. Lo siento!
-OK	Preferences		OK
+OK	Preferences		Aceptar
 There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		No hay memoria suficiente en su sistema para cargar el archivo de configuración. Si desea cargar su configuración personal, intente cerrando algunas aplicaciones y reiniciando Koder.
 There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		No hay memoria suficiente en su sistema para guardar el archivo de configuración. Si desea guardar su configuración personal, intente cerrando algunas aplicaciones y reintente nuevamente.
 Cancel	QuitAlert		Cancelar
@@ -113,4 +124,7 @@ Save all	QuitAlert		Guardar todo
 Save selected	QuitAlert		Guardar seleccionado
 There are unsaved changes.\nSelect the files to save.	QuitAlert		Hay cambios sin guardar.\nSeleccione los archivos a guardar.
 Unsaved files	QuitAlert		Archivos sin guardar
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		No se encontraron archivos de estilo. Asegúrese que los tiene instalados en alguno de los directorios de datos.
+OK	Styler		Aceptar
+Style files	Styler		Archivos de estilo
 Koder	System name		Koder

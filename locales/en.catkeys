@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	2285835744
+1	English	x-vnd.KapiX-Koder	2889977837
 ArmanHayots, for Russian translation.	App		ArmanHayots, for Russian translation.
 Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
 damoklas, for Lithuanian translation.	App		damoklas, for Lithuanian translation.
@@ -16,6 +16,7 @@ Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
 Editor	AppPreferencesWindow		Editor
 Highlight braces	AppPreferencesWindow		Highlight braces
 Highlight current line	AppPreferencesWindow		Highlight current line
+Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
 Koder preferences	AppPreferencesWindow		Koder preferences
 Line	AppPreferencesWindow		Line
 Mark overly long lines	AppPreferencesWindow		Mark overly long lines
@@ -27,7 +28,9 @@ Show indentation guides	AppPreferencesWindow		Show indentation guides
 Show line numbers	AppPreferencesWindow		Show line numbers
 Show toolbar	AppPreferencesWindow		Show toolbar
 Spaces per tab:	AppPreferencesWindow		Spaces per tab:
+Stack new windows	AppPreferencesWindow		Stack new windows
 Style	AppPreferencesWindow		Style
+Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
 Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
 Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
 [read-only]	EditorWindow		[read-only]
@@ -38,6 +41,7 @@ Close	EditorWindow		Close
 Comment block	EditorWindow		Comment block
 Comment line	EditorWindow		Comment line
 Copy	EditorWindow		Copy
+Corresponding file not found.	EditorWindow		Corresponding file not found.
 Cut	EditorWindow		Cut
 Discard	EditorWindow		Discard
 Do nothing	EditorWindow		Do nothing
@@ -55,23 +59,29 @@ Line endings	EditorWindow		Line endings
 New	EditorWindow		New
 OK	EditorWindow		OK
 Old Mac format	EditorWindow		Old Mac format
-Open	EditorWindow		Open
+Open corresponding file	EditorWindow		Open corresponding file
+Open corresponding…	EditorWindow		Open corresponding…
+Open…	EditorWindow		Open…
 Paste	EditorWindow		Paste
 Quit	EditorWindow		Quit
-Reached the end of the document. No results found.	EditorWindow		Reached the end of the document. No results found.
+Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
 Redo	EditorWindow		Redo
 Reload	EditorWindow		Reload
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
+Replacement finished	EditorWindow		Replacement finished
 Save	EditorWindow		Save
 Save as…	EditorWindow		Save as…
 Search	EditorWindow		Search
 Searching finished	EditorWindow		Searching finished
 Select all	EditorWindow		Select all
 Show line endings	EditorWindow		Show line endings
+Show toolbar	EditorWindow		Show toolbar
 Show white space	EditorWindow		Show white space
 Special symbols	EditorWindow		Special symbols
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
 The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
 The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
+Trim trailing whitespace	EditorWindow		Trim trailing whitespace
 Undo	EditorWindow		Undo
 Unix format	EditorWindow		Unix format
 Unsaved changes	EditorWindow		Unsaved changes
@@ -79,21 +89,22 @@ Untitled	EditorWindow		Untitled
 View	EditorWindow		View
 Warning	EditorWindow		Warning
 Windows format	EditorWindow		Windows format
+Wrap lines	EditorWindow		Wrap lines
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		You don't have permissions to edit this file. The editor will be set to read-only mode.
 You don't have sufficient permissions to edit this file.	EditorWindow		You don't have sufficient permissions to edit this file.
-Direction	FindWindow		Direction
-Down	FindWindow		Down
+Your changes will be lost.	EditorWindow		Your changes will be lost.
+Backwards	FindWindow		Backwards
 Find	FindWindow		Find
 Find:	FindWindow		Find:
 Find/Replace	FindWindow		Find/Replace
 In selection	FindWindow		In selection
 Match case	FindWindow		Match case
 Match entire words	FindWindow		Match entire words
+Regex	FindWindow		Regex
 Replace	FindWindow		Replace
 Replace all	FindWindow		Replace all
 Replace and find	FindWindow		Replace and find
 Replace:	FindWindow		Replace:
-Up	FindWindow		Up
 Wrap around	FindWindow		Wrap around
 Cancel	GoToLineWindow		Cancel
 Go to line	GoToLineWindow		Go to line
@@ -113,4 +124,7 @@ Save all	QuitAlert		Save all
 Save selected	QuitAlert		Save selected
 There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
 Unsaved files	QuitAlert		Unsaved files
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
+OK	Styler		OK
+Style files	Styler		Style files
 Koder	System name		Koder

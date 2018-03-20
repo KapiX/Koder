@@ -1,14 +1,14 @@
-1	English	x-vnd.KapiX-Koder	2285835744
-ArmanHayots, for Russian translation.	App		ArmanHayots, for Russian translation.
+1	Hungarian	x-vnd.KapiX-Koder	2889977837
+ArmanHayots, for Russian translation.	App		ArmanHayots-nak, az orosz fordításért..
 Code editor for Haiku based on Scintilla editing component.	App		A Scintilla szerkesztőkomponensre épülő kódszerkesztő Haikuhoz.
-damoklas, for Lithuanian translation.	App		damoklas, for Lithuanian translation.
+damoklas, for Lithuanian translation.	App		damoklasnak, a litván fordításért.
 Distributed on MIT license terms.	App		MIT licenc alatt terjeszthető.
-humdinger, for German translation and GUI design tips.	App		humdinger, for German translation and GUI design tips.
-Lan72, for Ukrainian translation.	App		Lan72, for Ukrainian translation.
-miqlas, for Hungarian translation and app icon.	App		miqlas, for Hungarian translation and app icon.
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, a Scintilla szerkesztő komponensért és a SciTE szerkesztőért.
-un_spacyar, for Spanish translation.	App		un_spacyar, for Spanish translation.
-zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
+humdinger, for German translation and GUI design tips.	App		humdingernek, a német fordításért és a GUI ötleteiért.
+Lan72, for Ukrainian translation.	App		Lan72-nak, az ukrán fordításért.
+miqlas, for Hungarian translation and app icon.	App		miqlasnak, a magyar fordításért és az ikonért.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgsonnak, a Scintilla szerkesztő komponensért és a SciTE szerkesztőért.
+un_spacyar, for Spanish translation.	App		un_spacyar-nak, a spanyol fordításért.
+zuMi, for toolbar icons.	App		zuMi-nak, az eszköztár ikonjaiért.
 Apply	AppPreferencesWindow		Alkalmaz
 Background	AppPreferencesWindow		Háttér
 Compact language menu	AppPreferencesWindow		Rövid nyelvi menü
@@ -16,18 +16,21 @@ Convert tabs to spaces	AppPreferencesWindow		Tabok szóközökké alakítása
 Editor	AppPreferencesWindow		Szerkesztő
 Highlight braces	AppPreferencesWindow		Zárójelek kiemelése
 Highlight current line	AppPreferencesWindow		Aktuális sor kiemelése
-Koder preferences	AppPreferencesWindow		Koder preferences
+Highlight trailing whitespace	AppPreferencesWindow		Sorvégi szóközök megjelenítése
+Koder preferences	AppPreferencesWindow		Koder beállításai
 Line	AppPreferencesWindow		Sor
-Mark overly long lines	AppPreferencesWindow		Mark overly long lines
-Max. characters per line:	AppPreferencesWindow		Max. characters per line:
-Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
+Mark overly long lines	AppPreferencesWindow		Túl hosszú sorok megjelenítése
+Max. characters per line:	AppPreferencesWindow		Max. karakter soronként:
+Only in actually indented lines	AppPreferencesWindow		Csak behúzott sorokra
 Revert	AppPreferencesWindow		Visszaállít
 Show full path in title	AppPreferencesWindow		Teljes elérési út a címsorban
 Show indentation guides	AppPreferencesWindow		Behúzási segédvonal megjelenítése
-Show line numbers	AppPreferencesWindow		Show line numbers
-Show toolbar	AppPreferencesWindow		Show toolbar
-Spaces per tab:	AppPreferencesWindow		Spaces per tab:
-Style	AppPreferencesWindow		Style
+Show line numbers	AppPreferencesWindow		Sorszámok megjelenítése
+Show toolbar	AppPreferencesWindow		Eszköztár megjelenítése
+Spaces per tab:	AppPreferencesWindow		Szóköz tabonként:
+Stack new windows	AppPreferencesWindow		Új ablakok egymáshoz rögzítése
+Style	AppPreferencesWindow		Stílus
+Trim trailing whitespace on save	AppPreferencesWindow		Mentéskor a sorvégi szóközök törlése
 Up to the next non-empty line	AppPreferencesWindow		Fel a következő nem üres sorig
 Up to the next/previous non-empty line	AppPreferencesWindow		A következő/előző nem üres sorig
 [read-only]	EditorWindow		[írásvédett]
@@ -35,43 +38,50 @@ About…	EditorWindow		Névjegy…
 Access denied	EditorWindow		Hozzáférés megtagadva
 Cancel	EditorWindow		Mégsem
 Close	EditorWindow		Bezárás
-Comment block	EditorWindow		Comment block
-Comment line	EditorWindow		Comment line
+Comment block	EditorWindow		Megjegyzés blokk
+Comment line	EditorWindow		Megjegyzés sor
 Copy	EditorWindow		Másolás
+Corresponding file not found.	EditorWindow		Hivatkozó fájl nem található.
 Cut	EditorWindow		Kivágás
 Discard	EditorWindow		Elvetés
-Do nothing	EditorWindow		Do nothing
+Do nothing	EditorWindow		Ne tegyen semmit
 Edit	EditorWindow		Szerkeszt
 Error	EditorWindow		Hiba
-Failed to read file permissions.	EditorWindow		Failed to read file permissions.
+Failed to read file permissions.	EditorWindow		Nem sikerült olvasni a fájl jogosultságait.
 File	EditorWindow		Fájl
 File modified	EditorWindow		Módosított fájl
 Find/Replace…	EditorWindow		Keres/Csere…
 Go to line…	EditorWindow		Sorra ugrás…
 Help	EditorWindow		Súgó
-Koder preferences…	EditorWindow		Koder preferences…
+Koder preferences…	EditorWindow		Koder beállításai…
 Language	EditorWindow		Nyelv
-Line endings	EditorWindow		Line endings
+Line endings	EditorWindow		Sor vége
 New	EditorWindow		Új
 OK	EditorWindow		OK
 Old Mac format	EditorWindow		Régi Mac formátum
-Open	EditorWindow		Megnyitás
+Open corresponding file	EditorWindow		Hivatkozott fájl megnyitása
+Open corresponding…	EditorWindow		Hivatkozott megnyitása…
+Open…	EditorWindow		Megnyitás…
 Paste	EditorWindow		Beillesztés
 Quit	EditorWindow		Kilépés
-Reached the end of the document. No results found.	EditorWindow		Reached the end of the document. No results found.
+Reached the end of the target. No results found.	EditorWindow		A kijelölésben nem volt találat.
 Redo	EditorWindow		Újra
 Reload	EditorWindow		Újratöltés
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
+Replacement finished	EditorWindow		Csere kész
 Save	EditorWindow		Mentés
 Save as…	EditorWindow		Mentés másként...
 Search	EditorWindow		Keresés
 Searching finished	EditorWindow		Keresés befejeződött
 Select all	EditorWindow		Mind kijelölése
-Show line endings	EditorWindow		Show line endings
+Show line endings	EditorWindow		Sorvégek megjelenítése
+Show toolbar	EditorWindow		Eszköztár megjelenítése
 Show white space	EditorWindow		Szóközök megjelenítése
 Special symbols	EditorWindow		Speciális jelek
-The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
-The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
-The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		A fájl mentetlen változtatásokat tartalmaz, de írásvédett. Mit tegyünk?
+The file contains unsaved changes. What to do?	EditorWindow		A fájl mentetlen változtatásokat tartalmaz. Mit tegyünk?
+The file has been modified by another application. What to do?	EditorWindow		A fájlt egy másik program módosította. Mit tegyünk?
+Trim trailing whitespace	EditorWindow		Sorvégi szóközök törlése
 Undo	EditorWindow		Visszavonás
 Unix format	EditorWindow		Unix formátum
 Unsaved changes	EditorWindow		Nem mentett módosítások
@@ -79,21 +89,22 @@ Untitled	EditorWindow		Névtelen
 View	EditorWindow		Nézet
 Warning	EditorWindow		Figyelmeztetés
 Windows format	EditorWindow		Windows formátum
+Wrap lines	EditorWindow		Sorok törése
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nem módosíthatod ezt a fájlt, ezért írásvédett módban lesz megnyitva.
 You don't have sufficient permissions to edit this file.	EditorWindow		Nincs elegendő jogosultsága a fájl megváltoztatásához.
-Direction	FindWindow		Irány
-Down	FindWindow		Le
+Your changes will be lost.	EditorWindow		A modosítások elvesznek.
+Backwards	FindWindow		Visszafelé
 Find	FindWindow		Keres
 Find:	FindWindow		Keresés:
 Find/Replace	FindWindow		Keres/Csere
 In selection	FindWindow		Kijelölésben
 Match case	FindWindow		Betűméret érzékeny
 Match entire words	FindWindow		Egész szavakra egyezés
+Regex	FindWindow		Regex
 Replace	FindWindow		Csere
 Replace all	FindWindow		Összes cseréje
 Replace and find	FindWindow		Cserél és keres
 Replace:	FindWindow		Csere:
-Up	FindWindow		Fel
 Wrap around	FindWindow		Körben
 Cancel	GoToLineWindow		Mégsem
 Go to line	GoToLineWindow		Sorra ugrás
@@ -113,4 +124,7 @@ Save all	QuitAlert		Mindent ment
 Save selected	QuitAlert		Kiválasztott mentése
 There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
 Unsaved files	QuitAlert		Nem mentett fájlok
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
+OK	Styler		OK
+Style files	Styler		Style files
 Koder	System name		Koder

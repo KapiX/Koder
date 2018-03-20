@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	2285835744
+1	Lithuanian	x-vnd.KapiX-Koder	2889977837
 ArmanHayots, for Russian translation.	App		ArmanHayots’ą, už vertimą į rusų kalbą.
 Code editor for Haiku based on Scintilla editing component.	App		Haiku skaitmenų rengyklė naudoja Scintilla taisymo dėmenį.
 damoklas, for Lithuanian translation.	App		damoklą, už vertimą į lietuvių kalbą.
@@ -16,6 +16,7 @@ Convert tabs to spaces	AppPreferencesWindow		Versti Tab’ą tarpeliais
 Editor	AppPreferencesWindow		Rengyklė
 Highlight braces	AppPreferencesWindow		Išryškinti skliaustus
 Highlight current line	AppPreferencesWindow		Išryškinti esamą eilutę
+Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
 Koder preferences	AppPreferencesWindow		Koder’io parankos
 Line	AppPreferencesWindow		Eilutė
 Mark overly long lines	AppPreferencesWindow		Žymėti perilgas eilutes
@@ -27,7 +28,9 @@ Show indentation guides	AppPreferencesWindow		Rodyti gaires
 Show line numbers	AppPreferencesWindow		Rodyti eilučių skaičius
 Show toolbar	AppPreferencesWindow		Rodyti įrankinę
 Spaces per tab:	AppPreferencesWindow		Tarpelių per Tab’ą:
+Stack new windows	AppPreferencesWindow		Stack new windows
 Style	AppPreferencesWindow		Braižas
+Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
 Up to the next non-empty line	AppPreferencesWindow		Iki kitos netuščios eilutės
 Up to the next/previous non-empty line	AppPreferencesWindow		Iki kitos/ankstesnės netuščios eilutės
 [read-only]	EditorWindow		[tik skaitymui]
@@ -38,6 +41,7 @@ Close	EditorWindow		Uždaryti
 Comment block	EditorWindow		Pastabų skiltis
 Comment line	EditorWindow		Pastabų eilutė
 Copy	EditorWindow		Nurašyti
+Corresponding file not found.	EditorWindow		Corresponding file not found.
 Cut	EditorWindow		Iškirpti
 Discard	EditorWindow		Atmesti
 Do nothing	EditorWindow		Nieko nedaryti
@@ -55,23 +59,29 @@ Line endings	EditorWindow		Eilučių baigmės
 New	EditorWindow		Nauja
 OK	EditorWindow		Gerai
 Old Mac format	EditorWindow		Senasis Mac pavidalas
-Open	EditorWindow		Atidaryti
+Open corresponding file	EditorWindow		Open corresponding file
+Open corresponding…	EditorWindow		Open corresponding…
+Open…	EditorWindow		Open…
 Paste	EditorWindow		Įterpti
 Quit	EditorWindow		Baigti
-Reached the end of the document. No results found.	EditorWindow		Rašinys peržvelgtas iki galo. Radinių nėra.
+Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
 Redo	EditorWindow		Atkurti
 Reload	EditorWindow		Perkrauti
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
+Replacement finished	EditorWindow		Replacement finished
 Save	EditorWindow		Išsaugoti
 Save as…	EditorWindow		Išsaugoti kaip…
 Search	EditorWindow		Ieška
 Searching finished	EditorWindow		Ieška baigta
 Select all	EditorWindow		Žymėti viską
 Show line endings	EditorWindow		Rodyti eilučių baigmes
+Show toolbar	EditorWindow		Show toolbar
 Show white space	EditorWindow		Rodyti tarpų ženklus
 Special symbols	EditorWindow		Ypatingieji ženklai
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Byloje yra pakeitimų, bet byla tik skaitymui. Ką daryti?
 The file contains unsaved changes. What to do?	EditorWindow		Byloje yra neišsaugotų pakeitimų. Ką daryti?
 The file has been modified by another application. What to do?	EditorWindow		Byla pakeista kita priemone. Ką daryti?
+Trim trailing whitespace	EditorWindow		Trim trailing whitespace
 Undo	EditorWindow		Atšaukti
 Unix format	EditorWindow		Unix pavidalas
 Unsaved changes	EditorWindow		Neišsaugoti keitimai
@@ -79,21 +89,22 @@ Untitled	EditorWindow		Bevardis
 View	EditorWindow		Vaizdas
 Warning	EditorWindow		Perspėjimas
 Windows format	EditorWindow		Windows pavidalas
+Wrap lines	EditorWindow		Wrap lines
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Neturite leidimų šios bylos taisymui. Rengyklė bus paleista tik skaitymui. 
 You don't have sufficient permissions to edit this file.	EditorWindow		Neturite pakankamai leidimų taisyti šią bylą.
-Direction	FindWindow		Kryptis
-Down	FindWindow		Žemyn
+Your changes will be lost.	EditorWindow		Your changes will be lost.
+Backwards	FindWindow		Backwards
 Find	FindWindow		Rasti
 Find:	FindWindow		Rasti:
 Find/Replace	FindWindow		Rasti/Pakeisti
 In selection	FindWindow		Pažymėtame
 Match case	FindWindow		Paisyti raidžių dydžio
 Match entire words	FindWindow		Paisyti ištisų žodžių
+Regex	FindWindow		Regex
 Replace	FindWindow		Pakeisti
 Replace all	FindWindow		Pakeisti viską
 Replace and find	FindWindow		Pakeisti ir rasti
 Replace:	FindWindow		Pakeisti:
-Up	FindWindow		Viršun
 Wrap around	FindWindow		Ratu
 Cancel	GoToLineWindow		Nutraukti
 Go to line	GoToLineWindow		Pereiti į eilutę
@@ -113,4 +124,7 @@ Save all	QuitAlert		Išsaugoti viską
 Save selected	QuitAlert		Išsaugoti pažymėtuosius
 There are unsaved changes.\nSelect the files to save.	QuitAlert		Čia yra neišsaugotų pakeitimų.\nPažymėkite bylas išsaugojimui.
 Unsaved files	QuitAlert		Neišsaugotos bylos
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
+OK	Styler		OK
+Style files	Styler		Style files
 Koder	System name		Koder
