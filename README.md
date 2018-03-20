@@ -19,7 +19,9 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 
 ## History
 
-0.3.0 - *TBD*
+0.4.0 - *TBD*
+
+0.3.0 - *20-03-2018*
 
 * New icon.
 * Add right-click menu.
