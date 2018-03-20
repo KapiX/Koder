@@ -37,6 +37,11 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 * Add option to trim trailing whitespace.
 * Add option to trim trailing whitespace automatically on save.
 * Use multiline controls in Find window.
+* Add support for regex in Find/Replace.
+* Fix keyboard navigation in Find/Replace.
+* Rearrange Find/Replace window interface.
+* Add "Open corresponding file" option.
+* Fix opening files from command line.
 
 0.2.0 - *15-04-2017*
 
