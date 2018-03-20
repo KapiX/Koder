@@ -30,7 +30,7 @@
 #include <String.h>
 #include <ToolBar.h>
 
-#include <yaml.h>
+#include <yaml-cpp/yaml.h>
 
 #include "AppPreferencesWindow.h"
 #include "Editor.h"

@@ -86,14 +86,12 @@ ifeq ($(shell uname -p), x86)
 SYSTEM_INCLUDE_PATHS = \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/interface) \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/shared) \
-	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY scintilla) \
-	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY yaml-cpp)
+	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY scintilla)
 else
 SYSTEM_INCLUDE_PATHS = \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/interface) \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/shared) \
-	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY scintilla) \
-	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY yaml-cpp)
+	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY scintilla)
 endif
 
 #	Additional paths paths to look for local headers. These use the form

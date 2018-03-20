@@ -5,7 +5,7 @@
 
 #include "Styler.h"
 
-#include <yaml.h>
+#include <yaml-cpp/yaml.h>
 
 #include <Alert.h>
 #include <Directory.h>

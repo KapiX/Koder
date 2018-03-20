@@ -15,7 +15,7 @@
 #include <String.h>
 
 #include <SciLexer.h>
-#include <yaml.h>
+#include <yaml-cpp/yaml.h>
 
 #include "Editor.h"
 #include "EditorWindow.h"

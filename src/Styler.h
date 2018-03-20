@@ -10,7 +10,7 @@
 #include <string>
 #include <set>
 
-#include <yaml.h>
+#include <yaml-cpp/yaml.h>
 
 
 class BPath;
