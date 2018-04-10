@@ -28,6 +28,10 @@ GoToLineWindow::GoToLineWindow(BWindow* owner)
 	fOwner(owner)
 {
 	fLine = new BTextControl("GoToLineTC", B_TRANSLATE("Go to line:"), "1", nullptr);
+	for(uint8 i = 0; i < '0'; i++)
+		fLine->TextView()->DisallowChar(static_cast<uint32>(i));
+	for(uint8 i = '9' + 1; i < 255; i++)
+		fLine->TextView()->DisallowChar(static_cast<uint32>(i));
 	fGo = new BButton("GoButton", B_TRANSLATE("OK"), new BMessage(GTLW_GO));
 	fGo->MakeDefault(true);
 	fCancel = new BButton("CancelButton", B_TRANSLATE("Cancel"), new BMessage(GTLW_CANCEL));
