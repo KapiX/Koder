@@ -9,6 +9,8 @@
 
 #include <string>
 
+#include <MessageFilter.h>
+
 
 class BBitmap;
 
@@ -17,6 +19,19 @@ std::string GetFileName(const std::string filename);
 std::string GetFileExtension(const std::string filename);
 // Gets an icon from executable's resources
 void GetVectorIcon(const std::string icon, BBitmap* bitmap);
+
+
+class KeyDownMessageFilter : public BMessageFilter
+{
+public:
+							KeyDownMessageFilter(char key, uint32 commandToSend);
+
+	virtual	filter_result	Filter(BMessage* message, BHandler** target);
+
+private:
+			char			fKey;
+			uint32			fCommandToSend;
+};
 
 
 #endif // UTILS_H

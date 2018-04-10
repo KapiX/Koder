@@ -17,6 +17,8 @@
 #include <RadioButton.h>
 #include <StringView.h>
 
+#include "Utils.h"
+
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "FindWindow"
@@ -79,6 +81,10 @@ FindWindow::MessageReceived(BMessage* message)
 			} else {
 				fFlagsChanged = false;
 			}
+		} break;
+		case FINDWINDOW_QUITTING: {
+			if(LockLooper())
+				Quit();
 		} break;
 		case Actions::MATCH_CASE:
 		case Actions::MATCH_WORD:
@@ -148,6 +154,8 @@ FindWindow::_InitInterface()
 	fInSelectionCB = new BCheckBox("inSelection", B_TRANSLATE("In selection"), new BMessage((uint32) Actions::IN_SELECTION));
 	fBackwardsCB = new BCheckBox("backwards", B_TRANSLATE("Backwards"), new BMessage((uint32) Actions::BACKWARDS));
 	fRegexCB = new BCheckBox("regex", B_TRANSLATE("Regex"), new BMessage((uint32) Actions::REGEX));
+
+	AddCommonFilter(new KeyDownMessageFilter(B_ESCAPE, FINDWINDOW_QUITTING));
 
 	BLayoutBuilder::Group<>(this, B_VERTICAL, 5)
 		.AddGroup(B_HORIZONTAL, 5)

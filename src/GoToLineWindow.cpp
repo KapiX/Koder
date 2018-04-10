@@ -11,8 +11,9 @@
 #include <Catalog.h>
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
-#include <MessageFilter.h>
 #include <TextControl.h>
+
+#include "Utils.h"
 
 
 #undef B_TRANSLATION_CONTEXT
@@ -31,7 +32,7 @@ GoToLineWindow::GoToLineWindow(BWindow* owner)
 	fGo->MakeDefault(true);
 	fCancel = new BButton("CancelButton", B_TRANSLATE("Cancel"), new BMessage(GTLW_CANCEL));
 
-	AddCommonFilter(new BMessageFilter(B_KEY_DOWN, KeyDownFilter));
+	AddCommonFilter(new KeyDownMessageFilter(B_ESCAPE, GTLW_CANCEL));
 
 	AddToSubset(fOwner);
 
@@ -80,20 +81,4 @@ GoToLineWindow::WindowActivated(bool active)
 {
 	fLine->MakeFocus();
 	fLine->TextView()->SelectAll();
-}
-
-
-filter_result
-GoToLineWindow::KeyDownFilter(BMessage* message, BHandler** target,
-	BMessageFilter* messageFilter)
-{
-	if(message->what == B_KEY_DOWN) {
-		const char* bytes;
-		message->FindString("bytes", &bytes);
-		if(bytes[0] == B_ESCAPE) {
-			messageFilter->Looper()->PostMessage(GTLW_CANCEL);
-			return B_SKIP_MESSAGE;
-		}
-	}
-	return B_DISPATCH_MESSAGE;
 }

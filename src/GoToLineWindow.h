@@ -7,7 +7,6 @@
 #define GOTOLINEWINDOW_H
 
 
-#include <MessageFilter.h>
 #include <Window.h>
 
 
@@ -28,9 +27,6 @@ public:
 			void			MessageReceived(BMessage* message);
 			void			ShowCentered(BRect ownerRect);
 			void			WindowActivated(bool active);
-	
-	static	filter_result	KeyDownFilter(BMessage* message, BHandler** target,
-								BMessageFilter* messageFilter);
 
 private:
 			BTextControl*	fLine;

@@ -8,6 +8,7 @@
 #include <Application.h>
 #include <Bitmap.h>
 #include <IconUtils.h>
+#include <MessageFilter.h>
 #include <Resources.h>
 
 
@@ -45,4 +46,28 @@ GetVectorIcon(const std::string icon, BBitmap* bitmap)
 		return;
 
 	BIconUtils::GetVectorIcon(rawIcon, size, bitmap);
+}
+
+
+KeyDownMessageFilter::KeyDownMessageFilter(char key, uint32 commandToSend)
+	:
+	BMessageFilter(B_KEY_DOWN),
+	fKey(key),
+	fCommandToSend(commandToSend)
+{
+}
+
+
+filter_result
+KeyDownMessageFilter::Filter(BMessage* message, BHandler** target)
+{
+	if(message->what == B_KEY_DOWN) {
+		const char* bytes;
+		message->FindString("bytes", &bytes);
+		if(bytes[0] == fKey) {
+			Looper()->PostMessage(fCommandToSend);
+			return B_SKIP_MESSAGE;
+		}
+	}
+	return B_DISPATCH_MESSAGE;
 }
