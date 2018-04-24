@@ -135,10 +135,10 @@ Preferences::Save(const char* filename)
 	storage.AddBool("whiteSpaceVisible", fWhiteSpaceVisible);
 	storage.AddBool("EOLVisible", fEOLVisible);
 	storage.AddBool("indentGuidesShow", fIndentGuidesShow);
-	storage.AddInt8("indentGuidesMode", fIndentGuidesMode);
+	storage.AddUInt8("indentGuidesMode", fIndentGuidesMode);
 	storage.AddBool("lineLimitShow", fLineLimitShow);
-	storage.AddInt8("lineLimitMode", fLineLimitMode);
-	storage.AddInt32("lineLimitColumn", fLineLimitColumn);
+	storage.AddUInt8("lineLimitMode", fLineLimitMode);
+	storage.AddUInt32("lineLimitColumn", fLineLimitColumn);
 	storage.AddBool("wrapLines", fWrapLines);
 	storage.AddBool("bracesHighlighting", fBracesHighlighting);
 	storage.AddBool("fullPathInTitle", fFullPathInTitle);
