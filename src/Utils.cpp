@@ -7,8 +7,10 @@
 
 #include <Application.h>
 #include <Bitmap.h>
+#include <CheckBox.h>
 #include <IconUtils.h>
 #include <MessageFilter.h>
+#include <RadioButton.h>
 #include <Resources.h>
 
 
@@ -47,6 +49,24 @@ GetVectorIcon(const std::string icon, BBitmap* bitmap)
 
 	BIconUtils::GetVectorIcon(rawIcon, size, bitmap);
 }
+
+
+template<typename T>
+bool IsChecked(T* control)
+{
+	return control->Value() == B_CONTROL_ON;
+}
+template bool IsChecked<BCheckBox>(BCheckBox*);
+template bool IsChecked<BRadioButton>(BRadioButton*);
+
+
+template<typename T>
+void SetChecked(T* control, bool checked)
+{
+	control->SetValue(checked ? B_CONTROL_ON : B_CONTROL_OFF);
+}
+template void SetChecked<BCheckBox>(BCheckBox*, bool);
+template void SetChecked<BRadioButton>(BRadioButton*, bool);
 
 
 KeyDownMessageFilter::KeyDownMessageFilter(char key, uint32 commandToSend)

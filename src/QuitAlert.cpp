@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "EditorWindow.h"
+#include "Utils.h"
 
 
 #undef B_TRANSLATION_CONTEXT
@@ -72,7 +73,7 @@ QuitAlert::_InitInterface()
 	EditorWindow* current;
 	for(int i = 0; i < fUnsavedFiles.size(); ++i) {
 		fCheckboxes[i] = new BCheckBox("file", fUnsavedFiles[i].c_str(), new BMessage((uint32) i));
-		fCheckboxes[i]->SetValue(B_CONTROL_ON);
+		SetChecked(fCheckboxes[i]);
 		files->AddView(fCheckboxes[i]);
 	}
 }

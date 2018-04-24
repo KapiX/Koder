@@ -25,6 +25,7 @@
 
 #include "Preferences.h"
 #include "Styler.h"
+#include "Utils.h"
 
 
 #undef B_TRANSLATION_CONTEXT
@@ -63,23 +64,19 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 {
 	switch(message->what) {
 		case Actions::COMPACT_LANG_MENU: {
-			fTempPreferences->fCompactLangMenu =
-				(fCompactLangMenuCB->Value() == B_CONTROL_ON ? true : false);
+			fTempPreferences->fCompactLangMenu = IsChecked(fCompactLangMenuCB);
 			_PreferencesModified();
 		} break;
 		case Actions::TOOLBAR: {
-			fTempPreferences->fToolbar =
-				(fToolbarCB->Value() == B_CONTROL_ON ? true : false);
+			fTempPreferences->fToolbar = IsChecked(fToolbarCB);
 			_PreferencesModified();
 		} break;
 		case Actions::FULL_PATH_IN_TITLE: {
-			fTempPreferences->fFullPathInTitle =
-				(fFullPathInTitleCB->Value() == B_CONTROL_ON ? true : false);
+			fTempPreferences->fFullPathInTitle = IsChecked(fFullPathInTitleCB);
 			_PreferencesModified();
 		} break;
 		case Actions::TABS_TO_SPACES: {
-			fTempPreferences->fTabsToSpaces =
-				(fTabsToSpacesCB->Value() == B_CONTROL_ON ? true : false);
+			fTempPreferences->fTabsToSpaces = IsChecked(fTabsToSpacesCB);
 			_PreferencesModified();
 		} break;
 		case Actions::TAB_WIDTH: {
@@ -87,13 +84,11 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			_PreferencesModified();
 		} break;
 		case Actions::LINE_HIGHLIGHTING: {
-			fTempPreferences->fLineHighlighting =
-				(fLineHighlightingCB->Value() == B_CONTROL_ON ? true : false);
+			fTempPreferences->fLineHighlighting = IsChecked(fLineHighlightingCB);
 			_PreferencesModified();
 		} break;
 		case Actions::LINE_NUMBERS: {
-			fTempPreferences->fLineNumbers =
-				(fLineNumbersCB->Value() == B_CONTROL_ON ? true : false);
+			fTempPreferences->fLineNumbers = IsChecked(fLineNumbersCB);
 			_PreferencesModified();
 		} break;
 		case Actions::LINELIMIT_COLUMN: {
@@ -102,7 +97,7 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			_PreferencesModified();
 		} break;
 		case Actions::LINELIMIT_SHOW: {
-			bool show = (fLineLimitShowCB->Value() == B_CONTROL_ON ? true : false);
+			bool show = IsChecked(fLineLimitShowCB);
 			fTempPreferences->fLineLimitShow = show;
 			_SetLineLimitBoxEnabled(show);
 			_PreferencesModified();
@@ -116,7 +111,7 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			_PreferencesModified();
 		} break;
 		case Actions::INDENTGUIDES_SHOW: {
-			bool show = (fIndentGuidesShowCB->Value() == B_CONTROL_ON ? true : false);
+			bool show = IsChecked(fIndentGuidesShowCB);
 			fTempPreferences->fIndentGuidesShow = show;
 			_SetIndentGuidesBoxEnabled(show);
 			_PreferencesModified();
@@ -134,8 +129,7 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			_PreferencesModified();
 		} break;
 		case Actions::BRACES_HIGHLIGHTING: {
-			fTempPreferences->fBracesHighlighting =
-				(fBracesHighlightingCB->Value() == B_CONTROL_ON ? true : false);
+			fTempPreferences->fBracesHighlighting = IsChecked(fBracesHighlightingCB);
 			_PreferencesModified();
 		} break;
 		case Actions::EDITOR_STYLE: {
@@ -143,18 +137,17 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			_PreferencesModified();
 		} break;
 		case Actions::ATTACH_WINDOWS: {
-			bool attach = (fAttachNewWindowsCB->Value() == B_CONTROL_ON ? true : false);
-			fTempPreferences->fOpenWindowsInStack = attach;
+			fTempPreferences->fOpenWindowsInStack = IsChecked(fAttachNewWindowsCB);
 			_PreferencesModified();
 		} break;
 		case Actions::HIGHLIGHT_TRAILING_WS: {
-			bool highlight = (fHighlightTrailingWSCB->Value() == B_CONTROL_ON ? true : false);
-			fTempPreferences->fHighlightTrailingWhitespace = highlight;
+			fTempPreferences->fHighlightTrailingWhitespace =
+				IsChecked(fHighlightTrailingWSCB);
 			_PreferencesModified();
 		} break;
 		case Actions::TRIM_TRAILING_WS_SAVE: {
-			bool trim = (fTrimTrailingWSOnSaveCB->Value() == B_CONTROL_ON ? true : false);
-			fTempPreferences->fTrimTrailingWhitespaceOnSave = trim;
+			fTempPreferences->fTrimTrailingWhitespaceOnSave =
+				IsChecked(fTrimTrailingWSOnSaveCB);
 			_PreferencesModified();
 		} break;
 		case Actions::APPLY: {
@@ -283,88 +276,32 @@ AppPreferencesWindow::_InitInterface()
 void
 AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 {
-	if(preferences->fCompactLangMenu == true) {
-		fCompactLangMenuCB->SetValue(B_CONTROL_ON);
-	} else {
-		fCompactLangMenuCB->SetValue(B_CONTROL_OFF);
-	}
-
-	if(preferences->fToolbar == true) {
-		fToolbarCB->SetValue(B_CONTROL_ON);
-	} else {
-		fToolbarCB->SetValue(B_CONTROL_OFF);
-	}
-
-	if(preferences->fFullPathInTitle == true) {
-		fFullPathInTitleCB->SetValue(B_CONTROL_ON);
-	} else {
-		fFullPathInTitleCB->SetValue(B_CONTROL_OFF);
-	}
-
-	if(preferences->fTabsToSpaces == true) {
-		fTabsToSpacesCB->SetValue(B_CONTROL_ON);
-	} else {
-		fTabsToSpacesCB->SetValue(B_CONTROL_OFF);
-	}
+	SetChecked(fCompactLangMenuCB, preferences->fCompactLangMenu);
+	SetChecked(fToolbarCB, preferences->fToolbar);
+	SetChecked(fFullPathInTitleCB, preferences->fFullPathInTitle);
+	SetChecked(fTabsToSpacesCB, preferences->fTabsToSpaces);
 
 	BString tabWidthString;
 	tabWidthString << preferences->fTabWidth;
 	fTabWidthTC->SetText(tabWidthString.String());
 
-	if(preferences->fLineNumbers == true) {
-		fLineNumbersCB->SetValue(B_CONTROL_ON);
-	} else {
-		fLineNumbersCB->SetValue(B_CONTROL_OFF);
-	}
-
-	if(preferences->fLineHighlighting == true) {
-		fLineHighlightingCB->SetValue(B_CONTROL_ON);
-	} else {
-		fLineHighlightingCB->SetValue(B_CONTROL_OFF);
-	}
+	SetChecked(fLineNumbersCB, preferences->fLineNumbers);
+	SetChecked(fLineHighlightingCB, preferences->fLineHighlighting);
 
 	BString columnString;
 	columnString << preferences->fLineLimitColumn;
 	fLineLimitColumnTC->SetText(columnString.String());
-	if(preferences->fLineLimitShow == true) {
-		fLineLimitShowCB->SetValue(B_CONTROL_ON);
-		_SetLineLimitBoxEnabled(true);
-	} else {
-		fLineLimitShowCB->SetValue(B_CONTROL_OFF);
-		_SetLineLimitBoxEnabled(false);
-	}
 
-	if(preferences->fIndentGuidesShow == true) {
-		fIndentGuidesShowCB->SetValue(B_CONTROL_ON);
-		_SetIndentGuidesBoxEnabled(true);
-	} else {
-		fIndentGuidesShowCB->SetValue(B_CONTROL_OFF);
-		_SetIndentGuidesBoxEnabled(false);
-	}
+	SetChecked(fLineLimitShowCB, preferences->fLineLimitShow);
+	_SetLineLimitBoxEnabled(preferences->fLineLimitShow);
 
-	if(preferences->fBracesHighlighting == true) {
-		fBracesHighlightingCB->SetValue(B_CONTROL_ON);
-	} else {
-		fBracesHighlightingCB->SetValue(B_CONTROL_OFF);
-	}
+	SetChecked(fIndentGuidesShowCB, preferences->fIndentGuidesShow);
+	_SetIndentGuidesBoxEnabled(preferences->fIndentGuidesShow);
 
-	if(preferences->fOpenWindowsInStack == true) {
-		fAttachNewWindowsCB->SetValue(B_CONTROL_ON);
-	} else {
-		fAttachNewWindowsCB->SetValue(B_CONTROL_OFF);
-	}
-
-	if(preferences->fHighlightTrailingWhitespace == true) {
-		fHighlightTrailingWSCB->SetValue(B_CONTROL_ON);
-	} else {
-		fHighlightTrailingWSCB->SetValue(B_CONTROL_OFF);
-	}
-
-	if(preferences->fTrimTrailingWhitespaceOnSave == true) {
-		fTrimTrailingWSOnSaveCB->SetValue(B_CONTROL_ON);
-	} else {
-		fTrimTrailingWSOnSaveCB->SetValue(B_CONTROL_OFF);
-	}
+	SetChecked(fBracesHighlightingCB, preferences->fBracesHighlighting);
+	SetChecked(fAttachNewWindowsCB, preferences->fOpenWindowsInStack);
+	SetChecked(fHighlightTrailingWSCB, preferences->fHighlightTrailingWhitespace);
+	SetChecked(fTrimTrailingWSOnSaveCB, preferences->fTrimTrailingWhitespaceOnSave);
 }
 
 
@@ -384,12 +321,8 @@ AppPreferencesWindow::_SetLineLimitBoxEnabled(bool enabled)
 	fLineLimitLineRadio->SetEnabled(enabled);
 
 	switch(fTempPreferences->fLineLimitMode) {
-		case 1:
-			fLineLimitLineRadio->SetValue(B_CONTROL_ON);
-		break;
-		case 2:
-			fLineLimitBackgroundRadio->SetValue(B_CONTROL_ON);
-		break;
+		case 1: SetChecked(fLineLimitLineRadio); break;
+		case 2: SetChecked(fLineLimitBackgroundRadio); break;
 	}
 }
 
@@ -402,15 +335,9 @@ AppPreferencesWindow::_SetIndentGuidesBoxEnabled(bool enabled)
 	fIndentGuidesLookBothRadio->SetEnabled(enabled);
 
 	switch(fTempPreferences->fIndentGuidesMode) {
-		case 1:
-			fIndentGuidesRealRadio->SetValue(B_CONTROL_ON);
-		break;
-		case 2:
-			fIndentGuidesLookForwardRadio->SetValue(B_CONTROL_ON);
-		break;
-		case 3:
-			fIndentGuidesLookBothRadio->SetValue(B_CONTROL_ON);
-		break;
+		case 1: SetChecked(fIndentGuidesRealRadio); break;
+		case 2: SetChecked(fIndentGuidesLookForwardRadio); break;
+		case 3: SetChecked(fIndentGuidesLookBothRadio); break;
 	}
 }
 

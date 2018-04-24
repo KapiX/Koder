@@ -58,18 +58,12 @@ FindWindow::MessageReceived(BMessage* message)
 				|| fOldFindText != findText
 				|| fOldReplaceText != replaceText);
 			message->AddBool("newSearch", newSearch);
-			message->AddBool("inSelection",
-				(fInSelectionCB->Value() == B_CONTROL_ON ? true : false));
-			message->AddBool("matchCase",
-				(fMatchCaseCB->Value() == B_CONTROL_ON ? true : false));
-			message->AddBool("matchWord",
-				(fMatchWordCB->Value() == B_CONTROL_ON ? true : false));
-			message->AddBool("wrapAround",
-				(fWrapAroundCB->Value() == B_CONTROL_ON ? true : false));
-			message->AddBool("regex",
-				(fRegexCB->Value() == B_CONTROL_ON ? true : false));
-			message->AddBool("backwards",
-				(fBackwardsCB->Value() == B_CONTROL_ON ? true : false));
+			message->AddBool("inSelection", IsChecked(fInSelectionCB));
+			message->AddBool("matchCase", IsChecked(fMatchCaseCB));
+			message->AddBool("matchWord", IsChecked(fMatchWordCB));
+			message->AddBool("wrapAround", IsChecked(fWrapAroundCB));
+			message->AddBool("regex", IsChecked(fRegexCB));
+			message->AddBool("backwards", IsChecked(fBackwardsCB));
 			message->AddString("findText", findText.c_str());
 			message->AddString("replaceText", replaceText.c_str());
 			be_app->PostMessage(message);
