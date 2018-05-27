@@ -7,14 +7,20 @@
 #define PREFERENCES_H
 
 
+#include <memory>
 #include <string>
 
-#include <File.h>
 #include <Message.h>
 #include <Path.h>
 
 
+class BFile;
+
+
 class Preferences {
+private:
+	std::shared_ptr<BFile>	_OpenFile(const char* filename, uint32 openMode);
+
 public:
 	void			Load(const char* filename);
 	void			Save(const char* filename);

@@ -16,50 +16,74 @@
 #define B_TRANSLATION_CONTEXT "Preferences"
 
 
+namespace {
+	const char* kErrorOK = B_TRANSLATE_MARK("OK");
+	const char* kErrorTitle = B_TRANSLATE_MARK("Editor settings");
+	const char* kErrorUnknown = B_TRANSLATE_MARK("Unknown error.");
+	const char* kErrorBadValue[] = {
+		B_TRANSLATE_MARK("Something wrong has happened while opening the "
+			"configuration file. Your personal settings will not be %s%."),
+		B_TRANSLATE_MARK_COMMENT("loaded", "settings will not be _"),
+		B_TRANSLATE_MARK_COMMENT("saved", "settings will not be _")
+	};
+	const char* kErrorAccessDenied[] = {
+		B_TRANSLATE_MARK("Access was denied while opening the configuration "
+			"file. Make sure you have %s% permission for your settings "
+			"directory."),
+		B_TRANSLATE_MARK_COMMENT("read", "Make sure you have _ permission for"),
+		B_TRANSLATE_MARK_COMMENT("write", "Make sure you have _ permission for")
+	};
+	const char* kErrorNoMemory[] = {
+		B_TRANSLATE_MARK("There is not enough memory available to %s% the "
+			"configuration file. Try closing a few applications and restart "
+			"the editor."),
+		B_TRANSLATE_MARK_COMMENT("load", "to _ the configuration"),
+		B_TRANSLATE_MARK_COMMENT("save", "to _ the configuration")
+	};
+}
+
+
+std::shared_ptr<BFile>
+Preferences::_OpenFile(const char* filename, uint32 openMode)
+{
+	if (openMode == B_WRITE_ONLY)
+		openMode |= B_CREATE_FILE | B_ERASE_FILE;
+	const int index = (openMode == B_READ_ONLY) ? 1 : 2;
+	auto file = std::make_shared<BFile>(filename, openMode);
+	status_t result = file->InitCheck();
+	if (result != B_OK) {
+		BString error = B_TRANSLATE(kErrorUnknown);
+		BString ok = B_TRANSLATE(kErrorOK);
+		switch (result) {
+			case B_BAD_VALUE:
+				error = B_TRANSLATE(kErrorBadValue[0]);
+				error.ReplaceFirst("%s%", B_TRANSLATE(kErrorBadValue[index]));
+				break;
+			case B_PERMISSION_DENIED:
+				error = B_TRANSLATE(kErrorAccessDenied[0]);
+				error.ReplaceFirst("%s%", B_TRANSLATE(kErrorAccessDenied[index]));
+				break;
+			case B_NO_MEMORY:
+				error = B_TRANSLATE(kErrorNoMemory[0]);
+				error.ReplaceFirst("%s%", B_TRANSLATE(kErrorNoMemory[index]));
+				break;
+		}
+		BAlert* alert = new BAlert(B_TRANSLATE(kErrorTitle), error, ok,
+			nullptr, nullptr, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
+		alert->Go();
+		return std::shared_ptr<BFile>();
+	}
+	return file;
+}
+
+
 void
 Preferences::Load(const char* filename)
 {
-	BFile *file = new BFile(filename, B_READ_ONLY);
-	status_t result = file->InitCheck();
-	switch (result) {
-		case B_BAD_VALUE:
-		{
-			BAlert* alert = new BAlert(B_TRANSLATE("Configuration file"),
-				B_TRANSLATE("Couldn't open configuration file because the path is not specified. It usually "
-				"means that the programmer made a mistake. There is nothing you can do about it. "
-				"Your personal settings will not be loaded. Sorry."), B_TRANSLATE("OK"), nullptr, nullptr,
-				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
-			alert->Go();
-			break;
-		}
-		case B_PERMISSION_DENIED:
-		{
-			BAlert* alert = new BAlert(B_TRANSLATE("Configuration file"),
-				B_TRANSLATE("Couldn't open configuration file because permission was denied. It usually "
-				"means that you don't have read permissions to your settings directory. "
-				"If you want to have your personal settings loaded, check your OS documentation "
-				"to find out which directory it is and try changing its permissions."), B_TRANSLATE("OK"),
-				nullptr, nullptr, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
-			alert->Go();
-			break;
-		}
-		case B_NO_MEMORY:
-		{
-			BAlert* alert = new BAlert(B_TRANSLATE("Configuration file"),
-				B_TRANSLATE("There is not enough memory available on your system to load the configuration "
-				"file. If you want to have your personal settings loaded, try closing few "
-				"applications and restart Koder."), B_TRANSLATE("OK"), nullptr, nullptr,
-				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
-			alert->Go();
-			break;
-		}
-		default:
-			break;
-	}
-
+	auto file = _OpenFile(filename, B_READ_ONLY);
 	BMessage storage;
-	if(result == B_OK)
-		storage.Unflatten(file);
+	if (file)
+		storage.Unflatten(file.get());
 	fTabWidth = storage.GetUInt8("tabWidth", 4);
 	fTabsToSpaces = storage.GetBool("tabsToSpaces", false);
 	fLineHighlighting = storage.GetBool("lineHighlighting", true);
@@ -83,52 +107,13 @@ Preferences::Load(const char* filename)
 	fWindowRect = storage.GetRect("windowRect", BRect(50, 50, 450, 450));
 	if(storage.FindMessage("findWindowState", &fFindWindowState) != B_OK)
 		fFindWindowState = BMessage();
-
-	delete file;
 }
 
 
 void
 Preferences::Save(const char* filename)
 {
-	BFile* file = new BFile(filename, B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
-	status_t result = file->InitCheck();
-	switch (result) {
-		case B_BAD_VALUE:
-		{
-			BAlert* alert = new BAlert(B_TRANSLATE("Configuration file"),
-				B_TRANSLATE("Couldn't open configuration file because the path is not specified. It usually "
-				"means that the programmer made a mistake. There is nothing you can do about it. "
-				"Your personal settings will not be saved. Sorry."), B_TRANSLATE("OK"), nullptr, nullptr,
-				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
-			alert->Go();
-			break;
-		}
-		case B_PERMISSION_DENIED:
-		{
-			BAlert* alert = new BAlert(B_TRANSLATE("Configuration file"),
-				B_TRANSLATE("Couldn't open configuration file because permission was denied. It usually "
-				"means that you don't have write permissions to your settings directory. "
-				"If you want to have your personal settings loaded, check your OS documentation "
-				"to find out which directory it is and try changing its permissions."), B_TRANSLATE("OK"),
-				nullptr, nullptr, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
-			alert->Go();
-			break;
-		}
-		case B_NO_MEMORY:
-		{
-			BAlert* alert = new BAlert(B_TRANSLATE("Configuration file"),
-				B_TRANSLATE("There is not enough memory available on your system to save the configuration "
-				"file. If you want to have your personal settings saved, try closing few "
-				"applications and try again."), B_TRANSLATE("OK"), nullptr, nullptr,
-				B_WIDTH_AS_USUAL, B_WARNING_ALERT);
-			alert->Go();
-			break;
-		}
-		default:
-			break;
-	}
-
+	auto file = _OpenFile(filename, B_WRITE_ONLY);
 	BMessage storage;
 	storage.AddInt8("tabWidth", fTabWidth);
 	storage.AddBool("tabsToSpaces", fTabsToSpaces);
@@ -152,9 +137,8 @@ Preferences::Save(const char* filename)
 	storage.AddString("style", fStyle.c_str());
 	storage.AddRect("windowRect", fWindowRect);
 	storage.AddMessage("findWindowState", &fFindWindowState);
-	storage.Flatten(file);
-
-	delete file;
+	if (file)
+		storage.Flatten(file.get());
 }
 
 
