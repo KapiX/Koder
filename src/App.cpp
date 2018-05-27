@@ -262,6 +262,7 @@ App::MessageReceived(BMessage* message)
 			BMessenger messenger((BWindow*) fLastActiveWindow);
 			messenger.SendMessage(message);
 		}
+		fPreferences->fFindWindowState = *message;
 	} break;
 	case FINDWINDOW_QUITTING: {
 		fFindWindow = nullptr;
@@ -275,7 +276,7 @@ App::MessageReceived(BMessage* message)
 	} break;
 	case MAINMENU_SEARCH_FINDREPLACE: {
 		if(fFindWindow == nullptr) {
-			fFindWindow = new FindWindow();
+			fFindWindow = new FindWindow(&fPreferences->fFindWindowState);
 		}
 		fFindWindow->Show();
 		fFindWindow->Activate();

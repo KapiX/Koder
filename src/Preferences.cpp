@@ -81,6 +81,8 @@ Preferences::Load(const char* filename)
 	fTrimTrailingWhitespaceOnSave = storage.GetBool("trimTrailingWhitespaceOnSave", false);
 	fStyle = storage.GetString("style", "default");
 	fWindowRect = storage.GetRect("windowRect", BRect(50, 50, 450, 450));
+	if(storage.FindMessage("findWindowState", &fFindWindowState) != B_OK)
+		fFindWindowState = BMessage();
 
 	delete file;
 }
@@ -149,6 +151,7 @@ Preferences::Save(const char* filename)
 	storage.AddBool("trimTrailingWhitespaceOnSave", fTrimTrailingWhitespaceOnSave);
 	storage.AddString("style", fStyle.c_str());
 	storage.AddRect("windowRect", fWindowRect);
+	storage.AddMessage("findWindowState", &fFindWindowState);
 	storage.Flatten(file);
 
 	delete file;
@@ -180,4 +183,5 @@ Preferences::operator =(Preferences p)
 	fTrimTrailingWhitespaceOnSave = p.fTrimTrailingWhitespaceOnSave;
 	fStyle = p.fStyle;
 	fWindowRect = p.fWindowRect;
+	fFindWindowState = p.fFindWindowState;
 }

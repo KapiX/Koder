@@ -45,7 +45,9 @@ public:
 	bool			fHighlightTrailingWhitespace;
 	bool			fTrimTrailingWhitespaceOnSave;
 	std::string		fStyle;
+	// application state
 	BRect			fWindowRect;
+	BMessage		fFindWindowState;
 };
 
 

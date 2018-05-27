@@ -24,7 +24,7 @@
 #define B_TRANSLATION_CONTEXT "FindWindow"
 
 
-FindWindow::FindWindow()
+FindWindow::FindWindow(BMessage *state)
 	:
 	BWindow(BRect(0, 0, 400, 300), B_TRANSLATE("Find/Replace"), B_TITLED_WINDOW,
 		B_NOT_ZOOMABLE | B_NOT_RESIZABLE | B_AUTO_UPDATE_SIZE_LIMITS, 0),
@@ -32,6 +32,16 @@ FindWindow::FindWindow()
 {
 	_InitInterface();
 	CenterOnScreen();
+
+	SetChecked(fInSelectionCB, state->GetBool("inSelection", false));
+	SetChecked(fMatchCaseCB, state->GetBool("matchCase", false));
+	SetChecked(fMatchWordCB, state->GetBool("matchWord", false));
+	SetChecked(fWrapAroundCB, state->GetBool("wrapAround", false));
+	SetChecked(fRegexCB, state->GetBool("regex", false));
+	SetChecked(fBackwardsCB, state->GetBool("backwards", false));
+
+	fFindTC->SetText(state->GetString("findText"));
+	fReplaceTC->SetText(state->GetString("replaceText"));
 }
 
 

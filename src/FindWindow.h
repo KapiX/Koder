@@ -33,7 +33,7 @@ enum {
 
 class FindWindow : public BWindow {
 public:
-					FindWindow();
+					FindWindow(BMessage *state);
 					~FindWindow();
 
 	void			MessageReceived(BMessage* message);
