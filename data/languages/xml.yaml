@@ -1,4 +1,8 @@
 # XML
 lexer: 5 # SCLEX_XML
+properties:
+    fold: 1
+    fold.html: 1
+    html.tags.case.sensitive: 1
 comments:
     block: [ "<!--", "-->" ]

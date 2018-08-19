@@ -16,15 +16,27 @@ cmake:
 cpp:
     name: C++
     extensions: [ cc, cpp, cxx, h, hh, hpp, hxx ]
+css:
+    name: CSS
+    extensions: [ css ]
 diff:
     name: Diff
     extensions: [ diff, patch, patchset ]
+html:
+    name: HTML
+    extensions: [ html, htm, shtml, shtm, xhtml, xht, hta ]
+javascript:
+    name: JavaScript
+    extensions: [ js, jsm, json ]
 makefile:
     name: Makefile
     extensions: [ mk, mak, Makefile, Makefile.am, makefile ]
 perl:
     name: Perl
     extensions: [ pl, pm, pod ]
+php:
+    name: PHP
+    extensions: [ php, php3, php4, php5, phps, phpt, phtml ]
 python:
     name: Python
     extensions: [ py, pyw ]
