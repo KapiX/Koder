@@ -18,7 +18,6 @@
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
 #include <MenuBar.h>
-#include <MessageFormat.h>
 #include <MimeType.h>
 #include <Node.h>
 #include <NodeInfo.h>
@@ -28,6 +27,7 @@
 #include <PopUpMenu.h>
 #include <Roster.h>
 #include <String.h>
+#include <StringFormat.h>
 #include <ToolBar.h>
 
 #include <yaml-cpp/yaml.h>
@@ -804,7 +804,7 @@ EditorWindow::_FindReplace(BMessage* message)
 			int occurences = fEditor->ReplaceAll(findText, replaceText,
 				matchCase, matchWord, inSelection, regex);
 			BString alertMessage;
-			static BMessageFormat format(B_TRANSLATE("Replaced "
+			static BStringFormat format(B_TRANSLATE("Replaced "
 				"{0, plural, one{# occurence} other{# occurences}}."));
 			format.Format(alertMessage, occurences);
 			BAlert* alert = new BAlert(B_TRANSLATE("Replacement finished"),
