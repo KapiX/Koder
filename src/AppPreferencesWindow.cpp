@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -150,6 +150,10 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 				IsChecked(fTrimTrailingWSOnSaveCB);
 			_PreferencesModified();
 		} break;
+		case Actions::USE_EDITORCONFIG: {
+			fTempPreferences->fUseEditorconfig = IsChecked(fUseEditorconfigCB);
+			_PreferencesModified();
+		} break;
 		case Actions::APPLY: {
 			*fCurrentPreferences = *fTempPreferences;
 			fApplyButton->SetEnabled(false);
@@ -232,6 +236,7 @@ AppPreferencesWindow::_InitInterface()
 	fAttachNewWindowsCB = new BCheckBox("attachWindows", B_TRANSLATE("Stack new windows"), new BMessage((uint32) Actions::ATTACH_WINDOWS));
 	fHighlightTrailingWSCB = new BCheckBox("highlightTrailingWS", B_TRANSLATE("Highlight trailing whitespace"), new BMessage((uint32) Actions::HIGHLIGHT_TRAILING_WS));
 	fTrimTrailingWSOnSaveCB  = new BCheckBox("trimTrailingWSOnSave", B_TRANSLATE("Trim trailing whitespace on save"), new BMessage((uint32) Actions::TRIM_TRAILING_WS_SAVE));
+	fUseEditorconfigCB  = new BCheckBox("useEditorconfig", B_TRANSLATE("Use .editorconfig if possible"), new BMessage((uint32) Actions::USE_EDITORCONFIG));
 
 	fApplyButton = new BButton(B_TRANSLATE("Apply"), new BMessage((uint32) Actions::APPLY));
 	fRevertButton = new BButton(B_TRANSLATE("Revert"), new BMessage((uint32) Actions::REVERT));
@@ -253,6 +258,7 @@ AppPreferencesWindow::_InitInterface()
 			.Add(fAttachNewWindowsCB)
 			.Add(fHighlightTrailingWSCB)
 			.Add(fTrimTrailingWSOnSaveCB)
+			.Add(fUseEditorconfigCB)
 			.End()
 		.Add(fLineLimitBox)
 		.Add(fIndentGuidesBox)
@@ -302,6 +308,7 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 	SetChecked(fAttachNewWindowsCB, preferences->fOpenWindowsInStack);
 	SetChecked(fHighlightTrailingWSCB, preferences->fHighlightTrailingWhitespace);
 	SetChecked(fTrimTrailingWSOnSaveCB, preferences->fTrimTrailingWhitespaceOnSave);
+	SetChecked(fUseEditorconfigCB, preferences->fUseEditorconfig);
 }
 
 

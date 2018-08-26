@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -63,6 +63,8 @@ private:
 		HIGHLIGHT_TRAILING_WS	= 'hltw',
 		TRIM_TRAILING_WS_SAVE	= 'ttws',
 
+		USE_EDITORCONFIG		= 'uecf',
+
 		APPLY					= 'appl',
 		REVERT					= 'rvrt'
 	};
@@ -111,6 +113,8 @@ private:
 	BCheckBox*		fAttachNewWindowsCB;
 	BCheckBox*		fHighlightTrailingWSCB;
 	BCheckBox*		fTrimTrailingWSOnSaveCB;
+
+	BCheckBox*		fUseEditorconfigCB;
 
 	BButton*		fApplyButton;
 	BButton*		fRevertButton;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -34,6 +34,7 @@
 
 #include "AppPreferencesWindow.h"
 #include "Editor.h"
+#include "Editorconfig.h"
 #include "FindWindow.h"
 #include "GoToLineWindow.h"
 #include "Languages.h"
@@ -194,6 +195,7 @@ EditorWindow::EditorWindow(bool stagger)
 	// needed for toolbar setting to work properly
 	if(fPreferences->fToolbar == true)
 		fToolbar->Hide();
+
 	_SyncWithPreferences();
 
 	fEditor->SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true, 0);
@@ -295,6 +297,9 @@ EditorWindow::OpenFile(entry_ref* ref, Sci_Position line, Sci_Position column)
 	else
 		fOpenedFilePath->SetTo(&entry);
 	RefreshTitle();
+
+	// load .editorconfig and apply settings
+	_SyncWithPreferences();
 }
 
 
@@ -335,7 +340,8 @@ EditorWindow::SaveFile(entry_ref* ref)
 	BNode node(ref);
 	_MonitorFile(&node, false);
 
-	if(fPreferences->fTrimTrailingWhitespaceOnSave == true) {
+	if(fFilePreferences.fTrimTrailingWhitespace.value_or(
+			fPreferences->fTrimTrailingWhitespaceOnSave) == true) {
 		fEditor->TrimTrailingWhitespace();
 	}
 
@@ -964,9 +970,75 @@ EditorWindow::_OpenCorrespondingFile(const BPath &file, const std::string lang)
 
 
 void
+EditorWindow::_LoadEditorconfig()
+{
+	if(fOpenedFilePath == nullptr) return;
+
+	BPath editorconfig;
+	if(Editorconfig::Find(fOpenedFilePath, &editorconfig)) {
+		BMessage allProps;
+		if(Editorconfig::Parse(editorconfig.Path(), &allProps)) {
+			BMessage props;
+			Editorconfig::MatchFilename(fOpenedFilePath->Path(), &allProps, &props);
+			char* name;
+			uint32 type;
+			int32 count;
+			for(int32 i = 0;
+					props.GetInfo(B_STRING_TYPE, i, &name, &type, &count) == B_OK;
+					i++) {
+				BString propName(name);
+				BString value;
+				props.FindString(propName, &value);
+				propName.ToLower();
+				if(propName == "end_of_line") {
+					value.ToLower();
+					uint8 eolMode = SC_EOL_LF;
+					if(value == "lf")
+						eolMode = SC_EOL_LF;
+					else if(value == "cr")
+						eolMode = SC_EOL_CR;
+					else if(value == "crlf")
+						eolMode = SC_EOL_CRLF;
+					fFilePreferences.fEOLMode = std::make_optional(eolMode);
+				} else if(propName == "tab_width") {
+					uint8 tabWidth = std::stoi(value.String());
+					fFilePreferences.fTabWidth = std::make_optional(tabWidth);
+				} else if(propName == "indent_style") {
+					value.ToLower();
+					bool tabsToSpaces = (value == "space");
+					fFilePreferences.fTabsToSpaces = std::make_optional(tabsToSpaces);
+				} else if(propName == "indent_size") {
+					if(value.ToLower() == "tab")
+						fFilePreferences.fIndentWidth = fFilePreferences.fTabWidth;
+					else {
+						uint8 indentWidth = std::stoi(value.String());
+						fFilePreferences.fIndentWidth = std::make_optional(indentWidth);
+					}
+				} else if(propName == "trim_trailing_whitespace") {
+					bool trim = (value.ToLower() == "true");
+					fFilePreferences.fTrimTrailingWhitespace = std::make_optional(trim);
+				}
+			}
+		}
+	}
+}
+
+
+void
 EditorWindow::_SyncWithPreferences()
 {
 	if(fPreferences != nullptr) {
+		if(fPreferences->fUseEditorconfig) {
+			_LoadEditorconfig();
+		} else {
+			// reset file preferences so they aren't picked up later
+			fFilePreferences.fTabWidth.reset();
+			fFilePreferences.fIndentWidth.reset();
+			fFilePreferences.fTabsToSpaces.reset();
+			fFilePreferences.fTrimTrailingWhitespace.reset();
+			fFilePreferences.fEOLMode.reset();
+		}
+
 		bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
 		fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, pressed);
 		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
@@ -979,10 +1051,18 @@ EditorWindow::_SyncWithPreferences()
 
 		fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
 		fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
-		fEditor->SendMessage(SCI_SETTABWIDTH, fPreferences->fTabWidth, 0);
-		fEditor->SendMessage(SCI_SETUSETABS, !fPreferences->fTabsToSpaces, 0);
+		fEditor->SendMessage(SCI_SETTABWIDTH,
+			fFilePreferences.fTabWidth.value_or(fPreferences->fTabWidth), 0);
+		fEditor->SendMessage(SCI_SETUSETABS,
+			!fFilePreferences.fTabsToSpaces.value_or(fPreferences->fTabsToSpaces), 0);
+		fEditor->SendMessage(SCI_SETINDENT,
+			fFilePreferences.fIndentWidth.value_or(0), 0);
 		fEditor->SendMessage(SCI_SETCARETLINEVISIBLE, fPreferences->fLineHighlighting, 0);
 		fEditor->SendMessage(SCI_SETCARETLINEVISIBLEALWAYS, true, 0);
+
+		if(fFilePreferences.fEOLMode) {
+			fEditor->SendMessage(SCI_SETEOLMODE, fFilePreferences.fEOLMode.value_or(SC_EOL_LF), 0);
+		}
 
 		if(fPreferences->fLineNumbers == true) {
 			fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::NUMBER, (long int) SC_MARGIN_NUMBER);

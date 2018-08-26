@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -50,6 +50,7 @@ public:
 	bool			fOpenWindowsInStack;
 	bool			fHighlightTrailingWhitespace;
 	bool			fTrimTrailingWhitespaceOnSave;
+	bool			fUseEditorconfig;
 	std::string		fStyle;
 	// application state
 	BRect			fWindowRect;

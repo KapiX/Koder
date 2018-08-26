@@ -1,11 +1,12 @@
 /*
- * Copyright 2014-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
 #ifndef EDITORWINDOW_H
 #define EDITORWINDOW_H
 
+#include <optional>
 #include <string>
 
 #include <Catalog.h>
@@ -107,6 +108,13 @@ private:
 		DISCARD	= 1,
 		SAVE	= 2
 	};
+	struct FilePreferences {
+		std::optional<int> fTabWidth;
+		std::optional<int> fIndentWidth;
+		std::optional<bool> fTabsToSpaces;
+		std::optional<bool> fTrimTrailingWhitespace;
+		std::optional<uint8> fEOLMode;
+	};
 			BMenuBar*		fMainMenu;
 			BPopUpMenu*		fContextMenu;
 			BPath*			fOpenedFilePath;
@@ -127,6 +135,7 @@ private:
 			bool			fActivatedGuard;
 
 	static	Preferences*	fPreferences;
+			FilePreferences	fFilePreferences;
 
 			bool			_CheckPermissions(BStatable* file, mode_t permissions);
 			void			_FindReplace(BMessage* message);
@@ -136,6 +145,7 @@ private:
 			void			_SetLanguage(std::string lang);
 			void			_SetLanguageByFilename(const char* filename);
 			void			_OpenCorrespondingFile(const BPath &file, const std::string lang);
+			void			_LoadEditorconfig();
 			void			_SyncWithPreferences();
 			void			_SyncEditMenus();
 			int32			_ShowModifiedAlert();

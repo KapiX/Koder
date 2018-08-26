@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -105,6 +105,7 @@ Preferences::Load(const char* filename)
 	fTrimTrailingWhitespaceOnSave = storage.GetBool("trimTrailingWhitespaceOnSave", false);
 	fStyle = storage.GetString("style", "default");
 	fWindowRect = storage.GetRect("windowRect", BRect(50, 50, 450, 450));
+	fUseEditorconfig = storage.GetBool("useEditorconfig", true);
 	if(storage.FindMessage("findWindowState", &fFindWindowState) != B_OK)
 		fFindWindowState = BMessage();
 }
@@ -137,6 +138,7 @@ Preferences::Save(const char* filename)
 	storage.AddString("style", fStyle.c_str());
 	storage.AddRect("windowRect", fWindowRect);
 	storage.AddMessage("findWindowState", &fFindWindowState);
+	storage.AddBool("useEditorconfig", fUseEditorconfig);
 	if (file)
 		storage.Flatten(file.get());
 }
@@ -168,4 +170,5 @@ Preferences::operator =(Preferences p)
 	fStyle = p.fStyle;
 	fWindowRect = p.fWindowRect;
 	fFindWindowState = p.fFindWindowState;
+	fUseEditorconfig = p.fUseEditorconfig;
 }
