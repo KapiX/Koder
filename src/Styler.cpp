@@ -163,9 +163,9 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 		editor->SendMessage(SCI_INDICSETSTYLE, INDIC_IME+1, INDIC_FULLBOX);
 		editor->SendMessage(SCI_INDICSETFORE, INDIC_IME+1, 0x0000FF);
 	}
-	for(YAML::const_iterator it = global.begin(); it != global.end(); ++it) {
-		std::string name = it->first.as<std::string>();
-		_GetAttributesFromNode(global[name], id, s);
+	for(const auto &node : global) {
+		std::string name = node.first.as<std::string>();
+		_GetAttributesFromNode(node.second, id, s);
 		if(id != -1) {
 			_ApplyAttributes(editor, id, s);
 			sStylesMapping.emplace(id, s);

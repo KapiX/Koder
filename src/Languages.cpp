@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2015-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -97,17 +97,15 @@ Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
 	int lexerID = language["lexer"].as<int>();
 	editor->SendMessage(SCI_SETLEXER, static_cast<uptr_t>(lexerID), 0);
 
-	const YAML::Node properties = language["properties"];
-	for(YAML::const_iterator it = properties.begin(); it != properties.end(); ++it) {
-		auto name = it->first.as<std::string>();
-		auto value = it->second.as<std::string>();
+	for(const auto& property : language["properties"]) {
+		auto name = property.first.as<std::string>();
+		auto value = property.second.as<std::string>();
 		editor->SendMessage(SCI_SETPROPERTY, (uptr_t) name.c_str(), (sptr_t) value.c_str());
 	}
 
-	const YAML::Node keywords = language["keywords"];
-	for(YAML::const_iterator it = keywords.begin(); it != keywords.end(); ++it) {
-		auto num = it->first.as<int>();
-		auto words = it->second.as<std::string>();
+	for(const auto& keyword : language["keywords"]) {
+		auto num = keyword.first.as<int>();
+		auto words = keyword.second.as<std::string>();
 		editor->SendMessage(SCI_SETKEYWORDS, num, (sptr_t) words.c_str());
 	}
 
@@ -163,10 +161,10 @@ Languages::_LoadLanguages(const BPath& path)
 	p.Append(gAppName);
 	p.Append("languages");
 	const YAML::Node languages = YAML::LoadFile(std::string(p.Path()) + ".yaml");
-	for(YAML::const_iterator it = languages.begin(); it != languages.end(); ++it) {
-		auto name = it->first.as<std::string>();
-		auto menuitem = it->second["name"].as<std::string>();
-		auto extensions = it->second["extensions"].as<std::vector<std::string>>();
+	for(const auto& language : languages) {
+		auto name = language.first.as<std::string>();
+		auto menuitem = language.second["name"].as<std::string>();
+		auto extensions = language.second["extensions"].as<std::vector<std::string>>();
 		for(auto extension : extensions) {
 			sExtensions[extension] = name;
 		}
