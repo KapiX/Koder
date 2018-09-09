@@ -36,11 +36,8 @@ public:
 private:
 	static	void	_ApplyGlobal(Editor* editor, const char* style, const BPath &path);
 	static	void	_GetAvailableStyles(std::set<std::string> &styles, const BPath &path);
-	static	void	_GetAttributesFromNode(const YAML::Node &node, int* styleId,
-						int* fgColor, int* bgColor, int* fontStyle);
-	static	void	_SetAttributesInEditor(Editor* editor, int styleId,
-						int fgColor, int bgColor, int fontStyle);
-	static	int		_CSSToInt(const std::string cssColor);
+	static	void	_GetAttributesFromNode(const YAML::Node &node, int& styleId, Style& style);
+	static	void	_ApplyAttributes(Editor* editor, int styleId, Style style);
 	static	std::unordered_map<int, Style>	sStylesMapping;
 };
 

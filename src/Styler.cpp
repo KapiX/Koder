@@ -1,11 +1,12 @@
 /*
- * Copyright 2014-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
 #include "Styler.h"
 
 #include <unordered_map>
+#include <vector>
 
 #include <yaml-cpp/yaml.h>
 
@@ -22,6 +23,61 @@
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Styler"
+
+
+namespace YAML {
+
+namespace {
+
+int
+CSSToInt(const std::string cssColor)
+{
+	if(cssColor[0] != '#' || cssColor.length() != 7)
+		return -1;
+
+	std::string red = cssColor.substr(1, 2);
+	std::string green = cssColor.substr(3, 2);
+	std::string blue = cssColor.substr(5, 2);
+
+	return std::stoi(blue + green + red, nullptr, 16);
+}
+
+}
+
+template<>
+struct convert<Styler::Style> {
+	static Node encode(const Styler::Style& rhs) {
+		// TODO
+	}
+
+	static bool decode(const Node& node, Styler::Style& rhs) {
+		if(!node.IsMap()) {
+			return false;
+		}
+
+		if(node["foreground"]) {
+			rhs.fgColor = CSSToInt(node["foreground"].as<std::string>());
+		}
+		if(node["background"]) {
+			rhs.bgColor = CSSToInt(node["background"].as<std::string>());
+		}
+		if(node["style"] && node["style"].IsSequence()) {
+			rhs.style = 0;
+			const auto styles = node["style"].as<std::vector<std::string>>();
+			for(const auto& style : styles) {
+				if(style == "bold")
+					rhs.style |= 1;
+				else if(style == "italic")
+					rhs.style |= 2;
+				else if(style == "underline")
+					rhs.style |= 4;
+			}
+		}
+		return true;
+	}
+};
+
+}
 
 
 std::unordered_map<int, Styler::Style>	Styler::sStylesMapping;
@@ -82,15 +138,16 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 		global = styles["Global"];
 	}
 
-	int id, fg, bg, fs;
+	int id;
+	Style s;
 	if(global["Default"]) {
-		_GetAttributesFromNode(global["Default"], &id, &fg, &bg, &fs);
+		_GetAttributesFromNode(global["Default"], id, s);
 
 		font_family fixed;
 		be_fixed_font->GetFamilyAndStyle(&fixed, nullptr);
-		editor->SendMessage(SCI_STYLESETFONT, id, (sptr_t) fixed);
-		editor->SendMessage(SCI_STYLESETSIZE, id, (sptr_t) be_fixed_font->Size());
-		_SetAttributesInEditor(editor, id, fg, bg, fs);
+		editor->SendMessage(SCI_STYLESETFONT, 32, (sptr_t) fixed);
+		editor->SendMessage(SCI_STYLESETSIZE, 32, (sptr_t) be_fixed_font->Size());
+		_ApplyAttributes(editor, 32, s);
 		editor->SendMessage(SCI_STYLECLEARALL, 0, 0);
 		editor->SendMessage(SCI_STYLESETFONT, 36, (sptr_t) fixed);
 		editor->SendMessage(SCI_STYLESETSIZE, 36, (sptr_t) (be_fixed_font->Size() / 1.3));
@@ -108,43 +165,43 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 	}
 	for(YAML::const_iterator it = global.begin(); it != global.end(); ++it) {
 		std::string name = it->first.as<std::string>();
-		_GetAttributesFromNode(global[name], &id, &fg, &bg, &fs);
+		_GetAttributesFromNode(global[name], id, s);
 		if(id != -1) {
-			_SetAttributesInEditor(editor, id, fg, bg, fs);
-			sStylesMapping.emplace(id, Style(fg, bg, fs));
+			_ApplyAttributes(editor, id, s);
+			sStylesMapping.emplace(id, s);
 		} else {
 			if(name == "Current line") {
-				editor->SendMessage(SCI_SETCARETLINEBACK, bg, 0);
+				editor->SendMessage(SCI_SETCARETLINEBACK, s.bgColor, 0);
 				//editor->SendMessage(SCI_SETCARETLINEBACKALPHA, 128, 0);
 			}
 			else if(name == "Whitespace") {
-				if(fg != -1) {
-					editor->SendMessage(SCI_SETWHITESPACEFORE, true, fg);
+				if(s.fgColor != -1) {
+					editor->SendMessage(SCI_SETWHITESPACEFORE, true, s.fgColor);
 				}
-				if(bg != -1) {
-					editor->SendMessage(SCI_SETWHITESPACEBACK, true, bg);
+				if(s.bgColor != -1) {
+					editor->SendMessage(SCI_SETWHITESPACEBACK, true, s.bgColor);
 				}
 			}
 			else if(name == "Selected text") {
-				if(fg != -1) {
-					editor->SendMessage(SCI_SETSELFORE, true, fg);
+				if(s.fgColor != -1) {
+					editor->SendMessage(SCI_SETSELFORE, true, s.fgColor);
 				}
-				if(bg != -1) {
-					editor->SendMessage(SCI_SETSELBACK, true, bg);
+				if(s.bgColor != -1) {
+					editor->SendMessage(SCI_SETSELBACK, true, s.bgColor);
 				}
 			}
 			else if(name == "Caret") {
-				editor->SendMessage(SCI_SETCARETFORE, fg, 0);
+				editor->SendMessage(SCI_SETCARETFORE, s.fgColor, 0);
 			}
 			else if(name == "Edge") {
-				editor->SendMessage(SCI_SETEDGECOLOUR, fg, 0);
+				editor->SendMessage(SCI_SETEDGECOLOUR, s.fgColor, 0);
 			}
 			else if(name == "Fold") {
-				if(fg != -1) {
-					editor->SendMessage(SCI_SETFOLDMARGINHICOLOUR, true, fg);
+				if(s.fgColor != -1) {
+					editor->SendMessage(SCI_SETFOLDMARGINHICOLOUR, true, s.fgColor);
 				}
-				if(bg != -1) {
-					editor->SendMessage(SCI_SETFOLDMARGINCOLOUR, true, bg);
+				if(s.bgColor != -1) {
+					editor->SendMessage(SCI_SETFOLDMARGINCOLOUR, true, s.bgColor);
 				}
 			}
 		}
@@ -152,8 +209,8 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 	for(const auto& style : styles) {
 		if(style.first.as<std::string>() == "Global")
 			continue;
-		_GetAttributesFromNode(style.second, &id, &fg, &bg, &fs);
-		sStylesMapping.emplace(id, Style(fg, bg, fs));
+		_GetAttributesFromNode(style.second, id, s);
+		sStylesMapping.emplace(id, s);
 	}
 }
 
@@ -167,7 +224,7 @@ Styler::ApplyLanguage(Editor* editor, const std::map<int, int>& styleMapping)
 		const auto it = sStylesMapping.find(styleId);
 		if(it != sStylesMapping.end()) {
 			Style s = it->second;
-			_SetAttributesInEditor(editor, scintillaId, s.fgColor, s.bgColor, s.style);
+			_ApplyAttributes(editor, scintillaId, s);
 		}
 	}
 }
@@ -209,68 +266,31 @@ Styler::_GetAvailableStyles(std::set<std::string> &styles, const BPath &path)
 
 
 void
-Styler::_GetAttributesFromNode(const YAML::Node &node, int* styleId, int* fgColor,
-	int* bgColor, int* fontStyle)
+Styler::_GetAttributesFromNode(const YAML::Node &node, int& styleId, Styler::Style& style)
 {
-	*styleId = -1;
-	*fgColor = -1;
-	*bgColor = -1;
-	*fontStyle = -1;
-
-	if(node["id"]) {
-		*styleId = node["id"].as<int>();
-	}
-	if(node["foreground"]) {
-		*fgColor = _CSSToInt(node["foreground"].as<std::string>());
-	}
-	if(node["background"]) {
-		*bgColor = _CSSToInt(node["background"].as<std::string>());
-	}
-	if(node["style"]) {
-		*fontStyle = 0;
-		auto styles = node["style"].as<std::vector<std::string>>();
-		for(auto style : styles) {
-			if(style == "bold") *fontStyle |= 1;
-			else if(style == "italic") *fontStyle |= 2;
-			else if(style == "underline") *fontStyle |= 4;
-		}
-	}
+	styleId = node["id"] ? node["id"].as<int>() : -1;
+	style = node.as<Style>();
 }
 
 
 void
-Styler::_SetAttributesInEditor(Editor* editor, int styleId, int fgColor,
-	int bgColor, int fontStyle)
+Styler::_ApplyAttributes(Editor* editor, int styleId, Styler::Style style)
 {
-	if(fgColor != -1) {
-		editor->SendMessage(SCI_STYLESETFORE, styleId, fgColor);
+	if(style.fgColor != -1) {
+		editor->SendMessage(SCI_STYLESETFORE, styleId, style.fgColor);
 	}
-	if(bgColor != -1) {
-		editor->SendMessage(SCI_STYLESETBACK, styleId, bgColor);
+	if(style.bgColor != -1) {
+		editor->SendMessage(SCI_STYLESETBACK, styleId, style.bgColor);
 	}
-	if(fontStyle != -1) {
-		if(fontStyle & 1) {
+	if(style.style != -1) {
+		if(style.style & 1) {
 			editor->SendMessage(SCI_STYLESETBOLD, styleId, true);
 		}
-		if(fontStyle & 2) {
+		if(style.style & 2) {
 			editor->SendMessage(SCI_STYLESETITALIC, styleId, true);
 		}
-		if(fontStyle & 4) {
+		if(style.style & 4) {
 			editor->SendMessage(SCI_STYLESETUNDERLINE, styleId, true);
 		}
 	}
-}
-
-
-/* static */ int
-Styler::_CSSToInt(const std::string cssColor)
-{
-	if(cssColor[0] != '#' || cssColor.length() != 7)
-		return -1;
-
-	std::string red = cssColor.substr(1, 2);
-	std::string green = cssColor.substr(3, 2);
-	std::string blue = cssColor.substr(5, 2);
-
-	return std::stoi(blue + green + red, nullptr, 16);
 }
