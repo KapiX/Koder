@@ -5,6 +5,8 @@
 
 #include "Styler.h"
 
+#include <unordered_map>
+
 #include <yaml-cpp/yaml.h>
 
 #include <Alert.h>
@@ -20,6 +22,9 @@
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "Styler"
+
+
+std::unordered_map<int, Styler::Style>	Styler::sStylesMapping;
 
 
 /* static */ void
@@ -71,7 +76,11 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 	p.Append(gAppName);
 	p.Append("styles");
 	p.Append(style);
-	const YAML::Node global = YAML::LoadFile(std::string(p.Path()) + ".yaml");
+	const YAML::Node styles = YAML::LoadFile(std::string(p.Path()) + ".yaml");
+	YAML::Node global;
+	if(styles["Global"]) {
+		global = styles["Global"];
+	}
 
 	int id, fg, bg, fs;
 	if(global["Default"]) {
@@ -102,6 +111,7 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 		_GetAttributesFromNode(global[name], &id, &fg, &bg, &fs);
 		if(id != -1) {
 			_SetAttributesInEditor(editor, id, fg, bg, fs);
+			sStylesMapping.emplace(id, Style(fg, bg, fs));
 		} else {
 			if(name == "Current line") {
 				editor->SendMessage(SCI_SETCARETLINEBACK, bg, 0);
@@ -139,52 +149,27 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 			}
 		}
 	}
-}
-
-
-/* static */ void
-Styler::ApplyLanguage(Editor* editor, const char* style, const char* lang)
-{
-	BPath dataPath;
-	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
-	try {
-		_ApplyLanguage(editor, style, lang, dataPath);
-	} catch (YAML::BadFile &) {
-	}
-	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
-	try {
-		_ApplyLanguage(editor, style, lang, dataPath);
-	} catch (YAML::BadFile &) {
-	}
-	find_directory(B_SYSTEM_NONPACKAGED_DATA_DIRECTORY, &dataPath);
-	try {
-		_ApplyLanguage(editor, style, lang, dataPath);
-	} catch (YAML::BadFile &) {
-	}
-	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
-	try {
-		_ApplyLanguage(editor, style, lang, dataPath);
-	} catch (YAML::BadFile &) {
+	for(const auto& style : styles) {
+		if(style.first.as<std::string>() == "Global")
+			continue;
+		_GetAttributesFromNode(style.second, &id, &fg, &bg, &fs);
+		sStylesMapping.emplace(id, Style(fg, bg, fs));
 	}
 }
 
 
 /* static */ void
-Styler::_ApplyLanguage(Editor* editor, const char* style, const char* lang, const BPath &path)
+Styler::ApplyLanguage(Editor* editor, const std::map<int, int>& styleMapping)
 {
-	BPath p(path);
-	p.Append(gAppName);
-	p.Append("styles");
-	p.Append(style);
-	p.Append(lang);
-	const YAML::Node language = YAML::LoadFile(std::string(p.Path()) + ".yaml");
-	int id, fg, bg, fs;
-	for(YAML::const_iterator it = language.begin(); it != language.end(); ++it) {
-		std::string name = it->first.as<std::string>();
-		_GetAttributesFromNode(language[name], &id, &fg, &bg, &fs);
-		_SetAttributesInEditor(editor, id, fg, bg, fs);
+	for(const auto& mapping : styleMapping) {
+		int scintillaId = mapping.first;
+		int styleId = mapping.second;
+		const auto it = sStylesMapping.find(styleId);
+		if(it != sStylesMapping.end()) {
+			Style s = it->second;
+			_SetAttributesInEditor(editor, scintillaId, s.fgColor, s.bgColor, s.style);
+		}
 	}
-	editor->SendMessage(SCI_COLOURISE, 0, -1);
 }
 
 

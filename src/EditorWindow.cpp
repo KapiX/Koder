@@ -903,9 +903,9 @@ void
 EditorWindow::_SetLanguage(std::string lang)
 {
 	fCurrentLanguage = lang;
-	Languages::ApplyLanguage(fEditor, lang.c_str());
+	const auto mapping = Languages::ApplyLanguage(fEditor, lang.c_str());
 	Styler::ApplyGlobal(fEditor, fPreferences->fStyle.c_str());
-	Styler::ApplyLanguage(fEditor, fPreferences->fStyle.c_str(), lang.c_str());
+	Styler::ApplyLanguage(fEditor, mapping);
 
 	fMainMenu->FindItem(EDIT_COMMENTLINE)->SetEnabled(fEditor->CanCommentLine());
 	fMainMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(fEditor->CanCommentBlock());

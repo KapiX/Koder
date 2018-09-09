@@ -49,34 +49,44 @@ Languages::SortAlphabetically()
 }
 
 
-/* static */ void
+/* static */ std::map<int, int>
 Languages::ApplyLanguage(Editor* editor, const char* lang)
 {
+	std::map<int, int> styleMapping;
 	BPath dataPath;
 	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
 	try {
-		_ApplyLanguage(editor, lang, dataPath);
+		auto m = _ApplyLanguage(editor, lang, dataPath);
+		m.merge(styleMapping);
+		std::swap(styleMapping, m);
 	} catch (YAML::BadFile &) {
 	}
 	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
 	try {
-		_ApplyLanguage(editor, lang, dataPath);
+		auto m = _ApplyLanguage(editor, lang, dataPath);
+		m.merge(styleMapping);
+		std::swap(styleMapping, m);
 	} catch (YAML::BadFile &) {
 	}
 	find_directory(B_SYSTEM_NONPACKAGED_DATA_DIRECTORY, &dataPath);
 	try {
-		_ApplyLanguage(editor, lang, dataPath);
+		auto m = _ApplyLanguage(editor, lang, dataPath);
+		m.merge(styleMapping);
+		std::swap(styleMapping, m);
 	} catch (YAML::BadFile &) {
 	}
 	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
 	try {
-		_ApplyLanguage(editor, lang, dataPath);
+		auto m = _ApplyLanguage(editor, lang, dataPath);
+		m.merge(styleMapping);
+		std::swap(styleMapping, m);
 	} catch (YAML::BadFile &) {
 	}
+	return styleMapping;
 }
 
 
-/* static */ void
+/* static */ std::map<int, int>
 Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
 {
 	BPath p(path);
@@ -110,6 +120,12 @@ Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
 		if(block && block.IsSequence())
 			editor->SetCommentBlockTokens(block[0].as<std::string>(), block[1].as<std::string>());
 	}
+
+	const YAML::Node styles = language["styles"];
+	if(styles) {
+		return styles.as<std::map<int, int>>();
+	}
+	return std::map<int, int>();
 }
 
 
