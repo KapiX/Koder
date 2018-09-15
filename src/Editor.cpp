@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -11,6 +11,7 @@
 #include <string>
 
 #include "Preferences.h"
+#include "StatusView.h"
 
 
 Editor::Editor()
@@ -27,8 +28,28 @@ Editor::Editor()
 	fSearchLastResultStart(-1),
 	fSearchLastResultEnd(-1),
 	fSearchLast(""),
-	fSearchLastFlags(0)
+	fSearchLastFlags(0),
+	fType(""),
+	fReadOnly(false)
 {
+	fStatusView = new StatusView(this);
+	AddChild(fStatusView);
+}
+
+
+void
+Editor::DoLayout()
+{
+	BScintillaView::DoLayout();
+	fStatusView->ResizeToPreferred();
+}
+
+
+void
+Editor::FrameResized(float width, float height)
+{
+	BScintillaView::FrameResized(width, height);
+	fStatusView->ResizeToPreferred();
 }
 
 
@@ -53,6 +74,7 @@ Editor::NotificationReceived(SCNotification* notification)
 		case SCN_UPDATEUI:
 			_BraceHighlight();
 			_UpdateLineNumberWidth();
+			_UpdateStatusView();
 			window_msg.SendMessage(EDITOR_UPDATEUI);
 		break;
 		case SCN_MARGINCLICK:
@@ -76,6 +98,31 @@ void
 Editor::SetPreferences(Preferences* preferences)
 {
 	fPreferences = preferences;
+}
+
+
+void
+Editor::SetType(std::string type)
+{
+	fType = type;
+	_UpdateStatusView();
+}
+
+
+void
+Editor::SetRef(const entry_ref& ref)
+{
+	fStatusView->SetRef(ref);
+	_UpdateStatusView();
+}
+
+
+void
+Editor::SetReadOnly(bool readOnly)
+{
+	fReadOnly = readOnly;
+	SendMessage(SCI_SETREADONLY, fReadOnly, 0);
+	_UpdateStatusView();
 }
 
 
@@ -403,6 +450,21 @@ Editor::_UpdateLineNumberWidth()
 		int charWidth = SendMessage(SCI_TEXTWIDTH, STYLE_LINENUMBER, (sptr_t) "0");
 		SendMessage(SCI_SETMARGINWIDTHN, Margin::NUMBER, std::max(i, 3) * charWidth);
 	}
+}
+
+
+void
+Editor::_UpdateStatusView()
+{
+	Sci_Position pos = SendMessage(SCI_GETCURRENTPOS, 0, 0);
+	int line = SendMessage(SCI_LINEFROMPOSITION, pos, 0);
+	int column = SendMessage(SCI_GETCOLUMN, pos, 0);
+	BMessage update(StatusView::UPDATE_STATUS);
+	update.AddInt32("line", line + 1);
+	update.AddInt32("column", column + 1);
+	update.AddString("type", fType.c_str());
+	update.AddBool("readOnly", fReadOnly);
+	fStatusView->SetStatus(&update);
 }
 
 

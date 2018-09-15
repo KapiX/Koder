@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -14,6 +14,7 @@
 
 
 class Preferences;
+class StatusView;
 
 
 enum {
@@ -37,10 +38,17 @@ public:
 
 						Editor();
 
+	virtual	void		DoLayout();
+	virtual	void		FrameResized(float width, float height);
+
 	void				NotificationReceived(SCNotification* notification);
 	void				ContextMenu(BPoint point);
 
 	void				SetPreferences(Preferences* preferences);
+
+	void				SetType(std::string type);
+	void				SetRef(const entry_ref& ref);
+	void				SetReadOnly(bool readOnly);
 
 	void				CommentLine(Sci_Position start, Sci_Position end);
 	void				CommentBlock(Sci_Position start, Sci_Position end);
@@ -67,6 +75,7 @@ public:
 private:
 	void				_MaintainIndentation(char ch);
 	void				_UpdateLineNumberWidth();
+	void				_UpdateStatusView();
 	void				_BraceHighlight();
 	bool				_BraceMatch(int pos);
 	void				_MarginClick(int margin, int pos);
@@ -81,6 +90,7 @@ private:
 							bool regex = false);
 
 	Preferences*		fPreferences;
+	StatusView*			fStatusView;
 
 	std::string			fCommentLineToken;
 	std::string			fCommentBlockStartToken;
@@ -97,6 +107,10 @@ private:
 	std::string			fSearchLast;
 	int					fSearchLastFlags;
 	bool				fNewSearch;
+
+	// needed for StatusView
+	std::string			fType;
+	bool				fReadOnly;
 };
 
 

@@ -40,6 +40,7 @@ SRCS = \
 	src/Languages.cpp \
 	src/Preferences.cpp \
 	src/QuitAlert.cpp \
+	src/StatusView.cpp \
 	src/Styler.cpp \
 	src/Utils.cpp
 
@@ -87,11 +88,13 @@ ifeq ($(shell uname -p), x86)
 SYSTEM_INCLUDE_PATHS = \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/interface) \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/shared) \
+	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/tracker) \
 	$(shell findpaths -a x86 -e B_FIND_PATH_HEADERS_DIRECTORY scintilla)
 else
 SYSTEM_INCLUDE_PATHS = \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/interface) \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/shared) \
+	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/tracker) \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY scintilla)
 endif
 

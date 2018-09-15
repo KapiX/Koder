@@ -29,6 +29,7 @@ class BPopUpMenu;
 class Editor;
 class GoToLineWindow;
 class Preferences;
+class StatusView;
 
 namespace BPrivate {
 	class BToolBar;
@@ -96,6 +97,7 @@ public:
 			void			MessageReceived(BMessage* message);
 			void			WindowActivated(bool active);
 			void			FrameMoved(BPoint origin);
+			void			FrameResized(float width, float height);
 
 			bool			IsModified() { return fModified; }
 			const char*		OpenedFilePath();
@@ -129,6 +131,7 @@ private:
 			BMenu*			fLanguageMenu;
 			std::string		fCurrentLanguage;
 			BPrivate::BToolBar*	fToolbar;
+			StatusView*		fStatusView;
 
 			GoToLineWindow*	fGoToLineWindow;
 

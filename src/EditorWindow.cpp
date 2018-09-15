@@ -39,6 +39,7 @@
 #include "GoToLineWindow.h"
 #include "Languages.h"
 #include "Preferences.h"
+#include "StatusView.h"
 #include "Styler.h"
 #include "Utils.h"
 
@@ -228,7 +229,7 @@ EditorWindow::New()
 void
 EditorWindow::OpenFile(entry_ref* ref, Sci_Position line, Sci_Position column)
 {
-	fEditor->SendMessage(SCI_SETREADONLY, false, 0);
+	fEditor->SetReadOnly(false);
 		// let us load new file
 	if(fOpenedFilePath != nullptr) {
 		// stop watching previously opened file
@@ -288,7 +289,8 @@ EditorWindow::OpenFile(entry_ref* ref, Sci_Position line, Sci_Position column)
 	entry.GetName(name);
 	_SetLanguageByFilename(name);
 
-	fEditor->SendMessage(SCI_SETREADONLY, fReadOnly, 0);
+	fEditor->SetReadOnly(fReadOnly);
+	fEditor->SetRef(*ref);
 
 	be_roster->AddToRecentDocuments(ref, gAppMime);
 
@@ -653,7 +655,7 @@ EditorWindow::MessageReceived(BMessage* message)
 
 					bool canWrite = _CheckPermissions(&entry, S_IWUSR | S_IWGRP | S_IWOTH);
 					fReadOnly = !canWrite;
-					fEditor->SendMessage(SCI_SETREADONLY, fReadOnly, 0);
+					fEditor->SetReadOnly(fReadOnly);
 				}
 				RefreshTitle();
 				// Notification about this is sent when window is activated
@@ -734,6 +736,14 @@ void
 EditorWindow::FrameMoved(BPoint origin)
 {
 	fPreferences->fWindowRect.OffsetTo(origin);
+}
+
+
+void
+EditorWindow::FrameResized(float width, float height)
+{
+	// Workaround: layouted views don't get that event
+	fEditor->FrameResized(width, height);
 }
 
 
@@ -906,6 +916,8 @@ EditorWindow::_SetLanguage(std::string lang)
 	const auto mapping = Languages::ApplyLanguage(fEditor, lang.c_str());
 	Styler::ApplyGlobal(fEditor, fPreferences->fStyle.c_str());
 	Styler::ApplyLanguage(fEditor, mapping);
+
+	fEditor->SetType(Languages::GetMenuItemName(lang));
 
 	fMainMenu->FindItem(EDIT_COMMENTLINE)->SetEnabled(fEditor->CanCommentLine());
 	fMainMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(fEditor->CanCommentBlock());
