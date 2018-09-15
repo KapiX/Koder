@@ -66,6 +66,10 @@ String:
     id: 106
     foreground: "#2a00ff"
     background: "#ffffff"
+Operator:
+    id: 110
+    foreground: "#3f5fbf"
+    background: "#ffffff"
 Verbatim:
     id: 113
     foreground: "#646464"
