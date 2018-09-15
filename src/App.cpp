@@ -95,6 +95,7 @@ App::AboutRequested()
 		B_TRANSLATE("ArmanHayots, for Russian translation."),
 		B_TRANSLATE("un_spacyar, for Spanish translation."),
 		B_TRANSLATE("Lan72, for Ukrainian translation."),
+		B_TRANSLATE("Konrad77, for dark theme."),
 		nullptr
 	};
 

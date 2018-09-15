@@ -21,6 +21,20 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 
 0.4.0 - *TBD*
 
+* Find/Replace window can be closed with Esc now.
+* Fix for saving preferences.
+* Save Find window settings.
+* Limited .editorconfig support.
+* Stack all windows besides those from Tracker.
+* Add status bar.
+* Add dark theme by Mikael Konradsson.
+* Add support for languages:
+  * CSS
+  * HTML
+  * JavaScript
+  * PHP
+  * OCaml
+
 0.3.0 - *20-03-2018*
 
 * New icon.
