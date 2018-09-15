@@ -413,10 +413,7 @@ void
 EditorWindow::MessageReceived(BMessage* message)
 {
 	if(message->WasDropped()) {
-		BMessage refsReceived(*message);
-		refsReceived.what = B_REFS_RECEIVED;
-		be_app->PostMessage(&refsReceived);
-		return;
+		message->what = B_REFS_RECEIVED;
 	}
 	switch(message->what) {
 		case SAVE_FILE: {
@@ -636,6 +633,7 @@ EditorWindow::MessageReceived(BMessage* message)
 				if(fOpenedFilePath == nullptr && fModified == false) {
 					OpenFile(&ref);
 				} else {
+					message->AddPointer("window", this);
 					be_app->PostMessage(message);
 				}
 			}

@@ -19,12 +19,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <Application.h>
 #include <Catalog.h>
 #include <ControlLook.h>
 #include <DirMenu.h>
 #include <MenuItem.h>
 #include <Message.h>
+#include <Messenger.h>
 #include <PopUpMenu.h>
 #include <ScrollView.h>
 #include <StringView.h>
@@ -320,7 +320,7 @@ StatusView::_ShowDirMenu()
 		return;
 
 	BPrivate::BDirMenu* menu = new BDirMenu(NULL,
-		be_app_messenger, B_REFS_RECEIVED);
+		BMessenger(Window()), B_REFS_RECEIVED);
 
 	menu->Populate(&entry, Window(), false, false, true, false, true);
 
