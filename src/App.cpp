@@ -13,6 +13,7 @@
 #include <File.h>
 #include <FindDirectory.h>
 #include <Path.h>
+#include <tracker_private.h>
 #include <WindowStack.h>
 
 #include <memory>
@@ -208,13 +209,21 @@ App::RefsReceived(BMessage* message)
 	if(message->GetInfo("refs", nullptr, &count) != B_OK) {
 		return;
 	}
+
 	BWindow* windowPtr = nullptr;
 	std::unique_ptr<BWindowStack> windowStack(nullptr);
 	if(message->FindPointer("window", (void**) &windowPtr) == B_OK)
 		windowStack.reset(new BWindowStack(windowPtr));
+
+	BMessenger messenger(kTrackerSignature);
+	BMessage trackerMessage(B_REFS_RECEIVED);
 	entry_ref ref;
 	for(int32 i = 0; i < count; ++i) {
 		if(message->FindRef("refs", i, &ref) == B_OK) {
+			if(BNode(&ref).IsDirectory()) {
+				trackerMessage.AddRef("refs", &ref);
+				continue;
+			}
 			Sci_Position line = message->GetInt32("be:line", 0) - 1;
 			Sci_Position column = message->GetInt32("be:column", 0) - 1;
 			bool stagger = fWindows.CountItems() > 0 && (!fPreferences->fOpenWindowsInStack || !windowStack.get());
@@ -229,6 +238,9 @@ App::RefsReceived(BMessage* message)
 			window->Show();
 			fWindows.AddItem(window);
 		}
+	}
+	if(!trackerMessage.IsEmpty()) {
+		messenger.SendMessage(&trackerMessage);
 	}
 }
 
