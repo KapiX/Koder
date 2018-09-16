@@ -138,6 +138,8 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 		global = styles["Global"];
 	}
 
+	sStylesMapping.clear();
+
 	int id;
 	Style s;
 	if(global["Default"]) {
