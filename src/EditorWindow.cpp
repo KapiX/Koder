@@ -499,7 +499,9 @@ EditorWindow::MessageReceived(BMessage* message)
 		case MAINMENU_EDIT_TRIMWS: {
 			fEditor->TrimTrailingWhitespace();
 		} break;
-		case MAINMENU_EDIT_APP_PREFERENCES:
+		case MAINMENU_EDIT_APP_PREFERENCES: {
+			be_app->PostMessage(message);
+		} break;
 		case MAINMENU_SEARCH_FINDREPLACE: {
 			if(fEditor->SendMessage(SCI_GETSELECTIONEMPTY, 0, 0) == false) {
 				int length = fEditor->SendMessage(SCI_GETSELTEXT, 0, 0);
