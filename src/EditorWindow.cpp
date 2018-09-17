@@ -129,6 +129,9 @@ EditorWindow::EditorWindow(bool stagger)
 		.End()
 		.AddMenu(B_TRANSLATE("Search"))
 			.AddItem(B_TRANSLATE("Find/Replace" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_FINDREPLACE, 'F')
+			.AddItem(B_TRANSLATE("Find next"), MAINMENU_SEARCH_FINDNEXT, 'G')
+			.AddItem(B_TRANSLATE("Find selection"), MAINMENU_SEARCH_FINDSELECTION, 'H')
+			.AddItem(B_TRANSLATE("Replace and find"), MAINMENU_SEARCH_REPLACEANDFIND, 'T')
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Go to line" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_GOTOLINE, ',')
 		.End()
@@ -510,6 +513,15 @@ EditorWindow::MessageReceived(BMessage* message)
 				message->AddString("selection", selection.c_str());
 			}
 			be_app->PostMessage(message);
+		} break;
+		case MAINMENU_SEARCH_FINDNEXT: {
+			fEditor->FindNext();
+		} break;
+		case MAINMENU_SEARCH_FINDSELECTION: {
+			fEditor->FindSelection();
+		} break;
+		case MAINMENU_SEARCH_REPLACEANDFIND: {
+			fEditor->ReplaceAndFind();
 		} break;
 		case MAINMENU_SEARCH_GOTOLINE: {
 			if(fGoToLineWindow == nullptr) {

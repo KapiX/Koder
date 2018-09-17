@@ -66,10 +66,13 @@ public:
 	void				TrimTrailingWhitespace();
 
 	bool				Find(BMessage* message);
+	void				FindNext();
+	void				FindSelection();
 	void				Replace(std::string replacement, bool regex = false);
 	int					ReplaceAll(std::string search, std::string replacement,
 							bool matchCase, bool matchWord, bool inSelection,
 							bool regex = false);
+	void				ReplaceAndFind();
 	void				ResetFindReplace();
 
 private:

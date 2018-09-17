@@ -367,6 +367,28 @@ Editor::Find(BMessage* message)
 
 
 void
+Editor::FindNext()
+{
+	Find(&fSearchLastMessage);
+}
+
+
+void
+Editor::FindSelection()
+{
+	if(SendMessage(SCI_GETSELECTIONEMPTY) == false) {
+		int length = SendMessage(SCI_GETSELTEXT);
+		std::string selection(length, '\0');
+		SendMessage(SCI_GETSELTEXT, 0, (sptr_t) &selection[0]);
+		fSearchLastMessage.MakeEmpty();
+		fSearchLastMessage.AddBool("wrapAround", true);
+		fSearchLastMessage.AddString("findText", selection.c_str());
+		Find(&fSearchLastMessage);
+	}
+}
+
+
+void
 Editor::Replace(std::string replacement, bool regex)
 {
 	Sci_Position startOld = SendMessage(SCI_GETTARGETSTART);
@@ -416,6 +438,16 @@ Editor::ReplaceAll(std::string search, std::string replacement, bool matchCase,
 	SendMessage(SCI_ENDUNDOACTION, 0, 0);
 	SendMessage(SCI_SETTARGETRANGE, startOld, endOld);
 	return occurences;
+}
+
+
+void
+Editor::ReplaceAndFind()
+{
+	bool regex = fSearchLastMessage.GetBool("regex");
+	const char* replaceText = fSearchLastMessage.GetString("replaceText", "");
+	Replace(replaceText, regex);
+	Find(&fSearchLastMessage);
 }
 
 
