@@ -196,10 +196,6 @@ EditorWindow::EditorWindow(bool stagger)
 	layout->SetInsets(0, 0, -1, -1);
 	SetKeyMenuBar(fMainMenu);
 
-	// needed for toolbar setting to work properly
-	if(fPreferences->fToolbar == true)
-		fToolbar->Hide();
-
 	_SyncWithPreferences();
 
 	fEditor->SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true, 0);
@@ -1133,10 +1129,12 @@ EditorWindow::_SyncWithPreferences()
 
 		fEditor->SendMessage(SCI_SETFOLDFLAGS, 16, 0);
 
-		if(fPreferences->fToolbar == true)
-			fToolbar->Show();
-		else
-			fToolbar->Hide();
+		if(!IsHidden()) {
+			if(fPreferences->fToolbar == true)
+				while(fToolbar->IsHidden()) fToolbar->Show();
+			else
+				while(!fToolbar->IsHidden()) fToolbar->Hide();
+		}
 
 		RefreshTitle();
 
