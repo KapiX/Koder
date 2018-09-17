@@ -300,9 +300,16 @@ Editor::TrimTrailingWhitespace()
 
 
 bool
-Editor::Find(std::string search, bool matchCase, bool matchWord, bool backwards,
-	bool wrapAround, bool inSelection, bool regex)
+Editor::Find(BMessage* message)
 {
+	bool inSelection = message->GetBool("inSelection");
+	bool matchCase = message->GetBool("matchCase");
+	bool matchWord = message->GetBool("matchWord");
+	bool wrapAround = message->GetBool("wrapAround");
+	bool backwards = message->GetBool("backwards");
+	bool regex = message->GetBool("regex");
+	const char* search = message->GetString("findText", "");
+
 	Sci_Position startOld = SendMessage(SCI_GETTARGETSTART);
 	Sci_Position endOld = SendMessage(SCI_GETTARGETEND);
 
@@ -353,6 +360,7 @@ Editor::Find(std::string search, bool matchCase, bool matchWord, bool backwards,
 			matchWord, regex);
 	}
 	fNewSearch = false;
+	fSearchLastMessage = *message;
 	SendMessage(SCI_SETTARGETRANGE, startOld, endOld);
 	return found;
 }

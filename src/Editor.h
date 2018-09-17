@@ -7,6 +7,8 @@
 #define EDITOR_H
 
 
+#include <Message.h>
+
 #include <ScintillaView.h>
 #include <SciLexer.h>
 
@@ -63,9 +65,7 @@ public:
 	void				ClearHighlightedWhitespace();
 	void				TrimTrailingWhitespace();
 
-	bool				Find(std::string search, bool matchCase, bool matchWord,
-							bool backwards, bool wrapAround, bool inSelection,
-							bool regex = false);
+	bool				Find(BMessage* message);
 	void				Replace(std::string replacement, bool regex = false);
 	int					ReplaceAll(std::string search, std::string replacement,
 							bool matchCase, bool matchWord, bool inSelection,
@@ -107,6 +107,7 @@ private:
 	std::string			fSearchLast;
 	int					fSearchLastFlags;
 	bool				fNewSearch;
+	BMessage			fSearchLastMessage;
 
 	// needed for StatusView
 	std::string			fType;

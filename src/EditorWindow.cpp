@@ -806,8 +806,7 @@ EditorWindow::_FindReplace(BMessage* message)
 				fEditor->ResetFindReplace();
 			}
 			bool found;
-			found = fEditor->Find(findText, matchCase, matchWord, backwards,
-				wrapAround, inSelection, regex);
+			found = fEditor->Find(message);
 			if(found == false) {
 				BAlert* alert = new BAlert(B_TRANSLATE("Searching finished"),
 					B_TRANSLATE("Reached the end of the target. No results found."),
