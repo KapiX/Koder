@@ -6,11 +6,13 @@
 #ifndef EDITORWINDOW_H
 #define EDITORWINDOW_H
 
+#include <memory>
 #include <optional>
 #include <string>
 
 #include <Catalog.h>
 #include <MimeType.h>
+#include <MessageFilter.h>
 #include <Statable.h>
 #include <String.h>
 #include <Window.h>
@@ -73,6 +75,7 @@ enum {
 	MAINMENU_SEARCH_FINDNEXT			= 'msfn',
 	MAINMENU_SEARCH_FINDSELECTION		= 'msfs',
 	MAINMENU_SEARCH_REPLACEANDFIND		= 'msrf',
+	MAINMENU_SEARCH_INCREMENTAL			= 'msin',
 	MAINMENU_SEARCH_GOTOLINE			= 'msgl',
 
 	MAINMENU_LANGUAGE					= 'ml00',
@@ -90,6 +93,7 @@ enum {
 class EditorWindow : public BWindow {
 public:
 							EditorWindow(bool stagger = false);
+	virtual					~EditorWindow();
 
 			void			New();
 			void			OpenFile(entry_ref* ref, Sci_Position line = -1, Sci_Position column = -1);
@@ -143,6 +147,9 @@ private:
 	static	Preferences*	fPreferences;
 			FilePreferences	fFilePreferences;
 
+			std::string			fIncrementalSearchTerm;
+			std::unique_ptr<BMessageFilter> fIncrementalSearchFilter;
+
 			bool			_CheckPermissions(BStatable* file, mode_t permissions);
 			void			_FindReplace(BMessage* message);
 			status_t		_MonitorFile(BStatable* file, bool enable);
@@ -156,6 +163,16 @@ private:
 			void			_SyncEditMenus();
 			int32			_ShowModifiedAlert();
 			void			_Save();
+
+	static	filter_result	_IncrementalSearchFilter(BMessage* message,
+								BHandler** target, BMessageFilter* messageFilter);
+
+	enum {
+		INCREMENTAL_SEARCH_CHAR			= 'incs',
+		INCREMENTAL_SEARCH_BACKSPACE	= 'incb',
+		INCREMENTAL_SEARCH_CANCEL		= 'ince',
+		INCREMENTAL_SEARCH_COMMIT		= 'incc'
+	};
 };
 
 

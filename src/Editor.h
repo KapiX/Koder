@@ -12,6 +12,7 @@
 #include <ScintillaView.h>
 #include <SciLexer.h>
 
+#include <memory>
 #include <string>
 
 
@@ -74,6 +75,9 @@ public:
 							bool regex = false);
 	void				ReplaceAndFind();
 	void				ResetFindReplace();
+	void				IncrementalSearch(std::string term);
+	void				IncrementalSearchCancel();
+	void				IncrementalSearchCommit(std::string term);
 
 private:
 	void				_MaintainIndentation(char ch);
@@ -111,6 +115,8 @@ private:
 	int					fSearchLastFlags;
 	bool				fNewSearch;
 	BMessage			fSearchLastMessage;
+	bool				fIncrementalSearch;
+	Sci_CharacterRange	fSavedSelection;
 
 	// needed for StatusView
 	std::string			fType;

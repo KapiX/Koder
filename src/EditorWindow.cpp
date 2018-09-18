@@ -59,7 +59,9 @@ Preferences* EditorWindow::fPreferences = nullptr;
 
 EditorWindow::EditorWindow(bool stagger)
 	:
-	BWindow(fPreferences->fWindowRect, gAppName, B_DOCUMENT_WINDOW, 0)
+	BWindow(fPreferences->fWindowRect, gAppName, B_DOCUMENT_WINDOW, 0),
+	fIncrementalSearchTerm(""),
+	fIncrementalSearchFilter(new BMessageFilter(B_KEY_DOWN, _IncrementalSearchFilter))
 {
 	fActivatedGuard = false;
 
@@ -132,6 +134,7 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem(B_TRANSLATE("Find next"), MAINMENU_SEARCH_FINDNEXT, 'G')
 			.AddItem(B_TRANSLATE("Find selection"), MAINMENU_SEARCH_FINDSELECTION, 'H')
 			.AddItem(B_TRANSLATE("Replace and find"), MAINMENU_SEARCH_REPLACEANDFIND, 'T')
+			.AddItem(B_TRANSLATE("Incremental search"), MAINMENU_SEARCH_INCREMENTAL, 'I')
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Go to line" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_GOTOLINE, ',')
 		.End()
@@ -213,6 +216,12 @@ EditorWindow::EditorWindow(bool stagger)
 	if(stagger == true) {
 		MoveBy(kWindowStagger, kWindowStagger);
 	}
+}
+
+
+EditorWindow::~EditorWindow()
+{
+	RemoveCommonFilter(fIncrementalSearchFilter.get());
 }
 
 
@@ -415,6 +424,25 @@ EditorWindow::MessageReceived(BMessage* message)
 		message->what = B_REFS_RECEIVED;
 	}
 	switch(message->what) {
+		case INCREMENTAL_SEARCH_CHAR: {
+			const char* character = message->GetString("character", "");
+			fIncrementalSearchTerm.append(character);
+			fEditor->IncrementalSearch(fIncrementalSearchTerm);
+		} break;
+		case INCREMENTAL_SEARCH_BACKSPACE: {
+			fIncrementalSearchTerm.pop_back();
+			fEditor->IncrementalSearch(fIncrementalSearchTerm);
+		} break;
+		case INCREMENTAL_SEARCH_CANCEL: {
+			fEditor->IncrementalSearchCancel();
+			fIncrementalSearchTerm = "";
+			RemoveCommonFilter(fIncrementalSearchFilter.get());
+		} break;
+		case INCREMENTAL_SEARCH_COMMIT: {
+			fEditor->IncrementalSearchCommit(fIncrementalSearchTerm);
+			fIncrementalSearchTerm = "";
+			RemoveCommonFilter(fIncrementalSearchFilter.get());
+		} break;
 		case SAVE_FILE: {
 			_Save();
 			message->SendReply((uint32) B_OK);
@@ -518,6 +546,9 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case MAINMENU_SEARCH_REPLACEANDFIND: {
 			fEditor->ReplaceAndFind();
+		} break;
+		case MAINMENU_SEARCH_INCREMENTAL: {
+			AddCommonFilter(fIncrementalSearchFilter.get());
 		} break;
 		case MAINMENU_SEARCH_GOTOLINE: {
 			if(fGoToLineWindow == nullptr) {
@@ -1205,4 +1236,29 @@ EditorWindow::_Save()
 	}
 	// block until user has chosen location
 	while(fSavePanel->IsShowing()) UpdateIfNeeded();
+}
+
+
+filter_result
+EditorWindow::_IncrementalSearchFilter(BMessage* message, BHandler** target,
+	BMessageFilter* messageFilter)
+{
+	if(message->what == B_KEY_DOWN) {
+		BLooper *looper = messageFilter->Looper();
+		const char* bytes;
+		message->FindString("bytes", &bytes);
+		if(bytes[0] == B_RETURN) {
+			looper->PostMessage(INCREMENTAL_SEARCH_COMMIT);
+		} else if(bytes[0] == B_ESCAPE) {
+			looper->PostMessage(INCREMENTAL_SEARCH_CANCEL);
+		} else if(bytes[0] == B_BACKSPACE) {
+			looper->PostMessage(INCREMENTAL_SEARCH_BACKSPACE);
+		} else {
+			BMessage msg(INCREMENTAL_SEARCH_CHAR);
+			msg.AddString("character", &bytes[0]);
+			messageFilter->Looper()->PostMessage(&msg);
+		}
+		return B_SKIP_MESSAGE;
+	}
+	return B_DISPATCH_MESSAGE;
 }

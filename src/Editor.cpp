@@ -29,6 +29,7 @@ Editor::Editor()
 	fSearchLastResultEnd(-1),
 	fSearchLast(""),
 	fSearchLastFlags(0),
+	fIncrementalSearch(false),
 	fType(""),
 	fReadOnly(false)
 {
@@ -455,6 +456,55 @@ void
 Editor::ResetFindReplace()
 {
 	fNewSearch = true;
+}
+
+
+void
+Editor::IncrementalSearch(std::string term)
+{
+	Sci_Position startOld = SendMessage(SCI_GETTARGETSTART);
+	Sci_Position endOld = SendMessage(SCI_GETTARGETEND);
+
+	int length = SendMessage(SCI_GETLENGTH);
+	Sci_Position anchor = SendMessage(SCI_GETANCHOR);
+	Sci_Position current = SendMessage(SCI_GETCURRENTPOS);
+
+	if(fIncrementalSearch == false) {
+		fIncrementalSearch = true;
+		fSavedSelection.cpMin = anchor;
+		fSavedSelection.cpMax = current;
+	}
+
+	Sci_Position start = (anchor < current) ? anchor : current;
+	bool found;
+	found = _Find(term, start, length, false, false, false);
+
+	if(found == false) {
+		found = _Find(term, 0, start, false, false, false);
+	}
+	// nothing found
+	if(found == false) {
+		_SetSelection(fSavedSelection.cpMin, fSavedSelection.cpMax);
+	}
+	SendMessage(SCI_SETTARGETRANGE, startOld, endOld);
+}
+
+
+void
+Editor::IncrementalSearchCancel()
+{
+	fIncrementalSearch = false;
+	_SetSelection(fSavedSelection.cpMin, fSavedSelection.cpMax);
+}
+
+
+void
+Editor::IncrementalSearchCommit(std::string term)
+{
+	fIncrementalSearch = false;
+	fSearchLastMessage.MakeEmpty();
+	fSearchLastMessage.AddBool("wrapAround", true);
+	fSearchLastMessage.AddString("findText", term.c_str());
 }
 
 
