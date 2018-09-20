@@ -209,6 +209,8 @@ EditorWindow::EditorWindow(bool stagger)
 	layout->SetInsets(0, 0, -1, -1);
 	SetKeyMenuBar(fMainMenu);
 
+	fEditor->SendMessage(SCI_GRABFOCUS);
+
 	_SyncWithPreferences();
 
 	fEditor->SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true, 0);
