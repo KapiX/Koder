@@ -86,16 +86,12 @@ std::unordered_map<int, Styler::Style>	Styler::sStylesMapping;
 /* static */ void
 Styler::ApplyGlobal(Editor* editor, const char* style)
 {
+	sStylesMapping.clear();
+
 	static bool alertShown = false;
 	bool found = false;
 	BPath dataPath;
-	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
-	try {
-		_ApplyGlobal(editor, style, dataPath);
-		found = true;
-	} catch (YAML::BadFile &) {
-	}
-	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
+	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
 	try {
 		_ApplyGlobal(editor, style, dataPath);
 		found = true;
@@ -107,7 +103,13 @@ Styler::ApplyGlobal(Editor* editor, const char* style)
 		found = true;
 	} catch (YAML::BadFile &) {
 	}
-	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
+	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
+	try {
+		_ApplyGlobal(editor, style, dataPath);
+		found = true;
+	} catch (YAML::BadFile &) {
+	}
+	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
 	try {
 		_ApplyGlobal(editor, style, dataPath);
 		found = true;
@@ -137,8 +139,6 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 	if(styles["Global"]) {
 		global = styles["Global"];
 	}
-
-	sStylesMapping.clear();
 
 	int id;
 	Style s;
