@@ -1,6 +1,6 @@
 # **![Koder icon](./artwork/Koder_icon_64.png)** Koder
 
-Koder is a code editor built using Scintilla editing component, inspired by Notepad++.
+Koder is a code editor built using Scintilla editing component.
 
 ![Screenshot](./artwork/Koder.png)
 
@@ -28,12 +28,10 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 * Stack all windows besides those from Tracker.
 * Add status bar.
 * Add dark theme by Mikael Konradsson.
-* Add support for languages:
-  * CSS
-  * HTML
-  * JavaScript
-  * PHP
-  * OCaml
+* Add support for HTML, CSS, JavaScript, PHP and OCaml.
+* Change styling system to make creating new themes easier.
+* Add quick search shortcuts.
+* Implement incremental search.
 
 0.3.0 - *20-03-2018*
 
