@@ -31,18 +31,9 @@ APP_MIME_SIG = x-vnd.KapiX-Koder
 SRCS = \
 	src/main.cpp \
 	src/App.cpp \
-	src/AppPreferencesWindow.cpp \
-	src/Editor.cpp \
-	src/Editorconfig.cpp \
-	src/EditorWindow.cpp \
-	src/FindWindow.cpp \
-	src/GoToLineWindow.cpp \
-	src/Languages.cpp \
-	src/Preferences.cpp \
-	src/QuitAlert.cpp \
-	src/StatusView.cpp \
-	src/Styler.cpp \
-	src/Utils.cpp
+	$(wildcard src/controls/*.cpp) \
+	$(wildcard src/support/*.cpp) \
+	$(wildcard src/windows/*.cpp)
 
 #	Specify the resource definition files to use. Full or relative paths can be
 #	used.
@@ -101,7 +92,7 @@ endif
 #	Additional paths paths to look for local headers. These use the form
 #	#include "header". Directories that contain the files in SRCS are
 #	automatically included.
-LOCAL_INCLUDE_PATHS =
+LOCAL_INCLUDE_PATHS = src/controls src/support src/windows
 
 #	Specify the level of optimization that you want. Specify either NONE (O0),
 #	SOME (O1), FULL (O2), or leave blank (for the default optimization level).
