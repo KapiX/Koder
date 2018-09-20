@@ -81,7 +81,11 @@ private:
 	Preferences*	fCurrentPreferences;
 	Preferences*	fTempPreferences;
 
-	BBox*			fEditorBox;
+	BBox*			fVisualBox;
+	BBox*			fBehaviorBox;
+	BBox*			fIndentationBox;
+	BBox*			fTrailingWSBox;
+
 	BCheckBox*		fCompactLangMenuCB;
 	BCheckBox*		fToolbarCB;
 	BCheckBox*		fFullPathInTitleCB;

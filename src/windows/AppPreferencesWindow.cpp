@@ -185,8 +185,15 @@ AppPreferencesWindow::Quit()
 void
 AppPreferencesWindow::_InitInterface()
 {
-	fEditorBox = new BBox("editorPrefs");
-	fEditorBox->SetLabel(B_TRANSLATE("Editor"));
+	fVisualBox = new BBox("visualPrefs");
+	fVisualBox->SetLabel(B_TRANSLATE("Visual"));
+	fBehaviorBox = new BBox("behaviorPrefs");
+	fBehaviorBox->SetLabel(B_TRANSLATE("Behavior"));
+	fIndentationBox = new BBox("indentationPrefs");
+	fIndentationBox->SetLabel(B_TRANSLATE("Indentation"));
+	fTrailingWSBox = new BBox("trailingWSPrefs");
+	fTrailingWSBox->SetLabel(B_TRANSLATE("Trailing whitespace"));
+
 	fCompactLangMenuCB = new BCheckBox("compactLangMenu", B_TRANSLATE("Compact language menu"), new BMessage((uint32) Actions::COMPACT_LANG_MENU));
 	fToolbarCB = new BCheckBox("toolbar", B_TRANSLATE("Show toolbar"), new BMessage((uint32) Actions::TOOLBAR));
 	fFullPathInTitleCB = new BCheckBox("fullPathInTitle", B_TRANSLATE("Show full path in title"), new BMessage((uint32) Actions::FULL_PATH_IN_TITLE));
@@ -244,30 +251,48 @@ AppPreferencesWindow::_InitInterface()
 	fApplyButton->SetEnabled(false);
 	fRevertButton->SetEnabled(false);
 
-	BLayoutBuilder::Group<>(fEditorBox, B_VERTICAL, B_USE_DEFAULT_SPACING)
-		.AddStrut(B_USE_HALF_ITEM_SPACING)
-		.AddGroup(B_VERTICAL, 0)
-			.Add(fCompactLangMenuCB)
-			.Add(fToolbarCB)
-			.Add(fFullPathInTitleCB)
-			.Add(fLineNumbersCB)
-			.Add(fLineHighlightingCB)
-			.Add(fTabsToSpacesCB)
-			.Add(fTabWidthTC)
-			.Add(fBracesHighlightingCB)
-			.Add(fAttachNewWindowsCB)
-			.Add(fHighlightTrailingWSCB)
-			.Add(fTrimTrailingWSOnSaveCB)
-			.Add(fUseEditorconfigCB)
-			.End()
+	BLayoutBuilder::Group<>(fVisualBox, B_VERTICAL, 0)
+		.AddStrut(B_USE_ITEM_SPACING)
+		.Add(fCompactLangMenuCB)
+		.Add(fToolbarCB)
+		.Add(fFullPathInTitleCB)
+		.Add(fLineNumbersCB)
+		.Add(fLineHighlightingCB)
+		.Add(fBracesHighlightingCB)
 		.Add(fLineLimitBox)
-		.Add(fIndentGuidesBox)
+		.AddStrut(B_USE_HALF_ITEM_SPACING)
 		.Add(fEditorStyleMF)
 		.AddGlue()
 		.SetInsets(B_USE_ITEM_INSETS);
 
+	BLayoutBuilder::Group<>(fIndentationBox, B_VERTICAL, 0)
+		.AddStrut(B_USE_ITEM_SPACING)
+		.Add(fTabsToSpacesCB)
+		.Add(fTabWidthTC)
+		.Add(fIndentGuidesBox)
+		.SetInsets(B_USE_ITEM_INSETS);
+
+	BLayoutBuilder::Group<>(fTrailingWSBox, B_VERTICAL, 0)
+		.AddStrut(B_USE_ITEM_SPACING)
+		.Add(fHighlightTrailingWSCB)
+		.Add(fTrimTrailingWSOnSaveCB)
+		.SetInsets(B_USE_ITEM_INSETS);
+
+	BLayoutBuilder::Group<>(fBehaviorBox, B_VERTICAL, 0)
+		.AddStrut(B_USE_ITEM_SPACING)
+		.Add(fAttachNewWindowsCB)
+		.Add(fUseEditorconfigCB)
+		.SetInsets(B_USE_ITEM_INSETS);
+
 	BLayoutBuilder::Group<>(this, B_VERTICAL, B_USE_DEFAULT_SPACING)
-		.Add(fEditorBox)
+		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
+			.Add(fVisualBox)
+			.AddGroup(B_VERTICAL, B_USE_DEFAULT_SPACING)
+				.Add(fIndentationBox)
+				.Add(fTrailingWSBox)
+				.Add(fBehaviorBox)
+			.End()
+		.End()
 		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
 			.Add(fRevertButton)
 			.AddGlue()
