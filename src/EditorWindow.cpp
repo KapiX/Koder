@@ -57,6 +57,16 @@ const float kWindowStagger = 17.0f;
 Preferences* EditorWindow::fPreferences = nullptr;
 
 
+namespace {
+	enum {
+		INCREMENTAL_SEARCH_CHAR			= 'incs',
+		INCREMENTAL_SEARCH_BACKSPACE	= 'incb',
+		INCREMENTAL_SEARCH_CANCEL		= 'ince',
+		INCREMENTAL_SEARCH_COMMIT		= 'incc'
+	};
+}
+
+
 EditorWindow::EditorWindow(bool stagger)
 	:
 	BWindow(fPreferences->fWindowRect, gAppName, B_DOCUMENT_WINDOW, 0),

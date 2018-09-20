@@ -166,13 +166,6 @@ private:
 
 	static	filter_result	_IncrementalSearchFilter(BMessage* message,
 								BHandler** target, BMessageFilter* messageFilter);
-
-	enum {
-		INCREMENTAL_SEARCH_CHAR			= 'incs',
-		INCREMENTAL_SEARCH_BACKSPACE	= 'incb',
-		INCREMENTAL_SEARCH_CANCEL		= 'ince',
-		INCREMENTAL_SEARCH_COMMIT		= 'incc'
-	};
 };
 
 
