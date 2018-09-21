@@ -12,11 +12,16 @@
 #include <Entry.h>
 #include <File.h>
 #include <FindDirectory.h>
+#include <Language.h>
+#include <LocaleRoster.h>
 #include <Path.h>
 #include <tracker_private.h>
 #include <WindowStack.h>
 
+#include <algorithm>
+#include <iterator>
 #include <memory>
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -86,24 +91,55 @@ App::Init()
 void
 App::AboutRequested()
 {
-	const char* specialThanks[] = {
+	std::vector<std::string> specialThanks{
 		B_TRANSLATE("Neil Hodgson, for Scintilla editing component and SciTE editor."),
 		B_TRANSLATE("zuMi, for toolbar icons."),
-		B_TRANSLATE("humdinger, for German translation, GUI design tips and app icon."),
-		B_TRANSLATE("miqlas, for Hungarian translation and old app icon."),
-		B_TRANSLATE("damoklas, for Lithuanian translation."),
-		B_TRANSLATE("ArmanHayots, for Russian translation."),
-		B_TRANSLATE("un_spacyar, for Spanish translation."),
-		B_TRANSLATE("Lan72, for Ukrainian translation."),
+		B_TRANSLATE("humdinger, for GUI design tips and artwork."),
 		B_TRANSLATE("Konrad77, for dark theme."),
-		nullptr
+		B_TRANSLATE_COMMENT("translators to:", "to _ (language), e.g. German"),
 	};
+
+	const std::unordered_map<std::string, std::vector<std::string>> translatorsMap{
+		{ "de", { "humdinger" } },
+		{ "es", { "un_spacyar" } },
+		{ "hu", { "miqlas" } },
+		{ "lt", { "damoklas" } },
+		{ "ru", { "ArmanHayots" } },
+		{ "uk", { "Lan72" } }
+	};
+
+	BMessage languages;
+	if(BLocaleRoster::Default()->GetAvailableLanguages(&languages) == B_OK) {
+		BString langID;
+		for(int i = 0; languages.FindString("language", i, &langID) == B_OK; i++) {
+			BLanguage lang(langID.String());
+			const auto translators = translatorsMap.find(lang.ID());
+			// let's deal with pt_BR later
+			if(lang.IsCountrySpecific() || translators == translatorsMap.end())
+				continue;
+			BString name;
+			lang.GetName(name);
+			std::ostringstream languageRow;
+			languageRow << "    " << name.String() << ": ";
+			std::copy(translators->second.begin(), translators->second.end(),
+				std::ostream_iterator<std::string>(languageRow, ", "));
+			std::string str(languageRow.str());
+			str.erase(str.end() - 2);
+			specialThanks.push_back(str);
+		}
+	}
+
+	// prepare something acceptable for BeAPI
+	std::vector<const char*> specialThanksC;
+	std::transform(specialThanks.begin(), specialThanks.end(),
+		std::back_inserter(specialThanksC), [](const std::string& s) { return s.c_str(); });
+	specialThanksC.push_back(nullptr);
 
 	BAboutWindow* window = new BAboutWindow(gAppName, gAppMime);
 	window->AddCopyright(2016, "Kacper Kasper");
 	window->AddDescription(
 		B_TRANSLATE("Code editor for Haiku based on Scintilla editing component."));
-	window->AddSpecialThanks(specialThanks);
+	window->AddSpecialThanks(specialThanksC.data());
 	window->AddExtraInfo(B_TRANSLATE("Distributed on MIT license terms."));
 	window->Show();
 }
