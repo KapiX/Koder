@@ -43,6 +43,8 @@ private:
 		TABS_TO_SPACES			= 'ttsp',
 		TAB_WIDTH				= 'tbwd',
 		LINE_HIGHLIGHTING		= 'lhlt',
+		LINE_HIGHLIGHTING_BG	= 'lhlb',
+		LINE_HIGHLIGHTING_FRAME	= 'lhlf',
 		LINE_NUMBERS			= 'lnum',
 
 		LINELIMIT_COLUMN		= 'llcl',
@@ -74,6 +76,7 @@ private:
 
 	void			_PreferencesModified();
 	void			_SetLineLimitBoxEnabled(bool enabled);
+	void			_SetLineHighlightingBoxEnabled(bool enabled);
 	void			_SetIndentGuidesBoxEnabled(bool enabled);
 	void			_PopulateStylesMenu();
 
@@ -91,7 +94,10 @@ private:
 	BCheckBox*		fFullPathInTitleCB;
 	BCheckBox*		fTabsToSpacesCB;
 	BTextControl*	fTabWidthTC;
+	BBox*			fLineHighlightingBox;
 	BCheckBox*		fLineHighlightingCB;
+	BRadioButton*	fLineHighlightingBackgroundRadio;
+	BRadioButton*	fLineHighlightingFrameRadio;
 	BCheckBox*		fLineNumbersCB;
 
 	BView*			fLineLimitHeaderView;

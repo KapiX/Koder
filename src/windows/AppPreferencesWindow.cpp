@@ -84,7 +84,17 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			_PreferencesModified();
 		} break;
 		case Actions::LINE_HIGHLIGHTING: {
-			fTempPreferences->fLineHighlighting = IsChecked(fLineHighlightingCB);
+			bool show = IsChecked(fLineHighlightingCB);
+			fTempPreferences->fLineHighlighting = show;
+			_SetLineHighlightingBoxEnabled(show);
+			_PreferencesModified();
+		} break;
+		case Actions::LINE_HIGHLIGHTING_BG: {
+			fTempPreferences->fLineHighlightingMode = 0;
+			_PreferencesModified();
+		} break;
+		case Actions::LINE_HIGHLIGHTING_FRAME: {
+			fTempPreferences->fLineHighlightingMode = 1;
 			_PreferencesModified();
 		} break;
 		case Actions::LINE_NUMBERS: {
@@ -199,7 +209,6 @@ AppPreferencesWindow::_InitInterface()
 	fFullPathInTitleCB = new BCheckBox("fullPathInTitle", B_TRANSLATE("Show full path in title"), new BMessage((uint32) Actions::FULL_PATH_IN_TITLE));
 	fTabsToSpacesCB = new BCheckBox("tabsToSpaces", B_TRANSLATE("Convert tabs to spaces"), new BMessage((uint32) Actions::TABS_TO_SPACES));
 	fTabWidthTC = new BTextControl("tabWidth", B_TRANSLATE("Spaces per tab:"), "4", new BMessage((uint32) Actions::TAB_WIDTH));
-	fLineHighlightingCB = new BCheckBox("lineHighlighting", B_TRANSLATE("Highlight current line"), new BMessage((uint32) Actions::LINE_HIGHLIGHTING));
 	fLineNumbersCB = new BCheckBox("lineNumbers", B_TRANSLATE("Show line numbers"), new BMessage((uint32) Actions::LINE_NUMBERS));
 
 	fLineLimitHeaderView = new BView("lineLimitHeader", 0);
@@ -220,6 +229,22 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fLineLimitColumnTC)
 		.SetInsets(B_USE_ITEM_INSETS);
 	fLineLimitBox->SetLabel(fLineLimitHeaderView);
+
+	fLineHighlightingBox = new BBox("lineHighlightingPrefs");
+	fLineHighlightingCB = new BCheckBox("lineHighlighting", B_TRANSLATE("Highlight current line"), new BMessage((uint32) Actions::LINE_HIGHLIGHTING));
+	fLineHighlightingBackgroundRadio = new BRadioButton("lineHighlightingRadio",
+		B_TRANSLATE_COMMENT("Background", "Current line highlight"),
+		new BMessage((uint32) Actions::LINE_HIGHLIGHTING_BG));
+	fLineHighlightingFrameRadio = new BRadioButton("lineHighlightingRadio",
+		B_TRANSLATE_COMMENT("Frame", "Current line highlight"),
+		new BMessage((uint32) Actions::LINE_HIGHLIGHTING_FRAME));
+
+	BLayoutBuilder::Group<>(fLineHighlightingBox, B_VERTICAL, 0)
+		.AddStrut(B_USE_ITEM_SPACING)
+		.Add(fLineHighlightingBackgroundRadio)
+		.Add(fLineHighlightingFrameRadio)
+		.SetInsets(B_USE_ITEM_INSETS);
+	fLineHighlightingBox->SetLabel(fLineHighlightingCB);
 
 	fIndentGuidesBox = new BBox("indentGuidesPrefs");
 	fIndentGuidesShowCB = new BCheckBox("indentGuidesShow", B_TRANSLATE("Show indentation guides"), new BMessage((uint32) Actions::INDENTGUIDES_SHOW));
@@ -257,9 +282,10 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fToolbarCB)
 		.Add(fFullPathInTitleCB)
 		.Add(fLineNumbersCB)
-		.Add(fLineHighlightingCB)
 		.Add(fBracesHighlightingCB)
 		.Add(fLineLimitBox)
+		.AddStrut(B_USE_HALF_ITEM_SPACING)
+		.Add(fLineHighlightingBox)
 		.AddStrut(B_USE_HALF_ITEM_SPACING)
 		.Add(fEditorStyleMF)
 		.AddGlue()
@@ -317,7 +343,6 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 	fTabWidthTC->SetText(tabWidthString.String());
 
 	SetChecked(fLineNumbersCB, preferences->fLineNumbers);
-	SetChecked(fLineHighlightingCB, preferences->fLineHighlighting);
 
 	BString columnString;
 	columnString << preferences->fLineLimitColumn;
@@ -325,6 +350,9 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 
 	SetChecked(fLineLimitShowCB, preferences->fLineLimitShow);
 	_SetLineLimitBoxEnabled(preferences->fLineLimitShow);
+
+	SetChecked(fLineHighlightingCB, preferences->fLineHighlighting);
+	_SetLineHighlightingBoxEnabled(preferences->fLineHighlighting);
 
 	SetChecked(fIndentGuidesShowCB, preferences->fIndentGuidesShow);
 	_SetIndentGuidesBoxEnabled(preferences->fIndentGuidesShow);
@@ -355,6 +383,19 @@ AppPreferencesWindow::_SetLineLimitBoxEnabled(bool enabled)
 	switch(fTempPreferences->fLineLimitMode) {
 		case 1: SetChecked(fLineLimitLineRadio); break;
 		case 2: SetChecked(fLineLimitBackgroundRadio); break;
+	}
+}
+
+
+void
+AppPreferencesWindow::_SetLineHighlightingBoxEnabled(bool enabled)
+{
+	fLineHighlightingBackgroundRadio->SetEnabled(enabled);
+	fLineHighlightingFrameRadio->SetEnabled(enabled);
+
+	switch(fTempPreferences->fLineHighlightingMode) {
+		case 0: SetChecked(fLineHighlightingBackgroundRadio); break;
+		case 1: SetChecked(fLineHighlightingFrameRadio); break;
 	}
 }
 

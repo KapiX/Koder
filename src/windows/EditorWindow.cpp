@@ -1122,6 +1122,7 @@ EditorWindow::_SyncWithPreferences()
 			fFilePreferences.fIndentWidth.value_or(0), 0);
 		fEditor->SendMessage(SCI_SETCARETLINEVISIBLE, fPreferences->fLineHighlighting, 0);
 		fEditor->SendMessage(SCI_SETCARETLINEVISIBLEALWAYS, true, 0);
+		fEditor->SendMessage(SCI_SETCARETLINEFRAME, fPreferences->fLineHighlightingMode ? 2 : 0);
 
 		if(fFilePreferences.fEOLMode) {
 			fEditor->SendMessage(SCI_SETEOLMODE, fFilePreferences.fEOLMode.value_or(SC_EOL_LF), 0);

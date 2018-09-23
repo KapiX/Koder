@@ -87,6 +87,7 @@ Preferences::Load(const char* filename)
 	fTabWidth = storage.GetUInt8("tabWidth", 4);
 	fTabsToSpaces = storage.GetBool("tabsToSpaces", false);
 	fLineHighlighting = storage.GetBool("lineHighlighting", true);
+	fLineHighlightingMode = storage.GetUInt8("lineHighlightingMode", 0);
 	fLineNumbers = storage.GetBool("lineNumbers", true);
 	fIndentGuidesShow = storage.GetBool("indentGuidesShow", true);
 	fIndentGuidesMode = storage.GetUInt8("indentGuidesMode", 1); // SC_IV_REAL
@@ -119,6 +120,7 @@ Preferences::Save(const char* filename)
 	storage.AddInt8("tabWidth", fTabWidth);
 	storage.AddBool("tabsToSpaces", fTabsToSpaces);
 	storage.AddBool("lineHighlighting", fLineHighlighting);
+	storage.AddUInt8("lineHighlightingMode", fLineHighlightingMode);
 	storage.AddBool("lineNumbers", fLineNumbers);
 	storage.AddBool("whiteSpaceVisible", fWhiteSpaceVisible);
 	storage.AddBool("EOLVisible", fEOLVisible);
@@ -151,6 +153,7 @@ Preferences::operator =(Preferences p)
 	fTabWidth = p.fTabWidth;
 	fTabsToSpaces = p.fTabsToSpaces;
 	fLineHighlighting = p.fLineHighlighting;
+	fLineHighlightingMode = p.fLineHighlightingMode;
 	fLineNumbers = p.fLineNumbers;
 	fEOLVisible = p.fEOLVisible;
 	fWhiteSpaceVisible = p.fWhiteSpaceVisible;

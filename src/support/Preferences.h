@@ -24,7 +24,7 @@ private:
 public:
 	void			Load(const char* filename);
 	void			Save(const char* filename);
-	
+
 	Preferences&	operator =(Preferences p);
 
 	BPath			fSettingsPath;
@@ -34,6 +34,7 @@ public:
 	bool			fTabsToSpaces;
 	// broadcast to all editors
 	bool			fLineHighlighting;
+	uint8			fLineHighlightingMode;
 	bool			fLineNumbers;
 	bool			fEOLVisible;
 	bool			fWhiteSpaceVisible;
