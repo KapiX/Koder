@@ -138,6 +138,8 @@ EditorWindow::EditorWindow(bool stagger)
 			.End()
 			.AddItem(B_TRANSLATE("Show toolbar"), MAINMENU_VIEW_TOOLBAR)
 			.AddItem(B_TRANSLATE("Wrap lines"), MAINMENU_VIEW_WRAPLINES)
+			.AddSeparator()
+			.AddItem(B_TRANSLATE("Stack all windows"), MAINMENU_VIEW_STACKWINDOWS)
 		.End()
 		.AddMenu(B_TRANSLATE("Search"))
 			.AddItem(B_TRANSLATE("Find/Replace" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_FINDREPLACE, 'F')
@@ -596,6 +598,10 @@ EditorWindow::MessageReceived(BMessage* message)
 			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fWrapLines);
 			fEditor->SendMessage(SCI_SETWRAPMODE, fPreferences->fWrapLines ?
 				SC_WRAP_WORD : SC_WRAP_NONE, 0);
+		} break;
+		case MAINMENU_VIEW_STACKWINDOWS: {
+			message->AddPointer("window", this);
+			be_app->PostMessage(message);
 		} break;
 		case MAINMENU_LANGUAGE: {
 			_SetLanguage(message->GetString("lang", "text"));

@@ -337,6 +337,25 @@ App::MessageReceived(BMessage* message)
 			}
 		}
 	} break;
+	case MAINMENU_VIEW_STACKWINDOWS: {
+		BWindow* windowPtr = nullptr;
+		std::unique_ptr<BWindowStack> windowStack(nullptr);
+		if(message->FindPointer("window", (void**) &windowPtr) != B_OK)
+			break;
+		windowStack.reset(new BWindowStack(windowPtr));
+		if(!windowStack)
+			break;
+		EditorWindow* current;
+		for(int i = 0; current = fWindows.ItemAt(i); ++i) {
+			if(current != windowPtr) {
+				//current->Hide();
+				BWindowStack stack(current);
+				stack.RemoveWindow(current);
+				windowStack->AddWindow(current);
+				//current->Show();
+			}
+		}
+	} break;
 	case WINDOW_NEW: {
 		BWindow* windowPtr = nullptr;
 		std::unique_ptr<BWindowStack> windowStack(nullptr);
