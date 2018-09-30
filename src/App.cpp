@@ -28,6 +28,7 @@
 #include "AppPreferencesWindow.h"
 #include "EditorWindow.h"
 #include "FindWindow.h"
+#include "GoToLineWindow.h"
 #include "Preferences.h"
 #include "Styler.h"
 #include "QuitAlert.h"
@@ -224,6 +225,18 @@ App::ArgvReceived(int32 argc, char** argv)
 		}
 		entry.SetTo(filename);
 		entry.GetRef(&ref);
+		if(!fPreferences->fAlwaysOpenInNewWindow) {
+			EditorWindow* current;
+			for(int i = 0; current = fWindows.ItemAt(i); ++i) {
+				if(BString(current->OpenedFilePath()) == filename) {
+					current->Activate();
+					BMessage gotoMsg(GTLW_GO);
+					gotoMsg.AddInt32("line", line + 1);
+					current->PostMessage(&gotoMsg);
+					return;
+				}
+			}
+		}
 		bool stagger = fWindows.CountItems() > 0 && (!fPreferences->fOpenWindowsInStack || !windowStack.get());
 		EditorWindow* window = new EditorWindow(stagger);
 		if(fPreferences->fOpenWindowsInStack) {
@@ -263,6 +276,21 @@ App::RefsReceived(BMessage* message)
 			}
 			Sci_Position line = message->GetInt32("be:line", 0) - 1;
 			Sci_Position column = message->GetInt32("be:column", 0) - 1;
+			if(!fPreferences->fAlwaysOpenInNewWindow) {
+				EditorWindow* current;
+				bool found = false;
+				for(int i = 0; current = fWindows.ItemAt(i); ++i) {
+					if(BString(current->OpenedFilePath()) == BPath(&ref).Path()) {
+						current->Activate();
+						BMessage gotoMsg(GTLW_GO);
+						gotoMsg.AddInt32("line", line + 1);
+						current->PostMessage(&gotoMsg);
+						found = true;
+					}
+				}
+				if(found)
+					continue;
+			}
 			bool stagger = fWindows.CountItems() > 0 && (!fPreferences->fOpenWindowsInStack || !windowStack.get());
 			EditorWindow* window = new EditorWindow(stagger);
 			if(fPreferences->fOpenWindowsInStack) {

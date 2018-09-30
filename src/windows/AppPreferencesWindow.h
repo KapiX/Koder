@@ -66,6 +66,7 @@ private:
 		TRIM_TRAILING_WS_SAVE	= 'ttws',
 
 		USE_EDITORCONFIG		= 'uecf',
+		ALWAYS_OPEN_IN_NEW_WINDOW='aonw',
 
 		APPLY					= 'appl',
 		REVERT					= 'rvrt'
@@ -125,6 +126,7 @@ private:
 	BCheckBox*		fTrimTrailingWSOnSaveCB;
 
 	BCheckBox*		fUseEditorconfigCB;
+	BCheckBox*		fAlwaysOpenInNewWindowCB;
 
 	BButton*		fApplyButton;
 	BButton*		fRevertButton;

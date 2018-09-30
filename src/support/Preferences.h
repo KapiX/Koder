@@ -52,6 +52,7 @@ public:
 	bool			fHighlightTrailingWhitespace;
 	bool			fTrimTrailingWhitespaceOnSave;
 	bool			fUseEditorconfig;
+	bool			fAlwaysOpenInNewWindow;
 	std::string		fStyle;
 	// application state
 	BRect			fWindowRect;

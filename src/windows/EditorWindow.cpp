@@ -684,7 +684,8 @@ EditorWindow::MessageReceived(BMessage* message)
 		case B_REFS_RECEIVED: {
 			entry_ref ref;
 			if(message->FindRef("refs", &ref) == B_OK) {
-				if(fOpenedFilePath == nullptr && fModified == false) {
+				if(fOpenedFilePath == nullptr && fModified == false
+					&& !fPreferences->fAlwaysOpenInNewWindow) {
 					OpenFile(&ref);
 				} else {
 					message->AddPointer("window", this);

@@ -164,6 +164,11 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			fTempPreferences->fUseEditorconfig = IsChecked(fUseEditorconfigCB);
 			_PreferencesModified();
 		} break;
+		case Actions::ALWAYS_OPEN_IN_NEW_WINDOW: {
+			fTempPreferences->fAlwaysOpenInNewWindow =
+				IsChecked(fAlwaysOpenInNewWindowCB);
+			_PreferencesModified();
+		} break;
 		case Actions::APPLY: {
 			*fCurrentPreferences = *fTempPreferences;
 			fApplyButton->SetEnabled(false);
@@ -269,6 +274,7 @@ AppPreferencesWindow::_InitInterface()
 	fHighlightTrailingWSCB = new BCheckBox("highlightTrailingWS", B_TRANSLATE("Highlight trailing whitespace"), new BMessage((uint32) Actions::HIGHLIGHT_TRAILING_WS));
 	fTrimTrailingWSOnSaveCB  = new BCheckBox("trimTrailingWSOnSave", B_TRANSLATE("Trim trailing whitespace on save"), new BMessage((uint32) Actions::TRIM_TRAILING_WS_SAVE));
 	fUseEditorconfigCB  = new BCheckBox("useEditorconfig", B_TRANSLATE("Use .editorconfig if possible"), new BMessage((uint32) Actions::USE_EDITORCONFIG));
+	fAlwaysOpenInNewWindowCB  = new BCheckBox("alwaysOpenInNewWindow", B_TRANSLATE("Always open files in new window"), new BMessage((uint32) Actions::ALWAYS_OPEN_IN_NEW_WINDOW));
 
 	fApplyButton = new BButton(B_TRANSLATE("Apply"), new BMessage((uint32) Actions::APPLY));
 	fRevertButton = new BButton(B_TRANSLATE("Revert"), new BMessage((uint32) Actions::REVERT));
@@ -306,6 +312,7 @@ AppPreferencesWindow::_InitInterface()
 
 	BLayoutBuilder::Group<>(fBehaviorBox, B_VERTICAL, 0)
 		.AddStrut(B_USE_ITEM_SPACING)
+		.Add(fAlwaysOpenInNewWindowCB)
 		.Add(fAttachNewWindowsCB)
 		.Add(fUseEditorconfigCB)
 		.SetInsets(B_USE_ITEM_INSETS);
@@ -362,6 +369,7 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 	SetChecked(fHighlightTrailingWSCB, preferences->fHighlightTrailingWhitespace);
 	SetChecked(fTrimTrailingWSOnSaveCB, preferences->fTrimTrailingWhitespaceOnSave);
 	SetChecked(fUseEditorconfigCB, preferences->fUseEditorconfig);
+	SetChecked(fAlwaysOpenInNewWindowCB, preferences->fAlwaysOpenInNewWindow);
 }
 
 

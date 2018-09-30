@@ -107,6 +107,7 @@ Preferences::Load(const char* filename)
 	fStyle = storage.GetString("style", "default");
 	fWindowRect = storage.GetRect("windowRect", BRect(50, 50, 450, 450));
 	fUseEditorconfig = storage.GetBool("useEditorconfig", true);
+	fAlwaysOpenInNewWindow = storage.GetBool("alwaysOpenInNewWindow", false);
 	if(storage.FindMessage("findWindowState", &fFindWindowState) != B_OK)
 		fFindWindowState = BMessage();
 }
@@ -140,6 +141,7 @@ Preferences::Save(const char* filename)
 	storage.AddString("style", fStyle.c_str());
 	storage.AddRect("windowRect", fWindowRect);
 	storage.AddMessage("findWindowState", &fFindWindowState);
+	storage.AddBool("alwaysOpenInNewWindow", fAlwaysOpenInNewWindow);
 	storage.AddBool("useEditorconfig", fUseEditorconfig);
 	if (file)
 		storage.Flatten(file.get());
@@ -173,5 +175,6 @@ Preferences::operator =(Preferences p)
 	fStyle = p.fStyle;
 	fWindowRect = p.fWindowRect;
 	fFindWindowState = p.fFindWindowState;
+	fAlwaysOpenInNewWindow = p.fAlwaysOpenInNewWindow;
 	fUseEditorconfig = p.fUseEditorconfig;
 }
