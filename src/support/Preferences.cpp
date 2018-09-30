@@ -67,6 +67,10 @@ Preferences::_OpenFile(const char* filename, uint32 openMode)
 				error = B_TRANSLATE(kErrorNoMemory[0]);
 				error.ReplaceFirst("%s%", B_TRANSLATE(kErrorNoMemory[index]));
 				break;
+			default:
+				// if opened for reading and not found don't throw "Unknown error."
+				if(index == 1)
+					return std::shared_ptr<BFile>();
 		}
 		BAlert* alert = new BAlert(B_TRANSLATE(kErrorTitle), error, ok,
 			nullptr, nullptr, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
