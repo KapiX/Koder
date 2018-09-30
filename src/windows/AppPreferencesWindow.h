@@ -17,6 +17,7 @@ class BPopUpMenu;
 class BMenuField;
 class BMessage;
 class BRadioButton;
+class BSpinner;
 class BStringView;
 class BTextControl;
 class BView;
@@ -67,6 +68,9 @@ private:
 
 		USE_EDITORCONFIG		= 'uecf',
 		ALWAYS_OPEN_IN_NEW_WINDOW='aonw',
+		USE_CUSTOM_FONT			= 'ucfn',
+		FONT_CHANGED			= 'fnch',
+		FONT_SIZE_CHANGED		= 'fsch',
 
 		APPLY					= 'appl',
 		REVERT					= 'rvrt'
@@ -79,7 +83,9 @@ private:
 	void			_SetLineLimitBoxEnabled(bool enabled);
 	void			_SetLineHighlightingBoxEnabled(bool enabled);
 	void			_SetIndentGuidesBoxEnabled(bool enabled);
+	void			_SetFontBoxEnabled(bool enabled);
 	void			_PopulateStylesMenu();
+	void			_UpdateFontMenu();
 
 	Preferences*	fStartPreferences;
 	Preferences*	fCurrentPreferences;
@@ -127,6 +133,12 @@ private:
 
 	BCheckBox*		fUseEditorconfigCB;
 	BCheckBox*		fAlwaysOpenInNewWindowCB;
+
+	BBox*			fFontBox;
+	BCheckBox*		fUseCustomFontCB;
+	BMenuField*		fFontMF;
+	BSpinner*		fFontSizeSpinner;
+	BPopUpMenu*		fFontMenu;
 
 	BButton*		fApplyButton;
 	BButton*		fRevertButton;

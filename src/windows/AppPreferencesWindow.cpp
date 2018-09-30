@@ -14,11 +14,13 @@
 #include <Catalog.h>
 #include <CheckBox.h>
 #include <ControlLook.h>
+#include <Font.h>
 #include <LayoutBuilder.h>
 #include <PopUpMenu.h>
 #include <MenuField.h>
 #include <Message.h>
 #include <RadioButton.h>
+#include <Spinner.h>
 #include <StringView.h>
 
 #include <Scintilla.h>
@@ -169,6 +171,21 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 				IsChecked(fAlwaysOpenInNewWindowCB);
 			_PreferencesModified();
 		} break;
+		case Actions::USE_CUSTOM_FONT: {
+			bool use = IsChecked(fUseCustomFontCB);
+			fTempPreferences->fUseCustomFont = use;
+			_SetFontBoxEnabled(use);
+			_PreferencesModified();
+		} break;
+		case Actions::FONT_CHANGED: {
+			fTempPreferences->fFontFamily = message->GetString("family");
+			_UpdateFontMenu();
+			_PreferencesModified();
+		} break;
+		case Actions::FONT_SIZE_CHANGED: {
+			fTempPreferences->fFontSize = fFontSizeSpinner->Value();
+			_PreferencesModified();
+		} break;
 		case Actions::APPLY: {
 			*fCurrentPreferences = *fTempPreferences;
 			fApplyButton->SetEnabled(false);
@@ -276,6 +293,25 @@ AppPreferencesWindow::_InitInterface()
 	fUseEditorconfigCB  = new BCheckBox("useEditorconfig", B_TRANSLATE("Use .editorconfig if possible"), new BMessage((uint32) Actions::USE_EDITORCONFIG));
 	fAlwaysOpenInNewWindowCB  = new BCheckBox("alwaysOpenInNewWindow", B_TRANSLATE("Always open files in new window"), new BMessage((uint32) Actions::ALWAYS_OPEN_IN_NEW_WINDOW));
 
+	fUseCustomFontCB = new BCheckBox("customFont", B_TRANSLATE("Use custom font"), new BMessage((uint32) Actions::USE_CUSTOM_FONT));
+	fFontMenu = new BPopUpMenu("font");
+	fFontMenu->SetLabelFromMarked(true);
+	fFontMenu->SetRadioMode(true);
+	fFontBox = new BBox("fontPrefs");
+	fFontMF = new BMenuField("font", "", fFontMenu);
+	fFontSizeSpinner = new BSpinner("fontSize", "", new BMessage((uint32) Actions::FONT_SIZE_CHANGED));
+	fFontSizeSpinner->SetExplicitMaxSize(BSize(80.0f, B_SIZE_UNSET));
+	fFontSizeSpinner->SetRange(6, 72);
+
+	BLayoutBuilder::Group<>(fFontBox, B_VERTICAL, 0)
+		.AddStrut(B_USE_ITEM_SPACING)
+		.AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+			.Add(fFontMF)
+			.Add(fFontSizeSpinner)
+		.End()
+		.SetInsets(B_USE_ITEM_INSETS);
+	fFontBox->SetLabel(fUseCustomFontCB);
+
 	fApplyButton = new BButton(B_TRANSLATE("Apply"), new BMessage((uint32) Actions::APPLY));
 	fRevertButton = new BButton(B_TRANSLATE("Revert"), new BMessage((uint32) Actions::REVERT));
 
@@ -294,7 +330,6 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fLineHighlightingBox)
 		.AddStrut(B_USE_HALF_ITEM_SPACING)
 		.Add(fEditorStyleMF)
-		.AddGlue()
 		.SetInsets(B_USE_ITEM_INSETS);
 
 	BLayoutBuilder::Group<>(fIndentationBox, B_VERTICAL, 0)
@@ -319,11 +354,15 @@ AppPreferencesWindow::_InitInterface()
 
 	BLayoutBuilder::Group<>(this, B_VERTICAL, B_USE_DEFAULT_SPACING)
 		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
-			.Add(fVisualBox)
+			.AddGroup(B_VERTICAL, B_USE_DEFAULT_SPACING)
+				.Add(fVisualBox)
+				.Add(fFontBox)
+			.End()
 			.AddGroup(B_VERTICAL, B_USE_DEFAULT_SPACING)
 				.Add(fIndentationBox)
 				.Add(fTrailingWSBox)
 				.Add(fBehaviorBox)
+				.AddGlue()
 			.End()
 		.End()
 		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
@@ -334,6 +373,7 @@ AppPreferencesWindow::_InitInterface()
 		.SetInsets(B_USE_SMALL_INSETS);
 
 	_PopulateStylesMenu();
+	_UpdateFontMenu();
 }
 
 
@@ -363,6 +403,11 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 
 	SetChecked(fIndentGuidesShowCB, preferences->fIndentGuidesShow);
 	_SetIndentGuidesBoxEnabled(preferences->fIndentGuidesShow);
+
+	SetChecked(fUseCustomFontCB, preferences->fUseCustomFont);
+	_SetFontBoxEnabled(preferences->fUseCustomFont);
+	fFontSizeSpinner->SetValue(preferences->fFontSize);
+	_UpdateFontMenu();
 
 	SetChecked(fBracesHighlightingCB, preferences->fBracesHighlighting);
 	SetChecked(fAttachNewWindowsCB, preferences->fOpenWindowsInStack);
@@ -424,6 +469,14 @@ AppPreferencesWindow::_SetIndentGuidesBoxEnabled(bool enabled)
 
 
 void
+AppPreferencesWindow::_SetFontBoxEnabled(bool enabled)
+{
+	fFontMF->SetEnabled(enabled);
+	fFontSizeSpinner->SetEnabled(enabled);
+}
+
+
+void
 AppPreferencesWindow::_PopulateStylesMenu()
 {
 	std::set<std::string> styles;
@@ -436,4 +489,27 @@ AppPreferencesWindow::_PopulateStylesMenu()
 			menuItem->SetMarked(true);
 		fEditorStyleMenu->AddItem(menuItem);
 	}
+}
+
+
+void
+AppPreferencesWindow::_UpdateFontMenu()
+{
+	fFontMenu->RemoveItems(0, fFontMenu->CountItems(), true);
+
+	int32 numFamilies = count_font_families();
+	for(int32 i = 0; i < numFamilies; i++) {
+		font_family family;
+		if(get_font_family(i, &family) == B_OK) {
+			BMessage* familyMsg = new BMessage(FONT_CHANGED);
+			familyMsg->AddString("family", family);
+
+			BMenuItem* familyItem = new BMenuItem(family, familyMsg);
+			if(fTempPreferences->fFontFamily == family) {
+				familyItem->SetMarked(true);
+			}
+			fFontMenu->AddItem(familyItem);
+		}
+	}
+	fFontMenu->SetTargetForItems(this);
 }

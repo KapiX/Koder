@@ -222,7 +222,11 @@ EditorWindow::EditorWindow(bool stagger)
 
 	fEditor->SendMessage(SCI_USEPOPUP, 0, 0);
 
-	Styler::ApplyGlobal(fEditor, fPreferences->fStyle.c_str());
+	BFont font;
+	font.SetFamilyAndStyle(fPreferences->fFontFamily.c_str(), nullptr);
+	font.SetSize(fPreferences->fFontSize);
+	BFont *fontPtr = (fPreferences->fUseCustomFont ? &font : nullptr);
+	Styler::ApplyGlobal(fEditor, fPreferences->fStyle.c_str(), fontPtr);
 
 	RefreshTitle();
 
@@ -966,7 +970,12 @@ EditorWindow::_SetLanguage(std::string lang)
 {
 	fCurrentLanguage = lang;
 	const auto mapping = Languages::ApplyLanguage(fEditor, lang.c_str());
-	Styler::ApplyGlobal(fEditor, fPreferences->fStyle.c_str());
+
+	BFont font;
+	font.SetFamilyAndStyle(fPreferences->fFontFamily.c_str(), nullptr);
+	font.SetSize(fPreferences->fFontSize);
+	BFont *fontPtr = (fPreferences->fUseCustomFont ? &font : nullptr);
+	Styler::ApplyGlobal(fEditor, fPreferences->fStyle.c_str(), fontPtr);
 	Styler::ApplyLanguage(fEditor, mapping);
 
 	fEditor->SetType(Languages::GetMenuItemName(lang));

@@ -108,6 +108,9 @@ Preferences::Load(const char* filename)
 	fWindowRect = storage.GetRect("windowRect", BRect(50, 50, 450, 450));
 	fUseEditorconfig = storage.GetBool("useEditorconfig", true);
 	fAlwaysOpenInNewWindow = storage.GetBool("alwaysOpenInNewWindow", false);
+	fUseCustomFont = storage.GetBool("useCustomFont", false);
+	fFontFamily = storage.GetString("fontFamily", "Noto Sans Mono");
+	fFontSize = storage.GetUInt8("fontSize", 12);
 	if(storage.FindMessage("findWindowState", &fFindWindowState) != B_OK)
 		fFindWindowState = BMessage();
 }
@@ -143,6 +146,9 @@ Preferences::Save(const char* filename)
 	storage.AddMessage("findWindowState", &fFindWindowState);
 	storage.AddBool("alwaysOpenInNewWindow", fAlwaysOpenInNewWindow);
 	storage.AddBool("useEditorconfig", fUseEditorconfig);
+	storage.AddBool("useCustomFont", fUseCustomFont);
+	storage.AddString("fontFamily", fFontFamily.c_str());
+	storage.AddUInt8("fontSize", fFontSize);
 	if (file)
 		storage.Flatten(file.get());
 }
@@ -176,5 +182,8 @@ Preferences::operator =(Preferences p)
 	fWindowRect = p.fWindowRect;
 	fFindWindowState = p.fFindWindowState;
 	fAlwaysOpenInNewWindow = p.fAlwaysOpenInNewWindow;
+	fUseCustomFont = p.fUseCustomFont;
+	fFontFamily = p.fFontFamily;
+	fFontSize = p.fFontSize;
 	fUseEditorconfig = p.fUseEditorconfig;
 }

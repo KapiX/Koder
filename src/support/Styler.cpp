@@ -13,6 +13,7 @@
 #include <Alert.h>
 #include <Directory.h>
 #include <FindDirectory.h>
+#include <Font.h>
 #include <Path.h>
 #include <String.h>
 
@@ -84,7 +85,7 @@ std::unordered_map<int, Styler::Style>	Styler::sStylesMapping;
 
 
 /* static */ void
-Styler::ApplyGlobal(Editor* editor, const char* style)
+Styler::ApplyGlobal(Editor* editor, const char* style, const BFont* font)
 {
 	sStylesMapping.clear();
 
@@ -93,25 +94,25 @@ Styler::ApplyGlobal(Editor* editor, const char* style)
 	BPath dataPath;
 	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
 	try {
-		_ApplyGlobal(editor, style, dataPath);
+		_ApplyGlobal(editor, style, dataPath, font);
 		found = true;
 	} catch (YAML::BadFile &) {
 	}
 	find_directory(B_SYSTEM_NONPACKAGED_DATA_DIRECTORY, &dataPath);
 	try {
-		_ApplyGlobal(editor, style, dataPath);
+		_ApplyGlobal(editor, style, dataPath, font);
 		found = true;
 	} catch (YAML::BadFile &) {
 	}
 	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
 	try {
-		_ApplyGlobal(editor, style, dataPath);
+		_ApplyGlobal(editor, style, dataPath, font);
 		found = true;
 	} catch (YAML::BadFile &) {
 	}
 	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
 	try {
-		_ApplyGlobal(editor, style, dataPath);
+		_ApplyGlobal(editor, style, dataPath, font);
 		found = true;
 	} catch (YAML::BadFile &) {
 	}
@@ -128,7 +129,7 @@ Styler::ApplyGlobal(Editor* editor, const char* style)
 
 
 /* static */ void
-Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
+Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path, const BFont* font)
 {
 	BPath p(path);
 	p.Append(gAppName);
@@ -145,15 +146,17 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path)
 	if(global["Default"]) {
 		_GetAttributesFromNode(global["Default"], id, s);
 
-		font_family fixed;
-		be_fixed_font->GetFamilyAndStyle(&fixed, nullptr);
-		editor->SendMessage(SCI_STYLESETFONT, 32, (sptr_t) fixed);
-		editor->SendMessage(SCI_STYLESETSIZE, 32, (sptr_t) be_fixed_font->Size());
+		if(font == nullptr)
+			font = be_fixed_font;
+		font_family fontName;
+		font->GetFamilyAndStyle(&fontName, nullptr);
+		editor->SendMessage(SCI_STYLESETFONT, 32, (sptr_t) fontName);
+		editor->SendMessage(SCI_STYLESETSIZE, 32, (sptr_t) font->Size());
 		_ApplyAttributes(editor, 32, s);
 		editor->SendMessage(SCI_STYLECLEARALL, 0, 0);
-		editor->SendMessage(SCI_STYLESETFONT, 36, (sptr_t) fixed);
-		editor->SendMessage(SCI_STYLESETSIZE, 36, (sptr_t) (be_fixed_font->Size() / 1.3));
-		editor->SendMessage(SCI_SETWHITESPACESIZE, be_fixed_font->Size() / 6, 0);
+		editor->SendMessage(SCI_STYLESETFONT, 36, (sptr_t) fontName);
+		editor->SendMessage(SCI_STYLESETSIZE, 36, (sptr_t) (font->Size() / 1.3));
+		editor->SendMessage(SCI_SETWHITESPACESIZE, font->Size() / 6, 0);
 
 		// whitespace
 		editor->SendMessage(SCI_INDICSETSTYLE, 0, INDIC_ROUNDBOX);

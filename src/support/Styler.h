@@ -15,6 +15,7 @@
 #include <yaml-cpp/yaml.h>
 
 
+class BFont;
 class BPath;
 class Editor;
 
@@ -28,13 +29,13 @@ public:
 		int bgColor;
 		int style;
 	};
-	static	void	ApplyGlobal(Editor* editor, const char* style);
+	static	void	ApplyGlobal(Editor* editor, const char* style, const BFont* font = nullptr);
 	static	void	ApplyLanguage(Editor* editor, const std::map<int, int>& styleMapping);
 
 	static	void	GetAvailableStyles(std::set<std::string> &styles);
 
 private:
-	static	void	_ApplyGlobal(Editor* editor, const char* style, const BPath &path);
+	static	void	_ApplyGlobal(Editor* editor, const char* style, const BPath &path, const BFont* font = nullptr);
 	static	void	_GetAvailableStyles(std::set<std::string> &styles, const BPath &path);
 	static	void	_GetAttributesFromNode(const YAML::Node &node, int& styleId, Style& style);
 	static	void	_ApplyAttributes(Editor* editor, int styleId, Style style);

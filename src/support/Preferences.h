@@ -53,6 +53,9 @@ public:
 	bool			fTrimTrailingWhitespaceOnSave;
 	bool			fUseEditorconfig;
 	bool			fAlwaysOpenInNewWindow;
+	bool			fUseCustomFont;
+	std::string		fFontFamily;
+	uint8			fFontSize;
 	std::string		fStyle;
 	// application state
 	BRect			fWindowRect;
