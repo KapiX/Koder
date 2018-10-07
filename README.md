@@ -19,7 +19,9 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 
 ## History
 
-0.4.0 - *TBD*
+0.5.0 - *TBD*
+
+0.4.0 - *07-10-2018*
 
 * Find/Replace window can be closed with Esc now.
 * Fix for saving preferences.
