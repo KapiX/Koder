@@ -1,130 +1,144 @@
-1	Romanian	x-vnd.KapiX-Koder	2889977837
-ArmanHayots, for Russian translation.	App		ArmanHayots, for Russian translation.
-Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
-damoklas, for Lithuanian translation.	App		damoklas, for Lithuanian translation.
-Distributed on MIT license terms.	App		Distributed on MIT license terms.
-humdinger, for German translation and GUI design tips.	App		humdinger, for German translation and GUI design tips.
-Lan72, for Ukrainian translation.	App		Lan72, for Ukrainian translation.
-miqlas, for Hungarian translation and app icon.	App		miqlas, for Hungarian translation and app icon.
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
-un_spacyar, for Spanish translation.	App		un_spacyar, for Spanish translation.
-zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
-Apply	AppPreferencesWindow		Apply
+1	Romanian	x-vnd.KapiX-Koder	2821340809
+Code editor for Haiku based on Scintilla editing component.	App		Editor de cod pentru Haiku bazat pe componenta de editare Scintilla.
+Distributed on MIT license terms.	App		Distribuit după condițiile licenței MIT.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, pentru componenta de editare Scintilla și editorul SciTE.
+zuMi, for toolbar icons.	App		zuMi, pentru iconițele barei de unelte.
+Konrad77, for dark theme.	App		Konrad77, for dark theme.
+translators to:	App	to _ (language), e.g. German	translators to:
+humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
+Apply	AppPreferencesWindow		Aplică
 Background	AppPreferencesWindow		Fundal
-Compact language menu	AppPreferencesWindow		Compact language menu
-Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
-Editor	AppPreferencesWindow		Editor
-Highlight braces	AppPreferencesWindow		Highlight braces
-Highlight current line	AppPreferencesWindow		Highlight current line
-Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
+Compact language menu	AppPreferencesWindow		Meniu de limbaj compact
+Convert tabs to spaces	AppPreferencesWindow		Convertește taburile la spații
+Highlight braces	AppPreferencesWindow		Evidențiază acoladele
+Highlight current line	AppPreferencesWindow		Evidențiază linia curentă
+Highlight trailing whitespace	AppPreferencesWindow		Evidențiază spațiile libere din urmă
 Koder preferences	AppPreferencesWindow		Preferințe Koder
 Line	AppPreferencesWindow		Linie
-Mark overly long lines	AppPreferencesWindow		Mark overly long lines
-Max. characters per line:	AppPreferencesWindow		Max. characters per line:
-Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
-Revert	AppPreferencesWindow		Revert
-Show full path in title	AppPreferencesWindow		Show full path in title
-Show indentation guides	AppPreferencesWindow		Show indentation guides
-Show line numbers	AppPreferencesWindow		Show line numbers
-Show toolbar	AppPreferencesWindow		Show toolbar
-Spaces per tab:	AppPreferencesWindow		Spaces per tab:
-Stack new windows	AppPreferencesWindow		Stack new windows
-Style	AppPreferencesWindow		Style
-Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
-Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
-Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
-[read-only]	EditorWindow		[read-only]
-About…	EditorWindow		About…
-Access denied	EditorWindow		Access denied
-Cancel	EditorWindow		Cancel
-Close	EditorWindow		Close
-Comment block	EditorWindow		Comment block
-Comment line	EditorWindow		Comment line
-Copy	EditorWindow		Copy
-Corresponding file not found.	EditorWindow		Corresponding file not found.
-Cut	EditorWindow		Cut
-Discard	EditorWindow		Discard
-Do nothing	EditorWindow		Do nothing
-Edit	EditorWindow		Edit
-Error	EditorWindow		Error
-Failed to read file permissions.	EditorWindow		Failed to read file permissions.
-File	EditorWindow		File
-File modified	EditorWindow		File modified
-Find/Replace…	EditorWindow		Find/Replace…
-Go to line…	EditorWindow		Go to line…
-Help	EditorWindow		Help
-Koder preferences…	EditorWindow		Koder preferences…
-Language	EditorWindow		Language
-Line endings	EditorWindow		Line endings
-New	EditorWindow		New
+Mark overly long lines	AppPreferencesWindow		Marchează liniile prea lungi
+Max. characters per line:	AppPreferencesWindow		Numărul max. de caractere per linie:
+Only in actually indented lines	AppPreferencesWindow		Doar în liniile care chiar sunt indentate
+Revert	AppPreferencesWindow		Revenire
+Show full path in title	AppPreferencesWindow		Arată calea completă în titlu
+Show indentation guides	AppPreferencesWindow		Afișează ghizii de indentare
+Show line numbers	AppPreferencesWindow		Afișează numerele liniilor
+Show toolbar	AppPreferencesWindow		Afișează bara de unelte
+Spaces per tab:	AppPreferencesWindow		Spații per tab:
+Stack new windows	AppPreferencesWindow		Stivuiește ferestrele noi
+Style	AppPreferencesWindow		Stil
+Trim trailing whitespace on save	AppPreferencesWindow		Taie spațiile libere din urmă la salvare
+Up to the next non-empty line	AppPreferencesWindow		Sus la următoarea linie care nu este goală
+Up to the next/previous non-empty line	AppPreferencesWindow		Sus la următoarea/anterioara linie care nu este goală
+Behavior	AppPreferencesWindow		Behavior
+Background	AppPreferencesWindow	Current line highlight	Background
+Frame	AppPreferencesWindow	Current line highlight	Frame
+Trailing whitespace	AppPreferencesWindow		Trailing whitespace
+Visual	AppPreferencesWindow		Visual
+Indentation	AppPreferencesWindow		Indentation
+Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
+Always open files in new window	AppPreferencesWindow		Always open files in new window
+Use custom font	AppPreferencesWindow		Use custom font
+[read-only]	EditorWindow		[protejat la scriere]
+About…	EditorWindow		Despre...
+Access denied	EditorWindow		Acces respins
+Cancel	EditorWindow		Anulează
+Close	EditorWindow		Închide
+Comment block	EditorWindow		Bloc de comentariu
+Comment line	EditorWindow		Linie de comentariu
+Copy	EditorWindow		Copiază
+Corresponding file not found.	EditorWindow		Fișierul corespunzător nu a putut fi găsit.
+Cut	EditorWindow		Tăiere
+Discard	EditorWindow		Ignoră
+Do nothing	EditorWindow		Nu face nimic
+Edit	EditorWindow		Editează
+Error	EditorWindow		Eroare
+Failed to read file permissions.	EditorWindow		Nu s-au putut citi permisiunile fișierului.
+File	EditorWindow		Fișier
+File modified	EditorWindow		Fișier modificat
+Find/Replace…	EditorWindow		Căutare/Înlocuire
+Go to line…	EditorWindow		Mergi la linia...
+Help	EditorWindow		Ajutor
+Koder preferences…	EditorWindow		Preferințe Koder...
+Language	EditorWindow		Limbaj
+Line endings	EditorWindow		Sfărșituri de linie
+New	EditorWindow		Nou
 OK	EditorWindow		OK
-Old Mac format	EditorWindow		Old Mac format
-Open corresponding file	EditorWindow		Open corresponding file
-Open corresponding…	EditorWindow		Open corresponding…
-Open…	EditorWindow		Open…
-Paste	EditorWindow		Paste
-Quit	EditorWindow		Quit
-Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
-Redo	EditorWindow		Redo
-Reload	EditorWindow		Reload
-Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
-Replacement finished	EditorWindow		Replacement finished
-Save	EditorWindow		Save
-Save as…	EditorWindow		Save as…
-Search	EditorWindow		Search
-Searching finished	EditorWindow		Searching finished
-Select all	EditorWindow		Select all
-Show line endings	EditorWindow		Show line endings
-Show toolbar	EditorWindow		Show toolbar
-Show white space	EditorWindow		Show white space
-Special symbols	EditorWindow		Special symbols
-The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
-The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
-The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
-Trim trailing whitespace	EditorWindow		Trim trailing whitespace
-Undo	EditorWindow		Undo
-Unix format	EditorWindow		Unix format
-Unsaved changes	EditorWindow		Unsaved changes
-Untitled	EditorWindow		Untitled
-View	EditorWindow		View
-Warning	EditorWindow		Warning
-Windows format	EditorWindow		Windows format
-Wrap lines	EditorWindow		Wrap lines
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		You don't have permissions to edit this file. The editor will be set to read-only mode.
-You don't have sufficient permissions to edit this file.	EditorWindow		You don't have sufficient permissions to edit this file.
-Your changes will be lost.	EditorWindow		Your changes will be lost.
-Backwards	FindWindow		Backwards
-Find	FindWindow		Find
-Find:	FindWindow		Find:
-Find/Replace	FindWindow		Find/Replace
-In selection	FindWindow		In selection
-Match case	FindWindow		Match case
-Match entire words	FindWindow		Match entire words
+Old Mac format	EditorWindow		Format Mac vechi
+Open corresponding file	EditorWindow		Deschide fișierul corespunzător
+Open corresponding…	EditorWindow		Deschide corespunzător...
+Open…	EditorWindow		Deschide...
+Paste	EditorWindow		Lipire
+Quit	EditorWindow		Ieșire
+Reached the end of the target. No results found.	EditorWindow		S-a ajuns la sfârșitul țintei. Nu s-au găsit rezultate.
+Redo	EditorWindow		Repetă
+Reload	EditorWindow		Reîncarcă
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		S-a înlocuit {0, plural, one{# apariție} other{# apariții}}.
+Replacement finished	EditorWindow		Înlocuirea s-a terminat
+Save	EditorWindow		Salvare
+Save as…	EditorWindow		Salvare ca...
+Search	EditorWindow		Căutare
+Searching finished	EditorWindow		Căutare terminată
+Select all	EditorWindow		Selectează tot
+Show line endings	EditorWindow		Arată sfârșiturile de linie
+Show toolbar	EditorWindow		Afișează bara de unelte
+Show white space	EditorWindow		Arată spațiile libere
+Special symbols	EditorWindow		Simboluri speciale
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Fișierul conține modificări nesalvate, dar este protejat la scriere. Ce trebuie făcut?
+The file contains unsaved changes. What to do?	EditorWindow		Fișierul conține modificări nesalvate. Ce trebuie făcut?
+The file has been modified by another application. What to do?	EditorWindow		Fișierul a fost modificat de către altă aplicație. Ce trebuie făcut?
+Trim trailing whitespace	EditorWindow		Taie spațiile libere din urmă
+Undo	EditorWindow		Reface
+Unix format	EditorWindow		Format Unix
+Unsaved changes	EditorWindow		Modificări nesalvate
+Untitled	EditorWindow		Fără titlu
+View	EditorWindow		Vizualizare
+Warning	EditorWindow		Avertisment
+Windows format	EditorWindow		Format Windows
+Wrap lines	EditorWindow		Încadrează liniile
+You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nu aveți permisiunile de a edita acest fișier. Editorul va fi stabilit la modul doar citire.
+You don't have sufficient permissions to edit this file.	EditorWindow		Nu aveți permisiunile suficiente de a edita acest fișier.
+Your changes will be lost.	EditorWindow		Modificările vor fi pierdute.
+Find selection	EditorWindow		Find selection
+Find next	EditorWindow		Find next
+Replace and find	EditorWindow		Replace and find
+Incremental search	EditorWindow		Incremental search
+Backwards	FindWindow		Invers
+Find	FindWindow		Căutare
+Find:	FindWindow		Caută:
+Find/Replace	FindWindow		Căutare/Înlocuire
+In selection	FindWindow		În selecție
+Match case	FindWindow		Potrivire majuscule
+Match entire words	FindWindow		Potrivire cuvinte întregi
 Regex	FindWindow		Regex
-Replace	FindWindow		Replace
-Replace all	FindWindow		Replace all
-Replace and find	FindWindow		Replace and find
-Replace:	FindWindow		Replace:
-Wrap around	FindWindow		Wrap around
-Cancel	GoToLineWindow		Cancel
-Go to line	GoToLineWindow		Go to line
-Go to line:	GoToLineWindow		Go to line:
+Replace	FindWindow		Înlocuiește
+Replace all	FindWindow		Înlocuiește tot
+Replace and find	FindWindow		Înlocuiește și caută
+Replace:	FindWindow		Înlocuiește:
+Wrap around	FindWindow		Încadrează în jurul
+Cancel	GoToLineWindow		Anulează:
+Go to line	GoToLineWindow		Mergi la linia
+Go to line:	GoToLineWindow		Mergi la linia:
 OK	GoToLineWindow		OK
-Configuration file	Preferences		Configuration file
-Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
-Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.
 OK	Preferences		OK
-There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.
-There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.
-Cancel	QuitAlert		Cancel
-Don't save	QuitAlert		Don't save
-Save all	QuitAlert		Save all
-Save selected	QuitAlert		Save selected
-There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
-Unsaved files	QuitAlert		Unsaved files
-Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
+Editor settings	Preferences		Editor settings
+read	Preferences	Make sure you have _ permission for	read
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
+load	Preferences	to _ the configuration	load
+Unknown error.	Preferences		Unknown error.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.
+loaded	Preferences	settings will not be _	loaded
+write	Preferences	Make sure you have _ permission for	write
+save	Preferences	to _ the configuration	save
+saved	Preferences	settings will not be _	saved
+Cancel	QuitAlert		Anulează
+Don't save	QuitAlert		Nu salva
+Save all	QuitAlert		Salvează tot
+Save selected	QuitAlert		Salvează selectate
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Există modificări nesalvate.\nSelectați fișierele de salvat.
+Unsaved files	QuitAlert		Fișiere nesalvate
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Nu s-au putut găsi fișierele de stil. Asigurați-vă că le aveți instalate într-unul dintre dosarele de date.
 OK	Styler		OK
-Style files	Styler		Style files
+Style files	Styler		Fișiere de stil
 Koder	System name		Koder
+Read-only	StatusView		Read-only

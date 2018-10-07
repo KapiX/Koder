@@ -1,35 +1,35 @@
-1	English (British)	x-vnd.KapiX-Koder	2821340809
+1	Finnish	x-vnd.KapiX-Koder	2821340809
 Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
 Distributed on MIT license terms.	App		Distributed on MIT license terms.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
 zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
-Konrad77, for dark theme.	App		Konrad77, for the dark theme.
+Konrad77, for dark theme.	App		Konrad77, for dark theme.
 translators to:	App	to _ (language), e.g. German	translators to:
 humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
 Apply	AppPreferencesWindow		Apply
-Background	AppPreferencesWindow		Background
+Background	AppPreferencesWindow		Tausta
 Compact language menu	AppPreferencesWindow		Compact language menu
-Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
+Convert tabs to spaces	AppPreferencesWindow		Muunna sarkaimet välilyönneiksi
 Highlight braces	AppPreferencesWindow		Highlight braces
 Highlight current line	AppPreferencesWindow		Highlight current line
 Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
-Koder preferences	AppPreferencesWindow		Koder preferences
-Line	AppPreferencesWindow		Line
+Koder preferences	AppPreferencesWindow		Koder-asetukset
+Line	AppPreferencesWindow		Rivi
 Mark overly long lines	AppPreferencesWindow		Mark overly long lines
 Max. characters per line:	AppPreferencesWindow		Max. characters per line:
 Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
 Revert	AppPreferencesWindow		Revert
-Show full path in title	AppPreferencesWindow		Show full path in title
+Show full path in title	AppPreferencesWindow		Näytä koko polku otsikossa
 Show indentation guides	AppPreferencesWindow		Show indentation guides
-Show line numbers	AppPreferencesWindow		Show line numbers
-Show toolbar	AppPreferencesWindow		Show toolbar
-Spaces per tab:	AppPreferencesWindow		Spaces per tab:
+Show line numbers	AppPreferencesWindow		Näytä rivinumerot
+Show toolbar	AppPreferencesWindow		Näytä työkalupalkki
+Spaces per tab:	AppPreferencesWindow		Välilyönteja sarkainta kohden:
 Stack new windows	AppPreferencesWindow		Stack new windows
-Style	AppPreferencesWindow		Style
+Style	AppPreferencesWindow		Tyyli
 Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
 Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
 Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
-Behavior	AppPreferencesWindow		Behaviour
+Behavior	AppPreferencesWindow		Behavior
 Background	AppPreferencesWindow	Current line highlight	Background
 Frame	AppPreferencesWindow	Current line highlight	Frame
 Trailing whitespace	AppPreferencesWindow		Trailing whitespace
@@ -39,48 +39,48 @@ Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possibl
 Always open files in new window	AppPreferencesWindow		Always open files in new window
 Use custom font	AppPreferencesWindow		Use custom font
 [read-only]	EditorWindow		[read-only]
-About…	EditorWindow		About…
+About…	EditorWindow		Ohjelmasta…
 Access denied	EditorWindow		Access denied
-Cancel	EditorWindow		Cancel
-Close	EditorWindow		Close
+Cancel	EditorWindow		Peru
+Close	EditorWindow		Sulje
 Comment block	EditorWindow		Comment block
 Comment line	EditorWindow		Comment line
 Copy	EditorWindow		Copy
 Corresponding file not found.	EditorWindow		Corresponding file not found.
-Cut	EditorWindow		Cut
+Cut	EditorWindow		Leikkaa
 Discard	EditorWindow		Discard
-Do nothing	EditorWindow		Do nothing
-Edit	EditorWindow		Edit
-Error	EditorWindow		Error
+Do nothing	EditorWindow		Älä tee mitään
+Edit	EditorWindow		Muokkaa
+Error	EditorWindow		Virhe
 Failed to read file permissions.	EditorWindow		Failed to read file permissions.
 File	EditorWindow		File
 File modified	EditorWindow		File modified
-Find/Replace…	EditorWindow		Find/Replace…
-Go to line…	EditorWindow		Go to line…
-Help	EditorWindow		Help
-Koder preferences…	EditorWindow		Koder preferences…
-Language	EditorWindow		Language
+Find/Replace…	EditorWindow		Etsi/Korvaa…
+Go to line…	EditorWindow		Siirry riville…
+Help	EditorWindow		Opaste
+Koder preferences…	EditorWindow		Koder-asetukset…
+Language	EditorWindow		Kieli
 Line endings	EditorWindow		Line endings
-New	EditorWindow		New
-OK	EditorWindow		Alright
-Old Mac format	EditorWindow		Old Mac format
+New	EditorWindow		Uusi
+OK	EditorWindow		Valmis
+Old Mac format	EditorWindow		Vanha Mac-muoto
 Open corresponding file	EditorWindow		Open corresponding file
 Open corresponding…	EditorWindow		Open corresponding…
-Open…	EditorWindow		Open…
-Paste	EditorWindow		Paste
-Quit	EditorWindow		Quit
+Open…	EditorWindow		Avaa…
+Paste	EditorWindow		Liitä
+Quit	EditorWindow		Poistu
 Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
 Redo	EditorWindow		Redo
-Reload	EditorWindow		Reload
+Reload	EditorWindow		Lataa uudelleen
 Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
 Replacement finished	EditorWindow		Replacement finished
-Save	EditorWindow		Save
-Save as…	EditorWindow		Save as…
-Search	EditorWindow		Search
-Searching finished	EditorWindow		Searching finished
-Select all	EditorWindow		Select all
+Save	EditorWindow		Tallenna
+Save as…	EditorWindow		Tallenna nimellä…
+Search	EditorWindow		Etsi
+Searching finished	EditorWindow		Etsintä päättynyt
+Select all	EditorWindow		Valitse kaikki
 Show line endings	EditorWindow		Show line endings
-Show toolbar	EditorWindow		Show toolbar
+Show toolbar	EditorWindow		Näytä työkalupalkki
 Show white space	EditorWindow		Show white space
 Special symbols	EditorWindow		Special symbols
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
@@ -89,10 +89,10 @@ The file has been modified by another application. What to do?	EditorWindow		The
 Trim trailing whitespace	EditorWindow		Trim trailing whitespace
 Undo	EditorWindow		Undo
 Unix format	EditorWindow		Unix format
-Unsaved changes	EditorWindow		Unsaved changes
-Untitled	EditorWindow		Untitled
-View	EditorWindow		View
-Warning	EditorWindow		Warning
+Unsaved changes	EditorWindow		Tallentamattomat muutokset
+Untitled	EditorWindow		Otsikoton
+View	EditorWindow		Näkymä
+Warning	EditorWindow		Varoitus
 Windows format	EditorWindow		Windows format
 Wrap lines	EditorWindow		Wrap lines
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		You don't have permissions to edit this file. The editor will be set to read-only mode.
@@ -100,26 +100,26 @@ You don't have sufficient permissions to edit this file.	EditorWindow		You don't
 Your changes will be lost.	EditorWindow		Your changes will be lost.
 Find selection	EditorWindow		Find selection
 Find next	EditorWindow		Find next
-Replace and find	EditorWindow		Find and replace
+Replace and find	EditorWindow		Replace and find
 Incremental search	EditorWindow		Incremental search
 Backwards	FindWindow		Backwards
-Find	FindWindow		Find
-Find:	FindWindow		Find:
+Find	FindWindow		Etsi
+Find:	FindWindow		Etsi:
 Find/Replace	FindWindow		Find/Replace
 In selection	FindWindow		In selection
 Match case	FindWindow		Match case
 Match entire words	FindWindow		Match entire words
 Regex	FindWindow		Regex
-Replace	FindWindow		Replace
-Replace all	FindWindow		Replace all
+Replace	FindWindow		Korvaa
+Replace all	FindWindow		Korvaa kaikki
 Replace and find	FindWindow		Replace and find
-Replace:	FindWindow		Replace:
+Replace:	FindWindow		Korvaa:
 Wrap around	FindWindow		Wrap around
-Cancel	GoToLineWindow		Cancel
-Go to line	GoToLineWindow		Go to line
-Go to line:	GoToLineWindow		Go to line:
-OK	GoToLineWindow		Alright
-OK	Preferences		Alright
+Cancel	GoToLineWindow		Peru
+Go to line	GoToLineWindow		Siirry riville
+Go to line:	GoToLineWindow		Siirry riville:
+OK	GoToLineWindow		Valmis
+OK	Preferences		Valmis
 Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
 Editor settings	Preferences		Editor settings
 read	Preferences	Make sure you have _ permission for	read
@@ -131,14 +131,14 @@ loaded	Preferences	settings will not be _	loaded
 write	Preferences	Make sure you have _ permission for	write
 save	Preferences	to _ the configuration	save
 saved	Preferences	settings will not be _	saved
-Cancel	QuitAlert		Cancel
-Don't save	QuitAlert		Don't save
-Save all	QuitAlert		Save all
-Save selected	QuitAlert		Save selected
+Cancel	QuitAlert		Peru
+Don't save	QuitAlert		Älä tallenna
+Save all	QuitAlert		Tallenna kaikki
+Save selected	QuitAlert		Tallenna valittu
 There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
 Unsaved files	QuitAlert		Unsaved files
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
-OK	Styler		Alright
-Style files	Styler		Style files
+OK	Styler		Valmis
+Style files	Styler		Tyylitiedostot
 Koder	System name		Koder
 Read-only	StatusView		Read-only

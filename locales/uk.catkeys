@@ -1,19 +1,15 @@
-1	Ukrainian	x-vnd.KapiX-Koder	2889977837
-ArmanHayots, for Russian translation.	App		ArmanHayots, за переклад російською.
+1	Ukrainian	x-vnd.KapiX-Koder	2821340809
 Code editor for Haiku based on Scintilla editing component.	App		Редактор коду для Haiku на основі компонента редагування Scintilla.
-damoklas, for Lithuanian translation.	App		damoklas, за переклад литовською.
 Distributed on MIT license terms.	App		Розповсюджується за ліцензією MIT.
-humdinger, for German translation and GUI design tips.	App		humdinger, за переклад німецькою і поради щодо оформлення інтерфейсу.
-Lan72, for Ukrainian translation.	App		Lan72, за переклад українською.
-miqlas, for Hungarian translation and app icon.	App		miqlas, за переклад угорською та програмні іконки.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, за компонент редагування Scintilla i редактор SciTE.
-un_spacyar, for Spanish translation.	App		un_spacyar, за переклад іспанською.
 zuMi, for toolbar icons.	App		zuMi, за іконки панелі інструментів.
+Konrad77, for dark theme.	App		Konrad77, for dark theme.
+translators to:	App	to _ (language), e.g. German	translators to:
+humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
 Apply	AppPreferencesWindow		Застосувати
 Background	AppPreferencesWindow		Фон
 Compact language menu	AppPreferencesWindow		Компактне меню мов
 Convert tabs to spaces	AppPreferencesWindow		Перетворювати відступи в пробіли
-Editor	AppPreferencesWindow		Редактор
 Highlight braces	AppPreferencesWindow		Підсвічувати дужки
 Highlight current line	AppPreferencesWindow		Підсвічувати поточний рядок
 Highlight trailing whitespace	AppPreferencesWindow		Підсвічувати кінцевий пробіл
@@ -33,6 +29,15 @@ Style	AppPreferencesWindow		Стиль
 Trim trailing whitespace on save	AppPreferencesWindow		Обрізати кінцевий пробіл при збереженні
 Up to the next non-empty line	AppPreferencesWindow		До наступного непустого рядка
 Up to the next/previous non-empty line	AppPreferencesWindow		До наступного/попереднього непустого рядка
+Behavior	AppPreferencesWindow		Behavior
+Background	AppPreferencesWindow	Current line highlight	Background
+Frame	AppPreferencesWindow	Current line highlight	Frame
+Trailing whitespace	AppPreferencesWindow		Trailing whitespace
+Visual	AppPreferencesWindow		Visual
+Indentation	AppPreferencesWindow		Indentation
+Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
+Always open files in new window	AppPreferencesWindow		Always open files in new window
+Use custom font	AppPreferencesWindow		Use custom font
 [read-only]	EditorWindow		[тільки для читання]
 About…	EditorWindow		Про програму…
 Access denied	EditorWindow		Відмова у доступі
@@ -89,10 +94,14 @@ Untitled	EditorWindow		Безіменний
 View	EditorWindow		Вигляд
 Warning	EditorWindow		Увага
 Windows format	EditorWindow		Формат Windows
-Wrap lines	EditorWindow		Wrap lines
+Wrap lines	EditorWindow		Переносити рядки
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		У вас немає прав для редагування цього файлу. Редактор встановлений в режим тільки читання.
 You don't have sufficient permissions to edit this file.	EditorWindow		У вас недостатньо прав для редагування цього файлу.
 Your changes will be lost.	EditorWindow		Ваші зміни втрачені.
+Find selection	EditorWindow		Find selection
+Find next	EditorWindow		Find next
+Replace and find	EditorWindow		Replace and find
+Incremental search	EditorWindow		Incremental search
 Backwards	FindWindow		У зворотному напрямі
 Find	FindWindow		Знайти
 Find:	FindWindow		Знайти:
@@ -110,14 +119,18 @@ Cancel	GoToLineWindow		Скасувати
 Go to line	GoToLineWindow		Перейти до рядка
 Go to line:	GoToLineWindow		Перейти до рядка:
 OK	GoToLineWindow		OK
-Configuration file	Preferences		Файл конфігурації
-Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Неможливо відкрити файл конфігурації через відмову в доступі. Як правило, це означає, що у вас немає дозволу на читання каталогу параметрів. Якщо ви хочете завантажити свої параметри, перевірте в документації системи, що це за каталог і спробуйте змінити дозволи.
-Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Неможливо відкрити файл конфігурації через відмову в доступі. Як правило, це означає, що у вас немає дозволу на запис каталогу параметрів. Якщо ви хочете завантажити свої параметри, перевірте в документації системи, що це за каталог і спробуйте змінити дозволи.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Не вдалося відкрити файл конфігурації через відсутність вказаного шляху. Це може означати, що програміст зробив помилку. Ви нічого не можете з цим вдіяти. Ваші параметри не будуть завантажені. Вибачте.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Не вдалося відкрити файл конфігурації через відсутність вказаного шляху. Це може означати, що програміст зробив помилку. Ви нічого не можете з цим вдіяти. Ваші параметри не будуть збережені. Вибачте.
 OK	Preferences		OK
-There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		Недостатньо пам'яті для завантаження файлу конфігурації. Якщо ви хочете, щоб були завантажені ваші параметри, закрийте деякі програми і перезапустіть Koder.
-There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		Недостатньо пам'яті для збереження файлу конфігурації. Якщо ви хочете, щоб були збережені ваші параметри, закрийте деякі програми і спробуйте знову.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
+Editor settings	Preferences		Editor settings
+read	Preferences	Make sure you have _ permission for	read
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
+load	Preferences	to _ the configuration	load
+Unknown error.	Preferences		Unknown error.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.
+loaded	Preferences	settings will not be _	loaded
+write	Preferences	Make sure you have _ permission for	write
+save	Preferences	to _ the configuration	save
+saved	Preferences	settings will not be _	saved
 Cancel	QuitAlert		Скасувати
 Don't save	QuitAlert		Не зберігати
 Save all	QuitAlert		Зберегти все
@@ -128,3 +141,4 @@ Couldn't find style files. Make sure you have them installed in one of your data
 OK	Styler		OK
 Style files	Styler		Файли стилю
 Koder	System name		Koder
+Read-only	StatusView		Read-only

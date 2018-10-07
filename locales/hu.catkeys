@@ -1,19 +1,15 @@
-1	Hungarian	x-vnd.KapiX-Koder	2889977837
-ArmanHayots, for Russian translation.	App		ArmanHayots-nak, az orosz fordításért..
+1	Hungarian	x-vnd.KapiX-Koder	2821340809
 Code editor for Haiku based on Scintilla editing component.	App		A Scintilla szerkesztőkomponensre épülő kódszerkesztő Haikuhoz.
-damoklas, for Lithuanian translation.	App		damoklasnak, a litván fordításért.
 Distributed on MIT license terms.	App		MIT licenc alatt terjeszthető.
-humdinger, for German translation and GUI design tips.	App		humdingernek, a német fordításért és a GUI ötleteiért.
-Lan72, for Ukrainian translation.	App		Lan72-nak, az ukrán fordításért.
-miqlas, for Hungarian translation and app icon.	App		miqlasnak, a magyar fordításért és az ikonért.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgsonnak, a Scintilla szerkesztő komponensért és a SciTE szerkesztőért.
-un_spacyar, for Spanish translation.	App		un_spacyar-nak, a spanyol fordításért.
 zuMi, for toolbar icons.	App		zuMi-nak, az eszköztár ikonjaiért.
+Konrad77, for dark theme.	App		Konrad77, a sötét témáért
+translators to:	App	to _ (language), e.g. German	feordítók:
+humdinger, for GUI design tips and artwork.	App		humdinger, a GUI design tippekért és a logóért
 Apply	AppPreferencesWindow		Alkalmaz
 Background	AppPreferencesWindow		Háttér
 Compact language menu	AppPreferencesWindow		Rövid nyelvi menü
 Convert tabs to spaces	AppPreferencesWindow		Tabok szóközökké alakítása
-Editor	AppPreferencesWindow		Szerkesztő
 Highlight braces	AppPreferencesWindow		Zárójelek kiemelése
 Highlight current line	AppPreferencesWindow		Aktuális sor kiemelése
 Highlight trailing whitespace	AppPreferencesWindow		Sorvégi szóközök megjelenítése
@@ -33,6 +29,15 @@ Style	AppPreferencesWindow		Stílus
 Trim trailing whitespace on save	AppPreferencesWindow		Mentéskor a sorvégi szóközök törlése
 Up to the next non-empty line	AppPreferencesWindow		Fel a következő nem üres sorig
 Up to the next/previous non-empty line	AppPreferencesWindow		A következő/előző nem üres sorig
+Behavior	AppPreferencesWindow		Viselkedés
+Background	AppPreferencesWindow	Current line highlight	Háttér
+Frame	AppPreferencesWindow	Current line highlight	Keret
+Trailing whitespace	AppPreferencesWindow		Sorvégi szóközök
+Visual	AppPreferencesWindow		Látvány
+Indentation	AppPreferencesWindow		Behúzás
+Use .editorconfig if possible	AppPreferencesWindow		Az .editorconfig használata, ha lehetséges
+Always open files in new window	AppPreferencesWindow		Fájlok megnyitása mindig új ablakban
+Use custom font	AppPreferencesWindow		Egyedi betűtípus haszálata
 [read-only]	EditorWindow		[írásvédett]
 About…	EditorWindow		Névjegy…
 Access denied	EditorWindow		Hozzáférés megtagadva
@@ -67,7 +72,7 @@ Quit	EditorWindow		Kilépés
 Reached the end of the target. No results found.	EditorWindow		A kijelölésben nem volt találat.
 Redo	EditorWindow		Újra
 Reload	EditorWindow		Újratöltés
-Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		{0, plural, one{# occurence} other{# occurences}} került lecserélésre.
 Replacement finished	EditorWindow		Csere kész
 Save	EditorWindow		Mentés
 Save as…	EditorWindow		Mentés másként...
@@ -93,6 +98,10 @@ Wrap lines	EditorWindow		Sorok törése
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nem módosíthatod ezt a fájlt, ezért írásvédett módban lesz megnyitva.
 You don't have sufficient permissions to edit this file.	EditorWindow		Nincs elegendő jogosultsága a fájl megváltoztatásához.
 Your changes will be lost.	EditorWindow		A modosítások elvesznek.
+Find selection	EditorWindow		Keresés kijelölésben
+Find next	EditorWindow		Következő
+Replace and find	EditorWindow		Keres és cserél
+Incremental search	EditorWindow		Inkrementális keresés
 Backwards	FindWindow		Visszafelé
 Find	FindWindow		Keres
 Find:	FindWindow		Keresés:
@@ -110,21 +119,26 @@ Cancel	GoToLineWindow		Mégsem
 Go to line	GoToLineWindow		Sorra ugrás
 Go to line:	GoToLineWindow		Sorra ugrás:
 OK	GoToLineWindow		OK
-Configuration file	Preferences		Configuration file
-Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
-Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.
 OK	Preferences		OK
-There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.
-There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Hozzáférés megtagadva a beállítások megnyitása során. Kérjük ellenőrizze, hogy van-e %s% joga a beállítások könyvtárban.
+Editor settings	Preferences		Szerkesztő beállításai
+read	Preferences	Make sure you have _ permission for	olvasási
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Valamilyen hiba történt a beállítások megnyitása során, a beállításai nem kerülnek %s%.
+load	Preferences	to _ the configuration	betöltése
+Unknown error.	Preferences		Ismeretlen hiba.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Nem áll elegendő memeória rendelkezésre a beállítások %s%. Próbálj meg bezárni pár programot, és indítsd újra a szerkesztőt.
+loaded	Preferences	settings will not be _	betöltésre
+write	Preferences	Make sure you have _ permission for	írás
+save	Preferences	to _ the configuration	ment
+saved	Preferences	settings will not be _	elmentésre
 Cancel	QuitAlert		Mégsem
 Don't save	QuitAlert		Ne mentse
 Save all	QuitAlert		Mindent ment
 Save selected	QuitAlert		Kiválasztott mentése
-There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Nem mentett minden változtatást.\nJelölje ki a mentendő fájlokat.
 Unsaved files	QuitAlert		Nem mentett fájlok
-Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		A stílusfájlok nem találhatók. Győződj meg róla, hogy az adatkönyvtárba telepítetted őket.
 OK	Styler		OK
-Style files	Styler		Style files
+Style files	Styler		Stílus-fájlok
 Koder	System name		Koder
+Read-only	StatusView		Csak olvasható

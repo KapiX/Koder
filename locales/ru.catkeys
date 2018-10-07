@@ -1,87 +1,92 @@
-1	Russian	x-vnd.KapiX-Koder	2889977837
-ArmanHayots, for Russian translation.	App		ArmanHayots, for Russian translation.
+1	Russian	x-vnd.KapiX-Koder	2821340809
 Code editor for Haiku based on Scintilla editing component.	App		Редактор кода для Haiku на базе текстового компонента Scintilla.
-damoklas, for Lithuanian translation.	App		damoklas, for Lithuanian translation.
 Distributed on MIT license terms.	App		Распространяется на условиях лицензии MIT.
-humdinger, for German translation and GUI design tips.	App		humdinger, for German translation and GUI design tips.
-Lan72, for Ukrainian translation.	App		Lan72, for Ukrainian translation.
-miqlas, for Hungarian translation and app icon.	App		miqlas, for Hungarian translation and app icon.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Нейл Ходгсон(Neil Hodgson), за текстовый компонент Scintilla и редактор SciTE.
-un_spacyar, for Spanish translation.	App		un_spacyar, for Spanish translation.
-zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
+zuMi, for toolbar icons.	App		zuMi, за иконки для панели инструментов.
+Konrad77, for dark theme.	App		Konrad77, за тёмную тему.
+translators to:	App	to _ (language), e.g. German	переводчики на:
+humdinger, for GUI design tips and artwork.	App		humdinger, за советы по дизайну интерфейса и арты.
 Apply	AppPreferencesWindow		Применить
 Background	AppPreferencesWindow		Фон
 Compact language menu	AppPreferencesWindow		Компактное меню языков
 Convert tabs to spaces	AppPreferencesWindow		Преобразовать отступы в пробелы
-Editor	AppPreferencesWindow		Редактор
 Highlight braces	AppPreferencesWindow		Подсветить скобки
 Highlight current line	AppPreferencesWindow		Подсветить текущую строку
-Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
-Koder preferences	AppPreferencesWindow		Koder preferences
+Highlight trailing whitespace	AppPreferencesWindow		Подсветить пробелы в конце строк
+Koder preferences	AppPreferencesWindow		Настройки Koder
 Line	AppPreferencesWindow		Строка
-Mark overly long lines	AppPreferencesWindow		Mark overly long lines
-Max. characters per line:	AppPreferencesWindow		Max. characters per line:
-Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
+Mark overly long lines	AppPreferencesWindow		Помечать слишком длинные строки
+Max. characters per line:	AppPreferencesWindow		Максимум символов в строке:
+Only in actually indented lines	AppPreferencesWindow		Только в строках с отступом
 Revert	AppPreferencesWindow		Откатить
 Show full path in title	AppPreferencesWindow		Отобразить полный путь в заголовке
 Show indentation guides	AppPreferencesWindow		Отобразить направляющие отступа
-Show line numbers	AppPreferencesWindow		Show line numbers
-Show toolbar	AppPreferencesWindow		Show toolbar
-Spaces per tab:	AppPreferencesWindow		Spaces per tab:
-Stack new windows	AppPreferencesWindow		Stack new windows
-Style	AppPreferencesWindow		Style
-Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
+Show line numbers	AppPreferencesWindow		Отобразить номера строк
+Show toolbar	AppPreferencesWindow		Отобразить панель инструментов
+Spaces per tab:	AppPreferencesWindow		Пробелов в табуляции:
+Stack new windows	AppPreferencesWindow		Группировать новые окна
+Style	AppPreferencesWindow		Стиль
+Trim trailing whitespace on save	AppPreferencesWindow		Обрезать пробелы в конце строк при сохранении
 Up to the next non-empty line	AppPreferencesWindow		До следующей непустой строки
 Up to the next/previous non-empty line	AppPreferencesWindow		До следующей/предыдущей непустой строки
+Behavior	AppPreferencesWindow		Поведение
+Background	AppPreferencesWindow	Current line highlight	Фон
+Frame	AppPreferencesWindow	Current line highlight	Рамка
+Trailing whitespace	AppPreferencesWindow		Пробелы в конце строк
+Visual	AppPreferencesWindow		Визуальные
+Indentation	AppPreferencesWindow		Отступ
+Use .editorconfig if possible	AppPreferencesWindow		При возможности использовать .editorconfig
+Always open files in new window	AppPreferencesWindow		Всегда открывать файлы в новом окне
+Use custom font	AppPreferencesWindow		Использовать пользовательский шрифт
 [read-only]	EditorWindow		[только для чтения]
 About…	EditorWindow		О программе...
 Access denied	EditorWindow		Доступ закрыт
 Cancel	EditorWindow		Отмена
 Close	EditorWindow		Закрыть
-Comment block	EditorWindow		Comment block
-Comment line	EditorWindow		Comment line
+Comment block	EditorWindow		Комментировать блок
+Comment line	EditorWindow		Комментировать строку
 Copy	EditorWindow		Копировать
-Corresponding file not found.	EditorWindow		Corresponding file not found.
+Corresponding file not found.	EditorWindow		Соответствующий файл не найден
 Cut	EditorWindow		Вырезать
 Discard	EditorWindow		Сбросить
-Do nothing	EditorWindow		Do nothing
+Do nothing	EditorWindow		Ничего не делать
 Edit	EditorWindow		Редактирование
 Error	EditorWindow		Ошибка
-Failed to read file permissions.	EditorWindow		Failed to read file permissions.
+Failed to read file permissions.	EditorWindow		Не удалось прочесть права доступа к файлу
 File	EditorWindow		Файл
 File modified	EditorWindow		Файл изменён
 Find/Replace…	EditorWindow		Найти/Заменить…
 Go to line…	EditorWindow		Перейти к строке…
 Help	EditorWindow		Помощь
-Koder preferences…	EditorWindow		Koder preferences…
+Koder preferences…	EditorWindow		Настройки Koder…
 Language	EditorWindow		Язык
-Line endings	EditorWindow		Line endings
+Line endings	EditorWindow		Символы конца строки
 New	EditorWindow		Новый
 OK	EditorWindow		Хорошо
 Old Mac format	EditorWindow		Старый формат Mac
-Open corresponding file	EditorWindow		Open corresponding file
-Open corresponding…	EditorWindow		Open corresponding…
-Open…	EditorWindow		Open…
+Open corresponding file	EditorWindow		Открыть соответствующий файл
+Open corresponding…	EditorWindow		Открыть соответствующий…
+Open…	EditorWindow		Открыть…
 Paste	EditorWindow		Вставить
 Quit	EditorWindow		Выйти
-Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
+Reached the end of the target. No results found.	EditorWindow		Достигнут конец документа. Совпадений не найдено.
 Redo	EditorWindow		Повторить
 Reload	EditorWindow		Перезагрузить
-Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
-Replacement finished	EditorWindow		Replacement finished
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Заменено {0, plural, one{# совпадение} other{# совпадений}}.
+Replacement finished	EditorWindow		Замена завершена
 Save	EditorWindow		Сохранить
 Save as…	EditorWindow		Сохранить как…
 Search	EditorWindow		Поиск
 Searching finished	EditorWindow		Поиск завершён
 Select all	EditorWindow		Выбрать всё
-Show line endings	EditorWindow		Show line endings
-Show toolbar	EditorWindow		Show toolbar
+Show line endings	EditorWindow		Показать символы конца строки
+Show toolbar	EditorWindow		Показать панель инструментов
 Show white space	EditorWindow		Отобразить пустые символы
 Special symbols	EditorWindow		Специальные символы
-The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
-The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
-The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
-Trim trailing whitespace	EditorWindow		Trim trailing whitespace
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Файл содержит несохранённые изменения, но открыт только для чтения. Что делать?
+The file contains unsaved changes. What to do?	EditorWindow		Файл содержит несохранённые изменения. Что делать?
+The file has been modified by another application. What to do?	EditorWindow		Файл был изменён другим приложением. Что делать?
+Trim trailing whitespace	EditorWindow		Удалить пробелы в конце строк
 Undo	EditorWindow		Отменить
 Unix format	EditorWindow		Формат Unix
 Unsaved changes	EditorWindow		Несохранённые изменения
@@ -89,18 +94,22 @@ Untitled	EditorWindow		Безымянный
 View	EditorWindow		Вид
 Warning	EditorWindow		Предупреждение
 Windows format	EditorWindow		Формат Windows
-Wrap lines	EditorWindow		Wrap lines
+Wrap lines	EditorWindow		Перенос строк
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Недостаточно прав для редактирования файла. Редактор переходит в режим только для чтения. 
 You don't have sufficient permissions to edit this file.	EditorWindow		Недостаточно прав для редактирования файла.
-Your changes will be lost.	EditorWindow		Your changes will be lost.
-Backwards	FindWindow		Backwards
+Your changes will be lost.	EditorWindow		Ваши изменения будут потеряны.
+Find selection	EditorWindow		Найти выбранное
+Find next	EditorWindow		Найти далее
+Replace and find	EditorWindow		Найти и заменить
+Incremental search	EditorWindow		Инкрементный поиск
+Backwards	FindWindow		Назад
 Find	FindWindow		Найти
 Find:	FindWindow		Найти:
 Find/Replace	FindWindow		Найти/Заменить
 In selection	FindWindow		В выбранном
 Match case	FindWindow		Учитывать регистр
 Match entire words	FindWindow		Учитывать слова целиком
-Regex	FindWindow		Regex
+Regex	FindWindow		Регулярное выражение
 Replace	FindWindow		Заменить
 Replace all	FindWindow		Заменить всё
 Replace and find	FindWindow		Найти и заменить
@@ -110,21 +119,26 @@ Cancel	GoToLineWindow		Отмена
 Go to line	GoToLineWindow		Перейти к строке
 Go to line:	GoToLineWindow		Перейти к строке:
 OK	GoToLineWindow		OK
-Configuration file	Preferences		Configuration file
-Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
-Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.
 OK	Preferences		OK
-There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.
-There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Отказано в доступе при открытии файла конфигурации. Убедитесь, что у вас есть права на %s% для папки 'settings'.
+Editor settings	Preferences		Настройки редактора
+read	Preferences	Make sure you have _ permission for	чтение
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		При открытии файла конфигурации произошла ошибка. Ваши личные настройки не будут %s%.
+load	Preferences	to _ the configuration	загрузить
+Unknown error.	Preferences		Неизвестная ошибка.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Недостаточно памяти, чтобы %s% файл конфигурации. Попробуйте закрыть несколько приложений и перезапустить редактор.
+loaded	Preferences	settings will not be _	загружены
+write	Preferences	Make sure you have _ permission for	запись
+save	Preferences	to _ the configuration	сохранить
+saved	Preferences	settings will not be _	сохранены
 Cancel	QuitAlert		Отмена
 Don't save	QuitAlert		Не сохранять
 Save all	QuitAlert		Сохранить всё
 Save selected	QuitAlert		Сохранить выбранное
-There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Есть несохранённые изменения.\nВыберите файлы для сохранения.
 Unsaved files	QuitAlert		Несохранённые файлы
-Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Не удалось найти файлы стилей. Убедитесь, что они установлены в одной из ваших папок 'data'.
 OK	Styler		OK
-Style files	Styler		Style files
+Style files	Styler		Файлы стилей
 Koder	System name		Koder
+Read-only	StatusView		Только чтение

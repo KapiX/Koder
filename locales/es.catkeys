@@ -1,19 +1,15 @@
-1	Spanish	x-vnd.KapiX-Koder	2889977837
-ArmanHayots, for Russian translation.	App		ArmanHayots, por la traducción al ruso.
+1	Spanish	x-vnd.KapiX-Koder	2821340809
 Code editor for Haiku based on Scintilla editing component.	App		Editor de código para Haiku, basado en Scintilla.
-damoklas, for Lithuanian translation.	App		damoklas, por la traducción al lituano.
 Distributed on MIT license terms.	App		Distribuido bajo los términos de la licencia MIT.
-humdinger, for German translation and GUI design tips.	App		humdinger, por la traducción al alemán y los tips de diseño de la GUI.
-Lan72, for Ukrainian translation.	App		Lan72, por la traducción al ucraniano.
-miqlas, for Hungarian translation and app icon.	App		miqlas, por la traducción al húngaro y el ícono de la aplicación.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, por el componente de edición Scintilla y el editor SciTE.
-un_spacyar, for Spanish translation.	App		un_spacyar, por la traducción al español.
 zuMi, for toolbar icons.	App		zuMi, por los íconos de la barra de herramientas.
+Konrad77, for dark theme.	App		Konrad77, por el tema dark.
+translators to:	App	to _ (language), e.g. German	traductores a:
+humdinger, for GUI design tips and artwork.	App		humdinger, por el arte y las sugerencias sobre el diseño de la GUI.
 Apply	AppPreferencesWindow		Aplicar
 Background	AppPreferencesWindow		Fondo
 Compact language menu	AppPreferencesWindow		Compactar menu de lenguaje
 Convert tabs to spaces	AppPreferencesWindow		Convertir tabulador a espacios
-Editor	AppPreferencesWindow		Editor
 Highlight braces	AppPreferencesWindow		Resaltar llaves
 Highlight current line	AppPreferencesWindow		Resaltar línea actual
 Highlight trailing whitespace	AppPreferencesWindow		Resaltar espacios en blanco al final de la línea
@@ -33,6 +29,15 @@ Style	AppPreferencesWindow		Estilo
 Trim trailing whitespace on save	AppPreferencesWindow		Al guardar, eliminar espacios en blanco al final de la línea
 Up to the next non-empty line	AppPreferencesWindow		Hasta la siguiente linea no-vacia
 Up to the next/previous non-empty line	AppPreferencesWindow		Hasta la siguiente/previa linea no-vacia
+Behavior	AppPreferencesWindow		Comportamiento
+Background	AppPreferencesWindow	Current line highlight	Fondo
+Frame	AppPreferencesWindow	Current line highlight	Marco
+Trailing whitespace	AppPreferencesWindow		Espacios en blanco al final
+Visual	AppPreferencesWindow		Visual
+Indentation	AppPreferencesWindow		Indentación
+Use .editorconfig if possible	AppPreferencesWindow		Usar .editorconfig si es posible
+Always open files in new window	AppPreferencesWindow		Siempre abrir archivos en una nueva ventana
+Use custom font	AppPreferencesWindow		Usar fuente personalizada
 [read-only]	EditorWindow		[solo-lectura]
 About…	EditorWindow		Acerca de…
 Access denied	EditorWindow		Acceso denegado
@@ -93,6 +98,10 @@ Wrap lines	EditorWindow		Ajustar líneas
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		No posee permisos para editar este archivo. El editor será seteado en modo solo-lectura.
 You don't have sufficient permissions to edit this file.	EditorWindow		No tiene suficientes permisos para editar este archivo.
 Your changes will be lost.	EditorWindow		Los cambios se perderán.
+Find selection	EditorWindow		Buscar selección
+Find next	EditorWindow		Buscar siguiente
+Replace and find	EditorWindow		Reemplazar y buscar
+Incremental search	EditorWindow		Búsqueda incremental
 Backwards	FindWindow		Hacia atrás
 Find	FindWindow		Buscar
 Find:	FindWindow		Buscar:
@@ -110,14 +119,18 @@ Cancel	GoToLineWindow		Cancelar
 Go to line	GoToLineWindow		Ir a la línea
 Go to line:	GoToLineWindow		Ir a la línea:
 OK	GoToLineWindow		Aceptar
-Configuration file	Preferences		Archivo de configuración
-Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		No se pudo abrir el archivo de configuración debido a ausencia de permisos. Esto usualmente significa que no posee permisos de lectura en el directorio de configuración. Si desea cargar su configuración personal, revise la documentación de su sistema operativo para determinar qué directorio se está usando e intentar modificar sus permisos.
-Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		No se pudo abrir el archivo de configuración debido a ausencia de permisos. Esto usualmente significa que no posee permisos de escritura en el directorio de configuración. Si desea cargar su configuración personal, revise la documentación de su sistema operativo para determinar qué directorio se está usando e intentar modificar sus permisos.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		No se pudo abrir el archivo de configuración debido a que la ruta al mismo no ha sido especificada. Esto usualmente significa que el programador ha cometido un error. No hay nada que usted pueda hacer al respecto. Su configuración personal no será cargada. Lo siento!
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		No se pudo abrir el archivo de configuración debido a que la ruta al mismo no ha sido especificada. Esto usualmente significa que el programador ha cometido un error. No hay nada que usted pueda hacer al respecto. Su configuración personal no será guardada. Lo siento!
 OK	Preferences		Aceptar
-There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		No hay memoria suficiente en su sistema para cargar el archivo de configuración. Si desea cargar su configuración personal, intente cerrando algunas aplicaciones y reiniciando Koder.
-There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		No hay memoria suficiente en su sistema para guardar el archivo de configuración. Si desea guardar su configuración personal, intente cerrando algunas aplicaciones y reintente nuevamente.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Fue denegado el acceso al abrir el archivo de configuración. Asegúrese que tiene permiso de %s% para su directorio de configuración.
+Editor settings	Preferences		Configuración del editor
+read	Preferences	Make sure you have _ permission for	lectura
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Hubo un error al abrir el archivo de configuración. Su configuración personal no será %s%.
+load	Preferences	to _ the configuration	cargar
+Unknown error.	Preferences		Error desconocido.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		No hay suficiente memoria disponible para %s% el archivo de configuración. Intente cerrando algunas aplicaciones y reinicie el editor.
+loaded	Preferences	settings will not be _	cargada
+write	Preferences	Make sure you have _ permission for	escritura
+save	Preferences	to _ the configuration	guardar
+saved	Preferences	settings will not be _	guardado
 Cancel	QuitAlert		Cancelar
 Don't save	QuitAlert		No guardar
 Save all	QuitAlert		Guardar todo
@@ -128,3 +141,4 @@ Couldn't find style files. Make sure you have them installed in one of your data
 OK	Styler		Aceptar
 Style files	Styler		Archivos de estilo
 Koder	System name		Koder
+Read-only	StatusView		Sólo-lectura

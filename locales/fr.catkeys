@@ -1,35 +1,35 @@
-1	English (British)	x-vnd.KapiX-Koder	2821340809
-Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
-Distributed on MIT license terms.	App		Distributed on MIT license terms.
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
-zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
-Konrad77, for dark theme.	App		Konrad77, for the dark theme.
+1	French	x-vnd.KapiX-Koder	2821340809
+Code editor for Haiku based on Scintilla editing component.	App		Un éditeur de code pour Haiku basé sur le composant d'édition Scintilla.
+Distributed on MIT license terms.	App		Distribué sous les termes de la licence MIT.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, pour le composant d'édition Scintilla et l'éditeur SciTE.
+zuMi, for toolbar icons.	App		zuMi, pour les icones de la barre d'outils.
+Konrad77, for dark theme.	App		Konrad77, for dark theme.
 translators to:	App	to _ (language), e.g. German	translators to:
 humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
-Apply	AppPreferencesWindow		Apply
-Background	AppPreferencesWindow		Background
+Apply	AppPreferencesWindow		Appliquer
+Background	AppPreferencesWindow		Arrière-plan
 Compact language menu	AppPreferencesWindow		Compact language menu
-Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
+Convert tabs to spaces	AppPreferencesWindow		Convertir les tabulations en espaces
 Highlight braces	AppPreferencesWindow		Highlight braces
 Highlight current line	AppPreferencesWindow		Highlight current line
 Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
 Koder preferences	AppPreferencesWindow		Koder preferences
-Line	AppPreferencesWindow		Line
+Line	AppPreferencesWindow		Ligne
 Mark overly long lines	AppPreferencesWindow		Mark overly long lines
 Max. characters per line:	AppPreferencesWindow		Max. characters per line:
 Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
 Revert	AppPreferencesWindow		Revert
-Show full path in title	AppPreferencesWindow		Show full path in title
-Show indentation guides	AppPreferencesWindow		Show indentation guides
-Show line numbers	AppPreferencesWindow		Show line numbers
-Show toolbar	AppPreferencesWindow		Show toolbar
-Spaces per tab:	AppPreferencesWindow		Spaces per tab:
+Show full path in title	AppPreferencesWindow		Afficher le chemin complet dans le titre
+Show indentation guides	AppPreferencesWindow		Afficher les guides d'indentation
+Show line numbers	AppPreferencesWindow		Afficher les numéros de lignes
+Show toolbar	AppPreferencesWindow		Afficher la barre d'outils
+Spaces per tab:	AppPreferencesWindow		Nbre d'espaces par tabulation :
 Stack new windows	AppPreferencesWindow		Stack new windows
 Style	AppPreferencesWindow		Style
 Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
 Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
 Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
-Behavior	AppPreferencesWindow		Behaviour
+Behavior	AppPreferencesWindow		Behavior
 Background	AppPreferencesWindow	Current line highlight	Background
 Frame	AppPreferencesWindow	Current line highlight	Frame
 Trailing whitespace	AppPreferencesWindow		Trailing whitespace
@@ -38,88 +38,88 @@ Indentation	AppPreferencesWindow		Indentation
 Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
 Always open files in new window	AppPreferencesWindow		Always open files in new window
 Use custom font	AppPreferencesWindow		Use custom font
-[read-only]	EditorWindow		[read-only]
-About…	EditorWindow		About…
-Access denied	EditorWindow		Access denied
-Cancel	EditorWindow		Cancel
-Close	EditorWindow		Close
-Comment block	EditorWindow		Comment block
-Comment line	EditorWindow		Comment line
-Copy	EditorWindow		Copy
-Corresponding file not found.	EditorWindow		Corresponding file not found.
-Cut	EditorWindow		Cut
+[read-only]	EditorWindow		[lecture-seule]
+About…	EditorWindow		À propos de…
+Access denied	EditorWindow		Accès refusé
+Cancel	EditorWindow		Annuler
+Close	EditorWindow		Fermer
+Comment block	EditorWindow		Bloc de commentaire
+Comment line	EditorWindow		Ligne de commentaire
+Copy	EditorWindow		Copier
+Corresponding file not found.	EditorWindow		Fichier correspondant non trouvé.
+Cut	EditorWindow		Couper
 Discard	EditorWindow		Discard
-Do nothing	EditorWindow		Do nothing
-Edit	EditorWindow		Edit
-Error	EditorWindow		Error
-Failed to read file permissions.	EditorWindow		Failed to read file permissions.
-File	EditorWindow		File
-File modified	EditorWindow		File modified
-Find/Replace…	EditorWindow		Find/Replace…
-Go to line…	EditorWindow		Go to line…
-Help	EditorWindow		Help
-Koder preferences…	EditorWindow		Koder preferences…
-Language	EditorWindow		Language
-Line endings	EditorWindow		Line endings
-New	EditorWindow		New
-OK	EditorWindow		Alright
-Old Mac format	EditorWindow		Old Mac format
-Open corresponding file	EditorWindow		Open corresponding file
-Open corresponding…	EditorWindow		Open corresponding…
-Open…	EditorWindow		Open…
-Paste	EditorWindow		Paste
-Quit	EditorWindow		Quit
+Do nothing	EditorWindow		Ne rien faire
+Edit	EditorWindow		Éditer
+Error	EditorWindow		Erreur
+Failed to read file permissions.	EditorWindow		Échec lors de la lecture des permissions du fichier.
+File	EditorWindow		Fichier
+File modified	EditorWindow		Fichier modifié
+Find/Replace…	EditorWindow		Chercher/Remplacer…
+Go to line…	EditorWindow		Aller à la ligne…
+Help	EditorWindow		Aide
+Koder preferences…	EditorWindow		Préférences de Koder…
+Language	EditorWindow		Langage
+Line endings	EditorWindow		Fins de ligne
+New	EditorWindow		Nouveau
+OK	EditorWindow		OK
+Old Mac format	EditorWindow		Ancien format Mac
+Open corresponding file	EditorWindow		Ouvrir le fichier correspondant
+Open corresponding…	EditorWindow		Ouvrir le correspondant…
+Open…	EditorWindow		Ouvrir…
+Paste	EditorWindow		Coller
+Quit	EditorWindow		Quitter
 Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
-Redo	EditorWindow		Redo
-Reload	EditorWindow		Reload
-Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
-Replacement finished	EditorWindow		Replacement finished
-Save	EditorWindow		Save
-Save as…	EditorWindow		Save as…
-Search	EditorWindow		Search
-Searching finished	EditorWindow		Searching finished
-Select all	EditorWindow		Select all
-Show line endings	EditorWindow		Show line endings
-Show toolbar	EditorWindow		Show toolbar
+Redo	EditorWindow		Refaire
+Reload	EditorWindow		Recharger
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Remplacée(s) {0, plural, one{# occurrence} other{# occurrences}}.
+Replacement finished	EditorWindow		Remplacement terminé
+Save	EditorWindow		Sauvegarder
+Save as…	EditorWindow		Enregistrer sous…
+Search	EditorWindow		Recherche
+Searching finished	EditorWindow		Recherche terminée
+Select all	EditorWindow		Sélectionner tout
+Show line endings	EditorWindow		Afficher les fins de lignes
+Show toolbar	EditorWindow		Afficher la barre d'outils
 Show white space	EditorWindow		Show white space
-Special symbols	EditorWindow		Special symbols
+Special symbols	EditorWindow		Symboles spéciaux
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
 The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
 The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
 Trim trailing whitespace	EditorWindow		Trim trailing whitespace
-Undo	EditorWindow		Undo
-Unix format	EditorWindow		Unix format
+Undo	EditorWindow		Défaire
+Unix format	EditorWindow		Format Unix
 Unsaved changes	EditorWindow		Unsaved changes
-Untitled	EditorWindow		Untitled
-View	EditorWindow		View
-Warning	EditorWindow		Warning
-Windows format	EditorWindow		Windows format
+Untitled	EditorWindow		Sans titre
+View	EditorWindow		Vue
+Warning	EditorWindow		Attention
+Windows format	EditorWindow		Format Windows
 Wrap lines	EditorWindow		Wrap lines
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		You don't have permissions to edit this file. The editor will be set to read-only mode.
 You don't have sufficient permissions to edit this file.	EditorWindow		You don't have sufficient permissions to edit this file.
 Your changes will be lost.	EditorWindow		Your changes will be lost.
 Find selection	EditorWindow		Find selection
 Find next	EditorWindow		Find next
-Replace and find	EditorWindow		Find and replace
+Replace and find	EditorWindow		Replace and find
 Incremental search	EditorWindow		Incremental search
-Backwards	FindWindow		Backwards
-Find	FindWindow		Find
-Find:	FindWindow		Find:
-Find/Replace	FindWindow		Find/Replace
-In selection	FindWindow		In selection
-Match case	FindWindow		Match case
+Backwards	FindWindow		En arrière
+Find	FindWindow		Chercher
+Find:	FindWindow		Chercher :
+Find/Replace	FindWindow		Chercher/Remplacer
+In selection	FindWindow		Dans la sélection
+Match case	FindWindow		Respecter la casse
 Match entire words	FindWindow		Match entire words
-Regex	FindWindow		Regex
-Replace	FindWindow		Replace
-Replace all	FindWindow		Replace all
-Replace and find	FindWindow		Replace and find
-Replace:	FindWindow		Replace:
+Regex	FindWindow		Expression régulière
+Replace	FindWindow		Remplacer
+Replace all	FindWindow		Remplacer tout
+Replace and find	FindWindow		Remplacer et chercher
+Replace:	FindWindow		Remplacer :
 Wrap around	FindWindow		Wrap around
-Cancel	GoToLineWindow		Cancel
-Go to line	GoToLineWindow		Go to line
-Go to line:	GoToLineWindow		Go to line:
-OK	GoToLineWindow		Alright
-OK	Preferences		Alright
+Cancel	GoToLineWindow		Annuler
+Go to line	GoToLineWindow		Aller à la ligne
+Go to line:	GoToLineWindow		Aller à la ligne :
+OK	GoToLineWindow		OK
+OK	Preferences		OK
 Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
 Editor settings	Preferences		Editor settings
 read	Preferences	Make sure you have _ permission for	read
@@ -131,14 +131,14 @@ loaded	Preferences	settings will not be _	loaded
 write	Preferences	Make sure you have _ permission for	write
 save	Preferences	to _ the configuration	save
 saved	Preferences	settings will not be _	saved
-Cancel	QuitAlert		Cancel
-Don't save	QuitAlert		Don't save
-Save all	QuitAlert		Save all
-Save selected	QuitAlert		Save selected
+Cancel	QuitAlert		Annuler
+Don't save	QuitAlert		Ne pas sauvegarder
+Save all	QuitAlert		Sauvegarder tout
+Save selected	QuitAlert		Sauvegarder la sélection
 There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
 Unsaved files	QuitAlert		Unsaved files
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
-OK	Styler		Alright
-Style files	Styler		Style files
+OK	Styler		OK
+Style files	Styler		Fichiers de style
 Koder	System name		Koder
 Read-only	StatusView		Read-only

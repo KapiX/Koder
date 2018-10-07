@@ -1,19 +1,15 @@
-1	Lithuanian	x-vnd.KapiX-Koder	2889977837
-ArmanHayots, for Russian translation.	App		ArmanHayots’ą, už vertimą į rusų kalbą.
+1	Lithuanian	x-vnd.KapiX-Koder	2821340809
 Code editor for Haiku based on Scintilla editing component.	App		Haiku skaitmenų rengyklė naudoja Scintilla taisymo dėmenį.
-damoklas, for Lithuanian translation.	App		damoklą, už vertimą į lietuvių kalbą.
 Distributed on MIT license terms.	App		Platinama vadovaujantis MIT leidimais.
-humdinger, for German translation and GUI design tips.	App		humdinger’į, už vertimą į vokiečių kalbą ir už vaizdinės sąsajos rengimo patarimus.
-Lan72, for Ukrainian translation.	App		Lan72’ą, už vertimą į ukrainiečių kalbą.
-miqlas, for Hungarian translation and app icon.	App		miqlas, for Hungarian translation and app icon.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil’ą Hodgson’ą, už taisymo dėmenį Scintilla bei rengyklę SciTE.
-un_spacyar, for Spanish translation.	App		un_spacyar’ą, už vertimą į ispanų kalbą.
 zuMi, for toolbar icons.	App		zuMi’į, už įrankinės ženkliukus.
+Konrad77, for dark theme.	App		Konrad77, for dark theme.
+translators to:	App	to _ (language), e.g. German	translators to:
+humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
 Apply	AppPreferencesWindow		Pritaikyti
 Background	AppPreferencesWindow		Laukas
 Compact language menu	AppPreferencesWindow		Glaustas kalbų sąrašas
 Convert tabs to spaces	AppPreferencesWindow		Versti Tab’ą tarpeliais
-Editor	AppPreferencesWindow		Rengyklė
 Highlight braces	AppPreferencesWindow		Išryškinti skliaustus
 Highlight current line	AppPreferencesWindow		Išryškinti esamą eilutę
 Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
@@ -33,6 +29,15 @@ Style	AppPreferencesWindow		Braižas
 Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
 Up to the next non-empty line	AppPreferencesWindow		Iki kitos netuščios eilutės
 Up to the next/previous non-empty line	AppPreferencesWindow		Iki kitos/ankstesnės netuščios eilutės
+Behavior	AppPreferencesWindow		Behavior
+Background	AppPreferencesWindow	Current line highlight	Background
+Frame	AppPreferencesWindow	Current line highlight	Frame
+Trailing whitespace	AppPreferencesWindow		Trailing whitespace
+Visual	AppPreferencesWindow		Visual
+Indentation	AppPreferencesWindow		Indentation
+Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
+Always open files in new window	AppPreferencesWindow		Always open files in new window
+Use custom font	AppPreferencesWindow		Use custom font
 [read-only]	EditorWindow		[tik skaitymui]
 About…	EditorWindow		Apie...
 Access denied	EditorWindow		Prieiga uždrausta
@@ -93,6 +98,10 @@ Wrap lines	EditorWindow		Wrap lines
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Neturite leidimų šios bylos taisymui. Rengyklė bus paleista tik skaitymui. 
 You don't have sufficient permissions to edit this file.	EditorWindow		Neturite pakankamai leidimų taisyti šią bylą.
 Your changes will be lost.	EditorWindow		Your changes will be lost.
+Find selection	EditorWindow		Find selection
+Find next	EditorWindow		Find next
+Replace and find	EditorWindow		Replace and find
+Incremental search	EditorWindow		Incremental search
 Backwards	FindWindow		Backwards
 Find	FindWindow		Rasti
 Find:	FindWindow		Rasti:
@@ -110,14 +119,18 @@ Cancel	GoToLineWindow		Nutraukti
 Go to line	GoToLineWindow		Pereiti į eilutę
 Go to line:	GoToLineWindow		Pereiti į eilutę:
 OK	GoToLineWindow		Gerai
-Configuration file	Preferences		Sąrankos byla
-Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Nepavyko atidaryti sąrankos bylos, nes leidimai uždrausti. Paprastai tai reiškia, kad neturite leidimo skaityti savo nustatymų aplanko. Jeigu norite įkrauti savo asmeninius nustatymus, pasiaiškinkite savos OS aprašyme, kuriame aplanke yra tie nustatymai ir bandykite keisti to aplanko leidimus.
-Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Nepavyko atidaryti sąrankos bylos, nes leidimai uždrausti. Paprastai tai reiškia, kad neturite leidimo rašyti į savo nustatymų aplanką. Jeigu norite įkrauti savo asmeninius nustatymus, pasiaiškinkite savos OS aprašyme, kuriame aplanke yra tie nustatymai ir bandykite keisti to aplanko leidimus.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Nepavyko atidaryti sąrankos bylos, nes nenurodytas kelias. Paprastai tai reiškia, kad tai yra skaitmeninės įrangos kūrėjo klaida. Nieko nepadarysite. Jūsų asmeninai nustatymai nebus įkrauti. Atleiskite.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Nepavyko atidaryti sąrankos bylos, nes nenurodytas kelias. Paprastai tai reiškia, kad tai yra skaitmeninės įrangos kūrėjo klaida. Nieko nepadarysite. Jūsų asmeninai nustatymai nebus išsaugoti. Atleiskite.
 OK	Preferences		Gerai
-There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		Neturite pakankamai atminties sąrankos bylos įkrovimui. Jeigu norite įkrauti savo asmeninius nustatymus, bandykite uždaryti kitą kokią paleistą skaitmeninę įrangą ir perlesti Koder’į.
-There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		Neturite pakankamai atminties sąrankos bylos išsaugojimui. Jeigu norite išsaugoti savo asmeninius nustatymus, bandykite uždaryti kitą kokią paleistą skaitmeninę įrangą ir bandykite vėl.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
+Editor settings	Preferences		Editor settings
+read	Preferences	Make sure you have _ permission for	read
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
+load	Preferences	to _ the configuration	load
+Unknown error.	Preferences		Unknown error.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.
+loaded	Preferences	settings will not be _	loaded
+write	Preferences	Make sure you have _ permission for	write
+save	Preferences	to _ the configuration	save
+saved	Preferences	settings will not be _	saved
 Cancel	QuitAlert		Nutraukti
 Don't save	QuitAlert		Neišsaugoti
 Save all	QuitAlert		Išsaugoti viską
@@ -128,3 +141,4 @@ Couldn't find style files. Make sure you have them installed in one of your data
 OK	Styler		OK
 Style files	Styler		Style files
 Koder	System name		Koder
+Read-only	StatusView		Read-only

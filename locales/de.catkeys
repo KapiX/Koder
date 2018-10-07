@@ -1,19 +1,15 @@
-1	German	x-vnd.KapiX-Koder	2889977837
-ArmanHayots, for Russian translation.	App		ArmanHayots, für die russische Übersetzung.
+1	German	x-vnd.KapiX-Koder	2821340809
 Code editor for Haiku based on Scintilla editing component.	App		Ein Code Editor für Haiku, der auf Scintillas Editor-Komponente aufbaut.
-damoklas, for Lithuanian translation.	App		damoklas, für die lithauische Übersetzung.
 Distributed on MIT license terms.	App		Veröffentlicht unter der MIT Lizenz.
-humdinger, for German translation and GUI design tips.	App		humdinger, für die deutsche Übersetzung und GUI Design Tips.
-Lan72, for Ukrainian translation.	App		Lan72, für die ukainische Übersetzung.
-miqlas, for Hungarian translation and app icon.	App		miqlas, für die ungarische Übersetzung und das Icon für Koder.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, für Scintillas Editor-Komponente und den SciTE Editor.
-un_spacyar, for Spanish translation.	App		un_spacyar, für die spanische Übersetzung.
 zuMi, for toolbar icons.	App		zuMi, für die Icons der Werkzeugleiste.
+Konrad77, for dark theme.	App		Konrad77, für das "Dark" Theme.
+translators to:	App	to _ (language), e.g. German	Übersetzer für:
+humdinger, for GUI design tips and artwork.	App		humdinger, für GUI Design Tipps und Artwork.
 Apply	AppPreferencesWindow		Anwenden
 Background	AppPreferencesWindow		Hintergrund
 Compact language menu	AppPreferencesWindow		Kompaktes Sprachmenü
 Convert tabs to spaces	AppPreferencesWindow		Tabulatoren zu Leerzeichen konvertieren
-Editor	AppPreferencesWindow		Editor
 Highlight braces	AppPreferencesWindow		Klammern hervorheben
 Highlight current line	AppPreferencesWindow		Aktuelle Zeile hervorheben
 Highlight trailing whitespace	AppPreferencesWindow		Anhängenden 'Whitespace' hervorheben
@@ -33,6 +29,15 @@ Style	AppPreferencesWindow		Stil
 Trim trailing whitespace on save	AppPreferencesWindow		Anhängenden 'Whitespace' beim Speichern entfernen
 Up to the next non-empty line	AppPreferencesWindow		Bis zur nächsten nicht-leeren Zeile
 Up to the next/previous non-empty line	AppPreferencesWindow		Bis zur nächsten/vorigen nicht-leeren Zeile
+Behavior	AppPreferencesWindow		Verhalten
+Background	AppPreferencesWindow	Current line highlight	Hintergrund
+Frame	AppPreferencesWindow	Current line highlight	Rahmen
+Trailing whitespace	AppPreferencesWindow		Anhängender 'Whitespace'
+Visual	AppPreferencesWindow		Ansicht
+Indentation	AppPreferencesWindow		Einzug
+Use .editorconfig if possible	AppPreferencesWindow		Falls möglich .editorconfig benutzen
+Always open files in new window	AppPreferencesWindow		Dateien immer in neuem Fenster öffnen
+Use custom font	AppPreferencesWindow		Eigene Schriftart verwenden
 [read-only]	EditorWindow		[schreibgeschützt]
 About…	EditorWindow		Über…
 Access denied	EditorWindow		Zugriff verweigert
@@ -93,6 +98,10 @@ Wrap lines	EditorWindow		Zeilen umbrechen
 You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Es fehlen die nötigen Rechte, um diese Datei bearbeiten zu können. Der Editor befindet sich daher im schreibgeschützenden Modus.
 You don't have sufficient permissions to edit this file.	EditorWindow		Es fehlen die nötigen Rechte, um diese Datei bearbeiten zu können.
 Your changes will be lost.	EditorWindow		Die Änderungen werden verloren gehen.
+Find selection	EditorWindow		Auswahl suchen
+Find next	EditorWindow		Weitersuchen
+Replace and find	EditorWindow		Ersetzen und suchen
+Incremental search	EditorWindow		Inkrementelle Suche
 Backwards	FindWindow		Rückwärts
 Find	FindWindow		Suchen
 Find:	FindWindow		Suche:
@@ -110,14 +119,18 @@ Cancel	GoToLineWindow		Abbrechen
 Go to line	GoToLineWindow		Zu Zeile springen
 Go to line:	GoToLineWindow		Zu Zeile springen:
 OK	GoToLineWindow		OK
-Configuration file	Preferences		Konfigurationsdatei
-Couldn't open configuration file because permission was denied. It usually means that you don't have read permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Die Konfigurationsdatei konnte nicht geöffnet werden, da der Zugriff verweigert wurde. Das bedeutet üblicherweise, dass keine Leseberechtigung für den Settings Ordner besteht. Falls die persönlichen Einstellungen geladen werden sollen, muss die Dokumentation des Betriebssystem zurate gezogen werden, um herauszufinden um welchen Ordner es sich handelt, damit dessen Zugriffsrechte geändert werden können.
-Couldn't open configuration file because permission was denied. It usually means that you don't have write permissions to your settings directory. If you want to have your personal settings loaded, check your OS documentation to find out which directory it is and try changing its permissions.	Preferences		Die Konfigurationsdatei konnte nicht geöffnet werden, da der Zugriff verweigert wurde. Das bedeutet üblicherweise, dass keine Schreibberechtigung für den Settings Ordner besteht. Falls die persönlichen Einstellungen geladen werden sollen, muss die Dokumentation des Betriebssystem zurate gezogen werden, um herauszufinden um welchen Ordner es sich handelt, damit dessen Zugriffsrechte geändert werden können.
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be loaded. Sorry.	Preferences		Die Konfigurationsdatei konnte nicht geöffnet werden, da ihr Pfad nicht gefunden wurde. Das bedeutet üblicherweise, dass der Programmierer einen Fehler gemacht hat. Da lässt sich nichts machen: Die persönlichen Einstellungen werden leider nicht geladen. 
-Couldn't open configuration file because the path is not specified. It usually means that the programmer made a mistake. There is nothing you can do about it. Your personal settings will not be saved. Sorry.	Preferences		Die Konfigurationsdatei konnte nicht geöffnet werden, da ihr Pfad nicht gefunden wurde. Das bedeutet üblicherweise, dass der Programmierer einen Fehler gemacht hat. Da lässt sich nichts machen: Die persönlichen Einstellungen werden leider nicht gespeichert. 
 OK	Preferences		OK
-There is not enough memory available on your system to load the configuration file. If you want to have your personal settings loaded, try closing few applications and restart Koder.	Preferences		Es steht nicht genügend Systemspeicher zum Laden der Konfigurationsdatei zur Verfügung. Falls die persönlichen Einstellungen geladen werden sollen, kann man versuchen einige Anwendungen zu schließen und Koder neu zu starten.
-There is not enough memory available on your system to save the configuration file. If you want to have your personal settings saved, try closing few applications and try again.	Preferences		Es steht nicht genügend Systemspeicher zum Speichern der Konfigurationsdatei zur Verfügung. Falls die persönlichen Einstellungen gespeichert werden sollen, kann man versuchen einige Anwendungen zu schließen und es dann nochmal zu probieren.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Beim Öffnen der Konfigurationsdatei wurde der Zugriff verweigert. Es werden %s%-Rechte auf den Settings Ordner benötigt.
+Editor settings	Preferences		Editor-Einstellungen
+read	Preferences	Make sure you have _ permission for	Lese-
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Beim Öffnen der Konfigurationsdatei ist etwas schief gegangen. Die persönlichen Einstellungen werden nicht %s%.
+load	Preferences	to _ the configuration	laden
+Unknown error.	Preferences		Unbekannter Fehler.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Für das %s% der Konfigurationsdatei steht nicht genügend Speicher zur Verfügung. Versuche einige Anwendungen zu schließen und Koder neu zu starten.
+loaded	Preferences	settings will not be _	geladen
+write	Preferences	Make sure you have _ permission for	Schreib
+save	Preferences	to _ the configuration	speichern
+saved	Preferences	settings will not be _	gespeichert
 Cancel	QuitAlert		Abbrechen
 Don't save	QuitAlert		Nicht speichern
 Save all	QuitAlert		Alle speichern
@@ -128,3 +141,4 @@ Couldn't find style files. Make sure you have them installed in one of your data
 OK	Styler		OK
 Style files	Styler		Stildateien
 Koder	System name		Koder
+Read-only	StatusView		Schreibgeschützt

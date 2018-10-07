@@ -102,11 +102,13 @@ App::AboutRequested()
 
 	const std::unordered_map<std::string, std::vector<std::string>> translatorsMap{
 		{ "de", { "humdinger" } },
+		{ "en_GB", { "adamfowleruk" } },
 		{ "es", { "un_spacyar" } },
 		{ "hu", { "miqlas" } },
-		{ "lt", { "damoklas" } },
-		{ "ru", { "ArmanHayots" } },
-		{ "uk", { "Lan72" } }
+		{ "it", { "TheClue" } },
+		//{ "lt", { "damoklas" } },
+		{ "ru", { "ArmanHayots", "TK-313" } }
+		//{ "uk", { "Lan72" } }
 	};
 
 	BMessage languages;
@@ -116,7 +118,8 @@ App::AboutRequested()
 			BLanguage lang(langID.String());
 			const auto translators = translatorsMap.find(lang.ID());
 			// let's deal with pt_BR later
-			if(lang.IsCountrySpecific() || translators == translatorsMap.end())
+			if((lang.IsCountrySpecific() && langID != "en_GB")
+				|| translators == translatorsMap.end())
 				continue;
 			BString name;
 			lang.GetName(name);
