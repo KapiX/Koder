@@ -105,6 +105,7 @@ public:
 			void			WindowActivated(bool active);
 			void			FrameMoved(BPoint origin);
 			void			FrameResized(float width, float height);
+			void			Show();
 
 			bool			IsModified() { return fModified; }
 			const char*		OpenedFilePath();

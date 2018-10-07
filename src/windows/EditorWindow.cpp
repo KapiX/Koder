@@ -804,6 +804,17 @@ EditorWindow::FrameResized(float width, float height)
 }
 
 
+void
+EditorWindow::Show()
+{
+	BWindow::Show();
+	if(LockLooper()) {
+		_SyncWithPreferences();
+		UnlockLooper();
+	}
+}
+
+
 const char*
 EditorWindow::OpenedFilePath()
 {
