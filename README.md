@@ -32,6 +32,10 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 * Change styling system to make creating new themes easier.
 * Add quick search shortcuts.
 * Implement incremental search.
+* Fix horizontal scroll bar range.
+* Add setting for line highlighting mode.
+* Add option to always open files in new windows.
+* Add option to change font.
 
 0.3.0 - *20-03-2018*
 
