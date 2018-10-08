@@ -22,7 +22,7 @@ Global:
         background: "#322543"
     Indent guideline:
         id: 37
-        foreground: "#24003E"
+        foreground: "#5F2B48"
         background: "#24003E"
     Brace highlight:
         id: 34

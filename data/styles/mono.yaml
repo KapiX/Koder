@@ -16,7 +16,7 @@ Global:
     Caret:
         foreground: "#FF4050"
     Edge:
-        foreground: "#FFFCFF"
+        foreground: "#C1BCC2"
     Fold:
         foreground: "#C1BCC2"
         background: "#C1BCC2"
