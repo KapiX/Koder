@@ -1,6 +1,4 @@
-# based on Themer default color scheme
 # Copyright (c) 2018 Mikael Konradsson
-# with tweaks for languages other than C++ by Kacper Kasper
 # MIT licensed
 Global:
     Default:
