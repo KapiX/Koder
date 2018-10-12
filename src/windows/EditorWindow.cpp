@@ -447,8 +447,10 @@ EditorWindow::MessageReceived(BMessage* message)
 			fEditor->IncrementalSearch(fIncrementalSearchTerm);
 		} break;
 		case INCREMENTAL_SEARCH_BACKSPACE: {
-			fIncrementalSearchTerm.pop_back();
-			fEditor->IncrementalSearch(fIncrementalSearchTerm);
+			if(!fIncrementalSearchTerm.empty()) {
+				fIncrementalSearchTerm.pop_back();
+				fEditor->IncrementalSearch(fIncrementalSearchTerm);
+			}
 		} break;
 		case INCREMENTAL_SEARCH_CANCEL: {
 			fEditor->IncrementalSearchCancel();
