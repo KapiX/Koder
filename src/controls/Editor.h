@@ -15,6 +15,8 @@
 #include <memory>
 #include <string>
 
+#include "ScintillaUtils.h"
+
 
 class Preferences;
 class StatusView;
@@ -53,8 +55,8 @@ public:
 	void				SetRef(const entry_ref& ref);
 	void				SetReadOnly(bool readOnly);
 
-	void				CommentLine(Sci_Position start, Sci_Position end);
-	void				CommentBlock(Sci_Position start, Sci_Position end);
+	void				CommentLine(Scintilla::Range range);
+	void				CommentBlock(Scintilla::Range range);
 
 	void				SetCommentLineToken(std::string token);
 	void				SetCommentBlockTokens(std::string start, std::string end);
@@ -79,6 +81,11 @@ public:
 	void				IncrementalSearchCancel();
 	void				IncrementalSearchCommit(std::string term);
 
+	template<typename T>
+	typename T::type	Get() { return T::Get(this); }
+	template<typename T>
+	void				Set(typename T::type value) { T::Set(this, value); }
+
 private:
 	void				_MaintainIndentation(char ch);
 	void				_UpdateLineNumberWidth();
@@ -89,8 +96,6 @@ private:
 	void				_HighlightTrailingWhitespace(Sci_Position start, Sci_Position end);
 
 	void				_SetLineIndentation(int line, int indent);
-	Sci_CharacterRange	_GetSelection();
-	void				_SetSelection(int anchor, int currentPos);
 
 	bool				_Find(std::string search, Sci_Position start,
 							Sci_Position end, bool matchCase, bool matchWord,
@@ -107,16 +112,14 @@ private:
 	Sci_Position		fHighlightedWhitespaceEnd;
 	Sci_Position		fHighlightedWhitespaceCurrentPos;
 
-	Sci_Position		fSearchTargetStart;
-	Sci_Position		fSearchTargetEnd;
-	Sci_Position		fSearchLastResultStart;
-	Sci_Position		fSearchLastResultEnd;
+	Scintilla::Range	fSearchTarget;
+	Scintilla::Range	fSearchLastResult;
 	std::string			fSearchLast;
 	int					fSearchLastFlags;
 	bool				fNewSearch;
 	BMessage			fSearchLastMessage;
 	bool				fIncrementalSearch;
-	Sci_CharacterRange	fSavedSelection;
+	Scintilla::Range	fSavedSelection;
 
 	// needed for StatusView
 	std::string			fType;

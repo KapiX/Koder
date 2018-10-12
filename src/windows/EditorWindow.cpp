@@ -39,6 +39,7 @@
 #include "GoToLineWindow.h"
 #include "Languages.h"
 #include "Preferences.h"
+#include "ScintillaUtils.h"
 #include "StatusView.h"
 #include "Styler.h"
 #include "Utils.h"
@@ -49,6 +50,7 @@
 
 
 using BToolBar = BPrivate::BToolBar;
+using namespace Scintilla::Properties;
 
 
 const float kWindowStagger = 17.0f;
@@ -519,14 +521,10 @@ EditorWindow::MessageReceived(BMessage* message)
 			be_app->PostMessage(B_QUIT_REQUESTED);
 		} break;
 		case EDIT_COMMENTLINE: {
-			Sci_Position start = fEditor->SendMessage(SCI_GETSELECTIONSTART, 0, 0);
-			Sci_Position end = fEditor->SendMessage(SCI_GETSELECTIONEND, 0, 0);
-			fEditor->CommentLine(start, end);
+			fEditor->CommentLine(fEditor->Get<Selection>());
 		} break;
 		case EDIT_COMMENTBLOCK: {
-			Sci_Position start = fEditor->SendMessage(SCI_GETSELECTIONSTART, 0, 0);
-			Sci_Position end = fEditor->SendMessage(SCI_GETSELECTIONEND, 0, 0);
-			fEditor->CommentBlock(start, end);
+			fEditor->CommentBlock(fEditor->Get<Selection>());
 		} break;
 		case MAINMENU_EDIT_CONVERTEOLS_UNIX: {
 			fEditor->SendMessage(SCI_CONVERTEOLS, SC_EOL_LF, 0);
