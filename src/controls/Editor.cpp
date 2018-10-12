@@ -11,7 +11,12 @@
 #include <string>
 
 #include "Preferences.h"
+#include "ScintillaUtils.h"
 #include "StatusView.h"
+
+
+namespace Sci = Scintilla;
+using namespace Sci::Properties;
 
 
 Editor::Editor()
@@ -132,9 +137,9 @@ Editor::CommentLine(Sci_Position start, Sci_Position end)
 {
 	if(end < start) return;
 
-	SendMessage(SCI_BEGINUNDOACTION, 0, 0);
-	Sci_Position targetStart = SendMessage(SCI_GETTARGETSTART, 0, 0);
-	Sci_Position targetEnd = SendMessage(SCI_GETTARGETEND, 0, 0);
+	Sci::Guard<TargetStart, TargetEnd> guard(this);
+	Sci::UndoAction action(this);
+
 	int startLine = SendMessage(SCI_LINEFROMPOSITION, start, 0);
 	int endLine = SendMessage(SCI_LINEFROMPOSITION, end, 0);
 	Sci_Position lineStartPos = SendMessage(SCI_POSITIONFROMLINE, startLine, 0);
@@ -170,8 +175,6 @@ Editor::CommentLine(Sci_Position start, Sci_Position end)
 		}
 		_SetSelection(start + tokenLength, end + addedCharacters);
 	}
-	SendMessage(SCI_SETTARGETRANGE, targetStart, targetEnd);
-	SendMessage(SCI_ENDUNDOACTION, 0, 0);
 }
 
 
@@ -193,7 +196,7 @@ Editor::CommentBlock(Sci_Position start, Sci_Position end)
 			endTokenPresent = false;
 	}
 
-	SendMessage(SCI_BEGINUNDOACTION, 0, 0);
+	Sci::UndoAction action(this);
 	if(startTokenPresent && endTokenPresent) {
 		// order is important here
 		SendMessage(SCI_DELETERANGE, end - endTokenLen, endTokenLen);
@@ -204,7 +207,6 @@ Editor::CommentBlock(Sci_Position start, Sci_Position end)
 		SendMessage(SCI_INSERTTEXT, end + startTokenLen, (sptr_t) fCommentBlockEndToken.c_str());
 		_SetSelection(start, end + startTokenLen + endTokenLen);
 	}
-	SendMessage(SCI_ENDUNDOACTION, 0, 0);
 }
 
 
@@ -255,14 +257,13 @@ Editor::HighlightTrailingWhitespace()
 void
 Editor::ClearHighlightedWhitespace()
 {
-	int oldIndicator = SendMessage(SCI_GETINDICATORCURRENT, 0, 0);
+	Sci::Guard<CurrentIndicator> guard(this);
+
 	SendMessage(SCI_SETINDICATORCURRENT, Indicator::WHITESPACE, 0);
 
 	// cleanup after previous runs
 	SendMessage(SCI_INDICATORCLEARRANGE, fHighlightedWhitespaceStart,
 		fHighlightedWhitespaceEnd - fHighlightedWhitespaceStart);
-
-	SendMessage(SCI_SETINDICATORCURRENT, oldIndicator, 0);
 
 	fHighlightedWhitespaceStart = 0;
 	fHighlightedWhitespaceEnd = 0;
@@ -273,15 +274,13 @@ Editor::ClearHighlightedWhitespace()
 void
 Editor::TrimTrailingWhitespace()
 {
-	Sci_Position oldStart = SendMessage(SCI_GETTARGETSTART, 0, 0);
-	Sci_Position oldEnd = SendMessage(SCI_GETTARGETEND, 0, 0);
-	int oldFlags = SendMessage(SCI_GETSEARCHFLAGS, 0, 0);
+	Sci::Guard<TargetStart, TargetEnd, SearchFlags> guard(this);
 
 	Sci_Position length = SendMessage(SCI_GETLENGTH, 0, 0);
 	SendMessage(SCI_SETTARGETRANGE, 0, length);
 	SendMessage(SCI_SETSEARCHFLAGS, SCFIND_REGEXP | SCFIND_CXX11REGEX, 0);
 
-	SendMessage(SCI_BEGINUNDOACTION, 0, 0);
+	Sci::UndoAction action(this);
 	const std::string whitespace = "\\s+$";
 	int result;
 	do {
@@ -293,10 +292,6 @@ Editor::TrimTrailingWhitespace()
 			SendMessage(SCI_SETTARGETRANGE, replacedEnd, length);
 		}
 	} while(result != -1);
-	SendMessage(SCI_ENDUNDOACTION, 0, 0);
-
-	SendMessage(SCI_SETSEARCHFLAGS, oldFlags, 0);
-	SendMessage(SCI_SETTARGETRANGE, oldStart, oldEnd);
 }
 
 
@@ -311,8 +306,7 @@ Editor::Find(BMessage* message)
 	bool regex = message->GetBool("regex");
 	const char* search = message->GetString("findText", "");
 
-	Sci_Position startOld = SendMessage(SCI_GETTARGETSTART);
-	Sci_Position endOld = SendMessage(SCI_GETTARGETEND);
+	Sci::Guard<TargetStart, TargetEnd, SearchFlags> guard(this);
 
 	int length = SendMessage(SCI_GETLENGTH);
 	Sci_Position anchor = SendMessage(SCI_GETANCHOR);
@@ -362,7 +356,6 @@ Editor::Find(BMessage* message)
 	}
 	fNewSearch = false;
 	fSearchLastMessage = *message;
-	SendMessage(SCI_SETTARGETRANGE, startOld, endOld);
 	return found;
 }
 
@@ -392,9 +385,8 @@ Editor::FindSelection()
 void
 Editor::Replace(std::string replacement, bool regex)
 {
-	Sci_Position startOld = SendMessage(SCI_GETTARGETSTART);
-	Sci_Position endOld = SendMessage(SCI_GETTARGETEND);
-	int searchFlagsOld = SendMessage(SCI_GETSEARCHFLAGS);
+	Sci::Guard<TargetStart, TargetEnd, SearchFlags> guard(this);
+
 	int replaceMsg = (regex ? SCI_REPLACETARGETRE : SCI_REPLACETARGET);
 	if(fSearchLastResultStart != -1 && fSearchLastResultEnd != -1) {
 		// we need to search again, because whitespace highlighting messes with
@@ -406,8 +398,6 @@ Editor::Replace(std::string replacement, bool regex)
 		fSearchLastResultStart = -1;
 		fSearchLastResultEnd = -1;
 	}
-	SendMessage(SCI_SETSEARCHFLAGS, searchFlagsOld);
-	SendMessage(SCI_SETTARGETRANGE, startOld, endOld);
 }
 
 
@@ -415,9 +405,9 @@ int
 Editor::ReplaceAll(std::string search, std::string replacement, bool matchCase,
 	bool matchWord, bool inSelection, bool regex)
 {
-	Sci_Position startOld = SendMessage(SCI_GETTARGETSTART);
-	Sci_Position endOld = SendMessage(SCI_GETTARGETEND);
-	SendMessage(SCI_BEGINUNDOACTION, 0, 0);
+	Sci::Guard<TargetStart, TargetEnd, SearchFlags> guard(this);
+	Sci::UndoAction action(this);
+
 	int replaceMsg = (regex ? SCI_REPLACETARGETRE : SCI_REPLACETARGET);
 	int occurences = 0;
 	if(inSelection == true) {
@@ -436,8 +426,6 @@ Editor::ReplaceAll(std::string search, std::string replacement, bool matchCase,
 			occurences++;
 		}
 	} while(found);
-	SendMessage(SCI_ENDUNDOACTION, 0, 0);
-	SendMessage(SCI_SETTARGETRANGE, startOld, endOld);
 	return occurences;
 }
 
@@ -462,8 +450,7 @@ Editor::ResetFindReplace()
 void
 Editor::IncrementalSearch(std::string term)
 {
-	Sci_Position startOld = SendMessage(SCI_GETTARGETSTART);
-	Sci_Position endOld = SendMessage(SCI_GETTARGETEND);
+	Sci::Guard<TargetStart, TargetEnd, SearchFlags> guard(this);
 
 	int length = SendMessage(SCI_GETLENGTH);
 	Sci_Position anchor = SendMessage(SCI_GETANCHOR);
@@ -486,7 +473,6 @@ Editor::IncrementalSearch(std::string term)
 	if(found == false) {
 		_SetSelection(fSavedSelection.cpMin, fSavedSelection.cpMax);
 	}
-	SendMessage(SCI_SETTARGETRANGE, startOld, endOld);
 }
 
 
@@ -620,14 +606,11 @@ Editor::_HighlightTrailingWhitespace(Sci_Position start, Sci_Position end)
 		return;
 	}
 
-	Sci_Position oldStart = SendMessage(SCI_GETTARGETSTART, 0, 0);
-	Sci_Position oldEnd = SendMessage(SCI_GETTARGETEND, 0, 0);
-	int oldFlags = SendMessage(SCI_GETSEARCHFLAGS, 0, 0);
+	Sci::Guard<TargetStart, TargetEnd, SearchFlags, CurrentIndicator> guard(this);
 
 	SendMessage(SCI_SETTARGETRANGE, start, end);
 	SendMessage(SCI_SETSEARCHFLAGS, SCFIND_REGEXP | SCFIND_CXX11REGEX, 0);
 
-	int oldIndicator = SendMessage(SCI_GETINDICATORCURRENT, 0, 0);
 	SendMessage(SCI_SETINDICATORCURRENT, Indicator::WHITESPACE, 0);
 
 	// cleanup after previous runs
@@ -647,10 +630,6 @@ Editor::_HighlightTrailingWhitespace(Sci_Position start, Sci_Position end)
 			SendMessage(SCI_SETTARGETRANGE, foundEnd + 1, end);
 		}
 	} while(result != -1);
-
-	SendMessage(SCI_SETINDICATORCURRENT, oldIndicator, 0);
-	SendMessage(SCI_SETSEARCHFLAGS, oldFlags, 0);
-	SendMessage(SCI_SETTARGETRANGE, oldStart, oldEnd);
 
 	fHighlightedWhitespaceStart = start;
 	fHighlightedWhitespaceEnd = end;
@@ -722,10 +701,6 @@ bool
 Editor::_Find(std::string search, Sci_Position start, Sci_Position end,
 	bool matchCase, bool matchWord, bool regex)
 {
-	int searchFlagsOld = SendMessage(SCI_GETSEARCHFLAGS);
-
-	bool found = false;
-
 	int searchFlags = 0;
 	if(matchCase == true)
 		searchFlags |= SCFIND_MATCHCASE;
@@ -744,10 +719,7 @@ Editor::_Find(std::string search, Sci_Position start, Sci_Position end,
 		fSearchLastResultStart = SendMessage(SCI_GETTARGETSTART);
 		fSearchLastResultEnd = SendMessage(SCI_GETTARGETEND);
 		SendMessage(SCI_SETSEL, fSearchLastResultStart, fSearchLastResultEnd);
-		found = true;
+		return true;
 	}
-
-	SendMessage(SCI_SETSEARCHFLAGS, searchFlagsOld);
-
-	return found;
+	return false;
 }
