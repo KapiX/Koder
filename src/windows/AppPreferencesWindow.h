@@ -72,7 +72,6 @@ private:
 		FONT_CHANGED			= 'fnch',
 		FONT_SIZE_CHANGED		= 'fsch',
 
-		APPLY					= 'appl',
 		REVERT					= 'rvrt'
 	};
 
@@ -88,8 +87,7 @@ private:
 	void			_UpdateFontMenu();
 
 	Preferences*	fStartPreferences;
-	Preferences*	fCurrentPreferences;
-	Preferences*	fTempPreferences;
+	Preferences*	fPreferences;
 
 	BBox*			fVisualBox;
 	BBox*			fBehaviorBox;
@@ -140,7 +138,6 @@ private:
 	BSpinner*		fFontSizeSpinner;
 	BPopUpMenu*		fFontMenu;
 
-	BButton*		fApplyButton;
 	BButton*		fRevertButton;
 };
 

@@ -469,9 +469,6 @@ EditorWindow::MessageReceived(BMessage* message)
 			message->SendReply((uint32) B_OK);
 				// TODO: error handling
 		} break;
-		case APP_PREFERENCES_CHANGED: {
-			_SyncWithPreferences();
-		} break;
 		case MAINMENU_FILE_NEW:
 			New();
 		break;
@@ -730,6 +727,12 @@ EditorWindow::MessageReceived(BMessage* message)
 				// because of that is not useful.
 				fModified = true;
 				RefreshTitle();
+			}
+		} break;
+		case B_OBSERVER_NOTICE_CHANGE: {
+			int32 what = message->GetInt32("be:observe_change_what", 0);
+			if(what == APP_PREFERENCES_CHANGED) {
+				_SyncWithPreferences();
 			}
 		} break;
 		case GTLW_GO: {

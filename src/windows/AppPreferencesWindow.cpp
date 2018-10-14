@@ -39,25 +39,21 @@ AppPreferencesWindow::AppPreferencesWindow(Preferences* preferences)
 	BWindow(BRect(0, 0, 400, 300), B_TRANSLATE("Koder preferences"), B_TITLED_WINDOW,
 		B_NOT_ZOOMABLE | B_AUTO_UPDATE_SIZE_LIMITS, 0)
 {
-	fCurrentPreferences = preferences;
+	fPreferences = preferences;
 
 	fStartPreferences = new Preferences();
-	*fStartPreferences = *fCurrentPreferences;
-
-	fTempPreferences = new Preferences();
-	*fTempPreferences = *fCurrentPreferences;
+	*fStartPreferences = *fPreferences;
 
 	_InitInterface();
 	CenterOnScreen();
 
-	_SyncPreferences(fCurrentPreferences);
+	_SyncPreferences(fPreferences);
 }
 
 
 AppPreferencesWindow::~AppPreferencesWindow()
 {
 	delete fStartPreferences;
-	delete fTempPreferences;
 }
 
 
@@ -66,137 +62,131 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 {
 	switch(message->what) {
 		case Actions::COMPACT_LANG_MENU: {
-			fTempPreferences->fCompactLangMenu = IsChecked(fCompactLangMenuCB);
+			fPreferences->fCompactLangMenu = IsChecked(fCompactLangMenuCB);
 			_PreferencesModified();
 		} break;
 		case Actions::TOOLBAR: {
-			fTempPreferences->fToolbar = IsChecked(fToolbarCB);
+			fPreferences->fToolbar = IsChecked(fToolbarCB);
 			_PreferencesModified();
 		} break;
 		case Actions::FULL_PATH_IN_TITLE: {
-			fTempPreferences->fFullPathInTitle = IsChecked(fFullPathInTitleCB);
+			fPreferences->fFullPathInTitle = IsChecked(fFullPathInTitleCB);
 			_PreferencesModified();
 		} break;
 		case Actions::TABS_TO_SPACES: {
-			fTempPreferences->fTabsToSpaces = IsChecked(fTabsToSpacesCB);
+			fPreferences->fTabsToSpaces = IsChecked(fTabsToSpacesCB);
 			_PreferencesModified();
 		} break;
 		case Actions::TAB_WIDTH: {
-			fTempPreferences->fTabWidth = std::stoi(fTabWidthTC->Text());
+			fPreferences->fTabWidth = std::stoi(fTabWidthTC->Text());
 			_PreferencesModified();
 		} break;
 		case Actions::LINE_HIGHLIGHTING: {
 			bool show = IsChecked(fLineHighlightingCB);
-			fTempPreferences->fLineHighlighting = show;
+			fPreferences->fLineHighlighting = show;
 			_SetLineHighlightingBoxEnabled(show);
 			_PreferencesModified();
 		} break;
 		case Actions::LINE_HIGHLIGHTING_BG: {
-			fTempPreferences->fLineHighlightingMode = 0;
+			fPreferences->fLineHighlightingMode = 0;
 			_PreferencesModified();
 		} break;
 		case Actions::LINE_HIGHLIGHTING_FRAME: {
-			fTempPreferences->fLineHighlightingMode = 1;
+			fPreferences->fLineHighlightingMode = 1;
 			_PreferencesModified();
 		} break;
 		case Actions::LINE_NUMBERS: {
-			fTempPreferences->fLineNumbers = IsChecked(fLineNumbersCB);
+			fPreferences->fLineNumbers = IsChecked(fLineNumbersCB);
 			_PreferencesModified();
 		} break;
 		case Actions::LINELIMIT_COLUMN: {
-			fTempPreferences->fLineLimitColumn =
+			fPreferences->fLineLimitColumn =
 				std::stoi(fLineLimitColumnTC->Text());
 			_PreferencesModified();
 		} break;
 		case Actions::LINELIMIT_SHOW: {
 			bool show = IsChecked(fLineLimitShowCB);
-			fTempPreferences->fLineLimitShow = show;
+			fPreferences->fLineLimitShow = show;
 			_SetLineLimitBoxEnabled(show);
 			_PreferencesModified();
 		} break;
 		case Actions::LINELIMIT_BACKGROUND: {
-			fTempPreferences->fLineLimitMode = EDGE_BACKGROUND;
+			fPreferences->fLineLimitMode = EDGE_BACKGROUND;
 			_PreferencesModified();
 		} break;
 		case Actions::LINELIMIT_LINE: {
-			fTempPreferences->fLineLimitMode = EDGE_LINE;
+			fPreferences->fLineLimitMode = EDGE_LINE;
 			_PreferencesModified();
 		} break;
 		case Actions::INDENTGUIDES_SHOW: {
 			bool show = IsChecked(fIndentGuidesShowCB);
-			fTempPreferences->fIndentGuidesShow = show;
+			fPreferences->fIndentGuidesShow = show;
 			_SetIndentGuidesBoxEnabled(show);
 			_PreferencesModified();
 		} break;
 		case Actions::INDENTGUIDES_REAL: {
-			fTempPreferences->fIndentGuidesMode = SC_IV_REAL;
+			fPreferences->fIndentGuidesMode = SC_IV_REAL;
 			_PreferencesModified();
 		} break;
 		case Actions::INDENTGUIDES_FORWARD: {
-			fTempPreferences->fIndentGuidesMode = SC_IV_LOOKFORWARD;
+			fPreferences->fIndentGuidesMode = SC_IV_LOOKFORWARD;
 			_PreferencesModified();
 		} break;
 		case Actions::INDENTGUIDES_BOTH: {
-			fTempPreferences->fIndentGuidesMode = SC_IV_LOOKBOTH;
+			fPreferences->fIndentGuidesMode = SC_IV_LOOKBOTH;
 			_PreferencesModified();
 		} break;
 		case Actions::BRACES_HIGHLIGHTING: {
-			fTempPreferences->fBracesHighlighting = IsChecked(fBracesHighlightingCB);
+			fPreferences->fBracesHighlighting = IsChecked(fBracesHighlightingCB);
 			_PreferencesModified();
 		} break;
 		case Actions::EDITOR_STYLE: {
-			fTempPreferences->fStyle = message->GetString("style", "default");
+			fPreferences->fStyle = message->GetString("style", "default");
 			_PreferencesModified();
 		} break;
 		case Actions::ATTACH_WINDOWS: {
-			fTempPreferences->fOpenWindowsInStack = IsChecked(fAttachNewWindowsCB);
+			fPreferences->fOpenWindowsInStack = IsChecked(fAttachNewWindowsCB);
 			_PreferencesModified();
 		} break;
 		case Actions::HIGHLIGHT_TRAILING_WS: {
-			fTempPreferences->fHighlightTrailingWhitespace =
+			fPreferences->fHighlightTrailingWhitespace =
 				IsChecked(fHighlightTrailingWSCB);
 			_PreferencesModified();
 		} break;
 		case Actions::TRIM_TRAILING_WS_SAVE: {
-			fTempPreferences->fTrimTrailingWhitespaceOnSave =
+			fPreferences->fTrimTrailingWhitespaceOnSave =
 				IsChecked(fTrimTrailingWSOnSaveCB);
 			_PreferencesModified();
 		} break;
 		case Actions::USE_EDITORCONFIG: {
-			fTempPreferences->fUseEditorconfig = IsChecked(fUseEditorconfigCB);
+			fPreferences->fUseEditorconfig = IsChecked(fUseEditorconfigCB);
 			_PreferencesModified();
 		} break;
 		case Actions::ALWAYS_OPEN_IN_NEW_WINDOW: {
-			fTempPreferences->fAlwaysOpenInNewWindow =
+			fPreferences->fAlwaysOpenInNewWindow =
 				IsChecked(fAlwaysOpenInNewWindowCB);
 			_PreferencesModified();
 		} break;
 		case Actions::USE_CUSTOM_FONT: {
 			bool use = IsChecked(fUseCustomFontCB);
-			fTempPreferences->fUseCustomFont = use;
+			fPreferences->fUseCustomFont = use;
 			_SetFontBoxEnabled(use);
 			_PreferencesModified();
 		} break;
 		case Actions::FONT_CHANGED: {
-			fTempPreferences->fFontFamily = message->GetString("family");
+			fPreferences->fFontFamily = message->GetString("family");
 			_UpdateFontMenu();
 			_PreferencesModified();
 		} break;
 		case Actions::FONT_SIZE_CHANGED: {
-			fTempPreferences->fFontSize = fFontSizeSpinner->Value();
+			fPreferences->fFontSize = fFontSizeSpinner->Value();
 			_PreferencesModified();
 		} break;
-		case Actions::APPLY: {
-			*fCurrentPreferences = *fTempPreferences;
-			fApplyButton->SetEnabled(false);
-			BMessage changed(APP_PREFERENCES_CHANGED);
-			be_app->PostMessage(&changed);
-		} break;
 		case Actions::REVERT: {
-			*fTempPreferences = *fStartPreferences;
+			*fPreferences = *fStartPreferences;
 			fRevertButton->SetEnabled(false);
-			fApplyButton->SetEnabled(true);
-			_SyncPreferences(fTempPreferences);
+			_PreferencesModified();
+			_SyncPreferences(fPreferences);
 		} break;
 		default: {
 			BWindow::MessageReceived(message);
@@ -312,10 +302,7 @@ AppPreferencesWindow::_InitInterface()
 		.SetInsets(B_USE_ITEM_INSETS);
 	fFontBox->SetLabel(fUseCustomFontCB);
 
-	fApplyButton = new BButton(B_TRANSLATE("Apply"), new BMessage((uint32) Actions::APPLY));
 	fRevertButton = new BButton(B_TRANSLATE("Revert"), new BMessage((uint32) Actions::REVERT));
-
-	fApplyButton->SetEnabled(false);
 	fRevertButton->SetEnabled(false);
 
 	BLayoutBuilder::Group<>(fVisualBox, B_VERTICAL, 0)
@@ -368,7 +355,6 @@ AppPreferencesWindow::_InitInterface()
 		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
 			.Add(fRevertButton)
 			.AddGlue()
-			.Add(fApplyButton)
 		.End()
 		.SetInsets(B_USE_SMALL_INSETS);
 
@@ -406,7 +392,10 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 
 	SetChecked(fUseCustomFontCB, preferences->fUseCustomFont);
 	_SetFontBoxEnabled(preferences->fUseCustomFont);
+	// FIXME: workaround, SetValue shouldn't notify that it was modified
+	fFontSizeSpinner->SetMessage(nullptr);
 	fFontSizeSpinner->SetValue(preferences->fFontSize);
+	fFontSizeSpinner->SetMessage(new BMessage((uint32) Actions::FONT_SIZE_CHANGED));
 	_UpdateFontMenu();
 
 	SetChecked(fBracesHighlightingCB, preferences->fBracesHighlighting);
@@ -421,7 +410,7 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 void
 AppPreferencesWindow::_PreferencesModified()
 {
-	fApplyButton->SetEnabled(true);
+	SendNotices(APP_PREFERENCES_CHANGED);
 	fRevertButton->SetEnabled(true);
 }
 
@@ -433,7 +422,7 @@ AppPreferencesWindow::_SetLineLimitBoxEnabled(bool enabled)
 	fLineLimitBackgroundRadio->SetEnabled(enabled);
 	fLineLimitLineRadio->SetEnabled(enabled);
 
-	switch(fTempPreferences->fLineLimitMode) {
+	switch(fPreferences->fLineLimitMode) {
 		case 1: SetChecked(fLineLimitLineRadio); break;
 		case 2: SetChecked(fLineLimitBackgroundRadio); break;
 	}
@@ -446,7 +435,7 @@ AppPreferencesWindow::_SetLineHighlightingBoxEnabled(bool enabled)
 	fLineHighlightingBackgroundRadio->SetEnabled(enabled);
 	fLineHighlightingFrameRadio->SetEnabled(enabled);
 
-	switch(fTempPreferences->fLineHighlightingMode) {
+	switch(fPreferences->fLineHighlightingMode) {
 		case 0: SetChecked(fLineHighlightingBackgroundRadio); break;
 		case 1: SetChecked(fLineHighlightingFrameRadio); break;
 	}
@@ -460,7 +449,7 @@ AppPreferencesWindow::_SetIndentGuidesBoxEnabled(bool enabled)
 	fIndentGuidesLookForwardRadio->SetEnabled(enabled);
 	fIndentGuidesLookBothRadio->SetEnabled(enabled);
 
-	switch(fTempPreferences->fIndentGuidesMode) {
+	switch(fPreferences->fIndentGuidesMode) {
 		case 1: SetChecked(fIndentGuidesRealRadio); break;
 		case 2: SetChecked(fIndentGuidesLookForwardRadio); break;
 		case 3: SetChecked(fIndentGuidesLookBothRadio); break;
@@ -485,7 +474,7 @@ AppPreferencesWindow::_PopulateStylesMenu()
 		BMessage* msg = new BMessage(EDITOR_STYLE);
 		msg->AddString("style", style.c_str());
 		BMenuItem* menuItem = new BMenuItem(style.c_str(), msg);
-		if(style == fTempPreferences->fStyle)
+		if(style == fPreferences->fStyle)
 			menuItem->SetMarked(true);
 		fEditorStyleMenu->AddItem(menuItem);
 	}
@@ -505,7 +494,7 @@ AppPreferencesWindow::_UpdateFontMenu()
 			familyMsg->AddString("family", family);
 
 			BMenuItem* familyItem = new BMenuItem(family, familyMsg);
-			if(fTempPreferences->fFontFamily == family) {
+			if(fPreferences->fFontFamily == family) {
 				familyItem->SetMarked(true);
 			}
 			fFontMenu->AddItem(familyItem);

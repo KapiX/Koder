@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -304,12 +304,6 @@ App::MessageReceived(BMessage* message)
 			fPreferences->fWindowRect = fLastActiveWindow->Frame();
 		}
 	} break;
-	case APP_PREFERENCES_CHANGED: {
-		for(uint32 i = 0, count = fWindows.CountItems(); i < count; i++) {
-			BMessenger messenger((BWindow*) fWindows.ItemAt(i));
-			messenger.SendMessage(message);
-		}
-	} break;
 	case APP_PREFERENCES_QUITTING: {
 		fAppPreferencesWindow = nullptr;
 	} break;
@@ -330,6 +324,9 @@ App::MessageReceived(BMessage* message)
 	case MAINMENU_EDIT_APP_PREFERENCES: {
 		if(fAppPreferencesWindow == nullptr) {
 			fAppPreferencesWindow = new AppPreferencesWindow(fPreferences);
+			for(uint32 i = 0, count = fWindows.CountItems(); i < count; i++) {
+				fAppPreferencesWindow->StartWatching(fWindows.ItemAt(i), APP_PREFERENCES_CHANGED);
+			}
 		}
 		fAppPreferencesWindow->Show();
 		fAppPreferencesWindow->Activate();
@@ -392,6 +389,9 @@ App::_CreateWindow(const BMessage* message, std::unique_ptr<BWindowStack>& windo
 			windowStack.reset(new BWindowStack(window));
 		else
 			windowStack->AddWindow(window);
+	if(fAppPreferencesWindow != nullptr) {
+		fAppPreferencesWindow->StartWatching(window, APP_PREFERENCES_CHANGED);
+	}
 	fWindows.AddItem(window);
 	return window;
 }
