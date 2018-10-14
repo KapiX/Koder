@@ -7,9 +7,12 @@
 #define APP_H
 
 
+#include <memory>
+
 #include <Application.h>
 #include <ObjectList.h>
 #include <Path.h>
+#include <WindowStack.h>
 
 
 class AppPreferencesWindow;
@@ -34,6 +37,9 @@ public:
 	void						MessageReceived(BMessage* message);
 
 private:
+	EditorWindow*				_CreateWindow(const BMessage* message,
+									std::unique_ptr<BWindowStack>& windowStack);
+
 	BObjectList<EditorWindow>	fWindows;
 	EditorWindow*				fLastActiveWindow;
 	AppPreferencesWindow*		fAppPreferencesWindow;

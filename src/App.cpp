@@ -198,7 +198,7 @@ App::ArgvReceived(int32 argc, char** argv)
 	BString cwd = message->GetString("cwd", "~");
 	entry_ref ref;
 	BEntry entry;
-	std::unique_ptr<BWindowStack> windowStack(nullptr);
+	std::unique_ptr<BWindowStack> windowStack;
 	for(int32 i = 1; i < argc; ++i) {
 		Sci_Position line = -1;
 		Sci_Position column = -1;
@@ -240,17 +240,9 @@ App::ArgvReceived(int32 argc, char** argv)
 				}
 			}
 		}
-		bool stagger = fWindows.CountItems() > 0 && (!fPreferences->fOpenWindowsInStack || !windowStack.get());
-		EditorWindow* window = new EditorWindow(stagger);
-		if(fPreferences->fOpenWindowsInStack) {
-			if(windowStack.get() == nullptr)
-				windowStack.reset(new BWindowStack(window));
-			else
-				windowStack->AddWindow(window);
-		}
+		auto window = _CreateWindow(message, windowStack);
 		window->OpenFile(&ref, line, column);
 		window->Show();
-		fWindows.AddItem(window);
 	}
 }
 
@@ -263,11 +255,7 @@ App::RefsReceived(BMessage* message)
 		return;
 	}
 
-	BWindow* windowPtr = nullptr;
-	std::unique_ptr<BWindowStack> windowStack(nullptr);
-	if(message->FindPointer("window", (void**) &windowPtr) == B_OK)
-		windowStack.reset(new BWindowStack(windowPtr));
-
+	std::unique_ptr<BWindowStack> windowStack;
 	BMessenger messenger(kTrackerSignature);
 	BMessage trackerMessage(B_REFS_RECEIVED);
 	entry_ref ref;
@@ -294,17 +282,9 @@ App::RefsReceived(BMessage* message)
 				if(found)
 					continue;
 			}
-			bool stagger = fWindows.CountItems() > 0 && (!fPreferences->fOpenWindowsInStack || !windowStack.get());
-			EditorWindow* window = new EditorWindow(stagger);
-			if(fPreferences->fOpenWindowsInStack) {
-				if(windowStack.get() == nullptr)
-					windowStack.reset(new BWindowStack(window));
-				else
-					windowStack->AddWindow(window);
-			}
+			auto window = _CreateWindow(message, windowStack);
 			window->OpenFile(&ref, line, column);
 			window->Show();
-			fWindows.AddItem(window);
 		}
 	}
 	if(!trackerMessage.IsEmpty()) {
@@ -369,16 +349,9 @@ App::MessageReceived(BMessage* message)
 		}
 	} break;
 	case WINDOW_NEW: {
-		BWindow* windowPtr = nullptr;
-		std::unique_ptr<BWindowStack> windowStack(nullptr);
-		if(message->FindPointer("window", (void**) &windowPtr) == B_OK)
-			windowStack.reset(new BWindowStack(windowPtr));
-		bool stagger = fWindows.CountItems() > 0 && (!fPreferences->fOpenWindowsInStack || !windowStack.get());
-		EditorWindow* window = new EditorWindow(stagger);
-		if(fPreferences->fOpenWindowsInStack && windowStack.get() != nullptr)
-			windowStack->AddWindow(window);
+		std::unique_ptr<BWindowStack> stack;
+		auto window = _CreateWindow(message, stack);
 		window->Show();
-		fWindows.AddItem(window);
 	} break;
 	case WINDOW_CLOSE: {
 		EditorWindow* window;
@@ -394,4 +367,31 @@ App::MessageReceived(BMessage* message)
 		BApplication::MessageReceived(message);
 	break;
 	}
+}
+
+/**
+ * Creates a window with parameters specified in message:
+ *   (Pointer) window - new window will be attached this one
+ * Takes current preferences into account.
+ * Adds created window to the list of all open windows.
+ * Returns a window and a window stack to which it is attached.
+ */
+EditorWindow*
+App::_CreateWindow(const BMessage* message, std::unique_ptr<BWindowStack>& windowStack)
+{
+	if(message != nullptr) {
+		BWindow* windowPtr;
+		if(message->FindPointer("window", (void**) &windowPtr) == B_OK)
+			windowStack.reset(new BWindowStack(windowPtr));
+	}
+	bool stagger = fWindows.CountItems() > 0 &&
+		(!fPreferences->fOpenWindowsInStack || !windowStack);
+	EditorWindow* window = new EditorWindow(stagger);
+	if(fPreferences->fOpenWindowsInStack)
+		if(!windowStack)
+			windowStack.reset(new BWindowStack(window));
+		else
+			windowStack->AddWindow(window);
+	fWindows.AddItem(window);
+	return window;
 }
