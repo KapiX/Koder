@@ -298,16 +298,12 @@ EditorWindow::OpenFile(entry_ref* ref, Sci_Position line, Sci_Position column)
 	fEditor->SendMessage(SCI_EMPTYUNDOBUFFER, 0, 0);
 	delete []buffer;
 
-	Sci_Position gotoPos;
+	Sci_Position gotoPos = caretPos;
 	if(line != -1) {
-		Sci_Position linePos = fEditor->SendMessage(SCI_POSITIONFROMLINE, line - 1);
+		gotoPos = fEditor->SendMessage(SCI_POSITIONFROMLINE, line - 1);
 		if(column != -1) {
-			gotoPos = linePos + column;
-		} else {
-			gotoPos = linePos;
+			gotoPos += column;
 		}
-	} else {
-		gotoPos = caretPos;
 	}
 	fEditor->SendMessage(SCI_GOTOPOS, gotoPos, 0);
 	fOpenedFileMimeType.SetTo(mimeType);
