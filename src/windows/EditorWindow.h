@@ -96,7 +96,9 @@ public:
 	virtual					~EditorWindow();
 
 			void			New();
-			void			OpenFile(entry_ref* ref, Sci_Position line = -1, Sci_Position column = -1);
+			void			OpenFile(const entry_ref* ref,
+								Sci_Position line = -1,
+								Sci_Position column = -1);
 			void			RefreshTitle();
 			void			SaveFile(entry_ref* ref);
 

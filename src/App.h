@@ -37,6 +37,10 @@ public:
 	void						MessageReceived(BMessage* message);
 
 private:
+	void						_ActivateOrCreateWindow(const BMessage* message,
+									const entry_ref& ref, const int32 line,
+									const int32 column,
+									std::unique_ptr<BWindowStack>& windowStack);
 	EditorWindow*				_CreateWindow(const BMessage* message,
 									std::unique_ptr<BWindowStack>& windowStack);
 	std::string					_ParseFileArgument(const std::string argument,

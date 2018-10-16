@@ -254,7 +254,7 @@ EditorWindow::New()
 
 
 void
-EditorWindow::OpenFile(entry_ref* ref, Sci_Position line, Sci_Position column)
+EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position column)
 {
 	fEditor->SetReadOnly(false);
 		// let us load new file

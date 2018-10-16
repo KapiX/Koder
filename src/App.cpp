@@ -196,8 +196,6 @@ App::ArgvReceived(int32 argc, char** argv)
 {
 	BMessage* message = CurrentMessage();
 	BString cwd = message->GetString("cwd", "~");
-	entry_ref ref;
-	BEntry entry;
 	std::unique_ptr<BWindowStack> windowStack;
 	for(int32 i = 1; i < argc; ++i) {
 		int32 line, column;
@@ -206,24 +204,9 @@ App::ArgvReceived(int32 argc, char** argv)
 			BPath absolute(cwd.String(), filename.c_str(), true);
 			filename = absolute.Path();
 		}
-		entry.SetTo(filename.c_str());
-		entry.GetRef(&ref);
-		if(!fPreferences->fAlwaysOpenInNewWindow) {
-			EditorWindow* current;
-			for(int i = 0; current = fWindows.ItemAt(i); ++i) {
-				if(std::string(current->OpenedFilePath()) == filename
-					&& line != -1) {
-					current->Activate();
-					BMessage gotoMsg(GTLW_GO);
-					gotoMsg.AddInt32("line", line);
-					current->PostMessage(&gotoMsg);
-					return;
-				}
-			}
-		}
-		auto window = _CreateWindow(message, windowStack);
-		window->OpenFile(&ref, line, column);
-		window->Show();
+		entry_ref ref;
+		BEntry(filename.c_str()).GetRef(&ref);
+		_ActivateOrCreateWindow(message, ref, line, column, windowStack);
 	}
 }
 
@@ -246,27 +229,9 @@ App::RefsReceived(BMessage* message)
 				trackerMessage.AddRef("refs", &ref);
 				continue;
 			}
-			Sci_Position line = message->GetInt32("be:line", -1);
-			Sci_Position column = message->GetInt32("be:column", -1);
-			if(!fPreferences->fAlwaysOpenInNewWindow) {
-				EditorWindow* current;
-				bool found = false;
-				for(int i = 0; current = fWindows.ItemAt(i); ++i) {
-					if(BString(current->OpenedFilePath()) == BPath(&ref).Path()
-						&& line != -1) {
-						current->Activate();
-						BMessage gotoMsg(GTLW_GO);
-						gotoMsg.AddInt32("line", line);
-						current->PostMessage(&gotoMsg);
-						found = true;
-					}
-				}
-				if(found)
-					continue;
-			}
-			auto window = _CreateWindow(message, windowStack);
-			window->OpenFile(&ref, line, column);
-			window->Show();
+			const int32 line = message->GetInt32("be:line", -1);
+			const int32 column = message->GetInt32("be:column", -1);
+			_ActivateOrCreateWindow(message, ref, line, column, windowStack);
 		}
 	}
 	if(!trackerMessage.IsEmpty()) {
@@ -347,6 +312,38 @@ App::MessageReceived(BMessage* message)
 	break;
 	}
 }
+
+
+/**
+ * Takes into account current preferences: if files should not always be opened
+ * in new window it first looks for existing one with specified file and
+ * activates it if found; otherwise creates a new one. Then jumps to specified
+ * line and column. windowStack - see App::_CreateWindow.
+ */
+void
+App::_ActivateOrCreateWindow(const BMessage* message, const entry_ref& ref,
+	const int32 line, const int32 column,
+	std::unique_ptr<BWindowStack>& windowStack)
+{
+	if(!fPreferences->fAlwaysOpenInNewWindow) {
+		EditorWindow* current;
+		for(int i = 0; current = fWindows.ItemAt(i); ++i) {
+			if(std::string(current->OpenedFilePath()) == BPath(&ref).Path()) {
+				current->Activate();
+				if(line != -1) {
+					BMessage gotoMsg(GTLW_GO);
+					gotoMsg.AddInt32("line", line);
+					current->PostMessage(&gotoMsg);
+				}
+				return;
+			}
+		}
+	}
+	auto window = _CreateWindow(message, windowStack);
+	window->OpenFile(&ref, line, column);
+	window->Show();
+}
+
 
 /**
  * Creates a window with parameters specified in message:
