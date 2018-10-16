@@ -185,7 +185,7 @@ StatusView::MouseDown(BPoint where)
 		_ShowDirMenu();
 		return;
 	}
-	
+
 	if(where.x < fNavigationButtonWidth + fCellWidth[kPositionCell]) {
 		BMessenger msgr(Window());
 		msgr.SendMessage(MAINMENU_SEARCH_GOTOLINE);
@@ -322,6 +322,12 @@ StatusView::_ShowDirMenu()
 	BPrivate::BDirMenu* menu = new BDirMenu(NULL,
 		BMessenger(Window()), B_REFS_RECEIVED);
 
+	BMenuItem* openTerminal = new BMenuItem(B_TRANSLATE("Open Terminal"),
+		new BMessage((uint32) OPEN_TERMINAL), 'T', B_OPTION_KEY);
+		// Actual shortcut is added in EditorWindow
+	openTerminal->SetTarget(Window());
+	menu->AddItem(openTerminal);
+	menu->AddSeparatorItem();
 	menu->Populate(&entry, Window(), false, false, true, false, true);
 
 	BPoint point = Parent()->Bounds().LeftBottom();

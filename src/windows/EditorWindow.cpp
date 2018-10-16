@@ -157,6 +157,9 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem(B_TRANSLATE("About" B_UTF8_ELLIPSIS), B_ABOUT_REQUESTED)
 		.End();
 
+	// When changing this shortcut remember to update one in StatusView as well
+	AddShortcut('T', B_COMMAND_KEY | B_OPTION_KEY, new BMessage((uint32) OPEN_TERMINAL));
+
 	fLanguageMenu = fMainMenu->FindItem(MAINMENU_LANGUAGE)->Menu();
 	_PopulateLanguageMenu();
 
@@ -744,6 +747,13 @@ EditorWindow::MessageReceived(BMessage* message)
 		case FINDWINDOW_REPLACEFIND: {
 			_FindReplace(message);
 		} break;
+		case OPEN_TERMINAL: {
+			if(fOpenedFilePath != nullptr) {
+				BPath directory;
+				fOpenedFilePath->GetParent(&directory);
+				_OpenTerminal(directory.Path());
+			}
+		} break;
 		default:
 			BWindow::MessageReceived(message);
 		break;
@@ -1270,6 +1280,44 @@ EditorWindow::_Save()
 	}
 	// block until user has chosen location
 	while(fSavePanel->IsShowing()) UpdateIfNeeded();
+}
+
+
+/**
+ * Launches Terminal with current working directory set to path.
+ * Uses Tracker add-on to do that, because it's easier (Terminal doesn't accept
+ * paths as arguments).
+ * Taken from Tracker.
+ */
+void
+EditorWindow::_OpenTerminal(const char* path)
+{
+	const char* terminalAddonSignature = "application/x-vnd.Haiku-OpenTerminal";
+	entry_ref addonRef, directoryRef;
+	be_roster->FindApp(terminalAddonSignature, &addonRef);
+	BEntry(path).GetRef(&directoryRef);
+	image_id addonImage = load_add_on(BPath(&addonRef).Path());
+	if (addonImage >= 0) {
+		void (*processRefsFn)(entry_ref, BMessage*, void*);
+		status_t result = get_image_symbol(addonImage, "process_refs", 2,
+			(void**) &processRefsFn);
+
+		if (result >= 0) {
+			// call add-on code
+			(*processRefsFn)(directoryRef, new BMessage(), NULL);
+		} else {
+			BAlert* alert = new BAlert(B_TRANSLATE("Open Terminal"),
+				B_TRANSLATE("Could not launch Open Terminal Tracker add-on."),
+				B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL,
+				B_STOP_ALERT);
+		}
+		unload_add_on(addonImage);
+	} else {
+		BAlert* alert = new BAlert(B_TRANSLATE("Open Terminal"),
+			B_TRANSLATE("Could not find Open Terminal Tracker add-on."),
+			B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL,
+			B_STOP_ALERT);
+	}
 }
 
 

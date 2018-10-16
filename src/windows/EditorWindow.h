@@ -87,6 +87,8 @@ enum {
 
 	WINDOW_NEW							= 'ewnw',
 	WINDOW_CLOSE						= 'ewcl',
+
+	OPEN_TERMINAL						= 'otrm',
 };
 
 
@@ -166,6 +168,7 @@ private:
 			void			_SyncEditMenus();
 			int32			_ShowModifiedAlert();
 			void			_Save();
+			void			_OpenTerminal(const char* path);
 
 	static	filter_result	_IncrementalSearchFilter(BMessage* message,
 								BHandler** target, BMessageFilter* messageFilter);
