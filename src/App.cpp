@@ -200,41 +200,22 @@ App::ArgvReceived(int32 argc, char** argv)
 	BEntry entry;
 	std::unique_ptr<BWindowStack> windowStack;
 	for(int32 i = 1; i < argc; ++i) {
-		Sci_Position line = -1;
-		Sci_Position column = -1;
-		BString argument(argv[i]);
-		BString filename;
-		BString lineStr, columnStr;
-		// first :
-		int32 pos = argument.FindFirst(':');
-		if(pos != B_ERROR) {
-			argument.CopyInto(filename, 0, pos);
-			// second :
-			int32 pos2 = argument.FindFirst(':', pos + 1);
-			if(pos2 != B_ERROR) {
-				argument.CopyInto(lineStr, pos + 1, pos2);
-				argument.CopyInto(columnStr, pos2 + 1, argument.Length());
-			} else {
-				argument.CopyInto(lineStr, pos + 1, argument.Length());
-			}
-			line = strtol(lineStr.String(), nullptr, 10) - 1;
-			column = strtol(columnStr.String(), nullptr, 10) - 1;
-		} else {
-			filename = argument;
-		}
-		if(filename.FindFirst('/') != 0) {
-			BPath absolute(cwd.String(), filename.String(), true);
+		int32 line, column;
+		std::string filename = _ParseFileArgument(argv[i], &line, &column);
+		if(filename.find('/') != 0) {
+			BPath absolute(cwd.String(), filename.c_str(), true);
 			filename = absolute.Path();
 		}
-		entry.SetTo(filename);
+		entry.SetTo(filename.c_str());
 		entry.GetRef(&ref);
 		if(!fPreferences->fAlwaysOpenInNewWindow) {
 			EditorWindow* current;
 			for(int i = 0; current = fWindows.ItemAt(i); ++i) {
-				if(BString(current->OpenedFilePath()) == filename) {
+				if(std::string(current->OpenedFilePath()) == filename
+					&& line != -1) {
 					current->Activate();
 					BMessage gotoMsg(GTLW_GO);
-					gotoMsg.AddInt32("line", line + 1);
+					gotoMsg.AddInt32("line", line);
 					current->PostMessage(&gotoMsg);
 					return;
 				}
@@ -265,16 +246,17 @@ App::RefsReceived(BMessage* message)
 				trackerMessage.AddRef("refs", &ref);
 				continue;
 			}
-			Sci_Position line = message->GetInt32("be:line", 0) - 1;
-			Sci_Position column = message->GetInt32("be:column", 0) - 1;
+			Sci_Position line = message->GetInt32("be:line", -1);
+			Sci_Position column = message->GetInt32("be:column", -1);
 			if(!fPreferences->fAlwaysOpenInNewWindow) {
 				EditorWindow* current;
 				bool found = false;
 				for(int i = 0; current = fWindows.ItemAt(i); ++i) {
-					if(BString(current->OpenedFilePath()) == BPath(&ref).Path()) {
+					if(BString(current->OpenedFilePath()) == BPath(&ref).Path()
+						&& line != -1) {
 						current->Activate();
 						BMessage gotoMsg(GTLW_GO);
-						gotoMsg.AddInt32("line", line + 1);
+						gotoMsg.AddInt32("line", line);
 						current->PostMessage(&gotoMsg);
 						found = true;
 					}
@@ -394,4 +376,36 @@ App::_CreateWindow(const BMessage* message, std::unique_ptr<BWindowStack>& windo
 	}
 	fWindows.AddItem(window);
 	return window;
+}
+
+
+/**
+ * Splits command line argument in format a/b/file:10:92 into filename, line
+ * and column. If column or line are missing -1 is returned in their place.
+ */
+std::string
+App::_ParseFileArgument(const std::string argument, int32* line, int32* column)
+{
+	std::string filename;
+	if(line != nullptr)
+		*line = -1;
+	if(column != nullptr)
+		*column = -1;
+	// first :
+	int32 first = argument.find(':');
+	if(first != std::string::npos) {
+		filename = argument.substr(0, first);
+		// second :
+		int32 second = argument.find(':', first + 1);
+		if(line != nullptr) {
+			*line = std::stoi(argument.substr(first + 1, second));
+				// if second is npos substr copies to the end
+		}
+		if(column != nullptr && second != std::string::npos) {
+			*column = std::stoi(argument.substr(second + 1));
+		}
+	} else {
+		filename = argument;
+	}
+	return filename;
 }

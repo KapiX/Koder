@@ -300,7 +300,7 @@ EditorWindow::OpenFile(entry_ref* ref, Sci_Position line, Sci_Position column)
 
 	Sci_Position gotoPos;
 	if(line != -1) {
-		Sci_Position linePos = fEditor->SendMessage(SCI_POSITIONFROMLINE, line, 0);
+		Sci_Position linePos = fEditor->SendMessage(SCI_POSITIONFROMLINE, line - 1);
 		if(column != -1) {
 			gotoPos = linePos + column;
 		} else {

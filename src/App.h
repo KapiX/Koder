@@ -39,6 +39,9 @@ public:
 private:
 	EditorWindow*				_CreateWindow(const BMessage* message,
 									std::unique_ptr<BWindowStack>& windowStack);
+	std::string					_ParseFileArgument(const std::string argument,
+									int32* line = nullptr,
+									int32* column = nullptr);
 
 	BObjectList<EditorWindow>	fWindows;
 	EditorWindow*				fLastActiveWindow;
