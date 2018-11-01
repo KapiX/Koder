@@ -1158,12 +1158,6 @@ EditorWindow::_SyncWithPreferences()
 			fEditor->SendMessage(SCI_SETEOLMODE, fFilePreferences.fEOLMode.value_or(SC_EOL_LF), 0);
 		}
 
-		if(fPreferences->fLineNumbers == true) {
-			fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::NUMBER, (long int) SC_MARGIN_NUMBER);
-		} else {
-			fEditor->SendMessage(SCI_SETMARGINWIDTHN, Editor::Margin::NUMBER, 0);
-		}
-
 		if(fPreferences->fLineLimitShow == true) {
 			fEditor->SendMessage(SCI_SETEDGEMODE, fPreferences->fLineLimitMode, 0);
 			fEditor->SendMessage(SCI_SETEDGECOLUMN, fPreferences->fLineLimitColumn, 0);
@@ -1189,6 +1183,9 @@ EditorWindow::_SyncWithPreferences()
 			fEditor->ClearHighlightedWhitespace();
 		}
 
+		fEditor->UpdateLineNumberWidth();
+
+		fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::NUMBER, SC_MARGIN_NUMBER);
 		fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::FOLD, SC_MARGIN_SYMBOL);
 		fEditor->SendMessage(SCI_SETMARGINMASKN, Editor::Margin::FOLD, SC_MASK_FOLDERS);
 		fEditor->SendMessage(SCI_SETMARGINWIDTHN, Editor::Margin::FOLD, 20);

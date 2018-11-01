@@ -81,6 +81,8 @@ public:
 	void				IncrementalSearchCancel();
 	void				IncrementalSearchCommit(std::string term);
 
+	void				UpdateLineNumberWidth();
+
 	template<typename T>
 	typename T::type	Get() { return T::Get(this); }
 	template<typename T>
@@ -88,7 +90,6 @@ public:
 
 private:
 	void				_MaintainIndentation(char ch);
-	void				_UpdateLineNumberWidth();
 	void				_UpdateStatusView();
 	void				_BraceHighlight();
 	bool				_BraceMatch(int pos);

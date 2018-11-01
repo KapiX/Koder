@@ -77,7 +77,7 @@ Editor::NotificationReceived(SCNotification* notification)
 		} break;
 		case SCN_UPDATEUI:
 			_BraceHighlight();
-			_UpdateLineNumberWidth();
+			UpdateLineNumberWidth();
 			_UpdateStatusView();
 			window_msg.SendMessage(EDITOR_UPDATEUI);
 		break;
@@ -434,6 +434,13 @@ Editor::ResetFindReplace()
 }
 
 
+/**
+ * Works like Find(), except it's always case insensitive, looks forward and
+ * includes the result in next search. It also saves selection in case the
+ * search is cancelled. Search term is managed by the parent control/window.
+ * After first call editor is put in incremental search mode so subsequent calls
+ * do not reset saved selection.
+ */
 void
 Editor::IncrementalSearch(std::string term)
 {
@@ -470,6 +477,10 @@ Editor::IncrementalSearchCancel()
 }
 
 
+/**
+ * Ends incremental search mode and sets up internal state so "Find next" works
+ * correctly.
+ */
 void
 Editor::IncrementalSearchCommit(std::string term)
 {
@@ -502,15 +513,22 @@ Editor::_MaintainIndentation(char ch)
 }
 
 
+/**
+ * Updates line number margin width to the width of biggest value. Minimum width
+ * is 3 characters. Takes preferences into account - if line numbers are
+ * disabled sets width to 0.
+ */
 void
-Editor::_UpdateLineNumberWidth()
+Editor::UpdateLineNumberWidth()
 {
 	if(fPreferences->fLineNumbers) {
-		int numLines = SendMessage(SCI_GETLINECOUNT, 0, 0);
+		int numLines = SendMessage(SCI_GETLINECOUNT);
 		int i;
 		for(i = 1; numLines > 0; numLines /= 10, ++i);
 		int charWidth = SendMessage(SCI_TEXTWIDTH, STYLE_LINENUMBER, (sptr_t) "0");
 		SendMessage(SCI_SETMARGINWIDTHN, Margin::NUMBER, std::max(i, 3) * charWidth);
+	} else {
+		SendMessage(SCI_SETMARGINWIDTHN, Margin::NUMBER, 0);
 	}
 }
 
