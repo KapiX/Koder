@@ -1,0 +1,17 @@
+lexer: Jam
+keywords:
+    0: >
+        actions bind break case continue default else existing for if ignore in
+        include jumptoeof local maxline on piecemeal quietly return rule switch
+        together updated while
+comments:
+    line: "#"
+styles:
+    0: 32
+    1: 101
+    2: 104
+    3: 106
+    4: 105
+    5: 110
+    6: 32
+    7: 152

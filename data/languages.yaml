@@ -25,6 +25,9 @@ diff:
 html:
     name: HTML
     extensions: [ html, htm, shtml, shtm, xhtml, xht, hta ]
+jam:
+    name: Jam
+    extensions: [ Jamfile, Jamrules, Jambase ]
 javascript:
     name: JavaScript
     extensions: [ js, jsm, json ]
