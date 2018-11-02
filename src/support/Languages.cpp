@@ -10,6 +10,7 @@
 #include <string>
 
 #include <Catalog.h>
+#include <Directory.h>
 #include <FindDirectory.h>
 #include <Path.h>
 #include <String.h>
@@ -94,8 +95,14 @@ Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
 	p.Append("languages");
 	p.Append(lang);
 	const YAML::Node language = YAML::LoadFile(std::string(p.Path()) + ".yaml");
-	int lexerID = language["lexer"].as<int>();
-	editor->SendMessage(SCI_SETLEXER, static_cast<uptr_t>(lexerID), 0);
+	try {
+		int lexerID = language["lexer"].as<int>();
+		editor->SendMessage(SCI_SETLEXER, static_cast<uptr_t>(lexerID), 0);
+	} catch(YAML::TypedBadConversion<int>&) {
+		std::string lexerName = language["lexer"].as<std::string>();
+		editor->SendMessage(SCI_SETLEXERLANGUAGE, 0,
+			reinterpret_cast<const sptr_t>(lexerName.c_str()));
+	}
 
 	for(const auto& property : language["properties"]) {
 		auto name = property.first.as<std::string>();
@@ -171,5 +178,42 @@ Languages::_LoadLanguages(const BPath& path)
 		if(std::find(sLanguages.begin(), sLanguages.end(), name) == sLanguages.end())
 			sLanguages.push_back(name);
 		sMenuItems[name] = menuitem;
+	}
+}
+
+
+/* static */ void
+Languages::LoadExternalLexers(Editor* editor)
+{
+	BPath dataPath;
+	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
+	_LoadExternalLexers(dataPath, editor);
+	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
+	_LoadExternalLexers(dataPath, editor);
+	find_directory(B_SYSTEM_NONPACKAGED_DATA_DIRECTORY, &dataPath);
+	_LoadExternalLexers(dataPath, editor);
+	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
+	_LoadExternalLexers(dataPath, editor);
+}
+
+
+/* static */ void
+Languages::_LoadExternalLexers(const BPath& path, Editor* editor)
+{
+	BPath p(path);
+	p.Append("scintilla");
+	p.Append("lexers");
+	BDirectory lexersDir(p.Path());
+	if (lexersDir.InitCheck() != B_OK)
+		return;
+
+	BEntry lexerEntry;
+	while(lexersDir.GetNextEntry(&lexerEntry, true) == B_OK) {
+		if(lexerEntry.IsDirectory())
+			continue;
+		BPath lexerPath;
+		lexerEntry.GetPath(&lexerPath);
+		editor->SendMessage(SCI_LOADLEXERLIBRARY, 0,
+			reinterpret_cast<const sptr_t>(lexerPath.Path()));
 	}
 }

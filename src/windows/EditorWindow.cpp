@@ -180,6 +180,7 @@ EditorWindow::EditorWindow(bool stagger)
 
 	fEditor = new Editor();
 	fEditor->SetPreferences(fPreferences);
+	Languages::LoadExternalLexers(fEditor);
 
 	BBitmap icon(BRect(0, 0, 23, 23), 0, B_RGBA32);
 	fToolbar = new BToolBar(B_HORIZONTAL);
