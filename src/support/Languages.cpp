@@ -6,6 +6,7 @@
 #include "Languages.h"
 
 #include <algorithm>
+#include <functional>
 #include <map>
 #include <string>
 
@@ -31,6 +32,29 @@ std::map<std::string, std::string>	Languages::sMenuItems;
 std::map<std::string, std::string> 	Languages::sExtensions;
 
 
+namespace {
+
+/**
+ * Executes a specified function for each data directory, going from system to
+ * user, packaged to non-packaged. The path is available as a parameter to the
+ * user supplied function.
+ */
+void
+DoInAllDataDirectories(std::function<void(const BPath&)> func) {
+	BPath dataPath;
+	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
+	func(dataPath);
+	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
+	func(dataPath);
+	find_directory(B_SYSTEM_NONPACKAGED_DATA_DIRECTORY, &dataPath);
+	func(dataPath);
+	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
+	func(dataPath);
+}
+
+}
+
+
 /* static */ bool
 Languages::GetLanguageForExtension(const std::string ext, std::string& lang)
 {
@@ -50,43 +74,34 @@ Languages::SortAlphabetically()
 }
 
 
+/**
+ * Reads YAML files from all data directories and creates a single style map,
+ * where repeated keys are overridden (user non-packaged being final).
+ */
 /* static */ std::map<int, int>
 Languages::ApplyLanguage(Editor* editor, const char* lang)
 {
 	std::map<int, int> styleMapping;
-	BPath dataPath;
-	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
-	try {
-		auto m = _ApplyLanguage(editor, lang, dataPath);
-		m.merge(styleMapping);
-		std::swap(styleMapping, m);
-	} catch (YAML::BadFile &) {
-	}
-	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
-	try {
-		auto m = _ApplyLanguage(editor, lang, dataPath);
-		m.merge(styleMapping);
-		std::swap(styleMapping, m);
-	} catch (YAML::BadFile &) {
-	}
-	find_directory(B_SYSTEM_NONPACKAGED_DATA_DIRECTORY, &dataPath);
-	try {
-		auto m = _ApplyLanguage(editor, lang, dataPath);
-		m.merge(styleMapping);
-		std::swap(styleMapping, m);
-	} catch (YAML::BadFile &) {
-	}
-	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
-	try {
-		auto m = _ApplyLanguage(editor, lang, dataPath);
-		m.merge(styleMapping);
-		std::swap(styleMapping, m);
-	} catch (YAML::BadFile &) {
-	}
+	DoInAllDataDirectories([&](const BPath& path) {
+			try {
+				auto m = _ApplyLanguage(editor, lang, path);
+				m.merge(styleMapping);
+				std::swap(styleMapping, m);
+			} catch (YAML::BadFile &) {}
+		});
 	return styleMapping;
 }
 
-
+/**
+ * Loads YAML file with language specification:
+ *   lexer: int if supplied with Scintilla, string if external (required)
+ *   properties: string/string map passed to SCI_SETPROPERTY
+ *   keywords: index(int)/string map passed to SCI_SETKEYWORDS
+ *   comments:
+ *     line: string
+ *     block: pair of strings
+ *   styles: lexer style id(int)/Koder style id(int) map
+ */
 /* static */ std::map<int, int>
 Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
 {
@@ -137,27 +152,11 @@ Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
 /* static */ void
 Languages::LoadLanguages()
 {
-	BPath dataPath;
-	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
-	try {
-		_LoadLanguages(dataPath);
-	} catch (YAML::BadFile &) {
-	}
-	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
-	try {
-		_LoadLanguages(dataPath);
-	} catch (YAML::BadFile &) {
-	}
-	find_directory(B_SYSTEM_NONPACKAGED_DATA_DIRECTORY, &dataPath);
-	try {
-		_LoadLanguages(dataPath);
-	} catch (YAML::BadFile &) {
-	}
-	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
-	try {
-		_LoadLanguages(dataPath);
-	} catch (YAML::BadFile &) {
-	}
+	DoInAllDataDirectories([](const BPath& path) {
+			try {
+				_LoadLanguages(path);
+			} catch (YAML::BadFile &) {}
+		});
 }
 
 
@@ -185,18 +184,16 @@ Languages::_LoadLanguages(const BPath& path)
 /* static */ void
 Languages::LoadExternalLexers(Editor* editor)
 {
-	BPath dataPath;
-	find_directory(B_SYSTEM_DATA_DIRECTORY, &dataPath);
-	_LoadExternalLexers(dataPath, editor);
-	find_directory(B_USER_DATA_DIRECTORY, &dataPath);
-	_LoadExternalLexers(dataPath, editor);
-	find_directory(B_SYSTEM_NONPACKAGED_DATA_DIRECTORY, &dataPath);
-	_LoadExternalLexers(dataPath, editor);
-	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
-	_LoadExternalLexers(dataPath, editor);
+	DoInAllDataDirectories([&](const BPath& path) {
+			_LoadExternalLexers(path, editor);
+		});
 }
 
 
+/**
+ * Iterates through all files in path/scintilla/lexers and loads them as lexers
+ * into editor.
+ */
 /* static */ void
 Languages::_LoadExternalLexers(const BPath& path, Editor* editor)
 {
