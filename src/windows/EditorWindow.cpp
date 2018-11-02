@@ -257,6 +257,12 @@ EditorWindow::New()
 }
 
 
+/**
+ * Sets up monitoring, checks for permissions, opens and reads the file, resets
+ * the save point and undo buffer, sets the caret on position when it was
+ * closed, sets the langugage, adds the file to recent documents, refreshes the
+ * window title and syncs the preferences.
+ */
 void
 EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position column)
 {
@@ -279,17 +285,7 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 	node.ReadAttr("be:caret_position", B_INT32_TYPE, 0, &caretPos, 4);
 	node.ReadAttr("BEOS:TYPE", B_MIME_TYPE, 0, mimeType, 256);
 
-	fReadOnly = true;
-	bool canWrite = _CheckPermissions(&node, S_IWUSR | S_IWGRP | S_IWOTH);
-	if(canWrite) {
-		fReadOnly = false;
-	} else {
-		BAlert* alert = new BAlert(B_TRANSLATE("Warning"),
-			B_TRANSLATE("You don't have permissions to edit this file. The editor will be set to read-only mode."),
-			B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
-		alert->SetShortcut(0, B_ESCAPE);
-		alert->Go();
-	}
+	fReadOnly = !_CheckPermissions(&node, S_IWUSR | S_IWGRP | S_IWOTH);
 
 	BFile file(&entry, B_READ_ONLY);
 	off_t size;
