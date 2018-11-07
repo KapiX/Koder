@@ -80,15 +80,23 @@ Regexp:
     background: "#ffffff"
 Global class:
     id: 119
-    foreground: "#b4438f"
+    foreground: "#006600"
+    background: "#ffffff"
+Constant:
+    id: 120
+    foreground: "#552200"
+    background: "#ffffff"
+Namespace:
+    id: 121
+    foreground: "#408080"
     background: "#ffffff"
 Comment:
     id: 101
-    foreground: "#3f7f5f"
+    foreground: "#557f5f"
     background: "#ffffff"
 Comment doc:
     id: 103
-    foreground: "#3f5fbf"
+    foreground: "#3f55bf"
     background: "#ffffff"
 Comment doc keyword:
     id: 117

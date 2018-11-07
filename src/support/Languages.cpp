@@ -81,6 +81,7 @@ Languages::SortAlphabetically()
 /* static */ std::map<int, int>
 Languages::ApplyLanguage(Editor* editor, const char* lang)
 {
+	editor->SendMessage(SCI_FREESUBSTYLES);
 	std::map<int, int> styleMapping;
 	DoInAllDataDirectories([&](const BPath& path) {
 			try {
@@ -95,12 +96,24 @@ Languages::ApplyLanguage(Editor* editor, const char* lang)
 /**
  * Loads YAML file with language specification:
  *   lexer: int if supplied with Scintilla, string if external (required)
- *   properties: string/string map passed to SCI_SETPROPERTY
- *   keywords: index(int)/string map passed to SCI_SETKEYWORDS
+ *   properties: (string|string) map -> SCI_SETPROPERTY
+ *   keywords: (index(int)|string) map -> SCI_SETKEYWORDS
+ *   identifiers: (lexem class id(int)|(string array)) map -> SCI_SETIDENTIFIERS
  *   comments:
  *     line: string
  *     block: pair of strings
- *   styles: lexer style id(int)/Koder style id(int) map
+ *   styles: (lexem class id(int)|Koder style id(int)) map
+ *   substyles: (lexem class id(int)|(Koder style id(int)) array) map
+ *
+ * For substyles, strings in identifiers array are matched with styles in
+ * substyles array. Array instead of map is used because substyles are allocated
+ * contiguously. Theoretically there is no limit on how many substyles there
+ * can be. Substyling of lexer style id must be supported by the lexer.
+ *
+ * Substyle ids are created using starting id returned by SCI_ALLOCATESUBSTYLE.
+ * For example if it returns 128, then 1st id = 128, 2nd = 129, 3rd = 130.
+ * These are then passed to SCI_SETIDENTIFIERS and merged merged into regular
+ * styles map to be handled by the Styler class.
  */
 /* static */ std::map<int, int>
 Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
@@ -131,21 +144,56 @@ Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
 		editor->SendMessage(SCI_SETKEYWORDS, num, (sptr_t) words.c_str());
 	}
 
-	const YAML::Node comments = language["comments"];
+	std::unordered_map<int, int> substyleStartMap;
+	const auto& identifiers = language["identifiers"];
+	if(identifiers && identifiers.IsMap()) {
+		for(const auto& id : identifiers) {
+			if(!id.second.IsSequence())
+				continue;
+
+			const int substyleId = id.first.as<int>();
+			// TODO: allocate only once
+			const int start = editor->SendMessage(SCI_ALLOCATESUBSTYLES,
+				substyleId, id.second.size());
+			substyleStartMap.emplace(substyleId, start);
+			int i = 0;
+			for(const auto& idents : id.second) {
+				editor->SendMessage(SCI_SETIDENTIFIERS, start + i++,
+					reinterpret_cast<sptr_t>(idents.as<std::string>().c_str()));
+			}
+		}
+	}
+
+	const YAML::Node comments = language["comment"];
 	if(comments) {
 		const YAML::Node line = comments["line"];
 		if(line)
 			editor->SetCommentLineToken(line.as<std::string>());
 		const YAML::Node block = comments["block"];
 		if(block && block.IsSequence())
-			editor->SetCommentBlockTokens(block[0].as<std::string>(), block[1].as<std::string>());
+			editor->SetCommentBlockTokens(block[0].as<std::string>(),
+				block[1].as<std::string>());
 	}
 
+	std::map<int, int> styleMap;
 	const YAML::Node styles = language["styles"];
 	if(styles) {
-		return styles.as<std::map<int, int>>();
+		styleMap = styles.as<std::map<int, int>>();
 	}
-	return std::map<int, int>();
+	const YAML::Node substyles = language["substyles"];
+	if(substyles && substyles.IsMap()) {
+		for(const auto& id : substyles) {
+			if(!id.second.IsSequence())
+				continue;
+
+			int i = 0;
+			for(const auto& styleId : id.second) {
+				const int substyleStart = substyleStartMap[id.first.as<int>()];
+				styleMap.emplace(substyleStart + i++, styleId.as<int>());
+			}
+		}
+	}
+	return styleMap;
 }
 
 
