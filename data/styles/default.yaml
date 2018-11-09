@@ -4,8 +4,8 @@
 Global:
     Default:
         id: 32
-        background: "#ffffff"
         foreground: "#000000"
+        background: "#ffffff"
     Current line:
         background: "#e8f2fe"
     Whitespace:
@@ -51,121 +51,95 @@ Global:
 Preprocessor:
     id: 109
     foreground: "#7f7f9f"
-    background: "#ffffff"
     style: [ bold ]
 Keyword:
     id: 105
     foreground: "#7f0055"
-    background: "#ffffff"
     style: [ bold ]
 Number:
     id: 104
     foreground: "#af0f91"
-    background: "#ffffff"
 String:
     id: 106
     foreground: "#2a00ff"
-    background: "#ffffff"
 Operator:
     id: 110
     foreground: "#3f5fbf"
-    background: "#ffffff"
 Verbatim:
     id: 113
     foreground: "#646464"
-    background: "#ffffff"
 Regexp:
     id: 114
     foreground: "#646464"
-    background: "#ffffff"
 Global class:
     id: 119
     foreground: "#006600"
-    background: "#ffffff"
 Constant:
     id: 120
     foreground: "#552200"
-    background: "#ffffff"
 Namespace:
     id: 121
     foreground: "#408080"
-    background: "#ffffff"
 Comment:
     id: 101
     foreground: "#557f5f"
-    background: "#ffffff"
 Comment doc:
     id: 103
     foreground: "#3f55bf"
-    background: "#ffffff"
 Comment doc keyword:
     id: 117
     foreground: "#7f9fbf"
-    background: "#ffffff"
     style: [ bold ]
 # Python/Ruby
 Triple:
     id: 126
     foreground: "#646464"
-    background: "#ffffff"
 Defname:
     id: 129
     foreground: "#3f5fbf"
-    background: "#ffffff"
     style: [ bold ]
 Decorator:
     id: 135
     foreground: "#3f5fbf"
-    background: "#ffffff"
     style: [ italic ]
 # YAML
 Reference:
     id: 145
     foreground: "#3f3fbf"
-    background: "#ffffff"
 Error:
     id: 148
     foreground: "#ff4136"
-    background: "#ffffff"
 # AWK/Bash/Diff/Makefile
 Backticks:
     id: 151
     foreground: "#646464"
-    background: "#ffffff"
     style: [ bold ]
 Scalar/Array/Diff header:
     id: 152
     foreground: "#0000c0"
-    background: "#ffffff"
     style: [ italic ]
 Deleted:
     id: 165
     foreground: "#ff4136"
-    background: "#ffffff"
 Added:
     id: 166
     foreground: "#2ecc40"
-    background: "#ffffff"
 # CMake
 String L:
     id: 153
     foreground: "#2a00ff"
-    background: "#ffffff"
     style: [ italic ]
 String R:
     id: 154
     foreground: "#2a00ff"
-    background: "#ffffff"
     style: [ underline ]
 # HTML/XML/CSS
 Tag Start/End:
     id: 155
     foreground: "#3f7f7f"
-    background: "#ffffff"
 Attribute:
     id: 156
     foreground: "#7f007f"
-    background: "#ffffff"
 SGML default:
     id: 161
     foreground: "#000000"
