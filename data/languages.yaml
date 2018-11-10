@@ -6,7 +6,7 @@ awk:
     extensions: [ awk ]
 bash:
     name: Bash
-    extensions: [ sh, bash, bsh, csh, ksh, recipe, configure ]
+    extensions: [ sh, bash, bsh, csh, ksh, configure ]
 c:
     name: C
     extensions: [ c ]
@@ -46,6 +46,9 @@ php:
 python:
     name: Python
     extensions: [ py, pyw ]
+recipe:
+    name: Recipe
+    extensions: [ recipe ]
 ruby:
     name: Ruby
     extensions: [ rb, rbw, rake, rjs, Rakefile ]

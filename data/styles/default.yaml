@@ -118,6 +118,17 @@ Scalar/Array/Diff header:
     id: 152
     foreground: "#0000c0"
     style: [ italic ]
+Recipe env variables:
+    id: 180
+    foreground: "#006600"
+Recipe shell functions:
+    id: 181
+    foreground: "#552200"
+    style: [ bold ]
+Recipe Scalar:
+    id: 182
+    foreground: "#408080"
+    style: [ italic ]
 Deleted:
     id: 165
     foreground: "#ff4136"

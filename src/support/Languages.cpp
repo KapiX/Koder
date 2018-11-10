@@ -108,12 +108,12 @@ Languages::ApplyLanguage(Editor* editor, const char* lang)
  * For substyles, strings in identifiers array are matched with styles in
  * substyles array. Array instead of map is used because substyles are allocated
  * contiguously. Theoretically there is no limit on how many substyles there
- * can be. Substyling of lexer style id must be supported by the lexer.
+ * can be. Substyling of lexem class id must be supported by the lexer.
  *
  * Substyle ids are created using starting id returned by SCI_ALLOCATESUBSTYLE.
  * For example if it returns 128, then 1st id = 128, 2nd = 129, 3rd = 130.
- * These are then passed to SCI_SETIDENTIFIERS and merged merged into regular
- * styles map to be handled by the Styler class.
+ * These are then passed to SCI_SETIDENTIFIERS and merged into regular styles
+ * map to be handled by the Styler class.
  */
 /* static */ std::map<int, int>
 Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
