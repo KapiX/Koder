@@ -46,6 +46,9 @@ php:
 python:
     name: Python
     extensions: [ py, pyw ]
+rdef:
+    name: RDef
+    extensions: [ rdef ]
 recipe:
     name: Recipe
     extensions: [ recipe ]
@@ -55,6 +58,9 @@ ruby:
 rust:
     name: Rust
     extensions: [ rs ]
+yab:
+    name: YAB
+    extensions: [ yab ]
 xml:
     name: XML
     extensions: [ xml, xaml, xsl, xslt, xsd, xul, kml, svg, mxml, xsml, wsdl,
