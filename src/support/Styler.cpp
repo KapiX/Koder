@@ -208,6 +208,24 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path, const
 				if(s.bgColor != -1) {
 					editor->SendMessage(SCI_SETFOLDMARGINCOLOUR, true, s.bgColor);
 				}
+			} else if(name == "Fold marker") {
+				std::array<int32, 7> markers = {
+					SC_MARKNUM_FOLDER,
+					SC_MARKNUM_FOLDEROPEN,
+					SC_MARKNUM_FOLDERSUB,
+					SC_MARKNUM_FOLDERTAIL,
+					SC_MARKNUM_FOLDEREND,
+					SC_MARKNUM_FOLDEROPENMID,
+					SC_MARKNUM_FOLDERMIDTAIL
+				};
+				for(auto marker : markers) {
+					if(s.fgColor != -1) {
+						editor->SendMessage(SCI_MARKERSETFORE, marker, s.fgColor);
+					}
+					if(s.bgColor != -1) {
+						editor->SendMessage(SCI_MARKERSETBACK, marker, s.bgColor);
+					}
+				}
 			}
 		}
 	}

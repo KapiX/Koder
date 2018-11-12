@@ -17,8 +17,11 @@ Global:
     Edge:
         foreground: "#7f9fbf"
     Fold:
-        foreground: "#808080"
-        background: "#f3f3f3"
+        foreground: "#e4e4e4"
+        background: "#e4e4e4"
+    Fold marker:
+        foreground: "#e4e4e4"
+        background: "#808080"
     Indent guideline:
         id: 37
         foreground: "#c0c0c0"

@@ -523,10 +523,11 @@ Editor::UpdateLineNumberWidth()
 {
 	if(fPreferences->fLineNumbers) {
 		int numLines = SendMessage(SCI_GETLINECOUNT);
-		int i;
-		for(i = 1; numLines > 0; numLines /= 10, ++i);
-		int charWidth = SendMessage(SCI_TEXTWIDTH, STYLE_LINENUMBER, (sptr_t) "0");
-		SendMessage(SCI_SETMARGINWIDTHN, Margin::NUMBER, std::max(i, 3) * charWidth);
+		int i = 0;
+		for(; numLines > 0; numLines /= 10, ++i);
+		int charWidth = SendMessage(SCI_TEXTWIDTH, STYLE_LINENUMBER, (sptr_t) "0") + 2;
+		SendMessage(SCI_SETMARGINWIDTHN, Margin::NUMBER,
+			std::max(i, 3) * charWidth);
 	} else {
 		SendMessage(SCI_SETMARGINWIDTHN, Margin::NUMBER, 0);
 	}
