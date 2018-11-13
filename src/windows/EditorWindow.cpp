@@ -721,8 +721,26 @@ EditorWindow::MessageReceived(BMessage* message)
 				// Do not delete fOpenedFilePath here.
 				// git removes the file when changing branches. Losing the path
 				// because of that is not useful.
-				fModified = true;
-				RefreshTitle();
+				// Ideally, if the file still exists and was not modified we
+				// would just reload it, but there is a timing issue and this
+				// can fail (load an "empty" file).
+				BAlert* alert = new BAlert(B_TRANSLATE("File removed"),
+					B_TRANSLATE("The file has been removed. What to do?"),
+					B_TRANSLATE("Reload"), B_TRANSLATE("Do nothing"), nullptr,
+					B_WIDTH_AS_USUAL, B_EVEN_SPACING, B_INFO_ALERT);
+				alert->SetShortcut(1, B_ESCAPE);
+				int result = alert->Go();
+				if(result == 0) {
+					_ReloadFile();
+				} else {
+					// EDITOR_SAVEPOINT_LEFT
+					fModified = true;
+					RefreshTitle();
+					fMainMenu->FindItem(MAINMENU_FILE_RELOAD)->SetEnabled(fModified);
+					fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
+					fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, fModified);
+					fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, fModified);
+				}
 			}
 		} break;
 		case B_OBSERVER_NOTICE_CHANGE: {
