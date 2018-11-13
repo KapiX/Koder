@@ -786,8 +786,13 @@ EditorWindow::WindowActivated(bool active)
 			if(result == 0) {
 				_ReloadFile();
 			} else {
+				// EDITOR_SAVEPOINT_LEFT
 				fModified = true;
 				RefreshTitle();
+				fMainMenu->FindItem(MAINMENU_FILE_RELOAD)->SetEnabled(fModified);
+				fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
+				fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, fModified);
+				fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, fModified);
 			}
 			fModifiedOutside = false;
 		}
