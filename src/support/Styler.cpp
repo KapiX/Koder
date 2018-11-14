@@ -226,6 +226,13 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path, const
 						editor->SendMessage(SCI_MARKERSETBACK, marker, s.bgColor);
 					}
 				}
+			} else if(name == "Bookmark marker") {
+				if(s.fgColor != -1) {
+					editor->SendMessage(SCI_MARKERSETFORE, Editor::Marker::BOOKMARK, s.fgColor);
+				}
+				if(s.bgColor != -1) {
+					editor->SendMessage(SCI_MARKERSETBACK, Editor::Marker::BOOKMARK, s.bgColor);
+				}
 			}
 		}
 	}

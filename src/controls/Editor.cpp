@@ -491,6 +491,85 @@ Editor::IncrementalSearchCommit(std::string term)
 }
 
 
+/**
+ * Toggles bookmark on specified line. If line == -1, assumes current line.
+ */
+void
+Editor::ToggleBookmark(int64 line)
+{
+	if(line == -1) {
+		Sci_Position pos = SendMessage(SCI_GETCURRENTPOS);
+		line = SendMessage(SCI_LINEFROMPOSITION, pos);
+	}
+	if((SendMessage(SCI_MARKERGET, line) & (1 << Marker::BOOKMARK)) == 0)
+		SendMessage(SCI_MARKERADD, line, Marker::BOOKMARK);
+	else
+		SendMessage(SCI_MARKERDELETE, line, Marker::BOOKMARK);
+}
+
+
+void
+Editor::SetBookmarks(const BMessage &lines)
+{
+	SendMessage(SCI_MARKERDELETEALL, (1 << Marker::BOOKMARK));
+	type_code type;
+	int32 count;
+	if(lines.GetInfo("line", &type, &count) == B_OK) {
+		for(int32 i = 0; i < count; i++) {
+			int64 line = lines.GetInt64("line", i, -1);
+			SendMessage(SCI_MARKERADD, line, Marker::BOOKMARK);
+		}
+	}
+}
+
+
+BMessage
+Editor::Bookmarks()
+{
+	int64 line = 0;
+	BMessage lines;
+	while(line != -1) {
+		line = SendMessage(SCI_MARKERNEXT, line + 1, (1 << Marker::BOOKMARK));
+		if(line != -1)
+			lines.AddInt64("line", line);
+	}
+	return lines;
+}
+
+
+/**
+ * Goes to next bookmark. Wraps around, if no bookmarks are set does nothing.
+ */
+void
+Editor::NextBookmark()
+{
+	Sci_Position pos = SendMessage(SCI_GETCURRENTPOS);
+	int64 line = SendMessage(SCI_LINEFROMPOSITION, pos);
+	int64 bookmark = SendMessage(SCI_MARKERNEXT, line + 1, (1 << Marker::BOOKMARK));
+	if(bookmark == -1)
+		bookmark = SendMessage(SCI_MARKERNEXT, 0, (1 << Marker::BOOKMARK));
+	if(bookmark != -1)
+		SendMessage(SCI_GOTOLINE, bookmark);
+}
+
+
+/**
+ * Goes to previous bookmark. Wraps around, if no bookmarks are set does nothing.
+ */
+void
+Editor::PreviousBookmark()
+{
+	Sci_Position pos = SendMessage(SCI_GETCURRENTPOS);
+	int64 line = SendMessage(SCI_LINEFROMPOSITION, pos);
+	int64 bookmark = SendMessage(SCI_MARKERPREVIOUS, line - 1, (1 << Marker::BOOKMARK));
+	int64 lineCount = SendMessage(SCI_GETLINECOUNT);
+	if(bookmark == -1)
+		bookmark = SendMessage(SCI_MARKERPREVIOUS, lineCount, (1 << Marker::BOOKMARK));
+	if(bookmark != -1)
+		SendMessage(SCI_GOTOLINE, bookmark);
+}
+
+
 // borrowed from SciTE
 // Copyright (c) Neil Hodgson
 void
@@ -594,6 +673,10 @@ Editor::_MarginClick(int margin, int pos)
 		case Margin::FOLD: {
 			int lineNumber = SendMessage(SCI_LINEFROMPOSITION, pos, 0);
 			SendMessage(SCI_TOGGLEFOLD, lineNumber, 0);
+		} break;
+		case Margin::BOOKMARKS: {
+			int64 lineNumber = SendMessage(SCI_LINEFROMPOSITION, pos);
+			ToggleBookmark(lineNumber);
 		} break;
 	}
 }

@@ -50,6 +50,9 @@ Global:
         background: "#00ffff"
     Tags attributes:
         background: "#ffffff"
+    Bookmark marker:
+        foreground: "#7f9fbf"
+        background: "#e8f2fe"
 # C++
 Preprocessor:
     id: 109

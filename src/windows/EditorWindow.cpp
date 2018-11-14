@@ -29,6 +29,7 @@
 #include <String.h>
 #include <StringFormat.h>
 #include <ToolBar.h>
+#include <kernel/fs_attr.h>
 
 #include <yaml-cpp/yaml.h>
 
@@ -147,6 +148,10 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem(B_TRANSLATE("Find selection"), MAINMENU_SEARCH_FINDSELECTION, 'H')
 			.AddItem(B_TRANSLATE("Replace and find"), MAINMENU_SEARCH_REPLACEANDFIND, 'T')
 			.AddItem(B_TRANSLATE("Incremental search"), MAINMENU_SEARCH_INCREMENTAL, 'I')
+			.AddSeparator()
+			.AddItem(B_TRANSLATE("Toggle bookmark"), MAINMENU_SEARCH_TOGGLEBOOKMARK, 'B')
+			.AddItem(B_TRANSLATE("Next bookmark"), MAINMENU_SEARCH_NEXTBOOKMARK, 'N', B_CONTROL_KEY)
+			.AddItem(B_TRANSLATE("Previous bookmark"), MAINMENU_SEARCH_PREVBOOKMARK, 'P', B_CONTROL_KEY)
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Go to line" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_GOTOLINE, ',')
 		.End()
@@ -281,9 +286,20 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 
 	char mimeType[256];
 	int32 caretPos = 0;
+	BMessage bookmarks;
 	BNode node(&entry);
 	node.ReadAttr("be:caret_position", B_INT32_TYPE, 0, &caretPos, 4);
 	node.ReadAttr("BEOS:TYPE", B_MIME_TYPE, 0, mimeType, 256);
+	// bookmarks
+	BMessage bookmarksArray;
+	attr_info info;
+	node.GetAttrInfo("koder:bookmarks", &info);
+	if(info.type == B_MESSAGE_TYPE) {
+		std::vector<char> buffer(info.size, 0);
+		node.ReadAttr("koder:bookmarks", B_MESSAGE_TYPE, 0, buffer.data(), info.size);
+		BMemoryIO memIO(buffer.data(), info.size);
+		bookmarksArray.Unflatten(&memIO);
+	}
 
 	fReadOnly = !_CheckPermissions(&node, S_IWUSR | S_IWGRP | S_IWOTH);
 
@@ -306,6 +322,7 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 		}
 	}
 	fEditor->SendMessage(SCI_GOTOPOS, gotoPos, 0);
+	fEditor->SetBookmarks(bookmarksArray);
 	fOpenedFileMimeType.SetTo(mimeType);
 
 	char name[B_FILE_NAME_LENGTH];
@@ -412,8 +429,13 @@ EditorWindow::QuitRequested()
 	if(close == true) {
 		if(fOpenedFilePath != nullptr) {
 			int32 caretPos = fEditor->SendMessage(SCI_GETCURRENTPOS, 0, 0);
+			BMessage bookmarks = fEditor->Bookmarks();
 			BNode node(fOpenedFilePath->Path());
 			node.WriteAttr("be:caret_position", B_INT32_TYPE, 0, &caretPos, 4);
+			BMallocIO mallocIO;
+			bookmarks.Flatten(&mallocIO);
+			node.WriteAttr("koder:bookmarks", B_MESSAGE_TYPE, 0,
+				mallocIO.Buffer(), mallocIO.BufferLength());
 		}
 
 		if(fGoToLineWindow != nullptr) {
@@ -559,6 +581,15 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case MAINMENU_SEARCH_INCREMENTAL: {
 			AddCommonFilter(fIncrementalSearchFilter.get());
+		} break;
+		case MAINMENU_SEARCH_TOGGLEBOOKMARK: {
+			fEditor->ToggleBookmark();
+		} break;
+		case MAINMENU_SEARCH_NEXTBOOKMARK: {
+			fEditor->NextBookmark();
+		} break;
+		case MAINMENU_SEARCH_PREVBOOKMARK: {
+			fEditor->PreviousBookmark();
 		} break;
 		case MAINMENU_SEARCH_GOTOLINE: {
 			if(fGoToLineWindow == nullptr) {
@@ -1205,13 +1236,20 @@ EditorWindow::_SyncWithPreferences()
 
 		fEditor->UpdateLineNumberWidth();
 
-		int32 foldWidth = fEditor->SendMessage(SCI_STYLEGETSIZE, 32) * 0.95;
+		const int32 fontSize = fEditor->SendMessage(SCI_STYLEGETSIZE, 32);
+		const int32 foldWidth = fontSize * 0.95;
+		const int32 bookmarkWidth = fontSize * 1.5;
 			// slightly smaller default font size
 		fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::NUMBER, SC_MARGIN_NUMBER);
 		fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::FOLD, SC_MARGIN_SYMBOL);
 		fEditor->SendMessage(SCI_SETMARGINMASKN, Editor::Margin::FOLD, SC_MASK_FOLDERS);
 		fEditor->SendMessage(SCI_SETMARGINWIDTHN, Editor::Margin::FOLD, foldWidth);
 		fEditor->SendMessage(SCI_SETMARGINSENSITIVEN, Editor::Margin::FOLD, 1);
+		fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::BOOKMARKS, SC_MARGIN_SYMBOL);
+		fEditor->SendMessage(SCI_SETMARGINMASKN, Editor::Margin::BOOKMARKS, (1 << Editor::Marker::BOOKMARK));
+		fEditor->SendMessage(SCI_SETMARGINWIDTHN, Editor::Margin::BOOKMARKS, bookmarkWidth);
+		fEditor->SendMessage(SCI_SETMARGINSENSITIVEN, Editor::Margin::BOOKMARKS, 1);
+		fEditor->SendMessage(SCI_MARKERDEFINE, Editor::Marker::BOOKMARK, SC_MARK_BOOKMARK);
 
 		fEditor->SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDER, SC_MARK_BOXPLUS);
 		fEditor->SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDEROPEN, SC_MARK_BOXMINUS);

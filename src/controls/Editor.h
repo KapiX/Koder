@@ -14,6 +14,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "ScintillaUtils.h"
 
@@ -35,7 +36,11 @@ class Editor : public BScintillaView {
 public:
 	enum Margin {
 		NUMBER 		= 0,
-		FOLD
+		FOLD,
+		BOOKMARKS
+	};
+	enum Marker {
+		BOOKMARK	= 0
 	};
 	enum Indicator {
 		WHITESPACE	= 0
@@ -82,6 +87,13 @@ public:
 	void				IncrementalSearchCommit(std::string term);
 
 	void				UpdateLineNumberWidth();
+
+	void				SetBookmarks(const BMessage &lines);
+	BMessage			Bookmarks();
+
+	void				ToggleBookmark(int64 line = -1);
+	void				NextBookmark();
+	void				PreviousBookmark();
 
 	template<typename T>
 	typename T::type	Get() { return T::Get(this); }
