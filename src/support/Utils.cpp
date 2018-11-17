@@ -69,10 +69,12 @@ template void SetChecked<BCheckBox>(BCheckBox*, bool);
 template void SetChecked<BRadioButton>(BRadioButton*, bool);
 
 
-KeyDownMessageFilter::KeyDownMessageFilter(char key, uint32 commandToSend)
+KeyDownMessageFilter::KeyDownMessageFilter(uint32 commandToSend, char key,
+	uint32 modifiers)
 	:
 	BMessageFilter(B_KEY_DOWN),
 	fKey(key),
+	fModifiers(modifiers),
 	fCommandToSend(commandToSend)
 {
 }
@@ -83,8 +85,10 @@ KeyDownMessageFilter::Filter(BMessage* message, BHandler** target)
 {
 	if(message->what == B_KEY_DOWN) {
 		const char* bytes;
+		uint32 modifiers;
 		message->FindString("bytes", &bytes);
-		if(bytes[0] == fKey) {
+		modifiers = static_cast<uint32>(message->GetInt32("modifiers", 0));
+		if(bytes[0] == fKey && modifiers == fModifiers) {
 			Looper()->PostMessage(fCommandToSend);
 			return B_SKIP_MESSAGE;
 		}

@@ -36,7 +36,7 @@ GoToLineWindow::GoToLineWindow(BWindow* owner)
 	fGo->MakeDefault(true);
 	fCancel = new BButton("CancelButton", B_TRANSLATE("Cancel"), new BMessage(GTLW_CANCEL));
 
-	AddCommonFilter(new KeyDownMessageFilter(B_ESCAPE, GTLW_CANCEL));
+	AddCommonFilter(new KeyDownMessageFilter(GTLW_CANCEL, B_ESCAPE));
 
 	AddToSubset(fOwner);
 

@@ -161,7 +161,7 @@ FindWindow::_InitInterface()
 	fBackwardsCB = new BCheckBox("backwards", B_TRANSLATE("Backwards"), new BMessage((uint32) Actions::BACKWARDS));
 	fRegexCB = new BCheckBox("regex", B_TRANSLATE("Regex"), new BMessage((uint32) Actions::REGEX));
 
-	AddCommonFilter(new KeyDownMessageFilter(B_ESCAPE, FINDWINDOW_QUITTING));
+	AddCommonFilter(new KeyDownMessageFilter(FINDWINDOW_QUITTING, B_ESCAPE));
 
 	BLayoutBuilder::Group<>(this, B_VERTICAL, 5)
 		.AddGroup(B_HORIZONTAL, 5)
