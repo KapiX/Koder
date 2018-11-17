@@ -755,23 +755,8 @@ EditorWindow::MessageReceived(BMessage* message)
 				// Ideally, if the file still exists and was not modified we
 				// would just reload it, but there is a timing issue and this
 				// can fail (load an "empty" file).
-				BAlert* alert = new BAlert(B_TRANSLATE("File removed"),
-					B_TRANSLATE("The file has been removed. What to do?"),
-					B_TRANSLATE("Reload"), B_TRANSLATE("Do nothing"), nullptr,
-					B_WIDTH_AS_USUAL, B_EVEN_SPACING, B_INFO_ALERT);
-				alert->SetShortcut(1, B_ESCAPE);
-				int result = alert->Go();
-				if(result == 0) {
-					_ReloadFile();
-				} else {
-					// EDITOR_SAVEPOINT_LEFT
-					fModified = true;
-					RefreshTitle();
-					fMainMenu->FindItem(MAINMENU_FILE_RELOAD)->SetEnabled(fModified);
-					fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
-					fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, fModified);
-					fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, fModified);
-				}
+				_ReloadAlert(B_TRANSLATE("File removed"),
+					B_TRANSLATE("The file has been removed. What to do?"));
 			}
 		} break;
 		case B_OBSERVER_NOTICE_CHANGE: {
@@ -826,23 +811,9 @@ EditorWindow::WindowActivated(bool active)
 		be_app->PostMessage(&message);
 
 		if(fModifiedOutside == true) {
-			// reload opened file
-			BAlert* alert = new BAlert(B_TRANSLATE("File modified"),
-				B_TRANSLATE("The file has been modified by another application. What to do?"),
-				B_TRANSLATE("Reload"), B_TRANSLATE("Do nothing"), nullptr, B_WIDTH_AS_USUAL, B_EVEN_SPACING, B_INFO_ALERT);
-			alert->SetShortcut(1, B_ESCAPE);
-			int result = alert->Go();
-			if(result == 0) {
-				_ReloadFile();
-			} else {
-				// EDITOR_SAVEPOINT_LEFT
-				fModified = true;
-				RefreshTitle();
-				fMainMenu->FindItem(MAINMENU_FILE_RELOAD)->SetEnabled(fModified);
-				fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
-				fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, fModified);
-				fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, fModified);
-			}
+			_ReloadAlert(B_TRANSLATE("File modified"), B_TRANSLATE(
+				"The file has been modified by another application. "
+				"What to do?"));
 			fModifiedOutside = false;
 		}
 	}
@@ -1300,6 +1271,23 @@ EditorWindow::_ShowModifiedAlert()
 		alertText, button0, button1, button2, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_STOP_ALERT);
 	modifiedAlert->SetShortcut(0, B_ESCAPE);
 	return modifiedAlert->Go();
+}
+
+
+void
+EditorWindow::_ReloadAlert(const char* title, const char* message)
+{
+// reload opened file
+	BAlert* alert = new BAlert(title, message,
+		B_TRANSLATE("Reload"), B_TRANSLATE("Do nothing"),
+		nullptr, B_WIDTH_AS_USUAL, B_EVEN_SPACING, B_INFO_ALERT);
+	alert->SetShortcut(1, B_ESCAPE);
+	int result = alert->Go();
+	if(result == 0) {
+		_ReloadFile();
+	} else {
+		PostMessage(EDITOR_SAVEPOINT_LEFT);
+	}
 }
 
 

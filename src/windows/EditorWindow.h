@@ -170,6 +170,7 @@ private:
 			void			_SyncWithPreferences();
 			void			_SyncEditMenus();
 			int32			_ShowModifiedAlert();
+			void			_ReloadAlert(const char* title, const char* message);
 			void			_Save();
 			void			_OpenTerminal(const char* path);
 
