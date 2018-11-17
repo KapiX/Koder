@@ -33,11 +33,36 @@ Editor::Editor()
 	fSearchLast(""),
 	fSearchLastFlags(0),
 	fIncrementalSearch(false),
+	fNumberMarginEnabled(false),
+	fFoldMarginEnabled(false),
+	fBookmarkMarginEnabled(false),
 	fType(""),
 	fReadOnly(false)
 {
 	fStatusView = new StatusView(this);
 	AddChild(fStatusView);
+
+	SendMessage(SCI_SETMARGINTYPEN, Margin::NUMBER, SC_MARGIN_NUMBER);
+
+	SendMessage(SCI_SETMARGINTYPEN, Margin::FOLD, SC_MARGIN_SYMBOL);
+	SendMessage(SCI_SETMARGINMASKN, Margin::FOLD, SC_MASK_FOLDERS);
+	SendMessage(SCI_SETMARGINSENSITIVEN, Margin::FOLD, 1);
+
+	SendMessage(SCI_SETMARGINTYPEN, Margin::BOOKMARKS, SC_MARGIN_SYMBOL);
+	SendMessage(SCI_SETMARGINMASKN, Margin::BOOKMARKS, (1 << Marker::BOOKMARK));
+	SendMessage(SCI_SETMARGINSENSITIVEN, Margin::BOOKMARKS, 1);
+
+	SendMessage(SCI_MARKERDEFINE, Marker::BOOKMARK, SC_MARK_BOOKMARK);
+
+	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDER, SC_MARK_BOXPLUS);
+	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDEROPEN, SC_MARK_BOXMINUS);
+	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDEREND, SC_MARK_BOXPLUSCONNECTED);
+	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERMIDTAIL, SC_MARK_TCORNER);
+	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDEROPENMID, SC_MARK_BOXMINUSCONNECTED);
+	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERSUB, SC_MARK_VLINE);
+	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERTAIL, SC_MARK_LCORNER);
+
+	SendMessage(SCI_SETFOLDFLAGS, 16, 0);
 }
 
 
@@ -570,6 +595,36 @@ Editor::PreviousBookmark()
 }
 
 
+
+void
+Editor::SetNumberMarginEnabled(bool enabled)
+{
+	fNumberMarginEnabled = enabled;
+	// width updated in UpdateLineNumberWidth (called by UPDATEUI event handler)
+}
+
+
+void
+Editor::SetFoldMarginEnabled(bool enabled)
+{
+	fFoldMarginEnabled = enabled;
+	const int32 fontSize = SendMessage(SCI_STYLEGETSIZE, 32);
+	const int32 foldWidth = fontSize * 0.95;
+	const int foldEnabled = SendMessage(SCI_GETPROPERTYINT, (uptr_t) "fold", 0);
+	SendMessage(SCI_SETMARGINWIDTHN, Margin::FOLD, foldEnabled ? foldWidth : 0);
+}
+
+
+void
+Editor::SetBookmarkMarginEnabled(bool enabled)
+{
+	fBookmarkMarginEnabled = enabled;
+	const int32 fontSize = SendMessage(SCI_STYLEGETSIZE, 32);
+	const int32 bookmarkWidth = fontSize * 1.5;
+	SendMessage(SCI_SETMARGINWIDTHN, Margin::BOOKMARKS, bookmarkWidth);
+}
+
+
 // borrowed from SciTE
 // Copyright (c) Neil Hodgson
 void
@@ -600,7 +655,7 @@ Editor::_MaintainIndentation(char ch)
 void
 Editor::UpdateLineNumberWidth()
 {
-	if(fPreferences->fLineNumbers) {
+	if(fNumberMarginEnabled) {
 		int numLines = SendMessage(SCI_GETLINECOUNT);
 		int i = 0;
 		for(; numLines > 0; numLines /= 10, ++i);

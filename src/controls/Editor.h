@@ -95,6 +95,10 @@ public:
 	void				NextBookmark();
 	void				PreviousBookmark();
 
+	void				SetNumberMarginEnabled(bool enabled);
+	void				SetFoldMarginEnabled(bool enabled);
+	void				SetBookmarkMarginEnabled(bool enabled);
+
 	template<typename T>
 	typename T::type	Get() { return T::Get(this); }
 	template<typename T>
@@ -133,6 +137,10 @@ private:
 	BMessage			fSearchLastMessage;
 	bool				fIncrementalSearch;
 	Scintilla::Range	fSavedSelection;
+
+	bool				fNumberMarginEnabled;
+	bool				fFoldMarginEnabled;
+	bool				fBookmarkMarginEnabled;
 
 	// needed for StatusView
 	std::string			fType;

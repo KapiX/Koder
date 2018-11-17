@@ -1234,32 +1234,11 @@ EditorWindow::_SyncWithPreferences()
 			fEditor->ClearHighlightedWhitespace();
 		}
 
+		fEditor->SetNumberMarginEnabled(fPreferences->fLineNumbers);
+		fEditor->SetFoldMarginEnabled(true);
+		fEditor->SetBookmarkMarginEnabled(true);
+
 		fEditor->UpdateLineNumberWidth();
-
-		const int32 fontSize = fEditor->SendMessage(SCI_STYLEGETSIZE, 32);
-		const int32 foldWidth = fontSize * 0.95;
-		const int32 bookmarkWidth = fontSize * 1.5;
-			// slightly smaller default font size
-		fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::NUMBER, SC_MARGIN_NUMBER);
-		fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::FOLD, SC_MARGIN_SYMBOL);
-		fEditor->SendMessage(SCI_SETMARGINMASKN, Editor::Margin::FOLD, SC_MASK_FOLDERS);
-		fEditor->SendMessage(SCI_SETMARGINWIDTHN, Editor::Margin::FOLD, foldWidth);
-		fEditor->SendMessage(SCI_SETMARGINSENSITIVEN, Editor::Margin::FOLD, 1);
-		fEditor->SendMessage(SCI_SETMARGINTYPEN, Editor::Margin::BOOKMARKS, SC_MARGIN_SYMBOL);
-		fEditor->SendMessage(SCI_SETMARGINMASKN, Editor::Margin::BOOKMARKS, (1 << Editor::Marker::BOOKMARK));
-		fEditor->SendMessage(SCI_SETMARGINWIDTHN, Editor::Margin::BOOKMARKS, bookmarkWidth);
-		fEditor->SendMessage(SCI_SETMARGINSENSITIVEN, Editor::Margin::BOOKMARKS, 1);
-		fEditor->SendMessage(SCI_MARKERDEFINE, Editor::Marker::BOOKMARK, SC_MARK_BOOKMARK);
-
-		fEditor->SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDER, SC_MARK_BOXPLUS);
-		fEditor->SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDEROPEN, SC_MARK_BOXMINUS);
-		fEditor->SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDEREND, SC_MARK_BOXPLUSCONNECTED);
-		fEditor->SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERMIDTAIL, SC_MARK_TCORNER);
-		fEditor->SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDEROPENMID, SC_MARK_BOXMINUSCONNECTED);
-		fEditor->SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERSUB, SC_MARK_VLINE);
-		fEditor->SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERTAIL, SC_MARK_LCORNER);
-
-		fEditor->SendMessage(SCI_SETFOLDFLAGS, 16, 0);
 
 		if(!IsHidden()) {
 			if(fPreferences->fToolbar == true)
