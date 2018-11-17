@@ -224,14 +224,9 @@ EditorWindow::EditorWindow(bool stagger)
 
 	_SyncWithPreferences();
 
-	fEditor->SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true, 0);
-	fEditor->SendMessage(SCI_SETIMEINTERACTION, SC_IME_INLINE, 0);
 	fEditor->SendMessage(SCI_SETSCROLLWIDTH, fEditor->Bounds().Width());
 	fEditor->SendMessage(SCI_SETSCROLLWIDTHTRACKING, true, 0);
-	fEditor->SendMessage(SCI_SETWRAPVISUALFLAGS, SC_WRAPVISUALFLAG_MARGIN, 0);
 	fEditor->SendMessage(SCI_SETSAVEPOINT, 0, 0);
-
-	fEditor->SendMessage(SCI_USEPOPUP, 0, 0);
 
 	BFont font;
 	font.SetFamilyAndStyle(fPreferences->fFontFamily.c_str(), nullptr);
