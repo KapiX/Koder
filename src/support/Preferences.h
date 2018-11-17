@@ -36,6 +36,8 @@ public:
 	bool			fLineHighlighting;
 	uint8			fLineHighlightingMode;
 	bool			fLineNumbers;
+	bool			fFoldMargin;
+	bool			fBookmarkMargin;
 	bool			fEOLVisible;
 	bool			fWhiteSpaceVisible;
 	bool			fIndentGuidesShow;

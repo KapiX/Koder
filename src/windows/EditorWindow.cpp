@@ -1201,8 +1201,8 @@ EditorWindow::_SyncWithPreferences()
 		}
 
 		fEditor->SetNumberMarginEnabled(fPreferences->fLineNumbers);
-		fEditor->SetFoldMarginEnabled(true);
-		fEditor->SetBookmarkMarginEnabled(true);
+		fEditor->SetFoldMarginEnabled(fPreferences->fFoldMargin);
+		fEditor->SetBookmarkMarginEnabled(fPreferences->fBookmarkMargin);
 
 		fEditor->UpdateLineNumberWidth();
 

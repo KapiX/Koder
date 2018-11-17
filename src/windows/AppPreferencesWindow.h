@@ -46,7 +46,10 @@ private:
 		LINE_HIGHLIGHTING		= 'lhlt',
 		LINE_HIGHLIGHTING_BG	= 'lhlb',
 		LINE_HIGHLIGHTING_FRAME	= 'lhlf',
+
 		LINE_NUMBERS			= 'lnum',
+		FOLD_MARGIN				= 'fldm',
+		BOOKMARK_MARGIN			= 'bkmm',
 
 		LINELIMIT_COLUMN		= 'llcl',
 		LINELIMIT_SHOW			= 'llsh',
@@ -103,7 +106,11 @@ private:
 	BCheckBox*		fLineHighlightingCB;
 	BRadioButton*	fLineHighlightingBackgroundRadio;
 	BRadioButton*	fLineHighlightingFrameRadio;
+
+	BBox*			fMarginsBox;
 	BCheckBox*		fLineNumbersCB;
+	BCheckBox*		fFoldMarginCB;
+	BCheckBox*		fBookmarkMarginCB;
 
 	BView*			fLineLimitHeaderView;
 	BCheckBox*		fLineLimitShowCB;

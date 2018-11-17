@@ -93,6 +93,8 @@ Preferences::Load(const char* filename)
 	fLineHighlighting = storage.GetBool("lineHighlighting", true);
 	fLineHighlightingMode = storage.GetUInt8("lineHighlightingMode", 0);
 	fLineNumbers = storage.GetBool("lineNumbers", true);
+	fFoldMargin = storage.GetBool("foldMargin", true);
+	fBookmarkMargin = storage.GetBool("bookmarkMargin", true);
 	fIndentGuidesShow = storage.GetBool("indentGuidesShow", true);
 	fIndentGuidesMode = storage.GetUInt8("indentGuidesMode", 1); // SC_IV_REAL
 	fWhiteSpaceVisible = storage.GetBool("whiteSpaceVisible", false);
@@ -130,6 +132,8 @@ Preferences::Save(const char* filename)
 	storage.AddBool("lineHighlighting", fLineHighlighting);
 	storage.AddUInt8("lineHighlightingMode", fLineHighlightingMode);
 	storage.AddBool("lineNumbers", fLineNumbers);
+	storage.AddBool("foldMargin", fFoldMargin);
+	storage.AddBool("bookmarkMargin", fBookmarkMargin);
 	storage.AddBool("whiteSpaceVisible", fWhiteSpaceVisible);
 	storage.AddBool("EOLVisible", fEOLVisible);
 	storage.AddBool("indentGuidesShow", fIndentGuidesShow);
@@ -167,6 +171,8 @@ Preferences::operator =(Preferences p)
 	fLineHighlighting = p.fLineHighlighting;
 	fLineHighlightingMode = p.fLineHighlightingMode;
 	fLineNumbers = p.fLineNumbers;
+	fFoldMargin = p.fFoldMargin;
+	fBookmarkMargin = p.fBookmarkMargin;
 	fEOLVisible = p.fEOLVisible;
 	fWhiteSpaceVisible = p.fWhiteSpaceVisible;
 	fIndentGuidesShow = p.fIndentGuidesShow;

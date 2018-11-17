@@ -99,6 +99,14 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			fPreferences->fLineNumbers = IsChecked(fLineNumbersCB);
 			_PreferencesModified();
 		} break;
+		case Actions::FOLD_MARGIN: {
+			fPreferences->fFoldMargin = IsChecked(fFoldMarginCB);
+			_PreferencesModified();
+		} break;
+		case Actions::BOOKMARK_MARGIN: {
+			fPreferences->fBookmarkMargin = IsChecked(fBookmarkMarginCB);
+			_PreferencesModified();
+		} break;
 		case Actions::LINELIMIT_COLUMN: {
 			fPreferences->fLineLimitColumn =
 				std::stoi(fLineLimitColumnTC->Text());
@@ -215,13 +223,28 @@ AppPreferencesWindow::_InitInterface()
 	fIndentationBox->SetLabel(B_TRANSLATE("Indentation"));
 	fTrailingWSBox = new BBox("trailingWSPrefs");
 	fTrailingWSBox->SetLabel(B_TRANSLATE("Trailing whitespace"));
+	fMarginsBox = new BBox("margins");
+	fMarginsBox->SetLabel(B_TRANSLATE("Margins"));
 
 	fCompactLangMenuCB = new BCheckBox("compactLangMenu", B_TRANSLATE("Compact language menu"), new BMessage((uint32) Actions::COMPACT_LANG_MENU));
 	fToolbarCB = new BCheckBox("toolbar", B_TRANSLATE("Show toolbar"), new BMessage((uint32) Actions::TOOLBAR));
 	fFullPathInTitleCB = new BCheckBox("fullPathInTitle", B_TRANSLATE("Show full path in title"), new BMessage((uint32) Actions::FULL_PATH_IN_TITLE));
 	fTabsToSpacesCB = new BCheckBox("tabsToSpaces", B_TRANSLATE("Convert tabs to spaces"), new BMessage((uint32) Actions::TABS_TO_SPACES));
 	fTabWidthTC = new BTextControl("tabWidth", B_TRANSLATE("Spaces per tab:"), "4", new BMessage((uint32) Actions::TAB_WIDTH));
-	fLineNumbersCB = new BCheckBox("lineNumbers", B_TRANSLATE("Show line numbers"), new BMessage((uint32) Actions::LINE_NUMBERS));
+
+	fLineNumbersCB = new BCheckBox("lineNumbers", B_TRANSLATE("Line numbers"),
+		new BMessage((uint32) Actions::LINE_NUMBERS));
+	fFoldMarginCB = new BCheckBox("folds", B_TRANSLATE("Folds"),
+		new BMessage((uint32) Actions::FOLD_MARGIN));
+	fBookmarkMarginCB = new BCheckBox("bookmarks", B_TRANSLATE("Bookmarks"),
+		new BMessage((uint32) Actions::BOOKMARK_MARGIN));
+
+	BLayoutBuilder::Group<>(fMarginsBox, B_VERTICAL, 0)
+		.AddStrut(B_USE_ITEM_SPACING)
+		.Add(fLineNumbersCB)
+		.Add(fFoldMarginCB)
+		.Add(fBookmarkMarginCB)
+		.SetInsets(B_USE_ITEM_INSETS);
 
 	fLineLimitHeaderView = new BView("lineLimitHeader", 0);
 	fLineLimitShowCB = new BCheckBox("lineLimitShow", B_TRANSLATE("Mark overly long lines"), new BMessage((uint32) Actions::LINELIMIT_SHOW));
@@ -310,11 +333,12 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fCompactLangMenuCB)
 		.Add(fToolbarCB)
 		.Add(fFullPathInTitleCB)
-		.Add(fLineNumbersCB)
 		.Add(fBracesHighlightingCB)
 		.Add(fLineLimitBox)
 		.AddStrut(B_USE_HALF_ITEM_SPACING)
 		.Add(fLineHighlightingBox)
+		.AddStrut(B_USE_HALF_ITEM_SPACING)
+		.Add(fMarginsBox)
 		.AddStrut(B_USE_HALF_ITEM_SPACING)
 		.Add(fEditorStyleMF)
 		.SetInsets(B_USE_ITEM_INSETS);
@@ -343,12 +367,12 @@ AppPreferencesWindow::_InitInterface()
 		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
 			.AddGroup(B_VERTICAL, B_USE_DEFAULT_SPACING)
 				.Add(fVisualBox)
-				.Add(fFontBox)
 			.End()
 			.AddGroup(B_VERTICAL, B_USE_DEFAULT_SPACING)
 				.Add(fIndentationBox)
 				.Add(fTrailingWSBox)
 				.Add(fBehaviorBox)
+				.Add(fFontBox)
 				.AddGlue()
 			.End()
 		.End()
@@ -376,6 +400,8 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 	fTabWidthTC->SetText(tabWidthString.String());
 
 	SetChecked(fLineNumbersCB, preferences->fLineNumbers);
+	SetChecked(fFoldMarginCB, preferences->fFoldMargin);
+	SetChecked(fBookmarkMarginCB, preferences->fBookmarkMargin);
 
 	BString columnString;
 	columnString << preferences->fLineLimitColumn;

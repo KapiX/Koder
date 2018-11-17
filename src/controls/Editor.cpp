@@ -613,10 +613,10 @@ void
 Editor::SetFoldMarginEnabled(bool enabled)
 {
 	fFoldMarginEnabled = enabled;
-	const int32 fontSize = SendMessage(SCI_STYLEGETSIZE, 32);
-	const int32 foldWidth = fontSize * 0.95;
 	const int foldEnabled = SendMessage(SCI_GETPROPERTYINT, (uptr_t) "fold", 0);
-	SendMessage(SCI_SETMARGINWIDTHN, Margin::FOLD, foldEnabled ? foldWidth : 0);
+	const int32 fontSize = SendMessage(SCI_STYLEGETSIZE, 32);
+	const int32 foldWidth = foldEnabled && enabled ? fontSize * 0.95 : 0;
+	SendMessage(SCI_SETMARGINWIDTHN, Margin::FOLD, foldWidth);
 }
 
 
@@ -625,7 +625,7 @@ Editor::SetBookmarkMarginEnabled(bool enabled)
 {
 	fBookmarkMarginEnabled = enabled;
 	const int32 fontSize = SendMessage(SCI_STYLEGETSIZE, 32);
-	const int32 bookmarkWidth = fontSize * 1.5;
+	const int32 bookmarkWidth = enabled ? fontSize * 1.5 : 0;
 	SendMessage(SCI_SETMARGINWIDTHN, Margin::BOOKMARKS, bookmarkWidth);
 }
 
