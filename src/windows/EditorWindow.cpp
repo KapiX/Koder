@@ -36,6 +36,7 @@
 #include "AppPreferencesWindow.h"
 #include "Editor.h"
 #include "Editorconfig.h"
+#include "File.h"
 #include "FindWindow.h"
 #include "GoToLineWindow.h"
 #include "Languages.h"
@@ -298,16 +299,11 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 
 	fReadOnly = !_CheckPermissions(&node, S_IWUSR | S_IWGRP | S_IWOTH);
 
-	BFile file(&entry, B_READ_ONLY);
-	off_t size;
-	file.GetSize(&size);
-	char* buffer = new char[size + 1];
-	file.Read(buffer, size);
-	buffer[size] = 0;
-	fEditor->SetText(buffer);
-	fEditor->SendMessage(SCI_SETSAVEPOINT, 0, 0);
-	fEditor->SendMessage(SCI_EMPTYUNDOBUFFER, 0, 0);
-	delete []buffer;
+	File file(&entry, B_READ_ONLY);
+	fEditor->SetText(file.Read().data());
+
+	fEditor->SendMessage(SCI_SETSAVEPOINT);
+	fEditor->SendMessage(SCI_EMPTYUNDOBUFFER);
 
 	Sci_Position gotoPos = caretPos;
 	if(line != -1) {
@@ -366,7 +362,7 @@ void
 EditorWindow::SaveFile(entry_ref* ref)
 {
 	// TODO error checking
-	BFile file(ref, B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
+	File file(ref, B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
 	if(file.InitCheck() == B_PERMISSION_DENIED) {
 		BAlert* alert = new BAlert(B_TRANSLATE("Access denied"),
 			B_TRANSLATE("You don't have sufficient permissions to edit this file."),
@@ -382,12 +378,10 @@ EditorWindow::SaveFile(entry_ref* ref)
 		fEditor->TrimTrailingWhitespace();
 	}
 
-	int length = fEditor->TextLength() + 1;
-	char* buffer = new char[length];
-	fEditor->GetText(0, length, buffer);
-	file.Write(buffer, length - 1);
-	fEditor->SendMessage(SCI_SETSAVEPOINT, 0, 0);
-	delete []buffer;
+	std::vector<char> buffer(fEditor->TextLength() + 1);
+	fEditor->GetText(0, buffer.size(), buffer.data());
+	file.Write(buffer);
+	fEditor->SendMessage(SCI_SETSAVEPOINT);
 
 	const char* mimeType = fOpenedFileMimeType.Type();
 	_MonitorFile(&node, true);
