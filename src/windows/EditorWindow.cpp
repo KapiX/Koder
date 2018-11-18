@@ -280,22 +280,7 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 	entry.GetModificationTime(&fOpenedFileModificationTime);
 	fModifiedOutside = false;
 
-	char mimeType[256];
-	int32 caretPos = 0;
-	BMessage bookmarks;
 	BNode node(&entry);
-	node.ReadAttr("be:caret_position", B_INT32_TYPE, 0, &caretPos, 4);
-	node.ReadAttr("BEOS:TYPE", B_MIME_TYPE, 0, mimeType, 256);
-	// bookmarks
-	BMessage bookmarksArray;
-	attr_info info;
-	node.GetAttrInfo("koder:bookmarks", &info);
-	if(info.type == B_MESSAGE_TYPE) {
-		std::vector<char> buffer(info.size, 0);
-		node.ReadAttr("koder:bookmarks", B_MESSAGE_TYPE, 0, buffer.data(), info.size);
-		BMemoryIO memIO(buffer.data(), info.size);
-		bookmarksArray.Unflatten(&memIO);
-	}
 
 	fReadOnly = !_CheckPermissions(&node, S_IWUSR | S_IWGRP | S_IWOTH);
 
@@ -305,7 +290,7 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 	fEditor->SendMessage(SCI_SETSAVEPOINT);
 	fEditor->SendMessage(SCI_EMPTYUNDOBUFFER);
 
-	Sci_Position gotoPos = caretPos;
+	Sci_Position gotoPos = file.ReadCaretPosition();
 	if(line != -1) {
 		gotoPos = fEditor->SendMessage(SCI_POSITIONFROMLINE, line - 1);
 		if(column != -1) {
@@ -313,8 +298,8 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 		}
 	}
 	fEditor->SendMessage(SCI_GOTOPOS, gotoPos, 0);
-	fEditor->SetBookmarks(bookmarksArray);
-	fOpenedFileMimeType.SetTo(mimeType);
+	fEditor->SetBookmarks(file.ReadBookmarks());
+	fOpenedFileMimeType.SetTo(file.ReadMimeType().c_str());
 
 	char name[B_FILE_NAME_LENGTH];
 	entry.GetName(name);
@@ -383,12 +368,10 @@ EditorWindow::SaveFile(entry_ref* ref)
 	file.Write(buffer);
 	fEditor->SendMessage(SCI_SETSAVEPOINT);
 
-	const char* mimeType = fOpenedFileMimeType.Type();
+	file.WriteMimeType(fOpenedFileMimeType.Type());
 	_MonitorFile(&node, true);
 	node.GetModificationTime(&fOpenedFileModificationTime);
 	fModifiedOutside = false;
-	BNodeInfo nodeInfo(&node);
-	nodeInfo.SetType(mimeType);
 
 	if(fOpenedFilePath != nullptr) {
 		delete fOpenedFilePath;
@@ -417,14 +400,9 @@ EditorWindow::QuitRequested()
 	}
 	if(close == true) {
 		if(fOpenedFilePath != nullptr) {
-			int32 caretPos = fEditor->SendMessage(SCI_GETCURRENTPOS, 0, 0);
-			BMessage bookmarks = fEditor->Bookmarks();
-			BNode node(fOpenedFilePath->Path());
-			node.WriteAttr("be:caret_position", B_INT32_TYPE, 0, &caretPos, 4);
-			BMallocIO mallocIO;
-			bookmarks.Flatten(&mallocIO);
-			node.WriteAttr("koder:bookmarks", B_MESSAGE_TYPE, 0,
-				mallocIO.Buffer(), mallocIO.BufferLength());
+			File file(fOpenedFilePath->Path(), B_READ_ONLY);
+			file.WriteCaretPosition(fEditor->SendMessage(SCI_GETCURRENTPOS));
+			file.WriteBookmarks(fEditor->Bookmarks());
 		}
 
 		if(fGoToLineWindow != nullptr) {

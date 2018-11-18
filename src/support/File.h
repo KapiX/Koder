@@ -7,7 +7,9 @@
 
 
 #include <File.h>
+#include <Message.h>
 
+#include <string>
 #include <vector>
 
 
@@ -23,7 +25,13 @@ public:
 
 	std::vector<char>	Read();
 	void				Write(std::vector<char> &buffer);
-private:
+
+	int32				ReadCaretPosition();
+	void				WriteCaretPosition(int32 caretPos);
+	std::string			ReadMimeType();
+	void				WriteMimeType(std::string mimeType);
+	BMessage			ReadBookmarks();
+	void				WriteBookmarks(BMessage bookmarks);
 };
 
 
