@@ -125,7 +125,7 @@ Preferences::Save(const char* filename)
 {
 	auto file = _OpenFile(filename, B_WRITE_ONLY);
 	BMessage storage;
-	storage.AddInt8("tabWidth", fTabWidth);
+	storage.AddUInt8("tabWidth", fTabWidth);
 	storage.AddBool("tabsToSpaces", fTabsToSpaces);
 	storage.AddBool("lineHighlighting", fLineHighlighting);
 	storage.AddUInt8("lineHighlightingMode", fLineHighlightingMode);
