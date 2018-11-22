@@ -129,13 +129,6 @@ Editor::ContextMenu(BPoint point)
 
 
 void
-Editor::SetPreferences(Preferences* preferences)
-{
-	fPreferences = preferences;
-}
-
-
-void
 Editor::SetType(std::string type)
 {
 	fType = type;
@@ -628,6 +621,13 @@ Editor::SetBookmarkMarginEnabled(bool enabled)
 }
 
 
+void
+Editor::SetBracesHighlightingEnabled(bool enabled)
+{
+	fBracesHighlightingEnabled = enabled;
+}
+
+
 std::string
 Editor::SelectionText()
 {
@@ -703,7 +703,7 @@ Editor::_UpdateStatusView()
 void
 Editor::_BraceHighlight()
 {
-	if(fPreferences->fBracesHighlighting == true) {
+	if(fBracesHighlightingEnabled == true) {
 		Sci_Position pos = SendMessage(SCI_GETCURRENTPOS, 0, 0);
 		// highlight indent guide
 		int line = SendMessage(SCI_LINEFROMPOSITION, pos, 0);

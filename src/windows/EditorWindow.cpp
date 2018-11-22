@@ -185,7 +185,6 @@ EditorWindow::EditorWindow(bool stagger)
 	fContextMenu->SetTargetForItems(*windowMessenger);
 
 	fEditor = new Editor();
-	fEditor->SetPreferences(fPreferences);
 	Languages::LoadExternalLexers(fEditor);
 
 	BBitmap icon(BRect(0, 0, 23, 23), 0, B_RGBA32);
@@ -1128,6 +1127,7 @@ EditorWindow::_SyncWithPreferences()
 		fEditor->SetNumberMarginEnabled(fPreferences->fLineNumbers);
 		fEditor->SetFoldMarginEnabled(fPreferences->fFoldMargin);
 		fEditor->SetBookmarkMarginEnabled(fPreferences->fBookmarkMargin);
+		fEditor->SetBracesHighlightingEnabled(fPreferences->fBracesHighlighting);
 
 		fEditor->UpdateLineNumberWidth();
 

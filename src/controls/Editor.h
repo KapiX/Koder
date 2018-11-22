@@ -54,8 +54,6 @@ public:
 	void				NotificationReceived(SCNotification* notification);
 	void				ContextMenu(BPoint point);
 
-	void				SetPreferences(Preferences* preferences);
-
 	void				SetType(std::string type);
 	void				SetRef(const entry_ref& ref);
 	void				SetReadOnly(bool readOnly);
@@ -98,6 +96,7 @@ public:
 	void				SetNumberMarginEnabled(bool enabled);
 	void				SetFoldMarginEnabled(bool enabled);
 	void				SetBookmarkMarginEnabled(bool enabled);
+	void				SetBracesHighlightingEnabled(bool enabled);
 
 	std::string			SelectionText();
 
@@ -120,7 +119,6 @@ private:
 							Sci_Position end, bool matchCase, bool matchWord,
 							bool regex = false);
 
-	Preferences*		fPreferences;
 	StatusView*			fStatusView;
 
 	std::string			fCommentLineToken;
@@ -143,6 +141,7 @@ private:
 	bool				fNumberMarginEnabled;
 	bool				fFoldMarginEnabled;
 	bool				fBookmarkMarginEnabled;
+	bool				fBracesHighlightingEnabled;
 
 	// needed for StatusView
 	std::string			fType;
