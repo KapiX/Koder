@@ -99,6 +99,8 @@ public:
 	void				SetFoldMarginEnabled(bool enabled);
 	void				SetBookmarkMarginEnabled(bool enabled);
 
+	std::string			SelectionText();
+
 	template<typename T>
 	typename T::type	Get() { return T::Get(this); }
 	template<typename T>

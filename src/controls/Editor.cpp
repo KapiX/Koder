@@ -393,10 +393,8 @@ Editor::FindNext()
 void
 Editor::FindSelection()
 {
-	if(SendMessage(SCI_GETSELECTIONEMPTY) == false) {
-		int length = SendMessage(SCI_GETSELTEXT);
-		std::string selection(length, '\0');
-		SendMessage(SCI_GETSELTEXT, 0, (sptr_t) &selection[0]);
+	std::string selection = SelectionText();
+	if(!selection.empty()) {
 		fSearchLastMessage.MakeEmpty();
 		fSearchLastMessage.AddBool("wrapAround", true);
 		fSearchLastMessage.AddString("findText", selection.c_str());
@@ -627,6 +625,20 @@ Editor::SetBookmarkMarginEnabled(bool enabled)
 	const int32 fontSize = SendMessage(SCI_STYLEGETSIZE, 32);
 	const int32 bookmarkWidth = enabled ? fontSize * 1.5 : 0;
 	SendMessage(SCI_SETMARGINWIDTHN, Margin::BOOKMARKS, bookmarkWidth);
+}
+
+
+std::string
+Editor::SelectionText()
+{
+	if(SendMessage(SCI_GETSELECTIONEMPTY) == false) {
+		int length = SendMessage(SCI_GETSELTEXT);
+		std::string selection(length, 0);
+		SendMessage(SCI_GETSELTEXT, 0,
+			reinterpret_cast<sptr_t>(selection.data()));
+		return selection;
+	} else
+		return std::string();
 }
 
 
