@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2017-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -10,6 +10,7 @@
 #include <string>
 #include <type_traits>
 
+#include <Alert.h>
 #include <MessageFilter.h>
 
 
@@ -28,6 +29,10 @@ template<typename T>
 bool IsChecked(T* control);
 template<typename T>
 void SetChecked(T* control, bool checked = true);
+
+
+void OKAlert(const char* title, const char* message,
+	alert_type type = B_INFO_ALERT);
 
 
 class KeyDownMessageFilter : public BMessageFilter

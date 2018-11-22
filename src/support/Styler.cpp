@@ -118,12 +118,9 @@ Styler::ApplyGlobal(Editor* editor, const char* style, const BFont* font)
 	}
 	if(found == false && alertShown == false) {
 		alertShown = true;
-		BAlert* alert = new BAlert(B_TRANSLATE("Style files"),
-			B_TRANSLATE("Couldn't find style files. Make sure you have them "
-				"installed in one of your data directories."),
-				B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL,
-				B_WARNING_ALERT);
-		alert->Go();
+		OKAlert(B_TRANSLATE("Style files"), B_TRANSLATE("Couldn't find style "
+			"files. Make sure you have them installed in one of your data "
+			"directories."), B_WARNING_ALERT);
 	}
 }
 

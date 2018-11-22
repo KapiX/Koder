@@ -1,17 +1,23 @@
 /*
- * Copyright 2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2017-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
 #include "Utils.h"
 
+#include <Alert.h>
 #include <Application.h>
 #include <Bitmap.h>
+#include <Catalog.h>
 #include <CheckBox.h>
 #include <IconUtils.h>
 #include <MessageFilter.h>
 #include <RadioButton.h>
 #include <Resources.h>
+
+
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "Utilities"
 
 
 std::string
@@ -67,6 +73,16 @@ void SetChecked(T* control, bool checked)
 }
 template void SetChecked<BCheckBox>(BCheckBox*, bool);
 template void SetChecked<BRadioButton>(BRadioButton*, bool);
+
+
+void
+OKAlert(const char* title, const char* message, alert_type type)
+{
+	BAlert* alert = new BAlert(title, message, B_TRANSLATE("OK"),
+		nullptr, nullptr, B_WIDTH_AS_USUAL, type);
+	alert->SetShortcut(0, B_ESCAPE);
+	alert->Go();
+}
 
 
 KeyDownMessageFilter::KeyDownMessageFilter(uint32 commandToSend, char key,

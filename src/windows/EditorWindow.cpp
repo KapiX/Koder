@@ -347,10 +347,8 @@ EditorWindow::SaveFile(entry_ref* ref)
 	// TODO error checking
 	File file(ref, B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
 	if(file.InitCheck() == B_PERMISSION_DENIED) {
-		BAlert* alert = new BAlert(B_TRANSLATE("Access denied"),
-			B_TRANSLATE("You don't have sufficient permissions to edit this file."),
-			B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_STOP_ALERT);
-		alert->SetShortcut(0, B_ESCAPE);
+		OKAlert(B_TRANSLATE("Access denied"), B_TRANSLATE("You don't have "
+			"sufficient permissions to edit this file."), B_STOP_ALERT);
 		return;
 	}
 	file.Monitor(false, this);
@@ -831,11 +829,8 @@ EditorWindow::_CheckPermissions(BStatable* file, mode_t permissions)
 {
 	mode_t perms;
 	if(file->GetPermissions(&perms) < B_OK) {
-		BAlert* alert = new BAlert(B_TRANSLATE("Error"),
-			B_TRANSLATE("Failed to read file permissions."),
-			B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_STOP_ALERT);
-		alert->SetShortcut(0, B_ESCAPE);
-		alert->Go();
+		OKAlert(B_TRANSLATE("Error"),
+			B_TRANSLATE("Failed to read file permissions."), B_STOP_ALERT);
 		return false;
 	}
 
@@ -871,11 +866,9 @@ EditorWindow::_FindReplace(BMessage* message)
 			bool found;
 			found = fEditor->Find(message);
 			if(found == false) {
-				BAlert* alert = new BAlert(B_TRANSLATE("Searching finished"),
-					B_TRANSLATE("Reached the end of the target. No results found."),
-					B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_INFO_ALERT);
-				alert->SetShortcut(0, B_ESCAPE);
-				alert->Go();
+				OKAlert(B_TRANSLATE("Searching finished"),
+					B_TRANSLATE("Reached the end of the target. "
+						"No results found."));
 			}
 		} break;
 		case FINDWINDOW_REPLACEALL: {
@@ -885,11 +878,7 @@ EditorWindow::_FindReplace(BMessage* message)
 			static BStringFormat format(B_TRANSLATE("Replaced "
 				"{0, plural, one{# occurence} other{# occurences}}."));
 			format.Format(alertMessage, occurences);
-			BAlert* alert = new BAlert(B_TRANSLATE("Replacement finished"),
-				alertMessage, B_TRANSLATE("OK"), nullptr, nullptr,
-				B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_INFO_ALERT);
-			alert->SetShortcut(0, B_ESCAPE);
-			alert->Go();
+			OKAlert(B_TRANSLATE("Replacement finished"), alertMessage);
 		} break;
 	}
 }
@@ -1030,10 +1019,8 @@ EditorWindow::_OpenCorrespondingFile(const BPath &file, const std::string lang)
 				}
 			}
 		}
-		BAlert* notFoundAlert = new BAlert(B_TRANSLATE("Open corresponding file"),
-			B_TRANSLATE("Corresponding file not found."), B_TRANSLATE("OK"),
-			nullptr, nullptr, B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_STOP_ALERT);
-		notFoundAlert->Go();
+		OKAlert(B_TRANSLATE("Open corresponding file"),
+			B_TRANSLATE("Corresponding file not found."), B_STOP_ALERT);
 	}
 }
 
@@ -1284,17 +1271,13 @@ EditorWindow::_OpenTerminal(const char* path)
 			// call add-on code
 			(*processRefsFn)(directoryRef, new BMessage(), NULL);
 		} else {
-			BAlert* alert = new BAlert(B_TRANSLATE("Open Terminal"),
-				B_TRANSLATE("Could not launch Open Terminal Tracker add-on."),
-				B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL,
-				B_STOP_ALERT);
+			OKAlert(B_TRANSLATE("Open Terminal"), B_TRANSLATE("Could not "
+				"launch Open Terminal Tracker add-on."), B_STOP_ALERT);
 		}
 		unload_add_on(addonImage);
 	} else {
-		BAlert* alert = new BAlert(B_TRANSLATE("Open Terminal"),
-			B_TRANSLATE("Could not find Open Terminal Tracker add-on."),
-			B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_AS_USUAL,
-			B_STOP_ALERT);
+		OKAlert(B_TRANSLATE("Open Terminal"), B_TRANSLATE("Could not find "
+			"Open Terminal Tracker add-on."), B_STOP_ALERT);
 	}
 }
 

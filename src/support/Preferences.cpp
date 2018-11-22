@@ -10,6 +10,7 @@
 #include <File.h>
 
 #include "Languages.h"
+#include "Utils.h"
 
 
 #undef B_TRANSLATION_CONTEXT
@@ -17,7 +18,6 @@
 
 
 namespace {
-	const char* kErrorOK = B_TRANSLATE_MARK("OK");
 	const char* kErrorTitle = B_TRANSLATE_MARK("Editor settings");
 	const char* kErrorUnknown = B_TRANSLATE_MARK("Unknown error.");
 	const char* kErrorBadValue[] = {
@@ -53,7 +53,6 @@ Preferences::_OpenFile(const char* filename, uint32 openMode)
 	status_t result = file->InitCheck();
 	if (result != B_OK) {
 		BString error = B_TRANSLATE(kErrorUnknown);
-		BString ok = B_TRANSLATE(kErrorOK);
 		switch (result) {
 			case B_BAD_VALUE:
 				error = B_TRANSLATE(kErrorBadValue[0]);
@@ -72,9 +71,7 @@ Preferences::_OpenFile(const char* filename, uint32 openMode)
 				if(index == 1)
 					return std::shared_ptr<BFile>();
 		}
-		BAlert* alert = new BAlert(B_TRANSLATE(kErrorTitle), error, ok,
-			nullptr, nullptr, B_WIDTH_AS_USUAL, B_WARNING_ALERT);
-		alert->Go();
+		OKAlert(B_TRANSLATE(kErrorTitle), error, B_WARNING_ALERT);
 		return std::shared_ptr<BFile>();
 	}
 	return file;
