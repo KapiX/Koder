@@ -281,7 +281,6 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 	file.Monitor(true, this);
 	file.GetModificationTime(&fOpenedFileModificationTime);
 	fModifiedOutside = false;
-	fReadOnly = !_CheckPermissions(&file, S_IWUSR | S_IWGRP | S_IWOTH);
 
 	fEditor->SetText(file.Read().data());
 
@@ -303,6 +302,7 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 	entry.GetName(name);
 	_SetLanguageByFilename(name);
 
+	fReadOnly = !File::CanWrite(&file);
 	fEditor->SetReadOnly(fReadOnly);
 	fEditor->SetRef(*ref);
 
@@ -696,8 +696,7 @@ EditorWindow::MessageReceived(BMessage* message)
 						fOpenedFileModificationTime = mt;
 					}
 
-					bool canWrite = _CheckPermissions(&entry, S_IWUSR | S_IWGRP | S_IWOTH);
-					fReadOnly = !canWrite;
+					fReadOnly = !File::CanWrite(&entry);
 					fEditor->SetReadOnly(fReadOnly);
 				}
 				RefreshTitle();
@@ -821,23 +820,6 @@ EditorWindow::OpenedFilePath()
 EditorWindow::SetPreferences(Preferences* preferences)
 {
 	fPreferences = preferences;
-}
-
-
-bool
-EditorWindow::_CheckPermissions(BStatable* file, mode_t permissions)
-{
-	mode_t perms;
-	if(file->GetPermissions(&perms) < B_OK) {
-		OKAlert(B_TRANSLATE("Error"),
-			B_TRANSLATE("Failed to read file permissions."), B_STOP_ALERT);
-		return false;
-	}
-
-	if(perms & permissions) {
-		return true;
-	}
-	return false;
 }
 
 

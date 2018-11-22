@@ -143,3 +143,20 @@ File::Monitor(BStatable* file, bool enable, BHandler* handler)
 	file->GetNodeRef(&nref);
 	return watch_node(&nref, flags, handler);
 }
+
+bool
+File::CanWrite(BStatable* file)
+{
+	if(file == nullptr)
+		return false;
+
+	mode_t permissions;
+	if(file->GetPermissions(&permissions) < B_OK) {
+		return false;
+	}
+
+	if(permissions & (S_IWUSR | S_IWGRP | S_IWOTH)) {
+		return true;
+	}
+	return false;
+}

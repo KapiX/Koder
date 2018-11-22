@@ -158,7 +158,6 @@ private:
 			std::string			fIncrementalSearchTerm;
 			std::unique_ptr<BMessageFilter> fIncrementalSearchFilter;
 
-			bool			_CheckPermissions(BStatable* file, mode_t permissions);
 			void			_FindReplace(BMessage* message);
 			void			_PopulateLanguageMenu();
 			void			_ReloadFile(entry_ref* ref = nullptr);
