@@ -32,6 +32,11 @@ public:
 	void				WriteMimeType(std::string mimeType);
 	BMessage			ReadBookmarks();
 	void				WriteBookmarks(BMessage bookmarks);
+
+	status_t			Monitor(bool enable, BHandler* handler);
+
+	static	status_t	Monitor(BStatable* file, bool enable,
+							BHandler* handler);
 };
 
 

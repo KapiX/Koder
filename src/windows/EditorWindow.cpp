@@ -272,19 +272,17 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 	if(fOpenedFilePath != nullptr) {
 		// stop watching previously opened file
 		BEntry open(fOpenedFilePath->Path());
-		_MonitorFile(&open, false);
+		File::Monitor(&open, false, this);
 	}
 
 	BEntry entry(ref);
-	_MonitorFile(&entry, true);
-	entry.GetModificationTime(&fOpenedFileModificationTime);
-	fModifiedOutside = false;
-
-	BNode node(&entry);
-
-	fReadOnly = !_CheckPermissions(&node, S_IWUSR | S_IWGRP | S_IWOTH);
 
 	File file(&entry, B_READ_ONLY);
+	file.Monitor(true, this);
+	file.GetModificationTime(&fOpenedFileModificationTime);
+	fModifiedOutside = false;
+	fReadOnly = !_CheckPermissions(&file, S_IWUSR | S_IWGRP | S_IWOTH);
+
 	fEditor->SetText(file.Read().data());
 
 	fEditor->SendMessage(SCI_SETSAVEPOINT);
@@ -355,8 +353,7 @@ EditorWindow::SaveFile(entry_ref* ref)
 		alert->SetShortcut(0, B_ESCAPE);
 		return;
 	}
-	BNode node(ref);
-	_MonitorFile(&node, false);
+	file.Monitor(false, this);
 
 	if(fFilePreferences.fTrimTrailingWhitespace.value_or(
 			fPreferences->fTrimTrailingWhitespaceOnSave) == true) {
@@ -369,8 +366,8 @@ EditorWindow::SaveFile(entry_ref* ref)
 	fEditor->SendMessage(SCI_SETSAVEPOINT);
 
 	file.WriteMimeType(fOpenedFileMimeType.Type());
-	_MonitorFile(&node, true);
-	node.GetModificationTime(&fOpenedFileModificationTime);
+	file.Monitor(true, this);
+	file.GetModificationTime(&fOpenedFileModificationTime);
 	fModifiedOutside = false;
 
 	if(fOpenedFilePath != nullptr) {
@@ -895,16 +892,6 @@ EditorWindow::_FindReplace(BMessage* message)
 			alert->Go();
 		} break;
 	}
-}
-
-
-status_t
-EditorWindow::_MonitorFile(BStatable* file, bool enable)
-{
-	uint32 flags = (enable == true ? B_WATCH_NAME | B_WATCH_STAT : B_STOP_WATCHING);
-	node_ref nref;
-	file->GetNodeRef(&nref);
-	return watch_node(&nref, flags, this);
 }
 
 

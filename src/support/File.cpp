@@ -7,6 +7,7 @@
 #include "File.h"
 
 #include <NodeInfo.h>
+#include <NodeMonitor.h>
 #include <kernel/fs_attr.h>
 
 #include <vector>
@@ -121,4 +122,24 @@ File::ReadBookmarks()
 		bookmarks.Unflatten(&memIO);
 	}
 	return bookmarks;
+}
+
+
+status_t
+File::Monitor(bool enable, BHandler* handler)
+{
+	return File::Monitor(this, enable, handler);
+}
+
+
+status_t
+File::Monitor(BStatable* file, bool enable, BHandler* handler)
+{
+	if(file == nullptr)
+		return B_BAD_VALUE;
+
+	uint32 flags = (enable ? B_WATCH_NAME | B_WATCH_STAT : B_STOP_WATCHING);
+	node_ref nref;
+	file->GetNodeRef(&nref);
+	return watch_node(&nref, flags, handler);
 }
