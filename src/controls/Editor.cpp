@@ -36,6 +36,7 @@ Editor::Editor()
 	fNumberMarginEnabled(false),
 	fFoldMarginEnabled(false),
 	fBookmarkMarginEnabled(false),
+	fBracesHighlightingEnabled(false),
 	fType(""),
 	fReadOnly(false)
 {
@@ -62,7 +63,6 @@ Editor::Editor()
 	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERSUB, SC_MARK_VLINE);
 	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERTAIL, SC_MARK_LCORNER);
 
-	SendMessage(SCI_MARKERENABLEHIGHLIGHT, true);
 	SendMessage(SCI_SETFOLDFLAGS, 16);
 	SendMessage(SCI_SETADDITIONALSELECTIONTYPING, true);
 	SendMessage(SCI_SETIMEINTERACTION, SC_IME_INLINE);
@@ -625,6 +625,7 @@ void
 Editor::SetBracesHighlightingEnabled(bool enabled)
 {
 	fBracesHighlightingEnabled = enabled;
+	SendMessage(SCI_MARKERENABLEHIGHLIGHT, enabled);
 }
 
 
