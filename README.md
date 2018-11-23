@@ -19,6 +19,11 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 
 ## History
 
+0.4.1 - *23-11-2018*
+
+* Fix crash in incremental search.
+* Fix saving of Spaces per tab setting.
+
 0.4.0 - *07-10-2018*
 
 * Find/Replace window can be closed with Esc now.
