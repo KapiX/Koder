@@ -13,14 +13,11 @@
 #include <Button.h>
 #include <Catalog.h>
 #include <Entry.h>
-#include <File.h>
 #include <FilePanel.h>
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
 #include <MenuBar.h>
 #include <MimeType.h>
-#include <Node.h>
-#include <NodeInfo.h>
 #include <NodeMonitor.h>
 #include <ObjectList.h>
 #include <Path.h>
@@ -30,8 +27,6 @@
 #include <StringFormat.h>
 #include <ToolBar.h>
 #include <kernel/fs_attr.h>
-
-#include <yaml-cpp/yaml.h>
 
 #include "AppPreferencesWindow.h"
 #include "Editor.h"

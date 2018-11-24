@@ -10,7 +10,6 @@
 #include <algorithm>
 #include <string>
 
-#include "Preferences.h"
 #include "ScintillaUtils.h"
 #include "StatusView.h"
 

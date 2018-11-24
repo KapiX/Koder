@@ -19,7 +19,6 @@
 #include "ScintillaUtils.h"
 
 
-class Preferences;
 class StatusView;
 
 
