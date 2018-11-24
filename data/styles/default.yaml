@@ -161,3 +161,10 @@ SGML default:
     id: 161
     foreground: "#000000"
     background: "#a6caf0"
+# Markdown
+Strong:
+    id: 200
+    style: [ bold ]
+Emphasis:
+    id: 201
+    style: [ italic ]
