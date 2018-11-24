@@ -175,6 +175,11 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 				IsChecked(fAlwaysOpenInNewWindowCB);
 			_PreferencesModified();
 		} break;
+		case Actions::APPEND_NL_AT_THE_END: {
+			fPreferences->fAppendNLAtTheEndIfNotPresent =
+				IsChecked(fAppendNLAtTheEndCB);
+			_PreferencesModified();
+		} break;
 		case Actions::USE_CUSTOM_FONT: {
 			bool use = IsChecked(fUseCustomFontCB);
 			fPreferences->fUseCustomFont = use;
@@ -305,6 +310,7 @@ AppPreferencesWindow::_InitInterface()
 	fTrimTrailingWSOnSaveCB  = new BCheckBox("trimTrailingWSOnSave", B_TRANSLATE("Trim trailing whitespace on save"), new BMessage((uint32) Actions::TRIM_TRAILING_WS_SAVE));
 	fUseEditorconfigCB  = new BCheckBox("useEditorconfig", B_TRANSLATE("Use .editorconfig if possible"), new BMessage((uint32) Actions::USE_EDITORCONFIG));
 	fAlwaysOpenInNewWindowCB  = new BCheckBox("alwaysOpenInNewWindow", B_TRANSLATE("Always open files in new window"), new BMessage((uint32) Actions::ALWAYS_OPEN_IN_NEW_WINDOW));
+	fAppendNLAtTheEndCB  = new BCheckBox("appendNLAtTheEnd", B_TRANSLATE("Append NL at the end if not present (on save)"), new BMessage((uint32) Actions::APPEND_NL_AT_THE_END));
 
 	fUseCustomFontCB = new BCheckBox("customFont", B_TRANSLATE("Use custom font"), new BMessage((uint32) Actions::USE_CUSTOM_FONT));
 	fFontMenu = new BPopUpMenu("font");
@@ -358,6 +364,7 @@ AppPreferencesWindow::_InitInterface()
 
 	BLayoutBuilder::Group<>(fBehaviorBox, B_VERTICAL, 0)
 		.AddStrut(B_USE_ITEM_SPACING)
+		.Add(fAppendNLAtTheEndCB)
 		.Add(fAlwaysOpenInNewWindowCB)
 		.Add(fAttachNewWindowsCB)
 		.Add(fUseEditorconfigCB)
@@ -367,13 +374,13 @@ AppPreferencesWindow::_InitInterface()
 		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
 			.AddGroup(B_VERTICAL, B_USE_DEFAULT_SPACING)
 				.Add(fVisualBox)
+				.AddGlue()
 			.End()
 			.AddGroup(B_VERTICAL, B_USE_DEFAULT_SPACING)
 				.Add(fIndentationBox)
 				.Add(fTrailingWSBox)
 				.Add(fBehaviorBox)
 				.Add(fFontBox)
-				.AddGlue()
 			.End()
 		.End()
 		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
@@ -430,6 +437,7 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 	SetChecked(fTrimTrailingWSOnSaveCB, preferences->fTrimTrailingWhitespaceOnSave);
 	SetChecked(fUseEditorconfigCB, preferences->fUseEditorconfig);
 	SetChecked(fAlwaysOpenInNewWindowCB, preferences->fAlwaysOpenInNewWindow);
+	SetChecked(fAppendNLAtTheEndCB, preferences->fAppendNLAtTheEndIfNotPresent);
 }
 
 

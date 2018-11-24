@@ -53,6 +53,7 @@ public:
 	bool			fOpenWindowsInStack;
 	bool			fHighlightTrailingWhitespace;
 	bool			fTrimTrailingWhitespaceOnSave;
+	bool			fAppendNLAtTheEndIfNotPresent;
 	bool			fUseEditorconfig;
 	bool			fAlwaysOpenInNewWindow;
 	bool			fUseCustomFont;

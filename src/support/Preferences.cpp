@@ -107,6 +107,7 @@ Preferences::Load(const char* filename)
 	fOpenWindowsInStack = storage.GetBool("openWindowsInStack", true);
 	fHighlightTrailingWhitespace = storage.GetBool("highlightTrailingWhitespace", false);
 	fTrimTrailingWhitespaceOnSave = storage.GetBool("trimTrailingWhitespaceOnSave", false);
+	fAppendNLAtTheEndIfNotPresent = storage.GetBool("appendNLAtTheEndIfNotPresent", true);
 	fStyle = storage.GetString("style", "default");
 	fWindowRect = storage.GetRect("windowRect", BRect(50, 50, 450, 450));
 	fUseEditorconfig = storage.GetBool("useEditorconfig", true);
@@ -146,6 +147,7 @@ Preferences::Save(const char* filename)
 	storage.AddBool("openWindowsInStack", fOpenWindowsInStack);
 	storage.AddBool("highlightTrailingWhitespace", fHighlightTrailingWhitespace);
 	storage.AddBool("trimTrailingWhitespaceOnSave", fTrimTrailingWhitespaceOnSave);
+	storage.AddBool("appendNLAtTheEndIfNotPresent", fAppendNLAtTheEndIfNotPresent);
 	storage.AddString("style", fStyle.c_str());
 	storage.AddRect("windowRect", fWindowRect);
 	storage.AddMessage("findWindowState", &fFindWindowState);
@@ -185,6 +187,7 @@ Preferences::operator =(Preferences p)
 	fOpenWindowsInStack = p.fOpenWindowsInStack;
 	fHighlightTrailingWhitespace = p.fHighlightTrailingWhitespace;
 	fTrimTrailingWhitespaceOnSave = p.fTrimTrailingWhitespaceOnSave;
+	fAppendNLAtTheEndIfNotPresent = p.fAppendNLAtTheEndIfNotPresent;
 	fStyle = p.fStyle;
 	fWindowRect = p.fWindowRect;
 	fFindWindowState = p.fFindWindowState;

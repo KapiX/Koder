@@ -70,6 +70,7 @@ private:
 		TRIM_TRAILING_WS_SAVE	= 'ttws',
 
 		USE_EDITORCONFIG		= 'uecf',
+		APPEND_NL_AT_THE_END	= 'apae',
 		ALWAYS_OPEN_IN_NEW_WINDOW='aonw',
 		USE_CUSTOM_FONT			= 'ucfn',
 		FONT_CHANGED			= 'fnch',
@@ -138,6 +139,7 @@ private:
 
 	BCheckBox*		fUseEditorconfigCB;
 	BCheckBox*		fAlwaysOpenInNewWindowCB;
+	BCheckBox*		fAppendNLAtTheEndCB;
 
 	BBox*			fFontBox;
 	BCheckBox*		fUseCustomFontCB;

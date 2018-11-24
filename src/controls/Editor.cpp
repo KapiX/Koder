@@ -321,6 +321,22 @@ Editor::TrimTrailingWhitespace()
 }
 
 
+/**
+ * Appends new line at the end of the file, if it is not present.
+ * Does so by checking if the last line is longer than 0.
+ */
+void
+Editor::AppendNLAtTheEndIfNotPresent()
+{
+	const std::string lineFeed = _LineFeedString(Get<EOLMode>());
+	const int lines = SendMessage(SCI_GETLINECOUNT);
+	if(SendMessage(SCI_LINELENGTH, lines - 1) > 0) {
+		SendMessage(SCI_APPENDTEXT, lineFeed.size(),
+			reinterpret_cast<sptr_t>(lineFeed.c_str()));
+	}
+}
+
+
 bool
 Editor::Find(BMessage* message)
 {
@@ -809,6 +825,21 @@ Editor::_HighlightTrailingWhitespace(Sci_Position start, Sci_Position end)
 	fHighlightedWhitespaceStart = start;
 	fHighlightedWhitespaceEnd = end;
 	fHighlightedWhitespaceCurrentPos = currentPos;
+}
+
+
+std::string
+Editor::_LineFeedString(int eolMode)
+{
+	switch(eolMode) {
+		default:
+		case SC_EOL_LF:
+			return "\n";
+		case SC_EOL_CRLF:
+			return "\r\n";
+		case SC_EOL_CR:
+			return "\r";
+	}
 }
 
 

@@ -65,6 +65,8 @@ typedef Property<Sci_Position, SCI_GETTARGETEND, SCI_SETTARGETEND>
 	SearchTargetEnd;
 typedef Property<int, SCI_GETINDICATORCURRENT, SCI_SETINDICATORCURRENT>
 	CurrentIndicator;
+typedef Property<int, SCI_GETEOLMODE, SCI_SETEOLMODE>
+	EOLMode;
 
 typedef PropertyRange<SCI_GETTARGETSTART, SCI_GETTARGETEND, SCI_SETTARGETRANGE>
 	SearchTarget;

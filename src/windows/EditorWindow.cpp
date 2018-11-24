@@ -352,6 +352,10 @@ EditorWindow::SaveFile(entry_ref* ref)
 		fEditor->TrimTrailingWhitespace();
 	}
 
+	if(fPreferences->fAppendNLAtTheEndIfNotPresent) {
+		fEditor->AppendNLAtTheEndIfNotPresent();
+	}
+
 	std::vector<char> buffer(fEditor->TextLength() + 1);
 	fEditor->GetText(0, buffer.size(), buffer.data());
 	file.Write(buffer);

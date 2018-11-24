@@ -70,6 +70,8 @@ public:
 	void				ClearHighlightedWhitespace();
 	void				TrimTrailingWhitespace();
 
+	void				AppendNLAtTheEndIfNotPresent();
+
 	bool				Find(BMessage* message);
 	void				FindNext();
 	void				FindSelection();
@@ -112,6 +114,7 @@ private:
 	bool				_BraceMatch(int pos);
 	void				_MarginClick(int margin, int pos);
 	void				_HighlightTrailingWhitespace(Sci_Position start, Sci_Position end);
+	std::string			_LineFeedString(int eolMode);
 
 	void				_SetLineIndentation(int line, int indent);
 
