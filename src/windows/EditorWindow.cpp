@@ -539,10 +539,10 @@ EditorWindow::MessageReceived(BMessage* message)
 			fEditor->ToggleBookmark();
 		} break;
 		case MAINMENU_SEARCH_NEXTBOOKMARK: {
-			fEditor->NextBookmark();
+			fEditor->GoToNextBookmark();
 		} break;
 		case MAINMENU_SEARCH_PREVBOOKMARK: {
-			fEditor->PreviousBookmark();
+			fEditor->GoToPreviousBookmark();
 		} break;
 		case MAINMENU_SEARCH_GOTOLINE: {
 			if(fGoToLineWindow == nullptr) {

@@ -89,8 +89,8 @@ public:
 	BMessage			Bookmarks();
 
 	void				ToggleBookmark(int64 line = -1);
-	void				NextBookmark();
-	void				PreviousBookmark();
+	void				GoToNextBookmark();
+	void				GoToPreviousBookmark();
 
 	void				SetNumberMarginEnabled(bool enabled);
 	void				SetFoldMarginEnabled(bool enabled);

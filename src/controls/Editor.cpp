@@ -564,7 +564,7 @@ Editor::Bookmarks()
  * Goes to next bookmark. Wraps around, if no bookmarks are set does nothing.
  */
 void
-Editor::NextBookmark()
+Editor::GoToNextBookmark()
 {
 	Sci_Position pos = SendMessage(SCI_GETCURRENTPOS);
 	int64 line = SendMessage(SCI_LINEFROMPOSITION, pos);
@@ -580,7 +580,7 @@ Editor::NextBookmark()
  * Goes to previous bookmark. Wraps around, if no bookmarks are set does nothing.
  */
 void
-Editor::PreviousBookmark()
+Editor::GoToPreviousBookmark()
 {
 	Sci_Position pos = SendMessage(SCI_GETCURRENTPOS);
 	int64 line = SendMessage(SCI_LINEFROMPOSITION, pos);
