@@ -24,23 +24,28 @@ identifiers:
         - >
             BUILD PATCH INSTALL TEST
             ADDITIONAL_FILES ARCHITECTURES BUILD_PACKAGE_ACTIVATION_PHASE
-            BUILD_PREREQUIRES BUILD_REQUIRES CHECKSUM_SHA256 CHECKSUM_SHA256_2
+            BUILD_PACKAGE_ACTIVATION_FILE BUILD_PREREQUIRES BUILD_REQUIRES
+            CHECKSUM_SHA256 CHECKSUM_SHA256_2
             CHECKSUM_SHA256_3 CHECKSUM_SHA256_4 CHECKSUM_SHA256_5
             CHECKSUM_SHA256_6 CHECKSUM_SHA256_7 CHECKSUM_SHA256_8
             CHECKSUM_SHA256_9 CONFLICTS COPYRIGHT DESCRIPTION
             DISABLE_SOURCE_PACKAGE FRESHENS GLOBAL_WRITABLE_FILES HOMEPAGE
             LICENSE MESSAGE PACKAGE_GROUPS PACKAGE_USERS PATCHES
             POST_INSTALL_SCRIPTS PROVIDES PROVIDES_devel REPLACES REQUIRES
-            REQUIRES_devel REVISION SOURCE_DIR SOURCE_DIR_2 SOURCE_DIR_3
+            REQUIRES_devel REVISION SECONDARY_ARCHITECTURES
+            SOURCE_DIR SOURCE_DIR_2 SOURCE_DIR_3
             SOURCE_DIR_4 SOURCE_DIR_5 SOURCE_DIR_6 SOURCE_DIR_7 SOURCE_DIR_8
             SOURCE_DIR_9 SOURCE_FILENAME SOURCE_URI SOURCE_URI_2 SOURCE_URI_3
             SOURCE_URI_4 SOURCE_URI_5 SOURCE_URI_6 SOURCE_URI_7 SOURCE_URI_8
             SOURCE_URI_9 SUMMARY SUPPLEMENTS TEST_REQUIRES USER_SETTINGS_FILES
         - >
             addAppDeskbarSymlink addPreferencesDeskbarSymlink
-            defineDebugInfoPackage extractDebugInfo fixDevelopLibDirReferences
-            fixPkgconfig packageEntries prepareInstalledDevelLib
-            prepareInstalledDevelLibs runConfigure
+            addResourcesToBinaries checkedUnmount defineDebugInfoPackage
+            extractDebugInfo fixDevelopLibDirReferences
+            fixPkgconfig getPackagePrefix getTargetArchitectureCommand
+            packageDebugInfos packageEntries prepareInstalledDevelLib
+            prepareInstalledDevelLibs runConfigure symlinkRelative
+            updateRevisionVariables
     9:
         - >
             $addOnsDir $appsDir $binDir $buildArchitecture $buildMachineTriple
