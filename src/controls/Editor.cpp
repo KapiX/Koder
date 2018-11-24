@@ -36,6 +36,7 @@ Editor::Editor()
 	fFoldMarginEnabled(false),
 	fBookmarkMarginEnabled(false),
 	fBracesHighlightingEnabled(false),
+	fTrailingWSHighlightingEnabled(false),
 	fType(""),
 	fReadOnly(false)
 {
@@ -108,6 +109,8 @@ Editor::NotificationReceived(SCNotification* notification)
 			_BraceHighlight();
 			UpdateLineNumberWidth();
 			_UpdateStatusView();
+			if(fTrailingWSHighlightingEnabled)
+				HighlightTrailingWhitespace();
 			window_msg.SendMessage(EDITOR_UPDATEUI);
 		break;
 		case SCN_MARGINCLICK:
@@ -625,6 +628,19 @@ Editor::SetBracesHighlightingEnabled(bool enabled)
 {
 	fBracesHighlightingEnabled = enabled;
 	SendMessage(SCI_MARKERENABLEHIGHLIGHT, enabled);
+}
+
+
+void
+Editor::SetTrailingWSHighlightingEnabled(bool enabled)
+{
+	fTrailingWSHighlightingEnabled = enabled;
+	if(enabled) {
+		HighlightTrailingWhitespace();
+	} else {
+		ClearHighlightedWhitespace();
+	}
+	// further updates in UPDATEUI event handler
 }
 
 
