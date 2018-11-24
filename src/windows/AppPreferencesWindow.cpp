@@ -197,8 +197,8 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 		} break;
 		case Actions::REVERT: {
 			*fPreferences = *fStartPreferences;
-			fRevertButton->SetEnabled(false);
 			_PreferencesModified();
+			fRevertButton->SetEnabled(false);
 			_SyncPreferences(fPreferences);
 		} break;
 		default: {
