@@ -22,6 +22,24 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 
 0.5.0 - *TBD*
 
+* Make preferences update automatically.
+* Add Open Terminal shortcut.
+* Update line number margin on preferences change.
+* Add support for loading external lexers.
+* Add support for Jamfile, HaikuPorts recipe, YAB, RDef and Markdown.
+* Remove read-only warning when opening a file.
+* Fix automatic color updates for status bar.
+* Highlight system constants in C++ mode.
+* Change fold markers and highlight active folding block.
+* Fix save and reload toolbar buttons state after external modification and file removal.
+* Add bookmarks support.
+* Add settings for margin visibility.
+
+0.4.1 - *23-11-2018*
+
+* Fix crash in incremental search.
+* Fix saving of Spaces per tab setting.
+
 0.4.0 - *07-10-2018*
 
 * Find/Replace window can be closed with Esc now.
