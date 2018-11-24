@@ -1,5 +1,6 @@
 # Copyright (c) 2018 Mikael Konradsson
 # MIT licensed
+
 Global:
     Default:
         id: 32
@@ -18,6 +19,9 @@ Global:
     Fold:
         foreground: "#282629"
         background: "#474247"
+    Fold marker:
+        foreground: "#e4e4e4"
+        background: "#808080"
     Indent guideline:
         id: 37
         foreground: "#474247"
@@ -35,7 +39,7 @@ Global:
     Line number:
         id: 33
         foreground: "#656066"
-        background: "#282629"
+        background: "#212022"
     Smart highlight:
         background: "#FF4050"
     Find mark:
@@ -46,6 +50,9 @@ Global:
         background: "#CC78FA"
     Tags attributes:
         background: "#F553BF"
+    Bookmark marker:
+        foreground: "#7694B2"
+        background: "#7f9fbf"
 # C++
 Preprocessor:
     id: 109
@@ -73,6 +80,12 @@ Regexp:
 Global class:
     id: 119
     foreground: "#53A6E1"
+Constant:
+    id: 120
+    foreground: "#F97C31"
+Namespace:
+    id: 121
+    foreground: "#FF74F4"
 Comment:
     id: 101
     foreground: "#C1BCC2"
@@ -81,7 +94,7 @@ Comment doc:
     foreground: "#66BFFF"
 Comment doc keyword:
     id: 117
-    foreground: "#66BFFF"
+    foreground: "#A45EEC"
     style: [ bold ]
 # Python/Ruby
 Triple:
@@ -110,6 +123,17 @@ Backticks:
 Scalar/Array/Diff header:
     id: 152
     foreground: "#F28144"
+    style: [ italic ]
+Recipe env variables:
+    id: 180
+    foreground: "#53A6E1"
+Recipe shell functions:
+    id: 181
+    foreground: "#E05900"
+    style: [ bold ]
+Recipe Scalar:
+    id: 182
+    foreground: "#408080"
     style: [ italic ]
 Deleted:
     id: 165
