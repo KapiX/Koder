@@ -172,6 +172,8 @@ private:
 			void			_Save();
 			void			_OpenTerminal(const char* path);
 
+			void			OnSavePoint(bool left);
+
 	static	filter_result	_IncrementalSearchFilter(BMessage* message,
 								BHandler** target, BMessageFilter* messageFilter);
 };

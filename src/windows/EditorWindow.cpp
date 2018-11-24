@@ -631,20 +631,10 @@ EditorWindow::MessageReceived(BMessage* message)
 			_SyncEditMenus();
 		} break;
 		case EDITOR_SAVEPOINT_LEFT: {
-			fModified = true;
-			RefreshTitle();
-			fMainMenu->FindItem(MAINMENU_FILE_RELOAD)->SetEnabled(fModified);
-			fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
-			fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, fModified);
-			fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, fModified);
+			OnSavePoint(true);
 		} break;
 		case EDITOR_SAVEPOINT_REACHED: {
-			fModified = false;
-			RefreshTitle();
-			fMainMenu->FindItem(MAINMENU_FILE_RELOAD)->SetEnabled(fModified);
-			fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
-			fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, fModified);
-			fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, fModified);
+			OnSavePoint(false);
 		} break;
 		case EDITOR_UPDATEUI: {
 			_SyncEditMenus();
@@ -1247,6 +1237,21 @@ EditorWindow::_OpenTerminal(const char* path)
 		OKAlert(B_TRANSLATE("Open Terminal"), B_TRANSLATE("Could not find "
 			"Open Terminal Tracker add-on."), B_STOP_ALERT);
 	}
+}
+
+
+/**
+ * left parameter specifies whether savepoint was left or reached.
+ */
+void
+EditorWindow::OnSavePoint(bool left)
+{
+	fModified = left;
+	RefreshTitle();
+	fMainMenu->FindItem(MAINMENU_FILE_RELOAD)->SetEnabled(fModified);
+	fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
+	fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, fModified);
+	fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, fModified);
 }
 
 
