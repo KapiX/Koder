@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2016-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -10,6 +10,7 @@
 #include <Catalog.h>
 #include <CheckBox.h>
 #include <LayoutBuilder.h>
+#include <ScrollView.h>
 #include <StringView.h>
 
 #include <string>
@@ -25,6 +26,7 @@
 
 namespace {
 const int kSemTimeOut = 50000;
+const uint32 kMaxItems = 4;
 }
 
 
@@ -57,24 +59,52 @@ QuitAlert::_InitInterface()
 	fDontSave = new BButton(B_TRANSLATE("Don't save"), new BMessage((uint32) Actions::DONT_SAVE));
 	fCancel = new BButton(B_TRANSLATE("Cancel"), new BMessage(B_QUIT_REQUESTED));
 	fCancel->MakeDefault(true);
-	BGroupLayout* files = new BGroupLayout(B_VERTICAL, 5);
-	BLayoutBuilder::Group<>(this, B_VERTICAL, 5)
+	BGroupView* filesView = new BGroupView(B_VERTICAL, 0);
+	filesView->SetViewUIColor(B_CONTROL_BACKGROUND_COLOR);
+	fScrollView = new BScrollView("files", filesView, 0, false, true);
+	BLayoutBuilder::Group<>(this, B_VERTICAL, B_USE_DEFAULT_SPACING)
 		.Add(fMessageString)
-		.Add(files)
-		.AddGroup(B_HORIZONTAL, 5)
+		.Add(fScrollView)
+		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
 			.Add(fSaveAll)
 			.Add(fSaveSelected)
 			.Add(fDontSave)
 			.AddGlue()
 			.Add(fCancel)
 		.End()
-		.SetInsets(5, 5, 5, 5);
+		.SetInsets(B_USE_SMALL_INSETS);
+	font_height fh;
+	be_plain_font->GetHeight(&fh);
+	float textHeight = fh.ascent + fh.descent + fh.leading + 5;
+	fScrollView->SetExplicitSize(BSize(B_SIZE_UNSET,
+		textHeight * std::min<uint32>(fUnsavedFiles.size(), kMaxItems) + 25.0f));
 
+	float height = 0.0f;
 	EditorWindow* current;
+	BGroupLayout* files = filesView->GroupLayout();
+	files->SetInsets(B_USE_SMALL_INSETS);
 	for(int i = 0; i < fUnsavedFiles.size(); ++i) {
 		fCheckboxes[i] = new BCheckBox("file", fUnsavedFiles[i].c_str(), new BMessage((uint32) i));
 		SetChecked(fCheckboxes[i]);
 		files->AddView(fCheckboxes[i]);
+	}
+}
+
+
+void
+QuitAlert::Show()
+{
+	BWindow::Show();
+	fScrollView->SetExplicitSize(BSize(Bounds().Width(), B_SIZE_UNSET));
+	font_height fh;
+	be_plain_font->GetHeight(&fh);
+	float textHeight = fh.ascent + fh.descent + fh.leading + 5;
+	if(LockLooper()) {
+		BScrollBar* bar = fScrollView->ScrollBar(B_VERTICAL);
+		bar->SetSteps(textHeight / 2.0f, textHeight * 3.0f / 2.0f);
+		bar->SetRange(0.0f, fUnsavedFiles.size() > kMaxItems ?
+			(textHeight + 3.0f) * (fUnsavedFiles.size() - kMaxItems) : 0.0f);
+		UnlockLooper();
 	}
 }
 

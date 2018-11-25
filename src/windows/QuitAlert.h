@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2016-2018 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -17,6 +17,7 @@
 class BButton;
 class BCheckBox;
 class BStringView;
+class BScrollView;
 
 class EditorWindow;
 
@@ -27,6 +28,7 @@ public:
 								~QuitAlert();
 
 	void						MessageReceived(BMessage* message);
+	virtual void				Show();
 	std::vector<bool>			Go();
 private:
 	enum Actions {
@@ -35,6 +37,7 @@ private:
 		DONT_SAVE		= 'dnsv'
 	};
 	const std::vector<std::string>	fUnsavedFiles;
+	BScrollView*					fScrollView;
 	BStringView*					fMessageString;
 	BButton*						fSaveAll;
 	BButton*						fSaveSelected;
