@@ -164,7 +164,7 @@ Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
 		}
 	}
 
-	const YAML::Node comments = language["comment"];
+	const YAML::Node comments = language["comments"];
 	if(comments) {
 		const YAML::Node line = comments["line"];
 		if(line)
