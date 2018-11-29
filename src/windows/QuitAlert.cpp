@@ -73,13 +73,17 @@ QuitAlert::_InitInterface()
 			.Add(fCancel)
 		.End()
 		.SetInsets(B_USE_SMALL_INSETS);
+
 	font_height fh;
 	be_plain_font->GetHeight(&fh);
 	float textHeight = fh.ascent + fh.descent + fh.leading + 5;
 	fScrollView->SetExplicitSize(BSize(B_SIZE_UNSET,
 		textHeight * std::min<uint32>(fUnsavedFiles.size(), kMaxItems) + 25.0f));
+	BScrollBar* bar = fScrollView->ScrollBar(B_VERTICAL);
+	bar->SetSteps(textHeight / 2.0f, textHeight * 3.0f / 2.0f);
+	bar->SetRange(0.0f, fUnsavedFiles.size() > kMaxItems ?
+		(textHeight + 3.0f) * (fUnsavedFiles.size() - kMaxItems) : 0.0f);
 
-	float height = 0.0f;
 	EditorWindow* current;
 	BGroupLayout* files = filesView->GroupLayout();
 	files->SetInsets(B_USE_SMALL_INSETS);
@@ -96,16 +100,6 @@ QuitAlert::Show()
 {
 	BWindow::Show();
 	fScrollView->SetExplicitSize(BSize(Bounds().Width(), B_SIZE_UNSET));
-	font_height fh;
-	be_plain_font->GetHeight(&fh);
-	float textHeight = fh.ascent + fh.descent + fh.leading + 5;
-	if(LockLooper()) {
-		BScrollBar* bar = fScrollView->ScrollBar(B_VERTICAL);
-		bar->SetSteps(textHeight / 2.0f, textHeight * 3.0f / 2.0f);
-		bar->SetRange(0.0f, fUnsavedFiles.size() > kMaxItems ?
-			(textHeight + 3.0f) * (fUnsavedFiles.size() - kMaxItems) : 0.0f);
-		UnlockLooper();
-	}
 }
 
 
