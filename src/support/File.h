@@ -41,4 +41,23 @@ public:
 };
 
 
+/**
+ * BackupFileGuard will create a backup of a file and let it exist until the
+ * guard goes out of scope. If SaveSuccessful() checkpoint is not reached
+ * (for example the program crashed or an exception was thrown) the backup file
+ * will not be removed.
+ * If path does not exist or is empty does nothing.
+ */
+class BackupFileGuard {
+public:
+	BackupFileGuard(const char* path, BHandler *handler = nullptr);
+	~BackupFileGuard();
+
+	void		SaveSuccessful();
+private:
+	std::string	fPath;
+	bool		fSuccess;
+};
+
+
 #endif // FILE_H

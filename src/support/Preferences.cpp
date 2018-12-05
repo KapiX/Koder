@@ -10,6 +10,7 @@
 #include <File.h>
 
 #include "Languages.h"
+#include "File.h"
 #include "Utils.h"
 
 
@@ -123,6 +124,8 @@ Preferences::Load(const char* filename)
 void
 Preferences::Save(const char* filename)
 {
+	BackupFileGuard backupGuard(filename);
+
 	auto file = _OpenFile(filename, B_WRITE_ONLY);
 	BMessage storage;
 	storage.AddUInt8("tabWidth", fTabWidth);
@@ -156,8 +159,10 @@ Preferences::Save(const char* filename)
 	storage.AddBool("useCustomFont", fUseCustomFont);
 	storage.AddString("fontFamily", fFontFamily.c_str());
 	storage.AddUInt8("fontSize", fFontSize);
-	if (file)
+	if (file) {
 		storage.Flatten(file.get());
+		backupGuard.SaveSuccessful();
+	}
 }
 
 

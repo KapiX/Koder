@@ -18,6 +18,7 @@ LIBPATHS = $(shell findpaths -e -a $(shell uname -p) B_FIND_PATH_DEVELOP_LIB_DIR
 SYSTEM_INCLUDE_PATHS = \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/interface) \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/shared) \
+	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/storage) \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/tracker) \
 	$(shell findpaths -e -a $(shell uname -p) B_FIND_PATH_HEADERS_DIRECTORY scintilla)
 

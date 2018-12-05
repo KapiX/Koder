@@ -338,8 +338,16 @@ EditorWindow::RefreshTitle()
 void
 EditorWindow::SaveFile(entry_ref* ref)
 {
+	std::string path;
+	if(fOpenedFilePath != nullptr)
+		path = fOpenedFilePath->Path();
+	else
+		path = BPath(ref).Path();
+
+	BackupFileGuard backupGuard(path.c_str(), this);
+
 	// TODO error checking
-	File file(ref, B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
+	File file(path.c_str(), B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
 	if(file.InitCheck() == B_PERMISSION_DENIED) {
 		OKAlert(B_TRANSLATE("Access denied"), B_TRANSLATE("You don't have "
 			"sufficient permissions to edit this file."), B_STOP_ALERT);
@@ -369,8 +377,9 @@ EditorWindow::SaveFile(entry_ref* ref)
 	if(fOpenedFilePath != nullptr) {
 		delete fOpenedFilePath;
 	}
-	fOpenedFilePath = new BPath(ref);
+	fOpenedFilePath = new BPath(path.c_str());
 	RefreshTitle();
+	backupGuard.SaveSuccessful();
 }
 
 

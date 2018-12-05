@@ -6,6 +6,8 @@
 
 #include "File.h"
 
+#include <CopyEngine.h>
+#include <EntryOperationEngineBase.h>
 #include <NodeInfo.h>
 #include <NodeMonitor.h>
 #include <kernel/fs_attr.h>
@@ -20,6 +22,9 @@ const std::string kCaretPositionAttribute = "be:caret_position";
 const std::string kBookmarksAttribute = "koder:bookmarks";
 
 }
+
+
+using Entry = BPrivate::BEntryOperationEngineBase::Entry;
 
 
 File::File(const entry_ref* ref, uint32 openMode)
@@ -144,6 +149,7 @@ File::Monitor(BStatable* file, bool enable, BHandler* handler)
 	return watch_node(&nref, flags, handler);
 }
 
+
 bool
 File::CanWrite(BStatable* file)
 {
@@ -159,4 +165,41 @@ File::CanWrite(BStatable* file)
 		return true;
 	}
 	return false;
+}
+
+
+BackupFileGuard::BackupFileGuard(const char* path, BHandler* handler)
+	:
+	fPath(path ? path : ""),
+	fSuccess(false)
+{
+	// TODO: more random backup name
+	if(fPath.empty())
+		return;
+
+	if(BEntry(fPath.c_str()).Exists() == false) {
+		fPath = "";
+		return;
+	}
+
+	BCopyEngine copier;
+	Entry src(fPath.c_str());
+	Entry dest((fPath + "~").c_str());
+	copier.CopyEntry(src, dest);
+}
+
+
+BackupFileGuard::~BackupFileGuard()
+{
+	if(fPath.empty() || !fSuccess)
+		return;
+
+	BEntry((fPath + "~").c_str()).Remove();
+}
+
+
+void
+BackupFileGuard::SaveSuccessful()
+{
+	fSuccess = true;
 }
