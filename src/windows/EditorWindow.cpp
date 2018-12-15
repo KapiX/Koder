@@ -39,6 +39,7 @@
 #include "ScintillaUtils.h"
 #include "StatusView.h"
 #include "Styler.h"
+#include "ToolBar.h"
 #include "Utils.h"
 
 
@@ -46,7 +47,6 @@
 #define B_TRANSLATION_CONTEXT "EditorWindow"
 
 
-using BToolBar = BPrivate::BToolBar;
 using namespace Scintilla::Properties;
 
 
@@ -183,20 +183,24 @@ EditorWindow::EditorWindow(bool stagger)
 	Languages::LoadExternalLexers(fEditor);
 
 	BBitmap icon(BRect(0, 0, 23, 23), 0, B_RGBA32);
-	fToolbar = new BToolBar(B_HORIZONTAL);
+	fToolbar = new ToolBar();
 	GetVectorIcon("open", &icon);
 	fToolbar->AddAction(MAINMENU_FILE_OPEN, this, &icon, B_TRANSLATE("Open" B_UTF8_ELLIPSIS));
 	GetVectorIcon("reload", &icon);
 	fToolbar->AddAction(MAINMENU_FILE_RELOAD, this, &icon, B_TRANSLATE("Reload"));
+	fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, false);
 	GetVectorIcon("save", &icon);
 	fToolbar->AddAction(MAINMENU_FILE_SAVE, this, &icon, B_TRANSLATE("Save"));
+	fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, false);
 	GetVectorIcon("save as", &icon);
 	fToolbar->AddAction(MAINMENU_FILE_SAVEAS, this, &icon, B_TRANSLATE("Save as" B_UTF8_ELLIPSIS));
 	fToolbar->AddSeparator();
 	GetVectorIcon("undo", &icon);
 	fToolbar->AddAction(B_UNDO, this, &icon, B_TRANSLATE("Undo"));
+	fToolbar->SetActionEnabled(B_UNDO, false);
 	GetVectorIcon("redo", &icon);
 	fToolbar->AddAction(B_REDO, this, &icon, B_TRANSLATE("Redo"));
+	fToolbar->SetActionEnabled(B_REDO, false);
 	fToolbar->AddSeparator();
 	GetVectorIcon("whitespace", &icon);
 	fToolbar->AddAction(TOOLBAR_SPECIAL_SYMBOLS, this, &icon, B_TRANSLATE("Special symbols"), nullptr, true);

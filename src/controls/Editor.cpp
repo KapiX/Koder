@@ -75,6 +75,11 @@ void
 Editor::DoLayout()
 {
 	BScintillaView::DoLayout();
+
+	BScrollBar* scrollBar = ScrollBar(B_VERTICAL);
+	scrollBar->ResizeBy(0, 1);
+	scrollBar->MoveBy(0, -1);
+
 	fStatusView->ResizeToPreferred();
 }
 
@@ -83,6 +88,7 @@ void
 Editor::FrameResized(float width, float height)
 {
 	BScintillaView::FrameResized(width, height);
+
 	fStatusView->ResizeToPreferred();
 }
 
