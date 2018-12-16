@@ -27,7 +27,7 @@
 FindWindow::FindWindow(BMessage *state)
 	:
 	BWindow(BRect(0, 0, 400, 300), B_TRANSLATE("Find/Replace"), B_TITLED_WINDOW,
-		B_NOT_ZOOMABLE | B_NOT_RESIZABLE | B_AUTO_UPDATE_SIZE_LIMITS, 0),
+		B_NOT_ZOOMABLE, 0),
 	fFlagsChanged(false)
 {
 	_InitInterface();
@@ -163,29 +163,34 @@ FindWindow::_InitInterface()
 
 	AddCommonFilter(new KeyDownMessageFilter(FINDWINDOW_QUITTING, B_ESCAPE));
 
-	BLayoutBuilder::Group<>(this, B_VERTICAL, 5)
-		.AddGroup(B_HORIZONTAL, 5)
-			.AddGrid(1, 1)
+	BLayoutBuilder::Group<>(this, B_VERTICAL, B_USE_DEFAULT_SPACING)
+		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
+			.AddGrid(B_USE_HALF_ITEM_SPACING, B_USE_HALF_ITEM_SPACING)
 				.Add(fFindString, 0, 0)
 				.Add(fFindTC, 1, 0)
 				.Add(fReplaceString, 0, 1)
 				.Add(fReplaceTC, 1, 1)
 			.End()
-			.AddGroup(B_VERTICAL, 5)
+			.AddGroup(B_VERTICAL, B_USE_ITEM_SPACING)
 				.Add(fFindButton)
 				.Add(fReplaceButton)
 				.Add(fReplaceFindButton)
 				.Add(fReplaceAllButton)
 				.AddGlue()
+				.SetExplicitMaxSize(BSize(200, B_SIZE_UNSET))
 			.End()
 		.End()
-		.AddGrid(1, 1)
+		.AddGrid(0.0f, 0.0f)
 			.Add(fMatchCaseCB, 0, 0)
 			.Add(fRegexCB, 1, 0)
 			.Add(fBackwardsCB, 2, 0)
 			.Add(fMatchWordCB, 0, 1)
 			.Add(fInSelectionCB, 1, 1)
 			.Add(fWrapAroundCB, 2, 1)
+//			.SetExplicitMaxSize(BSize(B_SIZE_UNSET, 50)) // doesn't work
 		.End()
-		.SetInsets(5, 5, 5, 5);
+		.SetInsets(B_USE_SMALL_INSETS);
+	BSize min = GetLayout()->MinSize();
+	SetSizeLimits(min.Width(), B_SIZE_UNLIMITED, min.Height(), B_SIZE_UNLIMITED);
+	ResizeTo(min.Width(), min.Height());
 }
