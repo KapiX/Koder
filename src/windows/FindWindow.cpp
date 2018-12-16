@@ -24,10 +24,10 @@
 #define B_TRANSLATION_CONTEXT "FindWindow"
 
 
-FindWindow::FindWindow(BMessage *state)
+FindWindow::FindWindow(BMessage* state)
 	:
 	BWindow(BRect(0, 0, 400, 300), B_TRANSLATE("Find/Replace"), B_TITLED_WINDOW,
-		B_NOT_ZOOMABLE, 0),
+		B_NOT_ZOOMABLE | B_AUTO_UPDATE_SIZE_LIMITS | B_CLOSE_ON_ESCAPE, 0),
 	fFlagsChanged(false)
 {
 	_InitInterface();
@@ -137,10 +137,12 @@ FindWindow::_InitInterface()
 	fReplaceString = new BStringView("replaceString", B_TRANSLATE("Replace:"));
 	fFindTC = new BScintillaView("findText", 0, true, true);
 	fFindTC->SetExplicitMinSize(BSize(200, 100));
+	fFindTC->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNSET));
 	fFindTC->Target()->SetFlags(fFindTC->Target()->Flags() | B_NAVIGABLE);
 	fFindTC->SendMessage(SCI_SETMARGINWIDTHN, 1, 0);
 	fReplaceTC = new BScintillaView("replaceText", 0, true, true);
 	fReplaceTC->SetExplicitMinSize(BSize(200, 100));
+	fReplaceTC->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNSET));
 	fReplaceTC->Target()->SetFlags(fReplaceTC->Target()->Flags() | B_NAVIGABLE);
 	fReplaceTC->SendMessage(SCI_SETMARGINWIDTHN, 1, 0);
 
@@ -164,30 +166,29 @@ FindWindow::_InitInterface()
 	AddCommonFilter(new KeyDownMessageFilter(FINDWINDOW_QUITTING, B_ESCAPE));
 
 	BLayoutBuilder::Group<>(this, B_VERTICAL, B_USE_DEFAULT_SPACING)
-		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
+		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING, 100)
 			.AddGrid(B_USE_HALF_ITEM_SPACING, B_USE_HALF_ITEM_SPACING)
 				.Add(fFindString, 0, 0)
 				.Add(fFindTC, 1, 0)
 				.Add(fReplaceString, 0, 1)
 				.Add(fReplaceTC, 1, 1)
 			.End()
-			.AddGroup(B_VERTICAL, B_USE_ITEM_SPACING)
+			.AddGroup(B_VERTICAL, B_USE_ITEM_SPACING, 0)
 				.Add(fFindButton)
 				.Add(fReplaceButton)
 				.Add(fReplaceFindButton)
 				.Add(fReplaceAllButton)
 				.AddGlue()
-				.SetExplicitMaxSize(BSize(200, B_SIZE_UNSET))
 			.End()
 		.End()
-		.AddGrid(0.0f, 0.0f)
+		.AddGrid(B_USE_ITEM_SPACING, 0.0f, 0)
 			.Add(fMatchCaseCB, 0, 0)
 			.Add(fRegexCB, 1, 0)
 			.Add(fBackwardsCB, 2, 0)
 			.Add(fMatchWordCB, 0, 1)
 			.Add(fInSelectionCB, 1, 1)
 			.Add(fWrapAroundCB, 2, 1)
-//			.SetExplicitMaxSize(BSize(B_SIZE_UNSET, 50)) // doesn't work
+			.AddGlue(3, 0, 1, 2)
 		.End()
 		.SetInsets(B_USE_SMALL_INSETS);
 	BSize min = GetLayout()->MinSize();
