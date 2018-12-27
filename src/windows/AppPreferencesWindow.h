@@ -40,6 +40,7 @@ private:
 	enum Actions {
 		COMPACT_LANG_MENU		= 'clnm',
 		TOOLBAR					= 'tlbr',
+		TOOLBAR_ICON_SIZE		= 'tlis',
 		FULL_PATH_IN_TITLE		= 'fpit',
 		TABS_TO_SPACES			= 'ttsp',
 		TAB_WIDTH				= 'tbwd',
@@ -87,6 +88,7 @@ private:
 	void			_SetLineHighlightingBoxEnabled(bool enabled);
 	void			_SetIndentGuidesBoxEnabled(bool enabled);
 	void			_SetFontBoxEnabled(bool enabled);
+	void			_SetToolbarBoxEnabled(bool enabled);
 	void			_PopulateStylesMenu();
 	void			_UpdateFontMenu();
 
@@ -99,7 +101,6 @@ private:
 	BBox*			fTrailingWSBox;
 
 	BCheckBox*		fCompactLangMenuCB;
-	BCheckBox*		fToolbarCB;
 	BCheckBox*		fFullPathInTitleCB;
 	BCheckBox*		fTabsToSpacesCB;
 	BTextControl*	fTabWidthTC;
@@ -107,6 +108,11 @@ private:
 	BCheckBox*		fLineHighlightingCB;
 	BRadioButton*	fLineHighlightingBackgroundRadio;
 	BRadioButton*	fLineHighlightingFrameRadio;
+
+	BBox*			fToolbarBox;
+	BCheckBox*		fToolbarCB;
+	BPopUpMenu*		fToolbarIconSizeMenu;
+	BMenuField*		fToolbarIconSizeMF;
 
 	BBox*			fMarginsBox;
 	BCheckBox*		fLineNumbersCB;

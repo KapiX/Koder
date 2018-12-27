@@ -116,6 +116,7 @@ Preferences::Load(const char* filename)
 	fUseCustomFont = storage.GetBool("useCustomFont", false);
 	fFontFamily = storage.GetString("fontFamily", "Noto Sans Mono");
 	fFontSize = storage.GetUInt8("fontSize", 12);
+	fToolbarIconSizeMultiplier = storage.GetUInt8("toolbarIconSizeMultiplier", 3);
 	if(storage.FindMessage("findWindowState", &fFindWindowState) != B_OK)
 		fFindWindowState = BMessage();
 }
@@ -159,6 +160,7 @@ Preferences::Save(const char* filename)
 	storage.AddBool("useCustomFont", fUseCustomFont);
 	storage.AddString("fontFamily", fFontFamily.c_str());
 	storage.AddUInt8("fontSize", fFontSize);
+	storage.AddUInt8("toolbarIconSizeMultiplier", fToolbarIconSizeMultiplier);
 	if (file) {
 		storage.Flatten(file.get());
 		backupGuard.SaveSuccessful();
@@ -200,5 +202,6 @@ Preferences::operator =(Preferences p)
 	fUseCustomFont = p.fUseCustomFont;
 	fFontFamily = p.fFontFamily;
 	fFontSize = p.fFontSize;
+	fToolbarIconSizeMultiplier = p.fToolbarIconSizeMultiplier;
 	fUseEditorconfig = p.fUseEditorconfig;
 }

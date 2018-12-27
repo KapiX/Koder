@@ -5,6 +5,7 @@
 
 #include "AppPreferencesWindow.h"
 
+#include <map>
 #include <set>
 #include <string>
 
@@ -66,7 +67,14 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			_PreferencesModified();
 		} break;
 		case Actions::TOOLBAR: {
-			fPreferences->fToolbar = IsChecked(fToolbarCB);
+			bool show = IsChecked(fToolbarCB);
+			fPreferences->fToolbar = show;
+			_SetToolbarBoxEnabled(show);
+			_PreferencesModified();
+		} break;
+		case Actions::TOOLBAR_ICON_SIZE: {
+			fPreferences->fToolbarIconSizeMultiplier =
+				message->GetUInt8("multiplier", 3);
 			_PreferencesModified();
 		} break;
 		case Actions::FULL_PATH_IN_TITLE: {
@@ -232,7 +240,6 @@ AppPreferencesWindow::_InitInterface()
 	fMarginsBox->SetLabel(B_TRANSLATE("Margins"));
 
 	fCompactLangMenuCB = new BCheckBox("compactLangMenu", B_TRANSLATE("Compact language menu"), new BMessage((uint32) Actions::COMPACT_LANG_MENU));
-	fToolbarCB = new BCheckBox("toolbar", B_TRANSLATE("Show toolbar"), new BMessage((uint32) Actions::TOOLBAR));
 	fFullPathInTitleCB = new BCheckBox("fullPathInTitle", B_TRANSLATE("Show full path in title"), new BMessage((uint32) Actions::FULL_PATH_IN_TITLE));
 	fTabsToSpacesCB = new BCheckBox("tabsToSpaces", B_TRANSLATE("Convert tabs to spaces"), new BMessage((uint32) Actions::TABS_TO_SPACES));
 	fTabWidthTC = new BTextControl("tabWidth", B_TRANSLATE("Spaces per tab:"), "4", new BMessage((uint32) Actions::TAB_WIDTH));
@@ -250,6 +257,33 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fFoldMarginCB)
 		.Add(fBookmarkMarginCB)
 		.SetInsets(B_USE_ITEM_INSETS);
+
+	fToolbarBox = new BBox("toolbar");
+	fToolbarCB = new BCheckBox("toolbar", B_TRANSLATE("Show toolbar"), new BMessage((uint32) Actions::TOOLBAR));
+	fToolbarIconSizeMenu = new BPopUpMenu("toolbar icon size");
+	fToolbarIconSizeMenu->SetLabelFromMarked(true);
+	fToolbarIconSizeMenu->SetRadioMode(true);
+	const std::map<uint8, std::string> sizes{
+		{ 2, B_TRANSLATE_COMMENT("Small", "Toolbar icon size") },
+		{ 3, B_TRANSLATE_COMMENT("Medium", "Toolbar icon size") },
+		{ 4, B_TRANSLATE_COMMENT("Large", "Toolbar icon size") },
+		{ 6, B_TRANSLATE_COMMENT("Extra large", "Toolbar icon size") },
+		{ 8, B_TRANSLATE_COMMENT("Huge", "Toolbar icon size") },
+		{ 12, B_TRANSLATE_COMMENT("Enormous", "Toolbar icon size") },
+		{ 16, B_TRANSLATE_COMMENT("Gigantic", "Toolbar icon size") }
+	};
+	for(const auto& size : sizes) {
+		BMessage* msg = new BMessage((uint32) Actions::TOOLBAR_ICON_SIZE);
+		msg->AddUInt8("multiplier", size.first);
+		fToolbarIconSizeMenu->AddItem(new BMenuItem(size.second.c_str(), msg));
+	}
+	fToolbarIconSizeMF = new BMenuField("toolbar icon size", B_TRANSLATE("Icon size"), fToolbarIconSizeMenu);
+
+	BLayoutBuilder::Group<>(fToolbarBox, B_VERTICAL, 0)
+		.AddStrut(B_USE_ITEM_SPACING)
+		.Add(fToolbarIconSizeMF)
+		.SetInsets(B_USE_ITEM_INSETS);
+	fToolbarBox->SetLabel(fToolbarCB);
 
 	fLineLimitHeaderView = new BView("lineLimitHeader", 0);
 	fLineLimitShowCB = new BCheckBox("lineLimitShow", B_TRANSLATE("Mark overly long lines"), new BMessage((uint32) Actions::LINELIMIT_SHOW));
@@ -337,9 +371,10 @@ AppPreferencesWindow::_InitInterface()
 	BLayoutBuilder::Group<>(fVisualBox, B_VERTICAL, 0)
 		.AddStrut(B_USE_ITEM_SPACING)
 		.Add(fCompactLangMenuCB)
-		.Add(fToolbarCB)
 		.Add(fFullPathInTitleCB)
 		.Add(fBracesHighlightingCB)
+		.Add(fToolbarBox)
+		.AddStrut(B_USE_HALF_ITEM_SPACING)
 		.Add(fLineLimitBox)
 		.AddStrut(B_USE_HALF_ITEM_SPACING)
 		.Add(fLineHighlightingBox)
@@ -374,13 +409,13 @@ AppPreferencesWindow::_InitInterface()
 		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
 			.AddGroup(B_VERTICAL, B_USE_DEFAULT_SPACING)
 				.Add(fVisualBox)
-				.AddGlue()
 			.End()
 			.AddGroup(B_VERTICAL, B_USE_DEFAULT_SPACING)
 				.Add(fIndentationBox)
 				.Add(fTrailingWSBox)
 				.Add(fBehaviorBox)
 				.Add(fFontBox)
+				.AddGlue()
 			.End()
 		.End()
 		.AddGroup(B_HORIZONTAL, B_USE_DEFAULT_SPACING)
@@ -398,7 +433,6 @@ void
 AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 {
 	SetChecked(fCompactLangMenuCB, preferences->fCompactLangMenu);
-	SetChecked(fToolbarCB, preferences->fToolbar);
 	SetChecked(fFullPathInTitleCB, preferences->fFullPathInTitle);
 	SetChecked(fTabsToSpacesCB, preferences->fTabsToSpaces);
 
@@ -422,6 +456,17 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 
 	SetChecked(fIndentGuidesShowCB, preferences->fIndentGuidesShow);
 	_SetIndentGuidesBoxEnabled(preferences->fIndentGuidesShow);
+
+	SetChecked(fToolbarCB, preferences->fToolbar);
+	_SetToolbarBoxEnabled(preferences->fToolbar);
+	for(int i = 0; i < fToolbarIconSizeMenu->CountItems(); i++) {
+		BMenuItem* item = fToolbarIconSizeMenu->ItemAt(i);
+		if(item->Message()->GetUInt8("multiplier", 3)
+				== fPreferences->fToolbarIconSizeMultiplier) {
+			item->SetMarked(true);
+			break;
+		}
+	}
 
 	SetChecked(fUseCustomFontCB, preferences->fUseCustomFont);
 	_SetFontBoxEnabled(preferences->fUseCustomFont);
@@ -496,6 +541,13 @@ AppPreferencesWindow::_SetFontBoxEnabled(bool enabled)
 {
 	fFontMF->SetEnabled(enabled);
 	fFontSizeSpinner->SetEnabled(enabled);
+}
+
+
+void
+AppPreferencesWindow::_SetToolbarBoxEnabled(bool enabled)
+{
+	fToolbarIconSizeMF->SetEnabled(enabled);
 }
 
 

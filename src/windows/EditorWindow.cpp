@@ -1137,6 +1137,10 @@ EditorWindow::_SyncWithPreferences()
 			else
 				while(!fToolbar->IsHidden()) fToolbar->Hide();
 		}
+		float baseSize = std::round(be_plain_font->Size() / 6.0f) * 4.0f;
+			// 12 = 8.0f, 18 = 12.0f, 24 = 16.0f
+		fToolbar->ChangeIconSize(baseSize * fPreferences->fToolbarIconSizeMultiplier);
+			// TODO Do this only if it has changed
 
 		RefreshTitle();
 

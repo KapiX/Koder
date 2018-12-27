@@ -59,6 +59,7 @@ public:
 	bool			fUseCustomFont;
 	std::string		fFontFamily;
 	uint8			fFontSize;
+	uint8			fToolbarIconSizeMultiplier;
 	std::string		fStyle;
 	// application state
 	BRect			fWindowRect;
