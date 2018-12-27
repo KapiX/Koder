@@ -32,10 +32,7 @@ class Editor;
 class GoToLineWindow;
 class Preferences;
 class StatusView;
-
-namespace BPrivate {
-	class BToolBar;
-}
+class ToolBar;
 
 
 const BString gAppName = B_TRANSLATE_SYSTEM_NAME("Koder");
@@ -145,7 +142,7 @@ private:
 			BFilePanel*		fSavePanel;
 			BMenu*			fLanguageMenu;
 			std::string		fCurrentLanguage;
-			BPrivate::BToolBar*	fToolbar;
+			ToolBar*		fToolbar;
 			StatusView*		fStatusView;
 
 			GoToLineWindow*	fGoToLineWindow;

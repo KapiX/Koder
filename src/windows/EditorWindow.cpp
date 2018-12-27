@@ -182,33 +182,37 @@ EditorWindow::EditorWindow(bool stagger)
 	fEditor = new Editor();
 	Languages::LoadExternalLexers(fEditor);
 
-	BBitmap icon(BRect(0, 0, 23, 23), 0, B_RGBA32);
-	fToolbar = new ToolBar();
-	GetVectorIcon("open", &icon);
-	fToolbar->AddAction(MAINMENU_FILE_OPEN, this, &icon, B_TRANSLATE("Open" B_UTF8_ELLIPSIS));
-	GetVectorIcon("reload", &icon);
-	fToolbar->AddAction(MAINMENU_FILE_RELOAD, this, &icon, B_TRANSLATE("Reload"));
+	fToolbar = new ToolBar(this);
+	fToolbar->AddAction(MAINMENU_FILE_OPEN,
+		B_TRANSLATE("Open" B_UTF8_ELLIPSIS), "open");
+	fToolbar->AddAction(MAINMENU_FILE_RELOAD,
+		B_TRANSLATE("Reload"), "reload");
 	fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, false);
-	GetVectorIcon("save", &icon);
-	fToolbar->AddAction(MAINMENU_FILE_SAVE, this, &icon, B_TRANSLATE("Save"));
+	fToolbar->AddAction(MAINMENU_FILE_SAVE,
+		B_TRANSLATE("Save"), "save");
 	fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, false);
-	GetVectorIcon("save as", &icon);
-	fToolbar->AddAction(MAINMENU_FILE_SAVEAS, this, &icon, B_TRANSLATE("Save as" B_UTF8_ELLIPSIS));
+	fToolbar->AddAction(MAINMENU_FILE_SAVEAS,
+		B_TRANSLATE("Save as" B_UTF8_ELLIPSIS), "save as");
+
 	fToolbar->AddSeparator();
-	GetVectorIcon("undo", &icon);
-	fToolbar->AddAction(B_UNDO, this, &icon, B_TRANSLATE("Undo"));
+
+	fToolbar->AddAction(B_UNDO,
+		B_TRANSLATE("Undo"), "undo");
 	fToolbar->SetActionEnabled(B_UNDO, false);
-	GetVectorIcon("redo", &icon);
-	fToolbar->AddAction(B_REDO, this, &icon, B_TRANSLATE("Redo"));
+	fToolbar->AddAction(B_REDO, B_TRANSLATE("Redo"), "redo");
 	fToolbar->SetActionEnabled(B_REDO, false);
+
 	fToolbar->AddSeparator();
-	GetVectorIcon("whitespace", &icon);
-	fToolbar->AddAction(TOOLBAR_SPECIAL_SYMBOLS, this, &icon, B_TRANSLATE("Special symbols"), nullptr, true);
+
+	fToolbar->AddAction(TOOLBAR_SPECIAL_SYMBOLS,
+		B_TRANSLATE("Special symbols"), "whitespace", true);
+
 	fToolbar->AddSeparator();
-	GetVectorIcon("preferences", &icon);
-	fToolbar->AddAction(MAINMENU_EDIT_APP_PREFERENCES, this, &icon, B_TRANSLATE("Koder preferences" B_UTF8_ELLIPSIS));
-	GetVectorIcon("find", &icon);
-	fToolbar->AddAction(MAINMENU_SEARCH_FINDREPLACE, this, &icon, B_TRANSLATE("Find/Replace" B_UTF8_ELLIPSIS));
+
+	fToolbar->AddAction(MAINMENU_EDIT_APP_PREFERENCES,
+		B_TRANSLATE("Koder preferences" B_UTF8_ELLIPSIS), "preferences");
+	fToolbar->AddAction(MAINMENU_SEARCH_FINDREPLACE,
+		B_TRANSLATE("Find/Replace" B_UTF8_ELLIPSIS), "find");
 	fToolbar->AddGlue();
 
 	BGroupLayout *layout = new BGroupLayout(B_VERTICAL, 0);
