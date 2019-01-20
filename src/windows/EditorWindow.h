@@ -28,6 +28,7 @@ class BMenu;
 class BMenuBar;
 class BPath;
 class BPopUpMenu;
+class BookmarksWindow;
 class Editor;
 class GoToLineWindow;
 class Preferences;
@@ -73,6 +74,7 @@ enum {
 	MAINMENU_SEARCH_FINDSELECTION		= 'msfs',
 	MAINMENU_SEARCH_REPLACEANDFIND		= 'msrf',
 	MAINMENU_SEARCH_INCREMENTAL			= 'msin',
+	MAINMENU_SEARCH_BOOKMARKS			= 'msbk',
 	MAINMENU_SEARCH_TOGGLEBOOKMARK		= 'mtbk',
 	MAINMENU_SEARCH_NEXTBOOKMARK		= 'mnbk',
 	MAINMENU_SEARCH_PREVBOOKMARK		= 'mpbk',
@@ -145,7 +147,8 @@ private:
 			ToolBar*		fToolbar;
 			StatusView*		fStatusView;
 
-			GoToLineWindow*	fGoToLineWindow;
+			GoToLineWindow*		fGoToLineWindow;
+			BookmarksWindow*	fBookmarksWindow;
 
 			bool			fActivatedGuard;
 

@@ -89,8 +89,9 @@ public:
 
 	void				SetBookmarks(const BMessage &lines);
 	BMessage			Bookmarks();
+	BMessage			BookmarksWithText();
 
-	void				ToggleBookmark(int64 line = -1);
+	bool				ToggleBookmark(int64 line = -1);
 	void				GoToNextBookmark();
 	void				GoToPreviousBookmark();
 

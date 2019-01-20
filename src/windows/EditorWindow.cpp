@@ -29,6 +29,7 @@
 #include <kernel/fs_attr.h>
 
 #include "AppPreferencesWindow.h"
+#include "BookmarksWindow.h"
 #include "Editor.h"
 #include "Editorconfig.h"
 #include "File.h"
@@ -79,6 +80,7 @@ EditorWindow::EditorWindow(bool stagger)
 	fReadOnly = false;
 
 	fGoToLineWindow = nullptr;
+	fBookmarksWindow = nullptr;
 	fOpenedFilePath = nullptr;
 	fOpenedFileMimeType.SetTo("text/plain");
 
@@ -145,6 +147,7 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem(B_TRANSLATE("Replace and find"), MAINMENU_SEARCH_REPLACEANDFIND, 'T')
 			.AddItem(B_TRANSLATE("Incremental search"), MAINMENU_SEARCH_INCREMENTAL, 'I')
 			.AddSeparator()
+			.AddItem(B_TRANSLATE("Bookmarks"), MAINMENU_SEARCH_BOOKMARKS)
 			.AddItem(B_TRANSLATE("Toggle bookmark"), MAINMENU_SEARCH_TOGGLEBOOKMARK, 'B')
 			.AddItem(B_TRANSLATE("Next bookmark"), MAINMENU_SEARCH_NEXTBOOKMARK, 'N', B_CONTROL_KEY)
 			.AddItem(B_TRANSLATE("Previous bookmark"), MAINMENU_SEARCH_PREVBOOKMARK, 'P', B_CONTROL_KEY)
@@ -556,8 +559,27 @@ EditorWindow::MessageReceived(BMessage* message)
 		case MAINMENU_SEARCH_INCREMENTAL: {
 			AddCommonFilter(fIncrementalSearchFilter.get());
 		} break;
+		case MAINMENU_SEARCH_BOOKMARKS: {
+			if(fBookmarksWindow == nullptr) {
+				fBookmarksWindow = new BookmarksWindow(this, fEditor->BookmarksWithText());
+			}
+			fBookmarksWindow->Show();
+			fBookmarksWindow->Activate();
+		} break;
 		case MAINMENU_SEARCH_TOGGLEBOOKMARK: {
-			fEditor->ToggleBookmark();
+			Sci_Position pos = fEditor->SendMessage(SCI_GETCURRENTPOS);
+			int64 line = fEditor->SendMessage(SCI_LINEFROMPOSITION, pos);
+			bool added = fEditor->ToggleBookmark(line);
+			BMessage notice = fEditor->BookmarksWithText();
+			SendNotices(added ? BOOKMARK_ADDED : BOOKMARK_REMOVED, &notice);
+		} break;
+		case BOOKMARK_REMOVED: {
+			int32 line = message->GetInt32("line", -1);
+			if(line != -1) {
+				fEditor->ToggleBookmark(line);
+				BMessage notice = fEditor->BookmarksWithText();
+				SendNotices(BOOKMARK_REMOVED, &notice);
+			}
 		} break;
 		case MAINMENU_SEARCH_NEXTBOOKMARK: {
 			fEditor->GoToNextBookmark();
@@ -667,6 +689,10 @@ EditorWindow::MessageReceived(BMessage* message)
 				fContextMenu->Go(where, true, true);
 			}
 		} break;
+		case EDITOR_MODIFIED: {
+			BMessage notice = fEditor->BookmarksWithText();
+			SendNotices(BOOKMARKS_INVALIDATED, &notice);
+		};
 		case B_ABOUT_REQUESTED:
 			be_app->PostMessage(message);
 		break;
@@ -731,6 +757,9 @@ EditorWindow::MessageReceived(BMessage* message)
 				fEditor->SendMessage(SCI_ENSUREVISIBLEENFORCEPOLICY, line - 1, 0);
 				fEditor->SendMessage(SCI_GOTOLINE, line - 1, 0);
 			}
+		} break;
+		case BOOKMARKS_WINDOW_QUITTING: {
+			fBookmarksWindow = nullptr;
 		} break;
 		case FINDWINDOW_FIND:
 		case FINDWINDOW_REPLACE:

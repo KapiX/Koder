@@ -538,18 +538,22 @@ Editor::IncrementalSearchCommit(std::string term)
 
 /**
  * Toggles bookmark on specified line. If line == -1, assumes current line.
+ * Returns true if bookmarks was added, false if it was removed.
  */
-void
+bool
 Editor::ToggleBookmark(int64 line)
 {
 	if(line == -1) {
 		Sci_Position pos = SendMessage(SCI_GETCURRENTPOS);
 		line = SendMessage(SCI_LINEFROMPOSITION, pos);
 	}
-	if((SendMessage(SCI_MARKERGET, line) & (1 << Marker::BOOKMARK)) == 0)
+	if((SendMessage(SCI_MARKERGET, line) & (1 << Marker::BOOKMARK)) == 0) {
 		SendMessage(SCI_MARKERADD, line, Marker::BOOKMARK);
-	else
+		return true;
+	} else {
 		SendMessage(SCI_MARKERDELETE, line, Marker::BOOKMARK);
+		return false;
+	}
 }
 
 
@@ -579,6 +583,25 @@ Editor::Bookmarks()
 			lines.AddInt64("line", line);
 	}
 	return lines;
+}
+
+
+BMessage
+Editor::BookmarksWithText()
+{
+	int64 line = 0;
+	BMessage bookmarks;
+	while(line != -1) {
+		line = SendMessage(SCI_MARKERNEXT, line + 1, (1 << Marker::BOOKMARK));
+		if(line != -1) {
+			bookmarks.AddInt64("line", line);
+			int32 length = SendMessage(SCI_LINELENGTH, line);
+			std::string lineContents(length + 1, '\0');
+			SendMessage(SCI_GETLINE, line, reinterpret_cast<sptr_t>(lineContents.data()));
+			bookmarks.AddString("text", lineContents.c_str());
+		}
+	}
+	return bookmarks;
 }
 
 
