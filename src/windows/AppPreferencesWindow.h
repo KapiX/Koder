@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2019 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -119,7 +119,6 @@ private:
 	BCheckBox*		fFoldMarginCB;
 	BCheckBox*		fBookmarkMarginCB;
 
-	BView*			fLineLimitHeaderView;
 	BCheckBox*		fLineLimitShowCB;
 	BTextControl*	fLineLimitColumnTC;
 

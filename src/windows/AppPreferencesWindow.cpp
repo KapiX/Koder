@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2019 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -285,13 +285,8 @@ AppPreferencesWindow::_InitInterface()
 		.SetInsets(B_USE_ITEM_INSETS);
 	fToolbarBox->SetLabel(fToolbarCB);
 
-	fLineLimitHeaderView = new BView("lineLimitHeader", 0);
-	fLineLimitShowCB = new BCheckBox("lineLimitShow", B_TRANSLATE("Mark overly long lines"), new BMessage((uint32) Actions::LINELIMIT_SHOW));
-
-	BLayoutBuilder::Group<>(fLineLimitHeaderView, B_HORIZONTAL, 0)
-		.Add(fLineLimitShowCB);
-
 	fLineLimitBox = new BBox("lineLimitPrefs");
+	fLineLimitShowCB = new BCheckBox("lineLimitShow", B_TRANSLATE("Mark overly long lines"), new BMessage((uint32) Actions::LINELIMIT_SHOW));
 	fLineLimitColumnTC = new BTextControl("lineLimitColumn", B_TRANSLATE("Max. characters per line:"), "80", new BMessage((uint32) Actions::LINELIMIT_COLUMN));
 	fLineLimitBackgroundRadio = new BRadioButton("lineLimitRadio", B_TRANSLATE("Background"), new BMessage((uint32) Actions::LINELIMIT_BACKGROUND));
 	fLineLimitLineRadio = new BRadioButton("lineLimitRadio", B_TRANSLATE("Line"), new BMessage((uint32) Actions::LINELIMIT_LINE));
@@ -302,7 +297,7 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fLineLimitLineRadio)
 		.Add(fLineLimitColumnTC)
 		.SetInsets(B_USE_ITEM_INSETS);
-	fLineLimitBox->SetLabel(fLineLimitHeaderView);
+	fLineLimitBox->SetLabel(fLineLimitShowCB);
 
 	fLineHighlightingBox = new BBox("lineHighlightingPrefs");
 	fLineHighlightingCB = new BCheckBox("lineHighlighting", B_TRANSLATE("Highlight current line"), new BMessage((uint32) Actions::LINE_HIGHLIGHTING));
