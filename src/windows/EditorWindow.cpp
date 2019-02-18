@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2019 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -209,6 +209,15 @@ EditorWindow::EditorWindow(bool stagger)
 
 	fToolbar->AddAction(TOOLBAR_SPECIAL_SYMBOLS,
 		B_TRANSLATE("Special symbols"), "whitespace", true);
+
+	fToolbar->AddSeparator();
+
+	fToolbar->AddAction(MAINMENU_SEARCH_BOOKMARKS,
+		B_TRANSLATE("Bookmarks"), "bookmarks");
+	fToolbar->AddAction(MAINMENU_SEARCH_PREVBOOKMARK,
+		B_TRANSLATE("Previous bookmark"), "bookmark prev");
+	fToolbar->AddAction(MAINMENU_SEARCH_NEXTBOOKMARK,
+		B_TRANSLATE("Next bookmark"), "bookmark next");
 
 	fToolbar->AddSeparator();
 
