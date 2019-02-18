@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2019 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -20,7 +20,7 @@ using namespace Sci::Properties;
 
 Editor::Editor()
 	:
-	BScintillaView("EditorView", 0, true, true, B_NO_BORDER),
+	BScintillaView("EditorView", B_FRAME_EVENTS, true, true, B_NO_BORDER),
 	fCommentLineToken(""),
 	fCommentBlockStartToken(""),
 	fCommentBlockEndToken(""),

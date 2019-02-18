@@ -824,14 +824,6 @@ EditorWindow::FrameMoved(BPoint origin)
 
 
 void
-EditorWindow::FrameResized(float width, float height)
-{
-	// Workaround: layouted views don't get that event
-	fEditor->FrameResized(width, height);
-}
-
-
-void
 EditorWindow::Show()
 {
 	BWindow::Show();

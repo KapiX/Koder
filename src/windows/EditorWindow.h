@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2019 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -110,7 +110,6 @@ public:
 			void			MessageReceived(BMessage* message);
 			void			WindowActivated(bool active);
 			void			FrameMoved(BPoint origin);
-			void			FrameResized(float width, float height);
 			void			Show();
 
 			bool			IsModified() { return fModified; }
