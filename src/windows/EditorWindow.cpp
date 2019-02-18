@@ -358,11 +358,9 @@ EditorWindow::RefreshTitle()
 void
 EditorWindow::SaveFile(entry_ref* ref)
 {
-	std::string path;
-	if(fOpenedFilePath != nullptr)
-		path = fOpenedFilePath->Path();
-	else
-		path = BPath(ref).Path();
+	if(ref == nullptr) return;
+
+	std::string path(BPath(ref).Path());
 
 	BackupFileGuard backupGuard(path.c_str(), this);
 
