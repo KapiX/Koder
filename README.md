@@ -6,7 +6,7 @@ Koder is a code editor built using Scintilla editing component.
 
 ## Dependencies
 
-* Scintilla
+* Scintilla >=4.1.3
 * yaml-cpp
 * Scintilla [lexers](https://github.com/KapiX/scintilla-haiku-lexers) for Haiku specific file types
 
@@ -34,6 +34,11 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 * Fix save and reload toolbar buttons state after external modification and file removal.
 * Add bookmarks support.
 * Add settings for margin visibility.
+* Hide fold margin if folding is not enabled.
+* Fixed caret position resetting when corresponding file was opened.
+* Add option to automatically insert new line at the end on save.
+* Add option to change toolbar icon size.
+* Backup files before saving.
 
 0.4.1 - *23-11-2018*
 
