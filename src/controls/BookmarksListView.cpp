@@ -46,7 +46,12 @@ BookmarksListView::AttachedToWindow()
 status_t
 BookmarksListView::Invoke(BMessage* message)
 {
-	BMessage clone;
+	bool notify = false;
+	uint32 kind = InvokeKind(&notify);
+	if(notify)
+		return BListView::Invoke(message);
+
+	BMessage clone(kind);
 	if(InvocationMessage() != nullptr)
 		clone = *InvocationMessage();
 	int32 index = CurrentSelection();
