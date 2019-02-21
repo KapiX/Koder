@@ -48,27 +48,27 @@ identifiers:
             updateRevisionVariables
     9:
         - >
-            $addOnsDir $appsDir $binDir $buildArchitecture $buildMachineTriple
-            $buildMachineTripleAsName $configureDirArgs $configureDirVariables
-            $crossSysrootDir $dataDir $dataRootDir $debugInfoDir $developDir
-            $developDocDir $developLibDir $docDir $documentationDir $fontsDir
-            $includeDir $infoDir $installDestDir $isCrossRepository $jobArgs
-            $jobs $libDir $libExecDir $localStateDir $manDir $oldIncludeDir
-            $portBaseDir $portDir $portFullVersion $portName
-            $portPackageLinksDir $portRevision $portRevisionedName $portVersion
-            $portVersionedName $postInstallDir $preferencesDir $prefix
-            $relativDebugInfoDir $relativeAddOnsDir $relativeAppsDir
-            $relativeBinDir $relativeDataDir $relativeDataRootDir
-            $relativeDevelopDir $relativeDevelopDocDir $relativeDevelopLibDir
-            $relativeDocDir $relativeDocumentationDir $relativeFontsDir
-            $relativeIncludeDir $relativeInfoDir $relativeLibDir
-            $relativeLibExecDir $relativeLocalStateDir $relativeManDir
-            $relativeOldIncludeDir $relativePostInstallDir
-            $relativePreferencesDir $relativeSbinDir $relativeSettingsDir
-            $relativeSharedStateDir $sbinDir $secondaryArchSuffix $settingsDir
-            $sharedStateDir $sourceDir $sourceDir2 $sourceDir3 $sourceDir4
-            $sourceDir5 $sourceDir6 $sourceDir7 $sourceDir8 $sourceDir9
-            $targetArchitecture $targetMachineTriple $targetMachineTripleAsName
+            addOnsDir appsDir binDir buildArchitecture buildMachineTriple
+            buildMachineTripleAsName configureDirArgs configureDirVariables
+            crossSysrootDir dataDir dataRootDir debugInfoDir developDir
+            developDocDir developLibDir docDir documentationDir fontsDir
+            includeDir infoDir installDestDir isCrossRepository jobArgs
+            jobs libDir libExecDir localStateDir manDir oldIncludeDir
+            portBaseDir portDir portFullVersion portName
+            portPackageLinksDir portRevision portRevisionedName portVersion
+            portVersionedName postInstallDir preferencesDir prefix
+            relativDebugInfoDir relativeAddOnsDir relativeAppsDir
+            relativeBinDir relativeDataDir relativeDataRootDir
+            relativeDevelopDir relativeDevelopDocDir relativeDevelopLibDir
+            relativeDocDir relativeDocumentationDir relativeFontsDir
+            relativeIncludeDir relativeInfoDir relativeLibDir
+            relativeLibExecDir relativeLocalStateDir relativeManDir
+            relativeOldIncludeDir relativePostInstallDir
+            relativePreferencesDir relativeSbinDir relativeSettingsDir
+            relativeSharedStateDir sbinDir secondaryArchSuffix settingsDir
+            sharedStateDir sourceDir sourceDir2 sourceDir3 sourceDir4
+            sourceDir5 sourceDir6 sourceDir7 sourceDir8 sourceDir9
+            targetArchitecture targetMachineTriple targetMachineTripleAsName
 comments:
     line: "#"
 styles:
