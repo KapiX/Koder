@@ -1028,8 +1028,8 @@ EditorWindow::_OpenCorrespondingFile(const BPath &file, const std::string lang)
 				}
 			}
 		}
-		OKAlert(B_TRANSLATE("Open corresponding file"),
-			B_TRANSLATE("Corresponding file not found."), B_STOP_ALERT);
+		OKAlert(B_TRANSLATE("Open partner file"),
+			B_TRANSLATE("Partner file not found."), B_STOP_ALERT);
 	}
 }
 

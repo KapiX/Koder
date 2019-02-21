@@ -7,6 +7,7 @@
 #include "BookmarksWindow.h"
 
 
+#include <Catalog.h>
 #include <GroupLayout.h>
 #include <ListView.h>
 #include <ScrollView.h>
@@ -15,6 +16,10 @@
 
 #include "BookmarksListView.h"
 #include "GoToLineWindow.h"
+
+
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "BookmarksWindow"
 
 
 class CustomScrollView : public BScrollView {
@@ -48,8 +53,7 @@ CustomScrollView::DoLayout()
 
 BookmarksWindow::BookmarksWindow(BWindow* owner, const BMessage bookmarks)
 	:
-	// TODO create next to parent
-	BWindow(BRect(0, 0, 0, 0), "Bookmarks",
+	BWindow(BRect(0, 0, 0, 0), B_TRANSLATE("Bookmarks"),
 		B_FLOATING_WINDOW_LOOK, B_FLOATING_SUBSET_WINDOW_FEEL, 0),
 	fOwner(owner)
 {

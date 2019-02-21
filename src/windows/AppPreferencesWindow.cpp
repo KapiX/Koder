@@ -237,7 +237,7 @@ AppPreferencesWindow::_InitInterface()
 	fTrailingWSBox = new BBox("trailingWSPrefs");
 	fTrailingWSBox->SetLabel(B_TRANSLATE("Trailing whitespace"));
 	fMarginsBox = new BBox("margins");
-	fMarginsBox->SetLabel(B_TRANSLATE("Margins"));
+	fMarginsBox->SetLabel(B_TRANSLATE("Left margin"));
 
 	fCompactLangMenuCB = new BCheckBox("compactLangMenu", B_TRANSLATE("Compact language menu"), new BMessage((uint32) Actions::COMPACT_LANG_MENU));
 	fFullPathInTitleCB = new BCheckBox("fullPathInTitle", B_TRANSLATE("Show full path in title"), new BMessage((uint32) Actions::FULL_PATH_IN_TITLE));
@@ -339,7 +339,7 @@ AppPreferencesWindow::_InitInterface()
 	fTrimTrailingWSOnSaveCB  = new BCheckBox("trimTrailingWSOnSave", B_TRANSLATE("Trim trailing whitespace on save"), new BMessage((uint32) Actions::TRIM_TRAILING_WS_SAVE));
 	fUseEditorconfigCB  = new BCheckBox("useEditorconfig", B_TRANSLATE("Use .editorconfig if possible"), new BMessage((uint32) Actions::USE_EDITORCONFIG));
 	fAlwaysOpenInNewWindowCB  = new BCheckBox("alwaysOpenInNewWindow", B_TRANSLATE("Always open files in new window"), new BMessage((uint32) Actions::ALWAYS_OPEN_IN_NEW_WINDOW));
-	fAppendNLAtTheEndCB  = new BCheckBox("appendNLAtTheEnd", B_TRANSLATE("Append NL at the end if not present (on save)"), new BMessage((uint32) Actions::APPEND_NL_AT_THE_END));
+	fAppendNLAtTheEndCB  = new BCheckBox("appendNLAtTheEnd", B_TRANSLATE("Ensure empty last line on save"), new BMessage((uint32) Actions::APPEND_NL_AT_THE_END));
 
 	fUseCustomFontCB = new BCheckBox("customFont", B_TRANSLATE("Use custom font"), new BMessage((uint32) Actions::USE_CUSTOM_FONT));
 	fFontMenu = new BPopUpMenu("font");
