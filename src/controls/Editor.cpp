@@ -68,6 +68,8 @@ Editor::Editor()
 	SendMessage(SCI_SETIMEINTERACTION, SC_IME_INLINE);
 	SendMessage(SCI_SETWRAPVISUALFLAGS, SC_WRAPVISUALFLAG_MARGIN);
 	SendMessage(SCI_USEPOPUP, 0);
+
+	SetExplicitMinSize(BSize(1.0f, 1.0f));
 }
 
 
