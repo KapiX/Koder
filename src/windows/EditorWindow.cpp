@@ -980,6 +980,9 @@ EditorWindow::_SetLanguage(std::string lang)
 
 	fContextMenu->FindItem(EDIT_COMMENTLINE)->SetEnabled(fEditor->CanCommentLine());
 	fContextMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(fEditor->CanCommentBlock());
+
+	// folding margin state can change depending on the language used
+	fEditor->SetFoldMarginEnabled(fPreferences->fFoldMargin);
 }
 
 
