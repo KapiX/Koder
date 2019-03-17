@@ -290,8 +290,13 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 	}
 
 	BEntry entry(ref);
+	uint32 openMode = B_READ_ONLY;
+	if(!entry.Exists()) {
+		// TODO: alert/phantom mode?
+		openMode |= B_CREATE_FILE;
+	}
 
-	File file(&entry, B_READ_ONLY);
+	File file(&entry, openMode);
 	file.Monitor(true, this);
 	file.GetModificationTime(&fOpenedFileModificationTime);
 	fModifiedOutside = false;
@@ -1238,7 +1243,10 @@ EditorWindow::_ShowModifiedAlert()
 void
 EditorWindow::_ReloadAlert(const char* title, const char* message)
 {
-// reload opened file
+	// TODO: clarify in the alert that Reloading will recreate the file if it
+	// doesn't exist anymore, and that some SCMs remove files on checkout
+
+	// reload opened file
 	BAlert* alert = new BAlert(title, message,
 		B_TRANSLATE("Reload"), B_TRANSLATE("Do nothing"),
 		nullptr, B_WIDTH_AS_USUAL, B_EVEN_SPACING, B_INFO_ALERT);
