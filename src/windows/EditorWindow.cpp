@@ -362,6 +362,12 @@ EditorWindow::SaveFile(entry_ref* ref)
 
 	std::string path(BPath(ref).Path());
 
+	if(fOpenedFilePath != nullptr) {
+		// stop watching currently open file, in case it is different from ref
+		BEntry open(fOpenedFilePath->Path());
+		File::Monitor(&open, false, this);
+	}
+
 	BackupFileGuard backupGuard(path.c_str(), this);
 
 	// TODO error checking
