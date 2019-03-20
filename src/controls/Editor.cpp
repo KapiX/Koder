@@ -539,6 +539,25 @@ Editor::IncrementalSearchCommit(std::string term)
 
 
 /**
+ * Jumps to line maintaining distance from window edges - in other words swaps
+ * the current line without changing caret position on the screen.
+ */
+void
+Editor::GoToLine(int64 line)
+{
+	int firstVisible = SendMessage(SCI_GETFIRSTVISIBLELINE);
+	Sci_Position currentPos = SendMessage(SCI_GETCURRENTPOS);
+	int currentLine = SendMessage(SCI_LINEFROMPOSITION, currentPos);
+	int currentLineOnScreen = currentLine - firstVisible;
+	SendMessage(SCI_GOTOLINE, line);
+	SendMessage(SCI_SCROLLCARET);
+	firstVisible = SendMessage(SCI_GETFIRSTVISIBLELINE);
+	int adjustment = (line - firstVisible) - currentLineOnScreen;
+	SendMessage(SCI_LINESCROLL, 0, adjustment);
+}
+
+
+/**
  * Toggles bookmark on specified line. If line == -1, assumes current line.
  * Returns true if bookmarks was added, false if it was removed.
  */
@@ -619,7 +638,7 @@ Editor::GoToNextBookmark()
 	if(bookmark == -1)
 		bookmark = SendMessage(SCI_MARKERNEXT, 0, (1 << Marker::BOOKMARK));
 	if(bookmark != -1)
-		SendMessage(SCI_GOTOLINE, bookmark);
+		GoToLine(bookmark);
 }
 
 
@@ -636,7 +655,7 @@ Editor::GoToPreviousBookmark()
 	if(bookmark == -1)
 		bookmark = SendMessage(SCI_MARKERPREVIOUS, lineCount, (1 << Marker::BOOKMARK));
 	if(bookmark != -1)
-		SendMessage(SCI_GOTOLINE, bookmark);
+		GoToLine(bookmark);
 }
 
 

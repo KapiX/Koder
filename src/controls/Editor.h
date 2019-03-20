@@ -87,6 +87,8 @@ public:
 
 	void				UpdateLineNumberWidth();
 
+	void				GoToLine(int64 line);
+
 	void				SetBookmarks(const BMessage &lines);
 	BMessage			Bookmarks();
 	BMessage			BookmarksWithText();
