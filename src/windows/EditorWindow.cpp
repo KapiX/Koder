@@ -810,7 +810,14 @@ EditorWindow::WindowActivated(bool active)
 			// cannot calculate scroll position correctly.
 			// After the window is activated for the first time, we are sure
 			// layouting has been completed.
-			fEditor->SendMessage(SCI_SCROLLCARET, 0, 0);
+			fEditor->SendMessage(SCI_SCROLLCARET);
+			// We can safely assume that caret is at the bottom at this point,
+			// so scroll further down.
+			int linesOnScreen = fEditor->SendMessage(SCI_LINESONSCREEN);
+			fEditor->SendMessage(SCI_LINESCROLL, 0, linesOnScreen - 8);
+			// ...if that assumption is not correct, make sure the caret
+			// is in the view.
+			fEditor->SendMessage(SCI_SCROLLCARET);
 			fActivatedGuard = true;
 		}
 		BMessage message(ACTIVE_WINDOW_CHANGED);
