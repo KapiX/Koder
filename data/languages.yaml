@@ -15,7 +15,7 @@ cmake:
     extensions: [ cmake, CMakeLists.txt, CMakeCache.txt ]
 cpp:
     name: C++
-    extensions: [ cc, cpp, cxx, h, hh, hpp, hxx ]
+    extensions: [ cc, cpp, cxx, h, hh, hpp, hxx, dox ]
 css:
     name: CSS
     extensions: [ css ]
