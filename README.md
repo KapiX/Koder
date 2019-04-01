@@ -39,6 +39,12 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 * Add option to automatically insert new line at the end on save.
 * Add option to change toolbar icon size.
 * Backup files before saving.
+* Fix window resizing after changing toolbar visibility.
+* Fix fold margin not appearing on language change.
+* Fix observing wrong file after Save as operation.
+* Fix opening non-existent files.
+* Make sure caret is in top quarter of the view when opening a file.
+* Add two new themes by Mikael Konradsson and dimmed theme by Humdinger.
 
 0.4.1 - *23-11-2018*
 
