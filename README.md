@@ -20,7 +20,9 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 
 ## History
 
-0.5.0 - *TBD*
+0.6.0 - *TBD*
+
+0.5.0 - *01-04-2019*
 
 * Make preferences update automatically.
 * Add Open Terminal shortcut.
