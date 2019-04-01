@@ -25,8 +25,8 @@ SYSTEM_INCLUDE_PATHS = \
 LOCAL_INCLUDE_PATHS = src/controls src/support src/windows
 LOCALES = de en en_GB es fr pt pl ro ru uk
 
-SYMBOLS := TRUE
-DEBUGGER := TRUE
+SYMBOLS := FALSE
+DEBUGGER := FALSE
 COMPILER_FLAGS = -std=c++17
 
 ## Include the Makefile-Engine
