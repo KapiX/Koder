@@ -1,4 +1,4 @@
-1	Lithuanian	x-vnd.KapiX-Koder	2821340809
+1	Lithuanian	x-vnd.KapiX-Koder	822155924
 Code editor for Haiku based on Scintilla editing component.	App		Haiku skaitmenų rengyklė naudoja Scintilla taisymo dėmenį.
 Distributed on MIT license terms.	App		Platinama vadovaujantis MIT leidimais.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil’ą Hodgson’ą, už taisymo dėmenį Scintilla bei rengyklę SciTE.
@@ -6,7 +6,6 @@ zuMi, for toolbar icons.	App		zuMi’į, už įrankinės ženkliukus.
 Konrad77, for dark theme.	App		Konrad77, for dark theme.
 translators to:	App	to _ (language), e.g. German	translators to:
 humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
-Apply	AppPreferencesWindow		Pritaikyti
 Background	AppPreferencesWindow		Laukas
 Compact language menu	AppPreferencesWindow		Glaustas kalbų sąrašas
 Convert tabs to spaces	AppPreferencesWindow		Versti Tab’ą tarpeliais
@@ -21,7 +20,6 @@ Only in actually indented lines	AppPreferencesWindow		Tik įtrauktąsias eilutes
 Revert	AppPreferencesWindow		Grąžinti
 Show full path in title	AppPreferencesWindow		Antraštėje rodyti pilną kelią
 Show indentation guides	AppPreferencesWindow		Rodyti gaires
-Show line numbers	AppPreferencesWindow		Rodyti eilučių skaičius
 Show toolbar	AppPreferencesWindow		Rodyti įrankinę
 Spaces per tab:	AppPreferencesWindow		Tarpelių per Tab’ą:
 Stack new windows	AppPreferencesWindow		Stack new windows
@@ -38,6 +36,19 @@ Indentation	AppPreferencesWindow		Indentation
 Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
 Always open files in new window	AppPreferencesWindow		Always open files in new window
 Use custom font	AppPreferencesWindow		Use custom font
+Folds	AppPreferencesWindow		Folds
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantic
+Large	AppPreferencesWindow	Toolbar icon size	Large
+Bookmarks	AppPreferencesWindow		Bookmarks
+Extra large	AppPreferencesWindow	Toolbar icon size	Extra large
+Medium	AppPreferencesWindow	Toolbar icon size	Medium
+Small	AppPreferencesWindow	Toolbar icon size	Small
+Huge	AppPreferencesWindow	Toolbar icon size	Huge
+Icon size	AppPreferencesWindow		Icon size
+Line numbers	AppPreferencesWindow		Line numbers
+Enormous	AppPreferencesWindow	Toolbar icon size	Enormous
+Left margin	AppPreferencesWindow		Left margin
+Ensure empty last line on save	AppPreferencesWindow		Ensure empty last line on save
 [read-only]	EditorWindow		[tik skaitymui]
 About…	EditorWindow		Apie...
 Access denied	EditorWindow		Prieiga uždrausta
@@ -46,13 +57,10 @@ Close	EditorWindow		Uždaryti
 Comment block	EditorWindow		Pastabų skiltis
 Comment line	EditorWindow		Pastabų eilutė
 Copy	EditorWindow		Nurašyti
-Corresponding file not found.	EditorWindow		Corresponding file not found.
 Cut	EditorWindow		Iškirpti
 Discard	EditorWindow		Atmesti
 Do nothing	EditorWindow		Nieko nedaryti
 Edit	EditorWindow		Taisa
-Error	EditorWindow		Klaida
-Failed to read file permissions.	EditorWindow		Nepavyko perskaityti bylos leidimų.
 File	EditorWindow		Byla
 File modified	EditorWindow		Byla pakeista
 Find/Replace…	EditorWindow		Rasti/Pakeisti…
@@ -62,10 +70,7 @@ Koder preferences…	EditorWindow		Koder’io parankos…
 Language	EditorWindow		Kalba
 Line endings	EditorWindow		Eilučių baigmės
 New	EditorWindow		Nauja
-OK	EditorWindow		Gerai
 Old Mac format	EditorWindow		Senasis Mac pavidalas
-Open corresponding file	EditorWindow		Open corresponding file
-Open corresponding…	EditorWindow		Open corresponding…
 Open…	EditorWindow		Open…
 Paste	EditorWindow		Įterpti
 Quit	EditorWindow		Baigti
@@ -92,16 +97,25 @@ Unix format	EditorWindow		Unix pavidalas
 Unsaved changes	EditorWindow		Neišsaugoti keitimai
 Untitled	EditorWindow		Bevardis
 View	EditorWindow		Vaizdas
-Warning	EditorWindow		Perspėjimas
 Windows format	EditorWindow		Windows pavidalas
 Wrap lines	EditorWindow		Wrap lines
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Neturite leidimų šios bylos taisymui. Rengyklė bus paleista tik skaitymui. 
 You don't have sufficient permissions to edit this file.	EditorWindow		Neturite pakankamai leidimų taisyti šią bylą.
 Your changes will be lost.	EditorWindow		Your changes will be lost.
 Find selection	EditorWindow		Find selection
 Find next	EditorWindow		Find next
 Replace and find	EditorWindow		Replace and find
 Incremental search	EditorWindow		Incremental search
+Could not find Open Terminal Tracker add-on.	EditorWindow		Could not find Open Terminal Tracker add-on.
+Toggle bookmark	EditorWindow		Toggle bookmark
+Open Terminal	EditorWindow		Open Terminal
+Next bookmark	EditorWindow		Next bookmark
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
+File removed	EditorWindow		File removed
+Bookmarks	EditorWindow		Bookmarks
+The file has been removed. What to do?	EditorWindow		The file has been removed. What to do?
+Open partner file	EditorWindow		Open partner file
+Previous bookmark	EditorWindow		Previous bookmark
+Partner file not found.	EditorWindow		Partner file not found.
 Backwards	FindWindow		Backwards
 Find	FindWindow		Rasti
 Find:	FindWindow		Rasti:
@@ -119,7 +133,15 @@ Cancel	GoToLineWindow		Nutraukti
 Go to line	GoToLineWindow		Pereiti į eilutę
 Go to line:	GoToLineWindow		Pereiti į eilutę:
 OK	GoToLineWindow		Gerai
-OK	Preferences		Gerai
+Cancel	QuitAlert		Nutraukti
+Don't save	QuitAlert		Neišsaugoti
+Save all	QuitAlert		Išsaugoti viską
+Save selected	QuitAlert		Išsaugoti pažymėtuosius
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Čia yra neišsaugotų pakeitimų.\nPažymėkite bylas išsaugojimui.
+Unsaved files	QuitAlert		Neišsaugotos bylos
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
+Style files	Styler		Style files
+Koder	System name		Koder
 Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
 Editor settings	Preferences		Editor settings
 read	Preferences	Make sure you have _ permission for	read
@@ -131,14 +153,9 @@ loaded	Preferences	settings will not be _	loaded
 write	Preferences	Make sure you have _ permission for	write
 save	Preferences	to _ the configuration	save
 saved	Preferences	settings will not be _	saved
-Cancel	QuitAlert		Nutraukti
-Don't save	QuitAlert		Neišsaugoti
-Save all	QuitAlert		Išsaugoti viską
-Save selected	QuitAlert		Išsaugoti pažymėtuosius
-There are unsaved changes.\nSelect the files to save.	QuitAlert		Čia yra neišsaugotų pakeitimų.\nPažymėkite bylas išsaugojimui.
-Unsaved files	QuitAlert		Neišsaugotos bylos
-Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
-OK	Styler		OK
-Style files	Styler		Style files
-Koder	System name		Koder
 Read-only	StatusView		Read-only
+Open Terminal	StatusView		Open Terminal
+Go to	BookmarksListView		Go to
+Delete	BookmarksListView		Delete
+OK	Utilities		OK
+Bookmarks	BookmarksWindow		Bookmarks

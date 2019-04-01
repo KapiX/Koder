@@ -1,4 +1,4 @@
-1	Russian	x-vnd.KapiX-Koder	2821340809
+1	Russian	x-vnd.KapiX-Koder	822155924
 Code editor for Haiku based on Scintilla editing component.	App		Редактор кода для Haiku на базе текстового компонента Scintilla.
 Distributed on MIT license terms.	App		Распространяется на условиях лицензии MIT.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Нейл Ходгсон(Neil Hodgson), за текстовый компонент Scintilla и редактор SciTE.
@@ -6,7 +6,6 @@ zuMi, for toolbar icons.	App		zuMi, за иконки для панели инс
 Konrad77, for dark theme.	App		Konrad77, за тёмную тему.
 translators to:	App	to _ (language), e.g. German	переводчики на:
 humdinger, for GUI design tips and artwork.	App		humdinger, за советы по дизайну интерфейса и арты.
-Apply	AppPreferencesWindow		Применить
 Background	AppPreferencesWindow		Фон
 Compact language menu	AppPreferencesWindow		Компактное меню языков
 Convert tabs to spaces	AppPreferencesWindow		Преобразовать отступы в пробелы
@@ -21,7 +20,6 @@ Only in actually indented lines	AppPreferencesWindow		Только в строк
 Revert	AppPreferencesWindow		Откатить
 Show full path in title	AppPreferencesWindow		Отобразить полный путь в заголовке
 Show indentation guides	AppPreferencesWindow		Отобразить направляющие отступа
-Show line numbers	AppPreferencesWindow		Отобразить номера строк
 Show toolbar	AppPreferencesWindow		Отобразить панель инструментов
 Spaces per tab:	AppPreferencesWindow		Пробелов в табуляции:
 Stack new windows	AppPreferencesWindow		Группировать новые окна
@@ -38,6 +36,19 @@ Indentation	AppPreferencesWindow		Отступ
 Use .editorconfig if possible	AppPreferencesWindow		При возможности использовать .editorconfig
 Always open files in new window	AppPreferencesWindow		Всегда открывать файлы в новом окне
 Use custom font	AppPreferencesWindow		Использовать пользовательский шрифт
+Folds	AppPreferencesWindow		Складки
+Gigantic	AppPreferencesWindow	Toolbar icon size	Гигантский
+Large	AppPreferencesWindow	Toolbar icon size	Большой
+Bookmarks	AppPreferencesWindow		Закладки
+Extra large	AppPreferencesWindow	Toolbar icon size	Ещё больше
+Medium	AppPreferencesWindow	Toolbar icon size	Средний
+Small	AppPreferencesWindow	Toolbar icon size	Маленький
+Huge	AppPreferencesWindow	Toolbar icon size	Огромный
+Icon size	AppPreferencesWindow		Размер значков
+Line numbers	AppPreferencesWindow		Номер строки
+Enormous	AppPreferencesWindow	Toolbar icon size	Невообразимо большой
+Left margin	AppPreferencesWindow		Левая граница
+Ensure empty last line on save	AppPreferencesWindow		Обеспечивать пустую последнюю строку при сохранении
 [read-only]	EditorWindow		[только для чтения]
 About…	EditorWindow		О программе...
 Access denied	EditorWindow		Доступ закрыт
@@ -46,13 +57,10 @@ Close	EditorWindow		Закрыть
 Comment block	EditorWindow		Комментировать блок
 Comment line	EditorWindow		Комментировать строку
 Copy	EditorWindow		Копировать
-Corresponding file not found.	EditorWindow		Соответствующий файл не найден
 Cut	EditorWindow		Вырезать
-Discard	EditorWindow		Сбросить
+Discard	EditorWindow		Не сохранять
 Do nothing	EditorWindow		Ничего не делать
 Edit	EditorWindow		Редактирование
-Error	EditorWindow		Ошибка
-Failed to read file permissions.	EditorWindow		Не удалось прочесть права доступа к файлу
 File	EditorWindow		Файл
 File modified	EditorWindow		Файл изменён
 Find/Replace…	EditorWindow		Найти/Заменить…
@@ -62,10 +70,7 @@ Koder preferences…	EditorWindow		Настройки Koder…
 Language	EditorWindow		Язык
 Line endings	EditorWindow		Символы конца строки
 New	EditorWindow		Новый
-OK	EditorWindow		Хорошо
 Old Mac format	EditorWindow		Старый формат Mac
-Open corresponding file	EditorWindow		Открыть соответствующий файл
-Open corresponding…	EditorWindow		Открыть соответствующий…
 Open…	EditorWindow		Открыть…
 Paste	EditorWindow		Вставить
 Quit	EditorWindow		Выйти
@@ -92,16 +97,25 @@ Unix format	EditorWindow		Формат Unix
 Unsaved changes	EditorWindow		Несохранённые изменения
 Untitled	EditorWindow		Безымянный
 View	EditorWindow		Вид
-Warning	EditorWindow		Предупреждение
 Windows format	EditorWindow		Формат Windows
 Wrap lines	EditorWindow		Перенос строк
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Недостаточно прав для редактирования файла. Редактор переходит в режим только для чтения. 
 You don't have sufficient permissions to edit this file.	EditorWindow		Недостаточно прав для редактирования файла.
 Your changes will be lost.	EditorWindow		Ваши изменения будут потеряны.
 Find selection	EditorWindow		Найти выбранное
 Find next	EditorWindow		Найти далее
 Replace and find	EditorWindow		Найти и заменить
 Incremental search	EditorWindow		Инкрементный поиск
+Could not find Open Terminal Tracker add-on.	EditorWindow		Расширение Tracker: Открыть Terminal не найдено.
+Toggle bookmark	EditorWindow		Добавить/удалить закладку
+Open Terminal	EditorWindow		Открыть Terminal
+Next bookmark	EditorWindow		Следующая закладка
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Не удалось запустить расширение Tracker: Открыть Terminal.
+File removed	EditorWindow		Файл удалён
+Bookmarks	EditorWindow		Закладки
+The file has been removed. What to do?	EditorWindow		Файл был удалён. Что сделать?
+Open partner file	EditorWindow		Открыть файл партнёра
+Previous bookmark	EditorWindow		Предыдущая закладка
+Partner file not found.	EditorWindow		Файл партнёра не найден.
 Backwards	FindWindow		Назад
 Find	FindWindow		Найти
 Find:	FindWindow		Найти:
@@ -119,7 +133,15 @@ Cancel	GoToLineWindow		Отмена
 Go to line	GoToLineWindow		Перейти к строке
 Go to line:	GoToLineWindow		Перейти к строке:
 OK	GoToLineWindow		OK
-OK	Preferences		OK
+Cancel	QuitAlert		Отмена
+Don't save	QuitAlert		Не сохранять
+Save all	QuitAlert		Сохранить всё
+Save selected	QuitAlert		Сохранить выбранное
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Есть несохранённые изменения.\nВыберите файлы для сохранения.
+Unsaved files	QuitAlert		Несохранённые файлы
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Не удалось найти файлы стилей. Убедитесь, что они установлены в одной из ваших папок 'data'.
+Style files	Styler		Файлы стилей
+Koder	System name		Koder
 Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Отказано в доступе при открытии файла конфигурации. Убедитесь, что у вас есть права на %s% для папки 'settings'.
 Editor settings	Preferences		Настройки редактора
 read	Preferences	Make sure you have _ permission for	чтение
@@ -131,14 +153,9 @@ loaded	Preferences	settings will not be _	загружены
 write	Preferences	Make sure you have _ permission for	запись
 save	Preferences	to _ the configuration	сохранить
 saved	Preferences	settings will not be _	сохранены
-Cancel	QuitAlert		Отмена
-Don't save	QuitAlert		Не сохранять
-Save all	QuitAlert		Сохранить всё
-Save selected	QuitAlert		Сохранить выбранное
-There are unsaved changes.\nSelect the files to save.	QuitAlert		Есть несохранённые изменения.\nВыберите файлы для сохранения.
-Unsaved files	QuitAlert		Несохранённые файлы
-Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Не удалось найти файлы стилей. Убедитесь, что они установлены в одной из ваших папок 'data'.
-OK	Styler		OK
-Style files	Styler		Файлы стилей
-Koder	System name		Koder
 Read-only	StatusView		Только чтение
+Open Terminal	StatusView		Открыть Terminal
+Go to	BookmarksListView		На строку
+Delete	BookmarksListView		Удалить
+OK	Utilities		ОК
+Bookmarks	BookmarksWindow		Закладки

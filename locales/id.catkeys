@@ -1,91 +1,91 @@
-1	Finnish	x-vnd.KapiX-Koder	822155924
-Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
-Distributed on MIT license terms.	App		Distributed on MIT license terms.
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
-zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
-Konrad77, for dark theme.	App		Konrad77, for dark theme.
-translators to:	App	to _ (language), e.g. German	translators to:
-humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
-Background	AppPreferencesWindow		Tausta
-Compact language menu	AppPreferencesWindow		Compact language menu
-Convert tabs to spaces	AppPreferencesWindow		Muunna sarkaimet välilyönneiksi
-Highlight braces	AppPreferencesWindow		Highlight braces
-Highlight current line	AppPreferencesWindow		Highlight current line
-Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
-Koder preferences	AppPreferencesWindow		Koder-asetukset
-Line	AppPreferencesWindow		Rivi
+1	Indonesian	x-vnd.KapiX-Koder	822155924
+Code editor for Haiku based on Scintilla editing component.	App		Kode editor untuk Haiku berbasis komponen pengeditan Scintilla.
+Distributed on MIT license terms.	App		Didistribusikan dengan persyaratan lisensi MIT.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, untuk komponen pengeditan Scintilla dan editor SciTE.
+zuMi, for toolbar icons.	App		zuMi, untuk ikon bilah-alat.
+Konrad77, for dark theme.	App		Konrad77, untuk tema gelap.
+translators to:	App	to _ (language), e.g. German	penerjemah ke:
+humdinger, for GUI design tips and artwork.	App		humdinger, untuk kiat desain GUI dan karya seni.
+Background	AppPreferencesWindow		Latar Belakang
+Compact language menu	AppPreferencesWindow		Menu bahasa yang ringkas
+Convert tabs to spaces	AppPreferencesWindow		Konversikan tab menjadi spasi
+Highlight braces	AppPreferencesWindow		Sorot tanda kurung
+Highlight current line	AppPreferencesWindow		Sorot baris saat ini
+Highlight trailing whitespace	AppPreferencesWindow		Sorot spasi spasi tambahan
+Koder preferences	AppPreferencesWindow		Preferensi Koder
+Line	AppPreferencesWindow		Baris
 Mark overly long lines	AppPreferencesWindow		Mark overly long lines
 Max. characters per line:	AppPreferencesWindow		Max. characters per line:
 Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
 Revert	AppPreferencesWindow		Revert
-Show full path in title	AppPreferencesWindow		Näytä koko polku otsikossa
+Show full path in title	AppPreferencesWindow		Show full path in title
 Show indentation guides	AppPreferencesWindow		Show indentation guides
-Show toolbar	AppPreferencesWindow		Näytä työkalupalkki
-Spaces per tab:	AppPreferencesWindow		Välilyönteja sarkainta kohden:
+Show toolbar	AppPreferencesWindow		Show toolbar
+Spaces per tab:	AppPreferencesWindow		Spaces per tab:
 Stack new windows	AppPreferencesWindow		Stack new windows
-Style	AppPreferencesWindow		Tyyli
+Style	AppPreferencesWindow		Style
 Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
 Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
 Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
-Behavior	AppPreferencesWindow		Behavior
-Background	AppPreferencesWindow	Current line highlight	Background
-Frame	AppPreferencesWindow	Current line highlight	Frame
+Behavior	AppPreferencesWindow		Tingkah laku
+Background	AppPreferencesWindow	Current line highlight	Latar Belakang
+Frame	AppPreferencesWindow	Current line highlight	Bingkai
 Trailing whitespace	AppPreferencesWindow		Trailing whitespace
 Visual	AppPreferencesWindow		Visual
-Indentation	AppPreferencesWindow		Indentation
+Indentation	AppPreferencesWindow		Lekukan
 Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
-Always open files in new window	AppPreferencesWindow		Always open files in new window
+Always open files in new window	AppPreferencesWindow		Selalu buka file di jendela baru
 Use custom font	AppPreferencesWindow		Use custom font
-Folds	AppPreferencesWindow		Folds
-Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantic
-Large	AppPreferencesWindow	Toolbar icon size	Large
-Bookmarks	AppPreferencesWindow		Bookmarks
-Extra large	AppPreferencesWindow	Toolbar icon size	Extra large
+Folds	AppPreferencesWindow		Lipat
+Gigantic	AppPreferencesWindow	Toolbar icon size	Raksasa
+Large	AppPreferencesWindow	Toolbar icon size	Besar
+Bookmarks	AppPreferencesWindow		Tandabuku
+Extra large	AppPreferencesWindow	Toolbar icon size	Ekstra besar
 Medium	AppPreferencesWindow	Toolbar icon size	Medium
 Small	AppPreferencesWindow	Toolbar icon size	Small
-Huge	AppPreferencesWindow	Toolbar icon size	Huge
-Icon size	AppPreferencesWindow		Icon size
+Huge	AppPreferencesWindow	Toolbar icon size	Sangat besar
+Icon size	AppPreferencesWindow		Ukuran ikon
 Line numbers	AppPreferencesWindow		Line numbers
-Enormous	AppPreferencesWindow	Toolbar icon size	Enormous
-Left margin	AppPreferencesWindow		Left margin
-Ensure empty last line on save	AppPreferencesWindow		Ensure empty last line on save
+Enormous	AppPreferencesWindow	Toolbar icon size	Besar sekali
+Left margin	AppPreferencesWindow		Margin kiri
+Ensure empty last line on save	AppPreferencesWindow		Pastikan baris terakhir kosong saat disimpan
 [read-only]	EditorWindow		[read-only]
-About…	EditorWindow		Ohjelmasta…
+About…	EditorWindow		About…
 Access denied	EditorWindow		Access denied
-Cancel	EditorWindow		Peru
-Close	EditorWindow		Sulje
+Cancel	EditorWindow		Cancel
+Close	EditorWindow		Close
 Comment block	EditorWindow		Comment block
 Comment line	EditorWindow		Comment line
 Copy	EditorWindow		Copy
-Cut	EditorWindow		Leikkaa
+Cut	EditorWindow		Cut
 Discard	EditorWindow		Discard
-Do nothing	EditorWindow		Älä tee mitään
-Edit	EditorWindow		Muokkaa
+Do nothing	EditorWindow		Do nothing
+Edit	EditorWindow		Edit
 File	EditorWindow		File
 File modified	EditorWindow		File modified
-Find/Replace…	EditorWindow		Etsi/Korvaa…
-Go to line…	EditorWindow		Siirry riville…
-Help	EditorWindow		Opaste
-Koder preferences…	EditorWindow		Koder-asetukset…
-Language	EditorWindow		Kieli
+Find/Replace…	EditorWindow		Find/Replace…
+Go to line…	EditorWindow		Go to line…
+Help	EditorWindow		Help
+Koder preferences…	EditorWindow		Koder preferences…
+Language	EditorWindow		Language
 Line endings	EditorWindow		Line endings
-New	EditorWindow		Uusi
-Old Mac format	EditorWindow		Vanha Mac-muoto
-Open…	EditorWindow		Avaa…
-Paste	EditorWindow		Liitä
-Quit	EditorWindow		Poistu
+New	EditorWindow		New
+Old Mac format	EditorWindow		Old Mac format
+Open…	EditorWindow		Open…
+Paste	EditorWindow		Paste
+Quit	EditorWindow		Quit
 Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
 Redo	EditorWindow		Redo
-Reload	EditorWindow		Lataa uudelleen
+Reload	EditorWindow		Reload
 Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
 Replacement finished	EditorWindow		Replacement finished
-Save	EditorWindow		Tallenna
-Save as…	EditorWindow		Tallenna nimellä…
-Search	EditorWindow		Etsi
-Searching finished	EditorWindow		Etsintä päättynyt
-Select all	EditorWindow		Valitse kaikki
+Save	EditorWindow		Save
+Save as…	EditorWindow		Save as…
+Search	EditorWindow		Search
+Searching finished	EditorWindow		Searching finished
+Select all	EditorWindow		Select all
 Show line endings	EditorWindow		Show line endings
-Show toolbar	EditorWindow		Näytä työkalupalkki
+Show toolbar	EditorWindow		Show toolbar
 Show white space	EditorWindow		Show white space
 Special symbols	EditorWindow		Special symbols
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
@@ -94,9 +94,9 @@ The file has been modified by another application. What to do?	EditorWindow		The
 Trim trailing whitespace	EditorWindow		Trim trailing whitespace
 Undo	EditorWindow		Undo
 Unix format	EditorWindow		Unix format
-Unsaved changes	EditorWindow		Tallentamattomat muutokset
-Untitled	EditorWindow		Otsikoton
-View	EditorWindow		Näkymä
+Unsaved changes	EditorWindow		Unsaved changes
+Untitled	EditorWindow		Untitled
+View	EditorWindow		View
 Windows format	EditorWindow		Windows format
 Wrap lines	EditorWindow		Wrap lines
 You don't have sufficient permissions to edit this file.	EditorWindow		You don't have sufficient permissions to edit this file.
@@ -117,30 +117,30 @@ Open partner file	EditorWindow		Open partner file
 Previous bookmark	EditorWindow		Previous bookmark
 Partner file not found.	EditorWindow		Partner file not found.
 Backwards	FindWindow		Backwards
-Find	FindWindow		Etsi
-Find:	FindWindow		Etsi:
+Find	FindWindow		Find
+Find:	FindWindow		Find:
 Find/Replace	FindWindow		Find/Replace
 In selection	FindWindow		In selection
 Match case	FindWindow		Match case
 Match entire words	FindWindow		Match entire words
 Regex	FindWindow		Regex
-Replace	FindWindow		Korvaa
-Replace all	FindWindow		Korvaa kaikki
+Replace	FindWindow		Replace
+Replace all	FindWindow		Replace all
 Replace and find	FindWindow		Replace and find
-Replace:	FindWindow		Korvaa:
+Replace:	FindWindow		Replace:
 Wrap around	FindWindow		Wrap around
-Cancel	GoToLineWindow		Peru
-Go to line	GoToLineWindow		Siirry riville
-Go to line:	GoToLineWindow		Siirry riville:
-OK	GoToLineWindow		Valmis
-Cancel	QuitAlert		Peru
-Don't save	QuitAlert		Älä tallenna
-Save all	QuitAlert		Tallenna kaikki
-Save selected	QuitAlert		Tallenna valittu
+Cancel	GoToLineWindow		Cancel
+Go to line	GoToLineWindow		Go to line
+Go to line:	GoToLineWindow		Go to line:
+OK	GoToLineWindow		OK
+Cancel	QuitAlert		Cancel
+Don't save	QuitAlert		Don't save
+Save all	QuitAlert		Save all
+Save selected	QuitAlert		Save selected
 There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
 Unsaved files	QuitAlert		Unsaved files
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
-Style files	Styler		Tyylitiedostot
+Style files	Styler		Style files
 Koder	System name		Koder
 Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
 Editor settings	Preferences		Editor settings

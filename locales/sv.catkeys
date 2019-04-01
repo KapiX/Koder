@@ -1,0 +1,161 @@
+1	Swedish	x-vnd.KapiX-Koder	822155924
+Code editor for Haiku based on Scintilla editing component.	App		Kodredigerare för Haiku baserad på Scintilla redigeringskomponent.
+Distributed on MIT license terms.	App		Distribuerad under MIT-licensvillkor.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, för Scintilla redigeringskomponenten och SciTE redigeraren.
+zuMi, for toolbar icons.	App		zuMi, för verktygsradsikoner.
+Konrad77, for dark theme.	App		Konrad77, för mörkt tema.
+translators to:	App	to _ (language), e.g. German	översättare till:
+humdinger, for GUI design tips and artwork.	App		humdinger, för GUI designtips och illustration.
+Background	AppPreferencesWindow		Bakgrund
+Compact language menu	AppPreferencesWindow		Kompakt språkmeny
+Convert tabs to spaces	AppPreferencesWindow		Konvertera tabulatortecken till mellanslag
+Highlight braces	AppPreferencesWindow		Framhäv hakparanteser
+Highlight current line	AppPreferencesWindow		Framhäv aktuell rad
+Highlight trailing whitespace	AppPreferencesWindow		Framhäv avslutande blankstegstecken
+Koder preferences	AppPreferencesWindow		Koderinställningar
+Line	AppPreferencesWindow		Linje
+Mark overly long lines	AppPreferencesWindow		Markera alltför långa rader
+Max. characters per line:	AppPreferencesWindow		Max. tecken per rad:
+Only in actually indented lines	AppPreferencesWindow		Endast i indenterade rader
+Revert	AppPreferencesWindow		Återgå
+Show full path in title	AppPreferencesWindow		Visa hela sökvägen i titeln
+Show indentation guides	AppPreferencesWindow		Visa indrags-hjälplinjer
+Show toolbar	AppPreferencesWindow		Visa verktygsrad
+Spaces per tab:	AppPreferencesWindow		Mellanslag per tabulatortecken:
+Stack new windows	AppPreferencesWindow		Stapla nya fönster
+Style	AppPreferencesWindow		Stil
+Trim trailing whitespace on save	AppPreferencesWindow		Ta bort släpande blanktecken vid sparning
+Up to the next non-empty line	AppPreferencesWindow		Upp till nästa icke-tomma rad
+Up to the next/previous non-empty line	AppPreferencesWindow		Upp till nästa/föregående icke-tomma rad
+Behavior	AppPreferencesWindow		Behavior tabulatortecken till mellanslag.
+Background	AppPreferencesWindow	Current line highlight	Bakgrund
+Frame	AppPreferencesWindow	Current line highlight	Ram
+Trailing whitespace	AppPreferencesWindow		Släpande blanktecken
+Visual	AppPreferencesWindow		Visuell
+Indentation	AppPreferencesWindow		Indrag
+Use .editorconfig if possible	AppPreferencesWindow		Använd .editorconfig om möjligt
+Always open files in new window	AppPreferencesWindow		Öppna alltid filer i ett nytt fönster
+Use custom font	AppPreferencesWindow		Använd anpassat typsnitt
+Folds	AppPreferencesWindow		Folds
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantic
+Large	AppPreferencesWindow	Toolbar icon size	Large
+Bookmarks	AppPreferencesWindow		Bookmarks
+Extra large	AppPreferencesWindow	Toolbar icon size	Extra large
+Medium	AppPreferencesWindow	Toolbar icon size	Medium
+Small	AppPreferencesWindow	Toolbar icon size	Small
+Huge	AppPreferencesWindow	Toolbar icon size	Huge
+Icon size	AppPreferencesWindow		Icon size
+Line numbers	AppPreferencesWindow		Line numbers
+Enormous	AppPreferencesWindow	Toolbar icon size	Enormous
+Left margin	AppPreferencesWindow		Left margin
+Ensure empty last line on save	AppPreferencesWindow		Ensure empty last line on save
+[read-only]	EditorWindow		[skrivskyddad]
+About…	EditorWindow		Om...
+Access denied	EditorWindow		Åtkomst nekad
+Cancel	EditorWindow		Avbryt
+Close	EditorWindow		Stäng
+Comment block	EditorWindow		Kommentarsavsnitt
+Comment line	EditorWindow		Kommentarsrad
+Copy	EditorWindow		Kopiera
+Cut	EditorWindow		Klipp ut
+Discard	EditorWindow		Förkasta
+Do nothing	EditorWindow		Gör ingenting
+Edit	EditorWindow		Redigera
+File	EditorWindow		Arkiv
+File modified	EditorWindow		Filen modifierad
+Find/Replace…	EditorWindow		Sök/Ersätt...
+Go to line…	EditorWindow		Gå till rad...
+Help	EditorWindow		Hjälp
+Koder preferences…	EditorWindow		Koderinställningar...
+Language	EditorWindow		Språk
+Line endings	EditorWindow		Radslut
+New	EditorWindow		Ny
+Old Mac format	EditorWindow		Gammalt Mac-format
+Open…	EditorWindow		Öppna...
+Paste	EditorWindow		Klistra in
+Quit	EditorWindow		Avsluta
+Reached the end of the target. No results found.	EditorWindow		Nådde slutet på sökningen. Inga resultat funna.
+Redo	EditorWindow		Gör om
+Reload	EditorWindow		Ladda om
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Ersatte {0, plural, one{# förekomst} other{# förekomster}}.
+Replacement finished	EditorWindow		Ersättning slutförd
+Save	EditorWindow		Spara
+Save as…	EditorWindow		Spara som...
+Search	EditorWindow		Sök
+Searching finished	EditorWindow		Sökning avslutad
+Select all	EditorWindow		Markera allt
+Show line endings	EditorWindow		Visa radavslut
+Show toolbar	EditorWindow		Visa verktygsrad
+Show white space	EditorWindow		Visa blanktecken
+Special symbols	EditorWindow		Särskilda symboler
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Filen innehåller osparade ändringar, men är skrivskyddad. Vad vill du göra?
+The file contains unsaved changes. What to do?	EditorWindow		Filen innehåller osparade ändringar. Vad vill du göra?
+The file has been modified by another application. What to do?	EditorWindow		Filen har ändrats av ett annat program. Vad vill du göra
+Trim trailing whitespace	EditorWindow		Radera avslutande blankstegstecken
+Undo	EditorWindow		Ångra
+Unix format	EditorWindow		Unix-format
+Unsaved changes	EditorWindow		Osparade ändringar
+Untitled	EditorWindow		Namnlös
+View	EditorWindow		Visa
+Windows format	EditorWindow		Windows-format
+Wrap lines	EditorWindow		Bryt rader
+You don't have sufficient permissions to edit this file.	EditorWindow		Du saknar behörighet att ändra denna fil.
+Your changes will be lost.	EditorWindow		Dina ändringar kommer att gå förlorade.
+Find selection	EditorWindow		Sök efter markering
+Find next	EditorWindow		Sök nästa
+Replace and find	EditorWindow		Ersätt och sök
+Incremental search	EditorWindow		Stegvis sökning
+Could not find Open Terminal Tracker add-on.	EditorWindow		Could not find Open Terminal Tracker add-on.
+Toggle bookmark	EditorWindow		Toggle bookmark
+Open Terminal	EditorWindow		Open Terminal
+Next bookmark	EditorWindow		Next bookmark
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
+File removed	EditorWindow		File removed
+Bookmarks	EditorWindow		Bookmarks
+The file has been removed. What to do?	EditorWindow		The file has been removed. What to do?
+Open partner file	EditorWindow		Open partner file
+Previous bookmark	EditorWindow		Previous bookmark
+Partner file not found.	EditorWindow		Partner file not found.
+Backwards	FindWindow		Bakåt
+Find	FindWindow		Sök
+Find:	FindWindow		Sök:
+Find/Replace	FindWindow		Sök/Ersätt
+In selection	FindWindow		I markering
+Match case	FindWindow		Matcha skiftesläge
+Match entire words	FindWindow		Matcha hela ord
+Regex	FindWindow		Reguljärt uttryck
+Replace	FindWindow		Ersätt
+Replace all	FindWindow		Ersätt allt
+Replace and find	FindWindow		Ersätt och sök
+Replace:	FindWindow		Ersätt:
+Wrap around	FindWindow		Fortsätt från början
+Cancel	GoToLineWindow		Avbryt
+Go to line	GoToLineWindow		Gå till rad
+Go to line:	GoToLineWindow		Gå till rad:
+OK	GoToLineWindow		OK
+Cancel	QuitAlert		Avbryt
+Don't save	QuitAlert		Spara inte
+Save all	QuitAlert		Spara allt
+Save selected	QuitAlert		Spara markering
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Det finns osparade ändringar.\nMarkera dom filer du vill spara.
+Unsaved files	QuitAlert		Osparade filer
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Kunde inte hitta stilfilerna. Säkerställ att du har installerat dem i en av dina data-mappar.
+Style files	Styler		Stilfiler
+Koder	System name		Koder
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Åtkomst nekades när inställningsfilen öppnades. Säkerställ att du har %s% behörighet till din inställningsmapp.
+Editor settings	Preferences		Redigeringsinställningar
+read	Preferences	Make sure you have _ permission for	läs
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Någonting gick snett när konfigurationsfilen öppnades. Dina individuella inställningar kommer inte att vara %s%.
+load	Preferences	to _ the configuration	Ladda
+Unknown error.	Preferences		Okänt fel.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Det finns inte tillräckligt med ledigt minne för att %s% inställningsfilen. Försök att stänga några program och starta om redigeraren.
+loaded	Preferences	settings will not be _	laddad
+write	Preferences	Make sure you have _ permission for	skriv
+save	Preferences	to _ the configuration	spara
+saved	Preferences	settings will not be _	sparad
+Read-only	StatusView		Skrivskyddad
+Open Terminal	StatusView		Open Terminal
+Go to	BookmarksListView		Go to
+Delete	BookmarksListView		Delete
+OK	Utilities		OK
+Bookmarks	BookmarksWindow		Bookmarks

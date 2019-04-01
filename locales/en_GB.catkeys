@@ -1,4 +1,4 @@
-1	English (British)	x-vnd.KapiX-Koder	2821340809
+1	English (British)	x-vnd.KapiX-Koder	822155924
 Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
 Distributed on MIT license terms.	App		Distributed on MIT license terms.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
@@ -6,7 +6,6 @@ zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
 Konrad77, for dark theme.	App		Konrad77, for the dark theme.
 translators to:	App	to _ (language), e.g. German	translators to:
 humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
-Apply	AppPreferencesWindow		Apply
 Background	AppPreferencesWindow		Background
 Compact language menu	AppPreferencesWindow		Compact language menu
 Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
@@ -21,7 +20,6 @@ Only in actually indented lines	AppPreferencesWindow		Only in actually indented 
 Revert	AppPreferencesWindow		Revert
 Show full path in title	AppPreferencesWindow		Show full path in title
 Show indentation guides	AppPreferencesWindow		Show indentation guides
-Show line numbers	AppPreferencesWindow		Show line numbers
 Show toolbar	AppPreferencesWindow		Show toolbar
 Spaces per tab:	AppPreferencesWindow		Spaces per tab:
 Stack new windows	AppPreferencesWindow		Stack new windows
@@ -38,6 +36,19 @@ Indentation	AppPreferencesWindow		Indentation
 Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
 Always open files in new window	AppPreferencesWindow		Always open files in new window
 Use custom font	AppPreferencesWindow		Use custom font
+Folds	AppPreferencesWindow		Folds
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantic
+Large	AppPreferencesWindow	Toolbar icon size	Large
+Bookmarks	AppPreferencesWindow		Bookmarks
+Extra large	AppPreferencesWindow	Toolbar icon size	Extra large
+Medium	AppPreferencesWindow	Toolbar icon size	Medium
+Small	AppPreferencesWindow	Toolbar icon size	Small
+Huge	AppPreferencesWindow	Toolbar icon size	Huge
+Icon size	AppPreferencesWindow		Icon size
+Line numbers	AppPreferencesWindow		Line numbers
+Enormous	AppPreferencesWindow	Toolbar icon size	Enormous
+Left margin	AppPreferencesWindow		Left margin
+Ensure empty last line on save	AppPreferencesWindow		Ensure empty last line on save
 [read-only]	EditorWindow		[read-only]
 About…	EditorWindow		About…
 Access denied	EditorWindow		Access denied
@@ -46,13 +57,10 @@ Close	EditorWindow		Close
 Comment block	EditorWindow		Comment block
 Comment line	EditorWindow		Comment line
 Copy	EditorWindow		Copy
-Corresponding file not found.	EditorWindow		Corresponding file not found.
 Cut	EditorWindow		Cut
 Discard	EditorWindow		Discard
 Do nothing	EditorWindow		Do nothing
 Edit	EditorWindow		Edit
-Error	EditorWindow		Error
-Failed to read file permissions.	EditorWindow		Failed to read file permissions.
 File	EditorWindow		File
 File modified	EditorWindow		File modified
 Find/Replace…	EditorWindow		Find/Replace…
@@ -62,10 +70,7 @@ Koder preferences…	EditorWindow		Koder preferences…
 Language	EditorWindow		Language
 Line endings	EditorWindow		Line endings
 New	EditorWindow		New
-OK	EditorWindow		Alright
 Old Mac format	EditorWindow		Old Mac format
-Open corresponding file	EditorWindow		Open corresponding file
-Open corresponding…	EditorWindow		Open corresponding…
 Open…	EditorWindow		Open…
 Paste	EditorWindow		Paste
 Quit	EditorWindow		Quit
@@ -92,16 +97,25 @@ Unix format	EditorWindow		Unix format
 Unsaved changes	EditorWindow		Unsaved changes
 Untitled	EditorWindow		Untitled
 View	EditorWindow		View
-Warning	EditorWindow		Warning
 Windows format	EditorWindow		Windows format
 Wrap lines	EditorWindow		Wrap lines
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		You don't have permissions to edit this file. The editor will be set to read-only mode.
 You don't have sufficient permissions to edit this file.	EditorWindow		You don't have sufficient permissions to edit this file.
 Your changes will be lost.	EditorWindow		Your changes will be lost.
 Find selection	EditorWindow		Find selection
 Find next	EditorWindow		Find next
 Replace and find	EditorWindow		Find and replace
 Incremental search	EditorWindow		Incremental search
+Could not find Open Terminal Tracker add-on.	EditorWindow		Could not find Open Terminal Tracker add-on.
+Toggle bookmark	EditorWindow		Toggle bookmark
+Open Terminal	EditorWindow		Open Terminal
+Next bookmark	EditorWindow		Next bookmark
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
+File removed	EditorWindow		File removed
+Bookmarks	EditorWindow		Bookmarks
+The file has been removed. What to do?	EditorWindow		The file has been removed. What to do?
+Open partner file	EditorWindow		Open partner file
+Previous bookmark	EditorWindow		Previous bookmark
+Partner file not found.	EditorWindow		Partner file not found.
 Backwards	FindWindow		Backwards
 Find	FindWindow		Find
 Find:	FindWindow		Find:
@@ -119,7 +133,15 @@ Cancel	GoToLineWindow		Cancel
 Go to line	GoToLineWindow		Go to line
 Go to line:	GoToLineWindow		Go to line:
 OK	GoToLineWindow		Alright
-OK	Preferences		Alright
+Cancel	QuitAlert		Cancel
+Don't save	QuitAlert		Don't save
+Save all	QuitAlert		Save all
+Save selected	QuitAlert		Save selected
+There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
+Unsaved files	QuitAlert		Unsaved files
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
+Style files	Styler		Style files
+Koder	System name		Koder
 Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
 Editor settings	Preferences		Editor settings
 read	Preferences	Make sure you have _ permission for	read
@@ -131,14 +153,9 @@ loaded	Preferences	settings will not be _	loaded
 write	Preferences	Make sure you have _ permission for	write
 save	Preferences	to _ the configuration	save
 saved	Preferences	settings will not be _	saved
-Cancel	QuitAlert		Cancel
-Don't save	QuitAlert		Don't save
-Save all	QuitAlert		Save all
-Save selected	QuitAlert		Save selected
-There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
-Unsaved files	QuitAlert		Unsaved files
-Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
-OK	Styler		Alright
-Style files	Styler		Style files
-Koder	System name		Koder
 Read-only	StatusView		Read-only
+Open Terminal	StatusView		Open Terminal
+Go to	BookmarksListView		Go to
+Delete	BookmarksListView		Delete
+OK	Utilities		Alright
+Bookmarks	BookmarksWindow		Bookmarks

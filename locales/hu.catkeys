@@ -1,4 +1,4 @@
-1	Hungarian	x-vnd.KapiX-Koder	2821340809
+1	Hungarian	x-vnd.KapiX-Koder	822155924
 Code editor for Haiku based on Scintilla editing component.	App		A Scintilla szerkesztőkomponensre épülő kódszerkesztő Haikuhoz.
 Distributed on MIT license terms.	App		MIT licenc alatt terjeszthető.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgsonnak, a Scintilla szerkesztő komponensért és a SciTE szerkesztőért.
@@ -6,7 +6,6 @@ zuMi, for toolbar icons.	App		zuMi-nak, az eszköztár ikonjaiért.
 Konrad77, for dark theme.	App		Konrad77, a sötét témáért
 translators to:	App	to _ (language), e.g. German	feordítók:
 humdinger, for GUI design tips and artwork.	App		humdinger, a GUI design tippekért és a logóért
-Apply	AppPreferencesWindow		Alkalmaz
 Background	AppPreferencesWindow		Háttér
 Compact language menu	AppPreferencesWindow		Rövid nyelvi menü
 Convert tabs to spaces	AppPreferencesWindow		Tabok szóközökké alakítása
@@ -21,7 +20,6 @@ Only in actually indented lines	AppPreferencesWindow		Csak behúzott sorokra
 Revert	AppPreferencesWindow		Visszaállít
 Show full path in title	AppPreferencesWindow		Teljes elérési út a címsorban
 Show indentation guides	AppPreferencesWindow		Behúzási segédvonal megjelenítése
-Show line numbers	AppPreferencesWindow		Sorszámok megjelenítése
 Show toolbar	AppPreferencesWindow		Eszköztár megjelenítése
 Spaces per tab:	AppPreferencesWindow		Szóköz tabonként:
 Stack new windows	AppPreferencesWindow		Új ablakok egymáshoz rögzítése
@@ -38,6 +36,19 @@ Indentation	AppPreferencesWindow		Behúzás
 Use .editorconfig if possible	AppPreferencesWindow		Az .editorconfig használata, ha lehetséges
 Always open files in new window	AppPreferencesWindow		Fájlok megnyitása mindig új ablakban
 Use custom font	AppPreferencesWindow		Egyedi betűtípus haszálata
+Folds	AppPreferencesWindow		Folds
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantikus
+Large	AppPreferencesWindow	Toolbar icon size	Nagy
+Bookmarks	AppPreferencesWindow		Könyvjelzők
+Extra large	AppPreferencesWindow	Toolbar icon size	Extra nagy
+Medium	AppPreferencesWindow	Toolbar icon size	Közepes
+Small	AppPreferencesWindow	Toolbar icon size	Kicsi
+Huge	AppPreferencesWindow	Toolbar icon size	Hatalmas
+Icon size	AppPreferencesWindow		Icon size
+Line numbers	AppPreferencesWindow		Sorszámok
+Enormous	AppPreferencesWindow	Toolbar icon size	Borzalmasan nagy
+Left margin	AppPreferencesWindow		Bal margó
+Ensure empty last line on save	AppPreferencesWindow		Utolsó, üres sor hozzáfűzése mentéskor
 [read-only]	EditorWindow		[írásvédett]
 About…	EditorWindow		Névjegy…
 Access denied	EditorWindow		Hozzáférés megtagadva
@@ -46,13 +57,10 @@ Close	EditorWindow		Bezárás
 Comment block	EditorWindow		Megjegyzés blokk
 Comment line	EditorWindow		Megjegyzés sor
 Copy	EditorWindow		Másolás
-Corresponding file not found.	EditorWindow		Hivatkozó fájl nem található.
 Cut	EditorWindow		Kivágás
 Discard	EditorWindow		Elvetés
 Do nothing	EditorWindow		Ne tegyen semmit
 Edit	EditorWindow		Szerkeszt
-Error	EditorWindow		Hiba
-Failed to read file permissions.	EditorWindow		Nem sikerült olvasni a fájl jogosultságait.
 File	EditorWindow		Fájl
 File modified	EditorWindow		Módosított fájl
 Find/Replace…	EditorWindow		Keres/Csere…
@@ -62,10 +70,7 @@ Koder preferences…	EditorWindow		Koder beállításai…
 Language	EditorWindow		Nyelv
 Line endings	EditorWindow		Sor vége
 New	EditorWindow		Új
-OK	EditorWindow		OK
 Old Mac format	EditorWindow		Régi Mac formátum
-Open corresponding file	EditorWindow		Hivatkozott fájl megnyitása
-Open corresponding…	EditorWindow		Hivatkozott megnyitása…
 Open…	EditorWindow		Megnyitás…
 Paste	EditorWindow		Beillesztés
 Quit	EditorWindow		Kilépés
@@ -92,16 +97,25 @@ Unix format	EditorWindow		Unix formátum
 Unsaved changes	EditorWindow		Nem mentett módosítások
 Untitled	EditorWindow		Névtelen
 View	EditorWindow		Nézet
-Warning	EditorWindow		Figyelmeztetés
 Windows format	EditorWindow		Windows formátum
 Wrap lines	EditorWindow		Sorok törése
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nem módosíthatod ezt a fájlt, ezért írásvédett módban lesz megnyitva.
 You don't have sufficient permissions to edit this file.	EditorWindow		Nincs elegendő jogosultsága a fájl megváltoztatásához.
 Your changes will be lost.	EditorWindow		A modosítások elvesznek.
 Find selection	EditorWindow		Keresés kijelölésben
 Find next	EditorWindow		Következő
 Replace and find	EditorWindow		Keres és cserél
 Incremental search	EditorWindow		Inkrementális keresés
+Could not find Open Terminal Tracker add-on.	EditorWindow		Could not find Open Terminal Tracker add-on.
+Toggle bookmark	EditorWindow		Toggle bookmark
+Open Terminal	EditorWindow		Terminál megnyitása
+Next bookmark	EditorWindow		Következő könyvjelző
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
+File removed	EditorWindow		Fájl törölve
+Bookmarks	EditorWindow		Könyvjelzők
+The file has been removed. What to do?	EditorWindow		A fájl eltávolításra került, mit történjen?
+Open partner file	EditorWindow		Partner fájl megnyitása
+Previous bookmark	EditorWindow		Előző könyvjelző
+Partner file not found.	EditorWindow		Partner fájl nem található.
 Backwards	FindWindow		Visszafelé
 Find	FindWindow		Keres
 Find:	FindWindow		Keresés:
@@ -119,7 +133,15 @@ Cancel	GoToLineWindow		Mégsem
 Go to line	GoToLineWindow		Sorra ugrás
 Go to line:	GoToLineWindow		Sorra ugrás:
 OK	GoToLineWindow		OK
-OK	Preferences		OK
+Cancel	QuitAlert		Mégsem
+Don't save	QuitAlert		Ne mentse
+Save all	QuitAlert		Mindent ment
+Save selected	QuitAlert		Kiválasztott mentése
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Nem mentett minden változtatást.\nJelölje ki a mentendő fájlokat.
+Unsaved files	QuitAlert		Nem mentett fájlok
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		A stílusfájlok nem találhatók. Győződj meg róla, hogy az adatkönyvtárba telepítetted őket.
+Style files	Styler		Stílus-fájlok
+Koder	System name		Koder
 Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Hozzáférés megtagadva a beállítások megnyitása során. Kérjük ellenőrizze, hogy van-e %s% joga a beállítások könyvtárban.
 Editor settings	Preferences		Szerkesztő beállításai
 read	Preferences	Make sure you have _ permission for	olvasási
@@ -131,14 +153,9 @@ loaded	Preferences	settings will not be _	betöltésre
 write	Preferences	Make sure you have _ permission for	írás
 save	Preferences	to _ the configuration	ment
 saved	Preferences	settings will not be _	elmentésre
-Cancel	QuitAlert		Mégsem
-Don't save	QuitAlert		Ne mentse
-Save all	QuitAlert		Mindent ment
-Save selected	QuitAlert		Kiválasztott mentése
-There are unsaved changes.\nSelect the files to save.	QuitAlert		Nem mentett minden változtatást.\nJelölje ki a mentendő fájlokat.
-Unsaved files	QuitAlert		Nem mentett fájlok
-Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		A stílusfájlok nem találhatók. Győződj meg róla, hogy az adatkönyvtárba telepítetted őket.
-OK	Styler		OK
-Style files	Styler		Stílus-fájlok
-Koder	System name		Koder
 Read-only	StatusView		Csak olvasható
+Open Terminal	StatusView		Terminál megnyitása
+Go to	BookmarksListView		Ugrás
+Delete	BookmarksListView		Töröl
+OK	Utilities		OK
+Bookmarks	BookmarksWindow		Könyvjelzők

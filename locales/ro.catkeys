@@ -1,12 +1,11 @@
-1	Romanian	x-vnd.KapiX-Koder	2821340809
+1	Romanian	x-vnd.KapiX-Koder	822155924
 Code editor for Haiku based on Scintilla editing component.	App		Editor de cod pentru Haiku bazat pe componenta de editare Scintilla.
 Distributed on MIT license terms.	App		Distribuit după condițiile licenței MIT.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, pentru componenta de editare Scintilla și editorul SciTE.
 zuMi, for toolbar icons.	App		zuMi, pentru iconițele barei de unelte.
-Konrad77, for dark theme.	App		Konrad77, for dark theme.
-translators to:	App	to _ (language), e.g. German	translators to:
-humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
-Apply	AppPreferencesWindow		Aplică
+Konrad77, for dark theme.	App		Konrad77, pentru tema întunecată.
+translators to:	App	to _ (language), e.g. German	traducători în:
+humdinger, for GUI design tips and artwork.	App		humdinger, pentru sugestii în designul GUI și artwork.
 Background	AppPreferencesWindow		Fundal
 Compact language menu	AppPreferencesWindow		Meniu de limbaj compact
 Convert tabs to spaces	AppPreferencesWindow		Convertește taburile la spații
@@ -21,7 +20,6 @@ Only in actually indented lines	AppPreferencesWindow		Doar în liniile care chia
 Revert	AppPreferencesWindow		Revenire
 Show full path in title	AppPreferencesWindow		Arată calea completă în titlu
 Show indentation guides	AppPreferencesWindow		Afișează ghizii de indentare
-Show line numbers	AppPreferencesWindow		Afișează numerele liniilor
 Show toolbar	AppPreferencesWindow		Afișează bara de unelte
 Spaces per tab:	AppPreferencesWindow		Spații per tab:
 Stack new windows	AppPreferencesWindow		Stivuiește ferestrele noi
@@ -29,15 +27,28 @@ Style	AppPreferencesWindow		Stil
 Trim trailing whitespace on save	AppPreferencesWindow		Taie spațiile libere din urmă la salvare
 Up to the next non-empty line	AppPreferencesWindow		Sus la următoarea linie care nu este goală
 Up to the next/previous non-empty line	AppPreferencesWindow		Sus la următoarea/anterioara linie care nu este goală
-Behavior	AppPreferencesWindow		Behavior
-Background	AppPreferencesWindow	Current line highlight	Background
-Frame	AppPreferencesWindow	Current line highlight	Frame
-Trailing whitespace	AppPreferencesWindow		Trailing whitespace
-Visual	AppPreferencesWindow		Visual
-Indentation	AppPreferencesWindow		Indentation
-Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
-Always open files in new window	AppPreferencesWindow		Always open files in new window
-Use custom font	AppPreferencesWindow		Use custom font
+Behavior	AppPreferencesWindow		Comportament
+Background	AppPreferencesWindow	Current line highlight	Fundal
+Frame	AppPreferencesWindow	Current line highlight	Cadru
+Trailing whitespace	AppPreferencesWindow		Spații albe de la final
+Visual	AppPreferencesWindow		Vizual
+Indentation	AppPreferencesWindow		Indentare
+Use .editorconfig if possible	AppPreferencesWindow		Utilizează .editorconfig dacă este posibil
+Always open files in new window	AppPreferencesWindow		Totdeauna deschide fișiere într-o fereastră nouă
+Use custom font	AppPreferencesWindow		Utilizează font personalizat
+Folds	AppPreferencesWindow		Falduri
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantic
+Large	AppPreferencesWindow	Toolbar icon size	Mare
+Bookmarks	AppPreferencesWindow		Semne de carte
+Extra large	AppPreferencesWindow	Toolbar icon size	Foarte mare
+Medium	AppPreferencesWindow	Toolbar icon size	Mediu
+Small	AppPreferencesWindow	Toolbar icon size	Mic
+Huge	AppPreferencesWindow	Toolbar icon size	Imens
+Icon size	AppPreferencesWindow		Mărimea pictogramelor
+Line numbers	AppPreferencesWindow		Numărul liniilor
+Enormous	AppPreferencesWindow	Toolbar icon size	Enorm de mare
+Left margin	AppPreferencesWindow		Marginea stângă
+Ensure empty last line on save	AppPreferencesWindow		Asigură o linie goală la salvare
 [read-only]	EditorWindow		[protejat la scriere]
 About…	EditorWindow		Despre...
 Access denied	EditorWindow		Acces respins
@@ -46,13 +57,10 @@ Close	EditorWindow		Închide
 Comment block	EditorWindow		Bloc de comentariu
 Comment line	EditorWindow		Linie de comentariu
 Copy	EditorWindow		Copiază
-Corresponding file not found.	EditorWindow		Fișierul corespunzător nu a putut fi găsit.
 Cut	EditorWindow		Tăiere
 Discard	EditorWindow		Ignoră
 Do nothing	EditorWindow		Nu face nimic
 Edit	EditorWindow		Editează
-Error	EditorWindow		Eroare
-Failed to read file permissions.	EditorWindow		Nu s-au putut citi permisiunile fișierului.
 File	EditorWindow		Fișier
 File modified	EditorWindow		Fișier modificat
 Find/Replace…	EditorWindow		Căutare/Înlocuire
@@ -62,10 +70,7 @@ Koder preferences…	EditorWindow		Preferințe Koder...
 Language	EditorWindow		Limbaj
 Line endings	EditorWindow		Sfărșituri de linie
 New	EditorWindow		Nou
-OK	EditorWindow		OK
 Old Mac format	EditorWindow		Format Mac vechi
-Open corresponding file	EditorWindow		Deschide fișierul corespunzător
-Open corresponding…	EditorWindow		Deschide corespunzător...
 Open…	EditorWindow		Deschide...
 Paste	EditorWindow		Lipire
 Quit	EditorWindow		Ieșire
@@ -92,16 +97,25 @@ Unix format	EditorWindow		Format Unix
 Unsaved changes	EditorWindow		Modificări nesalvate
 Untitled	EditorWindow		Fără titlu
 View	EditorWindow		Vizualizare
-Warning	EditorWindow		Avertisment
 Windows format	EditorWindow		Format Windows
 Wrap lines	EditorWindow		Încadrează liniile
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nu aveți permisiunile de a edita acest fișier. Editorul va fi stabilit la modul doar citire.
 You don't have sufficient permissions to edit this file.	EditorWindow		Nu aveți permisiunile suficiente de a edita acest fișier.
 Your changes will be lost.	EditorWindow		Modificările vor fi pierdute.
-Find selection	EditorWindow		Find selection
-Find next	EditorWindow		Find next
-Replace and find	EditorWindow		Replace and find
-Incremental search	EditorWindow		Incremental search
+Find selection	EditorWindow		Caută textul selectat
+Find next	EditorWindow		Următoarea apariție
+Replace and find	EditorWindow		Înlocuiește și caută
+Incremental search	EditorWindow		Căutarea încrementală
+Could not find Open Terminal Tracker add-on.	EditorWindow		Nu pot găsi Open Terminal Tracker add-on.
+Toggle bookmark	EditorWindow		Comută favoritul
+Open Terminal	EditorWindow		Deschide terminalul
+Next bookmark	EditorWindow		Favoritul următor
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Nu pot lansa Open Terminal Tracker add-on.
+File removed	EditorWindow		Fișierul a fost șters
+Bookmarks	EditorWindow		Semne de carte
+The file has been removed. What to do?	EditorWindow		Fișierul a fost eliminat. Ce trebuie făcut?
+Open partner file	EditorWindow		Deschide fișierul partener
+Previous bookmark	EditorWindow		Favoritul anterior
+Partner file not found.	EditorWindow		Nu s-a găsit fișierul partener.
 Backwards	FindWindow		Invers
 Find	FindWindow		Căutare
 Find:	FindWindow		Caută:
@@ -119,18 +133,6 @@ Cancel	GoToLineWindow		Anulează:
 Go to line	GoToLineWindow		Mergi la linia
 Go to line:	GoToLineWindow		Mergi la linia:
 OK	GoToLineWindow		OK
-OK	Preferences		OK
-Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
-Editor settings	Preferences		Editor settings
-read	Preferences	Make sure you have _ permission for	read
-Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
-load	Preferences	to _ the configuration	load
-Unknown error.	Preferences		Unknown error.
-There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.
-loaded	Preferences	settings will not be _	loaded
-write	Preferences	Make sure you have _ permission for	write
-save	Preferences	to _ the configuration	save
-saved	Preferences	settings will not be _	saved
 Cancel	QuitAlert		Anulează
 Don't save	QuitAlert		Nu salva
 Save all	QuitAlert		Salvează tot
@@ -138,7 +140,22 @@ Save selected	QuitAlert		Salvează selectate
 There are unsaved changes.\nSelect the files to save.	QuitAlert		Există modificări nesalvate.\nSelectați fișierele de salvat.
 Unsaved files	QuitAlert		Fișiere nesalvate
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Nu s-au putut găsi fișierele de stil. Asigurați-vă că le aveți instalate într-unul dintre dosarele de date.
-OK	Styler		OK
 Style files	Styler		Fișiere de stil
 Koder	System name		Koder
-Read-only	StatusView		Read-only
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Accesul a fost respins în timpul deschiderii fișierului de configurație. Asigurați-vă că aveți permisiunea %s% pentru directorul de configurări.
+Editor settings	Preferences		Configurări editor
+read	Preferences	Make sure you have _ permission for	citit
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		S-a întâmplat ceva greșit în timpul deschiderii fișierului de configurație. Configurările personale nu vor fi %s%.
+load	Preferences	to _ the configuration	încărca
+Unknown error.	Preferences		Eroare necunoscută.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Nu există destulă memorie disponibilă pentru a %s% fișierul de configurație. Încercați să închideți câteva aplicații și să reporniți editorul.
+loaded	Preferences	settings will not be _	încărcate
+write	Preferences	Make sure you have _ permission for	scriere
+save	Preferences	to _ the configuration	salva
+saved	Preferences	settings will not be _	salvate
+Read-only	StatusView		Doar citire
+Open Terminal	StatusView		Deschide terminalul
+Go to	BookmarksListView		Urmează
+Delete	BookmarksListView		Elimină
+OK	Utilities		OK
+Bookmarks	BookmarksWindow		Semne de carte

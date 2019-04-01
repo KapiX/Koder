@@ -1,4 +1,4 @@
-1	Polish	x-vnd.KapiX-Koder	2821340809
+1	Polish	x-vnd.KapiX-Koder	822155924
 Code editor for Haiku based on Scintilla editing component.	App		Edytor kodu dla Haiku oparty na kontrolce Scintilla.
 Distributed on MIT license terms.	App		Rozprowadzany na warunkach licencji MIT.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neila Hodgsona, za kontrolkę Scintilla i edytor SciTE.
@@ -6,7 +6,6 @@ zuMi, for toolbar icons.	App		zuMi, za ikony paska narzędzi.
 Konrad77, for dark theme.	App		Konrada77, za ciemny styl edytora.
 translators to:	App	to _ (language), e.g. German	tłumaczy na:
 humdinger, for GUI design tips and artwork.	App		humdingera, za porady dotyczące interfejsu oraz grafiki.
-Apply	AppPreferencesWindow		Zastosuj
 Background	AppPreferencesWindow		Tło
 Compact language menu	AppPreferencesWindow		Kompaktowe menu języków
 Convert tabs to spaces	AppPreferencesWindow		Konwersja tabulacji na spacje
@@ -21,7 +20,6 @@ Only in actually indented lines	AppPreferencesWindow		Tylko dla właściwych wci
 Revert	AppPreferencesWindow		Cofnij
 Show full path in title	AppPreferencesWindow		Pokazuj pełną ścieżkę na pasku tytułu
 Show indentation guides	AppPreferencesWindow		Pokazuj prowadnice wcięć
-Show line numbers	AppPreferencesWindow		Pokazuj numery linii
 Show toolbar	AppPreferencesWindow		Pokazuj pasek narzędzie
 Spaces per tab:	AppPreferencesWindow		Spacje na tabulację:
 Stack new windows	AppPreferencesWindow		Grupuj nowe okna
@@ -38,6 +36,19 @@ Indentation	AppPreferencesWindow		Wcięcia
 Use .editorconfig if possible	AppPreferencesWindow		Użyj .editorconfig jeśli to możliwe
 Always open files in new window	AppPreferencesWindow		Zawsze otwieraj pliki w nowym oknie
 Use custom font	AppPreferencesWindow		Użyj poniższego fontu
+Folds	AppPreferencesWindow		Zwijacze
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantyczne
+Large	AppPreferencesWindow	Toolbar icon size	Duże
+Bookmarks	AppPreferencesWindow		Zakładki
+Extra large	AppPreferencesWindow	Toolbar icon size	Bardzo duże
+Medium	AppPreferencesWindow	Toolbar icon size	Średnie
+Small	AppPreferencesWindow	Toolbar icon size	Małe
+Huge	AppPreferencesWindow	Toolbar icon size	Wielkie
+Icon size	AppPreferencesWindow		Rozmiar ikon
+Line numbers	AppPreferencesWindow		Numery linii
+Enormous	AppPreferencesWindow	Toolbar icon size	Ogromne
+Left margin	AppPreferencesWindow		Lewy margines
+Ensure empty last line on save	AppPreferencesWindow		Dodaj pustą linię na końcu przy zapisywaniu
 [read-only]	EditorWindow		[tylko do odczytu]
 About…	EditorWindow		O programie…
 Access denied	EditorWindow		Odmowa dostępu
@@ -46,13 +57,10 @@ Close	EditorWindow		Zamknij
 Comment block	EditorWindow		Zakomentuj blok
 Comment line	EditorWindow		Zakomentuj linię
 Copy	EditorWindow		Kopiuj
-Corresponding file not found.	EditorWindow		Odpowiadający plik nie znaleziony.
 Cut	EditorWindow		Wytnij
 Discard	EditorWindow		Odrzuć
 Do nothing	EditorWindow		Nic
 Edit	EditorWindow		Edycja
-Error	EditorWindow		Błąd
-Failed to read file permissions.	EditorWindow		Nie można odczytać uprawnień do pliku.
 File	EditorWindow		Plik
 File modified	EditorWindow		Plik zmodyfikowany
 Find/Replace…	EditorWindow		Znajdź/Zastąp…
@@ -62,10 +70,7 @@ Koder preferences…	EditorWindow		Ustawienia Kodera…
 Language	EditorWindow		Język
 Line endings	EditorWindow		Zakończenia linii
 New	EditorWindow		Nowy
-OK	EditorWindow		OK
 Old Mac format	EditorWindow		Format starego Mac OS
-Open corresponding file	EditorWindow		Otwórz plik odpowiadający
-Open corresponding…	EditorWindow		Otwórz odpowiadający…
 Open…	EditorWindow		Otwórz…
 Paste	EditorWindow		Wklej
 Quit	EditorWindow		Zakończ
@@ -92,16 +97,25 @@ Unix format	EditorWindow		Format Unix
 Unsaved changes	EditorWindow		Niezapisane zmiany
 Untitled	EditorWindow		Bez nazwy
 View	EditorWindow		Widok
-Warning	EditorWindow		Uwaga
 Windows format	EditorWindow		Format Windows
 Wrap lines	EditorWindow		Zawijaj linie
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		Nie masz uprawnień do edycji tego pliku. Edytor zostanie ustawiony w tryb tylko do odczytu.
 You don't have sufficient permissions to edit this file.	EditorWindow		Nie masz wystarczających uprawnień do edycji tego pliku.
 Your changes will be lost.	EditorWindow		Zmiany zostaną utracone.
 Find selection	EditorWindow		Znajdź zaznacznie
 Find next	EditorWindow		Znajdź następne
 Replace and find	EditorWindow		Zastąp i znajdź
 Incremental search	EditorWindow		Szukanie przyrostowe
+Could not find Open Terminal Tracker add-on.	EditorWindow		Nie znaleziono dodatku Trackera „Otwórz Terminal”.
+Toggle bookmark	EditorWindow		Przełącz zakładkę
+Open Terminal	EditorWindow		Otwórz Terminal
+Next bookmark	EditorWindow		Następna zakładka
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Nie udało się uruchomić dodatku Trackera „Otwórz Terminal”.
+File removed	EditorWindow		Plik usunięty
+Bookmarks	EditorWindow		Zakładki
+The file has been removed. What to do?	EditorWindow		Plik został usunięty. Co zrobić?
+Open partner file	EditorWindow		Otwórz plik towarzyszący
+Previous bookmark	EditorWindow		Poprzednia zakładka.
+Partner file not found.	EditorWindow		Nie znaleziono pliku towarzyszącego.
 Backwards	FindWindow		Wstecz
 Find	FindWindow		Znajdź
 Find:	FindWindow		Znajdź:
@@ -119,7 +133,15 @@ Cancel	GoToLineWindow		Anuluj
 Go to line	GoToLineWindow		Skocz do linii
 Go to line:	GoToLineWindow		Skok do linii:
 OK	GoToLineWindow		OK
-OK	Preferences		OK
+Cancel	QuitAlert		Anuluj
+Don't save	QuitAlert		Nie zapisuj
+Save all	QuitAlert		Zapisz wszystkie
+Save selected	QuitAlert		Zapisz zaznaczone
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Istnieją niezapisane zmiany.\nWybierz pliki do zapisania.
+Unsaved files	QuitAlert		Niezapisane pliki
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Nie znaleziono plików stylów. Upewnij się, że zostały zainstalowane w jednym z katalogów data.
+Style files	Styler		Pliki stylów
+Koder	System name		Koder
 Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Brak dostępu do pliku konfiguracyjnego. Upewnij się że masz uprawnienia do %s% dla katalogu z ustawieniami.
 Editor settings	Preferences		Ustawienia edytora
 read	Preferences	Make sure you have _ permission for	odczytu
@@ -131,14 +153,9 @@ loaded	Preferences	settings will not be _	wczytane
 write	Preferences	Make sure you have _ permission for	zapisu
 save	Preferences	to _ the configuration	zapisu
 saved	Preferences	settings will not be _	zapisane
-Cancel	QuitAlert		Anuluj
-Don't save	QuitAlert		Nie zapisuj
-Save all	QuitAlert		Zapisz wszystkie
-Save selected	QuitAlert		Zapisz zaznaczone
-There are unsaved changes.\nSelect the files to save.	QuitAlert		Istnieją niezapisane zmiany.\nWybierz pliki do zapisania.
-Unsaved files	QuitAlert		Niezapisane pliki
-Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Nie znaleziono plików stylów. Upewnij się, że zostały zainstalowane w jednym z katalogów data.
-OK	Styler		OK
-Style files	Styler		Pliki stylów
-Koder	System name		Koder
 Read-only	StatusView		Tylko do odczytu
+Open Terminal	StatusView		Otwórz Terminal
+Go to	BookmarksListView		Skocz do
+Delete	BookmarksListView		Usuń
+OK	Utilities		OK
+Bookmarks	BookmarksWindow		Zakładki

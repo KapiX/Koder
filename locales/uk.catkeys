@@ -1,12 +1,11 @@
-1	Ukrainian	x-vnd.KapiX-Koder	2821340809
+1	Ukrainian	x-vnd.KapiX-Koder	822155924
 Code editor for Haiku based on Scintilla editing component.	App		Редактор коду для Haiku на основі компонента редагування Scintilla.
 Distributed on MIT license terms.	App		Розповсюджується за ліцензією MIT.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, за компонент редагування Scintilla i редактор SciTE.
 zuMi, for toolbar icons.	App		zuMi, за іконки панелі інструментів.
-Konrad77, for dark theme.	App		Konrad77, for dark theme.
-translators to:	App	to _ (language), e.g. German	translators to:
-humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
-Apply	AppPreferencesWindow		Застосувати
+Konrad77, for dark theme.	App		Konrad77, за темну тему.
+translators to:	App	to _ (language), e.g. German	перекладачі:
+humdinger, for GUI design tips and artwork.	App		humdinger, за поради щодо дизайну інтерфейсу та графіку.
 Background	AppPreferencesWindow		Фон
 Compact language menu	AppPreferencesWindow		Компактне меню мов
 Convert tabs to spaces	AppPreferencesWindow		Перетворювати відступи в пробіли
@@ -21,7 +20,6 @@ Only in actually indented lines	AppPreferencesWindow		Тільки правил�
 Revert	AppPreferencesWindow		Повернути
 Show full path in title	AppPreferencesWindow		Показувати повний шлях у заголовку
 Show indentation guides	AppPreferencesWindow		Показувати напрямні відступу
-Show line numbers	AppPreferencesWindow		Показувати номери рядків
 Show toolbar	AppPreferencesWindow		Показувати панель інструментів
 Spaces per tab:	AppPreferencesWindow		Пробілів на відступи:
 Stack new windows	AppPreferencesWindow		Складати стеком нові вікна
@@ -29,16 +27,29 @@ Style	AppPreferencesWindow		Стиль
 Trim trailing whitespace on save	AppPreferencesWindow		Обрізати кінцевий пробіл при збереженні
 Up to the next non-empty line	AppPreferencesWindow		До наступного непустого рядка
 Up to the next/previous non-empty line	AppPreferencesWindow		До наступного/попереднього непустого рядка
-Behavior	AppPreferencesWindow		Behavior
-Background	AppPreferencesWindow	Current line highlight	Background
-Frame	AppPreferencesWindow	Current line highlight	Frame
-Trailing whitespace	AppPreferencesWindow		Trailing whitespace
-Visual	AppPreferencesWindow		Visual
-Indentation	AppPreferencesWindow		Indentation
-Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
-Always open files in new window	AppPreferencesWindow		Always open files in new window
-Use custom font	AppPreferencesWindow		Use custom font
-[read-only]	EditorWindow		[тільки для читання]
+Behavior	AppPreferencesWindow		Поведінка
+Background	AppPreferencesWindow	Current line highlight	Фон
+Frame	AppPreferencesWindow	Current line highlight	Рамка
+Trailing whitespace	AppPreferencesWindow		Пробіли в кінці рядків
+Visual	AppPreferencesWindow		Візуальні
+Indentation	AppPreferencesWindow		Відступ
+Use .editorconfig if possible	AppPreferencesWindow		По можливості використовувати .editorconfig
+Always open files in new window	AppPreferencesWindow		Завжди відкривати файли в новому вікні
+Use custom font	AppPreferencesWindow		Використовувати інший шрифт
+Folds	AppPreferencesWindow		Переносити рядки
+Gigantic	AppPreferencesWindow	Toolbar icon size	Гігантські
+Large	AppPreferencesWindow	Toolbar icon size	Великі
+Bookmarks	AppPreferencesWindow		Закладки
+Extra large	AppPreferencesWindow	Toolbar icon size	Дуже великі
+Medium	AppPreferencesWindow	Toolbar icon size	Середні
+Small	AppPreferencesWindow	Toolbar icon size	Дрібні
+Huge	AppPreferencesWindow	Toolbar icon size	Величезні
+Icon size	AppPreferencesWindow		Розмір піктограм
+Line numbers	AppPreferencesWindow		Номери рядків
+Enormous	AppPreferencesWindow	Toolbar icon size	Велетенські
+Left margin	AppPreferencesWindow		За лівим краєм
+Ensure empty last line on save	AppPreferencesWindow		Переконайтеся, що останній рядок збережено
+[read-only]	EditorWindow		[лише читання]
 About…	EditorWindow		Про програму…
 Access denied	EditorWindow		Відмова у доступі
 Cancel	EditorWindow		Скасувати
@@ -46,13 +57,10 @@ Close	EditorWindow		Закрити
 Comment block	EditorWindow		Закоментувати блок
 Comment line	EditorWindow		Закоментувати рядок
 Copy	EditorWindow		Копіювати
-Corresponding file not found.	EditorWindow		Відповідний файл не знайдено.
 Cut	EditorWindow		Вирізати
 Discard	EditorWindow		Відкинути
 Do nothing	EditorWindow		Нічого
 Edit	EditorWindow		Редагувати
-Error	EditorWindow		Помилка
-Failed to read file permissions.	EditorWindow		Неможливо прочитати права доступу до файлу.
 File	EditorWindow		Файл
 File modified	EditorWindow		Файл змінений
 Find/Replace…	EditorWindow		Знайти/замінити…
@@ -62,10 +70,7 @@ Koder preferences…	EditorWindow		Налаштування Koder…
 Language	EditorWindow		Мова
 Line endings	EditorWindow		Закінчення рядка
 New	EditorWindow		Новий
-OK	EditorWindow		OK
 Old Mac format	EditorWindow		Формат старої Mac OS
-Open corresponding file	EditorWindow		Відкрити відповідний файл
-Open corresponding…	EditorWindow		Відкрити відповідний...
 Open…	EditorWindow		Відкрити…
 Paste	EditorWindow		Вставити
 Quit	EditorWindow		Вихід
@@ -92,16 +97,25 @@ Unix format	EditorWindow		Формат Unix
 Unsaved changes	EditorWindow		Незбережені зміни
 Untitled	EditorWindow		Безіменний
 View	EditorWindow		Вигляд
-Warning	EditorWindow		Увага
 Windows format	EditorWindow		Формат Windows
 Wrap lines	EditorWindow		Переносити рядки
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		У вас немає прав для редагування цього файлу. Редактор встановлений в режим тільки читання.
-You don't have sufficient permissions to edit this file.	EditorWindow		У вас недостатньо прав для редагування цього файлу.
+You don't have sufficient permissions to edit this file.	EditorWindow		У вас відсутні права для редагування цього файлу.
 Your changes will be lost.	EditorWindow		Ваші зміни втрачені.
-Find selection	EditorWindow		Find selection
-Find next	EditorWindow		Find next
-Replace and find	EditorWindow		Replace and find
-Incremental search	EditorWindow		Incremental search
+Find selection	EditorWindow		Знайти виділене
+Find next	EditorWindow		Знайти далі
+Replace and find	EditorWindow		Знайти і замінити
+Incremental search	EditorWindow		Послідовний пошук
+Could not find Open Terminal Tracker add-on.	EditorWindow		Неможливо знайти додаток трекера 'Відкрити термінал'.
+Toggle bookmark	EditorWindow		Перемкнути закладку
+Open Terminal	EditorWindow		Відкрити термінал
+Next bookmark	EditorWindow		Наступна закладка
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Неможливо запустити додаток трекера 'Відкрити термінал'.
+File removed	EditorWindow		Файл видалений
+Bookmarks	EditorWindow		Закладки
+The file has been removed. What to do?	EditorWindow		Файл видалено. Що робити?
+Open partner file	EditorWindow		Відкрити партнерський файл
+Previous bookmark	EditorWindow		Попередня закладка
+Partner file not found.	EditorWindow		Партнерський файл не знайдено.
 Backwards	FindWindow		У зворотному напрямі
 Find	FindWindow		Знайти
 Find:	FindWindow		Знайти:
@@ -119,18 +133,6 @@ Cancel	GoToLineWindow		Скасувати
 Go to line	GoToLineWindow		Перейти до рядка
 Go to line:	GoToLineWindow		Перейти до рядка:
 OK	GoToLineWindow		OK
-OK	Preferences		OK
-Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
-Editor settings	Preferences		Editor settings
-read	Preferences	Make sure you have _ permission for	read
-Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
-load	Preferences	to _ the configuration	load
-Unknown error.	Preferences		Unknown error.
-There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.
-loaded	Preferences	settings will not be _	loaded
-write	Preferences	Make sure you have _ permission for	write
-save	Preferences	to _ the configuration	save
-saved	Preferences	settings will not be _	saved
 Cancel	QuitAlert		Скасувати
 Don't save	QuitAlert		Не зберігати
 Save all	QuitAlert		Зберегти все
@@ -138,7 +140,22 @@ Save selected	QuitAlert		Зберегти виділене
 There are unsaved changes.\nSelect the files to save.	QuitAlert		Є незбережені зміни.\nВиберіть файли для збереження.
 Unsaved files	QuitAlert		Незбережені файли
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Неможливо знайти файли стилю. Переконайтеся, що їх встановлено в одному з каталогів з вашими даними.
-OK	Styler		OK
 Style files	Styler		Файли стилю
 Koder	System name		Koder
-Read-only	StatusView		Read-only
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Відмовлено в доступі при відкритті файлу конфігурації. Впевніться, що ви маєте права на %s% для вашого каталогу з параметрами.
+Editor settings	Preferences		Параметри редактора
+read	Preferences	Make sure you have _ permission for	читання
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Трапилася помилка при відкритті файлу конфігурації. Ваші особисті параметри не буде %s%.
+load	Preferences	to _ the configuration	завантажити
+Unknown error.	Preferences		Невідома помилка.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Недостатньо пам'яті, щоб %s% файл конфігурації. Спробуте закрити деякі програми і перезапустіть редактор.
+loaded	Preferences	settings will not be _	завантажено
+write	Preferences	Make sure you have _ permission for	запис
+save	Preferences	to _ the configuration	зберегти
+saved	Preferences	settings will not be _	збережено
+Read-only	StatusView		Лише читання
+Open Terminal	StatusView		Відкрити термінал
+Go to	BookmarksListView		Перейти до
+Delete	BookmarksListView		Видалити
+OK	Utilities		OK
+Bookmarks	BookmarksWindow		Закладки

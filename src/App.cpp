@@ -101,14 +101,20 @@ App::AboutRequested()
 	};
 
 	const std::unordered_map<std::string, std::vector<std::string>> translatorsMap{
-		{ "de", { "humdinger" } },
+		{ "de", { "FabianReidinger", "humdinger" } },
 		{ "en_GB", { "adamfowleruk" } },
 		{ "es", { "un_spacyar" } },
+//		{ "fi", { "Karvjorm" } },
+		{ "fr", { "Briseur" } },
 		{ "hu", { "miqlas" } },
-		{ "it", { "TheClue" } },
-		//{ "lt", { "damoklas" } },
-		{ "ru", { "ArmanHayots", "TK-313" } }
-		//{ "uk", { "Lan72" } }
+//		{ "id", { "mazbrili" } },
+//		{ "it", { "TheClue" } },
+//		{ "lt", { "damoklas" } },
+		{ "pt", { "Victor Domingos" } },
+		{ "ro", { "al-popa", "Florentina" } },
+		{ "ru", { "al-popa", "ArmanHayots", "diver", "TK-313" } },
+//		{ "sv", { "deejam" } },
+		{ "uk", { "Lan72" } }
 	};
 
 	BMessage languages;

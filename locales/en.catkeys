@@ -1,144 +1,161 @@
-1	English	x-vnd.KapiX-Koder	2821340809
-Search	EditorWindow		Search
-Your changes will be lost.	EditorWindow		Your changes will be lost.
-File	EditorWindow		File
-Unsaved files	QuitAlert		Unsaved files
-Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
-Unix format	EditorWindow		Unix format
-Close	EditorWindow		Close
-Editor settings	Preferences		Editor settings
-Wrap lines	EditorWindow		Wrap lines
-Redo	EditorWindow		Redo
-Distributed on MIT license terms.	App		Distributed on MIT license terms.
-You don't have permissions to edit this file. The editor will be set to read-only mode.	EditorWindow		You don't have permissions to edit this file. The editor will be set to read-only mode.
-Special symbols	EditorWindow		Special symbols
-Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
-Replace all	FindWindow		Replace all
-Open corresponding file	EditorWindow		Open corresponding file
-Old Mac format	EditorWindow		Old Mac format
-Cancel	GoToLineWindow		Cancel
-Do nothing	EditorWindow		Do nothing
-Always open files in new window	AppPreferencesWindow		Always open files in new window
-Style	AppPreferencesWindow		Style
-Wrap around	FindWindow		Wrap around
-The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
-Match case	FindWindow		Match case
-Access denied	EditorWindow		Access denied
-File modified	EditorWindow		File modified
-Apply	AppPreferencesWindow		Apply
-read	Preferences	Make sure you have _ permission for	read
-There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
-Untitled	EditorWindow		Untitled
-Behavior	AppPreferencesWindow		Behavior
-Find selection	EditorWindow		Find selection
-Background	AppPreferencesWindow	Current line highlight	Background
-Line	AppPreferencesWindow		Line
-Show full path in title	AppPreferencesWindow		Show full path in title
-Show line endings	EditorWindow		Show line endings
-Konrad77, for dark theme.	App		Konrad77, for dark theme.
-Corresponding file not found.	EditorWindow		Corresponding file not found.
-Copy	EditorWindow		Copy
-Windows format	EditorWindow		Windows format
-Save selected	QuitAlert		Save selected
+1	English	x-vnd.KapiX-Koder	822155924
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
-Discard	EditorWindow		Discard
-You don't have sufficient permissions to edit this file.	EditorWindow		You don't have sufficient permissions to edit this file.
-Show indentation guides	AppPreferencesWindow		Show indentation guides
-OK	Styler		OK
-Frame	AppPreferencesWindow	Current line highlight	Frame
-Select all	EditorWindow		Select all
-Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
+Access denied	EditorWindow		Access denied
+Line endings	EditorWindow		Line endings
 In selection	FindWindow		In selection
-translators to:	App	to _ (language), e.g. German	translators to:
-humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
-Open…	EditorWindow		Open…
-Go to line:	GoToLineWindow		Go to line:
-Cut	EditorWindow		Cut
-Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
-Find:	FindWindow		Find:
-Find next	EditorWindow		Find next
-Highlight braces	AppPreferencesWindow		Highlight braces
-load	Preferences	to _ the configuration	load
-Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
-View	EditorWindow		View
-Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
-Edit	EditorWindow		Edit
-Revert	AppPreferencesWindow		Revert
-Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
-Save as…	EditorWindow		Save as…
-Paste	EditorWindow		Paste
-Find/Replace…	EditorWindow		Find/Replace…
-Failed to read file permissions.	EditorWindow		Failed to read file permissions.
-Don't save	QuitAlert		Don't save
-Open corresponding…	EditorWindow		Open corresponding…
-The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
-Style files	Styler		Style files
-Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
-Find/Replace	FindWindow		Find/Replace
-Unknown error.	Preferences		Unknown error.
-The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
-OK	Preferences		OK
-Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
-zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
+About…	EditorWindow		About…
 Use custom font	AppPreferencesWindow		Use custom font
-Replace and find	EditorWindow		Replace and find
+The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
+Read-only	StatusView		Read-only
 Replace:	FindWindow		Replace:
+Cancel	QuitAlert		Cancel
+Could not find Open Terminal Tracker add-on.	EditorWindow		Could not find Open Terminal Tracker add-on.
 Match entire words	FindWindow		Match entire words
-Help	EditorWindow		Help
-Trailing whitespace	AppPreferencesWindow		Trailing whitespace
-Compact language menu	AppPreferencesWindow		Compact language menu
-Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
-[read-only]	EditorWindow		[read-only]
-There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.
-Max. characters per line:	AppPreferencesWindow		Max. characters per line:
-loaded	Preferences	settings will not be _	loaded
-write	Preferences	Make sure you have _ permission for	write
-Koder	System name		Koder
-Comment block	EditorWindow		Comment block
-Highlight current line	AppPreferencesWindow		Highlight current line
-Reload	EditorWindow		Reload
-Warning	EditorWindow		Warning
-Trim trailing whitespace	EditorWindow		Trim trailing whitespace
-Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
-Stack new windows	AppPreferencesWindow		Stack new windows
-Replacement finished	EditorWindow		Replacement finished
-Replace	FindWindow		Replace
-Undo	EditorWindow		Undo
-Visual	AppPreferencesWindow		Visual
+Discard	EditorWindow		Discard
 Background	AppPreferencesWindow		Background
-Quit	EditorWindow		Quit
+Partner file not found.	EditorWindow		Partner file not found.
+Unsaved changes	EditorWindow		Unsaved changes
+Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
+File	EditorWindow		File
+Open…	EditorWindow		Open…
+Koder preferences…	EditorWindow		Koder preferences…
+Language	EditorWindow		Language
+read	Preferences	Make sure you have _ permission for	read
+Special symbols	EditorWindow		Special symbols
+Show line endings	EditorWindow		Show line endings
+Undo	EditorWindow		Undo
+Comment line	EditorWindow		Comment line
+Show full path in title	AppPreferencesWindow		Show full path in title
+Close	EditorWindow		Close
+Spaces per tab:	AppPreferencesWindow		Spaces per tab:
+Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
+Copy	EditorWindow		Copy
+translators to:	App	to _ (language), e.g. German	translators to:
+OK	GoToLineWindow		OK
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.
+Folds	AppPreferencesWindow		Folds
+Visual	AppPreferencesWindow		Visual
+Wrap around	FindWindow		Wrap around
+Highlight current line	AppPreferencesWindow		Highlight current line
+Go to line…	EditorWindow		Go to line…
+Left margin	AppPreferencesWindow		Left margin
+Mark overly long lines	AppPreferencesWindow		Mark overly long lines
+Replace and find	EditorWindow		Replace and find
+Find/Replace	FindWindow		Find/Replace
+Match case	FindWindow		Match case
+Distributed on MIT license terms.	App		Distributed on MIT license terms.
+Find:	FindWindow		Find:
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
+View	EditorWindow		View
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
+Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantic
+write	Preferences	Make sure you have _ permission for	write
+Show toolbar	AppPreferencesWindow		Show toolbar
+Select all	EditorWindow		Select all
+Do nothing	EditorWindow		Do nothing
+Trailing whitespace	AppPreferencesWindow		Trailing whitespace
+Cancel	GoToLineWindow		Cancel
+Large	AppPreferencesWindow	Toolbar icon size	Large
+Backwards	FindWindow		Backwards
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
+Toggle bookmark	EditorWindow		Toggle bookmark
+Old Mac format	EditorWindow		Old Mac format
+Open Terminal	EditorWindow		Open Terminal
+loaded	Preferences	settings will not be _	loaded
+Unsaved files	QuitAlert		Unsaved files
+Bookmarks	AppPreferencesWindow		Bookmarks
+load	Preferences	to _ the configuration	load
+Edit	EditorWindow		Edit
+Comment block	EditorWindow		Comment block
+Background	AppPreferencesWindow	Current line highlight	Background
+Behavior	AppPreferencesWindow		Behavior
+Windows format	EditorWindow		Windows format
+save	Preferences	to _ the configuration	save
+Replace all	FindWindow		Replace all
+Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
+Koder	System name		Koder
+Extra large	AppPreferencesWindow	Toolbar icon size	Extra large
+Find selection	EditorWindow		Find selection
+Stack new windows	AppPreferencesWindow		Stack new windows
+Medium	AppPreferencesWindow	Toolbar icon size	Medium
+Revert	AppPreferencesWindow		Revert
+Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
+Next bookmark	EditorWindow		Next bookmark
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
+Save	EditorWindow		Save
+Wrap lines	EditorWindow		Wrap lines
+Find next	EditorWindow		Find next
+Small	AppPreferencesWindow	Toolbar icon size	Small
+Incremental search	EditorWindow		Incremental search
+Style files	Styler		Style files
+Cut	EditorWindow		Cut
+Frame	AppPreferencesWindow	Current line highlight	Frame
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
+Indentation	AppPreferencesWindow		Indentation
+Ensure empty last line on save	AppPreferencesWindow		Ensure empty last line on save
 Save all	QuitAlert		Save all
 Show toolbar	EditorWindow		Show toolbar
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
-Find	FindWindow		Find
-Replace and find	FindWindow		Replace and find
-Indentation	AppPreferencesWindow		Indentation
-Error	EditorWindow		Error
-Language	EditorWindow		Language
-Mark overly long lines	AppPreferencesWindow		Mark overly long lines
-Koder preferences…	EditorWindow		Koder preferences…
-Show line numbers	AppPreferencesWindow		Show line numbers
-Cancel	QuitAlert		Cancel
-Regex	FindWindow		Regex
-Comment line	EditorWindow		Comment line
-Spaces per tab:	AppPreferencesWindow		Spaces per tab:
-Save	EditorWindow		Save
-About…	EditorWindow		About…
-Show toolbar	AppPreferencesWindow		Show toolbar
-OK	EditorWindow		OK
-Go to line…	EditorWindow		Go to line…
-Cancel	EditorWindow		Cancel
-Read-only	StatusView		Read-only
+Replacement finished	EditorWindow		Replacement finished
 New	EditorWindow		New
-Unsaved changes	EditorWindow		Unsaved changes
-Go to line	GoToLineWindow		Go to line
-Koder preferences	AppPreferencesWindow		Koder preferences
-Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
-Incremental search	EditorWindow		Incremental search
-OK	GoToLineWindow		OK
-save	Preferences	to _ the configuration	save
-saved	Preferences	settings will not be _	saved
-Searching finished	EditorWindow		Searching finished
-Backwards	FindWindow		Backwards
+Your changes will be lost.	EditorWindow		Your changes will be lost.
+Always open files in new window	AppPreferencesWindow		Always open files in new window
+Find/Replace…	EditorWindow		Find/Replace…
+Replace and find	FindWindow		Replace and find
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
+Open Terminal	StatusView		Open Terminal
 Show white space	EditorWindow		Show white space
-Line endings	EditorWindow		Line endings
+Huge	AppPreferencesWindow	Toolbar icon size	Huge
+Regex	FindWindow		Regex
+Go to	BookmarksListView		Go to
+Quit	EditorWindow		Quit
+Redo	EditorWindow		Redo
+Go to line:	GoToLineWindow		Go to line:
+Editor settings	Preferences		Editor settings
+You don't have sufficient permissions to edit this file.	EditorWindow		You don't have sufficient permissions to edit this file.
+Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
+Search	EditorWindow		Search
+Icon size	AppPreferencesWindow		Icon size
+File removed	EditorWindow		File removed
+Line numbers	AppPreferencesWindow		Line numbers
+Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
+zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
+Help	EditorWindow		Help
+Style	AppPreferencesWindow		Style
+Paste	EditorWindow		Paste
+Save as…	EditorWindow		Save as…
+Untitled	EditorWindow		Untitled
+Bookmarks	EditorWindow		Bookmarks
+Unknown error.	Preferences		Unknown error.
+Find	FindWindow		Find
+Delete	BookmarksListView		Delete
+Go to line	GoToLineWindow		Go to line
+Reload	EditorWindow		Reload
+There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
+The file has been removed. What to do?	EditorWindow		The file has been removed. What to do?
+The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
+Enormous	AppPreferencesWindow	Toolbar icon size	Enormous
+Trim trailing whitespace	EditorWindow		Trim trailing whitespace
+Konrad77, for dark theme.	App		Konrad77, for dark theme.
+Cancel	EditorWindow		Cancel
+Open partner file	EditorWindow		Open partner file
+Previous bookmark	EditorWindow		Previous bookmark
+OK	Utilities		OK
+Line	AppPreferencesWindow		Line
+Searching finished	EditorWindow		Searching finished
+humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
+saved	Preferences	settings will not be _	saved
+Bookmarks	BookmarksWindow		Bookmarks
+Compact language menu	AppPreferencesWindow		Compact language menu
+File modified	EditorWindow		File modified
+Unix format	EditorWindow		Unix format
+Highlight braces	AppPreferencesWindow		Highlight braces
+Save selected	QuitAlert		Save selected
+Max. characters per line:	AppPreferencesWindow		Max. characters per line:
+Don't save	QuitAlert		Don't save
+Koder preferences	AppPreferencesWindow		Koder preferences
+Show indentation guides	AppPreferencesWindow		Show indentation guides
+Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
+Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
+Replace	FindWindow		Replace
+[read-only]	EditorWindow		[read-only]
