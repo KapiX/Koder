@@ -127,6 +127,7 @@ Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
 		int lexerID = language["lexer"].as<int>();
 		editor->SendMessage(SCI_SETLEXER, static_cast<uptr_t>(lexerID), 0);
 	} catch(YAML::TypedBadConversion<int>&) {
+		// TODO: early exit if lexer not changed
 		std::string lexerName = language["lexer"].as<std::string>();
 		editor->SendMessage(SCI_SETLEXERLANGUAGE, 0,
 			reinterpret_cast<const sptr_t>(lexerName.c_str()));

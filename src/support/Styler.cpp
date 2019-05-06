@@ -303,6 +303,10 @@ Styler::_GetAttributesFromNode(const YAML::Node &node, int& styleId, Styler::Sty
 void
 Styler::_ApplyAttributes(Editor* editor, int styleId, Styler::Style style)
 {
+	if(styleId < 0) {
+		// FIXME: What happened here?
+		return;
+	}
 	if(style.fgColor != -1) {
 		editor->SendMessage(SCI_STYLESETFORE, styleId, style.fgColor);
 	}
