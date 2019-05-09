@@ -575,6 +575,7 @@ EditorWindow::MessageReceived(BMessage* message)
 			fEditor->ReplaceAndFind();
 		} break;
 		case MAINMENU_SEARCH_INCREMENTAL: {
+			RemoveCommonFilter(fIncrementalSearchFilter.get());
 			AddCommonFilter(fIncrementalSearchFilter.get());
 		} break;
 		case MAINMENU_SEARCH_BOOKMARKS: {
