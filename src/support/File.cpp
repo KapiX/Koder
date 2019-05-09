@@ -10,6 +10,7 @@
 #include <EntryOperationEngineBase.h>
 #include <NodeInfo.h>
 #include <NodeMonitor.h>
+#include <Volume.h>
 #include <kernel/fs_attr.h>
 
 #include <vector>
@@ -155,6 +156,14 @@ File::CanWrite(BStatable* file)
 {
 	if(file == nullptr)
 		return false;
+
+	BVolume volume;
+	if(file->GetVolume(&volume) < B_OK) {
+		return false;
+	}
+	if(volume.IsReadOnly()) {
+		return false;
+	}
 
 	mode_t permissions;
 	if(file->GetPermissions(&permissions) < B_OK) {
