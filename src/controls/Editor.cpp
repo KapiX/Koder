@@ -143,6 +143,8 @@ Editor::SetType(std::string type)
 {
 	fType = type;
 	_UpdateStatusView();
+
+	SendMessage(SCI_COLOURISE, 0, -1);
 }
 
 
