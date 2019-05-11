@@ -20,6 +20,14 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 
 ## History
 
+0.5.1 - *11-05-2019*
+
+* Fix crash when external lexer is not found.
+* Enable folding for Python.
+* Fix crash when invoking incremental search twice.
+* Fix read-only detection for volumes mounted as read-only.
+* Highlight syntax for the entire file on language change.
+
 0.5.0 - *01-04-2019*
 
 * Make preferences update automatically.
