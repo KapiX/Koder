@@ -2,6 +2,14 @@
 
 ## 0.6.0 - TBD
 
+## [0.5.1] - 2019-05-11
+
+* Fix crash when external lexer is not found.
+* Enable folding for Python.
+* Fix crash when invoking incremental search twice.
+* Fix read-only detection for volumes mounted as read-only.
+* Highlight syntax for the entire file on language change.
+
 ## [0.5.0] - 2019-04-01
 
 * Make preferences update automatically.
@@ -96,6 +104,7 @@
 
 * Initial release.
 
+[0.5.1]: https://github.com/KapiX/Koder/releases/tag/0.5.1
 [0.5.0]: https://github.com/KapiX/Koder/releases/tag/0.5.0
 [0.4.1]: https://github.com/KapiX/Koder/releases/tag/0.4.1
 [0.4.0]: https://github.com/KapiX/Koder/releases/tag/0.4.0
