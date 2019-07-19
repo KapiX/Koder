@@ -286,7 +286,8 @@ App::MessageReceived(BMessage* message)
 	} break;
 	case MAINMENU_SEARCH_FINDREPLACE: {
 		if(fFindWindow == nullptr) {
-			fFindWindow = new FindWindow(&fPreferences->fFindWindowState);
+			fFindWindow = new FindWindow(
+				&fPreferences->fFindWindowState, fPreferences->fSettingsPath);
 		}
 		fFindWindow->Show();
 		fFindWindow->Activate();

@@ -5,18 +5,22 @@
 
 #include "FindWindow.h"
 
-#include <ScintillaView.h>
+#include <memory>
 
 #include <Application.h>
 #include <Box.h>
 #include <Button.h>
+#include <ControlLook.h>
 #include <Catalog.h>
 #include <CheckBox.h>
 #include <LayoutBuilder.h>
 #include <Message.h>
 #include <RadioButton.h>
+#include <ScintillaView.h>
 #include <StringView.h>
 
+#include "File.h"
+#include "FindStatusView.h"
 #include "Utils.h"
 
 
@@ -24,13 +28,48 @@
 #define B_TRANSLATION_CONTEXT "FindWindow"
 
 
-FindWindow::FindWindow(BMessage *state)
+class FindScintillaView : public BScintillaView
+{
+public:
+	FindScintillaView(const char* name, uint32 getMessage, uint32 clearMessage,
+		uint32 applyMessage, uint32 flags = 0, bool horizontal = true,
+		bool vertical = true, border_style border = B_FANCY_BORDER)
+		:
+		BScintillaView(name, flags, horizontal, vertical, border)
+	{
+		fStatusView = new FindStatusView(this,
+			getMessage, clearMessage, applyMessage);
+		AddChild(fStatusView);
+	}
+
+	virtual void DoLayout()
+	{
+		BScintillaView::DoLayout();
+
+		fStatusView->ResizeToPreferred();
+	}
+
+
+	virtual void FrameResized(float width, float height)
+	{
+		BScintillaView::FrameResized(width, height);
+
+		fStatusView->ResizeToPreferred();
+	}
+private:
+	FindStatusView* fStatusView;
+};
+
+
+FindWindow::FindWindow(BMessage *state, BPath settingsPath)
 	:
 	BWindow(BRect(0, 0, 400, 300), B_TRANSLATE("Find/Replace"), B_TITLED_WINDOW,
 		B_NOT_ZOOMABLE, 0),
-	fFlagsChanged(false)
+	fFlagsChanged(false),
+	fSettingsPath(settingsPath)
 {
 	_InitInterface();
+	_LoadHistory();
 	CenterOnScreen();
 
 	SetChecked(fInSelectionCB, state->GetBool("inSelection", false));
@@ -58,12 +97,38 @@ FindWindow::MessageReceived(BMessage* message)
 		case FINDWINDOW_REPLACE:
 		case FINDWINDOW_REPLACEFIND:
 		case FINDWINDOW_REPLACEALL: {
-			int32 findLength = fFindTC->TextLength() + 1;
-			int32 replaceLength = fReplaceTC->TextLength() + 1;
-			std::string findText(findLength + 1, '\0');
-			std::string replaceText(replaceLength + 1, '\0');
-			fFindTC->GetText(0, findLength, &findText[0]);
-			fReplaceTC->GetText(0, replaceLength, &replaceText[0]);
+			std::string findText(fFindTC->TextLength(), '\0');
+			std::string replaceText(fReplaceTC->TextLength(), '\0');
+			fFindTC->GetText(0, findText.size() + 1, &findText[0]);
+			fReplaceTC->GetText(0, replaceText.size() + 1, &replaceText[0]);
+			{
+				const int32 mruMax = 10;
+				int32 count = 0;
+				std::string lastFind;
+				if(fFindHistory.GetInfo("mru", nullptr, &count) == B_OK) {
+					lastFind = fFindHistory.GetString("mru", count - 1, "");
+				}
+				if(lastFind != findText)
+					fFindHistory.AddString("mru", findText.c_str());
+				while(count >= mruMax) {
+					fFindHistory.RemoveData("mru", 0);
+					count--;
+				}
+
+				if (message->what != FINDWINDOW_FIND) {
+					count = 0;
+					std::string lastReplace;
+					if(fReplaceHistory.GetInfo("mru", nullptr, &count) == B_OK) {
+						lastReplace = fReplaceHistory.GetString("mru", count - 1, "");
+					}
+					if(lastReplace != replaceText)
+						fReplaceHistory.AddString("mru", replaceText.c_str());
+					while(count >= mruMax) {
+						fReplaceHistory.RemoveData("mru", 0);
+						count--;
+					}
+				}
+			}
 			bool newSearch = (fFlagsChanged
 				|| fOldFindText != findText
 				|| fOldReplaceText != replaceText);
@@ -97,6 +162,36 @@ FindWindow::MessageReceived(BMessage* message)
 		case Actions::IN_SELECTION: {
 			fFlagsChanged = true;
 		} break;
+		case HistoryRequests::GET_FIND_HISTORY: {
+			BMessage reply(fFindHistory);
+			reply.what = message->what;
+			message->SendReply(&reply);
+		} break;
+		case HistoryRequests::CLEAR_FIND_HISTORY: {
+			fFindHistory.MakeEmpty();
+		} break;
+		case HistoryRequests::APPLY_FIND_ITEM: {
+			int32 index = message->GetInt32("item", 0);
+			BString item = fFindHistory.GetString("mru", index, "");
+			fFindHistory.RemoveData("mru", index);
+			fFindTC->SetText(item.String());
+			fFindHistory.AddString("mru", item.String());
+		} break;
+		case HistoryRequests::GET_REPLACE_HISTORY: {
+			BMessage reply(fReplaceHistory);
+			reply.what = message->what;
+			message->SendReply(&reply);
+		} break;
+		case HistoryRequests::CLEAR_REPLACE_HISTORY: {
+			fReplaceHistory.MakeEmpty();
+		} break;
+		case HistoryRequests::APPLY_REPLACE_ITEM: {
+			int32 index = message->GetInt32("item", 0);
+			BString item = fReplaceHistory.GetString("mru", index, "");
+			fReplaceHistory.RemoveData("mru", index);
+			fReplaceTC->SetText(item.String());
+			fReplaceHistory.AddString("mru", item.String());
+		} break;
 		default: {
 			BWindow::MessageReceived(message);
 		} break;
@@ -117,6 +212,8 @@ FindWindow::WindowActivated(bool active)
 void
 FindWindow::Quit()
 {
+	_SaveHistory();
+
 	be_app->PostMessage(FINDWINDOW_QUITTING);
 
 	BWindow::Quit();
@@ -135,11 +232,18 @@ FindWindow::_InitInterface()
 {
 	fFindString = new BStringView("findString", B_TRANSLATE("Find:"));
 	fReplaceString = new BStringView("replaceString", B_TRANSLATE("Replace:"));
-	fFindTC = new BScintillaView("findText", 0, true, true);
+	fFindTC = new FindScintillaView("findText",
+		HistoryRequests::GET_FIND_HISTORY,
+		HistoryRequests::CLEAR_FIND_HISTORY,
+		HistoryRequests::APPLY_FIND_ITEM);
 	fFindTC->SetExplicitMinSize(BSize(200, 100));
 	fFindTC->Target()->SetFlags(fFindTC->Target()->Flags() | B_NAVIGABLE);
 	fFindTC->SendMessage(SCI_SETMARGINWIDTHN, 1, 0);
-	fReplaceTC = new BScintillaView("replaceText", 0, true, true);
+
+	fReplaceTC = new FindScintillaView("replaceText",
+		HistoryRequests::GET_REPLACE_HISTORY,
+		HistoryRequests::CLEAR_REPLACE_HISTORY,
+		HistoryRequests::APPLY_REPLACE_ITEM);
 	fReplaceTC->SetExplicitMinSize(BSize(200, 100));
 	fReplaceTC->Target()->SetFlags(fReplaceTC->Target()->Flags() | B_NAVIGABLE);
 	fReplaceTC->SendMessage(SCI_SETMARGINWIDTHN, 1, 0);
@@ -193,4 +297,38 @@ FindWindow::_InitInterface()
 	BSize min = GetLayout()->MinSize();
 	SetSizeLimits(min.Width(), B_SIZE_UNLIMITED, min.Height(), B_SIZE_UNLIMITED);
 	ResizeTo(min.Width(), min.Height());
+}
+
+void
+FindWindow::_LoadHistory()
+{
+	auto file = std::make_shared<BFile>(
+		BPath(fSettingsPath.Path(), "findreplace_mru").Path(), B_READ_ONLY);
+	// TODO: proper error checking
+	if(file && file->InitCheck() == B_OK) {
+		BMessage history;
+		history.Unflatten(file.get());
+		history.FindMessage("find", &fFindHistory);
+		history.FindMessage("replace", &fReplaceHistory);
+	}
+}
+
+void
+FindWindow::_SaveHistory()
+{
+	BPath historyPath(fSettingsPath.Path(), "findreplace_mru");
+
+	BMessage history;
+	history.AddMessage("find", &fFindHistory);
+	history.AddMessage("replace", &fReplaceHistory);
+
+	BackupFileGuard backupFileGuard(historyPath.Path());
+
+	auto file = std::make_shared<BFile>(historyPath.Path(),
+		B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
+	// TODO: proper error checking
+	if(file && file->InitCheck() == B_OK) {
+		history.Flatten(file.get());
+		backupFileGuard.SaveSuccessful();
+	}
 }

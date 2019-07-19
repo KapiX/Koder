@@ -9,6 +9,7 @@
 
 #include <string>
 
+#include <Path.h>
 #include <String.h>
 #include <Window.h>
 
@@ -19,7 +20,7 @@ class BCheckBox;
 class BMessage;
 class BRadioButton;
 class BStringView;
-class BScintillaView;
+class FindScintillaView;
 
 
 enum {
@@ -33,7 +34,7 @@ enum {
 
 class FindWindow : public BWindow {
 public:
-					FindWindow(BMessage *state);
+					FindWindow(BMessage *state, BPath settingsPath);
 					~FindWindow();
 
 	void			MessageReceived(BMessage* message);
@@ -51,12 +52,22 @@ private:
 		IN_SELECTION	= 'insl',
 		REGEX			= 'rege'
 	};
+	enum HistoryRequests {
+		GET_FIND_HISTORY		= 'fmru',
+		GET_REPLACE_HISTORY		= 'rmru',
+		CLEAR_FIND_HISTORY		= 'cfmr',
+		CLEAR_REPLACE_HISTORY	= 'crmr',
+		APPLY_FIND_ITEM			= 'afit',
+		APPLY_REPLACE_ITEM		= 'arit'
+	};
 	void			_InitInterface();
+	void			_LoadHistory();
+	void			_SaveHistory();
 
 	BStringView*	fFindString;
-	BScintillaView*	fFindTC;
+	FindScintillaView*	fFindTC;
 	BStringView*	fReplaceString;
-	BScintillaView*	fReplaceTC;
+	FindScintillaView*	fReplaceTC;
 
 	BButton*		fFindButton;
 	BButton*		fReplaceButton;
@@ -69,6 +80,10 @@ private:
 	BCheckBox*		fBackwardsCB;
 	BCheckBox*		fInSelectionCB;
 	BCheckBox*		fRegexCB;
+
+	BPath			fSettingsPath;
+	BMessage		fFindHistory;
+	BMessage		fReplaceHistory;
 
 	bool			fFlagsChanged;
 	std::string		fOldFindText;
