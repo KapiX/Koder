@@ -28,6 +28,7 @@
 #include <ToolBar.h>
 #include <kernel/fs_attr.h>
 
+#include "App.h"
 #include "AppPreferencesWindow.h"
 #include "BookmarksWindow.h"
 #include "Editor.h"
@@ -78,6 +79,8 @@ EditorWindow::EditorWindow(bool stagger)
 	fModifiedOutside = false;
 	fModified = false;
 	fReadOnly = false;
+
+	fOnQuitReplyToMessage = nullptr;
 
 	fGoToLineWindow = nullptr;
 	fBookmarksWindow = nullptr;
@@ -443,6 +446,9 @@ EditorWindow::QuitRequested()
 
 		delete fOpenPanel;
 		delete fSavePanel;
+
+		if(fOnQuitReplyToMessage != nullptr)
+			fOnQuitReplyToMessage->SendReply(B_OK);
 
 		BMessage closing(WINDOW_CLOSE);
 		closing.AddPointer("window", this);
@@ -866,6 +872,13 @@ EditorWindow::OpenedFilePath()
 EditorWindow::SetPreferences(Preferences* preferences)
 {
 	fPreferences = preferences;
+}
+
+
+void
+EditorWindow::SetOnQuitReplyToMessage(BMessage* message)
+{
+	fOnQuitReplyToMessage = message;
 }
 
 

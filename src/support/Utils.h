@@ -25,6 +25,10 @@ std::string GetFileExtension(const std::string filename);
 void GetVectorIcon(const std::string icon, BBitmap* bitmap);
 
 
+std::string ParseFileArgument(const std::string argument,
+	int32* line = nullptr, int32* column = nullptr);
+
+
 template<typename T>
 bool IsChecked(T* control);
 template<typename T>

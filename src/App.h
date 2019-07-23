@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2019 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -12,6 +12,7 @@
 #include <Application.h>
 #include <ObjectList.h>
 #include <Path.h>
+#include <String.h>
 #include <WindowStack.h>
 
 
@@ -20,6 +21,15 @@ class EditorWindow;
 class FindWindow;
 class Preferences;
 class Styler;
+
+
+enum {
+	SUPPRESS_INITIAL_WINDOW		= 'Siwn',
+	WINDOW_NEW_WITH_QUIT_REPLY	= 'NWwn'
+};
+
+
+const BString gAppMime = "application/x-vnd.KapiX-Koder";
 
 
 class App : public BApplication {
@@ -43,9 +53,10 @@ private:
 									std::unique_ptr<BWindowStack>& windowStack);
 	EditorWindow*				_CreateWindow(const BMessage* message,
 									std::unique_ptr<BWindowStack>& windowStack);
-	std::string					_ParseFileArgument(const std::string argument,
-									int32* line = nullptr,
-									int32* column = nullptr);
+	void						_CreateWindowWithQuitReply(BMessage* message,
+									const entry_ref* ref = nullptr,
+									const int32 line = -1,
+									const int32 column = -1);
 
 	BObjectList<EditorWindow>	fWindows;
 	EditorWindow*				fLastActiveWindow;
@@ -55,6 +66,7 @@ private:
 	Styler*						fStyler;
 
 	BPath						fPreferencesFile;
+	bool						fSuppressInitialWindow;
 };
 
 

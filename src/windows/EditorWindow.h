@@ -37,7 +37,6 @@ class ToolBar;
 
 
 const BString gAppName = B_TRANSLATE_SYSTEM_NAME("Koder");
-const BString gAppMime = "application/x-vnd.KapiX-Koder";
 
 const uint32 ACTIVE_WINDOW_CHANGED	= 'AWCH';
 const uint32 SAVE_FILE				= 'SVFL';
@@ -117,6 +116,8 @@ public:
 
 	static	void			SetPreferences(Preferences* preferences);
 
+			void			SetOnQuitReplyToMessage(BMessage* message);
+
 private:
 	enum ModifiedAlertResult {
 		CANCEL	= 0,
@@ -150,6 +151,8 @@ private:
 			BookmarksWindow*	fBookmarksWindow;
 
 			bool			fActivatedGuard;
+
+			BMessage*		fOnQuitReplyToMessage;
 
 	static	Preferences*	fPreferences;
 			FilePreferences	fFilePreferences;

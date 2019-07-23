@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2014-2019 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -31,6 +31,7 @@
 #include "GoToLineWindow.h"
 #include "Preferences.h"
 #include "Styler.h"
+#include "Utils.h"
 #include "QuitAlert.h"
 
 
@@ -44,7 +45,8 @@ App::App()
 	fLastActiveWindow(nullptr),
 	fAppPreferencesWindow(nullptr),
 	fFindWindow(nullptr),
-	fPreferences(nullptr)
+	fPreferences(nullptr),
+	fSuppressInitialWindow(false)
 {
 }
 
@@ -191,7 +193,7 @@ App::QuitRequested()
 void
 App::ReadyToRun()
 {
-	if(CountWindows() == 0) {
+	if(CountWindows() == 0 && fSuppressInitialWindow == false) {
 		PostMessage(WINDOW_NEW);
 	}
 }
@@ -204,8 +206,12 @@ App::ArgvReceived(int32 argc, char** argv)
 	BString cwd = message->GetString("cwd", "~");
 	std::unique_ptr<BWindowStack> windowStack;
 	for(int32 i = 1; i < argc; ++i) {
+		std::string arg = argv[i];
+		// FIXME: this should be handled in main.cpp probably
+		if(arg == "-w" || arg == "--wait" || arg == "-h" || arg == "--help")
+			continue;
 		int32 line, column;
-		std::string filename = _ParseFileArgument(argv[i], &line, &column);
+		std::string filename = ParseFileArgument(argv[i], &line, &column);
 		if(filename.find('/') != 0) {
 			BPath absolute(cwd.String(), filename.c_str(), true);
 			filename = absolute.Path();
@@ -250,6 +256,9 @@ void
 App::MessageReceived(BMessage* message)
 {
 	switch(message->what) {
+	case SUPPRESS_INITIAL_WINDOW: {
+		fSuppressInitialWindow = true;
+	} break;
 	case ACTIVE_WINDOW_CHANGED: {
 		if(message->FindPointer("window", (void**) &fLastActiveWindow) != B_OK) {
 			fLastActiveWindow = nullptr;
@@ -303,6 +312,17 @@ App::MessageReceived(BMessage* message)
 		std::unique_ptr<BWindowStack> stack;
 		auto window = _CreateWindow(message, stack);
 		window->Show();
+	} break;
+	case WINDOW_NEW_WITH_QUIT_REPLY: {
+		BMessage* detached = DetachCurrentMessage();
+		entry_ref ref;
+		if(message->FindRef("refs", &ref) == B_OK) {
+			const int32 line = message->GetInt32("be:line", -1);
+			const int32 column = message->GetInt32("be:column", -1);
+			_CreateWindowWithQuitReply(detached, &ref, line, column);
+		} else {
+			_CreateWindowWithQuitReply(detached);
+		}
 	} break;
 	case WINDOW_CLOSE: {
 		EditorWindow* window;
@@ -384,32 +404,18 @@ App::_CreateWindow(const BMessage* message, std::unique_ptr<BWindowStack>& windo
 
 
 /**
- * Splits command line argument in format a/b/file:10:92 into filename, line
- * and column. If column or line are missing -1 is returned in their place.
+ * Creates a window and tells it to reply to message when it quits.
+ * Then optionally opens the file and jumps to specified line and column.
+ * IMPORTANT! message has to be detached from any looper.
  */
-std::string
-App::_ParseFileArgument(const std::string argument, int32* line, int32* column)
+void
+App::_CreateWindowWithQuitReply(BMessage* message, const entry_ref* ref,
+	const int32 line, const int32 column)
 {
-	std::string filename;
-	if(line != nullptr)
-		*line = -1;
-	if(column != nullptr)
-		*column = -1;
-	// first :
-	int32 first = argument.find(':');
-	if(first != std::string::npos) {
-		filename = argument.substr(0, first);
-		// second :
-		int32 second = argument.find(':', first + 1);
-		if(line != nullptr) {
-			*line = std::stoi(argument.substr(first + 1, second));
-				// if second is npos substr copies to the end
-		}
-		if(column != nullptr && second != std::string::npos) {
-			*column = std::stoi(argument.substr(second + 1));
-		}
-	} else {
-		filename = argument;
-	}
-	return filename;
+	auto emptyStack = std::unique_ptr<BWindowStack>();
+	EditorWindow* window = _CreateWindow(message, emptyStack);
+	window->SetOnQuitReplyToMessage(message);
+	if(ref != nullptr)
+		window->OpenFile(ref, line, column);
+	window->Show();
 }

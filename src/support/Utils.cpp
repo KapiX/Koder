@@ -57,6 +57,38 @@ GetVectorIcon(const std::string icon, BBitmap* bitmap)
 }
 
 
+/**
+ * Splits command line argument in format a/b/file:10:92 into filename, line
+ * and column. If column or line are missing -1 is returned in their place.
+ */
+std::string
+ParseFileArgument(const std::string argument, int32* line, int32* column)
+{
+	std::string filename;
+	if(line != nullptr)
+		*line = -1;
+	if(column != nullptr)
+		*column = -1;
+	// first :
+	int32 first = argument.find(':');
+	if(first != std::string::npos) {
+		filename = argument.substr(0, first);
+		// second :
+		int32 second = argument.find(':', first + 1);
+		if(line != nullptr) {
+			*line = std::stoi(argument.substr(first + 1, second));
+				// if second is npos substr copies to the end
+		}
+		if(column != nullptr && second != std::string::npos) {
+			*column = std::stoi(argument.substr(second + 1));
+		}
+	} else {
+		filename = argument;
+	}
+	return filename;
+}
+
+
 template<typename T>
 bool IsChecked(T* control)
 {
