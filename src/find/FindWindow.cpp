@@ -37,9 +37,8 @@ public:
 		:
 		BScintillaView(name, flags, horizontal, vertical, border)
 	{
-		fStatusView = new FindStatusView(this,
+		fStatusView = new find::StatusView(this,
 			getMessage, clearMessage, applyMessage);
-		AddChild(fStatusView);
 	}
 
 	virtual void DoLayout()
@@ -57,7 +56,7 @@ public:
 		fStatusView->ResizeToPreferred();
 	}
 private:
-	FindStatusView* fStatusView;
+	find::StatusView* fStatusView;
 };
 
 

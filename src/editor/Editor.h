@@ -19,7 +19,9 @@
 #include "ScintillaUtils.h"
 
 
-class StatusView;
+namespace editor {
+	class StatusView;
+}
 
 
 enum {
@@ -125,7 +127,7 @@ private:
 							Sci_Position end, bool matchCase, bool matchWord,
 							bool regex = false);
 
-	StatusView*			fStatusView;
+	editor::StatusView*	fStatusView;
 
 	std::string			fCommentLineToken;
 	std::string			fCommentBlockStartToken;

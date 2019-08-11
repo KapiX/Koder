@@ -8,7 +8,7 @@
  *
  * Copied from Haiku commit a609673ce8c942d91e14f24d1d8832951ab27964.
  * Modifications:
- * Copyright 2018 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2018-2019 Kacper Kasper <kacperkasper@gmail.com>
  * Distributed under the terms of the MIT License.
  */
 #ifndef STATUS_VIEW_H
@@ -22,46 +22,30 @@
 
 class BScrollView;
 
+
+namespace controls {
+
 class StatusView : public BView {
 public:
-	enum {
-		UPDATE_STATUS		= 'upda'
-	};
-
-							StatusView(BScrollView* fScrollView);
+							StatusView(BScrollView* scrollView);
 							~StatusView();
 
-			void			SetStatus(BMessage* mesage);
-			void			SetRef(const entry_ref& ref);
 	virtual	void			AttachedToWindow();
 	virtual void			GetPreferredSize(float* _width, float* _height);
 	virtual	void			ResizeToPreferred();
-	virtual	void			Draw(BRect bounds);
-	virtual	void			MouseDown(BPoint point);
 	virtual	void			WindowActivated(bool active);
+
+protected:
+	virtual	float			Width() = 0;
+			BScrollView*	ScrollView();
 
 private:
 			void			_ValidatePreferredSize();
-			void			_ShowDirMenu();
-			void			_DrawNavigationButton(BRect rect);
-			bool			_HasRef();
 
-private:
-	enum {
-		kPositionCell,
-		kTypeCell,
-		kFileStateCell,
-		kStatusCellCount
-	};
 			BScrollView*	fScrollView;
 			BSize			fPreferredSize;
-			BString			fCellText[kStatusCellCount];
-			float			fCellWidth[kStatusCellCount];
-			bool			fReadOnly;
-			bool			fNavigationPressed;
-			BString			fType;
-			entry_ref		fRef;
-	const	float			fNavigationButtonWidth;
 };
+
+} // namespace controls
 
 #endif  // STATUS_VIEW_H

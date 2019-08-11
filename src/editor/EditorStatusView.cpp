@@ -8,12 +8,12 @@
  *
  * Copied from Haiku commit a609673ce8c942d91e14f24d1d8832951ab27964.
  * Modifications:
- * Copyright 2018 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2018-2019 Kacper Kasper <kacperkasper@gmail.com>
  * Distributed under the terms of the MIT License.
  */
 
 
-#include "StatusView.h"
+#include "EditorStatusView.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,20 +39,21 @@ using namespace BPrivate;
 
 
 #undef B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT "StatusView"
+#define B_TRANSLATION_CONTEXT "EditorStatusView"
 
+namespace editor {
 
 StatusView::StatusView(BScrollView* scrollView)
 			:
-			BView(BRect(), "statusview",
-				B_FOLLOW_BOTTOM | B_FOLLOW_LEFT, B_WILL_DRAW),
-			fScrollView(scrollView),
-			fPreferredSize(0., 0.),
+			controls::StatusView(scrollView),
 			fReadOnly(false),
 			fNavigationPressed(false),
 			fNavigationButtonWidth(B_H_SCROLL_BAR_HEIGHT)
 {
 	memset(fCellWidth, 0, sizeof(fCellWidth));
+
+	SetFont(be_plain_font);
+	SetFontSize(10.);
 }
 
 
@@ -64,60 +65,28 @@ StatusView::~StatusView()
 void
 StatusView::AttachedToWindow()
 {
-	SetFont(be_plain_font);
-	SetFontSize(10.);
-
 	BMessage message(UPDATE_STATUS);
 	message.AddInt32("line", 1);
 	message.AddInt32("column", 1);
 	message.AddString("type", "");
 	SetStatus(&message);
 
-	BScrollBar* scrollBar = fScrollView->ScrollBar(B_HORIZONTAL);
-	MoveTo(0., scrollBar->Frame().top);
-
-	SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
-
-	ResizeToPreferred();
-}
-
-
-void
-StatusView::GetPreferredSize(float* _width, float* _height)
-{
-	_ValidatePreferredSize();
-
-	if (_width)
-		*_width = fPreferredSize.width;
-
-	if (_height)
-		*_height = fPreferredSize.height;
-}
-
-
-void
-StatusView::ResizeToPreferred()
-{
-	float width, height;
-	GetPreferredSize(&width, &height);
-
-	if (Bounds().Width() > width)
-		width = Bounds().Width();
-
-	BView::ResizeTo(width, height);
+	controls::StatusView::AttachedToWindow();
 }
 
 
 void
 StatusView::Draw(BRect updateRect)
 {
-	if (fPreferredSize.width <= 0)
+	float width, height;
+	GetPreferredSize(&width, &height);
+	if (width <= 0)
 		return;
 
 	rgb_color highColor = HighColor();
 	BRect bounds(Bounds());
-	bounds.bottom = fPreferredSize.height;
-	bounds.right = fPreferredSize.width;
+	bounds.bottom = height;
+	bounds.right = width;
 	uint32 flags = 0;
 	if(!Window()->IsActive())
 		flags |= BControlLook::B_DISABLED;
@@ -171,14 +140,14 @@ StatusView::Draw(BRect updateRect)
 void
 StatusView::MouseDown(BPoint where)
 {
-	if (where.x < B_H_SCROLL_BAR_HEIGHT && _HasRef()) {
+	if (where.x < fNavigationButtonWidth && _HasRef()) {
 		fNavigationPressed = true;
 		Invalidate();
 		_ShowDirMenu();
 		return;
 	}
 
-	if(where.x < fNavigationButtonWidth + fCellWidth[kPositionCell]) {
+	if(where.x < fNavigationButtonWidth + fCellWidth[kPositionCell] && where.x > fNavigationButtonWidth) {
 		BMessenger msgr(Window());
 		msgr.SendMessage(MAINMENU_SEARCH_GOTOLINE);
 	}
@@ -198,11 +167,23 @@ StatusView::MouseDown(BPoint where)
 }
 
 
-void
-StatusView::WindowActivated(bool active)
+float
+StatusView::Width()
 {
-	// Workaround: doesn't redraw automatically
-	Invalidate();
+	float width = fNavigationButtonWidth;
+	for (size_t i = 0; i < kStatusCellCount; i++) {
+		if (fCellText[i].Length() == 0) {
+			fCellWidth[i] = 0;
+			continue;
+		}
+		float cellWidth = ceilf(StringWidth(fCellText[i]));
+		if (cellWidth > 0)
+			cellWidth += kHorzSpacing * 2;
+		if (cellWidth > fCellWidth[i] || i != kPositionCell)
+			fCellWidth[i] = cellWidth;
+		width += fCellWidth[i];
+	}
+	return width;
 }
 
 
@@ -226,7 +207,6 @@ StatusView::SetStatus(BMessage* message)
 	} else
 		fCellText[kFileStateCell].Truncate(0);
 
-	_ValidatePreferredSize();
 	Invalidate();
 }
 
@@ -242,44 +222,6 @@ bool
 StatusView::_HasRef()
 {
 	return fRef != entry_ref();
-}
-
-
-void
-StatusView::_ValidatePreferredSize()
-{
-	// width
-	fPreferredSize.width = fNavigationButtonWidth;
-	for (size_t i = 0; i < kStatusCellCount; i++) {
-		if (fCellText[i].Length() == 0) {
-			fCellWidth[i] = 0;
-			continue;
-		}
-		float width = ceilf(StringWidth(fCellText[i]));
-		if (width > 0)
-			width += kHorzSpacing * 2;
-		if (width > fCellWidth[i] || i != kPositionCell)
-			fCellWidth[i] = width;
-		fPreferredSize.width += fCellWidth[i];
-	}
-
-	// height
-	font_height fontHeight;
-	GetFontHeight(&fontHeight);
-
-	fPreferredSize.height = ceilf(fontHeight.ascent + fontHeight.descent
-		+ fontHeight.leading);
-
-	if (fPreferredSize.height < B_H_SCROLL_BAR_HEIGHT)
-		fPreferredSize.height = B_H_SCROLL_BAR_HEIGHT;
-
-	ResizeBy(fPreferredSize.width, 0);
-	BScrollBar* scrollBar = fScrollView->ScrollBar(B_HORIZONTAL);
-	float diff = scrollBar->Frame().left - fPreferredSize.width;
-	if(fabs(diff) > 0.5) {
-		scrollBar->ResizeBy(diff, 0);
-		scrollBar->MoveBy(-diff, 0);
-	}
 }
 
 
@@ -331,3 +273,5 @@ StatusView::_ShowDirMenu()
 	fNavigationPressed = false;
 	delete menu;
 }
+
+} // namespace editor

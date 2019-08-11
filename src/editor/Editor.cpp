@@ -11,7 +11,7 @@
 #include <string>
 
 #include "ScintillaUtils.h"
-#include "StatusView.h"
+#include "EditorStatusView.h"
 
 
 namespace Sci = Scintilla;
@@ -40,8 +40,7 @@ Editor::Editor()
 	fType(""),
 	fReadOnly(false)
 {
-	fStatusView = new StatusView(this);
-	AddChild(fStatusView);
+	fStatusView = new editor::StatusView(this);
 
 	SendMessage(SCI_SETMARGINTYPEN, Margin::NUMBER, SC_MARGIN_NUMBER);
 
@@ -775,7 +774,7 @@ Editor::_UpdateStatusView()
 	Sci_Position pos = SendMessage(SCI_GETCURRENTPOS, 0, 0);
 	int line = SendMessage(SCI_LINEFROMPOSITION, pos, 0);
 	int column = SendMessage(SCI_GETCOLUMN, pos, 0);
-	BMessage update(StatusView::UPDATE_STATUS);
+	BMessage update(editor::StatusView::UPDATE_STATUS);
 	update.AddInt32("line", line + 1);
 	update.AddInt32("column", column + 1);
 	update.AddString("type", fType.c_str());

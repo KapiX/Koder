@@ -42,93 +42,50 @@ namespace {
 }
 
 
-FindStatusView::FindStatusView(BScrollView* scrollView, uint32 getMessage,
+namespace find {
+
+StatusView::StatusView(BScrollView* scrollView, uint32 getMessage,
 	uint32 clearMessage, uint32 applyMessage)
 	:
-	BView(BRect(), "statusview", B_FOLLOW_BOTTOM | B_FOLLOW_LEFT, B_WILL_DRAW),
-	fScrollView(scrollView),
-	fPreferredSize(0., 0.),
+	controls::StatusView(scrollView),
 	fPressed(false),
 	fButtonWidth(B_H_SCROLL_BAR_HEIGHT + kHorzSpacing * 2),
 	fGetMessage(getMessage),
 	fClearMessage(clearMessage),
 	fApplyMessage(applyMessage)
 {
-}
-
-
-FindStatusView::~FindStatusView()
-{
-}
-
-
-void
-FindStatusView::AttachedToWindow()
-{
 	SetFont(be_plain_font);
 	SetFontSize(10.);
-
-	fButtonWidth += StringWidth(B_TRANSLATE(kLabel));
-
-	BScrollBar* scrollBar = fScrollView->ScrollBar(B_HORIZONTAL);
-	MoveTo(0., scrollBar->Frame().top);
-
-	SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
-
-	ResizeToPreferred();
 }
 
 
-void
-FindStatusView::GetPreferredSize(float* _width, float* _height)
+StatusView::~StatusView()
 {
-	_ValidatePreferredSize();
-
-	if (_width)
-		*_width = fPreferredSize.width;
-
-	if (_height)
-		*_height = fPreferredSize.height;
 }
 
 
 void
-FindStatusView::ResizeToPreferred()
+StatusView::Draw(BRect updateRect)
 {
 	float width, height;
 	GetPreferredSize(&width, &height);
-
-	if (Bounds().Width() > width)
-		width = Bounds().Width();
-
-	BView::ResizeTo(width, height);
-}
-
-
-void
-FindStatusView::Draw(BRect updateRect)
-{
-	if (fPreferredSize.width <= 0)
+	if (width <= 0)
 		return;
 
 	rgb_color highColor = HighColor();
 	BRect bounds(Bounds());
-	bounds.bottom = fPreferredSize.height;
-	bounds.right = fPreferredSize.width;
+	bounds.bottom = height;
+	bounds.right = width;
 
 	rgb_color base = tint_color(ViewColor(), B_DARKEN_2_TINT);
 
-	// Navigation button
-	BRect navRect(bounds);
-	navRect.right = fButtonWidth;
-	navRect.bottom--;
-	_DrawNavigationButton(navRect);
+	_DrawButton(bounds);
 
 	be_control_look->DrawScrollViewFrame(this, bounds, bounds, BRect(), BRect(),
 		ViewColor(), B_FANCY_BORDER, 0,
 		BControlLook::B_LEFT_BORDER | BControlLook::B_BOTTOM_BORDER);
 
-	if(fScrollView->IsBorderHighlighted() && Window()->IsActive()) {
+	if(ScrollView()->IsBorderHighlighted() && Window()->IsActive()) {
 		SetHighUIColor(B_KEYBOARD_NAVIGATION_COLOR);
 	} else {
 		SetHighUIColor(B_PANEL_BACKGROUND_COLOR, B_DARKEN_2_TINT);
@@ -137,8 +94,9 @@ FindStatusView::Draw(BRect updateRect)
 
 	// BControlLook mutates color
 	SetHighColor(base);
-	navRect.top++;
-	StrokeLine(navRect.RightTop(), navRect.RightBottom());
+	BPoint rt = bounds.RightTop();
+	rt.y++;
+	StrokeLine(rt, bounds.RightBottom());
 
 	font_height fontHeight;
 	GetFontHeight(&fontHeight);
@@ -146,6 +104,10 @@ FindStatusView::Draw(BRect updateRect)
 	float x = 0.0f;
 	float y = (bounds.bottom + bounds.top
 		+ ceilf(fontHeight.ascent) - ceilf(fontHeight.descent)) / 2;
+	if(fPressed) {
+		x++;
+		y++;
+	}
 	SetHighUIColor(B_PANEL_TEXT_COLOR);
 	DrawString(B_TRANSLATE(kLabel), BPoint(x + kHorzSpacing, y));
 	SetHighColor(highColor);
@@ -153,7 +115,7 @@ FindStatusView::Draw(BRect updateRect)
 
 
 void
-FindStatusView::MouseDown(BPoint where)
+StatusView::MouseDown(BPoint where)
 {
 	fPressed = true;
 	Invalidate();
@@ -162,15 +124,7 @@ FindStatusView::MouseDown(BPoint where)
 
 
 void
-FindStatusView::WindowActivated(bool active)
-{
-	// Workaround: doesn't redraw automatically
-	Invalidate();
-}
-
-
-void
-FindStatusView::MessageReceived(BMessage* message)
+StatusView::MessageReceived(BMessage* message)
 {
 	if(message->what == fGetMessage && message->IsReply()) {
 		BPopUpMenu* menu = new BPopUpMenu("HistoryMenu", false, false);
@@ -212,34 +166,15 @@ FindStatusView::MessageReceived(BMessage* message)
 }
 
 
-void
-FindStatusView::_ValidatePreferredSize()
+float
+StatusView::Width()
 {
-	// width
-	fPreferredSize.width = fButtonWidth;
-
-	// height
-	font_height fontHeight;
-	GetFontHeight(&fontHeight);
-
-	fPreferredSize.height = ceilf(fontHeight.ascent + fontHeight.descent
-		+ fontHeight.leading);
-
-	if (fPreferredSize.height < B_H_SCROLL_BAR_HEIGHT + 1)
-		fPreferredSize.height = B_H_SCROLL_BAR_HEIGHT + 1;
-
-	ResizeBy(fPreferredSize.width, 0);
-	BScrollBar* scrollBar = fScrollView->ScrollBar(B_HORIZONTAL);
-	float diff = scrollBar->Frame().left - fPreferredSize.width;
-	if(fabs(diff) > 0.5) {
-		scrollBar->ResizeBy(diff, 0);
-		scrollBar->MoveBy(-diff, 0);
-	}
+	return fButtonWidth + StringWidth(B_TRANSLATE(kLabel));
 }
 
 
 void
-FindStatusView::_DrawNavigationButton(BRect rect)
+StatusView::_DrawButton(BRect rect)
 {
 	rgb_color baseColor = tint_color(ui_color(B_PANEL_BACKGROUND_COLOR),
 		B_LIGHTEN_1_TINT);
@@ -250,15 +185,18 @@ FindStatusView::_DrawNavigationButton(BRect rect)
 		flags |= BControlLook::B_DISABLED;
 	be_control_look->DrawButtonBackground(this, rect, rect, baseColor, flags,
 		BControlLook::B_ALL_BORDERS, B_HORIZONTAL);
-	rect.left += fButtonWidth - B_H_SCROLL_BAR_HEIGHT;
+	rect.left += rect.right - B_H_SCROLL_BAR_HEIGHT + 1;
+	rect.bottom -= 2;
 	be_control_look->DrawArrowShape(this, rect, rect, baseColor,
 		BControlLook::B_DOWN_ARROW, flags, B_DARKEN_MAX_TINT);
 }
 
 
 void
-FindStatusView::_ShowHistoryMenu()
+StatusView::_ShowHistoryMenu()
 {
 	BMessenger windowMsgr(Window());
 	windowMsgr.SendMessage(fGetMessage, this);
 }
+
+} // namespace find
