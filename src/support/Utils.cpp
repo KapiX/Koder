@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2018 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2017-2019 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -114,6 +114,12 @@ OKAlert(const char* title, const char* message, alert_type type)
 		nullptr, nullptr, B_WIDTH_AS_USUAL, type);
 	alert->SetShortcut(0, B_ESCAPE);
 	alert->Go();
+}
+
+
+int32 rgb_colorToSciColor(rgb_color color)
+{
+	return color.red | (color.green << 8) | (color.blue << 16);
 }
 
 

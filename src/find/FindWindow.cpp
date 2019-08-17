@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2017 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2016-2019 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -30,6 +30,17 @@
 
 class FindScintillaView : public BScintillaView
 {
+private:
+	void UpdateColors()
+	{
+		rgb_color fore = ui_color(B_DOCUMENT_TEXT_COLOR);
+		rgb_color back = ui_color(B_DOCUMENT_BACKGROUND_COLOR);
+		SendMessage(SCI_STYLESETFORE, STYLE_DEFAULT, rgb_colorToSciColor(fore));
+		SendMessage(SCI_STYLESETBACK, STYLE_DEFAULT, rgb_colorToSciColor(back));
+		SendMessage(SCI_STYLESETFORE, 0, rgb_colorToSciColor(fore));
+		SendMessage(SCI_STYLESETBACK, 0, rgb_colorToSciColor(back));
+	}
+
 public:
 	FindScintillaView(const char* name, uint32 getMessage, uint32 clearMessage,
 		uint32 applyMessage, uint32 flags = 0, bool horizontal = true,
@@ -37,6 +48,7 @@ public:
 		:
 		BScintillaView(name, flags, horizontal, vertical, border)
 	{
+		UpdateColors();
 		fStatusView = new find::StatusView(this,
 			getMessage, clearMessage, applyMessage);
 	}
@@ -54,6 +66,18 @@ public:
 		BScintillaView::FrameResized(width, height);
 
 		fStatusView->ResizeToPreferred();
+	}
+
+	virtual void MessageReceived(BMessage* message)
+	{
+		switch(message->what) {
+			case B_COLORS_UPDATED: {
+				UpdateColors();
+			} break;
+			default: {
+				BScintillaView::MessageReceived(message);
+			} break;
+		}
 	}
 private:
 	find::StatusView* fStatusView;

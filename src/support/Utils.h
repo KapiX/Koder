@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2018 Kacper Kasper <kacperkasper@gmail.com>
+ * Copyright 2017-2019 Kacper Kasper <kacperkasper@gmail.com>
  * All rights reserved. Distributed under the terms of the MIT license.
  */
 
@@ -37,6 +37,9 @@ void SetChecked(T* control, bool checked = true);
 
 void OKAlert(const char* title, const char* message,
 	alert_type type = B_INFO_ALERT);
+
+
+int32 rgb_colorToSciColor(rgb_color color);
 
 
 class KeyDownMessageFilter : public BMessageFilter
