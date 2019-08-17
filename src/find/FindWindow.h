@@ -20,7 +20,9 @@ class BCheckBox;
 class BMessage;
 class BRadioButton;
 class BStringView;
-class FindScintillaView;
+namespace find {
+	class ScintillaView;
+}
 
 
 enum {
@@ -65,9 +67,9 @@ private:
 	void			_SaveHistory();
 
 	BStringView*	fFindString;
-	FindScintillaView*	fFindTC;
+	find::ScintillaView*	fFindTC;
 	BStringView*	fReplaceString;
-	FindScintillaView*	fReplaceTC;
+	find::ScintillaView*	fReplaceTC;
 
 	BButton*		fFindButton;
 	BButton*		fReplaceButton;

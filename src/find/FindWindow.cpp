@@ -20,68 +20,12 @@
 #include <StringView.h>
 
 #include "File.h"
-#include "FindStatusView.h"
+#include "FindScintillaView.h"
 #include "Utils.h"
 
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "FindWindow"
-
-
-class FindScintillaView : public BScintillaView
-{
-private:
-	void UpdateColors()
-	{
-		rgb_color fore = ui_color(B_DOCUMENT_TEXT_COLOR);
-		rgb_color back = ui_color(B_DOCUMENT_BACKGROUND_COLOR);
-		SendMessage(SCI_STYLESETFORE, STYLE_DEFAULT, rgb_colorToSciColor(fore));
-		SendMessage(SCI_STYLESETBACK, STYLE_DEFAULT, rgb_colorToSciColor(back));
-		SendMessage(SCI_STYLESETFORE, 0, rgb_colorToSciColor(fore));
-		SendMessage(SCI_STYLESETBACK, 0, rgb_colorToSciColor(back));
-	}
-
-public:
-	FindScintillaView(const char* name, uint32 getMessage, uint32 clearMessage,
-		uint32 applyMessage, uint32 flags = 0, bool horizontal = true,
-		bool vertical = true, border_style border = B_FANCY_BORDER)
-		:
-		BScintillaView(name, flags, horizontal, vertical, border)
-	{
-		UpdateColors();
-		fStatusView = new find::StatusView(this,
-			getMessage, clearMessage, applyMessage);
-	}
-
-	virtual void DoLayout()
-	{
-		BScintillaView::DoLayout();
-
-		fStatusView->ResizeToPreferred();
-	}
-
-
-	virtual void FrameResized(float width, float height)
-	{
-		BScintillaView::FrameResized(width, height);
-
-		fStatusView->ResizeToPreferred();
-	}
-
-	virtual void MessageReceived(BMessage* message)
-	{
-		switch(message->what) {
-			case B_COLORS_UPDATED: {
-				UpdateColors();
-			} break;
-			default: {
-				BScintillaView::MessageReceived(message);
-			} break;
-		}
-	}
-private:
-	find::StatusView* fStatusView;
-};
 
 
 FindWindow::FindWindow(BMessage *state, BPath settingsPath)
@@ -255,7 +199,7 @@ FindWindow::_InitInterface()
 {
 	fFindString = new BStringView("findString", B_TRANSLATE("Find:"));
 	fReplaceString = new BStringView("replaceString", B_TRANSLATE("Replace:"));
-	fFindTC = new FindScintillaView("findText",
+	fFindTC = new find::ScintillaView("findText",
 		HistoryRequests::GET_FIND_HISTORY,
 		HistoryRequests::CLEAR_FIND_HISTORY,
 		HistoryRequests::APPLY_FIND_ITEM);
@@ -263,7 +207,7 @@ FindWindow::_InitInterface()
 	fFindTC->Target()->SetFlags(fFindTC->Target()->Flags() | B_NAVIGABLE);
 	fFindTC->SendMessage(SCI_SETMARGINWIDTHN, 1, 0);
 
-	fReplaceTC = new FindScintillaView("replaceText",
+	fReplaceTC = new find::ScintillaView("replaceText",
 		HistoryRequests::GET_REPLACE_HISTORY,
 		HistoryRequests::CLEAR_REPLACE_HISTORY,
 		HistoryRequests::APPLY_REPLACE_ITEM);
