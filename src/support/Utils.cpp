@@ -149,3 +149,12 @@ KeyDownMessageFilter::Filter(BMessage* message, BHandler** target)
 	}
 	return B_DISPATCH_MESSAGE;
 }
+
+
+template<>
+void
+copy_value(const void* source, ssize_t size, std::string* destination)
+{
+	destination->resize(size);
+	*destination = reinterpret_cast<const char*>(source);
+}
