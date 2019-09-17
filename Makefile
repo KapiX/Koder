@@ -38,3 +38,27 @@ COMPILER_FLAGS = -gno-column-info -std=c++17
 DEVEL_DIRECTORY := \
 	$(shell findpaths -r "makefile_engine" B_FIND_PATH_DEVELOP_DIRECTORY)
 include $(DEVEL_DIRECTORY)/etc/makefile-engine
+
+# TESTS
+
+TEST_DIR := test
+
+$(OBJ_DIR)/$(TEST_DIR)-%.o : $(TEST_DIR)/%.cpp
+	$(C++) -c $< $(INCLUDES) $(CFLAGS) -o "$@"
+
+TEST_SRCS = \
+	main.cpp \
+	TestUtils.cpp
+
+TEST_OBJECTS = $(addprefix $(OBJ_DIR)/test-, $(addsuffix .o, $(foreach file, \
+	$(TEST_SRCS), $(basename $(notdir $(file))))))
+
+TEST_TARGET = $(TARGET_DIR)/$(NAME)_tests
+
+TEST_BASE_OBJS = $(filter-out $(OBJ_DIR)/main.o,$(OBJS))
+
+$(TEST_TARGET): $(TEST_BASE_OBJS) $(TEST_OBJECTS)
+	$(LD) -o "$@" $(TEST_BASE_OBJS) $(TEST_OBJECTS) $(LDFLAGS) -lgtest
+
+check : $(TEST_TARGET)
+	$(TEST_TARGET)

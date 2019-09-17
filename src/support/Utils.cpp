@@ -24,7 +24,8 @@ std::string
 GetFileName(const std::string filename)
 {
 	size_t pos = filename.rfind('.');
-	if(pos != std::string::npos)
+	// pos != 0 is for dotfiles
+	if(pos != std::string::npos && pos != 0)
 		return filename.substr(0, pos);
 	return filename;
 }
@@ -34,7 +35,8 @@ std::string
 GetFileExtension(const std::string filename)
 {
 	size_t pos = filename.rfind('.');
-	if(pos != std::string::npos)
+	// pos != 0 is for dotfiles
+	if(pos != std::string::npos && pos != 0)
 		return filename.substr(pos + 1);
 	return "";
 }
