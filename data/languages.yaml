@@ -22,6 +22,9 @@ css:
 diff:
     name: Diff
     extensions: [ diff, patch, patchset ]
+gdscript:
+    name: GDScript
+    extensions: [ gd ]
 html:
     name: HTML
     extensions: [ html, htm, shtml, shtm, xhtml, xht, hta ]
