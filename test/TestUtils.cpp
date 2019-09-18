@@ -91,3 +91,125 @@ TEST(GetFileExtensionTest, HandlesFileWithTwoExtensions) {
 	const std::string result = GetFileExtension("testing.long.extension");
 	ASSERT_EQ(result, "extension");
 }
+
+// ParseFileArgument
+
+TEST(ParseFileArgumentTest, HandlesFileNameAndNoReturnParameters) {
+	const std::string result = ParseFileArgument("test.txt");
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesFileNameNoLineAndNoReturnParameters) {
+	const std::string result = ParseFileArgument("test.txt:");
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesFileNameLineAndNoReturnParameters) {
+	const std::string result = ParseFileArgument("test.txt:2");
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesFileNameLineNoColumnAndNoReturnParameters) {
+	const std::string result = ParseFileArgument("test.txt:2:");
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesFileNameNoLine) {
+	int32 line = 0;
+	int32 column = 0;
+	const std::string result = ParseFileArgument("test.txt:", &line, &column);
+	// line is undefined
+	// column is undefined
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesFileNameLine) {
+	int32 line = 0;
+	int32 column = 0;
+	const std::string result = ParseFileArgument("test.txt:2", &line, &column);
+	EXPECT_EQ(line, 2);
+	// column is undefined
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesFileNameLineNoColumn) {
+	int32 line = 0;
+	int32 column = 0;
+	const std::string result = ParseFileArgument("test.txt:2:", &line, &column);
+	EXPECT_EQ(line, 2);
+	// column is undefined
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesFileNameNoLineNoColumnAndNoReturnParameters) {
+	const std::string result = ParseFileArgument("test.txt::");
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesFileNameLineColumnAndOneReturnParameter) {
+	int32 line = 0;
+	const std::string result = ParseFileArgument("test.txt:2:5", &line);
+	EXPECT_EQ(line, 2);
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesFileNameNoLineColumn) {
+	int32 line = 0;
+	int32 column = 0;
+	const std::string result = ParseFileArgument("test.txt::32", &line, &column);
+	// line is undefined
+	EXPECT_EQ(column, 32);
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesFileNameNoLineColumnAndOneReturnParameter) {
+	int32 column = 0;
+	const std::string result = ParseFileArgument("test.txt::32", nullptr, &column);
+	EXPECT_EQ(column, 32);
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesFileNameLineColumn) {
+	int32 line = 0;
+	int32 column = 0;
+	const std::string result = ParseFileArgument("test.txt:2:5", &line, &column);
+	EXPECT_EQ(line, 2);
+	EXPECT_EQ(column, 5);
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesLargeLineAndColumnValues) {
+	int32 line = 0;
+	int32 column = 0;
+	const std::string result = ParseFileArgument("test.txt:2332:512354", &line, &column);
+	EXPECT_EQ(line, 2332);
+	EXPECT_EQ(column, 512354);
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, HandlesNegativeLineAndColumnValues) {
+	int32 line = 0;
+	int32 column = 0;
+	const std::string result = ParseFileArgument("test.txt:-23:-120", &line, &column);
+	EXPECT_EQ(line, -23);
+	EXPECT_EQ(column, -120);
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, OnlyFileNameReturnNegativeOneForLineAndColumn) {
+	int32 line = 0;
+	int32 column = 0;
+	const std::string result = ParseFileArgument("test.txt", &line, &column);
+	EXPECT_EQ(line, -1);
+	EXPECT_EQ(column, -1);
+	EXPECT_EQ(result, "test.txt");
+}
+
+TEST(ParseFileArgumentTest, NoLineAndNoColumnReturnNegativeOne) {
+	int32 line = 0;
+	int32 column = 0;
+	const std::string result = ParseFileArgument("test.txt::", &line, &column);
+	EXPECT_EQ(line, -1);
+	EXPECT_EQ(column, -1);
+	EXPECT_EQ(result, "test.txt");
+}

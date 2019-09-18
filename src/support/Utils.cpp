@@ -78,11 +78,17 @@ ParseFileArgument(const std::string argument, int32* line, int32* column)
 		// second :
 		int32 second = argument.find(':', first + 1);
 		if(line != nullptr) {
-			*line = std::stoi(argument.substr(first + 1, second));
-				// if second is npos substr copies to the end
+			const int32 length = second != std::string::npos ?
+				second - (first + 1) : second;
+			const std::string line_str = argument.substr(first + 1, length);
+			if(!line_str.empty()) {
+				*line = std::stoi(line_str);
+			}
 		}
 		if(column != nullptr && second != std::string::npos) {
-			*column = std::stoi(argument.substr(second + 1));
+			const std::string column_str = argument.substr(second + 1);
+			if(!column_str.empty())
+				*column = std::stoi(column_str);
 		}
 	} else {
 		filename = argument;
