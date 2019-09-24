@@ -48,7 +48,8 @@ $(OBJ_DIR)/$(TEST_DIR)-%.o : $(TEST_DIR)/%.cpp
 
 TEST_SRCS = \
 	main.cpp \
-	TestUtils.cpp
+	TestUtils.cpp \
+	TestFindReplace.cpp
 
 TEST_OBJECTS = $(addprefix $(OBJ_DIR)/test-, $(addsuffix .o, $(foreach file, \
 	$(TEST_SRCS), $(basename $(notdir $(file))))))
