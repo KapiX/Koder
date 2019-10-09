@@ -30,6 +30,7 @@ class BPath;
 class BPopUpMenu;
 class BookmarksWindow;
 class Editor;
+class FindReplaceHandler;
 class GoToLineWindow;
 class Preferences;
 class StatusView;
@@ -154,13 +155,14 @@ private:
 
 			BMessage*		fOnQuitReplyToMessage;
 
+			FindReplaceHandler*	fFindReplaceHandler;
+
 	static	Preferences*	fPreferences;
 			FilePreferences	fFilePreferences;
 
 			std::string			fIncrementalSearchTerm;
 			std::unique_ptr<BMessageFilter> fIncrementalSearchFilter;
 
-			void			_FindReplace(BMessage* message);
 			void			_PopulateLanguageMenu();
 			void			_ReloadFile(entry_ref* ref = nullptr);
 			void			_SetLanguage(std::string lang);

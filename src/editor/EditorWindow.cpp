@@ -34,6 +34,7 @@
 #include "Editor.h"
 #include "Editorconfig.h"
 #include "File.h"
+#include "FindReplaceHandler.h"
 #include "FindWindow.h"
 #include "GoToLineWindow.h"
 #include "Languages.h"
@@ -240,6 +241,9 @@ EditorWindow::EditorWindow(bool stagger)
 
 	fEditor->SendMessage(SCI_GRABFOCUS);
 
+	fFindReplaceHandler = new FindReplaceHandler(fEditor, this);
+	AddHandler(fFindReplaceHandler);
+
 	_SyncWithPreferences();
 
 	fEditor->SendMessage(SCI_SETSCROLLWIDTH, fEditor->Bounds().Width());
@@ -262,6 +266,8 @@ EditorWindow::EditorWindow(bool stagger)
 
 EditorWindow::~EditorWindow()
 {
+	delete fFindReplaceHandler;
+
 	RemoveCommonFilter(fIncrementalSearchFilter.get());
 }
 
@@ -464,6 +470,28 @@ EditorWindow::MessageReceived(BMessage* message)
 	if(message->WasDropped()) {
 		message->what = B_REFS_RECEIVED;
 	}
+
+	if(message->IsReply()) {
+		switch(message->what) {
+			case FindReplaceHandler::FIND: {
+				bool found = message->GetBool("found", true);
+				if(found == false) {
+					OKAlert(B_TRANSLATE("Searching finished"),
+						B_TRANSLATE("Reached the end of the target. "
+							"No results found."));
+				}
+			} break;
+			case FindReplaceHandler::REPLACEALL: {
+				int32 replaced = message->GetInt32("replaced", 0);
+				BString alertMessage;
+				static BStringFormat format(B_TRANSLATE("Replaced "
+					"{0, plural, one{# occurence} other{# occurences}}."));
+				format.Format(alertMessage, replaced);
+				OKAlert(B_TRANSLATE("Replacement finished"), alertMessage);
+			} break;
+		}
+	}
+
 	switch(message->what) {
 		case INCREMENTAL_SEARCH_CHAR: {
 			const char* character = message->GetString("character", "");
@@ -786,11 +814,22 @@ EditorWindow::MessageReceived(BMessage* message)
 		case BOOKMARKS_WINDOW_QUITTING: {
 			fBookmarksWindow = nullptr;
 		} break;
-		case FINDWINDOW_FIND:
-		case FINDWINDOW_REPLACE:
-		case FINDWINDOW_REPLACEALL:
+		// FIXME: this looked better in my head...
+		case FINDWINDOW_FIND: {
+			message->what = FindReplaceHandler::FIND;
+			PostMessage(message, fFindReplaceHandler, this);
+		} break;
+		case FINDWINDOW_REPLACE: {
+			message->what = FindReplaceHandler::REPLACE;
+			PostMessage(message, fFindReplaceHandler, this);
+		} break;
+		case FINDWINDOW_REPLACEALL: {
+			message->what = FindReplaceHandler::REPLACEALL;
+			PostMessage(message, fFindReplaceHandler, this);
+		} break;
 		case FINDWINDOW_REPLACEFIND: {
-			_FindReplace(message);
+			message->what = FindReplaceHandler::REPLACEFIND;
+			PostMessage(message, fFindReplaceHandler, this);
 		} break;
 		case OPEN_TERMINAL: {
 			if(fOpenedFilePath != nullptr) {
@@ -879,49 +918,6 @@ void
 EditorWindow::SetOnQuitReplyToMessage(BMessage* message)
 {
 	fOnQuitReplyToMessage = message;
-}
-
-
-void
-EditorWindow::_FindReplace(BMessage* message)
-{
-	bool newSearch = message->GetBool("newSearch");
-	bool inSelection = message->GetBool("inSelection");
-	bool matchCase = message->GetBool("matchCase");
-	bool matchWord = message->GetBool("matchWord");
-	bool wrapAround = message->GetBool("wrapAround");
-	bool backwards = message->GetBool("backwards");
-	bool regex = message->GetBool("regex");
-	const char* findText = message->GetString("findText", "");
-	const char* replaceText = message->GetString("replaceText", "");
-
-	switch(message->what) {
-		case FINDWINDOW_REPLACE:
-		case FINDWINDOW_REPLACEFIND:
-			fEditor->Replace(replaceText, regex);
-			if(message->what == FINDWINDOW_REPLACE) break;
-		case FINDWINDOW_FIND: {
-			if(newSearch == true) {
-				fEditor->ResetFindReplace();
-			}
-			bool found;
-			found = fEditor->Find(message);
-			if(found == false) {
-				OKAlert(B_TRANSLATE("Searching finished"),
-					B_TRANSLATE("Reached the end of the target. "
-						"No results found."));
-			}
-		} break;
-		case FINDWINDOW_REPLACEALL: {
-			int occurences = fEditor->ReplaceAll(findText, replaceText,
-				matchCase, matchWord, inSelection, regex);
-			BString alertMessage;
-			static BStringFormat format(B_TRANSLATE("Replaced "
-				"{0, plural, one{# occurence} other{# occurences}}."));
-			format.Format(alertMessage, occurences);
-			OKAlert(B_TRANSLATE("Replacement finished"), alertMessage);
-		} break;
-	}
 }
 
 

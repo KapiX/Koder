@@ -63,3 +63,6 @@ $(TEST_TARGET): $(TEST_BASE_OBJS) $(TEST_OBJECTS)
 
 check : $(TEST_TARGET)
 	$(TEST_TARGET)
+
+check-debug : $(TEST_TARGET)
+	Debugger $(TEST_TARGET)

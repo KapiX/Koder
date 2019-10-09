@@ -15,9 +15,11 @@ namespace Sci = Scintilla;
 using namespace Sci::Properties;
 
 
-FindReplaceHandler::FindReplaceHandler(BScintillaView* editor)
+FindReplaceHandler::FindReplaceHandler(BScintillaView* editor,
+	BHandler* replyHandler)
 	:
 	fEditor(editor),
+	fReplyHandler(replyHandler),
 	fSearchTarget(-1, -1),
 	fSearchLastResult(-1, -1),
 	fSearchLast(""),
@@ -29,24 +31,35 @@ FindReplaceHandler::FindReplaceHandler(BScintillaView* editor)
 void
 FindReplaceHandler::MessageReceived(BMessage* message)
 {
-	const search_info info = _UnpackSearchMessage(*message);
-
-	const bool inSelection = info.inSelection;
-	const bool matchCase = info.matchCase;
-	const bool matchWord = info.matchWord;
-	const bool wrapAround = info.wrapAround;
-	const bool backwards = info.backwards;
-	const bool regex = info.regex;
-	const std::string find = info.find;
-	const std::string replace = info.replace;
+	search_info info = _UnpackSearchMessage(*message);
 
 	Sci::Guard<SearchTarget, SearchFlags> guard(fEditor);
 
 	const int length = fEditor->SendMessage(SCI_GETLENGTH);
 	const Sci_Position anchor = fEditor->SendMessage(SCI_GETANCHOR);
 	const Sci_Position current = fEditor->SendMessage(SCI_GETCURRENTPOS);
-
 	switch(message->what) {
+		case REPLACEFIND:
+			// fallthrough
+		case REPLACE: {
+			int replaceMsg = (info.regex ? SCI_REPLACETARGETRE : SCI_REPLACETARGET);
+			if(fSearchLastResult != Sci::Range{ -1, -1 }) {
+				// we need to search again, because whitespace highlighting messes with
+				// the results
+				Set<SearchFlags>(fSearchLastFlags);
+				Set<SearchTarget>(fSearchLastResult);
+				fEditor->SendMessage(SCI_SEARCHINTARGET, (uptr_t) fSearchLastInfo.find.size(), (sptr_t) fSearchLastInfo.find.c_str());
+				fEditor->SendMessage(replaceMsg, -1, (sptr_t) info.replace.c_str());
+				Sci::Range target = Get<SearchTarget>();
+				if(fSearchLastInfo.backwards == true) {
+					std::swap(target.first, target.second);
+				}
+				fEditor->SendMessage(SCI_SETANCHOR, target.first);
+				fEditor->SendMessage(SCI_SETCURRENTPOS, target.second);
+				fSearchLastResult = { -1, -1 };
+			}
+		}
+		if(message->what != REPLACEFIND) break;
 		case FIND: {
 			if((fSearchLastInfo.backwards == true && (anchor != fSearchLastResult.first
 					|| current != fSearchLastResult.second))
@@ -55,15 +68,18 @@ FindReplaceHandler::MessageReceived(BMessage* message)
 				|| info != fSearchLastInfo) {
 				fNewSearch = true;
 			}
+			if(message->what == REPLACEFIND) {
+				info = fSearchLastInfo;
+			}
 
 			if(fNewSearch == true) {
-				if(inSelection == true) {
+				if(info.inSelection == true) {
 					fSearchTarget = Get<Selection>();
-					if(backwards == true) {
+					if(info.backwards == true) {
 						std::swap(fSearchTarget.first, fSearchTarget.second);
 					}
 				} else {
-					fSearchTarget = backwards ? Sci::Range(anchor, 0) : Sci::Range(current, length);
+					fSearchTarget = info.backwards ? Sci::Range(current, 0) : Sci::Range(current, length);
 				}
 			}
 
@@ -73,52 +89,57 @@ FindReplaceHandler::MessageReceived(BMessage* message)
 				temp.first = current;
 			}
 
-			Sci_Position pos = _Find(find, temp.first, temp.second, matchCase,
-				matchWord, regex);
-			fSearchLastResult = Get<SearchTarget>();
-			if(backwards == true) {
-				std::swap(fSearchLastResult.first, fSearchLastResult.second);
-			}
-			fEditor->SendMessage(SCI_SETANCHOR, fSearchLastResult.first);
-			fEditor->SendMessage(SCI_SETCURRENTPOS, fSearchLastResult.second);
+			Sci_Position pos = _Find(info.find, temp.first, temp.second,
+				info.matchCase, info.matchWord, info.regex);
 
-			if(pos == -1 && wrapAround == true) {
+			if(pos == -1 && info.wrapAround == true) {
 				Sci_Position startAgain;
-				if(inSelection == true) {
+				if(info.inSelection == true) {
 					startAgain = fSearchTarget.first;
 				} else {
-					startAgain = (backwards ? length : 0);
+					startAgain = (info.backwards ? length : 0);
 				}
-				pos = _Find(find, startAgain, fSearchTarget.second, matchCase,
-					matchWord, regex);
-				if(pos != -1) {
-					fSearchLastResult = Get<SearchTarget>();
-					if(backwards == true) {
-						std::swap(fSearchLastResult.first, fSearchLastResult.second);
-					}
-					fEditor->SendMessage(SCI_SETANCHOR, fSearchLastResult.first);
-					fEditor->SendMessage(SCI_SETCURRENTPOS, fSearchLastResult.second);
+				pos = _Find(info.find, startAgain, fSearchTarget.second,
+					info.matchCase, info.matchWord, info.regex);
+			}
+			if(pos != -1) {
+				fSearchLastResult = Get<SearchTarget>();
+				if(info.backwards == true) {
+					std::swap(fSearchLastResult.first, fSearchLastResult.second);
 				}
+				fEditor->SendMessage(SCI_SETANCHOR, fSearchLastResult.first);
+				fEditor->SendMessage(SCI_SETCURRENTPOS, fSearchLastResult.second);
+				fEditor->SendMessage(SCI_SCROLLCARET);
+			}
+			if(fReplyHandler != nullptr) {
+				BMessage reply(FIND);
+				reply.AddBool("found", pos != -1);
+				message->SendReply(&reply, fReplyHandler);
 			}
 			fNewSearch = false;
 			fSearchLastInfo = info;
 		} break;
-		case REPLACE: {
-			int replaceMsg = (regex ? SCI_REPLACETARGETRE : SCI_REPLACETARGET);
-			if(fSearchLastResult != Sci::Range{ -1, -1 }) {
-				// we need to search again, because whitespace highlighting messes with
-				// the results
-				Set<SearchFlags>(fSearchLastFlags);
-				Set<SearchTarget>(fSearchLastResult);
-				fEditor->SendMessage(SCI_SEARCHINTARGET, (uptr_t) fSearchLast.size(), (sptr_t) fSearchLast.c_str());
-				fEditor->SendMessage(replaceMsg, -1, (sptr_t) replace.c_str());
-				Sci::Range target = Get<SearchTarget>();
-				if(fSearchLastInfo.backwards == true) {
-					std::swap(target.first, target.second);
+		case REPLACEALL: {
+			Sci::UndoAction action(fEditor);
+			int replaceMsg = (info.regex ? SCI_REPLACETARGETRE : SCI_REPLACETARGET);
+			int occurences = 0;
+			fEditor->SendMessage(info.inSelection ? SCI_TARGETFROMSELECTION : SCI_TARGETWHOLEDOCUMENT);
+			auto target = Get<SearchTarget>();
+			Sci_Position pos;
+			do {
+				pos = _Find(info.find, target.first, target.second,
+					info.matchCase, info.matchWord, info.regex);
+				if(pos != -1) {
+					fEditor->SendMessage(replaceMsg, -1, (sptr_t) info.replace.c_str());
+					target.first = Get<SearchTargetEnd>();
+					target.second = fEditor->SendMessage(SCI_GETLENGTH);
+					occurences++;
 				}
-				fEditor->SendMessage(SCI_SETANCHOR, target.first);
-				fEditor->SendMessage(SCI_SETCURRENTPOS, target.second);
-				fSearchLastResult = { -1, -1 };
+			} while(pos != -1);
+			if(fReplyHandler != nullptr) {
+				BMessage reply(REPLACEALL);
+				reply.AddInt32("replaced", occurences);
+				message->SendReply(&reply, fReplyHandler);
 			}
 		} break;
 	}

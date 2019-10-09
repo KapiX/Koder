@@ -25,7 +25,8 @@ public:
 		REPLACEFIND	= 'fnrp',
 		REPLACEALL	= 'rpla',
 	};
-					FindReplaceHandler(BScintillaView* editor);
+					FindReplaceHandler(BScintillaView* editor,
+						BHandler* replyHandler = nullptr);
 	virtual void	MessageReceived(BMessage* message);
 
 private:
@@ -64,6 +65,7 @@ private:
 	void				Set(typename T::type value) { T::Set(fEditor, value); }
 
 	BScintillaView*	fEditor;
+	BHandler*		fReplyHandler;
 
 	Scintilla::Range	fSearchTarget;
 	Scintilla::Range	fSearchLastResult;
