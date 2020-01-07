@@ -169,7 +169,7 @@ Preferences::Save(const char* filename)
 
 
 Preferences&
-Preferences::operator =(Preferences p)
+Preferences::operator =(Preferences& p)
 {
 	fSettingsPath = p.fSettingsPath;
 	fTabWidth = p.fTabWidth;
@@ -204,4 +204,6 @@ Preferences::operator =(Preferences p)
 	fFontSize = p.fFontSize;
 	fToolbarIconSizeMultiplier = p.fToolbarIconSizeMultiplier;
 	fUseEditorconfig = p.fUseEditorconfig;
+
+	return *this;
 }
