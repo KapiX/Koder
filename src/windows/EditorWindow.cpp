@@ -1232,7 +1232,7 @@ EditorWindow::_ShowModifiedAlert()
 	const char* alertText;
 	const char* button0 = B_TRANSLATE("Cancel");
 	const char* button1 = B_TRANSLATE("Discard");
-	const char* button2;
+	const char* button2 = nullptr;
 	if(fReadOnly == true) {
 		alertText = B_TRANSLATE("The file contains unsaved changes, but is read-only. What to do?");
 		//button2 = B_TRANSLATE("Save as" B_UTF8_ELLIPSIS);
