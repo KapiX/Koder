@@ -20,6 +20,11 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 
 ## History
 
+0.5.2 - *08-01-2020*
+
+* Fix crash when opening Preferences.
+* Fix garbage button text in file modified warning.
+
 0.5.1 - *11-05-2019*
 
 * Fix crash when external lexer is not found.
