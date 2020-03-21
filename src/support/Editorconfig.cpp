@@ -95,7 +95,7 @@ Editorconfig::MatchFilename(const char* filename, const BMessage* allProperties,
 		int32 slashIndex = regexStr.FindFirst("/");
 		if(slashIndex != B_ERROR && slashIndex > 0 && regexStr[slashIndex - 1] != '\\')
 			dirSpecific = true;
-		bool inBrace = false;
+		int32 inBraceCount = 0;
 		int32 c = 0;
 		while(c < regexStr.Length()) {
 			if(regexStr[c] == '*') {
@@ -127,16 +127,15 @@ Editorconfig::MatchFilename(const char* filename, const BMessage* allProperties,
 				c += 2;
 				continue;
 			}
-			if(!inBrace) {
-				if(regexStr[c] == '{') {
-					if(c > 0 && regexStr[c - 1] == '\\') {
-						c++;
-						continue;
-					}
-					inBrace = true;
-					regexStr.Replace("{", "(", 1, c);
+			if(regexStr[c] == '{') {
+				if(c > 0 && regexStr[c - 1] == '\\') {
+					c++;
+					continue;
 				}
-			} else {
+				inBraceCount++;
+				regexStr.Replace("{", "(", 1, c);
+			}
+			if(inBraceCount > 0) {
 				if(c > 0 && regexStr[c - 1] == '\\') {
 					c++;
 					continue;
@@ -144,12 +143,14 @@ Editorconfig::MatchFilename(const char* filename, const BMessage* allProperties,
 				if(regexStr[c] == ',')
 					regexStr.Replace(",", "|", 1, c);
 				if(regexStr[c] == '}') {
-					inBrace = false;
+					inBraceCount--;
 					regexStr.Replace("}", ")", 1, c);
 				}
 			}
 			c++;
 		}
+
+		if(inBraceCount != 0) return;
 
 		std::regex expr(regexStr.String());
 		if(properties != nullptr && std::regex_match(filename, expr)) {
