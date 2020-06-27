@@ -101,20 +101,24 @@ App::AboutRequested()
 	};
 
 	const std::unordered_map<std::string, std::vector<std::string>> translatorsMap{
+		{ "ca", { "Davidmp" } },
 		{ "de", { "FabianReidinger", "humdinger" } },
-		{ "en_GB", { "adamfowleruk" } },
+		{ "en_GB", { "Adam Fowler" } },
 		{ "es", { "un_spacyar" } },
 //		{ "fi", { "Karvjorm" } },
 		{ "fr", { "Briseur" } },
+		{ "fur", { "tmtfx" } },
 		{ "hu", { "miqlas" } },
 //		{ "id", { "mazbrili" } },
-//		{ "it", { "TheClue" } },
+		{ "it", { "Gabriele Baldassarre" } },
+		{ "ja", { "Murai Takashi" } },
 //		{ "lt", { "damoklas" } },
 		{ "pt", { "Victor Domingos" } },
-		{ "ro", { "al-popa", "Florentina" } },
+		{ "ro", { "al-popa", "Florentina Mușat" } },
 		{ "ru", { "al-popa", "ArmanHayots", "diver", "TK-313" } },
-//		{ "sv", { "deejam" } },
-		{ "uk", { "Lan72" } }
+		{ "sv", { "deejam", "Fredrik Modéen" } },
+		{ "tr", { "Emir Sarı" } },
+		{ "uk", { "Alexey Lugin" } }
 	};
 
 	BMessage languages;

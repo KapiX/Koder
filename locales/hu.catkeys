@@ -1,82 +1,45 @@
 1	Hungarian	x-vnd.KapiX-Koder	822155924
-Code editor for Haiku based on Scintilla editing component.	App		A Scintilla szerkesztőkomponensre épülő kódszerkesztő Haikuhoz.
-Distributed on MIT license terms.	App		MIT licenc alatt terjeszthető.
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgsonnak, a Scintilla szerkesztő komponensért és a SciTE szerkesztőért.
-zuMi, for toolbar icons.	App		zuMi-nak, az eszköztár ikonjaiért.
-Konrad77, for dark theme.	App		Konrad77, a sötét témáért
-translators to:	App	to _ (language), e.g. German	feordítók:
-humdinger, for GUI design tips and artwork.	App		humdinger, a GUI design tippekért és a logóért
-Background	AppPreferencesWindow		Háttér
-Compact language menu	AppPreferencesWindow		Rövid nyelvi menü
-Convert tabs to spaces	AppPreferencesWindow		Tabok szóközökké alakítása
-Highlight braces	AppPreferencesWindow		Zárójelek kiemelése
-Highlight current line	AppPreferencesWindow		Aktuális sor kiemelése
-Highlight trailing whitespace	AppPreferencesWindow		Sorvégi szóközök megjelenítése
-Koder preferences	AppPreferencesWindow		Koder beállításai
-Line	AppPreferencesWindow		Sor
-Mark overly long lines	AppPreferencesWindow		Túl hosszú sorok megjelenítése
-Max. characters per line:	AppPreferencesWindow		Max. karakter soronként:
-Only in actually indented lines	AppPreferencesWindow		Csak behúzott sorokra
-Revert	AppPreferencesWindow		Visszaállít
-Show full path in title	AppPreferencesWindow		Teljes elérési út a címsorban
-Show indentation guides	AppPreferencesWindow		Behúzási segédvonal megjelenítése
-Show toolbar	AppPreferencesWindow		Eszköztár megjelenítése
-Spaces per tab:	AppPreferencesWindow		Szóköz tabonként:
-Stack new windows	AppPreferencesWindow		Új ablakok egymáshoz rögzítése
-Style	AppPreferencesWindow		Stílus
-Trim trailing whitespace on save	AppPreferencesWindow		Mentéskor a sorvégi szóközök törlése
-Up to the next non-empty line	AppPreferencesWindow		Fel a következő nem üres sorig
-Up to the next/previous non-empty line	AppPreferencesWindow		A következő/előző nem üres sorig
-Behavior	AppPreferencesWindow		Viselkedés
-Background	AppPreferencesWindow	Current line highlight	Háttér
-Frame	AppPreferencesWindow	Current line highlight	Keret
-Trailing whitespace	AppPreferencesWindow		Sorvégi szóközök
-Visual	AppPreferencesWindow		Látvány
-Indentation	AppPreferencesWindow		Behúzás
-Use .editorconfig if possible	AppPreferencesWindow		Az .editorconfig használata, ha lehetséges
-Always open files in new window	AppPreferencesWindow		Fájlok megnyitása mindig új ablakban
-Use custom font	AppPreferencesWindow		Egyedi betűtípus haszálata
-Folds	AppPreferencesWindow		Folds
-Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantikus
-Large	AppPreferencesWindow	Toolbar icon size	Nagy
-Bookmarks	AppPreferencesWindow		Könyvjelzők
-Extra large	AppPreferencesWindow	Toolbar icon size	Extra nagy
-Medium	AppPreferencesWindow	Toolbar icon size	Közepes
-Small	AppPreferencesWindow	Toolbar icon size	Kicsi
-Huge	AppPreferencesWindow	Toolbar icon size	Hatalmas
-Icon size	AppPreferencesWindow		Icon size
-Line numbers	AppPreferencesWindow		Sorszámok
-Enormous	AppPreferencesWindow	Toolbar icon size	Borzalmasan nagy
-Left margin	AppPreferencesWindow		Bal margó
-Ensure empty last line on save	AppPreferencesWindow		Utolsó, üres sor hozzáfűzése mentéskor
 [read-only]	EditorWindow		[írásvédett]
 About…	EditorWindow		Névjegy…
 Access denied	EditorWindow		Hozzáférés megtagadva
+Bookmarks	EditorWindow		Könyvjelzők
 Cancel	EditorWindow		Mégsem
 Close	EditorWindow		Bezárás
 Comment block	EditorWindow		Megjegyzés blokk
 Comment line	EditorWindow		Megjegyzés sor
 Copy	EditorWindow		Másolás
+Could not find Open Terminal Tracker add-on.	EditorWindow		Az Open Terminal Tracker bővítmény nem található.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Az Open Terminal Tracker bővítmény nem indítható el.
 Cut	EditorWindow		Kivágás
 Discard	EditorWindow		Elvetés
 Do nothing	EditorWindow		Ne tegyen semmit
 Edit	EditorWindow		Szerkeszt
 File	EditorWindow		Fájl
 File modified	EditorWindow		Módosított fájl
+File removed	EditorWindow		Fájl törölve
+Find next	EditorWindow		Következő
+Find selection	EditorWindow		Keresés kijelölésben
 Find/Replace…	EditorWindow		Keres/Csere…
 Go to line…	EditorWindow		Sorra ugrás…
 Help	EditorWindow		Súgó
+Incremental search	EditorWindow		Inkrementális keresés
 Koder preferences…	EditorWindow		Koder beállításai…
 Language	EditorWindow		Nyelv
 Line endings	EditorWindow		Sor vége
 New	EditorWindow		Új
+Next bookmark	EditorWindow		Következő könyvjelző
 Old Mac format	EditorWindow		Régi Mac formátum
+Open partner file	EditorWindow		Partner fájl megnyitása
+Open Terminal	EditorWindow		Terminál megnyitása
 Open…	EditorWindow		Megnyitás…
+Partner file not found.	EditorWindow		Partner fájl nem található.
 Paste	EditorWindow		Beillesztés
+Previous bookmark	EditorWindow		Előző könyvjelző
 Quit	EditorWindow		Kilépés
 Reached the end of the target. No results found.	EditorWindow		A kijelölésben nem volt találat.
 Redo	EditorWindow		Újra
 Reload	EditorWindow		Újratöltés
+Replace and find	EditorWindow		Keres és cserél
 Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		{0, plural, one{# occurence} other{# occurences}} került lecserélésre.
 Replacement finished	EditorWindow		Csere kész
 Save	EditorWindow		Mentés
@@ -91,6 +54,8 @@ Special symbols	EditorWindow		Speciális jelek
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		A fájl mentetlen változtatásokat tartalmaz, de írásvédett. Mit tegyünk?
 The file contains unsaved changes. What to do?	EditorWindow		A fájl mentetlen változtatásokat tartalmaz. Mit tegyünk?
 The file has been modified by another application. What to do?	EditorWindow		A fájlt egy másik program módosította. Mit tegyünk?
+The file has been removed. What to do?	EditorWindow		A fájl eltávolításra került, mit történjen?
+Toggle bookmark	EditorWindow		Könyvjelzők be- és kikapcsolása
 Trim trailing whitespace	EditorWindow		Sorvégi szóközök törlése
 Undo	EditorWindow		Visszavonás
 Unix format	EditorWindow		Unix formátum
@@ -101,21 +66,60 @@ Windows format	EditorWindow		Windows formátum
 Wrap lines	EditorWindow		Sorok törése
 You don't have sufficient permissions to edit this file.	EditorWindow		Nincs elegendő jogosultsága a fájl megváltoztatásához.
 Your changes will be lost.	EditorWindow		A modosítások elvesznek.
-Find selection	EditorWindow		Keresés kijelölésben
-Find next	EditorWindow		Következő
-Replace and find	EditorWindow		Keres és cserél
-Incremental search	EditorWindow		Inkrementális keresés
-Could not find Open Terminal Tracker add-on.	EditorWindow		Could not find Open Terminal Tracker add-on.
-Toggle bookmark	EditorWindow		Toggle bookmark
-Open Terminal	EditorWindow		Terminál megnyitása
-Next bookmark	EditorWindow		Következő könyvjelző
-Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
-File removed	EditorWindow		Fájl törölve
-Bookmarks	EditorWindow		Könyvjelzők
-The file has been removed. What to do?	EditorWindow		A fájl eltávolításra került, mit történjen?
-Open partner file	EditorWindow		Partner fájl megnyitása
-Previous bookmark	EditorWindow		Előző könyvjelző
-Partner file not found.	EditorWindow		Partner fájl nem található.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Hozzáférés megtagadva a beállítások megnyitása során. Kérjük ellenőrizze, hogy van-e %s% joga a beállítások könyvtárban.
+Editor settings	Preferences		Szerkesztő beállításai
+load	Preferences	to _ the configuration	betöltése
+loaded	Preferences	settings will not be _	betöltésre
+read	Preferences	Make sure you have _ permission for	olvasási
+save	Preferences	to _ the configuration	ment
+saved	Preferences	settings will not be _	elmentésre
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Valamilyen hiba történt a beállítások megnyitása során, a beállításai nem kerülnek %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Nem áll elegendő memeória rendelkezésre a beállítások %s%. Próbálj meg bezárni pár programot, és indítsd újra a szerkesztőt.
+Unknown error.	Preferences		Ismeretlen hiba.
+write	Preferences	Make sure you have _ permission for	írás
+Always open files in new window	AppPreferencesWindow		Fájlok megnyitása mindig új ablakban
+Background	AppPreferencesWindow		Háttér
+Background	AppPreferencesWindow	Current line highlight	Háttér
+Behavior	AppPreferencesWindow		Viselkedés
+Bookmarks	AppPreferencesWindow		Könyvjelzők
+Compact language menu	AppPreferencesWindow		Rövid nyelvi menü
+Convert tabs to spaces	AppPreferencesWindow		Tabok szóközökké alakítása
+Enormous	AppPreferencesWindow	Toolbar icon size	Borzalmasan nagy
+Ensure empty last line on save	AppPreferencesWindow		Utolsó, üres sor hozzáfűzése mentéskor
+Extra large	AppPreferencesWindow	Toolbar icon size	Extra nagy
+Folds	AppPreferencesWindow		Folds
+Frame	AppPreferencesWindow	Current line highlight	Keret
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantikus
+Highlight braces	AppPreferencesWindow		Zárójelek kiemelése
+Highlight current line	AppPreferencesWindow		Aktuális sor kiemelése
+Highlight trailing whitespace	AppPreferencesWindow		Sorvégi szóközök megjelenítése
+Huge	AppPreferencesWindow	Toolbar icon size	Hatalmas
+Icon size	AppPreferencesWindow		Icon size
+Indentation	AppPreferencesWindow		Behúzás
+Koder preferences	AppPreferencesWindow		Koder beállításai
+Large	AppPreferencesWindow	Toolbar icon size	Nagy
+Left margin	AppPreferencesWindow		Bal margó
+Line	AppPreferencesWindow		Sor
+Line numbers	AppPreferencesWindow		Sorszámok
+Mark overly long lines	AppPreferencesWindow		Túl hosszú sorok megjelenítése
+Max. characters per line:	AppPreferencesWindow		Max. karakter soronként:
+Medium	AppPreferencesWindow	Toolbar icon size	Közepes
+Only in actually indented lines	AppPreferencesWindow		Csak behúzott sorokra
+Revert	AppPreferencesWindow		Visszaállít
+Show full path in title	AppPreferencesWindow		Teljes elérési út a címsorban
+Show indentation guides	AppPreferencesWindow		Behúzási segédvonal megjelenítése
+Show toolbar	AppPreferencesWindow		Eszköztár megjelenítése
+Small	AppPreferencesWindow	Toolbar icon size	Kicsi
+Spaces per tab:	AppPreferencesWindow		Szóköz tabonként:
+Stack new windows	AppPreferencesWindow		Új ablakok egymáshoz rögzítése
+Style	AppPreferencesWindow		Stílus
+Trailing whitespace	AppPreferencesWindow		Sorvégi szóközök
+Trim trailing whitespace on save	AppPreferencesWindow		Mentéskor a sorvégi szóközök törlése
+Up to the next non-empty line	AppPreferencesWindow		Fel a következő nem üres sorig
+Up to the next/previous non-empty line	AppPreferencesWindow		A következő/előző nem üres sorig
+Use .editorconfig if possible	AppPreferencesWindow		Az .editorconfig használata, ha lehetséges
+Use custom font	AppPreferencesWindow		Egyedi betűtípus haszálata
+Visual	AppPreferencesWindow		Látvány
 Backwards	FindWindow		Visszafelé
 Find	FindWindow		Keres
 Find:	FindWindow		Keresés:
@@ -129,6 +133,7 @@ Replace all	FindWindow		Összes cseréje
 Replace and find	FindWindow		Cserél és keres
 Replace:	FindWindow		Csere:
 Wrap around	FindWindow		Körben
+Bookmarks	BookmarksWindow		Könyvjelzők
 Cancel	GoToLineWindow		Mégsem
 Go to line	GoToLineWindow		Sorra ugrás
 Go to line:	GoToLineWindow		Sorra ugrás:
@@ -139,23 +144,18 @@ Save all	QuitAlert		Mindent ment
 Save selected	QuitAlert		Kiválasztott mentése
 There are unsaved changes.\nSelect the files to save.	QuitAlert		Nem mentett minden változtatást.\nJelölje ki a mentendő fájlokat.
 Unsaved files	QuitAlert		Nem mentett fájlok
+Code editor for Haiku based on Scintilla editing component.	App		A Scintilla szerkesztőkomponensre épülő kódszerkesztő Haikuhoz.
+Distributed on MIT license terms.	App		MIT licenc alatt terjeszthető.
+humdinger, for GUI design tips and artwork.	App		humdinger, a GUI design tippekért és a logóért
+Konrad77, for dark theme.	App		Konrad77, a sötét témáért
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgsonnak, a Scintilla szerkesztő komponensért és a SciTE szerkesztőért.
+translators to:	App	to _ (language), e.g. German	feordítók:
+zuMi, for toolbar icons.	App		zuMi-nak, az eszköztár ikonjaiért.
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		A stílusfájlok nem találhatók. Győződj meg róla, hogy az adatkönyvtárba telepítetted őket.
 Style files	Styler		Stílus-fájlok
-Koder	System name		Koder
-Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Hozzáférés megtagadva a beállítások megnyitása során. Kérjük ellenőrizze, hogy van-e %s% joga a beállítások könyvtárban.
-Editor settings	Preferences		Szerkesztő beállításai
-read	Preferences	Make sure you have _ permission for	olvasási
-Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Valamilyen hiba történt a beállítások megnyitása során, a beállításai nem kerülnek %s%.
-load	Preferences	to _ the configuration	betöltése
-Unknown error.	Preferences		Ismeretlen hiba.
-There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Nem áll elegendő memeória rendelkezésre a beállítások %s%. Próbálj meg bezárni pár programot, és indítsd újra a szerkesztőt.
-loaded	Preferences	settings will not be _	betöltésre
-write	Preferences	Make sure you have _ permission for	írás
-save	Preferences	to _ the configuration	ment
-saved	Preferences	settings will not be _	elmentésre
-Read-only	StatusView		Csak olvasható
-Open Terminal	StatusView		Terminál megnyitása
-Go to	BookmarksListView		Ugrás
 Delete	BookmarksListView		Töröl
+Go to	BookmarksListView		Ugrás
+Koder	System name		Koder
 OK	Utilities		OK
-Bookmarks	BookmarksWindow		Könyvjelzők
+Open Terminal	StatusView		Terminál megnyitása
+Read-only	StatusView		Csak olvasható

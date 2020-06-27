@@ -1,82 +1,45 @@
 1	Ukrainian	x-vnd.KapiX-Koder	822155924
-Code editor for Haiku based on Scintilla editing component.	App		Редактор коду для Haiku на основі компонента редагування Scintilla.
-Distributed on MIT license terms.	App		Розповсюджується за ліцензією MIT.
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, за компонент редагування Scintilla i редактор SciTE.
-zuMi, for toolbar icons.	App		zuMi, за іконки панелі інструментів.
-Konrad77, for dark theme.	App		Konrad77, за темну тему.
-translators to:	App	to _ (language), e.g. German	перекладачі:
-humdinger, for GUI design tips and artwork.	App		humdinger, за поради щодо дизайну інтерфейсу та графіку.
-Background	AppPreferencesWindow		Фон
-Compact language menu	AppPreferencesWindow		Компактне меню мов
-Convert tabs to spaces	AppPreferencesWindow		Перетворювати відступи в пробіли
-Highlight braces	AppPreferencesWindow		Підсвічувати дужки
-Highlight current line	AppPreferencesWindow		Підсвічувати поточний рядок
-Highlight trailing whitespace	AppPreferencesWindow		Підсвічувати кінцевий пробіл
-Koder preferences	AppPreferencesWindow		Налаштування Koder
-Line	AppPreferencesWindow		Рядок
-Mark overly long lines	AppPreferencesWindow		Відмічати надто довгі рядки
-Max. characters per line:	AppPreferencesWindow		Макс. число знаків на рядок:
-Only in actually indented lines	AppPreferencesWindow		Тільки правильний відступ
-Revert	AppPreferencesWindow		Повернути
-Show full path in title	AppPreferencesWindow		Показувати повний шлях у заголовку
-Show indentation guides	AppPreferencesWindow		Показувати напрямні відступу
-Show toolbar	AppPreferencesWindow		Показувати панель інструментів
-Spaces per tab:	AppPreferencesWindow		Пробілів на відступи:
-Stack new windows	AppPreferencesWindow		Складати стеком нові вікна
-Style	AppPreferencesWindow		Стиль
-Trim trailing whitespace on save	AppPreferencesWindow		Обрізати кінцевий пробіл при збереженні
-Up to the next non-empty line	AppPreferencesWindow		До наступного непустого рядка
-Up to the next/previous non-empty line	AppPreferencesWindow		До наступного/попереднього непустого рядка
-Behavior	AppPreferencesWindow		Поведінка
-Background	AppPreferencesWindow	Current line highlight	Фон
-Frame	AppPreferencesWindow	Current line highlight	Рамка
-Trailing whitespace	AppPreferencesWindow		Пробіли в кінці рядків
-Visual	AppPreferencesWindow		Візуальні
-Indentation	AppPreferencesWindow		Відступ
-Use .editorconfig if possible	AppPreferencesWindow		По можливості використовувати .editorconfig
-Always open files in new window	AppPreferencesWindow		Завжди відкривати файли в новому вікні
-Use custom font	AppPreferencesWindow		Використовувати інший шрифт
-Folds	AppPreferencesWindow		Переносити рядки
-Gigantic	AppPreferencesWindow	Toolbar icon size	Гігантські
-Large	AppPreferencesWindow	Toolbar icon size	Великі
-Bookmarks	AppPreferencesWindow		Закладки
-Extra large	AppPreferencesWindow	Toolbar icon size	Дуже великі
-Medium	AppPreferencesWindow	Toolbar icon size	Середні
-Small	AppPreferencesWindow	Toolbar icon size	Дрібні
-Huge	AppPreferencesWindow	Toolbar icon size	Величезні
-Icon size	AppPreferencesWindow		Розмір піктограм
-Line numbers	AppPreferencesWindow		Номери рядків
-Enormous	AppPreferencesWindow	Toolbar icon size	Велетенські
-Left margin	AppPreferencesWindow		За лівим краєм
-Ensure empty last line on save	AppPreferencesWindow		Переконайтеся, що останній рядок збережено
 [read-only]	EditorWindow		[лише читання]
 About…	EditorWindow		Про програму…
 Access denied	EditorWindow		Відмова у доступі
+Bookmarks	EditorWindow		Закладки
 Cancel	EditorWindow		Скасувати
 Close	EditorWindow		Закрити
 Comment block	EditorWindow		Закоментувати блок
 Comment line	EditorWindow		Закоментувати рядок
 Copy	EditorWindow		Копіювати
+Could not find Open Terminal Tracker add-on.	EditorWindow		Неможливо знайти додаток трекера 'Відкрити термінал'.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Неможливо запустити додаток трекера 'Відкрити термінал'.
 Cut	EditorWindow		Вирізати
 Discard	EditorWindow		Відкинути
 Do nothing	EditorWindow		Нічого
 Edit	EditorWindow		Редагувати
 File	EditorWindow		Файл
 File modified	EditorWindow		Файл змінений
+File removed	EditorWindow		Файл видалений
+Find next	EditorWindow		Знайти далі
+Find selection	EditorWindow		Знайти виділене
 Find/Replace…	EditorWindow		Знайти/замінити…
 Go to line…	EditorWindow		Перейти до рядка…
 Help	EditorWindow		Довідка
+Incremental search	EditorWindow		Послідовний пошук
 Koder preferences…	EditorWindow		Налаштування Koder…
 Language	EditorWindow		Мова
 Line endings	EditorWindow		Закінчення рядка
 New	EditorWindow		Новий
+Next bookmark	EditorWindow		Наступна закладка
 Old Mac format	EditorWindow		Формат старої Mac OS
+Open partner file	EditorWindow		Відкрити партнерський файл
+Open Terminal	EditorWindow		Відкрити термінал
 Open…	EditorWindow		Відкрити…
+Partner file not found.	EditorWindow		Партнерський файл не знайдено.
 Paste	EditorWindow		Вставити
+Previous bookmark	EditorWindow		Попередня закладка
 Quit	EditorWindow		Вихід
 Reached the end of the target. No results found.	EditorWindow		Досягнуто кінця документа. Нічого не знайдено.
 Redo	EditorWindow		Повернути
 Reload	EditorWindow		Перезавантажити
+Replace and find	EditorWindow		Знайти і замінити
 Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Замінено {0, множина, один{# поширення} інші{# поширення}}.
 Replacement finished	EditorWindow		Заміну завершено
 Save	EditorWindow		Зберегти
@@ -91,6 +54,8 @@ Special symbols	EditorWindow		Спеціальні символи
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Файл містить незбережені зміни, але він тільки для читання. Що бажаєте зробити?
 The file contains unsaved changes. What to do?	EditorWindow		Файл містить незбережені зміни. Що бажаєте зробити?
 The file has been modified by another application. What to do?	EditorWindow		Файл був змінений іншою програмою. Що бажаєте зробити?
+The file has been removed. What to do?	EditorWindow		Файл видалено. Що робити?
+Toggle bookmark	EditorWindow		Перемкнути закладку
 Trim trailing whitespace	EditorWindow		Обрізати кінцевий пробіл
 Undo	EditorWindow		Скасувати
 Unix format	EditorWindow		Формат Unix
@@ -101,21 +66,60 @@ Windows format	EditorWindow		Формат Windows
 Wrap lines	EditorWindow		Переносити рядки
 You don't have sufficient permissions to edit this file.	EditorWindow		У вас відсутні права для редагування цього файлу.
 Your changes will be lost.	EditorWindow		Ваші зміни втрачені.
-Find selection	EditorWindow		Знайти виділене
-Find next	EditorWindow		Знайти далі
-Replace and find	EditorWindow		Знайти і замінити
-Incremental search	EditorWindow		Послідовний пошук
-Could not find Open Terminal Tracker add-on.	EditorWindow		Неможливо знайти додаток трекера 'Відкрити термінал'.
-Toggle bookmark	EditorWindow		Перемкнути закладку
-Open Terminal	EditorWindow		Відкрити термінал
-Next bookmark	EditorWindow		Наступна закладка
-Could not launch Open Terminal Tracker add-on.	EditorWindow		Неможливо запустити додаток трекера 'Відкрити термінал'.
-File removed	EditorWindow		Файл видалений
-Bookmarks	EditorWindow		Закладки
-The file has been removed. What to do?	EditorWindow		Файл видалено. Що робити?
-Open partner file	EditorWindow		Відкрити партнерський файл
-Previous bookmark	EditorWindow		Попередня закладка
-Partner file not found.	EditorWindow		Партнерський файл не знайдено.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Відмовлено в доступі при відкритті файлу конфігурації. Впевніться, що ви маєте права на %s% для вашого каталогу з параметрами.
+Editor settings	Preferences		Параметри редактора
+load	Preferences	to _ the configuration	завантажити
+loaded	Preferences	settings will not be _	завантажено
+read	Preferences	Make sure you have _ permission for	читання
+save	Preferences	to _ the configuration	зберегти
+saved	Preferences	settings will not be _	збережено
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Трапилася помилка при відкритті файлу конфігурації. Ваші особисті параметри не буде %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Недостатньо пам'яті, щоб %s% файл конфігурації. Спробуте закрити деякі програми і перезапустіть редактор.
+Unknown error.	Preferences		Невідома помилка.
+write	Preferences	Make sure you have _ permission for	запис
+Always open files in new window	AppPreferencesWindow		Завжди відкривати файли в новому вікні
+Background	AppPreferencesWindow		Фон
+Background	AppPreferencesWindow	Current line highlight	Фон
+Behavior	AppPreferencesWindow		Поведінка
+Bookmarks	AppPreferencesWindow		Закладки
+Compact language menu	AppPreferencesWindow		Компактне меню мов
+Convert tabs to spaces	AppPreferencesWindow		Перетворювати відступи в пробіли
+Enormous	AppPreferencesWindow	Toolbar icon size	Велетенські
+Ensure empty last line on save	AppPreferencesWindow		Переконайтеся, що останній рядок збережено
+Extra large	AppPreferencesWindow	Toolbar icon size	Дуже великі
+Folds	AppPreferencesWindow		Переносити рядки
+Frame	AppPreferencesWindow	Current line highlight	Рамка
+Gigantic	AppPreferencesWindow	Toolbar icon size	Гігантські
+Highlight braces	AppPreferencesWindow		Підсвічувати дужки
+Highlight current line	AppPreferencesWindow		Підсвічувати поточний рядок
+Highlight trailing whitespace	AppPreferencesWindow		Підсвічувати кінцевий пробіл
+Huge	AppPreferencesWindow	Toolbar icon size	Величезні
+Icon size	AppPreferencesWindow		Розмір піктограм
+Indentation	AppPreferencesWindow		Відступ
+Koder preferences	AppPreferencesWindow		Налаштування Koder
+Large	AppPreferencesWindow	Toolbar icon size	Великі
+Left margin	AppPreferencesWindow		За лівим краєм
+Line	AppPreferencesWindow		Рядок
+Line numbers	AppPreferencesWindow		Номери рядків
+Mark overly long lines	AppPreferencesWindow		Відмічати надто довгі рядки
+Max. characters per line:	AppPreferencesWindow		Макс. число знаків на рядок:
+Medium	AppPreferencesWindow	Toolbar icon size	Середні
+Only in actually indented lines	AppPreferencesWindow		Тільки правильний відступ
+Revert	AppPreferencesWindow		Повернути
+Show full path in title	AppPreferencesWindow		Показувати повний шлях у заголовку
+Show indentation guides	AppPreferencesWindow		Показувати напрямні відступу
+Show toolbar	AppPreferencesWindow		Показувати панель інструментів
+Small	AppPreferencesWindow	Toolbar icon size	Дрібні
+Spaces per tab:	AppPreferencesWindow		Пробілів на відступи:
+Stack new windows	AppPreferencesWindow		Складати стеком нові вікна
+Style	AppPreferencesWindow		Стиль
+Trailing whitespace	AppPreferencesWindow		Пробіли в кінці рядків
+Trim trailing whitespace on save	AppPreferencesWindow		Обрізати кінцевий пробіл при збереженні
+Up to the next non-empty line	AppPreferencesWindow		До наступного непустого рядка
+Up to the next/previous non-empty line	AppPreferencesWindow		До наступного/попереднього непустого рядка
+Use .editorconfig if possible	AppPreferencesWindow		По можливості використовувати .editorconfig
+Use custom font	AppPreferencesWindow		Використовувати інший шрифт
+Visual	AppPreferencesWindow		Візуальні
 Backwards	FindWindow		У зворотному напрямі
 Find	FindWindow		Знайти
 Find:	FindWindow		Знайти:
@@ -129,6 +133,7 @@ Replace all	FindWindow		Замінити все
 Replace and find	FindWindow		Знайти і замінити
 Replace:	FindWindow		Замінити:
 Wrap around	FindWindow		Циклічно
+Bookmarks	BookmarksWindow		Закладки
 Cancel	GoToLineWindow		Скасувати
 Go to line	GoToLineWindow		Перейти до рядка
 Go to line:	GoToLineWindow		Перейти до рядка:
@@ -139,23 +144,18 @@ Save all	QuitAlert		Зберегти все
 Save selected	QuitAlert		Зберегти виділене
 There are unsaved changes.\nSelect the files to save.	QuitAlert		Є незбережені зміни.\nВиберіть файли для збереження.
 Unsaved files	QuitAlert		Незбережені файли
+Code editor for Haiku based on Scintilla editing component.	App		Редактор коду для Haiku на основі компонента редагування Scintilla.
+Distributed on MIT license terms.	App		Розповсюджується за ліцензією MIT.
+humdinger, for GUI design tips and artwork.	App		humdinger, за поради щодо дизайну інтерфейсу та графіку.
+Konrad77, for dark theme.	App		Konrad77, за темну тему.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, за компонент редагування Scintilla i редактор SciTE.
+translators to:	App	to _ (language), e.g. German	перекладачі:
+zuMi, for toolbar icons.	App		zuMi, за іконки панелі інструментів.
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Неможливо знайти файли стилю. Переконайтеся, що їх встановлено в одному з каталогів з вашими даними.
 Style files	Styler		Файли стилю
-Koder	System name		Koder
-Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Відмовлено в доступі при відкритті файлу конфігурації. Впевніться, що ви маєте права на %s% для вашого каталогу з параметрами.
-Editor settings	Preferences		Параметри редактора
-read	Preferences	Make sure you have _ permission for	читання
-Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Трапилася помилка при відкритті файлу конфігурації. Ваші особисті параметри не буде %s%.
-load	Preferences	to _ the configuration	завантажити
-Unknown error.	Preferences		Невідома помилка.
-There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Недостатньо пам'яті, щоб %s% файл конфігурації. Спробуте закрити деякі програми і перезапустіть редактор.
-loaded	Preferences	settings will not be _	завантажено
-write	Preferences	Make sure you have _ permission for	запис
-save	Preferences	to _ the configuration	зберегти
-saved	Preferences	settings will not be _	збережено
-Read-only	StatusView		Лише читання
-Open Terminal	StatusView		Відкрити термінал
-Go to	BookmarksListView		Перейти до
 Delete	BookmarksListView		Видалити
+Go to	BookmarksListView		Перейти до
+Koder	System name		Koder
 OK	Utilities		OK
-Bookmarks	BookmarksWindow		Закладки
+Open Terminal	StatusView		Відкрити термінал
+Read-only	StatusView		Лише читання

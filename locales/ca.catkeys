@@ -1,0 +1,161 @@
+1	Catalan	x-vnd.KapiX-Koder	822155924
+[read-only]	EditorWindow		[només de lectura]
+About…	EditorWindow		Quant a...
+Access denied	EditorWindow		Accés denegat
+Bookmarks	EditorWindow		Marcadors
+Cancel	EditorWindow		Cancel·la
+Close	EditorWindow		Tanca
+Comment block	EditorWindow		Comenta el bloc
+Comment line	EditorWindow		Comenta la línia
+Copy	EditorWindow		Copia
+Could not find Open Terminal Tracker add-on.	EditorWindow		No s'ha pogut trobar el complement de l'Open Terminal Tracker.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		No s'ha pogut iniciar el complement de l'Open Terminal Tracker.
+Cut	EditorWindow		Retalla
+Discard	EditorWindow		Descarta
+Do nothing	EditorWindow		No facis res
+Edit	EditorWindow		Edita
+File	EditorWindow		Fitxer
+File modified	EditorWindow		Fitxer modificat
+File removed	EditorWindow		Fitxer suprimit
+Find next	EditorWindow		Troba'n el següent
+Find selection	EditorWindow		Troba la selecció
+Find/Replace…	EditorWindow		Troba / reemplaça...
+Go to line…	EditorWindow		Ves a la línia...
+Help	EditorWindow		Ajuda
+Incremental search	EditorWindow		Cerca incremental
+Koder preferences…	EditorWindow		Preferències del Koder…
+Language	EditorWindow		Llengua
+Line endings	EditorWindow		Finals de línia
+New	EditorWindow		Nou
+Next bookmark	EditorWindow		Marcador nou
+Old Mac format	EditorWindow		Format Mac antic
+Open partner file	EditorWindow		Obre el fitxer acompanyant
+Open Terminal	EditorWindow		Obre el Terminal
+Open…	EditorWindow		Obre...
+Partner file not found.	EditorWindow		No s'ha trobat el fitxer acompanyant.
+Paste	EditorWindow		Enganxa
+Previous bookmark	EditorWindow		Marcador anterior
+Quit	EditorWindow		Surt
+Reached the end of the target. No results found.	EditorWindow		S'ha arribat al final. Sense resultats.
+Redo	EditorWindow		Refés
+Reload	EditorWindow		Torna a carregar
+Replace and find	EditorWindow		Troba i reemplaça
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		S'ha/n reemplaçat {0, plural, one{# cas} other{# casos}}.
+Replacement finished	EditorWindow		Ha acabat el reemplaçament.
+Save	EditorWindow		Desa
+Save as…	EditorWindow		Desa com a...
+Search	EditorWindow		Cerca
+Searching finished	EditorWindow		Ha acabat la cerca.
+Select all	EditorWindow		Selecciona-ho tot
+Show line endings	EditorWindow		Mostra els finals de línia
+Show toolbar	EditorWindow		Mostra la barra d'eines
+Show white space	EditorWindow		Mostra els espais en blanc
+Special symbols	EditorWindow		Símbols especials
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		El fitxer conté canvis no desats, però és només de lectura. Què faig?
+The file contains unsaved changes. What to do?	EditorWindow		El fitxer conté canvis no desats. Què faig?
+The file has been modified by another application. What to do?	EditorWindow		Una altra aplicació ha modificat el fitxer. Què faig?
+The file has been removed. What to do?	EditorWindow		El fitxer s'ha suprimit. Què faig?
+Toggle bookmark	EditorWindow		Commuta el marcador
+Trim trailing whitespace	EditorWindow		Retalla els espais finals
+Undo	EditorWindow		Defés
+Unix format	EditorWindow		Format d'Unix
+Unsaved changes	EditorWindow		Canvis no desats
+Untitled	EditorWindow		Sense títol
+View	EditorWindow		Visualització
+Windows format	EditorWindow		Format de Windows
+Wrap lines	EditorWindow		Ajusta les línies
+You don't have sufficient permissions to edit this file.	EditorWindow		No teniu permisos suficients per editar aquest fitxer.
+Your changes will be lost.	EditorWindow		Els vostres canvis es perdran.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		S'ha denegat l'accés mentre s'obria el fitxer de configuració. Assegureu-vos de tenir el permís %s% per al directori de configuració.
+Editor settings	Preferences		Paràmetres de l'editor
+load	Preferences	to _ the configuration	carregar
+loaded	Preferences	settings will not be _	carregarà
+read	Preferences	Make sure you have _ permission for	de lectura
+save	Preferences	to _ the configuration	desar
+saved	Preferences	settings will not be _	desarà
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Ha passat alguna cosa incorrecta en obrir el fitxer de configuració. La vostra configuració personal no es %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		No hi ha prou memòria disponible per %s% el fitxer de configuració. Proveu de tancar algunes aplicacions i reinicieu l'editor.
+Unknown error.	Preferences		Error desconegut.
+write	Preferences	Make sure you have _ permission for	d'escriptura
+Always open files in new window	AppPreferencesWindow		Obre sempre els fitxers en una nova finestra.
+Background	AppPreferencesWindow		Fons
+Background	AppPreferencesWindow	Current line highlight	Fons
+Behavior	AppPreferencesWindow		Comportament
+Bookmarks	AppPreferencesWindow		Marcadors
+Compact language menu	AppPreferencesWindow		Menú compacte de llengües
+Convert tabs to spaces	AppPreferencesWindow		Converteix tabulacions en espais.
+Enormous	AppPreferencesWindow	Toolbar icon size	Enorme
+Ensure empty last line on save	AppPreferencesWindow		Assegura una última línia buida en desar.
+Extra large	AppPreferencesWindow	Toolbar icon size	Molt grossa
+Folds	AppPreferencesWindow		Plecs
+Frame	AppPreferencesWindow	Current line highlight	Marc
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gegant
+Highlight braces	AppPreferencesWindow		Ressalta els claudàtors
+Highlight current line	AppPreferencesWindow		Ressalta la línia actual
+Highlight trailing whitespace	AppPreferencesWindow		Ressalta l'espai final
+Huge	AppPreferencesWindow	Toolbar icon size	Força grossa
+Icon size	AppPreferencesWindow		Mida de la icona
+Indentation	AppPreferencesWindow		Sagnat
+Koder preferences	AppPreferencesWindow		Preferències del Koder
+Large	AppPreferencesWindow	Toolbar icon size	Grossa
+Left margin	AppPreferencesWindow		Marge esquerre
+Line	AppPreferencesWindow		Línia
+Line numbers	AppPreferencesWindow		Números de línia
+Mark overly long lines	AppPreferencesWindow		Marca cada línia llarga
+Max. characters per line:	AppPreferencesWindow		Max. de caràcters per línia:
+Medium	AppPreferencesWindow	Toolbar icon size	Mitjana
+Only in actually indented lines	AppPreferencesWindow		Només en línies amb sagnat
+Revert	AppPreferencesWindow		Reverteix
+Show full path in title	AppPreferencesWindow		Mostra el camí complet al títol.
+Show indentation guides	AppPreferencesWindow		Mostra les guies de sagnat.
+Show toolbar	AppPreferencesWindow		Mostra la barra d'eines.
+Small	AppPreferencesWindow	Toolbar icon size	Petita
+Spaces per tab:	AppPreferencesWindow		Espais per tabulació:
+Stack new windows	AppPreferencesWindow		Apila les finestres noves
+Style	AppPreferencesWindow		Estil
+Trailing whitespace	AppPreferencesWindow		Espai final
+Trim trailing whitespace on save	AppPreferencesWindow		Retalla l'espai final en desar.
+Up to the next non-empty line	AppPreferencesWindow		Fins a la línia següent no buida
+Up to the next/previous non-empty line	AppPreferencesWindow		Fins a la línia següent / anterior no buida
+Use .editorconfig if possible	AppPreferencesWindow		Usa .editorconfig si és possible.
+Use custom font	AppPreferencesWindow		Usa una lletra personalitzada.
+Visual	AppPreferencesWindow		Visual
+Backwards	FindWindow		Enrere
+Find	FindWindow		Troba
+Find:	FindWindow		Troba:
+Find/Replace	FindWindow		Troba / reemplaça
+In selection	FindWindow		A la selecció
+Match case	FindWindow		Coincidència de caixa
+Match entire words	FindWindow		Coincidència de paraules senceres
+Regex	FindWindow		Expressió regular
+Replace	FindWindow		Reemplaça
+Replace all	FindWindow		Reemplaça-ho tot
+Replace and find	FindWindow		Troba i reemplaça
+Replace:	FindWindow		Reemplaça:
+Wrap around	FindWindow		Cíclic
+Bookmarks	BookmarksWindow		Marcadors
+Cancel	GoToLineWindow		Cancel·la
+Go to line	GoToLineWindow		Ves a la línia
+Go to line:	GoToLineWindow		Ves a la línia:
+OK	GoToLineWindow		D'acord
+Cancel	QuitAlert		Cancel·la
+Don't save	QuitAlert		No ho desis
+Save all	QuitAlert		Desa-ho tot
+Save selected	QuitAlert		Desa la selecció
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Hi ha canvis sense desar.\nSeleccioneu els fitxers per desar.
+Unsaved files	QuitAlert		Fitxers no desats
+Code editor for Haiku based on Scintilla editing component.	App		Editor de codi per a Haiku basat en el component d'edició de Scintilla.
+Distributed on MIT license terms.	App		Distribuït segons els termes de la llicència MIT.
+humdinger, for GUI design tips and artwork.	App		humdinger, pels consells de disseny d'IGU i treball artístic.
+Konrad77, for dark theme.	App		Konrad77, pel tema fosc.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, pel component d'edició de Scintilla i l'editor de SciTE.
+translators to:	App	to _ (language), e.g. German	Traducció al català: David Medina
+zuMi, for toolbar icons.	App		zuMi, per les icones de la barra d’eines.
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		No s'han pogut trobar els fitxers d'estil. Assegureu-vos que els tingueu instal·lats en un dels vostres directoris de dades.
+Style files	Styler		Fitxers d'estil
+Delete	BookmarksListView		Suprimeix
+Go to	BookmarksListView		Ves a
+Koder	System name		Koder
+OK	Utilities		D'acord
+Open Terminal	StatusView		Obre el Terminal
+Read-only	StatusView		Només de lectura

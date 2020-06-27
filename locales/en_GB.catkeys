@@ -1,82 +1,45 @@
 1	English (British)	x-vnd.KapiX-Koder	822155924
-Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
-Distributed on MIT license terms.	App		Distributed on MIT license terms.
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
-zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
-Konrad77, for dark theme.	App		Konrad77, for the dark theme.
-translators to:	App	to _ (language), e.g. German	translators to:
-humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
-Background	AppPreferencesWindow		Background
-Compact language menu	AppPreferencesWindow		Compact language menu
-Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
-Highlight braces	AppPreferencesWindow		Highlight braces
-Highlight current line	AppPreferencesWindow		Highlight current line
-Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
-Koder preferences	AppPreferencesWindow		Koder preferences
-Line	AppPreferencesWindow		Line
-Mark overly long lines	AppPreferencesWindow		Mark overly long lines
-Max. characters per line:	AppPreferencesWindow		Max. characters per line:
-Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
-Revert	AppPreferencesWindow		Revert
-Show full path in title	AppPreferencesWindow		Show full path in title
-Show indentation guides	AppPreferencesWindow		Show indentation guides
-Show toolbar	AppPreferencesWindow		Show toolbar
-Spaces per tab:	AppPreferencesWindow		Spaces per tab:
-Stack new windows	AppPreferencesWindow		Stack new windows
-Style	AppPreferencesWindow		Style
-Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
-Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
-Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
-Behavior	AppPreferencesWindow		Behaviour
-Background	AppPreferencesWindow	Current line highlight	Background
-Frame	AppPreferencesWindow	Current line highlight	Frame
-Trailing whitespace	AppPreferencesWindow		Trailing whitespace
-Visual	AppPreferencesWindow		Visual
-Indentation	AppPreferencesWindow		Indentation
-Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
-Always open files in new window	AppPreferencesWindow		Always open files in new window
-Use custom font	AppPreferencesWindow		Use custom font
-Folds	AppPreferencesWindow		Folds
-Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantic
-Large	AppPreferencesWindow	Toolbar icon size	Large
-Bookmarks	AppPreferencesWindow		Bookmarks
-Extra large	AppPreferencesWindow	Toolbar icon size	Extra large
-Medium	AppPreferencesWindow	Toolbar icon size	Medium
-Small	AppPreferencesWindow	Toolbar icon size	Small
-Huge	AppPreferencesWindow	Toolbar icon size	Huge
-Icon size	AppPreferencesWindow		Icon size
-Line numbers	AppPreferencesWindow		Line numbers
-Enormous	AppPreferencesWindow	Toolbar icon size	Enormous
-Left margin	AppPreferencesWindow		Left margin
-Ensure empty last line on save	AppPreferencesWindow		Ensure empty last line on save
 [read-only]	EditorWindow		[read-only]
 About…	EditorWindow		About…
 Access denied	EditorWindow		Access denied
+Bookmarks	EditorWindow		Bookmarks
 Cancel	EditorWindow		Cancel
 Close	EditorWindow		Close
 Comment block	EditorWindow		Comment block
 Comment line	EditorWindow		Comment line
 Copy	EditorWindow		Copy
+Could not find Open Terminal Tracker add-on.	EditorWindow		Could not find Open Terminal Tracker add-on.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
 Cut	EditorWindow		Cut
 Discard	EditorWindow		Discard
 Do nothing	EditorWindow		Do nothing
 Edit	EditorWindow		Edit
 File	EditorWindow		File
 File modified	EditorWindow		File modified
+File removed	EditorWindow		File removed
+Find next	EditorWindow		Find next
+Find selection	EditorWindow		Find selection
 Find/Replace…	EditorWindow		Find/Replace…
 Go to line…	EditorWindow		Go to line…
 Help	EditorWindow		Help
+Incremental search	EditorWindow		Incremental search
 Koder preferences…	EditorWindow		Koder preferences…
 Language	EditorWindow		Language
 Line endings	EditorWindow		Line endings
 New	EditorWindow		New
+Next bookmark	EditorWindow		Next bookmark
 Old Mac format	EditorWindow		Old Mac format
+Open partner file	EditorWindow		Open partner file
+Open Terminal	EditorWindow		Open Terminal
 Open…	EditorWindow		Open…
+Partner file not found.	EditorWindow		Partner file not found.
 Paste	EditorWindow		Paste
+Previous bookmark	EditorWindow		Previous bookmark
 Quit	EditorWindow		Quit
 Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
 Redo	EditorWindow		Redo
 Reload	EditorWindow		Reload
+Replace and find	EditorWindow		Find and replace
 Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
 Replacement finished	EditorWindow		Replacement finished
 Save	EditorWindow		Save
@@ -91,6 +54,8 @@ Special symbols	EditorWindow		Special symbols
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
 The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
 The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
+The file has been removed. What to do?	EditorWindow		The file has been removed. What to do?
+Toggle bookmark	EditorWindow		Toggle bookmark
 Trim trailing whitespace	EditorWindow		Trim trailing whitespace
 Undo	EditorWindow		Undo
 Unix format	EditorWindow		Unix format
@@ -101,21 +66,60 @@ Windows format	EditorWindow		Windows format
 Wrap lines	EditorWindow		Wrap lines
 You don't have sufficient permissions to edit this file.	EditorWindow		You don't have sufficient permissions to edit this file.
 Your changes will be lost.	EditorWindow		Your changes will be lost.
-Find selection	EditorWindow		Find selection
-Find next	EditorWindow		Find next
-Replace and find	EditorWindow		Find and replace
-Incremental search	EditorWindow		Incremental search
-Could not find Open Terminal Tracker add-on.	EditorWindow		Could not find Open Terminal Tracker add-on.
-Toggle bookmark	EditorWindow		Toggle bookmark
-Open Terminal	EditorWindow		Open Terminal
-Next bookmark	EditorWindow		Next bookmark
-Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
-File removed	EditorWindow		File removed
-Bookmarks	EditorWindow		Bookmarks
-The file has been removed. What to do?	EditorWindow		The file has been removed. What to do?
-Open partner file	EditorWindow		Open partner file
-Previous bookmark	EditorWindow		Previous bookmark
-Partner file not found.	EditorWindow		Partner file not found.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
+Editor settings	Preferences		Editor settings
+load	Preferences	to _ the configuration	load
+loaded	Preferences	settings will not be _	loaded
+read	Preferences	Make sure you have _ permission for	read
+save	Preferences	to _ the configuration	save
+saved	Preferences	settings will not be _	saved
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.
+Unknown error.	Preferences		Unknown error.
+write	Preferences	Make sure you have _ permission for	write
+Always open files in new window	AppPreferencesWindow		Always open files in new window
+Background	AppPreferencesWindow		Background
+Background	AppPreferencesWindow	Current line highlight	Background
+Behavior	AppPreferencesWindow		Behaviour
+Bookmarks	AppPreferencesWindow		Bookmarks
+Compact language menu	AppPreferencesWindow		Compact language menu
+Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
+Enormous	AppPreferencesWindow	Toolbar icon size	Enormous
+Ensure empty last line on save	AppPreferencesWindow		Ensure empty last line on save
+Extra large	AppPreferencesWindow	Toolbar icon size	Extra large
+Folds	AppPreferencesWindow		Folds
+Frame	AppPreferencesWindow	Current line highlight	Frame
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantic
+Highlight braces	AppPreferencesWindow		Highlight braces
+Highlight current line	AppPreferencesWindow		Highlight current line
+Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
+Huge	AppPreferencesWindow	Toolbar icon size	Huge
+Icon size	AppPreferencesWindow		Icon size
+Indentation	AppPreferencesWindow		Indentation
+Koder preferences	AppPreferencesWindow		Koder preferences
+Large	AppPreferencesWindow	Toolbar icon size	Large
+Left margin	AppPreferencesWindow		Left margin
+Line	AppPreferencesWindow		Line
+Line numbers	AppPreferencesWindow		Line numbers
+Mark overly long lines	AppPreferencesWindow		Mark overly long lines
+Max. characters per line:	AppPreferencesWindow		Max. characters per line:
+Medium	AppPreferencesWindow	Toolbar icon size	Medium
+Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
+Revert	AppPreferencesWindow		Revert
+Show full path in title	AppPreferencesWindow		Show full path in title
+Show indentation guides	AppPreferencesWindow		Show indentation guides
+Show toolbar	AppPreferencesWindow		Show toolbar
+Small	AppPreferencesWindow	Toolbar icon size	Small
+Spaces per tab:	AppPreferencesWindow		Spaces per tab:
+Stack new windows	AppPreferencesWindow		Stack new windows
+Style	AppPreferencesWindow		Style
+Trailing whitespace	AppPreferencesWindow		Trailing whitespace
+Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
+Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
+Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
+Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
+Use custom font	AppPreferencesWindow		Use custom font
+Visual	AppPreferencesWindow		Visual
 Backwards	FindWindow		Backwards
 Find	FindWindow		Find
 Find:	FindWindow		Find:
@@ -129,6 +133,7 @@ Replace all	FindWindow		Replace all
 Replace and find	FindWindow		Replace and find
 Replace:	FindWindow		Replace:
 Wrap around	FindWindow		Wrap around
+Bookmarks	BookmarksWindow		Bookmarks
 Cancel	GoToLineWindow		Cancel
 Go to line	GoToLineWindow		Go to line
 Go to line:	GoToLineWindow		Go to line:
@@ -139,23 +144,18 @@ Save all	QuitAlert		Save all
 Save selected	QuitAlert		Save selected
 There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
 Unsaved files	QuitAlert		Unsaved files
+Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
+Distributed on MIT license terms.	App		Distributed on MIT license terms.
+humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
+Konrad77, for dark theme.	App		Konrad77, for the dark theme.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
+translators to:	App	to _ (language), e.g. German	translators to:
+zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
 Style files	Styler		Style files
-Koder	System name		Koder
-Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
-Editor settings	Preferences		Editor settings
-read	Preferences	Make sure you have _ permission for	read
-Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
-load	Preferences	to _ the configuration	load
-Unknown error.	Preferences		Unknown error.
-There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.
-loaded	Preferences	settings will not be _	loaded
-write	Preferences	Make sure you have _ permission for	write
-save	Preferences	to _ the configuration	save
-saved	Preferences	settings will not be _	saved
-Read-only	StatusView		Read-only
-Open Terminal	StatusView		Open Terminal
-Go to	BookmarksListView		Go to
 Delete	BookmarksListView		Delete
+Go to	BookmarksListView		Go to
+Koder	System name		Koder
 OK	Utilities		Alright
-Bookmarks	BookmarksWindow		Bookmarks
+Open Terminal	StatusView		Open Terminal
+Read-only	StatusView		Read-only

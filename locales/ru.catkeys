@@ -1,82 +1,45 @@
 1	Russian	x-vnd.KapiX-Koder	822155924
-Code editor for Haiku based on Scintilla editing component.	App		Редактор кода для Haiku на базе текстового компонента Scintilla.
-Distributed on MIT license terms.	App		Распространяется на условиях лицензии MIT.
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Нейл Ходгсон(Neil Hodgson), за текстовый компонент Scintilla и редактор SciTE.
-zuMi, for toolbar icons.	App		zuMi, за иконки для панели инструментов.
-Konrad77, for dark theme.	App		Konrad77, за тёмную тему.
-translators to:	App	to _ (language), e.g. German	переводчики на:
-humdinger, for GUI design tips and artwork.	App		humdinger, за советы по дизайну интерфейса и арты.
-Background	AppPreferencesWindow		Фон
-Compact language menu	AppPreferencesWindow		Компактное меню языков
-Convert tabs to spaces	AppPreferencesWindow		Преобразовать отступы в пробелы
-Highlight braces	AppPreferencesWindow		Подсветить скобки
-Highlight current line	AppPreferencesWindow		Подсветить текущую строку
-Highlight trailing whitespace	AppPreferencesWindow		Подсветить пробелы в конце строк
-Koder preferences	AppPreferencesWindow		Настройки Koder
-Line	AppPreferencesWindow		Строка
-Mark overly long lines	AppPreferencesWindow		Помечать слишком длинные строки
-Max. characters per line:	AppPreferencesWindow		Максимум символов в строке:
-Only in actually indented lines	AppPreferencesWindow		Только в строках с отступом
-Revert	AppPreferencesWindow		Откатить
-Show full path in title	AppPreferencesWindow		Отобразить полный путь в заголовке
-Show indentation guides	AppPreferencesWindow		Отобразить направляющие отступа
-Show toolbar	AppPreferencesWindow		Отобразить панель инструментов
-Spaces per tab:	AppPreferencesWindow		Пробелов в табуляции:
-Stack new windows	AppPreferencesWindow		Группировать новые окна
-Style	AppPreferencesWindow		Стиль
-Trim trailing whitespace on save	AppPreferencesWindow		Обрезать пробелы в конце строк при сохранении
-Up to the next non-empty line	AppPreferencesWindow		До следующей непустой строки
-Up to the next/previous non-empty line	AppPreferencesWindow		До следующей/предыдущей непустой строки
-Behavior	AppPreferencesWindow		Поведение
-Background	AppPreferencesWindow	Current line highlight	Фон
-Frame	AppPreferencesWindow	Current line highlight	Рамка
-Trailing whitespace	AppPreferencesWindow		Пробелы в конце строк
-Visual	AppPreferencesWindow		Визуальные
-Indentation	AppPreferencesWindow		Отступ
-Use .editorconfig if possible	AppPreferencesWindow		При возможности использовать .editorconfig
-Always open files in new window	AppPreferencesWindow		Всегда открывать файлы в новом окне
-Use custom font	AppPreferencesWindow		Использовать пользовательский шрифт
-Folds	AppPreferencesWindow		Складки
-Gigantic	AppPreferencesWindow	Toolbar icon size	Гигантский
-Large	AppPreferencesWindow	Toolbar icon size	Большой
-Bookmarks	AppPreferencesWindow		Закладки
-Extra large	AppPreferencesWindow	Toolbar icon size	Ещё больше
-Medium	AppPreferencesWindow	Toolbar icon size	Средний
-Small	AppPreferencesWindow	Toolbar icon size	Маленький
-Huge	AppPreferencesWindow	Toolbar icon size	Огромный
-Icon size	AppPreferencesWindow		Размер значков
-Line numbers	AppPreferencesWindow		Номер строки
-Enormous	AppPreferencesWindow	Toolbar icon size	Невообразимо большой
-Left margin	AppPreferencesWindow		Левая граница
-Ensure empty last line on save	AppPreferencesWindow		Обеспечивать пустую последнюю строку при сохранении
 [read-only]	EditorWindow		[только для чтения]
 About…	EditorWindow		О программе...
 Access denied	EditorWindow		Доступ закрыт
+Bookmarks	EditorWindow		Закладки
 Cancel	EditorWindow		Отмена
 Close	EditorWindow		Закрыть
 Comment block	EditorWindow		Комментировать блок
 Comment line	EditorWindow		Комментировать строку
 Copy	EditorWindow		Копировать
+Could not find Open Terminal Tracker add-on.	EditorWindow		Расширение Tracker: Открыть Terminal не найдено.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Не удалось запустить расширение Tracker: Открыть Terminal.
 Cut	EditorWindow		Вырезать
 Discard	EditorWindow		Не сохранять
 Do nothing	EditorWindow		Ничего не делать
 Edit	EditorWindow		Редактирование
 File	EditorWindow		Файл
 File modified	EditorWindow		Файл изменён
+File removed	EditorWindow		Файл удалён
+Find next	EditorWindow		Найти далее
+Find selection	EditorWindow		Найти выбранное
 Find/Replace…	EditorWindow		Найти/Заменить…
 Go to line…	EditorWindow		Перейти к строке…
 Help	EditorWindow		Помощь
+Incremental search	EditorWindow		Инкрементный поиск
 Koder preferences…	EditorWindow		Настройки Koder…
 Language	EditorWindow		Язык
 Line endings	EditorWindow		Символы конца строки
 New	EditorWindow		Новый
+Next bookmark	EditorWindow		Следующая закладка
 Old Mac format	EditorWindow		Старый формат Mac
+Open partner file	EditorWindow		Открыть файл партнёра
+Open Terminal	EditorWindow		Открыть Terminal
 Open…	EditorWindow		Открыть…
+Partner file not found.	EditorWindow		Файл партнёра не найден.
 Paste	EditorWindow		Вставить
+Previous bookmark	EditorWindow		Предыдущая закладка
 Quit	EditorWindow		Выйти
 Reached the end of the target. No results found.	EditorWindow		Достигнут конец документа. Совпадений не найдено.
 Redo	EditorWindow		Повторить
 Reload	EditorWindow		Перезагрузить
+Replace and find	EditorWindow		Найти и заменить
 Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Заменено {0, plural, one{# совпадение} other{# совпадений}}.
 Replacement finished	EditorWindow		Замена завершена
 Save	EditorWindow		Сохранить
@@ -91,6 +54,8 @@ Special symbols	EditorWindow		Специальные символы
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Файл содержит несохранённые изменения, но открыт только для чтения. Что делать?
 The file contains unsaved changes. What to do?	EditorWindow		Файл содержит несохранённые изменения. Что делать?
 The file has been modified by another application. What to do?	EditorWindow		Файл был изменён другим приложением. Что делать?
+The file has been removed. What to do?	EditorWindow		Файл был удалён. Что сделать?
+Toggle bookmark	EditorWindow		Добавить/удалить закладку
 Trim trailing whitespace	EditorWindow		Удалить пробелы в конце строк
 Undo	EditorWindow		Отменить
 Unix format	EditorWindow		Формат Unix
@@ -101,21 +66,60 @@ Windows format	EditorWindow		Формат Windows
 Wrap lines	EditorWindow		Перенос строк
 You don't have sufficient permissions to edit this file.	EditorWindow		Недостаточно прав для редактирования файла.
 Your changes will be lost.	EditorWindow		Ваши изменения будут потеряны.
-Find selection	EditorWindow		Найти выбранное
-Find next	EditorWindow		Найти далее
-Replace and find	EditorWindow		Найти и заменить
-Incremental search	EditorWindow		Инкрементный поиск
-Could not find Open Terminal Tracker add-on.	EditorWindow		Расширение Tracker: Открыть Terminal не найдено.
-Toggle bookmark	EditorWindow		Добавить/удалить закладку
-Open Terminal	EditorWindow		Открыть Terminal
-Next bookmark	EditorWindow		Следующая закладка
-Could not launch Open Terminal Tracker add-on.	EditorWindow		Не удалось запустить расширение Tracker: Открыть Terminal.
-File removed	EditorWindow		Файл удалён
-Bookmarks	EditorWindow		Закладки
-The file has been removed. What to do?	EditorWindow		Файл был удалён. Что сделать?
-Open partner file	EditorWindow		Открыть файл партнёра
-Previous bookmark	EditorWindow		Предыдущая закладка
-Partner file not found.	EditorWindow		Файл партнёра не найден.
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Отказано в доступе при открытии файла конфигурации. Убедитесь, что у вас есть права на %s% для папки 'settings'.
+Editor settings	Preferences		Настройки редактора
+load	Preferences	to _ the configuration	загрузить
+loaded	Preferences	settings will not be _	загружены
+read	Preferences	Make sure you have _ permission for	чтение
+save	Preferences	to _ the configuration	сохранить
+saved	Preferences	settings will not be _	сохранены
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		При открытии файла конфигурации произошла ошибка. Ваши личные настройки не будут %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Недостаточно памяти, чтобы %s% файл конфигурации. Попробуйте закрыть несколько приложений и перезапустить редактор.
+Unknown error.	Preferences		Неизвестная ошибка.
+write	Preferences	Make sure you have _ permission for	запись
+Always open files in new window	AppPreferencesWindow		Всегда открывать файлы в новом окне
+Background	AppPreferencesWindow		Фон
+Background	AppPreferencesWindow	Current line highlight	Фон
+Behavior	AppPreferencesWindow		Поведение
+Bookmarks	AppPreferencesWindow		Закладки
+Compact language menu	AppPreferencesWindow		Компактное меню языков
+Convert tabs to spaces	AppPreferencesWindow		Преобразовать отступы в пробелы
+Enormous	AppPreferencesWindow	Toolbar icon size	Невообразимо большой
+Ensure empty last line on save	AppPreferencesWindow		Обеспечивать пустую последнюю строку при сохранении
+Extra large	AppPreferencesWindow	Toolbar icon size	Ещё больше
+Folds	AppPreferencesWindow		Складки
+Frame	AppPreferencesWindow	Current line highlight	Рамка
+Gigantic	AppPreferencesWindow	Toolbar icon size	Гигантский
+Highlight braces	AppPreferencesWindow		Подсветить скобки
+Highlight current line	AppPreferencesWindow		Подсветить текущую строку
+Highlight trailing whitespace	AppPreferencesWindow		Подсветить пробелы в конце строк
+Huge	AppPreferencesWindow	Toolbar icon size	Огромный
+Icon size	AppPreferencesWindow		Размер значков
+Indentation	AppPreferencesWindow		Отступ
+Koder preferences	AppPreferencesWindow		Настройки Koder
+Large	AppPreferencesWindow	Toolbar icon size	Большой
+Left margin	AppPreferencesWindow		Левая граница
+Line	AppPreferencesWindow		Строка
+Line numbers	AppPreferencesWindow		Номер строки
+Mark overly long lines	AppPreferencesWindow		Помечать слишком длинные строки
+Max. characters per line:	AppPreferencesWindow		Максимум символов в строке:
+Medium	AppPreferencesWindow	Toolbar icon size	Средний
+Only in actually indented lines	AppPreferencesWindow		Только в строках с отступом
+Revert	AppPreferencesWindow		Откатить
+Show full path in title	AppPreferencesWindow		Отобразить полный путь в заголовке
+Show indentation guides	AppPreferencesWindow		Отобразить направляющие отступа
+Show toolbar	AppPreferencesWindow		Отобразить панель инструментов
+Small	AppPreferencesWindow	Toolbar icon size	Маленький
+Spaces per tab:	AppPreferencesWindow		Пробелов в табуляции:
+Stack new windows	AppPreferencesWindow		Группировать новые окна
+Style	AppPreferencesWindow		Стиль
+Trailing whitespace	AppPreferencesWindow		Пробелы в конце строк
+Trim trailing whitespace on save	AppPreferencesWindow		Обрезать пробелы в конце строк при сохранении
+Up to the next non-empty line	AppPreferencesWindow		До следующей непустой строки
+Up to the next/previous non-empty line	AppPreferencesWindow		До следующей/предыдущей непустой строки
+Use .editorconfig if possible	AppPreferencesWindow		При возможности использовать .editorconfig
+Use custom font	AppPreferencesWindow		Использовать пользовательский шрифт
+Visual	AppPreferencesWindow		Визуальные
 Backwards	FindWindow		Назад
 Find	FindWindow		Найти
 Find:	FindWindow		Найти:
@@ -129,6 +133,7 @@ Replace all	FindWindow		Заменить всё
 Replace and find	FindWindow		Найти и заменить
 Replace:	FindWindow		Заменить:
 Wrap around	FindWindow		По кругу
+Bookmarks	BookmarksWindow		Закладки
 Cancel	GoToLineWindow		Отмена
 Go to line	GoToLineWindow		Перейти к строке
 Go to line:	GoToLineWindow		Перейти к строке:
@@ -139,23 +144,18 @@ Save all	QuitAlert		Сохранить всё
 Save selected	QuitAlert		Сохранить выбранное
 There are unsaved changes.\nSelect the files to save.	QuitAlert		Есть несохранённые изменения.\nВыберите файлы для сохранения.
 Unsaved files	QuitAlert		Несохранённые файлы
+Code editor for Haiku based on Scintilla editing component.	App		Редактор кода для Haiku на базе текстового компонента Scintilla.
+Distributed on MIT license terms.	App		Распространяется на условиях лицензии MIT.
+humdinger, for GUI design tips and artwork.	App		humdinger, за советы по дизайну интерфейса и арты.
+Konrad77, for dark theme.	App		Konrad77, за тёмную тему.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Нейл Ходгсон(Neil Hodgson), за текстовый компонент Scintilla и редактор SciTE.
+translators to:	App	to _ (language), e.g. German	переводчики на:
+zuMi, for toolbar icons.	App		zuMi, за иконки для панели инструментов.
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Не удалось найти файлы стилей. Убедитесь, что они установлены в одной из ваших папок 'data'.
 Style files	Styler		Файлы стилей
-Koder	System name		Koder
-Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Отказано в доступе при открытии файла конфигурации. Убедитесь, что у вас есть права на %s% для папки 'settings'.
-Editor settings	Preferences		Настройки редактора
-read	Preferences	Make sure you have _ permission for	чтение
-Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		При открытии файла конфигурации произошла ошибка. Ваши личные настройки не будут %s%.
-load	Preferences	to _ the configuration	загрузить
-Unknown error.	Preferences		Неизвестная ошибка.
-There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Недостаточно памяти, чтобы %s% файл конфигурации. Попробуйте закрыть несколько приложений и перезапустить редактор.
-loaded	Preferences	settings will not be _	загружены
-write	Preferences	Make sure you have _ permission for	запись
-save	Preferences	to _ the configuration	сохранить
-saved	Preferences	settings will not be _	сохранены
-Read-only	StatusView		Только чтение
-Open Terminal	StatusView		Открыть Terminal
-Go to	BookmarksListView		На строку
 Delete	BookmarksListView		Удалить
+Go to	BookmarksListView		На строку
+Koder	System name		Koder
 OK	Utilities		ОК
-Bookmarks	BookmarksWindow		Закладки
+Open Terminal	StatusView		Открыть Terminal
+Read-only	StatusView		Только чтение
