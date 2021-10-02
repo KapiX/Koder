@@ -61,7 +61,6 @@ Undo	EditorWindow		元に戻す
 Unix format	EditorWindow		Unix 形式
 Unsaved changes	EditorWindow		保存されていない変更
 Untitled	EditorWindow		無題
-
 View	EditorWindow		表示
 Windows format	EditorWindow		Windows 形式
 Wrap lines	EditorWindow		行を折り返す
@@ -158,5 +157,5 @@ Delete	BookmarksListView		削除
 Go to	BookmarksListView		移動
 Koder	System name		Koder
 OK	Utilities		OK
-Open Terminal	StatusView		Open Terminal
+Open Terminal	StatusView		端末を開く
 Read-only	StatusView		読み取り専用
