@@ -23,7 +23,7 @@ SYSTEM_INCLUDE_PATHS = \
 	$(shell findpaths -e -a $(shell uname -p) B_FIND_PATH_HEADERS_DIRECTORY scintilla)
 
 LOCAL_INCLUDE_PATHS = src/controls src/support src/windows
-LOCALES = de en en_GB es fr pt pl ro ru uk
+LOCALES = ca de en en_GB es fi fr fur hu id it ja lt pl pt ro ru sv tr uk
 
 SYMBOLS := FALSE
 DEBUGGER := FALSE
