@@ -1,0 +1,162 @@
+1	Dutch	x-vnd.KapiX-Koder	822155924
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Er is een fout opgetreded bij het openen van het configuratie bestand. Je persoonlijke instellingen zullen niet %s%.
+Access denied	EditorWindow		Toegang ontzegd
+Line endings	EditorWindow		Regel eindes
+In selection	FindWindow		In selectie
+About…	EditorWindow		Over…
+Use custom font	AppPreferencesWindow		Ander font gebruiken
+The file contains unsaved changes. What to do?	EditorWindow		Het bestand bevat niet opgeslagen aanpassingen. Wat wil je doen?
+Read-only	StatusView		Alleen lezen
+Replace:	FindWindow		Vervangen:
+Cancel	QuitAlert		Annuleren
+Could not find Open Terminal Tracker add-on.	EditorWindow		Kan Open Terminal Tracker add-on niet vinden.
+Match entire words	FindWindow		Alle woorden gelijk
+Discard	EditorWindow		Verwerpen
+Background	AppPreferencesWindow		AchtergrondBackground
+Partner file not found.	EditorWindow		Partner bestand niet gevonden.
+Unsaved changes	EditorWindow		Niet opgeslagen aanpassingen
+Trim trailing whitespace on save	AppPreferencesWindow		Achterliggende witruimte bijsnijden bij het opslaan
+File	EditorWindow		Bestand
+Open…	EditorWindow		Open…
+Koder preferences…	EditorWindow		Koder instellingen…
+Language	EditorWindow		Taal
+read	Preferences	Make sure you have _ permission for	lees
+Special symbols	EditorWindow		Speciale symbolen
+Show line endings	EditorWindow		Toon regel eindes
+Undo	EditorWindow		Ongedaan maken
+Comment line	EditorWindow		Regel commentaar
+Show full path in title	AppPreferencesWindow		Toon volledig pad in venster titel
+Close	EditorWindow		Sluiten
+Spaces per tab:	AppPreferencesWindow		Spaties per tab:
+Code editor for Haiku based on Scintilla editing component.	App		Code editor voor Haiku gebaseerd op Scintilla editor component.
+Copy	EditorWindow		Kopiëren
+translators to:	App	to _ (language), e.g. German	vertalingen voor:
+OK	GoToLineWindow		OK
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Voor de %s% van het configuratie bestand is er niet voldoende geheugen beschikbaar. Probeer enkele toepassingen te sluiten en Koder opnieuw te starten.
+Folds	AppPreferencesWindow		Plooien
+Visual	AppPreferencesWindow		Visueel
+Wrap around	FindWindow		Volledige tekst doorzoeken
+Highlight current line	AppPreferencesWindow		Markeer huidige lijn
+Go to line…	EditorWindow		Ga naar lijn…
+Left margin	AppPreferencesWindow		Linkse marge
+Mark overly long lines	AppPreferencesWindow		Overmatige lijnen markeren
+Replace and find	EditorWindow		Zoek en vervang
+Find/Replace	FindWindow		Zoek/Vervang
+Match case	FindWindow		Hoofd/kleine letters respecteren
+Distributed on MIT license terms.	App		Verdeeld onder de MIT licentie termen.
+Find:	FindWindow		Zoek:
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Kan geen stijl bestanden vinden. Deze moeten in een van je data folders geïnstalleerd zijn.
+View	EditorWindow		Toon
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, voor Scintilla editor component en SciTE editor.
+Reached the end of the target. No results found.	EditorWindow		Einde van het doel bereikt. Geen resultaten gevonden.
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantisch
+write	Preferences	Make sure you have _ permission for	schrijf
+Show toolbar	AppPreferencesWindow		Toon werktuigen
+Select all	EditorWindow		Selecteer alles
+Do nothing	EditorWindow		Niets doen
+Trailing whitespace	AppPreferencesWindow		Achterliggende witruimte
+Cancel	GoToLineWindow		Annuleer
+Large	AppPreferencesWindow	Toolbar icon size	Groot
+Backwards	FindWindow		Achteruit zoeken
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Het bestand bevat niet opgeslagen veranderingen, maar is alleen lezeen. Wat wil je doen?
+Toggle bookmark	EditorWindow		Bladwijzer wisselen
+Old Mac format	EditorWindow		Oud Mac formaat
+Open Terminal	EditorWindow		Open Terminal
+loaded	Preferences	settings will not be _	geladen
+Unsaved files	QuitAlert		Niet opgeslagen bestanden
+Bookmarks	AppPreferencesWindow		Bladwijzers
+load	Preferences	to _ the configuration	laad
+Edit	EditorWindow		Bewerken
+Comment block	EditorWindow		Blok commentaar
+Background	AppPreferencesWindow	Current line highlight	Achtergrond
+Behavior	AppPreferencesWindow		Gedrag
+Windows format	EditorWindow		Windows formaat
+save	Preferences	to _ the configuration	opslaan
+Replace all	FindWindow		Alles vervangen
+Up to the next non-empty line	AppPreferencesWindow		Tot aan de volgende niet-lege lijn
+Koder	System name		Koder
+Extra large	AppPreferencesWindow	Toolbar icon size	Extra groot
+Find selection	EditorWindow		Zoek selectie
+Stack new windows	AppPreferencesWindow		Stapel nieuwe vensters
+Medium	AppPreferencesWindow	Toolbar icon size	Medium
+Revert	AppPreferencesWindow		Herstellen
+Only in actually indented lines	AppPreferencesWindow		Alleen in daadwerkelijk ingesprongen regels
+Next bookmark	EditorWindow		Volgende bladwijzer
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Toegang geweigerd bij het openen van het configuratie bestand. Maak zeker dat je %s% rechten hebt voor je configuratie map.
+Save	EditorWindow		Opslaan
+Wrap lines	EditorWindow		Lijnen afbreken
+Find next	EditorWindow		Zoek volgende
+Small	AppPreferencesWindow	Toolbar icon size	Klein
+Incremental search	EditorWindow		Incrementeel zoeken
+Style files	Styler		Stijl bestanden
+Cut	EditorWindow		Knippen
+Frame	AppPreferencesWindow	Current line highlight	Frame
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		{0, plural, one{Een zoek actie werd} other{# Zoek acties werden}} vervangen.
+Indentation	AppPreferencesWindow		Inspringen
+Ensure empty last line on save	AppPreferencesWindow		Verzeker lege laatste lijn bij het opslaan
+Save all	QuitAlert		Alles opslaan
+Show toolbar	EditorWindow		Toon werktuigen
+Replacement finished	EditorWindow		Vervanging afgewerkt
+New	EditorWindow		Nieuw
+Your changes will be lost.	EditorWindow		Je aanpassing zullen verloren gaan.
+Always open files in new window	AppPreferencesWindow		Nieuwe bestanden altijd in een nieuw venster openen
+Find/Replace…	EditorWindow		Zoek/Vervang…
+Replace and find	FindWindow		Zoek en vervang
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Kon Open Terminal Tracker add-on niet laden.
+Open Terminal	StatusView		Open Terminal
+Show white space	EditorWindow		Toon witruimtes
+Huge	AppPreferencesWindow	Toolbar icon size	Enorm
+Regex	FindWindow		Regex
+Go to	BookmarksListView		Ga naar
+Quit	EditorWindow		Afsluiten
+Redo	EditorWindow		Opnieuw
+Go to line:	GoToLineWindow		Ga naar lijn:
+Editor settings	Preferences		Editor instellingen
+You don't have sufficient permissions to edit this file.	EditorWindow		Je hebt niet voldoende rechten om het bestand te bewerken.
+Convert tabs to spaces	AppPreferencesWindow		Converteer tabs naar spaties
+Search	EditorWindow		Zoek
+Icon size	AppPreferencesWindow		Icoon grootte
+File removed	EditorWindow		Bestand verwijderd
+Line numbers	AppPreferencesWindow		Lijn nummers
+Use .editorconfig if possible	AppPreferencesWindow		Gebruik .editorconfig als het mogelijk is
+zuMi, for toolbar icons.	App		zuMi, voor werktuig iconen.
+Help	EditorWindow		Help
+Style	AppPreferencesWindow		Stijl
+Paste	EditorWindow		Plakken
+Save as…	EditorWindow		Opslaan als…
+Untitled	EditorWindow		Geen titel
+Bookmarks	EditorWindow		Bladwijezrs
+Unknown error.	Preferences		Onbekende fout.
+Find	FindWindow		Zoek
+Delete	BookmarksListView		Verwijder
+Go to line	GoToLineWindow		Ga naar lijn
+Reload	EditorWindow		Herlaad
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Er zijn niet opgeslagen veranderingen.\nSelecteer de bestanden om op te slaan.
+The file has been removed. What to do?	EditorWindow		Bestand is verwijderd. Wat wil je doen?
+The file has been modified by another application. What to do?	EditorWindow		Het bestand is door een andere toepassing veranderd. Wat wil je doen?
+Enormous	AppPreferencesWindow	Toolbar icon size	Immens
+Trim trailing whitespace	EditorWindow		Witruimte trimmen
+Konrad77, for dark theme.	App		Konrad77, voor het donker thema.
+Cancel	EditorWindow		Annuleer
+Open partner file	EditorWindow		Open partner bestand
+Previous bookmark	EditorWindow		Vorige bladwijzer
+OK	Utilities		OK
+Line	AppPreferencesWindow		Lijn
+Searching finished	EditorWindow		Zoektocht beëindigd
+humdinger, for GUI design tips and artwork.	App		humdinger, voor GUI design tips en artwork.
+saved	Preferences	settings will not be _	opgeslaan
+Bookmarks	BookmarksWindow		Bladwijzers
+Compact language menu	AppPreferencesWindow		Compact taal menu
+File modified	EditorWindow		Bestand veranderd
+Unix format	EditorWindow		Unix formaat
+Highlight braces	AppPreferencesWindow		Markeer braces
+Save selected	QuitAlert		Geselecteerde opslaan
+Max. characters per line:	AppPreferencesWindow		Max. karakters per lijn:
+Don't save	QuitAlert		Niet opslaan
+Koder preferences	AppPreferencesWindow		Koder instellingen
+Show indentation guides	AppPreferencesWindow		Toon inspringhulplijnen
+Up to the next/previous non-empty line	AppPreferencesWindow		Naar de volgende/vorige niet-lege lijn
+Highlight trailing whitespace	AppPreferencesWindow		Markeer achterblijvende witruimte
+Replace	FindWindow		Vervang
+[read-only]	EditorWindow		[alleen-lezen]
+en]
