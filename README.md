@@ -20,6 +20,10 @@ Copy all files from **data** directory to **Koder** directory in any non-package
 
 ## History
 
+0.5.4 - *10-10-2021*
+
+* Update translations.
+
 0.5.3 - *27-06-2020*
 
 * Fix crash on nested brackets in .editorconfig file.
