@@ -101,7 +101,7 @@ App::AboutRequested()
 	};
 
 	const std::unordered_map<std::string, std::vector<std::string>> translatorsMap{
-		{ "ca", { "Davidmp" } },
+		{ "ca", { "David Medina" } },
 		{ "de", { "FabianReidinger", "humdinger" } },
 		{ "en_GB", { "Adam Fowler" } },
 		{ "es", { "un_spacyar" } },
@@ -111,8 +111,9 @@ App::AboutRequested()
 		{ "hu", { "miqlas" } },
 //		{ "id", { "mazbrili" } },
 		{ "it", { "Gabriele Baldassarre" } },
-		{ "ja", { "Murai Takashi" } },
+		{ "ja", { "FuRuYa7", "Murai Takashi" } },
 //		{ "lt", { "damoklas" } },
+		{ "nl", { "Begasus" } },
 		{ "pt", { "Victor Domingos" } },
 		{ "ro", { "al-popa", "Florentina Mușat" } },
 		{ "ru", { "al-popa", "ArmanHayots", "diver", "TK-313" } },
