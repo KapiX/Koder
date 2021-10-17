@@ -184,8 +184,8 @@ TEST_F(FindReplaceTest, RegularFindAfterBackwardsFindFindsNextPhrase)
 	const Sci_Position anchor = fEditor->SendMessage(SCI_GETANCHOR);
 	const Sci_Position current = fEditor->SendMessage(SCI_GETCURRENTPOS);
 
-	EXPECT_EQ(anchor, 118);
-	EXPECT_EQ(current, 113);
+	EXPECT_EQ(anchor, 113);
+	EXPECT_EQ(current, 118);
 }
 
 TEST_F(FindReplaceTest, FirstNoResultFoundSecondWrapAroundEnabledFindsTheResult)

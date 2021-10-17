@@ -79,7 +79,9 @@ FindReplaceHandler::MessageReceived(BMessage* message)
 						std::swap(fSearchTarget.first, fSearchTarget.second);
 					}
 				} else {
-					fSearchTarget = info.backwards ? Sci::Range(current, 0) : Sci::Range(current, length);
+					fSearchTarget = info.backwards
+						? Sci::Range(std::min(anchor, current), 0)
+						: Sci::Range(std::max(anchor, current), length);
 				}
 			}
 
