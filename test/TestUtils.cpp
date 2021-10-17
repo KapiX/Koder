@@ -213,3 +213,17 @@ TEST(ParseFileArgumentTest, NoLineAndNoColumnReturnNegativeOne) {
 	EXPECT_EQ(column, -1);
 	EXPECT_EQ(result, "test.txt");
 }
+
+TEST(ParseFileArgumentTest, IgnoresIncompleteNegativeNumbers) {
+	int32 line = 0;
+	int32 column = 0;
+	const std::string result = ParseFileArgument("test.txt:-:-", &line, &column);
+	EXPECT_EQ(result, "test.txt:-:-");
+}
+
+TEST(ParseFileArgumentTest, Issue137IgnoresURLs) {
+	int32 line = 0;
+	int32 column = 0;
+	const std::string result = ParseFileArgument("https://datatracker.ietf.org/drafts/current/", &line, &column);
+	EXPECT_EQ(result, "https://datatracker.ietf.org/drafts/current/");
+}
