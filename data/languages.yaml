@@ -34,6 +34,9 @@ jam:
 javascript:
     name: JavaScript
     extensions: [ js, jsm, json ]
+lua:
+    name: Lua
+    extensions: [ lua ]
 makefile:
     name: Makefile
     extensions: [ mk, mak, Makefile, Makefile.am, makefile ]
