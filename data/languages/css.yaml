@@ -1,5 +1,5 @@
 # CSS
-lexer: 38 # SCLEX_CSS
+lexer: css
 properties:
 keywords:
     0: >

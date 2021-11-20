@@ -1,4 +1,4 @@
-lexer: Jam
+lexer: jam
 properties:
     fold: 1
     fold.comment: 1

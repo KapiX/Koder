@@ -1,5 +1,5 @@
 # YAML
-lexer: 48 # SCLEX_YAML
+lexer: yaml
 comments:
     line: "#"
 styles:

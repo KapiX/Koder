@@ -25,11 +25,9 @@ public:
 	static	void								SortAlphabetically();
 	static	std::map<int, int>					ApplyLanguage(Editor* editor, const char* lang);
 	static	void								LoadLanguages();
-	static	void								LoadExternalLexers(Editor* editor);
 
 private:
 	static	void								_LoadLanguages(const BPath& path);
-	static	void								_LoadExternalLexers(const BPath& path, Editor* editor);
 	static	std::map<int, int>					_ApplyLanguage(Editor* editor, const char* lang, const BPath &path);
 	static	std::vector<std::string>			sLanguages;
 	static	std::map<std::string, std::string>	sMenuItems;

@@ -1,5 +1,5 @@
 # XML
-lexer: 5 # SCLEX_XML
+lexer: xml
 properties:
     fold: 1
     fold.html: 1

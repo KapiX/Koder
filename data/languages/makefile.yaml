@@ -1,5 +1,5 @@
 # Makefile
-lexer: 11 # SCLEX_MAKEFILE
+lexer: makefile
 comments:
     line: "#"
 styles:

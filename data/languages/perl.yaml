@@ -1,6 +1,6 @@
 # Perl
 # adapted from SciTE
-lexer: 6 # SCLEX_PERL
+lexer: perl
 keywords:
     0: >
         NULL __FILE__ __LINE__ __PACKAGE__ __DATA__ __END__ AUTOLOAD

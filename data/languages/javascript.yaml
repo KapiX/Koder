@@ -1,5 +1,5 @@
 # JavaScript
-lexer: 3 # SCLEX_CPP
+lexer: cpp
 properties:
     fold: 1
 keywords:

@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <functional>
 #include <map>
+#include <memory>
 #include <string>
 
 #include <Catalog.h>
@@ -16,6 +17,8 @@
 #include <Path.h>
 #include <String.h>
 
+#include <ILexer.h>
+#include <Lexilla.h>
 #include <SciLexer.h>
 #include <yaml-cpp/yaml.h>
 
@@ -51,6 +54,53 @@ DoInAllDataDirectories(std::function<void(const BPath&)> func) {
 	find_directory(B_USER_NONPACKAGED_DATA_DIRECTORY, &dataPath);
 	func(dataPath);
 }
+
+void
+DoInAllLibDirectories(std::function<void(const BPath&)> func) {
+	BPath libPath;
+	find_directory(B_SYSTEM_LIB_DIRECTORY, &libPath);
+	func(libPath);
+	find_directory(B_USER_LIB_DIRECTORY, &libPath);
+	func(libPath);
+	find_directory(B_SYSTEM_NONPACKAGED_LIB_DIRECTORY, &libPath);
+	func(libPath);
+	find_directory(B_USER_NONPACKAGED_LIB_DIRECTORY, &libPath);
+	func(libPath);
+}
+
+class LexerLibrary {
+public:
+	LexerLibrary(const char* path) {
+		fLibrary = load_add_on(path);
+		if(fLibrary > 0) {
+			if(get_image_symbol(fLibrary, LEXILLA_CREATELEXER, B_SYMBOL_TYPE_TEXT,
+					reinterpret_cast<void**>(&fCreateLexer)) != B_OK) {
+				fCreateLexer = nullptr;
+			}
+		}
+	}
+
+	~LexerLibrary() {
+		if(fLibrary > 0) {
+			unload_add_on(fLibrary);
+		}
+		fLibrary = 0;
+	}
+
+	bool IsValid() {
+		return fLibrary > 0 && fCreateLexer != nullptr;
+	}
+
+	Scintilla::ILexer5* CreateLexer(const char* name) {
+		return fCreateLexer(name);
+	}
+
+private:
+	image_id fLibrary;
+	Lexilla::CreateLexerFn fCreateLexer;
+};
+
+std::vector<std::unique_ptr<LexerLibrary>> sLexerLibraries;
 
 }
 
@@ -95,7 +145,7 @@ Languages::ApplyLanguage(Editor* editor, const char* lang)
 
 /**
  * Loads YAML file with language specification:
- *   lexer: int if supplied with Scintilla, string if external (required)
+ *   lexer: string (required)
  *   properties: (string|string) map -> SCI_SETPROPERTY
  *   keywords: (index(int)|string) map -> SCI_SETKEYWORDS
  *   identifiers: (lexem class id(int)|(string array)) map -> SCI_SETIDENTIFIERS
@@ -118,20 +168,30 @@ Languages::ApplyLanguage(Editor* editor, const char* lang)
 /* static */ std::map<int, int>
 Languages::_ApplyLanguage(Editor* editor, const char* lang, const BPath &path)
 {
+	if(sLexerLibraries.empty() == true)
+		return {};
+
+	// TODO: early exit if lexer not changed
+
 	BPath p(path);
 	p.Append(gAppName);
 	p.Append("languages");
 	p.Append(lang);
 	const YAML::Node language = YAML::LoadFile(std::string(p.Path()) + ".yaml");
-	try {
-		int lexerID = language["lexer"].as<int>();
-		editor->SendMessage(SCI_SETLEXER, static_cast<uptr_t>(lexerID), 0);
-	} catch(YAML::TypedBadConversion<int>&) {
-		// TODO: early exit if lexer not changed
-		std::string lexerName = language["lexer"].as<std::string>();
-		editor->SendMessage(SCI_SETLEXERLANGUAGE, 0,
-			reinterpret_cast<const sptr_t>(lexerName.c_str()));
+	std::string lexerName = language["lexer"].as<std::string>();
+	Scintilla::ILexer5* lexer;
+	// sLexerLibraries contains libraries in the following order:
+	// * system
+	// * user
+	// * non-packaged system
+	// * non-packaged user
+	// Going in reverse results in correct override hierarchy.
+	for(auto it = sLexerLibraries.rbegin(); it != sLexerLibraries.rend(); ++it) {
+		lexer = (*it)->CreateLexer(lexerName.c_str());
+		if(lexer != nullptr)
+			break;
 	}
+	editor->SendMessage(SCI_SETILEXER, 0, reinterpret_cast<sptr_t>(lexer));
 
 	for(const auto& property : language["properties"]) {
 		auto name = property.first.as<std::string>();
@@ -206,6 +266,35 @@ Languages::LoadLanguages()
 				_LoadLanguages(path);
 			} catch (YAML::BadFile &) {}
 		});
+
+	DoInAllLibDirectories([](const BPath& path) {
+		BPath p(path);
+		p.Append(LEXILLA_LIB LEXILLA_EXTENSION);
+		auto lexilla = std::make_unique<LexerLibrary>(p.Path());
+		if(lexilla->IsValid() == true) {
+			sLexerLibraries.push_back(std::move(lexilla));
+		}
+	});
+
+	DoInAllLibDirectories([](const BPath& path) {
+		BPath p(path);
+		p.Append("lexilla");
+		BDirectory lexersDir(p.Path());
+		if (lexersDir.InitCheck() != B_OK)
+			return;
+
+		BEntry lexerEntry;
+		while(lexersDir.GetNextEntry(&lexerEntry, true) == B_OK) {
+			if(lexerEntry.IsDirectory())
+				continue;
+			BPath lexerPath;
+			lexerEntry.GetPath(&lexerPath);
+			auto lexer = std::make_unique<LexerLibrary>(lexerPath.Path());
+			if(lexer->IsValid() == true) {
+				sLexerLibraries.push_back(std::move(lexer));
+			}
+		}
+	});
 }
 
 
@@ -226,40 +315,5 @@ Languages::_LoadLanguages(const BPath& path)
 		if(std::find(sLanguages.begin(), sLanguages.end(), name) == sLanguages.end())
 			sLanguages.push_back(name);
 		sMenuItems[name] = menuitem;
-	}
-}
-
-
-/* static */ void
-Languages::LoadExternalLexers(Editor* editor)
-{
-	DoInAllDataDirectories([&](const BPath& path) {
-			_LoadExternalLexers(path, editor);
-		});
-}
-
-
-/**
- * Iterates through all files in path/scintilla/lexers and loads them as lexers
- * into editor.
- */
-/* static */ void
-Languages::_LoadExternalLexers(const BPath& path, Editor* editor)
-{
-	BPath p(path);
-	p.Append("scintilla");
-	p.Append("lexers");
-	BDirectory lexersDir(p.Path());
-	if (lexersDir.InitCheck() != B_OK)
-		return;
-
-	BEntry lexerEntry;
-	while(lexersDir.GetNextEntry(&lexerEntry, true) == B_OK) {
-		if(lexerEntry.IsDirectory())
-			continue;
-		BPath lexerPath;
-		lexerEntry.GetPath(&lexerPath);
-		editor->SendMessage(SCI_LOADLEXERLIBRARY, 0,
-			reinterpret_cast<const sptr_t>(lexerPath.Path()));
 	}
 }

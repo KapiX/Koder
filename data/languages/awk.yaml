@@ -1,6 +1,6 @@
 # AWK
 # adapted from SciTE
-lexer: 6 # SCLEX_PERL
+lexer: perl
 keywords:
     0: >
         BEGIN END

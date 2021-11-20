@@ -187,7 +187,6 @@ EditorWindow::EditorWindow(bool stagger)
 	fContextMenu->SetTargetForItems(*windowMessenger);
 
 	fEditor = new Editor();
-	Languages::LoadExternalLexers(fEditor);
 
 	fToolbar = new ToolBar(this);
 	fToolbar->AddAction(MAINMENU_FILE_OPEN,

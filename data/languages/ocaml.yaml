@@ -1,5 +1,5 @@
 # OCaml
-lexer: 65 # SCLEX_CAML
+lexer: caml
 keywords:
     0: >
         and as assert begin class constraint do done downto else end exception

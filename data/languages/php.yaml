@@ -1,5 +1,5 @@
 # PHP
-lexer: 69 # SCLEX_PHPSCRIPT
+lexer: phpscript
 keywords:
     4: >
         __CLASS__ __DIR__ __FILE__ __FUNCTION__ __LINE__ __METHOD__

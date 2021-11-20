@@ -1,5 +1,5 @@
 # Lua
-lexer: 15 # SCLEX_LUA
+lexer: lua
 properties:
     fold: 1
 keywords:

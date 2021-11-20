@@ -6,9 +6,10 @@ Koder is a code editor built using Scintilla editing component.
 
 ## Dependencies
 
-* Scintilla >=4.1.3
+* Scintilla >= 5.1.4
+* Lexilla
 * yaml-cpp
-* Scintilla [lexers](https://github.com/KapiX/scintilla-haiku-lexers) for Haiku specific file types
+* [Additional lexers](https://github.com/KapiX/scintilla-haiku-lexers) for Haiku specific file types
 * GTest (to run the tests)
 
 ## Building

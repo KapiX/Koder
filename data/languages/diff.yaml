@@ -1,5 +1,5 @@
 # Diff
-lexer: 16 # SCLEX_DIFF
+lexer: diff
 styles:
     0: 32
     1: 101

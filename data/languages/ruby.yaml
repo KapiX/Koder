@@ -1,6 +1,6 @@
 # Ruby
 # adapted from SciTE
-lexer: 22 # SCLEX_RUBY
+lexer: ruby
 keywords:
     0: >
         __FILE__ and def end in or self unless __LINE__ begin \

@@ -1,5 +1,5 @@
 # YAB
-lexer: YAB
+lexer: yab
 properties:
     fold: 1
 keywords:

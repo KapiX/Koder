@@ -1,4 +1,4 @@
-lexer: 62 # SCLEX_BASH
+lexer: bash
 properties:
     fold: 1
     fold.comment: 1

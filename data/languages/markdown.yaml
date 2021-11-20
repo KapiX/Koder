@@ -1,5 +1,5 @@
 # Markdown
-lexer: 98 # SCLEX_MARKDOWN
+lexer: markdown
 styles:
     0: 32
     1: 32

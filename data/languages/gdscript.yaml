@@ -1,5 +1,5 @@
 # GDScript
-lexer: 2 # SCLEX_PYTHON
+lexer: python
 properties:
     fold: 1
 keywords:

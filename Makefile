@@ -23,7 +23,8 @@ SYSTEM_INCLUDE_PATHS = \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/shared) \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/storage) \
 	$(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/tracker) \
-	$(shell findpaths -e -a $(shell uname -p) B_FIND_PATH_HEADERS_DIRECTORY scintilla)
+	$(shell findpaths -e -a $(shell uname -p) B_FIND_PATH_HEADERS_DIRECTORY scintilla) \
+	$(shell findpaths -e -a $(shell uname -p) B_FIND_PATH_HEADERS_DIRECTORY lexilla)
 
 LOCAL_INCLUDE_PATHS = src/bookmarks src/controls src/editor src/find \
 	src/preferences src/support

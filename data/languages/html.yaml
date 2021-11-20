@@ -1,5 +1,5 @@
 # HTML
-lexer: 4 # SCLEX_HTML
+lexer: hypertext
 properties:
     fold: 1
     fold.html: 1
