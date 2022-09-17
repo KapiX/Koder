@@ -737,7 +737,6 @@ EditorWindow::MessageReceived(BMessage* message)
 		case EDITOR_CONTEXT_MENU: {
 			BPoint where;
 			if(message->FindPoint("where", &where) == B_OK) {
-				where = ConvertToScreen(where);
 				fContextMenu->Go(where, true, true);
 			}
 		} break;
