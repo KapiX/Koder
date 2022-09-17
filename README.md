@@ -38,6 +38,7 @@ That being said, creating interfaces to talk with an IDE is fine. This approach 
 
 ## Release checklist
 
+- [ ] Check if all unit tests pass.
 - [ ] Update translations and credits in About window
 - [ ] Update README, changelog and screenshot
 - [ ] Create release branch

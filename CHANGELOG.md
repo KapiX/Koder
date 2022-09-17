@@ -2,6 +2,28 @@
 
 ## 0.6.0 - TBD
 
+* Add Find/Replace history.
+* Add --wait switch to block when used from command line.
+* Make Find/Replace field follow system colors.
+* Reworked Find/Replace logic to be more robust and bug-free.
+* Fix crash when URL is passed as file argument.
+* Add support for Lua.
+* Fix context menu position.
+
+## [0.5.4] - 2021-10-10
+
+* Update translations.
+
+## [0.5.3] - 2020-06-27
+
+* Fix crash on nested brackets in .editorconfig file.
+* Update translations.
+
+## [0.5.2] - 2020-01-08
+
+* Fix crash when opening Preferences.
+* Fix garbage button text in file modified warning.
+
 ## [0.5.1] - 2019-05-11
 
 * Fix crash when external lexer is not found.
