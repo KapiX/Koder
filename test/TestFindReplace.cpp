@@ -34,6 +34,15 @@ FindReplaceTest::SetUp()
 	fApplication = new BApplication("application/x-vnd.KapiX-KoderFindReplaceTest");
 	fWindow = new BWindow(BRect(100, 100, 400, 400), "FindReplaceTest", B_DOCUMENT_WINDOW, 0);
 	fEditor = new BScintillaView("EditorView", 0, true, true, B_NO_BORDER);
+	fFindReplaceHandler = new FindReplaceHandler(fEditor, fWindow);
+	fWindow->AddHandler(fFindReplaceHandler);
+	BGroupLayout *layout = new BGroupLayout(B_VERTICAL, 0);
+	fWindow->SetLayout(layout);
+	fWindow->Show();
+	layout->AddView(fEditor);
+	fMessenger = new BMessenger(fFindReplaceHandler, fWindow);
+
+	fEditor->LockLooper();
 	fEditor->SetText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
 		"Duis congue aliquam eros eget rhoncus. Mauris ultricies ipsum urna, "
 		"vitae scelerisque lacus facilisis molestie. Curabitur pulvinar "
@@ -42,13 +51,7 @@ FindReplaceTest::SetUp()
 		"Pellentesque quis lectus dolor. Vestibulum ante ipsum primis in "
 		"faucibus orci luctus et ultrices posuere cubilia Curae; Cras ac purus "
 		"auctor, mattis risus eu, ultricies lectus.");
-	fFindReplaceHandler = new FindReplaceHandler(fEditor, fWindow);
-	fWindow->AddHandler(fFindReplaceHandler);
-	BGroupLayout *layout = new BGroupLayout(B_VERTICAL, 0);
-	fWindow->SetLayout(layout);
-	fWindow->Show();
-	layout->AddView(fEditor);
-	fMessenger = new BMessenger(fFindReplaceHandler, fWindow);
+	fEditor->UnlockLooper();
 }
 
 
