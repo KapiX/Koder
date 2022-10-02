@@ -175,9 +175,12 @@ KeyDownMessageFilter::Filter(BMessage* message, BHandler** target)
 
 
 template<>
-void
-copy_value(const void* source, ssize_t size, std::string* destination)
-{
-	destination->resize(size);
-	*destination = reinterpret_cast<const char*>(source);
+entry_ref
+find_value<B_REF_TYPE>(BMessage* message, std::string name, int index) {
+	entry_ref ref;
+	status_t status = message->FindRef(name.c_str(), index, &ref);
+	if(status == B_OK) {
+		return ref;
+	}
+	return entry_ref();
 }

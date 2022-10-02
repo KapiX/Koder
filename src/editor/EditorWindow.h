@@ -81,6 +81,7 @@ enum {
 	MAINMENU_SEARCH_GOTOLINE			= 'msgl',
 
 	MAINMENU_LANGUAGE					= 'ml00',
+	MAINMENU_OPEN_RECENT				= 'mr00',
 
 	TOOLBAR_SPECIAL_SYMBOLS				= 'tlss',
 
@@ -143,6 +144,7 @@ private:
 			Editor*			fEditor;
 			BFilePanel*		fOpenPanel;
 			BFilePanel*		fSavePanel;
+			BMenu*			fOpenRecentMenu;
 			BMenu*			fLanguageMenu;
 			std::string		fCurrentLanguage;
 			ToolBar*		fToolbar;
@@ -163,6 +165,7 @@ private:
 			std::string			fIncrementalSearchTerm;
 			std::unique_ptr<BMessageFilter> fIncrementalSearchFilter;
 
+			void			_PopulateOpenRecentMenu();
 			void			_PopulateLanguageMenu();
 			void			_ReloadFile(entry_ref* ref = nullptr);
 			void			_SetLanguage(std::string lang);

@@ -103,6 +103,9 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem(B_TRANSLATE("New"), MAINMENU_FILE_NEW, 'N')
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Open" B_UTF8_ELLIPSIS), MAINMENU_FILE_OPEN, 'O')
+			.AddMenu(B_TRANSLATE("Open recent"))
+				.AddItem(B_TRANSLATE("<empty>"), MAINMENU_OPEN_RECENT)
+			.End()
 			.AddItem(B_TRANSLATE("Reload"), MAINMENU_FILE_RELOAD)
 			.AddItem(B_TRANSLATE("Save"), MAINMENU_FILE_SAVE, 'S')
 			.AddItem(B_TRANSLATE("Save as" B_UTF8_ELLIPSIS), MAINMENU_FILE_SAVEAS)
@@ -167,6 +170,9 @@ EditorWindow::EditorWindow(bool stagger)
 
 	// When changing this shortcut remember to update one in StatusView as well
 	AddShortcut('T', B_COMMAND_KEY | B_OPTION_KEY, new BMessage((uint32) OPEN_TERMINAL));
+
+	fOpenRecentMenu = fMainMenu->FindItem(MAINMENU_OPEN_RECENT)->Menu();
+	_PopulateOpenRecentMenu();
 
 	fLanguageMenu = fMainMenu->FindItem(MAINMENU_LANGUAGE)->Menu();
 	_PopulateLanguageMenu();
@@ -916,6 +922,30 @@ void
 EditorWindow::SetOnQuitReplyToMessage(BMessage* message)
 {
 	fOnQuitReplyToMessage = message;
+}
+
+
+void
+EditorWindow::_PopulateOpenRecentMenu()
+{
+	BMessage refList;
+	be_roster->GetRecentDocuments(&refList, 10, nullptr, gAppMime);
+
+	message_property<B_REF_TYPE> refs(&refList, "refs");
+	if(refs.size() == 0) {
+		fOpenRecentMenu->ItemAt(0)->SetEnabled(false);
+	} else {
+		// Clear the menu first
+		int32 count = fOpenRecentMenu->CountItems();
+		fOpenRecentMenu->RemoveItems(0, count, true);
+		for(auto ref : refs) {
+			BPath p(&ref);
+			BMessage *msg = new BMessage(B_REFS_RECEIVED);
+			msg->AddRef("refs", &ref);
+			BMenuItem *menuItem = new BMenuItem(p.Path(), msg);
+			fOpenRecentMenu->AddItem(menuItem);
+		}
+	}
 }
 
 

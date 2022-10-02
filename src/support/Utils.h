@@ -18,6 +18,8 @@ class BBitmap;
 class BCheckBox;
 class BRadioButton;
 
+struct entry_ref;
+
 
 std::string GetFileName(const std::string filename);
 std::string GetFileExtension(const std::string filename);
@@ -70,13 +72,29 @@ struct property_type<B_STRING_TYPE>
 	using type = std::string;
 };
 
-
-template<typename Dest>
-void
-copy_value(const void* source, ssize_t, Dest* destination)
+template<>
+struct property_type<B_REF_TYPE>
 {
-	*destination = *reinterpret_cast<const Dest*>(source);
+	using type = entry_ref;
+};
+
+
+template<type_code BType>
+typename property_type<BType>::type
+find_value(BMessage* message, std::string name, int index) {
+	typename property_type<BType>::type typed_data;
+	ssize_t size;
+	const void* data;
+	status_t status = message->FindData(name.c_str(), BType, index, &data, &size);
+	if(status == B_OK) {
+		memcpy(data, size, &typed_data);
+	}
+	return typename property_type<BType>::type();
 }
+
+template<>
+entry_ref
+find_value<B_REF_TYPE>(BMessage* message, std::string name, int index);
 
 
 template<type_code BType>
@@ -108,15 +126,7 @@ public:
 			return clone;
 		}
 		typename property_type<BType>::type operator*() {
-			ssize_t size;
-			const void *data;
-			status_t status = message_->FindData(prop_name_.c_str(), BType, index_, &data, &size);
-			if(status == B_OK) {
-				typename property_type<BType>::type value;
-				copy_value<typename property_type<BType>::type>(data, size, &value);
-				return value;
-			}
-			// FIXME: throw an exception here
+			return find_value<BType>(message_, prop_name_, index_);
 		}
 	};
 	message_property(BMessage* message, std::string prop_name)
