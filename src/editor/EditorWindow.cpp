@@ -59,21 +59,9 @@ const float kWindowStagger = 17.0f;
 Preferences* EditorWindow::fPreferences = nullptr;
 
 
-namespace {
-	enum {
-		INCREMENTAL_SEARCH_CHAR			= 'incs',
-		INCREMENTAL_SEARCH_BACKSPACE	= 'incb',
-		INCREMENTAL_SEARCH_CANCEL		= 'ince',
-		INCREMENTAL_SEARCH_COMMIT		= 'incc'
-	};
-}
-
-
 EditorWindow::EditorWindow(bool stagger)
 	:
-	BWindow(fPreferences->fWindowRect, gAppName, B_DOCUMENT_WINDOW, 0),
-	fIncrementalSearchTerm(""),
-	fIncrementalSearchFilter(new BMessageFilter(B_KEY_DOWN, _IncrementalSearchFilter))
+	BWindow(fPreferences->fWindowRect, gAppName, B_DOCUMENT_WINDOW, 0)
 {
 	fActivatedGuard = false;
 
@@ -271,9 +259,9 @@ EditorWindow::EditorWindow(bool stagger)
 
 EditorWindow::~EditorWindow()
 {
-	delete fFindReplaceHandler;
+	RemoveCommonFilter(fFindReplaceHandler->IncrementalSearchFilter());
 
-	RemoveCommonFilter(fIncrementalSearchFilter.get());
+	delete fFindReplaceHandler;
 }
 
 
@@ -498,27 +486,6 @@ EditorWindow::MessageReceived(BMessage* message)
 	}
 
 	switch(message->what) {
-		case INCREMENTAL_SEARCH_CHAR: {
-			const char* character = message->GetString("character", "");
-			fIncrementalSearchTerm.append(character);
-			fEditor->IncrementalSearch(fIncrementalSearchTerm);
-		} break;
-		case INCREMENTAL_SEARCH_BACKSPACE: {
-			if(!fIncrementalSearchTerm.empty()) {
-				fIncrementalSearchTerm.pop_back();
-				fEditor->IncrementalSearch(fIncrementalSearchTerm);
-			}
-		} break;
-		case INCREMENTAL_SEARCH_CANCEL: {
-			fEditor->IncrementalSearchCancel();
-			fIncrementalSearchTerm = "";
-			RemoveCommonFilter(fIncrementalSearchFilter.get());
-		} break;
-		case INCREMENTAL_SEARCH_COMMIT: {
-			fEditor->IncrementalSearchCommit(fIncrementalSearchTerm);
-			fIncrementalSearchTerm = "";
-			RemoveCommonFilter(fIncrementalSearchFilter.get());
-		} break;
 		case SAVE_FILE: {
 			_Save();
 			message->SendReply((uint32) B_OK);
@@ -614,8 +581,8 @@ EditorWindow::MessageReceived(BMessage* message)
 			fEditor->ReplaceAndFind();
 		} break;
 		case MAINMENU_SEARCH_INCREMENTAL: {
-			RemoveCommonFilter(fIncrementalSearchFilter.get());
-			AddCommonFilter(fIncrementalSearchFilter.get());
+			RemoveCommonFilter(fFindReplaceHandler->IncrementalSearchFilter());
+			AddCommonFilter(fFindReplaceHandler->IncrementalSearchFilter());
 		} break;
 		case MAINMENU_SEARCH_BOOKMARKS: {
 			if(fBookmarksWindow == nullptr) {
@@ -1367,29 +1334,4 @@ EditorWindow::OnSavePoint(bool left)
 	fMainMenu->FindItem(MAINMENU_FILE_SAVE)->SetEnabled(fModified);
 	fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, fModified);
 	fToolbar->SetActionEnabled(MAINMENU_FILE_SAVE, fModified);
-}
-
-
-filter_result
-EditorWindow::_IncrementalSearchFilter(BMessage* message, BHandler** target,
-	BMessageFilter* messageFilter)
-{
-	if(message->what == B_KEY_DOWN) {
-		BLooper *looper = messageFilter->Looper();
-		const char* bytes;
-		message->FindString("bytes", &bytes);
-		if(bytes[0] == B_RETURN) {
-			looper->PostMessage(INCREMENTAL_SEARCH_COMMIT);
-		} else if(bytes[0] == B_ESCAPE) {
-			looper->PostMessage(INCREMENTAL_SEARCH_CANCEL);
-		} else if(bytes[0] == B_BACKSPACE) {
-			looper->PostMessage(INCREMENTAL_SEARCH_BACKSPACE);
-		} else {
-			BMessage msg(INCREMENTAL_SEARCH_CHAR);
-			msg.AddString("character", &bytes[0]);
-			messageFilter->Looper()->PostMessage(&msg);
-		}
-		return B_SKIP_MESSAGE;
-	}
-	return B_DISPATCH_MESSAGE;
 }

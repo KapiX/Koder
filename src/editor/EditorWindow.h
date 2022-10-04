@@ -162,9 +162,6 @@ private:
 	static	Preferences*	fPreferences;
 			FilePreferences	fFilePreferences;
 
-			std::string			fIncrementalSearchTerm;
-			std::unique_ptr<BMessageFilter> fIncrementalSearchFilter;
-
 			void			_PopulateOpenRecentMenu();
 			void			_PopulateLanguageMenu();
 			void			_ReloadFile(entry_ref* ref = nullptr);
@@ -180,9 +177,6 @@ private:
 			void			_OpenTerminal(const char* path);
 
 			void			OnSavePoint(bool left);
-
-	static	filter_result	_IncrementalSearchFilter(BMessage* message,
-								BHandler** target, BMessageFilter* messageFilter);
 };
 
 

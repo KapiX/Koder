@@ -10,6 +10,7 @@
 
 #include <Handler.h>
 #include <Message.h>
+#include <MessageFilter.h>
 
 #include "ScintillaUtils.h"
 
@@ -27,9 +28,30 @@ public:
 	};
 					FindReplaceHandler(BScintillaView* editor,
 						BHandler* replyHandler = nullptr);
+					~FindReplaceHandler();
 	virtual void	MessageReceived(BMessage* message);
 
+	BMessageFilter*	IncrementalSearchFilter() const { return fIncrementalSearchFilter; }
+
 private:
+	enum {
+		INCREMENTAL_SEARCH_CHAR			= 'incs',
+		INCREMENTAL_SEARCH_BACKSPACE	= 'incb',
+		INCREMENTAL_SEARCH_CANCEL		= 'ince',
+		INCREMENTAL_SEARCH_COMMIT		= 'incc'
+	};
+
+	class IncrementalSearchMessageFilter : public BMessageFilter
+	{
+	public:
+		IncrementalSearchMessageFilter(BHandler* handler);
+
+		virtual	filter_result	Filter(BMessage* message, BHandler** target);
+
+	private:
+		BHandler *fHandler;
+	};
+
 	struct search_info {
 		bool inSelection : 1;
 		bool matchCase : 1;
@@ -73,8 +95,11 @@ private:
 	int					fSearchLastFlags;
 	bool				fNewSearch;
 	search_info			fSearchLastInfo;
+
 	bool				fIncrementalSearch;
+	std::string			fIncrementalSearchTerm;
 	Scintilla::Range	fSavedSelection;
+	BMessageFilter*		fIncrementalSearchFilter;
 };
 
 

@@ -83,9 +83,6 @@ public:
 							bool regex = false);
 	void				ReplaceAndFind();
 	void				ResetFindReplace();
-	void				IncrementalSearch(std::string term);
-	void				IncrementalSearchCancel();
-	void				IncrementalSearchCommit(std::string term);
 
 	void				UpdateLineNumberWidth();
 
@@ -143,8 +140,6 @@ private:
 	int					fSearchLastFlags;
 	bool				fNewSearch;
 	BMessage			fSearchLastMessage;
-	bool				fIncrementalSearch;
-	Scintilla::Range	fSavedSelection;
 
 	bool				fNumberMarginEnabled;
 	bool				fFoldMarginEnabled;

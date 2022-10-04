@@ -31,7 +31,6 @@ Editor::Editor()
 	fSearchLastResult(-1, -1),
 	fSearchLast(""),
 	fSearchLastFlags(0),
-	fIncrementalSearch(false),
 	fNumberMarginEnabled(false),
 	fFoldMarginEnabled(false),
 	fBookmarkMarginEnabled(false),
@@ -479,63 +478,6 @@ void
 Editor::ResetFindReplace()
 {
 	fNewSearch = true;
-}
-
-
-/**
- * Works like Find(), except it's always case insensitive, looks forward and
- * includes the result in next search. It also saves selection in case the
- * search is cancelled. Search term is managed by the parent control/window.
- * After first call editor is put in incremental search mode so subsequent calls
- * do not reset saved selection.
- */
-void
-Editor::IncrementalSearch(std::string term)
-{
-	Sci::Guard<SearchTarget, SearchFlags> guard(this);
-
-	int length = SendMessage(SCI_GETLENGTH);
-	Sci_Position anchor = SendMessage(SCI_GETANCHOR);
-	Sci_Position current = SendMessage(SCI_GETCURRENTPOS);
-
-	if(fIncrementalSearch == false) {
-		fIncrementalSearch = true;
-		fSavedSelection = { anchor, current };
-	}
-
-	Sci_Position start = (anchor < current) ? anchor : current;
-	bool found;
-	found = _Find(term, start, length, false, false, false);
-
-	if(found == false) {
-		found = _Find(term, 0, start, false, false, false);
-	}
-	// nothing found
-	if(found == false) {
-		Set<Selection>(fSavedSelection);
-	}
-}
-
-
-void
-Editor::IncrementalSearchCancel()
-{
-	fIncrementalSearch = false;
-	Set<Selection>(fSavedSelection);
-}
-
-
-/**
- * Ends incremental search mode and sets up internal state so "Find next" works
- * correctly.
- */
-void
-Editor::IncrementalSearchCommit(std::string term)
-{
-	fIncrementalSearch = false;
-	fSearchLastMessage.MakeEmpty();
-	fSearchLastMessage.AddBool("wrapAround", true);
-	fSearchLastMessage.AddString("findText", term.c_str());
 }
 
 

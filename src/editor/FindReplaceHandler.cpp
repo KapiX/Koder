@@ -6,7 +6,9 @@
 
 #include "FindReplaceHandler.h"
 
+#include <Looper.h>
 #include <Message.h>
+#include <MessageFilter.h>
 #include <Messenger.h>
 #include <ScintillaView.h>
 
@@ -25,6 +27,13 @@ FindReplaceHandler::FindReplaceHandler(BScintillaView* editor,
 	fSearchLast(""),
 	fSearchLastFlags(0)
 {
+	fIncrementalSearchFilter = new IncrementalSearchMessageFilter(this);
+}
+
+
+FindReplaceHandler::~FindReplaceHandler()
+{
+	delete fIncrementalSearchFilter;
 }
 
 
@@ -38,6 +47,26 @@ FindReplaceHandler::MessageReceived(BMessage* message)
 	const int length = fEditor->SendMessage(SCI_GETLENGTH);
 	const Sci_Position anchor = fEditor->SendMessage(SCI_GETANCHOR);
 	const Sci_Position current = fEditor->SendMessage(SCI_GETCURRENTPOS);
+
+	const auto incrementalSearch = [&]() {
+		if(fIncrementalSearch == false) {
+			fIncrementalSearch = true;
+			fSavedSelection = { anchor, current };
+		}
+		Sci_Position start = std::min(anchor, current);
+		Sci_Position pos = _Find(fIncrementalSearchTerm, start, length, false, false, false);
+
+		if(pos == -1) {
+			pos = _Find(fIncrementalSearchTerm, 0, start, false, false, false);
+		}
+
+		if(pos == -1) {
+			Set<Selection>(fSavedSelection);
+		} else {
+			Set<Selection>(Get<SearchTarget>());
+		}
+	};
+
 	switch(message->what) {
 		case REPLACEFIND:
 			// fallthrough
@@ -144,8 +173,66 @@ FindReplaceHandler::MessageReceived(BMessage* message)
 				message->SendReply(&reply, fReplyHandler);
 			}
 		} break;
+		case INCREMENTAL_SEARCH_CHAR: {
+			const char* character = message->GetString("character", "");
+			fIncrementalSearchTerm.append(character);
+			incrementalSearch();
+		} break;
+		case INCREMENTAL_SEARCH_BACKSPACE: {
+			if(!fIncrementalSearchTerm.empty()) {
+				fIncrementalSearchTerm.pop_back();
+				incrementalSearch();
+			}
+		} break;
+		case INCREMENTAL_SEARCH_CANCEL: {
+			fIncrementalSearch = false;
+			fIncrementalSearchTerm = "";
+			Set<Selection>(fSavedSelection);
+			Looper()->RemoveCommonFilter(fIncrementalSearchFilter);
+		} break;
+		case INCREMENTAL_SEARCH_COMMIT: {
+			fIncrementalSearch = false;
+			search_info si = {};
+			si.wrapAround = true;
+			si.find = fIncrementalSearchTerm;
+			fIncrementalSearchTerm = "";
+			Looper()->RemoveCommonFilter(fIncrementalSearchFilter);
+		} break;
 	}
 }
+
+
+FindReplaceHandler::IncrementalSearchMessageFilter::IncrementalSearchMessageFilter(BHandler* handler)
+	:
+	BMessageFilter(B_KEY_DOWN),
+	fHandler(handler)
+{
+}
+
+
+filter_result
+FindReplaceHandler::IncrementalSearchMessageFilter::Filter(BMessage* message, BHandler** target)
+{
+	if(message->what == B_KEY_DOWN) {
+		BLooper *looper = Looper();
+		const char* bytes;
+		message->FindString("bytes", &bytes);
+		if(bytes[0] == B_RETURN) {
+			looper->PostMessage(INCREMENTAL_SEARCH_COMMIT, fHandler);
+		} else if(bytes[0] == B_ESCAPE) {
+			looper->PostMessage(INCREMENTAL_SEARCH_CANCEL, fHandler);
+		} else if(bytes[0] == B_BACKSPACE) {
+			looper->PostMessage(INCREMENTAL_SEARCH_BACKSPACE, fHandler);
+		} else {
+			BMessage msg(INCREMENTAL_SEARCH_CHAR);
+			msg.AddString("character", &bytes[0]);
+			Looper()->PostMessage(&msg, fHandler);
+		}
+		return B_SKIP_MESSAGE;
+	}
+	return B_DISPATCH_MESSAGE;
+}
+
 
 
 Sci_Position
