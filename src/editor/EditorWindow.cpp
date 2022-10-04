@@ -572,13 +572,19 @@ EditorWindow::MessageReceived(BMessage* message)
 			be_app->PostMessage(message);
 		} break;
 		case MAINMENU_SEARCH_FINDNEXT: {
-			fEditor->FindNext();
+			PostMessage(FindReplaceHandler::FIND, fFindReplaceHandler, this);
 		} break;
 		case MAINMENU_SEARCH_FINDSELECTION: {
-			fEditor->FindSelection();
+			std::string selection = fEditor->SelectionText();
+			if(!selection.empty()) {
+				BMessage msg(FindReplaceHandler::FIND);
+				msg.AddBool("wrapAround", true);
+				msg.AddString("findText", selection.c_str());
+				PostMessage(&msg, fFindReplaceHandler, this);
+			}
 		} break;
 		case MAINMENU_SEARCH_REPLACEANDFIND: {
-			fEditor->ReplaceAndFind();
+			PostMessage(FindReplaceHandler::REPLACEFIND, fFindReplaceHandler, this);
 		} break;
 		case MAINMENU_SEARCH_INCREMENTAL: {
 			RemoveCommonFilter(fFindReplaceHandler->IncrementalSearchFilter());

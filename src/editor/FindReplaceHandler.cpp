@@ -69,6 +69,9 @@ FindReplaceHandler::MessageReceived(BMessage* message)
 
 	switch(message->what) {
 		case REPLACEFIND:
+			if(info.replace.empty() && info.find.empty()) {
+				info.replace = fSearchLastInfo.replace;
+			}
 			// fallthrough
 		case REPLACE: {
 			int replaceMsg = (info.regex ? SCI_REPLACETARGETRE : SCI_REPLACETARGET);
@@ -90,6 +93,9 @@ FindReplaceHandler::MessageReceived(BMessage* message)
 		}
 		if(message->what != REPLACEFIND) break;
 		case FIND: {
+			if(info.find.empty()) {
+				info = fSearchLastInfo;
+			}
 			if((fSearchLastInfo.backwards == true && (anchor != fSearchLastResult.first
 					|| current != fSearchLastResult.second))
 				|| (fSearchLastInfo.backwards == false && (anchor != fSearchLastResult.second
