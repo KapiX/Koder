@@ -74,16 +74,6 @@ public:
 
 	void				AppendNLAtTheEndIfNotPresent();
 
-	bool				Find(BMessage* message);
-	void				FindNext();
-	void				FindSelection();
-	void				Replace(std::string replacement, bool regex = false);
-	int					ReplaceAll(std::string search, std::string replacement,
-							bool matchCase, bool matchWord, bool inSelection,
-							bool regex = false);
-	void				ReplaceAndFind();
-	void				ResetFindReplace();
-
 	void				UpdateLineNumberWidth();
 
 	void				GoToLine(int64 line);
@@ -120,10 +110,6 @@ private:
 
 	void				_SetLineIndentation(int line, int indent);
 
-	bool				_Find(std::string search, Sci_Position start,
-							Sci_Position end, bool matchCase, bool matchWord,
-							bool regex = false);
-
 	editor::StatusView*	fStatusView;
 
 	std::string			fCommentLineToken;
@@ -133,13 +119,6 @@ private:
 	Sci_Position		fHighlightedWhitespaceStart;
 	Sci_Position		fHighlightedWhitespaceEnd;
 	Sci_Position		fHighlightedWhitespaceCurrentPos;
-
-	Scintilla::Range	fSearchTarget;
-	Scintilla::Range	fSearchLastResult;
-	std::string			fSearchLast;
-	int					fSearchLastFlags;
-	bool				fNewSearch;
-	BMessage			fSearchLastMessage;
 
 	bool				fNumberMarginEnabled;
 	bool				fFoldMarginEnabled;
