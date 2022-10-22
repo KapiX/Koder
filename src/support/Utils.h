@@ -48,12 +48,12 @@ class KeyDownMessageFilter : public BMessageFilter
 {
 public:
 							KeyDownMessageFilter(uint32 commandToSend,
-								char key, uint32 modifiers = 0);
+								uint32 key, uint32 modifiers = 0);
 
 	virtual	filter_result	Filter(BMessage* message, BHandler** target);
 
 private:
-			char			fKey;
+			uint32			fKey;
 			uint32			fModifiers;
 			uint32			fCommandToSend;
 };

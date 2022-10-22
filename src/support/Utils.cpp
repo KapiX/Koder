@@ -146,10 +146,10 @@ int32 rgb_colorToSciColor(rgb_color color)
 }
 
 
-KeyDownMessageFilter::KeyDownMessageFilter(uint32 commandToSend, char key,
+KeyDownMessageFilter::KeyDownMessageFilter(uint32 commandToSend, uint32 key,
 	uint32 modifiers)
 	:
-	BMessageFilter(B_KEY_DOWN),
+	BMessageFilter(B_ANY_DELIVERY, B_ANY_SOURCE),
 	fKey(key),
 	fModifiers(modifiers),
 	fCommandToSend(commandToSend)
@@ -160,12 +160,12 @@ KeyDownMessageFilter::KeyDownMessageFilter(uint32 commandToSend, char key,
 filter_result
 KeyDownMessageFilter::Filter(BMessage* message, BHandler** target)
 {
-	if(message->what == B_KEY_DOWN) {
-		const char* bytes;
+	if(message->what == B_KEY_DOWN || message->what == B_UNMAPPED_KEY_DOWN) {
+		uint32 key;
 		uint32 modifiers;
-		message->FindString("bytes", &bytes);
+		key = static_cast<uint32>(message->GetInt32("raw_char", 0));
 		modifiers = static_cast<uint32>(message->GetInt32("modifiers", 0));
-		if(bytes[0] == fKey && modifiers == fModifiers) {
+		if(key == fKey && modifiers == fModifiers) {
 			Looper()->PostMessage(fCommandToSend);
 			return B_SKIP_MESSAGE;
 		}
