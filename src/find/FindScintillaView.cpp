@@ -19,6 +19,8 @@ ScintillaView::ScintillaView(const char* name, uint32 getMessage,
 	:
 	BScintillaView(name, flags, horizontal, vertical, border)
 {
+	SendMessage(SCI_SETSELEOLFILLED, 1);
+
 	_UpdateColors();
 	fStatusView = new find::StatusView(this,
 		getMessage, clearMessage, applyMessage);
