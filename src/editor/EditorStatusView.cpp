@@ -48,12 +48,13 @@ StatusView::StatusView(BScrollView* scrollView)
 			controls::StatusView(scrollView),
 			fReadOnly(false),
 			fNavigationPressed(false),
-			fNavigationButtonWidth(B_H_SCROLL_BAR_HEIGHT)
+			fNavigationButtonWidth(scrollView->ScrollBar(B_HORIZONTAL)->Frame().Height())
 {
 	memset(fCellWidth, 0, sizeof(fCellWidth));
 
 	SetFont(be_plain_font);
-	SetFontSize(10.);
+	float fontSize = 10.f * (be_plain_font->Size() / 12.f);
+	SetFontSize(fontSize);
 }
 
 

@@ -49,13 +49,14 @@ StatusView::StatusView(BScrollView* scrollView, uint32 getMessage,
 	:
 	controls::StatusView(scrollView),
 	fPressed(false),
-	fButtonWidth(B_H_SCROLL_BAR_HEIGHT + kHorzSpacing * 2),
+	fButtonWidth(scrollView->ScrollBar(B_HORIZONTAL)->Frame().Height() + kHorzSpacing * 2),
 	fGetMessage(getMessage),
 	fClearMessage(clearMessage),
 	fApplyMessage(applyMessage)
 {
 	SetFont(be_plain_font);
-	SetFontSize(10.);
+	float fontSize = 10.f * (be_plain_font->Size() / 12.f);
+	SetFontSize(fontSize);
 }
 
 
@@ -153,7 +154,7 @@ StatusView::MessageReceived(BMessage* message)
 
 		BPoint point = Parent()->Bounds().LeftBottom();
 		point.x += 2; // border width
-		point.y += 3 + B_H_SCROLL_BAR_HEIGHT;
+		point.y += 3 + ScrollView()->ScrollBar(B_HORIZONTAL)->Frame().Height();
 		ConvertToScreen(&point);
 		BRect clickToOpenRect(Parent()->Bounds());
 		ConvertToScreen(&clickToOpenRect);
@@ -185,7 +186,7 @@ StatusView::_DrawButton(BRect rect)
 		flags |= BControlLook::B_DISABLED;
 	be_control_look->DrawButtonBackground(this, rect, rect, baseColor, flags,
 		BControlLook::B_ALL_BORDERS, B_HORIZONTAL);
-	rect.left += rect.right - B_H_SCROLL_BAR_HEIGHT + 1;
+	rect.left += rect.right - ScrollView()->ScrollBar(B_HORIZONTAL)->Frame().Height() - 1;
 	rect.bottom -= 2;
 	be_control_look->DrawArrowShape(this, rect, rect, baseColor,
 		BControlLook::B_DOWN_ARROW, flags, B_DARKEN_MAX_TINT);
