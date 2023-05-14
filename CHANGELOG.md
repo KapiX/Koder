@@ -1,6 +1,8 @@
 # Changelog
 
-## 0.6.0 - TBD
+## 0.7.0 - TBD
+
+## [0.6.0] - 2023-05-14
 
 * Add Find/Replace history.
 * Add --wait switch to block when used from command line.
