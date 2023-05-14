@@ -1,82 +1,47 @@
-1	Polish	x-vnd.KapiX-Koder	822155924
-Code editor for Haiku based on Scintilla editing component.	App		Edytor kodu dla Haiku oparty na kontrolce Scintilla.
-Distributed on MIT license terms.	App		Rozprowadzany na warunkach licencji MIT.
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neila Hodgsona, za kontrolkę Scintilla i edytor SciTE.
-zuMi, for toolbar icons.	App		zuMi, za ikony paska narzędzi.
-Konrad77, for dark theme.	App		Konrada77, za ciemny styl edytora.
-translators to:	App	to _ (language), e.g. German	tłumaczy na:
-humdinger, for GUI design tips and artwork.	App		humdingera, za porady dotyczące interfejsu oraz grafiki.
-Background	AppPreferencesWindow		Tło
-Compact language menu	AppPreferencesWindow		Kompaktowe menu języków
-Convert tabs to spaces	AppPreferencesWindow		Konwersja tabulacji na spacje
-Highlight braces	AppPreferencesWindow		Podświetl nawiasy
-Highlight current line	AppPreferencesWindow		Podświetl edytowaną linię
-Highlight trailing whitespace	AppPreferencesWindow		Podświetlaj wiodące białe znaki
-Koder preferences	AppPreferencesWindow		Preferencje Kodera
-Line	AppPreferencesWindow		Linia
-Mark overly long lines	AppPreferencesWindow		Oznacz zbyt długie linie
-Max. characters per line:	AppPreferencesWindow		Maks. liczba znaków w linii:
-Only in actually indented lines	AppPreferencesWindow		Tylko dla właściwych wcięć
-Revert	AppPreferencesWindow		Cofnij
-Show full path in title	AppPreferencesWindow		Pokazuj pełną ścieżkę na pasku tytułu
-Show indentation guides	AppPreferencesWindow		Pokazuj prowadnice wcięć
-Show toolbar	AppPreferencesWindow		Pokazuj pasek narzędzie
-Spaces per tab:	AppPreferencesWindow		Spacje na tabulację:
-Stack new windows	AppPreferencesWindow		Grupuj nowe okna
-Style	AppPreferencesWindow		Styl
-Trim trailing whitespace on save	AppPreferencesWindow		Obcinaj wiodące białe znaki przy zapisywaniu
-Up to the next non-empty line	AppPreferencesWindow		Do następnej niepustej linii
-Up to the next/previous non-empty line	AppPreferencesWindow		Do następnej/poprzedniej niepustej linii
-Behavior	AppPreferencesWindow		Zachowanie
-Background	AppPreferencesWindow	Current line highlight	Tło
-Frame	AppPreferencesWindow	Current line highlight	Ramka
-Trailing whitespace	AppPreferencesWindow		Końcowe białe znaki
-Visual	AppPreferencesWindow		Wizualne
-Indentation	AppPreferencesWindow		Wcięcia
-Use .editorconfig if possible	AppPreferencesWindow		Użyj .editorconfig jeśli to możliwe
-Always open files in new window	AppPreferencesWindow		Zawsze otwieraj pliki w nowym oknie
-Use custom font	AppPreferencesWindow		Użyj poniższego fontu
-Folds	AppPreferencesWindow		Zwijacze
-Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantyczne
-Large	AppPreferencesWindow	Toolbar icon size	Duże
-Bookmarks	AppPreferencesWindow		Zakładki
-Extra large	AppPreferencesWindow	Toolbar icon size	Bardzo duże
-Medium	AppPreferencesWindow	Toolbar icon size	Średnie
-Small	AppPreferencesWindow	Toolbar icon size	Małe
-Huge	AppPreferencesWindow	Toolbar icon size	Wielkie
-Icon size	AppPreferencesWindow		Rozmiar ikon
-Line numbers	AppPreferencesWindow		Numery linii
-Enormous	AppPreferencesWindow	Toolbar icon size	Ogromne
-Left margin	AppPreferencesWindow		Lewy margines
-Ensure empty last line on save	AppPreferencesWindow		Dodaj pustą linię na końcu przy zapisywaniu
+1	Polish	x-vnd.KapiX-Koder	3251374093
 [read-only]	EditorWindow		[tylko do odczytu]
+<empty>	EditorWindow		<pusto>
 About…	EditorWindow		O programie…
 Access denied	EditorWindow		Odmowa dostępu
+Bookmarks	EditorWindow		Zakładki
 Cancel	EditorWindow		Anuluj
 Close	EditorWindow		Zamknij
 Comment block	EditorWindow		Zakomentuj blok
 Comment line	EditorWindow		Zakomentuj linię
 Copy	EditorWindow		Kopiuj
+Could not find Open Terminal Tracker add-on.	EditorWindow		Nie znaleziono dodatku Trackera „Otwórz Terminal”.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Nie udało się uruchomić dodatku Trackera „Otwórz Terminal”.
 Cut	EditorWindow		Wytnij
 Discard	EditorWindow		Odrzuć
 Do nothing	EditorWindow		Nic
 Edit	EditorWindow		Edycja
 File	EditorWindow		Plik
 File modified	EditorWindow		Plik zmodyfikowany
+File removed	EditorWindow		Plik usunięty
+Find next	EditorWindow		Znajdź następne
+Find selection	EditorWindow		Znajdź zaznacznie
 Find/Replace…	EditorWindow		Znajdź/Zastąp…
 Go to line…	EditorWindow		Skocz do linii…
 Help	EditorWindow		Pomoc
+Incremental search	EditorWindow		Szukanie przyrostowe
 Koder preferences…	EditorWindow		Ustawienia Kodera…
 Language	EditorWindow		Język
 Line endings	EditorWindow		Zakończenia linii
 New	EditorWindow		Nowy
+Next bookmark	EditorWindow		Następna zakładka
 Old Mac format	EditorWindow		Format starego Mac OS
+Open partner file	EditorWindow		Otwórz plik towarzyszący
+Open recent	EditorWindow		Otwórz ostatnie
+Open Terminal	EditorWindow		Otwórz Terminal
 Open…	EditorWindow		Otwórz…
+Partner file not found.	EditorWindow		Nie znaleziono pliku towarzyszącego.
 Paste	EditorWindow		Wklej
+Previous bookmark	EditorWindow		Poprzednia zakładka.
 Quit	EditorWindow		Zakończ
 Reached the end of the target. No results found.	EditorWindow		Osiągnięto koniec zakresu. Brak wyników.
 Redo	EditorWindow		Ponów
 Reload	EditorWindow		Przeładuj
+Replace and find	EditorWindow		Zastąp i znajdź
 Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Zastąpiono {0, plural, one{# wystąpienie} few{# wystąpienia} many{# wystąpień} other{# wystąpienia}}.
 Replacement finished	EditorWindow		Zamiana zakończona
 Save	EditorWindow		Zapisz
@@ -91,6 +56,8 @@ Special symbols	EditorWindow		Symbole specjalne
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Plik zawiera niezapisane zmiany, ale jest tylko do odczytu. Co zrobić?
 The file contains unsaved changes. What to do?	EditorWindow		Plik zawiera niezapisane zmiany. Co zrobić?
 The file has been modified by another application. What to do?	EditorWindow		Plik został zmodyfikowany przez inną aplikację. Co zrobić?
+The file has been removed. What to do?	EditorWindow		Plik został usunięty. Co zrobić?
+Toggle bookmark	EditorWindow		Przełącz zakładkę
 Trim trailing whitespace	EditorWindow		Obetnij wiodące białe znaki
 Undo	EditorWindow		Cofnij
 Unix format	EditorWindow		Format Unix
@@ -101,21 +68,63 @@ Windows format	EditorWindow		Format Windows
 Wrap lines	EditorWindow		Zawijaj linie
 You don't have sufficient permissions to edit this file.	EditorWindow		Nie masz wystarczających uprawnień do edycji tego pliku.
 Your changes will be lost.	EditorWindow		Zmiany zostaną utracone.
-Find selection	EditorWindow		Znajdź zaznacznie
-Find next	EditorWindow		Znajdź następne
-Replace and find	EditorWindow		Zastąp i znajdź
-Incremental search	EditorWindow		Szukanie przyrostowe
-Could not find Open Terminal Tracker add-on.	EditorWindow		Nie znaleziono dodatku Trackera „Otwórz Terminal”.
-Toggle bookmark	EditorWindow		Przełącz zakładkę
-Open Terminal	EditorWindow		Otwórz Terminal
-Next bookmark	EditorWindow		Następna zakładka
-Could not launch Open Terminal Tracker add-on.	EditorWindow		Nie udało się uruchomić dodatku Trackera „Otwórz Terminal”.
-File removed	EditorWindow		Plik usunięty
-Bookmarks	EditorWindow		Zakładki
-The file has been removed. What to do?	EditorWindow		Plik został usunięty. Co zrobić?
-Open partner file	EditorWindow		Otwórz plik towarzyszący
-Previous bookmark	EditorWindow		Poprzednia zakładka.
-Partner file not found.	EditorWindow		Nie znaleziono pliku towarzyszącego.
+<empty>	FindStatusView		<pusto>
+Clear	FindStatusView		Wyczyść
+History	FindStatusView		Historia
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Brak dostępu do pliku konfiguracyjnego. Upewnij się że masz uprawnienia do %s% dla katalogu z ustawieniami.
+Editor settings	Preferences		Ustawienia edytora
+load	Preferences	to _ the configuration	wczytania
+loaded	Preferences	settings will not be _	wczytane
+read	Preferences	Make sure you have _ permission for	odczytu
+save	Preferences	to _ the configuration	zapisu
+saved	Preferences	settings will not be _	zapisane
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Coś niespodziewanego nastapiło podczas otwierania pliku konfiguracyjnego. Ustawienia nie zostaną %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Niewystarczająca ilość pamięci do %s% pliku konfiguracyjnego. Spróbuj zamknąć kilka aplikacji i uruchom edytor ponownie.
+Unknown error.	Preferences		Nieznany błąd.
+write	Preferences	Make sure you have _ permission for	zapisu
+Always open files in new window	AppPreferencesWindow		Zawsze otwieraj pliki w nowym oknie
+Background	AppPreferencesWindow		Tło
+Background	AppPreferencesWindow	Current line highlight	Tło
+Behavior	AppPreferencesWindow		Zachowanie
+Bookmarks	AppPreferencesWindow		Zakładki
+Compact language menu	AppPreferencesWindow		Kompaktowe menu języków
+Convert tabs to spaces	AppPreferencesWindow		Konwersja tabulacji na spacje
+Enormous	AppPreferencesWindow	Toolbar icon size	Ogromne
+Ensure empty last line on save	AppPreferencesWindow		Dodaj pustą linię na końcu przy zapisywaniu
+Extra large	AppPreferencesWindow	Toolbar icon size	Bardzo duże
+Folds	AppPreferencesWindow		Zwijacze
+Frame	AppPreferencesWindow	Current line highlight	Ramka
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantyczne
+Highlight braces	AppPreferencesWindow		Podświetl nawiasy
+Highlight current line	AppPreferencesWindow		Podświetl edytowaną linię
+Highlight trailing whitespace	AppPreferencesWindow		Podświetlaj wiodące białe znaki
+Huge	AppPreferencesWindow	Toolbar icon size	Wielkie
+Icon size	AppPreferencesWindow		Rozmiar ikon
+Indentation	AppPreferencesWindow		Wcięcia
+Koder preferences	AppPreferencesWindow		Preferencje Kodera
+Large	AppPreferencesWindow	Toolbar icon size	Duże
+Left margin	AppPreferencesWindow		Lewy margines
+Line	AppPreferencesWindow		Linia
+Line numbers	AppPreferencesWindow		Numery linii
+Mark overly long lines	AppPreferencesWindow		Oznacz zbyt długie linie
+Max. characters per line:	AppPreferencesWindow		Maks. liczba znaków w linii:
+Medium	AppPreferencesWindow	Toolbar icon size	Średnie
+Only in actually indented lines	AppPreferencesWindow		Tylko dla właściwych wcięć
+Revert	AppPreferencesWindow		Cofnij
+Show full path in title	AppPreferencesWindow		Pokazuj pełną ścieżkę na pasku tytułu
+Show indentation guides	AppPreferencesWindow		Pokazuj prowadnice wcięć
+Show toolbar	AppPreferencesWindow		Pokazuj pasek narzędzie
+Small	AppPreferencesWindow	Toolbar icon size	Małe
+Spaces per tab:	AppPreferencesWindow		Spacje na tabulację:
+Stack new windows	AppPreferencesWindow		Grupuj nowe okna
+Style	AppPreferencesWindow		Styl
+Trailing whitespace	AppPreferencesWindow		Końcowe białe znaki
+Trim trailing whitespace on save	AppPreferencesWindow		Obcinaj wiodące białe znaki przy zapisywaniu
+Up to the next non-empty line	AppPreferencesWindow		Do następnej niepustej linii
+Up to the next/previous non-empty line	AppPreferencesWindow		Do następnej/poprzedniej niepustej linii
+Use .editorconfig if possible	AppPreferencesWindow		Użyj .editorconfig jeśli to możliwe
+Use custom font	AppPreferencesWindow		Użyj poniższego fontu
+Visual	AppPreferencesWindow		Wizualne
 Backwards	FindWindow		Wstecz
 Find	FindWindow		Znajdź
 Find:	FindWindow		Znajdź:
@@ -129,6 +138,7 @@ Replace all	FindWindow		Zastąp wszystkie
 Replace and find	FindWindow		Zastąp i znajdź
 Replace:	FindWindow		Zastąp:
 Wrap around	FindWindow		Zapętlaj
+Bookmarks	BookmarksWindow		Zakładki
 Cancel	GoToLineWindow		Anuluj
 Go to line	GoToLineWindow		Skocz do linii
 Go to line:	GoToLineWindow		Skok do linii:
@@ -139,23 +149,18 @@ Save all	QuitAlert		Zapisz wszystkie
 Save selected	QuitAlert		Zapisz zaznaczone
 There are unsaved changes.\nSelect the files to save.	QuitAlert		Istnieją niezapisane zmiany.\nWybierz pliki do zapisania.
 Unsaved files	QuitAlert		Niezapisane pliki
+Code editor for Haiku based on Scintilla editing component.	App		Edytor kodu dla Haiku oparty na kontrolce Scintilla.
+Distributed on MIT license terms.	App		Rozprowadzany na warunkach licencji MIT.
+humdinger, for GUI design tips and artwork.	App		humdingera, za porady dotyczące interfejsu oraz grafiki.
+Konrad77, for dark theme.	App		Konrada77, za ciemny styl edytora.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neila Hodgsona, za kontrolkę Scintilla i edytor SciTE.
+translators to:	App	to _ (language), e.g. German	tłumaczy na:
+zuMi, for toolbar icons.	App		zuMi, za ikony paska narzędzi.
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Nie znaleziono plików stylów. Upewnij się, że zostały zainstalowane w jednym z katalogów data.
 Style files	Styler		Pliki stylów
-Koder	System name		Koder
-Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Brak dostępu do pliku konfiguracyjnego. Upewnij się że masz uprawnienia do %s% dla katalogu z ustawieniami.
-Editor settings	Preferences		Ustawienia edytora
-read	Preferences	Make sure you have _ permission for	odczytu
-Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Coś niespodziewanego nastapiło podczas otwierania pliku konfiguracyjnego. Ustawienia nie zostaną %s%.
-load	Preferences	to _ the configuration	wczytania
-Unknown error.	Preferences		Nieznany błąd.
-There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Niewystarczająca ilość pamięci do %s% pliku konfiguracyjnego. Spróbuj zamknąć kilka aplikacji i uruchom edytor ponownie.
-loaded	Preferences	settings will not be _	wczytane
-write	Preferences	Make sure you have _ permission for	zapisu
-save	Preferences	to _ the configuration	zapisu
-saved	Preferences	settings will not be _	zapisane
-Read-only	StatusView		Tylko do odczytu
-Open Terminal	StatusView		Otwórz Terminal
-Go to	BookmarksListView		Skocz do
 Delete	BookmarksListView		Usuń
+Go to	BookmarksListView		Skocz do
+Koder	System name		Koder
 OK	Utilities		OK
-Bookmarks	BookmarksWindow		Zakładki
+Open Terminal	EditorStatusView		Otwórz Terminal
+Read-only	EditorStatusView		Tylko do odczytu

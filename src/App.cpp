@@ -103,32 +103,39 @@ App::AboutRequested()
 	};
 
 	const std::unordered_map<std::string, std::vector<std::string>> translatorsMap{
+		{ "ca", { "Davidmp" } },
 		{ "de", { "FabianReidinger", "humdinger" } },
-		{ "en_GB", { "adamfowleruk" } },
-		{ "es", { "un_spacyar" } },
+		{ "el", { "blu.256" } },
+		{ "en_AU", { "jt15s" } },
+		{ "en_GB", { "Adam Fowler", "jt15s" } },
+		{ "es", { "cafeina", "unspacyar"} },
+		{ "es_419", { "victroniko" } },
 //		{ "fi", { "Karvjorm" } },
-		{ "fr", { "Briseur" } },
+		{ "fr", { "Briseur", "Loïc", "Jérôme Duval" } },
+		{ "fur", { "tmtfx" } },
 		{ "hu", { "miqlas" } },
 //		{ "id", { "mazbrili" } },
-//		{ "it", { "TheClue" } },
+		{ "it", { "Gabriele Baldassarre" } },
+		{ "ja", { "Murai Takashi" } },
 //		{ "lt", { "damoklas" } },
-		{ "pt", { "Victor Domingos" } },
-		{ "ro", { "al-popa", "Florentina" } },
-		{ "ru", { "al-popa", "ArmanHayots", "diver", "TK-313" } },
-//		{ "sv", { "deejam" } },
-		{ "uk", { "Lan72" } }
+		{ "nl", { "Schrijvers Luc" } },
+		{ "pt", { "louisdem", "Victor Domingos" } },
+		{ "ro", { "al-popa", "Florentina Mușat" } },
+		{ "ru", { "al-popa", "ArmanHayots", "Sergei Reznikov", "TK-313" } },
+		{ "sv", { "deejam", "Fredrik Modéen" } },
+		{ "tr", { "Emir Sarı" } },
+		{ "uk", { "Alexey Lugin" } },
+		{ "zh_Hans", { "玉堂白鹤" } }
 	};
 
 	BMessage languages;
 	if(BLocaleRoster::Default()->GetAvailableLanguages(&languages) == B_OK) {
 		BString langID;
 		for(int i = 0; languages.FindString("language", i, &langID) == B_OK; i++) {
-			BLanguage lang(langID.String());
-			const auto translators = translatorsMap.find(lang.ID());
-			// let's deal with pt_BR later
-			if((lang.IsCountrySpecific() && langID != "en_GB")
-				|| translators == translatorsMap.end())
+			const auto translators = translatorsMap.find(langID.String());
+			if(translators == translatorsMap.end())
 				continue;
+			BLanguage lang(langID.String());
 			BString name;
 			lang.GetName(name);
 			std::ostringstream languageRow;

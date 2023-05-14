@@ -1,0 +1,166 @@
+1	Friulian	x-vnd.KapiX-Koder	3251374093
+[read-only]	EditorWindow		[dome-leture]
+<empty>	EditorWindow		<vueit>
+About…	EditorWindow		Informazions su…
+Access denied	EditorWindow		Acès dineât
+Bookmarks	EditorWindow		Segnelibris
+Cancel	EditorWindow		Anule
+Close	EditorWindow		Siere
+Comment block	EditorWindow		Bloc coments
+Comment line	EditorWindow		Rie coment
+Copy	EditorWindow		Copie
+Could not find Open Terminal Tracker add-on.	EditorWindow		Impussibil cjatâ il add-on di Tracker Open Terminal.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Impussibil inviâ il add-on di Tracker Open Terminal.
+Cut	EditorWindow		Taie
+Discard	EditorWindow		Scarte
+Do nothing	EditorWindow		No sta fa nuie
+Edit	EditorWindow		Modifiche
+File	EditorWindow		File
+File modified	EditorWindow		File modificât
+File removed	EditorWindow		File eliminât
+Find next	EditorWindow		Cjate prossim
+Find selection	EditorWindow		Cjate selezion
+Find/Replace…	EditorWindow		Cjate/Sostituìs…
+Go to line…	EditorWindow		Va ae rie…
+Help	EditorWindow		Jutori
+Incremental search	EditorWindow		Ricercje incrementâl
+Koder preferences…	EditorWindow		Preferencis di Koder…
+Language	EditorWindow		Lenghe
+Line endings	EditorWindow		Fin di rie
+New	EditorWindow		Gnûf
+Next bookmark	EditorWindow		Prossim segnelibri
+Old Mac format	EditorWindow		Formât Mac vecjo
+Open partner file	EditorWindow		Vierç file relazionât
+Open recent	EditorWindow		Vierç resint
+Open Terminal	EditorWindow		Vierç terminâl
+Open…	EditorWindow		Vierç…
+Partner file not found.	EditorWindow		File relazionât no cjatât.
+Paste	EditorWindow		Tache
+Previous bookmark	EditorWindow		Segnelibris precedent
+Quit	EditorWindow		Jes
+Reached the end of the target. No results found.	EditorWindow		Si è rivâts ae fin. Nissun risultât cjatât.
+Redo	EditorWindow		Torne fâs
+Reload	EditorWindow		Torne cjarie
+Replace and find	EditorWindow		Sostituìs e cjate
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		{0, plural, one{# câs sostituît} other{# câs sostituîts}}.
+Replacement finished	EditorWindow		Sostituzion finide
+Save	EditorWindow		Salve
+Save as…	EditorWindow		Salve come…
+Search	EditorWindow		Cîr
+Searching finished	EditorWindow		Ricercje finide
+Select all	EditorWindow		Selezione dut
+Show line endings	EditorWindow		Mostre fins di rie
+Show toolbar	EditorWindow		Mostre sbare dai struments
+Show white space	EditorWindow		Mostre spazis blancs
+Special symbols	EditorWindow		Simbui speciâi
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Il file al conten modifichis che no son stadis salvadis, ma al è in dome-leture. Ce desideristu fâ?
+The file contains unsaved changes. What to do?	EditorWindow		Il file al conten modifichis che no son stadis salvadis. Ce desideristu fâ?
+The file has been modified by another application. What to do?	EditorWindow		Il file al è stât modificât di une altre aplicazion. Ce desideristu fâ?
+The file has been removed. What to do?	EditorWindow		Il file al è stât eliminât. Ce desideristu fâ?
+Toggle bookmark	EditorWindow		Ative/disative segnelibri
+Trim trailing whitespace	EditorWindow		Gjave vie i spazis blancs finâi
+Undo	EditorWindow		Disfe
+Unix format	EditorWindow		Formât Unix
+Unsaved changes	EditorWindow		Modifichis no salvadis
+Untitled	EditorWindow		Cence titul
+View	EditorWindow		Visualize
+Windows format	EditorWindow		Formât Windows
+Wrap lines	EditorWindow		A Rie gnove in automatic
+You don't have sufficient permissions to edit this file.	EditorWindow		No si à permès suficients par modificâ chest file.
+Your changes will be lost.	EditorWindow		Lis tôs modifichis a laran pierdudis.
+<empty>	FindStatusView		<vueit>
+Clear	FindStatusView		Nete
+History	FindStatusView		Cronologjie
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		L'acès al è stât dineât intant che si vierzeve il file di configurazion. Sigurâsi di vê i permès di %s% pe vuestre cartele des impostazions.
+Editor settings	Preferences		Impostazions editôr
+load	Preferences	to _ the configuration	cjariâ
+loaded	Preferences	settings will not be _	cjariadis
+read	Preferences	Make sure you have _ permission for	leture
+save	Preferences	to _ the configuration	salvâ
+saved	Preferences	settings will not be _	salvadis
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Alc al è lât strucj intal vierzi il file di configurazion. Lis impostazions personâls no vignaran %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		No je vonde memorie disponibile par %s% il file di configurazion. Prove a sierâ cualchi aplicazion e torne invie l'editôr.
+Unknown error.	Preferences		Erôr no cognossût.
+write	Preferences	Make sure you have _ permission for	scriture
+Always open files in new window	AppPreferencesWindow		Vierç simpri i file intun gnûf barcon
+Background	AppPreferencesWindow		Fonts
+Background	AppPreferencesWindow	Current line highlight	Fonts
+Behavior	AppPreferencesWindow		Compuartament
+Bookmarks	AppPreferencesWindow		Segnelibris
+Compact language menu	AppPreferencesWindow		Menù lenghe compat
+Convert tabs to spaces	AppPreferencesWindow		Convertìs schedis in spazis
+Enormous	AppPreferencesWindow	Toolbar icon size	Enorme
+Ensure empty last line on save	AppPreferencesWindow		Garantìs ultime rie vueide al salvament
+Extra large	AppPreferencesWindow	Toolbar icon size	Plui largje
+Folds	AppPreferencesWindow		Pleâ
+Frame	AppPreferencesWindow	Current line highlight	Curnîs
+Gigantic	AppPreferencesWindow	Toolbar icon size	Grandonone
+Highlight braces	AppPreferencesWindow		Evidenzie parentesis
+Highlight current line	AppPreferencesWindow		Evidenzie rie atuâl
+Highlight trailing whitespace	AppPreferencesWindow		Evidenzie spazis blancs a fin di rie
+Huge	AppPreferencesWindow	Toolbar icon size	Plui grande
+Icon size	AppPreferencesWindow		Dimension icone
+Indentation	AppPreferencesWindow		Indentazion
+Koder preferences	AppPreferencesWindow		Preferencis di Koder
+Large	AppPreferencesWindow	Toolbar icon size	Largje
+Left margin	AppPreferencesWindow		Margjin di çampe
+Line	AppPreferencesWindow		Rie
+Line numbers	AppPreferencesWindow		Numars des riis
+Mark overly long lines	AppPreferencesWindow		Segne riis masse lungjis
+Max. characters per line:	AppPreferencesWindow		Caratars massims par rie:
+Medium	AppPreferencesWindow	Toolbar icon size	Medie
+Only in actually indented lines	AppPreferencesWindow		Dome tes riis cumò indentadis
+Revert	AppPreferencesWindow		Torne indaûr
+Show full path in title	AppPreferencesWindow		Mostre percors complet tal titul
+Show indentation guides	AppPreferencesWindow		Mostre vuidis di intendazion
+Show toolbar	AppPreferencesWindow		Mostre sbare dai struments
+Small	AppPreferencesWindow	Toolbar icon size	Piçule
+Spaces per tab:	AppPreferencesWindow		Spazis par schede:
+Stack new windows	AppPreferencesWindow		Intasse gnûfs barcons
+Style	AppPreferencesWindow		Stîl
+Trailing whitespace	AppPreferencesWindow		Spazis blancs finâls
+Trim trailing whitespace on save	AppPreferencesWindow		Gjave vie i spazis blancs finâi al salvament
+Up to the next non-empty line	AppPreferencesWindow		Fin ae prossime rie no vueide
+Up to the next/previous non-empty line	AppPreferencesWindow		Fin ae prossime/precedente rie no vueide
+Use .editorconfig if possible	AppPreferencesWindow		Dopre .editorconfig se pussibil
+Use custom font	AppPreferencesWindow		Dopre caratar personalizât
+Visual	AppPreferencesWindow		Visuâl
+Backwards	FindWindow		Indaûr
+Find	FindWindow		Cjate
+Find:	FindWindow		Cjate:
+Find/Replace	FindWindow		Cjate/Sostituìs
+In selection	FindWindow		Te selezion
+Match case	FindWindow		Corispondence maiusculis/minusculis
+Match entire words	FindWindow		Corispondence peraulis interiis
+Regex	FindWindow		Espression regolâr
+Replace	FindWindow		Sostituìs
+Replace all	FindWindow		Sostituìs dut
+Replace and find	FindWindow		Sostituìs e cjate
+Replace:	FindWindow		Sostituìs:
+Wrap around	FindWindow		Cir in dut il test
+Bookmarks	BookmarksWindow		Segnelibris
+Cancel	GoToLineWindow		Anule
+Go to line	GoToLineWindow		Va ae rie
+Go to line:	GoToLineWindow		Va ae rie:
+OK	GoToLineWindow		Va ben
+Cancel	QuitAlert		Anule
+Don't save	QuitAlert		No sta salvâ
+Save all	QuitAlert		Salve dut
+Save selected	QuitAlert		Salve chel selezionât
+There are unsaved changes.\nSelect the files to save.	QuitAlert		A'ndi son modifichis no salvadis.\nSelezione i file di salvâ.
+Unsaved files	QuitAlert		File no salvâts
+Code editor for Haiku based on Scintilla editing component.	App		Editôr di codiç par Haiku basât sul component Scintilla.
+Distributed on MIT license terms.	App		Distribuît secont i tiermis de licence MIT.
+humdinger, for GUI design tips and artwork.	App		humdinger, pe grafiche e il dissen de GUI.
+Konrad77, for dark theme.	App		Konrad77, pal teme scûr.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, pal component di modifiche di Scintilla e l'editôr SciTE.
+translators to:	App	to _ (language), e.g. German	tradutôrs par:
+zuMi, for toolbar icons.	App		zuMi, pes iconis de sbare dai struments.
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Impussibil cjatâ i file di stîl. Siguraisi di vêju instalâts intune des vuestris cartelis di dâts.
+Style files	Styler		File di stîl
+Delete	BookmarksListView		Elimine
+Go to	BookmarksListView		Va a
+Koder	System name		Koder
+OK	Utilities		Va ben
+Open Terminal	EditorStatusView		Vierç Terminâl
+Read-only	EditorStatusView		Dome-leture

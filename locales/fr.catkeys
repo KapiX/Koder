@@ -1,82 +1,47 @@
-1	French	x-vnd.KapiX-Koder	822155924
-Code editor for Haiku based on Scintilla editing component.	App		Un éditeur de code pour Haiku basé sur le composant d'édition Scintilla.
-Distributed on MIT license terms.	App		Distribué sous les termes de la licence MIT.
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, pour le composant d'édition Scintilla et l'éditeur SciTE.
-zuMi, for toolbar icons.	App		zuMi, pour les icones de la barre d'outils.
-Konrad77, for dark theme.	App		Konrad77, pour le thème sombre.
-translators to:	App	to _ (language), e.g. German	localisation en :
-humdinger, for GUI design tips and artwork.	App		humdinger, pour les astuces de design GUI et l'illustration.
-Background	AppPreferencesWindow		Arrière-plan
-Compact language menu	AppPreferencesWindow		Menu de langage compact
-Convert tabs to spaces	AppPreferencesWindow		Convertir les tabulations en espaces
-Highlight braces	AppPreferencesWindow		Mettre en évidence les bretelles
-Highlight current line	AppPreferencesWindow		Mettre en évidence la ligne courante
-Highlight trailing whitespace	AppPreferencesWindow		Mettre en évidence les espaces en fin de ligne
-Koder preferences	AppPreferencesWindow		Préférences de Koder
-Line	AppPreferencesWindow		Ligne
-Mark overly long lines	AppPreferencesWindow		Indiquer les lignes trop longues
-Max. characters per line:	AppPreferencesWindow		Max. caractères par ligne :
-Only in actually indented lines	AppPreferencesWindow		Seulement dans les lignes déjà indentées
-Revert	AppPreferencesWindow		Défaire
-Show full path in title	AppPreferencesWindow		Afficher le chemin complet dans le titre
-Show indentation guides	AppPreferencesWindow		Afficher les guides d'indentation
-Show toolbar	AppPreferencesWindow		Afficher la barre d'outils
-Spaces per tab:	AppPreferencesWindow		Nbre d'espaces par tabulation :
-Stack new windows	AppPreferencesWindow		Juxtaposer les nouvelles fenêtres
-Style	AppPreferencesWindow		Style
-Trim trailing whitespace on save	AppPreferencesWindow		Éliminer les espaces en fin de ligne à la sauvegarde
-Up to the next non-empty line	AppPreferencesWindow		Jusqu'à la ligne non-vide suivante
-Up to the next/previous non-empty line	AppPreferencesWindow		Jusqu'à la ligne non-vide suivante/précédente
-Behavior	AppPreferencesWindow		Comportement
-Background	AppPreferencesWindow	Current line highlight	Arrière-plan
-Frame	AppPreferencesWindow	Current line highlight	Bordure
-Trailing whitespace	AppPreferencesWindow		Espaces en fin de ligne
-Visual	AppPreferencesWindow		Visuel
-Indentation	AppPreferencesWindow		Indentation
-Use .editorconfig if possible	AppPreferencesWindow		Utiliser .editorconfig si possible
-Always open files in new window	AppPreferencesWindow		Toujours ouvrir les fichiers dans une nouvelle fenêtre
-Use custom font	AppPreferencesWindow		Utiliser une police personnalisée
-Folds	AppPreferencesWindow		Plis
-Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantesque
-Large	AppPreferencesWindow	Toolbar icon size	Grosse
-Bookmarks	AppPreferencesWindow		Signets
-Extra large	AppPreferencesWindow	Toolbar icon size	Très grosse
-Medium	AppPreferencesWindow	Toolbar icon size	Moyenne
-Small	AppPreferencesWindow	Toolbar icon size	Petite
-Huge	AppPreferencesWindow	Toolbar icon size	Immense
-Icon size	AppPreferencesWindow		Dimension de l'icone
-Line numbers	AppPreferencesWindow		Numéros de ligne
-Enormous	AppPreferencesWindow	Toolbar icon size	Enorme
-Left margin	AppPreferencesWindow		Marge à gauche
-Ensure empty last line on save	AppPreferencesWindow		S'assurer que la dernière ligne est vide à la sauvegarde
+1	French	x-vnd.KapiX-Koder	3251374093
 [read-only]	EditorWindow		[lecture-seule]
+<empty>	EditorWindow		<vide>
 About…	EditorWindow		À propos de…
 Access denied	EditorWindow		Accès refusé
+Bookmarks	EditorWindow		Signets
 Cancel	EditorWindow		Annuler
 Close	EditorWindow		Fermer
 Comment block	EditorWindow		Bloc de commentaire
 Comment line	EditorWindow		Ligne de commentaire
 Copy	EditorWindow		Copier
+Could not find Open Terminal Tracker add-on.	EditorWindow		Impossible de trouver l’extension « Ouvrir un terminal » du Tracker.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Impossible de lancer l’extension « Ouvrir un terminal » du Tracker.
 Cut	EditorWindow		Couper
 Discard	EditorWindow		Abandonner
 Do nothing	EditorWindow		Ne rien faire
 Edit	EditorWindow		Éditer
 File	EditorWindow		Fichier
 File modified	EditorWindow		Fichier modifié
+File removed	EditorWindow		Fichier enlevé
+Find next	EditorWindow		Chercher la suivante
+Find selection	EditorWindow		Chercher la sélection
 Find/Replace…	EditorWindow		Chercher/Remplacer…
 Go to line…	EditorWindow		Aller à la ligne…
 Help	EditorWindow		Aide
+Incremental search	EditorWindow		Recherche incrémentale
 Koder preferences…	EditorWindow		Préférences de Koder…
 Language	EditorWindow		Langage
 Line endings	EditorWindow		Fins de ligne
 New	EditorWindow		Nouveau
+Next bookmark	EditorWindow		Signet suivant
 Old Mac format	EditorWindow		Ancien format Mac
+Open partner file	EditorWindow		Ouvrir le fichier associé
+Open recent	EditorWindow		Ouvrir récent
+Open Terminal	EditorWindow		Ouvrir un terminal
 Open…	EditorWindow		Ouvrir…
+Partner file not found.	EditorWindow		Fichier associé non trouvé.
 Paste	EditorWindow		Coller
+Previous bookmark	EditorWindow		Signet précédent
 Quit	EditorWindow		Quitter
 Reached the end of the target. No results found.	EditorWindow		Fin de la cible atteinte. Aucun résultat trouvé.
 Redo	EditorWindow		Refaire
 Reload	EditorWindow		Recharger
+Replace and find	EditorWindow		Remplacer et chercher
 Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Remplacée(s) {0, plural, one{# occurrence} other{# occurrences}}.
 Replacement finished	EditorWindow		Remplacement terminé
 Save	EditorWindow		Sauvegarder
@@ -85,12 +50,14 @@ Search	EditorWindow		Recherche
 Searching finished	EditorWindow		Recherche terminée
 Select all	EditorWindow		Sélectionner tout
 Show line endings	EditorWindow		Afficher la fin des lignes
-Show toolbar	EditorWindow		Afficher la barre d'outils
+Show toolbar	EditorWindow		Afficher la barre d’outils
 Show white space	EditorWindow		Afficher les espaces
 Special symbols	EditorWindow		Symboles spéciaux
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Le fichier contient des changements non sauvegardés  mais, est en lecture-seule. Que faire ?
 The file contains unsaved changes. What to do?	EditorWindow		Le fichier contient des changements non sauvegardés. Que faire ?
 The file has been modified by another application. What to do?	EditorWindow		Le fichier a été modifié par une autre application. Que faire ?
+The file has been removed. What to do?	EditorWindow		Le fichier a été enlevé. Que faire ?
+Toggle bookmark	EditorWindow		Basculer le signet
 Trim trailing whitespace	EditorWindow		Éliminer les espaces en fin de ligne
 Undo	EditorWindow		Défaire
 Unix format	EditorWindow		Format Unix
@@ -99,23 +66,65 @@ Untitled	EditorWindow		Sans titre
 View	EditorWindow		Vue
 Windows format	EditorWindow		Format Windows
 Wrap lines	EditorWindow		Aller à la ligne automatiquement
-You don't have sufficient permissions to edit this file.	EditorWindow		Vous n'avez pas les permissions suffisantes pour éditer ce fichier.
+You don't have sufficient permissions to edit this file.	EditorWindow		Vous n’avez pas les permissions suffisantes pour éditer ce fichier.
 Your changes will be lost.	EditorWindow		Vos changements seront perdus.
-Find selection	EditorWindow		Chercher la sélection
-Find next	EditorWindow		Chercher la suivante
-Replace and find	EditorWindow		Remplacer et chercher
-Incremental search	EditorWindow		Recherche incrémentale
-Could not find Open Terminal Tracker add-on.	EditorWindow		Impossible de trouver l'extension du Tracker Ouvrir un terminal.
-Toggle bookmark	EditorWindow		Basculer le signet
-Open Terminal	EditorWindow		Ouvrir un terminal
-Next bookmark	EditorWindow		Signet suivant
-Could not launch Open Terminal Tracker add-on.	EditorWindow		Impossible de lancer l'extension du Tracker Ouvrir un terminal.
-File removed	EditorWindow		Fichier enlevé
-Bookmarks	EditorWindow		Signets
-The file has been removed. What to do?	EditorWindow		Le fichier a été enlevé. Que faire ?
-Open partner file	EditorWindow		Ouvrir le fichier associé
-Previous bookmark	EditorWindow		Signet précédent
-Partner file not found.	EditorWindow		Fichier associé non trouvé.
+<empty>	FindStatusView		<vide>
+Clear	FindStatusView		Vider
+History	FindStatusView		Historique
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		L’accès a été refusé à l’ouverture du fichier de configuration. Assurez-vous d’avoir les permissions pour « %s% » dans votre dossier de paramètres.
+Editor settings	Preferences		Paramètres de l’éditeur
+load	Preferences	to _ the configuration	charger
+loaded	Preferences	settings will not be _	chargés
+read	Preferences	Make sure you have _ permission for	lire
+save	Preferences	to _ the configuration	sauvegarder
+saved	Preferences	settings will not be _	sauvegardés
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Quelque chose s’est mal passé à l’ouverture du fichier de configuration. Vos paramètres personnels ne seront pas %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Il n’y a pas assez de mémoire disponible pour %s% le fichier de configuration. Essayez de quitter quelques applications et relancez l’éditeur.
+Unknown error.	Preferences		Erreur inconnue.
+write	Preferences	Make sure you have _ permission for	écrire
+Always open files in new window	AppPreferencesWindow		Toujours ouvrir les fichiers dans une nouvelle fenêtre
+Background	AppPreferencesWindow		Arrière-plan
+Background	AppPreferencesWindow	Current line highlight	Arrière-plan
+Behavior	AppPreferencesWindow		Comportement
+Bookmarks	AppPreferencesWindow		Signets
+Compact language menu	AppPreferencesWindow		Menu de langage compact
+Convert tabs to spaces	AppPreferencesWindow		Convertir les tabulations en espaces
+Enormous	AppPreferencesWindow	Toolbar icon size	Enorme
+Ensure empty last line on save	AppPreferencesWindow		Assurez-vous que la dernière ligne est vide à la sauvegarde
+Extra large	AppPreferencesWindow	Toolbar icon size	Très grosse
+Folds	AppPreferencesWindow		Plis
+Frame	AppPreferencesWindow	Current line highlight	Bordure
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantesque
+Highlight braces	AppPreferencesWindow		Mettre en évidence les bretelles
+Highlight current line	AppPreferencesWindow		Mettre en évidence la ligne courante
+Highlight trailing whitespace	AppPreferencesWindow		Mettre en évidence les espaces en fin de ligne
+Huge	AppPreferencesWindow	Toolbar icon size	Immense
+Icon size	AppPreferencesWindow		Dimension de l’icône
+Indentation	AppPreferencesWindow		Indentation
+Koder preferences	AppPreferencesWindow		Préférences de Koder
+Large	AppPreferencesWindow	Toolbar icon size	Grosse
+Left margin	AppPreferencesWindow		Marge à gauche
+Line	AppPreferencesWindow		Ligne
+Line numbers	AppPreferencesWindow		Numéros de ligne
+Mark overly long lines	AppPreferencesWindow		Indiquer les lignes trop longues
+Max. characters per line:	AppPreferencesWindow		Max. caractères par ligne :
+Medium	AppPreferencesWindow	Toolbar icon size	Moyenne
+Only in actually indented lines	AppPreferencesWindow		Seulement dans les lignes déjà indentées
+Revert	AppPreferencesWindow		Défaire
+Show full path in title	AppPreferencesWindow		Afficher le chemin complet dans le titre
+Show indentation guides	AppPreferencesWindow		Afficher les guides d’indentation
+Show toolbar	AppPreferencesWindow		Afficher la barre d’outils
+Small	AppPreferencesWindow	Toolbar icon size	Petite
+Spaces per tab:	AppPreferencesWindow		Nbre d’espaces par tabulation :
+Stack new windows	AppPreferencesWindow		Juxtaposer les nouvelles fenêtres
+Style	AppPreferencesWindow		Style
+Trailing whitespace	AppPreferencesWindow		Espaces en fin de ligne
+Trim trailing whitespace on save	AppPreferencesWindow		Éliminer les espaces en fin de ligne à la sauvegarde
+Up to the next non-empty line	AppPreferencesWindow		Jusqu’à la ligne non-vide suivante
+Up to the next/previous non-empty line	AppPreferencesWindow		Jusqu’à la ligne non-vide suivante/précédente
+Use .editorconfig if possible	AppPreferencesWindow		Utiliser .editorconfig si possible
+Use custom font	AppPreferencesWindow		Utiliser une police personnalisée
+Visual	AppPreferencesWindow		Visuel
 Backwards	FindWindow		En arrière
 Find	FindWindow		Chercher
 Find:	FindWindow		Chercher :
@@ -129,33 +138,29 @@ Replace all	FindWindow		Remplacer tout
 Replace and find	FindWindow		Remplacer et chercher
 Replace:	FindWindow		Remplacer :
 Wrap around	FindWindow		Recherche en boucle
+Bookmarks	BookmarksWindow		Signets
 Cancel	GoToLineWindow		Annuler
 Go to line	GoToLineWindow		Aller à la ligne
 Go to line:	GoToLineWindow		Aller à la ligne :
-OK	GoToLineWindow		OK
+OK	GoToLineWindow		D’accord
 Cancel	QuitAlert		Annuler
 Don't save	QuitAlert		Ne pas sauvegarder
 Save all	QuitAlert		Sauvegarder tout
 Save selected	QuitAlert		Sauvegarder la sélection
 There are unsaved changes.\nSelect the files to save.	QuitAlert		Il y a des changements non sauvegardés.\nSélectionnez les fichiers à sauvegarder.
 Unsaved files	QuitAlert		Fichiers non sauvegardés
+Code editor for Haiku based on Scintilla editing component.	App		Un éditeur de code pour Haiku basé sur le composant d’édition Scintilla.
+Distributed on MIT license terms.	App		Distribué sous les termes de la licence MIT.
+humdinger, for GUI design tips and artwork.	App		humdinger, pour les astuces de design GUI et l’illustration.
+Konrad77, for dark theme.	App		Konrad77, pour le thème sombre.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, pour le composant d’édition Scintilla et l’éditeur SciTE.
+translators to:	App	to _ (language), e.g. German	localisation en :
+zuMi, for toolbar icons.	App		zuMi, pour les icônes de la barre d’outils.
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Impossible de trouver les fichiers de style. Assurez-vous de les avoir installés dans un de vos dossiers de données.
 Style files	Styler		Fichiers de style
-Koder	System name		Koder
-Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		L'accès a été refusé à l'ouverture du fichier de configuration. Assurez-vous d'avoir les permissions pour %s% dans votre dossier de paramètres.
-Editor settings	Preferences		Paramètres de l'éditeur
-read	Preferences	Make sure you have _ permission for	lire
-Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Quelque chose s'est mal passé à l'ouverture du fichier de configuration. Vos paramètres personnels ne seront pas %s%.
-load	Preferences	to _ the configuration	charger
-Unknown error.	Preferences		Erreur inconnue.
-There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Il n'y a pas assez de mémoire disponible pour %s% le fichier de configuration. Essayez de quitter quelques applications et relancez l'éditeur.
-loaded	Preferences	settings will not be _	chargés
-write	Preferences	Make sure you have _ permission for	écrire
-save	Preferences	to _ the configuration	sauvegarder
-saved	Preferences	settings will not be _	sauvegardés
-Read-only	StatusView		Lecture-seule
-Open Terminal	StatusView		Ouvrir un terminal
-Go to	BookmarksListView		Aller à
 Delete	BookmarksListView		Supprimer
-OK	Utilities		OK
-Bookmarks	BookmarksWindow		Signets
+Go to	BookmarksListView		Aller à
+Koder	System name		Koder
+OK	Utilities		D’accord
+Open Terminal	EditorStatusView		Ouvrir le Terminal
+Read-only	EditorStatusView		Lecture seule

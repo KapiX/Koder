@@ -1,0 +1,166 @@
+1	Greek (Modern)	x-vnd.KapiX-Koder	3251374093
+[read-only]	EditorWindow		[μόνο ανάγνωση]
+<empty>	EditorWindow		<κενό>
+About…	EditorWindow		Σχετικά...
+Access denied	EditorWindow		Απαγορεύεται η πρόσβαση
+Bookmarks	EditorWindow		Σελιδοδείκτες
+Cancel	EditorWindow		Ακύρωση
+Close	EditorWindow		Κλείσιμο
+Comment block	EditorWindow		Εκτενές σχόλιο
+Comment line	EditorWindow		Σχόλιο γραμμής
+Copy	EditorWindow		Αντιγραφή
+Could not find Open Terminal Tracker add-on.	EditorWindow		Αδύνατη η εύρεση του add-on Open Terminal Tracker.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Αδύνατη η εκκίνηση του add-on Open Terminal Tracker.
+Cut	EditorWindow		Αποκοπή
+Discard	EditorWindow		Απόρριψη
+Do nothing	EditorWindow		Μην κάνεις τίποτα
+Edit	EditorWindow		Επεξεργασία
+File	EditorWindow		Αρχείο
+File modified	EditorWindow		Το αρχείο έχει τροποποιηθεί
+File removed	EditorWindow		Το αρχείο έχει διαγραφεί
+Find next	EditorWindow		Εύρεση επόμενου
+Find selection	EditorWindow		Εύρεση επιλογής
+Find/Replace…	EditorWindow		Εύρεση/Αντικατασταση...
+Go to line…	EditorWindow		Μετάβαση στη γραμμή...
+Help	EditorWindow		Βοήθεια
+Incremental search	EditorWindow		Αυξητική αναζήτηση
+Koder preferences…	EditorWindow		Ρυθμίσεις του Koder...
+Language	EditorWindow		Γλώσσα
+Line endings	EditorWindow		Τερματισμοί γραμμής
+New	EditorWindow		Νέο
+Next bookmark	EditorWindow		Επόμενος σελιδοδείκτης
+Old Mac format	EditorWindow		Παλιό μορφότυπο των Mac
+Open partner file	EditorWindow		Άνοιγμα αρχείου συνεργασίας
+Open recent	EditorWindow		Άνοιγμα πρόσφατων
+Open Terminal	EditorWindow		Άνοιγμα τερματικού
+Open…	EditorWindow		Άνοιγμα…
+Partner file not found.	EditorWindow		Το αρχείο συνεργασίας δεν βρέθηκε.
+Paste	EditorWindow		Επικόλληση
+Previous bookmark	EditorWindow		Προηγούμενος σελιδοδείκτης
+Quit	EditorWindow		Έξοδος
+Reached the end of the target. No results found.	EditorWindow		Στο τέλος του στόχου αναζήτησης. Κανένα αποτέλεσμα.
+Redo	EditorWindow		Επανάληψη
+Reload	EditorWindow		Επαναφόρτιση
+Replace and find	EditorWindow		Αντικατάσταση και εύρεση
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		{0, plural, one{Αντικαταστάθηκε # αποτέλεσμα} other{Αντικαταστάθηκαν # αποτελέσματα}} αναζήτησης.
+Replacement finished	EditorWindow		Η αντικατάσταση ολοκληρώθηκε.
+Save	EditorWindow		Αποθήκευση
+Save as…	EditorWindow		Αποθήκευση ως...
+Search	EditorWindow		Εύρεση
+Searching finished	EditorWindow		Η αναζήτηση ολοκληρώθηκε
+Select all	EditorWindow		Επιλογή όλων
+Show line endings	EditorWindow		Εμφάνιση τερματισμών γραμμών
+Show toolbar	EditorWindow		Εμφάνιση κουτιού εργαλείων
+Show white space	EditorWindow		Εμφάνιση κενού χώρου
+Special symbols	EditorWindow		Ειδικά σύμβολα
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Το αρχείο περιέχει μη αποθηκευμένες αλλαγές, αλλά είναι διαθέσιμο μόνο για ανάγνωση. Τι πρέπει να γίνει;
+The file contains unsaved changes. What to do?	EditorWindow		Το αρχείο περιέχει μη αποθηκευμένες αλλαγές. Τι πρέπει να γίνει;
+The file has been modified by another application. What to do?	EditorWindow		Το αρχείο έχει τροποποιηθεί από ενα άλλο πρόγραμμα. Τι πρέπει να γίνει;
+The file has been removed. What to do?	EditorWindow		Το αρχείο έχει διαγραφεί. Τι πρέπει να γίνει;
+Toggle bookmark	EditorWindow		Σελιδοδείκτης
+Trim trailing whitespace	EditorWindow		Περικοπή κενών στο τέλος κάθε γραμμής
+Undo	EditorWindow		Αναίρεση
+Unix format	EditorWindow		Μορφότυπο Unix
+Unsaved changes	EditorWindow		Μη αποθηκευμένες αλλαγές
+Untitled	EditorWindow		Χωρίς όνομα
+View	EditorWindow		Προβολή
+Windows format	EditorWindow		Μορφότυπο Windows
+Wrap lines	EditorWindow		Αναδίπλωση γραμμών
+You don't have sufficient permissions to edit this file.	EditorWindow		Δεν έχετε επαρκή δικαιώματα για να επεξεργαστείτε αυτό το αρχείο.
+Your changes will be lost.	EditorWindow		Οι αλλαγές σας θα χαθούν.
+<empty>	FindStatusView		<κενό>
+Clear	FindStatusView		Απαλοιφή
+History	FindStatusView		Ιστορικό
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Η προσπέλαση του αρχείου ρυθμίσεων απέτυχε. Βεβαιωθείτε ότι έχετε δικαίωμα %s% για τον φάκελο ρυθμίσεών σας.
+Editor settings	Preferences		Ρυθμίσεις επεξεργαστή
+load	Preferences	to _ the configuration	φόρτωση
+loaded	Preferences	settings will not be _	φορτωθούν
+read	Preferences	Make sure you have _ permission for	ανάγνωσης
+save	Preferences	to _ the configuration	αποθήκευση
+saved	Preferences	settings will not be _	αποθηκευτούν
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Κάτι πήγε στραβά κατά το άνοιγμα του αρχείου ρυθμίσεων. Οι εξατομικευμένες ρυθμίσεις σας δεν θα %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Δεν υπάρχει αρκετή μνήμη για την %s% του αρχείου ρυθμίσεων. Δοκιμάστε να κλείσετε μερικές εφαρμογές και να επανεκκινήσετε τον επεξεργαστή.
+Unknown error.	Preferences		Άγνωστο σφάλμα.
+write	Preferences	Make sure you have _ permission for	εγγραφής
+Always open files in new window	AppPreferencesWindow		Άνοιγμα αρχείων πάντα σε νέο παράθυρο
+Background	AppPreferencesWindow		Παρασκήνιο
+Background	AppPreferencesWindow	Current line highlight	Παρασκήνιο
+Behavior	AppPreferencesWindow		Συμπεριφορά
+Bookmarks	AppPreferencesWindow		Σελιδοδείκτες
+Compact language menu	AppPreferencesWindow		Σύντομο μενού γλωσσών
+Convert tabs to spaces	AppPreferencesWindow		Μετατροπή χαρακτήρων tab σε κενά
+Enormous	AppPreferencesWindow	Toolbar icon size	Τεράστια
+Ensure empty last line on save	AppPreferencesWindow		Εξασφάλιση κενής τελευταίας γραμμής κατα την αποθήκευση
+Extra large	AppPreferencesWindow	Toolbar icon size	Πελώρια
+Folds	AppPreferencesWindow		Συντμήσεις
+Frame	AppPreferencesWindow	Current line highlight	Περίγραμμα
+Gigantic	AppPreferencesWindow	Toolbar icon size	Γιγαντιαία
+Highlight braces	AppPreferencesWindow		Έμφαση στις αγκύλες
+Highlight current line	AppPreferencesWindow		Έμφαση στην τρέχουσα γραμμή
+Highlight trailing whitespace	AppPreferencesWindow		Έμφαση στα κενά στο τέλος κάθε γραμμής
+Huge	AppPreferencesWindow	Toolbar icon size	Μεγάλα
+Icon size	AppPreferencesWindow		Μέγεθος εικονιδίων
+Indentation	AppPreferencesWindow		Εσοχές
+Koder preferences	AppPreferencesWindow		Ρυθμίσεις του Koder
+Large	AppPreferencesWindow	Toolbar icon size	Πολύ μεγάλα
+Left margin	AppPreferencesWindow		Αριστερό περιθώριο
+Line	AppPreferencesWindow		Γραμμή
+Line numbers	AppPreferencesWindow		Αρίθμηση γραμμών
+Mark overly long lines	AppPreferencesWindow		Σήμανση υπερβολικά μεγάλων γραμμών
+Max. characters per line:	AppPreferencesWindow		Μέγιστος αριθμός χαρακτήρων ανά γραμμή:
+Medium	AppPreferencesWindow	Toolbar icon size	Μεσαία
+Only in actually indented lines	AppPreferencesWindow		Μόνο στις γραμμές που όντως έχουν εσοχή
+Revert	AppPreferencesWindow		Αναίρεση
+Show full path in title	AppPreferencesWindow		Εμφάνιση πλήρους διαδρομής στον τίτλο
+Show indentation guides	AppPreferencesWindow		Εμφάνιση βοηθημάτων εσοχών
+Show toolbar	AppPreferencesWindow		Εμφάνιση γραμμής εργαλείων
+Small	AppPreferencesWindow	Toolbar icon size	Μικρά
+Spaces per tab:	AppPreferencesWindow		Κενά ανά tab:
+Stack new windows	AppPreferencesWindow		Στοίχιση νέων παραθύρων σε στοίβα
+Style	AppPreferencesWindow		Στυλ
+Trailing whitespace	AppPreferencesWindow		Κενά στο τέλος της γραμμής
+Trim trailing whitespace on save	AppPreferencesWindow		Αφαίρεση κενών στο τέλος κάθε γραμμής κατά την αποθήκευση
+Up to the next non-empty line	AppPreferencesWindow		Ως την επόμενη μη κενή γραμμή
+Up to the next/previous non-empty line	AppPreferencesWindow		Ως την επόμενη/προηγούμενη μη κενή γραμμή
+Use .editorconfig if possible	AppPreferencesWindow		Χρήση αρχείου .editorconfig αν είναι εφικτό
+Use custom font	AppPreferencesWindow		Χρήση προσαρμοσμένης γραμματοσειράς
+Visual	AppPreferencesWindow		Οπτικό
+Backwards	FindWindow		Προς τα πίσω
+Find	FindWindow		Εύρεση
+Find:	FindWindow		Εύρεση:
+Find/Replace	FindWindow		Εύρεση/Αντικατάσταση
+In selection	FindWindow		Μέσα στο επιλεγμένο κείμενο
+Match case	FindWindow		Συμφωνία πεζών-κεφαλαίων
+Match entire words	FindWindow		Μόνο ολόκληρες λέξεις
+Regex	FindWindow		Κανονική έκφραση
+Replace	FindWindow		Αντικατάσταση
+Replace all	FindWindow		Αντικατάσταση ολων
+Replace and find	FindWindow		Αντικατάσταση και εύρεση
+Replace:	FindWindow		Αντικατάσταση:
+Wrap around	FindWindow		Αναδίπλωση αναζήτησης
+Bookmarks	BookmarksWindow		Σελιδοδείκτες
+Cancel	GoToLineWindow		Ακύρωση
+Go to line	GoToLineWindow		Μετάβαση στη γραμμή
+Go to line:	GoToLineWindow		Μετάβαση:
+OK	GoToLineWindow		Εντάξει
+Cancel	QuitAlert		Ακύρωση
+Don't save	QuitAlert		Χωρίς αποθήκευση
+Save all	QuitAlert		Αποθήκευση όλων
+Save selected	QuitAlert		Αποθήκευση επιλεγμένων
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Υπάρχουν μη αποθηκευμένες αλλαγές.\nΕπιλέξτε τα αρχεία που θα αποθηκευτούν.
+Unsaved files	QuitAlert		Μη αποθηκευμένα αρχεία
+Code editor for Haiku based on Scintilla editing component.	App		Επεξεργαστής κώδικα για το Haiku βασισμένος στο συστατικό επεξεργασίας Scintilla
+Distributed on MIT license terms.	App		Διανέμεται υπό τους όρους της άδειας χρήσης MIT.
+humdinger, for GUI design tips and artwork.	App		humdinger, για το σχεδιασμό του γραφικού περιβάλλοντος χρήστη, τις συμβουλές και τα γραφικά.
+Konrad77, for dark theme.	App		Konrad77, για το σκοτεινό θέμα.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, για τοσυστατικό επεξεργασίας Scintilla και τον επεξεργαστή SciTE.
+translators to:	App	to _ (language), e.g. German	μεταφραστές για τις ακόλουθες γλώσσες:
+zuMi, for toolbar icons.	App		zuMi, για τα εικονίδια της γραμμής εργαλείων.
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Αδύνατη η εύρεση των αρχείων στυλ. Παρακαλώ βεβαιωθείτε ότι είναι εγκατεστημένα σε κάποιο από τους καταλόγους δεδομένων σας.
+Style files	Styler		Αρχεία στυλ
+Delete	BookmarksListView		Διαγραφή
+Go to	BookmarksListView		Μετάβαση
+Koder	System name		Koder
+OK	Utilities		Εντάξει
+Open Terminal	EditorStatusView		Άνοιγμα τερματικού
+Read-only	EditorStatusView		Μόνο ανάγνωση

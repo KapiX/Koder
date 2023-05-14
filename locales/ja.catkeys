@@ -1,0 +1,166 @@
+1	Japanese	x-vnd.KapiX-Koder	3251374093
+[read-only]	EditorWindow		[読み取り専用]
+<empty>	EditorWindow		<なし>
+About…	EditorWindow		このソフトウェアについて…
+Access denied	EditorWindow		アクセス拒否
+Bookmarks	EditorWindow		ブックマーク
+Cancel	EditorWindow		キャンセル
+Close	EditorWindow		閉じる
+Comment block	EditorWindow		現在のブロック
+Comment line	EditorWindow		現在の行
+Copy	EditorWindow		コピー
+Could not find Open Terminal Tracker add-on.	EditorWindow		Open Terminal Tracker アドオンを見つけられませんでした。
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Open Terminal Tracker アドオンを起動できませんでした。
+Cut	EditorWindow		切り取り
+Discard	EditorWindow		破棄
+Do nothing	EditorWindow		何もしない
+Edit	EditorWindow		編集
+File	EditorWindow		ファイル
+File modified	EditorWindow		ファイルが編集されました
+File removed	EditorWindow		ファイルが削除されました
+Find next	EditorWindow		次を検索
+Find selection	EditorWindow		選択部を検索
+Find/Replace…	EditorWindow		検索/置換…
+Go to line…	EditorWindow		行へ移動…
+Help	EditorWindow		ヘルプ
+Incremental search	EditorWindow		インクリメンタルサーチ
+Koder preferences…	EditorWindow		Koder 設定…
+Language	EditorWindow		言語
+Line endings	EditorWindow		改行
+New	EditorWindow		新規
+Next bookmark	EditorWindow		次のブックマーク
+Old Mac format	EditorWindow		古い Mac 形式
+Open partner file	EditorWindow		対応するファイルを開く
+Open recent	EditorWindow		最近開いたファイル
+Open Terminal	EditorWindow		Open Terminal
+Open…	EditorWindow		開く…
+Partner file not found.	EditorWindow		対応するファイルが見つかりませんでした。
+Paste	EditorWindow		貼り付け
+Previous bookmark	EditorWindow		前のブックマーク
+Quit	EditorWindow		終了
+Reached the end of the target. No results found.	EditorWindow		検索の最後まで達しましたが、見つかりませんでした。
+Redo	EditorWindow		やり直す
+Reload	EditorWindow		再読み込み
+Replace and find	EditorWindow		置換と検索
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		{0, plural, one{# 個置換しました} other{# 個置換しました}}.
+Replacement finished	EditorWindow		置換が終了しました
+Save	EditorWindow		保存
+Save as…	EditorWindow		名前を付けて保存…
+Search	EditorWindow		検索
+Searching finished	EditorWindow		検索が終了しました
+Select all	EditorWindow		すべてを選択
+Show line endings	EditorWindow		改行を表示
+Show toolbar	EditorWindow		ツールバーを表示
+Show white space	EditorWindow		空白文字を表示
+Special symbols	EditorWindow		特殊記号
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		ファイルは保存されていない変更を含んでいますが、読み取り専用です。どうしますか?
+The file contains unsaved changes. What to do?	EditorWindow		ファイルは保存されていない変更を含んでいます。どうしますか?
+The file has been modified by another application. What to do?	EditorWindow		ファイルはほかのアプリケーションで変更されています。どうしますか?
+The file has been removed. What to do?	EditorWindow		ファイルは削除されています。どうしますか?
+Toggle bookmark	EditorWindow		ブックマークを切り替え
+Trim trailing whitespace	EditorWindow		行末の空白文字を削除
+Undo	EditorWindow		元に戻す
+Unix format	EditorWindow		Unix 形式
+Unsaved changes	EditorWindow		保存されていない変更
+Untitled	EditorWindow		無題
+View	EditorWindow		表示
+Windows format	EditorWindow		Windows 形式
+Wrap lines	EditorWindow		行を折り返す
+You don't have sufficient permissions to edit this file.	EditorWindow		このファイルを編集する充分な許可がありません。
+Your changes will be lost.	EditorWindow		変更は失われるでしょう。
+<empty>	FindStatusView		<なし>
+Clear	FindStatusView		消去
+History	FindStatusView		履歴
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		設定ファイルを開く際にアクセスが拒否されました。settings ディレクトリに %s% の許可があるとこを確認してください。
+Editor settings	Preferences		エディター設定
+load	Preferences	to _ the configuration	読み込み
+loaded	Preferences	settings will not be _	読み込み
+read	Preferences	Make sure you have _ permission for	読み取り
+save	Preferences	to _ the configuration	保存
+saved	Preferences	settings will not be _	保存
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		設定ファイルを開く際になにか問題が発生しました。ユーザーの個人設定は%s%されません。
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		設定ファイルを%s%するための充分なメモリーがありません。いくつかのアプリケーションを閉じて、エディターを再起動してみてください。
+Unknown error.	Preferences		不明なエラー。
+write	Preferences	Make sure you have _ permission for	書き込み
+Always open files in new window	AppPreferencesWindow		常に新しいウィンドウで開く
+Background	AppPreferencesWindow		背景
+Background	AppPreferencesWindow	Current line highlight	背景
+Behavior	AppPreferencesWindow		動作
+Bookmarks	AppPreferencesWindow		ブックマーク
+Compact language menu	AppPreferencesWindow		言語メニューを縮小
+Convert tabs to spaces	AppPreferencesWindow		タブをスペースに変換
+Enormous	AppPreferencesWindow	Toolbar icon size	超巨大
+Ensure empty last line on save	AppPreferencesWindow		保存時に文末に空行を追加
+Extra large	AppPreferencesWindow	Toolbar icon size	特大
+Folds	AppPreferencesWindow		折り返し
+Frame	AppPreferencesWindow	Current line highlight	フレーム
+Gigantic	AppPreferencesWindow	Toolbar icon size	超々巨大
+Highlight braces	AppPreferencesWindow		括弧の組を強調
+Highlight current line	AppPreferencesWindow		現在の行を強調
+Highlight trailing whitespace	AppPreferencesWindow		行末の空白文字を強調
+Huge	AppPreferencesWindow	Toolbar icon size	巨大
+Icon size	AppPreferencesWindow		アイコンサイズ
+Indentation	AppPreferencesWindow		インデント
+Koder preferences	AppPreferencesWindow		Koder 設定
+Large	AppPreferencesWindow	Toolbar icon size	大
+Left margin	AppPreferencesWindow		左余白
+Line	AppPreferencesWindow		線
+Line numbers	AppPreferencesWindow		行番号
+Mark overly long lines	AppPreferencesWindow		長い行をマーク
+Max. characters per line:	AppPreferencesWindow		1 行あたりの最大文字数:
+Medium	AppPreferencesWindow	Toolbar icon size	中
+Only in actually indented lines	AppPreferencesWindow		実際にインデントしている行のみ
+Revert	AppPreferencesWindow		取り消す
+Show full path in title	AppPreferencesWindow		タイトルにフルパスを表示
+Show indentation guides	AppPreferencesWindow		インデントガイドを表示
+Show toolbar	AppPreferencesWindow		ツールバーを表示
+Small	AppPreferencesWindow	Toolbar icon size	小
+Spaces per tab:	AppPreferencesWindow		タブあたりのスペース:
+Stack new windows	AppPreferencesWindow		新規ウィンドウをスタック
+Style	AppPreferencesWindow		スタイル
+Trailing whitespace	AppPreferencesWindow		行末の空白文字
+Trim trailing whitespace on save	AppPreferencesWindow		保存時に行末の空白文字を削除
+Up to the next non-empty line	AppPreferencesWindow		次の空行でない行まで
+Up to the next/previous non-empty line	AppPreferencesWindow		次/前の空行でない行まで
+Use .editorconfig if possible	AppPreferencesWindow		可能であれば .editorconfig を使用
+Use custom font	AppPreferencesWindow		カスタムフォントを使う
+Visual	AppPreferencesWindow		ビジュアル
+Backwards	FindWindow		前方向へ検索
+Find	FindWindow		検索
+Find:	FindWindow		検索:
+Find/Replace	FindWindow		検索/置換
+In selection	FindWindow		選択範囲を検索
+Match case	FindWindow		大文字小文字を区別する
+Match entire words	FindWindow		単語全体に一致
+Regex	FindWindow		正規表現
+Replace	FindWindow		置換
+Replace all	FindWindow		すべて置換
+Replace and find	FindWindow		置換と検索
+Replace:	FindWindow		置換:
+Wrap around	FindWindow		折り返し検索
+Bookmarks	BookmarksWindow		ブックマーク
+Cancel	GoToLineWindow		キャンセル
+Go to line	GoToLineWindow		行へ移動
+Go to line:	GoToLineWindow		行へ移動:
+OK	GoToLineWindow		OK
+Cancel	QuitAlert		キャンセル
+Don't save	QuitAlert		保存せずに終了
+Save all	QuitAlert		すべて保存
+Save selected	QuitAlert		選択したファイルを保存
+There are unsaved changes.\nSelect the files to save.	QuitAlert		保存されていない変更があります。\n保存するファイルを選んでください。
+Unsaved files	QuitAlert		保存されていないファイル
+Code editor for Haiku based on Scintilla editing component.	App		Scintilla editing component に基づく Haiku 用コードエディター
+Distributed on MIT license terms.	App		MIT license 条項で配布されます。
+humdinger, for GUI design tips and artwork.	App		humdinger: GUI デザインのヒントとアートワーク
+Konrad77, for dark theme.	App		Konrad77: ダークテーマ
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson: Scintilla editing component と SciTE エディター
+translators to:	App	to _ (language), e.g. German	翻訳:
+zuMi, for toolbar icons.	App		zuMi: ツールバーアイコン
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		スタイルファイルが見つかりません。データディレクトリにそれらがあるか確認してください。
+Style files	Styler		スタイルファイル
+Delete	BookmarksListView		削除
+Go to	BookmarksListView		移動
+Koder	System name		Koder
+OK	Utilities		OK
+Open Terminal	EditorStatusView		端末を開く
+Read-only	EditorStatusView		読み取り専用

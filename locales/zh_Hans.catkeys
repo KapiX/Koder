@@ -1,0 +1,166 @@
+1	Chinese (simplified)	x-vnd.KapiX-Koder	3251374093
+[read-only]	EditorWindow		[只读]
+<empty>	EditorWindow		<empty>
+About…	EditorWindow		关于…
+Access denied	EditorWindow		访问被拒绝
+Bookmarks	EditorWindow		书签
+Cancel	EditorWindow		取消
+Close	EditorWindow		关闭
+Comment block	EditorWindow		注释块
+Comment line	EditorWindow		注释行
+Copy	EditorWindow		复制
+Could not find Open Terminal Tracker add-on.	EditorWindow		找不到 Open Terminal Tracker 插件。
+Could not launch Open Terminal Tracker add-on.	EditorWindow		无法启动 Open Terminal Tracker 加载项。
+Cut	EditorWindow		剪切
+Discard	EditorWindow		丢弃
+Do nothing	EditorWindow		不执行任何操作
+Edit	EditorWindow		编辑
+File	EditorWindow		文件
+File modified	EditorWindow		文件已修改
+File removed	EditorWindow		文件已删除
+Find next	EditorWindow		查找下一个
+Find selection	EditorWindow		查找所选内容
+Find/Replace…	EditorWindow		查找/替换…
+Go to line…	EditorWindow		转到行…
+Help	EditorWindow		帮助
+Incremental search	EditorWindow		增量搜索
+Koder preferences…	EditorWindow		Koder 首选项…
+Language	EditorWindow		语言
+Line endings	EditorWindow		行尾
+New	EditorWindow		新建
+Next bookmark	EditorWindow		下一个书签
+Old Mac format	EditorWindow		旧 Mac 格式
+Open partner file	EditorWindow		打开合作伙伴文件
+Open recent	EditorWindow		打开最近文件
+Open Terminal	EditorWindow		打开终端
+Open…	EditorWindow		打开…
+Partner file not found.	EditorWindow		没有合作伙伴文件被发现。
+Paste	EditorWindow		粘贴
+Previous bookmark	EditorWindow		上一个书签
+Quit	EditorWindow		退出
+Reached the end of the target. No results found.	EditorWindow		已抵达目标结尾。没有发现。
+Redo	EditorWindow		重做
+Reload	EditorWindow		重新加载
+Replace and find	EditorWindow		替换并查找
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		替换了 {0, plural, one{# occurence} other{# occurences}}。
+Replacement finished	EditorWindow		替换完成
+Save	EditorWindow		保存
+Save as…	EditorWindow		另存为…
+Search	EditorWindow		搜索
+Searching finished	EditorWindow		搜索完成
+Select all	EditorWindow		全选
+Show line endings	EditorWindow		显示行尾
+Show toolbar	EditorWindow		显示工具栏
+Show white space	EditorWindow		显示空白
+Special symbols	EditorWindow		特殊符号
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		该文件包含未保存的更改，但为只读。怎么办?
+The file contains unsaved changes. What to do?	EditorWindow		该文件包含未保存的更改。怎么办？
+The file has been modified by another application. What to do?	EditorWindow		该文件已被其他应用程序修改。怎么办？
+The file has been removed. What to do?	EditorWindow		该文件已删除。怎么办？
+Toggle bookmark	EditorWindow		切换书签
+Trim trailing whitespace	EditorWindow		修整尾部空白
+Undo	EditorWindow		撤消
+Unix format	EditorWindow		Unix 格式
+Unsaved changes	EditorWindow		未保存的更改
+Untitled	EditorWindow		未命名
+View	EditorWindow		视图
+Windows format	EditorWindow		Windows 格式
+Wrap lines	EditorWindow		换行符
+You don't have sufficient permissions to edit this file.	EditorWindow		您没有足够的权限编辑此文件。
+Your changes will be lost.	EditorWindow		您的更改将会丢失。
+<empty>	FindStatusView		<empty>
+Clear	FindStatusView		清除
+History	FindStatusView		历史
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		打开配置文件时拒绝访问。确保您对设置目录具有 %s% 权限。
+Editor settings	Preferences		编辑器设置
+load	Preferences	to _ the configuration	加载
+loaded	Preferences	settings will not be _	已加载
+read	Preferences	Make sure you have _ permission for	读
+save	Preferences	to _ the configuration	保存
+saved	Preferences	settings will not be _	已保存
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		打开配置文件时出错。您的个人设置将不是  %s% 。 
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		内存不足，无法使用 %s% 配置文件。请尝试关闭一些应用程序并重新启动编辑器。
+Unknown error.	Preferences		未知错误。
+write	Preferences	Make sure you have _ permission for	写
+Always open files in new window	AppPreferencesWindow		总是在新窗口打开文件
+Background	AppPreferencesWindow		背景
+Background	AppPreferencesWindow	Current line highlight	背景
+Behavior	AppPreferencesWindow		行为
+Bookmarks	AppPreferencesWindow		书签
+Compact language menu	AppPreferencesWindow		精简语言菜单
+Convert tabs to spaces	AppPreferencesWindow		将制表符转换为空格
+Enormous	AppPreferencesWindow	Toolbar icon size	极大
+Ensure empty last line on save	AppPreferencesWindow		保存时确保最后一行为空
+Extra large	AppPreferencesWindow	Toolbar icon size	较大
+Folds	AppPreferencesWindow		折叠
+Frame	AppPreferencesWindow	Current line highlight	边框
+Gigantic	AppPreferencesWindow	Toolbar icon size	庞大
+Highlight braces	AppPreferencesWindow		高亮显示大括号
+Highlight current line	AppPreferencesWindow		高亮显示当前行
+Highlight trailing whitespace	AppPreferencesWindow		高亮显示尾随空格
+Huge	AppPreferencesWindow	Toolbar icon size	巨大
+Icon size	AppPreferencesWindow		图标大小
+Indentation	AppPreferencesWindow		缩进
+Koder preferences	AppPreferencesWindow		Koder 首选项
+Large	AppPreferencesWindow	Toolbar icon size	大
+Left margin	AppPreferencesWindow		左页边
+Line	AppPreferencesWindow		线条
+Line numbers	AppPreferencesWindow		行号
+Mark overly long lines	AppPreferencesWindow		标记过长的线条
+Max. characters per line:	AppPreferencesWindow		每行最大字符数：
+Medium	AppPreferencesWindow	Toolbar icon size	中
+Only in actually indented lines	AppPreferencesWindow		仅在实际缩进的行中
+Revert	AppPreferencesWindow		还原
+Show full path in title	AppPreferencesWindow		在标题中显示完整路径
+Show indentation guides	AppPreferencesWindow		显示缩进参考线
+Show toolbar	AppPreferencesWindow		显示工具栏
+Small	AppPreferencesWindow	Toolbar icon size	小
+Spaces per tab:	AppPreferencesWindow		每个制表符占用空格:
+Stack new windows	AppPreferencesWindow		堆叠新窗口
+Style	AppPreferencesWindow		样式
+Trailing whitespace	AppPreferencesWindow		尾部空格
+Trim trailing whitespace on save	AppPreferencesWindow		保存时删除尾部空格
+Up to the next non-empty line	AppPreferencesWindow		直到下一个非空行
+Up to the next/previous non-empty line	AppPreferencesWindow		直到下一个或上一个非空行
+Use .editorconfig if possible	AppPreferencesWindow		如果可能，请使用 .editorconfig 
+Use custom font	AppPreferencesWindow		使用自定义字体
+Visual	AppPreferencesWindow		视觉
+Backwards	FindWindow		反向
+Find	FindWindow		查找
+Find:	FindWindow		查找:
+Find/Replace	FindWindow		查找/替换
+In selection	FindWindow		在所选中
+Match case	FindWindow		区分大小写
+Match entire words	FindWindow		匹配整个单词
+Regex	FindWindow		正规表示式
+Replace	FindWindow		替换
+Replace all	FindWindow		全部替换
+Replace and find	FindWindow		替换并查找
+Replace:	FindWindow		替换:
+Wrap around	FindWindow		回绕
+Bookmarks	BookmarksWindow		书签
+Cancel	GoToLineWindow		取消
+Go to line	GoToLineWindow		转至行
+Go to line:	GoToLineWindow		转至行:
+OK	GoToLineWindow		确定
+Cancel	QuitAlert		取消
+Don't save	QuitAlert		不保存
+Save all	QuitAlert		全部保存
+Save selected	QuitAlert		保存所选
+There are unsaved changes.\nSelect the files to save.	QuitAlert		有未保存的更改。\n选择要保存的文件。
+Unsaved files	QuitAlert		未保存文件
+Code editor for Haiku based on Scintilla editing component.	App		基于 Scintilla 编辑组件的 Haiku 代码编辑器。
+Distributed on MIT license terms.	App		根据 MIT 许可条款分发。
+humdinger, for GUI design tips and artwork.	App		humdinger, 贡献 GUI 艺术设计和插画。
+Konrad77, for dark theme.	App		Konrad77, 贡献暗黑主题。
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, 贡献 Scintilla 编辑组件和 SciTE 编辑器。
+translators to:	App	to _ (language), e.g. German	翻译人员:
+zuMi, for toolbar icons.	App		zuMi, 贡献工具栏图标。
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		找不到样式文件。请确保已将它们安装在其中一个数据目录中。
+Style files	Styler		样式文件
+Delete	BookmarksListView		删除
+Go to	BookmarksListView		跳转至
+Koder	System name		Koder
+OK	Utilities		确定
+Open Terminal	EditorStatusView		打开终端
+Read-only	EditorStatusView		只读

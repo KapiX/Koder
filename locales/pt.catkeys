@@ -1,82 +1,47 @@
-1	Portuguese	x-vnd.KapiX-Koder	822155924
-Code editor for Haiku based on Scintilla editing component.	App		Editor de código para Haiku baseado no componente de edição Scintilla.
-Distributed on MIT license terms.	App		Distribuído nos termos da licença MIT.
-Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, pelo componente de edição Scintilla e pelo editor SciTE.
-zuMi, for toolbar icons.	App		zuMi, pelos ícones de barra de ferrmentas.
-Konrad77, for dark theme.	App		Konrad77, pelo tema escuro.
-translators to:	App	to _ (language), e.g. German	tradutores para:
-humdinger, for GUI design tips and artwork.	App		humdinger, pelo trabalho de desenho e pelas dicas de design de GUI.
-Background	AppPreferencesWindow		Fundo
-Compact language menu	AppPreferencesWindow		Menu de linguagem compacto
-Convert tabs to spaces	AppPreferencesWindow		Converter tabulações para espaços
-Highlight braces	AppPreferencesWindow		Realçar parênteses
-Highlight current line	AppPreferencesWindow		Realçar a linha atual
-Highlight trailing whitespace	AppPreferencesWindow		Realçar espaço em branco no final
-Koder preferences	AppPreferencesWindow		Preferências do Koder
-Line	AppPreferencesWindow		Linha
-Mark overly long lines	AppPreferencesWindow		Assinalar linhas demasiado longas
-Max. characters per line:	AppPreferencesWindow		Máx. de caracteres por linha:
-Only in actually indented lines	AppPreferencesWindow		Apenas em linhas efetivamente indentadas
-Revert	AppPreferencesWindow		Reverter
-Show full path in title	AppPreferencesWindow		Mostrar caminho completo no título
-Show indentation guides	AppPreferencesWindow		Mostrar guias de indentação
-Show toolbar	AppPreferencesWindow		Mostrar barra de ferramentas
-Spaces per tab:	AppPreferencesWindow		Espaços por tabulação:
-Stack new windows	AppPreferencesWindow		Empilhar novas janelas
-Style	AppPreferencesWindow		Estilo
-Trim trailing whitespace on save	AppPreferencesWindow		Remover espaços em branco no final ao guardar
-Up to the next non-empty line	AppPreferencesWindow		Até à linha não-vazia seguinte
-Up to the next/previous non-empty line	AppPreferencesWindow		Até à linha não-vazia seguinte/anterior
-Behavior	AppPreferencesWindow		Comportamento
-Background	AppPreferencesWindow	Current line highlight	Fundo
-Frame	AppPreferencesWindow	Current line highlight	Moldura
-Trailing whitespace	AppPreferencesWindow		Espaço em branco no final
-Visual	AppPreferencesWindow		Visual
-Indentation	AppPreferencesWindow		Indentação
-Use .editorconfig if possible	AppPreferencesWindow		Usar .editorconfig se possível
-Always open files in new window	AppPreferencesWindow		Abrir sempre os ficheiros numa janela nova
-Use custom font	AppPreferencesWindow		Usar tipo de letra personalizado
-Folds	AppPreferencesWindow		Dobras
-Gigantic	AppPreferencesWindow	Toolbar icon size	Gigante
-Large	AppPreferencesWindow	Toolbar icon size	Grande
-Bookmarks	AppPreferencesWindow		Marcadores
-Extra large	AppPreferencesWindow	Toolbar icon size	Extra grande
-Medium	AppPreferencesWindow	Toolbar icon size	Médio
-Small	AppPreferencesWindow	Toolbar icon size	Pequeno
-Huge	AppPreferencesWindow	Toolbar icon size	Muito grande
-Icon size	AppPreferencesWindow		Tamanho de ícone
-Line numbers	AppPreferencesWindow		Numeração de linhas
-Enormous	AppPreferencesWindow	Toolbar icon size	Enorme
-Left margin	AppPreferencesWindow		Margem esquerda
-Ensure empty last line on save	AppPreferencesWindow		Assegurar última linha vazia ao guardar
+1	Portuguese	x-vnd.KapiX-Koder	3251374093
 [read-only]	EditorWindow		[apenas de leitura]
-About…	EditorWindow		Acerca…
+<empty>	EditorWindow		<vazio>
+About…	EditorWindow		Sobre…
 Access denied	EditorWindow		Acesso recusado
+Bookmarks	EditorWindow		Marcadores
 Cancel	EditorWindow		Cancelar
 Close	EditorWindow		Fechar
-Comment block	EditorWindow		Bloco de comentário
-Comment line	EditorWindow		Linha de comentário
+Comment block	EditorWindow		Comentar bloco
+Comment line	EditorWindow		Comentar linha
 Copy	EditorWindow		Copiar
+Could not find Open Terminal Tracker add-on.	EditorWindow		Não foi possível encontrar a extensão do Tracker Abrir Terminal.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Não foi possível executar a extensão do Tracker Abrir Terminal.
 Cut	EditorWindow		Cortar
 Discard	EditorWindow		Descartar
 Do nothing	EditorWindow		Não fazer nada
 Edit	EditorWindow		Editar
 File	EditorWindow		Ficheiro
 File modified	EditorWindow		Ficheiro modificado
+File removed	EditorWindow		Ficheiro removido
+Find next	EditorWindow		Procurar seguinte
+Find selection	EditorWindow		Procurar seleção
 Find/Replace…	EditorWindow		Procurar/Substituir…
 Go to line…	EditorWindow		Ir para a linha…
 Help	EditorWindow		Ajuda
+Incremental search	EditorWindow		Procura incremental
 Koder preferences…	EditorWindow		Preferências do Koder…
 Language	EditorWindow		Linguagem
 Line endings	EditorWindow		Finais de linha
 New	EditorWindow		Novo
+Next bookmark	EditorWindow		Marcador seguinte
 Old Mac format	EditorWindow		Formato antigo de Mac
+Open partner file	EditorWindow		Abrir ficheiro associado
+Open recent	EditorWindow		Abrir recente
+Open Terminal	EditorWindow		Abrir Terminal
 Open…	EditorWindow		Abrir…
+Partner file not found.	EditorWindow		Ficheiro associado não encontrado.
 Paste	EditorWindow		Colar
+Previous bookmark	EditorWindow		Marcador anterior
 Quit	EditorWindow		Sair
 Reached the end of the target. No results found.	EditorWindow		Foi alcançado o final do alvo. Nenhum resultado encontrado.
 Redo	EditorWindow		Refazer
 Reload	EditorWindow		Recarregar
+Replace and find	EditorWindow		Substituir e procurar
 Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Efetuada substituição de {0, plural, one{# ocorrência} other{# ocorrências}}.
 Replacement finished	EditorWindow		Substituição concluída
 Save	EditorWindow		Guardar
@@ -91,6 +56,8 @@ Special symbols	EditorWindow		Símbolos especiais
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		O ficheiro contém alterações por guardar, mas é só de leitura. O que fazer?
 The file contains unsaved changes. What to do?	EditorWindow		O ficheiro contém alterações por guardar. O que fazer?
 The file has been modified by another application. What to do?	EditorWindow		O ficheiro foi modificado por outra aplicação. O que fazer?
+The file has been removed. What to do?	EditorWindow		O ficheiro foi removido. O que fazer?
+Toggle bookmark	EditorWindow		Alternar marcador
 Trim trailing whitespace	EditorWindow		Remover espaço em branco no final
 Undo	EditorWindow		Desfazer
 Unix format	EditorWindow		Formato Unix
@@ -101,21 +68,63 @@ Windows format	EditorWindow		Formato do Windows
 Wrap lines	EditorWindow		Quebrar linhas
 You don't have sufficient permissions to edit this file.	EditorWindow		Não tem permissões suficientes para editar este ficheiro.
 Your changes will be lost.	EditorWindow		As suas alterações serão perdidas.
-Find selection	EditorWindow		Procurar seleção
-Find next	EditorWindow		Procurar seguinte
-Replace and find	EditorWindow		Substituir e procurar
-Incremental search	EditorWindow		Procura incremental
-Could not find Open Terminal Tracker add-on.	EditorWindow		Não foi possível encontrar a extensão do Tracker Abrir Terminal.
-Toggle bookmark	EditorWindow		Alternar marcador
-Open Terminal	EditorWindow		Abrir Terminal
-Next bookmark	EditorWindow		Marcador seguinte
-Could not launch Open Terminal Tracker add-on.	EditorWindow		Não foi possível executar a extensão do Tracker Abrir Terminal.
-File removed	EditorWindow		Ficheiro removido
-Bookmarks	EditorWindow		Marcadores
-The file has been removed. What to do?	EditorWindow		O ficheiro foi removido. O que fazer?
-Open partner file	EditorWindow		Abrir ficheiro associado
-Previous bookmark	EditorWindow		Marcador anterior
-Partner file not found.	EditorWindow		Ficheiro associado não encontrado.
+<empty>	FindStatusView		<vazio>
+Clear	FindStatusView		Limpar
+History	FindStatusView		Histórico
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		O acesso foi recusado durante a abertura do ficheiro de configuração. Certifique-se de que tem permissão de %s% para a sua pasta de definições.
+Editor settings	Preferences		Definições do editor
+load	Preferences	to _ the configuration	carregar
+loaded	Preferences	settings will not be _	carregadas
+read	Preferences	Make sure you have _ permission for	leitura
+save	Preferences	to _ the configuration	guardar
+saved	Preferences	settings will not be _	guardadas
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Ocorreu algo errado ao abrir o ficheiro de configuração. As suas definições pessoais não serão %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Não há memória disponível suficiente para %s% o ficheiro de configuração. Tente fechar algumas aplicações e reinicie o editor.
+Unknown error.	Preferences		Erro desconhecido.
+write	Preferences	Make sure you have _ permission for	escrita
+Always open files in new window	AppPreferencesWindow		Abrir sempre os ficheiros numa janela nova
+Background	AppPreferencesWindow		Fundo
+Background	AppPreferencesWindow	Current line highlight	Fundo
+Behavior	AppPreferencesWindow		Comportamento
+Bookmarks	AppPreferencesWindow		Marcadores
+Compact language menu	AppPreferencesWindow		Menu de linguagem compacto
+Convert tabs to spaces	AppPreferencesWindow		Converter tabulações para espaços
+Enormous	AppPreferencesWindow	Toolbar icon size	Enorme
+Ensure empty last line on save	AppPreferencesWindow		Assegurar última linha vazia ao guardar
+Extra large	AppPreferencesWindow	Toolbar icon size	Extra grande
+Folds	AppPreferencesWindow		Dobras
+Frame	AppPreferencesWindow	Current line highlight	Moldura
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigante
+Highlight braces	AppPreferencesWindow		Realçar parênteses
+Highlight current line	AppPreferencesWindow		Realçar a linha atual
+Highlight trailing whitespace	AppPreferencesWindow		Realçar espaço em branco no final
+Huge	AppPreferencesWindow	Toolbar icon size	Muito grande
+Icon size	AppPreferencesWindow		Tamanho de ícone
+Indentation	AppPreferencesWindow		Indentação
+Koder preferences	AppPreferencesWindow		Preferências do Koder
+Large	AppPreferencesWindow	Toolbar icon size	Grande
+Left margin	AppPreferencesWindow		Margem esquerda
+Line	AppPreferencesWindow		Linha
+Line numbers	AppPreferencesWindow		Numeração de linhas
+Mark overly long lines	AppPreferencesWindow		Assinalar linhas demasiado longas
+Max. characters per line:	AppPreferencesWindow		Máx. de caracteres por linha:
+Medium	AppPreferencesWindow	Toolbar icon size	Médio
+Only in actually indented lines	AppPreferencesWindow		Apenas em linhas efetivamente indentadas
+Revert	AppPreferencesWindow		Reverter
+Show full path in title	AppPreferencesWindow		Mostrar caminho completo no título
+Show indentation guides	AppPreferencesWindow		Mostrar guias de indentação
+Show toolbar	AppPreferencesWindow		Mostrar barra de ferramentas
+Small	AppPreferencesWindow	Toolbar icon size	Pequeno
+Spaces per tab:	AppPreferencesWindow		Espaços por tabulação:
+Stack new windows	AppPreferencesWindow		Empilhar novas janelas
+Style	AppPreferencesWindow		Estilo
+Trailing whitespace	AppPreferencesWindow		Espaço em branco no final
+Trim trailing whitespace on save	AppPreferencesWindow		Remover espaços em branco no final ao guardar
+Up to the next non-empty line	AppPreferencesWindow		Até à linha não-vazia seguinte
+Up to the next/previous non-empty line	AppPreferencesWindow		Até à linha não-vazia seguinte/anterior
+Use .editorconfig if possible	AppPreferencesWindow		Usar .editorconfig se possível
+Use custom font	AppPreferencesWindow		Usar tipo de letra personalizado
+Visual	AppPreferencesWindow		Visual
 Backwards	FindWindow		Para trás
 Find	FindWindow		Procurar
 Find:	FindWindow		Procurar:
@@ -129,6 +138,7 @@ Replace all	FindWindow		Substituir tudo
 Replace and find	FindWindow		Substituir e procurar
 Replace:	FindWindow		Substituir:
 Wrap around	FindWindow		Dar a volta
+Bookmarks	BookmarksWindow		Marcadores
 Cancel	GoToLineWindow		Cancelar
 Go to line	GoToLineWindow		Ir para linha
 Go to line:	GoToLineWindow		Ir para a linha:
@@ -139,23 +149,18 @@ Save all	QuitAlert		Guardar tudo
 Save selected	QuitAlert		Guardar seleção
 There are unsaved changes.\nSelect the files to save.	QuitAlert		Há alterações por guardar.\nSelecione os ficheiros a guardar.
 Unsaved files	QuitAlert		Ficheiros por guardar
+Code editor for Haiku based on Scintilla editing component.	App		Editor de código para Haiku baseado no componente de edição Scintilla.
+Distributed on MIT license terms.	App		Distribuído nos termos da licença MIT.
+humdinger, for GUI design tips and artwork.	App		humdinger, pelo trabalho de desenho e pelas dicas de design de GUI.
+Konrad77, for dark theme.	App		Konrad77, pelo tema escuro.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, pelo componente de edição Scintilla e pelo editor SciTE.
+translators to:	App	to _ (language), e.g. German	tradutores para:
+zuMi, for toolbar icons.	App		zuMi, pelos ícones de barra de ferrmentas.
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Não foi possível encontrar ficheiros de estilo. Certifique-se de que os tem instalados numa das suas pastas de dados.
 Style files	Styler		Ficheiros de estilo
-Koder	System name		Koder
-Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		O acesso foi recusado durante a abertura do ficheiro de configuração. Certifique-se de que tem permissão de %s% para a sua pasta de definições.
-Editor settings	Preferences		Definições do editor
-read	Preferences	Make sure you have _ permission for	leitura
-Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Ocorreu algo errado ao abrir o ficheiro de configuração. As suas definições pessoais não serão %s%.
-load	Preferences	to _ the configuration	carregar
-Unknown error.	Preferences		Erro desconhecido.
-There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Não há memória disponível suficiente para %s% o ficheiro de configuração. Tente fechar algumas aplicações e reinicie o editor.
-loaded	Preferences	settings will not be _	carregadas
-write	Preferences	Make sure you have _ permission for	escrita
-save	Preferences	to _ the configuration	guardar
-saved	Preferences	settings will not be _	guardadas
-Read-only	StatusView		Só de leitura
-Open Terminal	StatusView		Abrir Terminal
-Go to	BookmarksListView		Ir para
 Delete	BookmarksListView		Eliminar
+Go to	BookmarksListView		Ir para
+Koder	System name		Koder
 OK	Utilities		OK
-Bookmarks	BookmarksWindow		Marcadores
+Open Terminal	EditorStatusView		Abrir Terminal
+Read-only	EditorStatusView		Apenas leitura

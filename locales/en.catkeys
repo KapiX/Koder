@@ -1,26 +1,25 @@
-1	English	x-vnd.KapiX-Koder	822155924
+1	English	x-vnd.KapiX-Koder	3251374093
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
+Use custom font	AppPreferencesWindow		Use custom font
 In selection	FindWindow		In selection
 About…	EditorWindow		About…
-Use custom font	AppPreferencesWindow		Use custom font
 The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
-Read-only	StatusView		Read-only
 Replace:	FindWindow		Replace:
 Cancel	QuitAlert		Cancel
 Could not find Open Terminal Tracker add-on.	EditorWindow		Could not find Open Terminal Tracker add-on.
 Match entire words	FindWindow		Match entire words
 Discard	EditorWindow		Discard
 Background	AppPreferencesWindow		Background
-Partner file not found.	EditorWindow		Partner file not found.
-Unsaved changes	EditorWindow		Unsaved changes
 Trim trailing whitespace on save	AppPreferencesWindow		Trim trailing whitespace on save
+Unsaved changes	EditorWindow		Unsaved changes
+Partner file not found.	EditorWindow		Partner file not found.
 File	EditorWindow		File
 Open…	EditorWindow		Open…
 Koder preferences…	EditorWindow		Koder preferences…
-Language	EditorWindow		Language
 read	Preferences	Make sure you have _ permission for	read
+Language	EditorWindow		Language
 Special symbols	EditorWindow		Special symbols
 Show line endings	EditorWindow		Show line endings
 Undo	EditorWindow		Undo
@@ -31,21 +30,22 @@ Spaces per tab:	AppPreferencesWindow		Spaces per tab:
 Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
 Copy	EditorWindow		Copy
 translators to:	App	to _ (language), e.g. German	translators to:
+<empty>	EditorWindow		<empty>
 OK	GoToLineWindow		OK
 There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.
 Folds	AppPreferencesWindow		Folds
 Visual	AppPreferencesWindow		Visual
 Wrap around	FindWindow		Wrap around
 Highlight current line	AppPreferencesWindow		Highlight current line
-Go to line…	EditorWindow		Go to line…
 Left margin	AppPreferencesWindow		Left margin
+Go to line…	EditorWindow		Go to line…
 Mark overly long lines	AppPreferencesWindow		Mark overly long lines
 Replace and find	EditorWindow		Replace and find
 Find/Replace	FindWindow		Find/Replace
 Match case	FindWindow		Match case
 Distributed on MIT license terms.	App		Distributed on MIT license terms.
-Find:	FindWindow		Find:
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
+Find:	FindWindow		Find:
 View	EditorWindow		View
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
 Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
@@ -58,8 +58,8 @@ Trailing whitespace	AppPreferencesWindow		Trailing whitespace
 Cancel	GoToLineWindow		Cancel
 Large	AppPreferencesWindow	Toolbar icon size	Large
 Backwards	FindWindow		Backwards
-The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
 Toggle bookmark	EditorWindow		Toggle bookmark
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
 Old Mac format	EditorWindow		Old Mac format
 Open Terminal	EditorWindow		Open Terminal
 loaded	Preferences	settings will not be _	loaded
@@ -72,39 +72,42 @@ Background	AppPreferencesWindow	Current line highlight	Background
 Behavior	AppPreferencesWindow		Behavior
 Windows format	EditorWindow		Windows format
 save	Preferences	to _ the configuration	save
-Replace all	FindWindow		Replace all
 Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
+Replace all	FindWindow		Replace all
 Koder	System name		Koder
 Extra large	AppPreferencesWindow	Toolbar icon size	Extra large
-Find selection	EditorWindow		Find selection
 Stack new windows	AppPreferencesWindow		Stack new windows
-Medium	AppPreferencesWindow	Toolbar icon size	Medium
+Find selection	EditorWindow		Find selection
 Revert	AppPreferencesWindow		Revert
+Medium	AppPreferencesWindow	Toolbar icon size	Medium
 Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
+<empty>	FindStatusView		<empty>
 Next bookmark	EditorWindow		Next bookmark
 Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
 Save	EditorWindow		Save
 Wrap lines	EditorWindow		Wrap lines
-Find next	EditorWindow		Find next
+History	FindStatusView		History
 Small	AppPreferencesWindow	Toolbar icon size	Small
+Find next	EditorWindow		Find next
 Incremental search	EditorWindow		Incremental search
 Style files	Styler		Style files
 Cut	EditorWindow		Cut
 Frame	AppPreferencesWindow	Current line highlight	Frame
-Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
-Indentation	AppPreferencesWindow		Indentation
 Ensure empty last line on save	AppPreferencesWindow		Ensure empty last line on save
-Save all	QuitAlert		Save all
+Indentation	AppPreferencesWindow		Indentation
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
+Open recent	EditorWindow		Open recent
 Show toolbar	EditorWindow		Show toolbar
-Replacement finished	EditorWindow		Replacement finished
+Save all	QuitAlert		Save all
+Read-only	EditorStatusView		Read-only
 New	EditorWindow		New
-Your changes will be lost.	EditorWindow		Your changes will be lost.
+Replacement finished	EditorWindow		Replacement finished
 Always open files in new window	AppPreferencesWindow		Always open files in new window
+Your changes will be lost.	EditorWindow		Your changes will be lost.
 Find/Replace…	EditorWindow		Find/Replace…
-Replace and find	FindWindow		Replace and find
-Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
-Open Terminal	StatusView		Open Terminal
 Show white space	EditorWindow		Show white space
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
+Replace and find	FindWindow		Replace and find
 Huge	AppPreferencesWindow	Toolbar icon size	Huge
 Regex	FindWindow		Regex
 Go to	BookmarksListView		Go to
@@ -117,45 +120,47 @@ Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
 Search	EditorWindow		Search
 Icon size	AppPreferencesWindow		Icon size
 File removed	EditorWindow		File removed
-Line numbers	AppPreferencesWindow		Line numbers
 Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
+Line numbers	AppPreferencesWindow		Line numbers
 zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
-Help	EditorWindow		Help
+Clear	FindStatusView		Clear
 Style	AppPreferencesWindow		Style
 Paste	EditorWindow		Paste
+Help	EditorWindow		Help
 Save as…	EditorWindow		Save as…
-Untitled	EditorWindow		Untitled
 Bookmarks	EditorWindow		Bookmarks
+Untitled	EditorWindow		Untitled
 Unknown error.	Preferences		Unknown error.
 Find	FindWindow		Find
 Delete	BookmarksListView		Delete
-Go to line	GoToLineWindow		Go to line
 Reload	EditorWindow		Reload
+Go to line	GoToLineWindow		Go to line
 There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
 The file has been removed. What to do?	EditorWindow		The file has been removed. What to do?
-The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
 Enormous	AppPreferencesWindow	Toolbar icon size	Enormous
 Trim trailing whitespace	EditorWindow		Trim trailing whitespace
+The file has been modified by another application. What to do?	EditorWindow		The file has been modified by another application. What to do?
 Konrad77, for dark theme.	App		Konrad77, for dark theme.
-Cancel	EditorWindow		Cancel
 Open partner file	EditorWindow		Open partner file
-Previous bookmark	EditorWindow		Previous bookmark
+Cancel	EditorWindow		Cancel
 OK	Utilities		OK
+Previous bookmark	EditorWindow		Previous bookmark
 Line	AppPreferencesWindow		Line
-Searching finished	EditorWindow		Searching finished
-humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
 saved	Preferences	settings will not be _	saved
+humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
+Searching finished	EditorWindow		Searching finished
 Bookmarks	BookmarksWindow		Bookmarks
 Compact language menu	AppPreferencesWindow		Compact language menu
-File modified	EditorWindow		File modified
 Unix format	EditorWindow		Unix format
+Open Terminal	EditorStatusView		Open Terminal
+File modified	EditorWindow		File modified
 Highlight braces	AppPreferencesWindow		Highlight braces
 Save selected	QuitAlert		Save selected
 Max. characters per line:	AppPreferencesWindow		Max. characters per line:
-Don't save	QuitAlert		Don't save
-Koder preferences	AppPreferencesWindow		Koder preferences
-Show indentation guides	AppPreferencesWindow		Show indentation guides
-Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
 Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
+Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
+Show indentation guides	AppPreferencesWindow		Show indentation guides
+Koder preferences	AppPreferencesWindow		Koder preferences
+Don't save	QuitAlert		Don't save
 Replace	FindWindow		Replace
 [read-only]	EditorWindow		[read-only]

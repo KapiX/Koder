@@ -28,7 +28,7 @@ SYSTEM_INCLUDE_PATHS = \
 
 LOCAL_INCLUDE_PATHS = src/bookmarks src/controls src/editor src/find \
 	src/preferences src/support
-LOCALES = de en en_GB es fr pt pl ro ru uk
+LOCALES = ca de el en en_AU en_GB es es_419 fr fur hu it ja nl pl pt ro ru sv tr uk zh_Hans
 
 SYMBOLS := TRUE
 DEBUGGER := TRUE

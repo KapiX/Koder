@@ -1,0 +1,166 @@
+1	Spanish (Latin American)	x-vnd.KapiX-Koder	3251374093
+[read-only]	EditorWindow		[sólo-lectura]
+<empty>	EditorWindow		<vacío>
+About…	EditorWindow		Acerca de…
+Access denied	EditorWindow		Acceso denegado
+Bookmarks	EditorWindow		Marcadores
+Cancel	EditorWindow		Cancelar
+Close	EditorWindow		Cerrar
+Comment block	EditorWindow		Bloque de comentario
+Comment line	EditorWindow		Línea de comentario
+Copy	EditorWindow		Copiar
+Could not find Open Terminal Tracker add-on.	EditorWindow		No se pudo encontrar el add-on "Abrir terminal" del Tracker.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		No se pudo lanzar el add-on "Abrir terminal" del Tracker.
+Cut	EditorWindow		Cortar
+Discard	EditorWindow		Descartar
+Do nothing	EditorWindow		No hacer nada
+Edit	EditorWindow		Editar
+File	EditorWindow		Archivo
+File modified	EditorWindow		Archivo modificado
+File removed	EditorWindow		Archivo removido
+Find next	EditorWindow		Buscar siguiente
+Find selection	EditorWindow		Buscar selección
+Find/Replace…	EditorWindow		Buscar/reemplazar…
+Go to line…	EditorWindow		Ir a línea...
+Help	EditorWindow		Ayuda
+Incremental search	EditorWindow		Búsqueda incremental
+Koder preferences…	EditorWindow		Preferencias de Koder...
+Language	EditorWindow		Idioma
+Line endings	EditorWindow		Finales de línea
+New	EditorWindow		Nuevo
+Next bookmark	EditorWindow		Siguiente marcador
+Old Mac format	EditorWindow		Formato Mac antiguo
+Open partner file	EditorWindow		Abrir archivo partner
+Open recent	EditorWindow		Abrir reciente
+Open Terminal	EditorWindow		Abrir terminal
+Open…	EditorWindow		Abrir…
+Partner file not found.	EditorWindow		Archivo partner no encontrado.
+Paste	EditorWindow		Pegar
+Previous bookmark	EditorWindow		Marcador anterior
+Quit	EditorWindow		Salir
+Reached the end of the target. No results found.	EditorWindow		Alcanzado el final del objetivo. No se encontraron resultados.
+Redo	EditorWindow		Rehacer
+Reload	EditorWindow		Recargar
+Replace and find	EditorWindow		Reemplazar y buscar
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Reemplazado: {0, plural, one{# occurencia} other{# occurencias}}.
+Replacement finished	EditorWindow		Reemplazo terminado
+Save	EditorWindow		Guardar
+Save as…	EditorWindow		Guardar como…
+Search	EditorWindow		Buscar
+Searching finished	EditorWindow		Búsqueda finalizada
+Select all	EditorWindow		Seleccionar todo
+Show line endings	EditorWindow		Mostrar finales de línea
+Show toolbar	EditorWindow		Mostrar barra de herramientas
+Show white space	EditorWindow		Mostrar espacio en blanco
+Special symbols	EditorWindow		Símbolos especiales
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		El archivo contiene cambios no guardados, pero es de sólo lectura. ¿Qué debo hacer?
+The file contains unsaved changes. What to do?	EditorWindow		El archivo contiene cambios no guardados. ¿Qué debo hacer?
+The file has been modified by another application. What to do?	EditorWindow		El archivo ha sido modificado por otra aplicación. ¿Qué debo hacer?
+The file has been removed. What to do?	EditorWindow		El archivo ha sido eliminado. ¿Qué debo hacer?
+Toggle bookmark	EditorWindow		Alternar marcador
+Trim trailing whitespace	EditorWindow		Recortar los espacios en blanco
+Undo	EditorWindow		Deshacer
+Unix format	EditorWindow		Formato de Unix
+Unsaved changes	EditorWindow		Cambios no guardados
+Untitled	EditorWindow		Sin título
+View	EditorWindow		Vista
+Windows format	EditorWindow		Formato de Windows
+Wrap lines	EditorWindow		Ajustar líneas
+You don't have sufficient permissions to edit this file.	EditorWindow		No tiene permisos suficientes para editar este archivo.
+Your changes will be lost.	EditorWindow		Se perderán los cambios.
+<empty>	FindStatusView		<vacío>
+Clear	FindStatusView		Limpiar
+History	FindStatusView		Historial
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Se denegó el acceso al abrir el archivo de configuración. Asegúrese de que tiene permiso %s% para su carpeta de configuración.
+Editor settings	Preferences		Configuración del editor
+load	Preferences	to _ the configuration	cargar
+loaded	Preferences	settings will not be _	cargados
+read	Preferences	Make sure you have _ permission for	lectura
+save	Preferences	to _ the configuration	Guardar
+saved	Preferences	settings will not be _	guardados
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Ha ocurrido un problema al abrir el archivo de configuración. Su configuración personal no será %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		No hay suficiente memoria para %s% el archivo de configuración. Intente cerrar algunas aplicaciones y reinicie el editor.
+Unknown error.	Preferences		Error desconocido.
+write	Preferences	Make sure you have _ permission for	escritura
+Always open files in new window	AppPreferencesWindow		Abrir siempre los archivos en una ventana nueva
+Background	AppPreferencesWindow		Fondo
+Background	AppPreferencesWindow	Current line highlight	Fondo
+Behavior	AppPreferencesWindow		Comportamiento
+Bookmarks	AppPreferencesWindow		Marcadores
+Compact language menu	AppPreferencesWindow		Menú de idiomas compacto
+Convert tabs to spaces	AppPreferencesWindow		Convertir tabuladores en espacios
+Enormous	AppPreferencesWindow	Toolbar icon size	Enorme
+Ensure empty last line on save	AppPreferencesWindow		Garantizar última línea vacía al guardar
+Extra large	AppPreferencesWindow	Toolbar icon size	Extra grande
+Folds	AppPreferencesWindow		Plegar
+Frame	AppPreferencesWindow	Current line highlight	Marco
+Gigantic	AppPreferencesWindow	Toolbar icon size	Gigante
+Highlight braces	AppPreferencesWindow		Resaltar corchetes
+Highlight current line	AppPreferencesWindow		Resaltar línea actual
+Highlight trailing whitespace	AppPreferencesWindow		Resaltar los espacios en blanco finales
+Huge	AppPreferencesWindow	Toolbar icon size	Muy grande
+Icon size	AppPreferencesWindow		Tamaño de ícono
+Indentation	AppPreferencesWindow		Indentación
+Koder preferences	AppPreferencesWindow		Preferencias de Koder
+Large	AppPreferencesWindow	Toolbar icon size	Grande
+Left margin	AppPreferencesWindow		Margen izquierdo
+Line	AppPreferencesWindow		Línea
+Line numbers	AppPreferencesWindow		Números de línea
+Mark overly long lines	AppPreferencesWindow		Marcar líneas demasiado largas
+Max. characters per line:	AppPreferencesWindow		Máx. caracteres por línea
+Medium	AppPreferencesWindow	Toolbar icon size	Mediano
+Only in actually indented lines	AppPreferencesWindow		Sólo en líneas actualmente indentadas
+Revert	AppPreferencesWindow		Revertir
+Show full path in title	AppPreferencesWindow		Mostrar la ruta completa en el título
+Show indentation guides	AppPreferencesWindow		Mostrar guías de indentación
+Show toolbar	AppPreferencesWindow		Mostrar barra de herramientas
+Small	AppPreferencesWindow	Toolbar icon size	Pequeño
+Spaces per tab:	AppPreferencesWindow		Espacios por tab:
+Stack new windows	AppPreferencesWindow		Apilar ventanas nuevas
+Style	AppPreferencesWindow		Estilo
+Trailing whitespace	AppPreferencesWindow		Espacio en blanco al final
+Trim trailing whitespace on save	AppPreferencesWindow		Recortar espacios en blanco al guardar
+Up to the next non-empty line	AppPreferencesWindow		Hasta la siguiente línea no vacía
+Up to the next/previous non-empty line	AppPreferencesWindow		Hasta la siguiente/anterior línea no vacía
+Use .editorconfig if possible	AppPreferencesWindow		Utilice .editorconfig si es posible
+Use custom font	AppPreferencesWindow		Usar fuente personalizada
+Visual	AppPreferencesWindow		Visual
+Backwards	FindWindow		Hacia atrás
+Find	FindWindow		Encontrar
+Find:	FindWindow		Encontrar:
+Find/Replace	FindWindow		Buscar/reemplazar
+In selection	FindWindow		En selección
+Match case	FindWindow		Coincidir mayúsculas/minúsculas
+Match entire words	FindWindow		Coincidir palabras completas
+Regex	FindWindow		Regex
+Replace	FindWindow		Reemplazar
+Replace all	FindWindow		Reemplazar todo
+Replace and find	FindWindow		Reemplazar y encontrar
+Replace:	FindWindow		Reemplazar:
+Wrap around	FindWindow		Ajustar todo el texto
+Bookmarks	BookmarksWindow		Marcadores
+Cancel	GoToLineWindow		Cancelar
+Go to line	GoToLineWindow		Ir a línea
+Go to line:	GoToLineWindow		Ir a línea:
+OK	GoToLineWindow		Aceptar
+Cancel	QuitAlert		Cancelar
+Don't save	QuitAlert		No guardar
+Save all	QuitAlert		Guardar todo
+Save selected	QuitAlert		Guardar selección
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Hay cambios sin guardar.\NSeleccione los archivos a guardar.
+Unsaved files	QuitAlert		Archivos no guardados
+Code editor for Haiku based on Scintilla editing component.	App		Editor de código para Haiku basado en el componente de edición Scintilla.
+Distributed on MIT license terms.	App		Distribuido bajo licencia MIT.
+humdinger, for GUI design tips and artwork.	App		humdinger, por tips sobre la GUI e ilustraciones.
+Konrad77, for dark theme.	App		Konrad77, por el tema oscuro.
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, por el componente de edición Scintilla y el editor SciTE.
+translators to:	App	to _ (language), e.g. German	traductores a:
+zuMi, for toolbar icons.	App		zuMi, por los iconos de la barra de herramientas.
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		No se encuentran los archivos de estilo. Asegúrese de que los tiene instalados en alguna de sus carpetas de datos.
+Style files	Styler		Archivos de estilo
+Delete	BookmarksListView		Eliminar
+Go to	BookmarksListView		Ir a
+Koder	System name		Koder
+OK	Utilities		Aceptar
+Open Terminal	EditorStatusView		Abrir Terminal
+Read-only	EditorStatusView		Sólo lectura

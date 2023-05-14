@@ -1,0 +1,166 @@
+1	Turkish	x-vnd.KapiX-Koder	3251374093
+[read-only]	EditorWindow		[saltokunur]
+<empty>	EditorWindow		<boş>
+About…	EditorWindow		Hakkında…
+Access denied	EditorWindow		Erişim engellendi
+Bookmarks	EditorWindow		Yer imleri
+Cancel	EditorWindow		İptal
+Close	EditorWindow		Kapat
+Comment block	EditorWindow		Yorum bloku
+Comment line	EditorWindow		Yorum satırı
+Copy	EditorWindow		Kopyala
+Could not find Open Terminal Tracker add-on.	EditorWindow		Uçbirim'i Aç İzleyici eklentisi bulunamadı.
+Could not launch Open Terminal Tracker add-on.	EditorWindow		Uçbirim'i Aç İzleyici eklentisi açılamadı.
+Cut	EditorWindow		Kes
+Discard	EditorWindow		At
+Do nothing	EditorWindow		Bir şey yapma
+Edit	EditorWindow		Düzen
+File	EditorWindow		Dosya
+File modified	EditorWindow		Dosya değiştirildi
+File removed	EditorWindow		Dosya kaldırıldı
+Find next	EditorWindow		Sonrakini bul
+Find selection	EditorWindow		Seçimi bul
+Find/Replace…	EditorWindow		Bul/Değiştir…
+Go to line…	EditorWindow		Satıra git…
+Help	EditorWindow		Yardım
+Incremental search	EditorWindow		Artan arama
+Koder preferences…	EditorWindow		Koder tercihleri…
+Language	EditorWindow		Dil
+Line endings	EditorWindow		Satır sonları
+New	EditorWindow		Yeni
+Next bookmark	EditorWindow		Sonraki yer imi
+Old Mac format	EditorWindow		Eski Mac biçimi
+Open partner file	EditorWindow		İlişkin dosyayı aç
+Open recent	EditorWindow		Son kullanılanı aç
+Open Terminal	EditorWindow		Uçbirim'i aç
+Open…	EditorWindow		Aç…
+Partner file not found.	EditorWindow		İlişkin dosya bulunamadı.
+Paste	EditorWindow		Yapıştır
+Previous bookmark	EditorWindow		Önceki yer imi
+Quit	EditorWindow		Çık
+Reached the end of the target. No results found.	EditorWindow		Hedefin sonuna ulaşıldı. Sonuç bulunamadı.
+Redo	EditorWindow		Yenile
+Reload	EditorWindow		Yeniden yükle
+Replace and find	EditorWindow		Değiştir ve bul
+Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		{0, plural, one{# sonuç} other{# sonuç}} değiştirildi.
+Replacement finished	EditorWindow		Değiştirme tamamlandı.
+Save	EditorWindow		Kaydet
+Save as…	EditorWindow		Farklı kaydet…
+Search	EditorWindow		Ara
+Searching finished	EditorWindow		Arama bitti
+Select all	EditorWindow		Tümünü seç
+Show line endings	EditorWindow		Satır sonlarını göster
+Show toolbar	EditorWindow		Araç çubuğunu göster
+Show white space	EditorWindow		Boşlukları göster
+Special symbols	EditorWindow		Özel semboller
+The file contains unsaved changes, but is read-only. What to do?	EditorWindow		Bu dosyada kaydedilmemiş değişiklikler var; ancak dosya saltokunur. Ne yapalım?
+The file contains unsaved changes. What to do?	EditorWindow		Bu dosyada kaydedilmemiş değişiklikler var, ne yapalım?
+The file has been modified by another application. What to do?	EditorWindow		Bu dosya başka bir uygulama tarafından değiştirilmiş. Ne yapalım?
+The file has been removed. What to do?	EditorWindow		Bu dosya kaldırılmış. Ne yapalım?
+Toggle bookmark	EditorWindow		Yer imlerini aç/kapat
+Trim trailing whitespace	EditorWindow		Sondaki boşlukları kırp
+Undo	EditorWindow		Geri al
+Unix format	EditorWindow		Unix biçimi
+Unsaved changes	EditorWindow		Kaydedilmemiş değişiklikler
+Untitled	EditorWindow		Adsız
+View	EditorWindow		Görüntü
+Windows format	EditorWindow		Windows biçimi
+Wrap lines	EditorWindow		Satırları kaydır
+You don't have sufficient permissions to edit this file.	EditorWindow		Bu dosyayı düzenlemek için gerekli izinlere iye değilsiniz.
+Your changes will be lost.	EditorWindow		Değişiklikleriniz kaybolacak.
+<empty>	FindStatusView		<boş>
+Clear	FindStatusView		Temizle
+History	FindStatusView		Geçmiş
+Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Yapılandırma dosyasına erişim engellendi. Ayarlar dizininiz için %s% izninizin olduğundan emin olun.
+Editor settings	Preferences		Düzenleyici ayarları
+load	Preferences	to _ the configuration	yüklemek
+loaded	Preferences	settings will not be _	yüklendi
+read	Preferences	Make sure you have _ permission for	okumak
+save	Preferences	to _ the configuration	kaydetmek
+saved	Preferences	settings will not be _	kaydedildi
+Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Yapılandırma dosyası açılırken bir hata oluştu. Kişisel ayarlarınız %s%.
+There is not enough memory available to %s% the configuration file. Try closing a few applications and restart the editor.	Preferences		Yapılandırma dosyasını %s% için yeterli bellek yok. Birkaç uygulamayı kapatıp düzenleyiciyi yeniden başlatın.
+Unknown error.	Preferences		Bilinmeyen hata.
+write	Preferences	Make sure you have _ permission for	yazmak
+Always open files in new window	AppPreferencesWindow		Dosyaları her zaman yeni pencerede aç
+Background	AppPreferencesWindow		Arka plan
+Background	AppPreferencesWindow	Current line highlight	Arka plan
+Behavior	AppPreferencesWindow		Davranış
+Bookmarks	AppPreferencesWindow		Yer imleri
+Compact language menu	AppPreferencesWindow		Küçük dil menüsü
+Convert tabs to spaces	AppPreferencesWindow		Sekmeleri boşluklara dönüştür
+Enormous	AppPreferencesWindow	Toolbar icon size	Çok büyük
+Ensure empty last line on save	AppPreferencesWindow		Kaydederken son satırın boş olduğundan emin ol
+Extra large	AppPreferencesWindow	Toolbar icon size	Ekstra büyük
+Folds	AppPreferencesWindow		Kıvırmalar
+Frame	AppPreferencesWindow	Current line highlight	Çerçeve
+Gigantic	AppPreferencesWindow	Toolbar icon size	Dev gibi
+Highlight braces	AppPreferencesWindow		Kıvrık ayraçları vurgula
+Highlight current line	AppPreferencesWindow		Geçerli satırı vurgula
+Highlight trailing whitespace	AppPreferencesWindow		Sondaki boşlukları vurgula
+Huge	AppPreferencesWindow	Toolbar icon size	Kocaman
+Icon size	AppPreferencesWindow		Simge boyutu
+Indentation	AppPreferencesWindow		Girinti
+Koder preferences	AppPreferencesWindow		Koder tercihleri
+Large	AppPreferencesWindow	Toolbar icon size	Geniş
+Left margin	AppPreferencesWindow		Sol kenar boşluğu
+Line	AppPreferencesWindow		Satır
+Line numbers	AppPreferencesWindow		Satır numaraları
+Mark overly long lines	AppPreferencesWindow		Çok uzun satırları imle
+Max. characters per line:	AppPreferencesWindow		Satır başına en çok karakter sayısı:
+Medium	AppPreferencesWindow	Toolbar icon size	Orta
+Only in actually indented lines	AppPreferencesWindow		Yalnızca gerçekten girintili satırlarda
+Revert	AppPreferencesWindow		Eski haline döndür
+Show full path in title	AppPreferencesWindow		Başlıkta tam yolu göster
+Show indentation guides	AppPreferencesWindow		Girintileme kılavuzlarını göster
+Show toolbar	AppPreferencesWindow		Araç çubuğunu göster
+Small	AppPreferencesWindow	Toolbar icon size	Küçük
+Spaces per tab:	AppPreferencesWindow		Sekme başına boşluk:
+Stack new windows	AppPreferencesWindow		Yeni pencereleri üst üste yığ
+Style	AppPreferencesWindow		Biçem
+Trailing whitespace	AppPreferencesWindow		Sondaki boşluk
+Trim trailing whitespace on save	AppPreferencesWindow		Kaydederken sondaki boşlukları kırp
+Up to the next non-empty line	AppPreferencesWindow		Bir sonraki boş olmayan satıra kadar
+Up to the next/previous non-empty line	AppPreferencesWindow		Bir önceki/sonraki boş olmayan satıra kadar
+Use .editorconfig if possible	AppPreferencesWindow		Olanaklıysa .editorconfig kullan
+Use custom font	AppPreferencesWindow		Özel yazıtipi kullan
+Visual	AppPreferencesWindow		Görsel
+Backwards	FindWindow		Geriye doğru
+Find	FindWindow		Bul
+Find:	FindWindow		Bul:
+Find/Replace	FindWindow		Bul/Değiştir
+In selection	FindWindow		Seçimde
+Match case	FindWindow		BÜYÜK/küçük harf eşleştir
+Match entire words	FindWindow		Tüm sözcükleri eşleştir
+Regex	FindWindow		Düzenli ifade
+Replace	FindWindow		Değiştir
+Replace all	FindWindow		Tümünü değiştir
+Replace and find	FindWindow		Değiştir ve bul
+Replace:	FindWindow		Değiştir:
+Wrap around	FindWindow		Kaydır
+Bookmarks	BookmarksWindow		Yer imleri
+Cancel	GoToLineWindow		İptal
+Go to line	GoToLineWindow		Satıra git
+Go to line:	GoToLineWindow		Satıra git:
+OK	GoToLineWindow		Tamam
+Cancel	QuitAlert		Vazgeç
+Don't save	QuitAlert		Kaydetme
+Save all	QuitAlert		Tümünü kaydet
+Save selected	QuitAlert		Seçiliyi kaydet
+There are unsaved changes.\nSelect the files to save.	QuitAlert		Kaydedilmemiş değişiklikler var.\nKaydedilecek dosyaları seçin.
+Unsaved files	QuitAlert		Kaydedilmemiş dosyalar
+Code editor for Haiku based on Scintilla editing component.	App		Haiku için Scintilla düzenleme bileşeni tabanlı kod düzenleyici.
+Distributed on MIT license terms.	App		MIT Lisansı hükümleri altında dağıtılmaktadır.
+humdinger, for GUI design tips and artwork.	App		humdinger, grafik arabirim konusunda ipuçları ve simgeler
+Konrad77, for dark theme.	App		Konrad77, koyu tema
+Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, Scintilla düzenleme bileşeni ve SciTE düzenleyicisi
+translators to:	App	to _ (language), e.g. German	çeviriler:
+zuMi, for toolbar icons.	App		zuMi, araç çubuğu simgeleri
+Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Biçem dosyaları bulunamadı. Veri dizinlerinizden bir tanesinde kurulu olduklarından emin olun.
+Style files	Styler		Biçem dosyaları
+Delete	BookmarksListView		Sil
+Go to	BookmarksListView		Git
+Koder	System name		Koder
+OK	Utilities		Tamam
+Open Terminal	EditorStatusView		Uçbirim aç
+Read-only	EditorStatusView		Saltokunur

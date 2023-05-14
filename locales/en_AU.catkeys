@@ -1,4 +1,4 @@
-1	English (British)	x-vnd.KapiX-Koder	3251374093
+1	English (Australian)	x-vnd.KapiX-Koder	3251374093
 [read-only]	EditorWindow		[read-only]
 <empty>	EditorWindow		<empty>
 About…	EditorWindow		About…
@@ -41,7 +41,7 @@ Quit	EditorWindow		Quit
 Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
 Redo	EditorWindow		Redo
 Reload	EditorWindow		Reload
-Replace and find	EditorWindow		Find and replace
+Replace and find	EditorWindow		Replace and find
 Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
 Replacement finished	EditorWindow		Replacement finished
 Save	EditorWindow		Save
@@ -142,7 +142,7 @@ Bookmarks	BookmarksWindow		Bookmarks
 Cancel	GoToLineWindow		Cancel
 Go to line	GoToLineWindow		Go to line
 Go to line:	GoToLineWindow		Go to line:
-OK	GoToLineWindow		Alright
+OK	GoToLineWindow		OK
 Cancel	QuitAlert		Cancel
 Don't save	QuitAlert		Don't save
 Save all	QuitAlert		Save all
@@ -152,15 +152,15 @@ Unsaved files	QuitAlert		Unsaved files
 Code editor for Haiku based on Scintilla editing component.	App		Code editor for Haiku based on Scintilla editing component.
 Distributed on MIT license terms.	App		Distributed on MIT license terms.
 humdinger, for GUI design tips and artwork.	App		humdinger, for GUI design tips and artwork.
-Konrad77, for dark theme.	App		Konrad77, for the dark theme.
+Konrad77, for dark theme.	App		Konrad77, for dark theme.
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
-translators to:	App	to _ (language), e.g. German	translators to English (British):
+translators to:	App	to _ (language), e.g. German	translators to English (Australian):
 zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
 Style files	Styler		Style files
 Delete	BookmarksListView		Delete
 Go to	BookmarksListView		Go to
 Koder	System name		Koder
-OK	Utilities		Alright
+OK	Utilities		OK
 Open Terminal	EditorStatusView		Open Terminal
 Read-only	EditorStatusView		Read-only
