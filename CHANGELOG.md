@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.6.0 - TBD
+## [0.6.0] - 2023-05-14
 
 * Add Find/Replace history.
 * Add --wait switch to block when used from command line.
@@ -130,6 +130,10 @@
 
 * Initial release.
 
+[0.6.0]: https://github.com/KapiX/Koder/releases/tag/0.6.0
+[0.5.4]: https://github.com/KapiX/Koder/releases/tag/0.5.4
+[0.5.3]: https://github.com/KapiX/Koder/releases/tag/0.5.3
+[0.5.2]: https://github.com/KapiX/Koder/releases/tag/0.5.2
 [0.5.1]: https://github.com/KapiX/Koder/releases/tag/0.5.1
 [0.5.0]: https://github.com/KapiX/Koder/releases/tag/0.5.0
 [0.4.1]: https://github.com/KapiX/Koder/releases/tag/0.4.1

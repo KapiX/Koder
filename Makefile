@@ -30,8 +30,8 @@ LOCAL_INCLUDE_PATHS = src/bookmarks src/controls src/editor src/find \
 	src/preferences src/support
 LOCALES = ca de el en en_AU en_GB es es_419 fr fur hu it ja nl pl pt ro ru sv tr uk zh_Hans
 
-SYMBOLS := TRUE
-DEBUGGER := TRUE
+SYMBOLS := FALSE
+DEBUGGER := FALSE
 # -gno-column-info is a workaround for Debugger issue (#15159)
 COMPILER_FLAGS = -gno-column-info -std=c++17 -Werror
 
