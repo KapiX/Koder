@@ -9,6 +9,10 @@
 * Fix crash when URL is passed as file argument.
 * Add support for Lua.
 * Fix context menu position.
+* Add "Open recent" menu.
+* Fix Esc key not closing Find/Replace window.
+* Change selection highlight to be more consistent with the OS.
+* Fix hardcoded sizes for views dependent on scroll bar size (HiDPI awareness).
 
 ## [0.5.4] - 2021-10-10
 
