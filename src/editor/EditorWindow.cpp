@@ -183,6 +183,8 @@ EditorWindow::EditorWindow(bool stagger)
 	fEditor = new Editor();
 
 	fToolbar = new ToolBar(this);
+	fToolbar->AddAction(MAINMENU_FILE_NEW,
+		B_TRANSLATE("New"), "new document");
 	fToolbar->AddAction(MAINMENU_FILE_OPEN,
 		B_TRANSLATE("Open" B_UTF8_ELLIPSIS), "open");
 	fToolbar->AddAction(MAINMENU_FILE_RELOAD,
