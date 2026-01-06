@@ -102,6 +102,7 @@ Preferences::Load(const char* filename)
 	fLineLimitColumn = storage.GetUInt32("lineLimitColumn", 80);
 	fWrapLines = storage.GetBool("wrapLines", false);
 	fBracesHighlighting = storage.GetBool("bracesHighlighting", true);
+	fUseBlockCursor = storage.GetBool("useBlockCursor", false);
 	fFullPathInTitle = storage.GetBool("fullPathInTitle", true);
 	fCompactLangMenu = storage.GetBool("compactLangMenu", true);
 	fToolbar = storage.GetBool("toolbar", true);
@@ -145,6 +146,7 @@ Preferences::Save(const char* filename)
 	storage.AddUInt32("lineLimitColumn", fLineLimitColumn);
 	storage.AddBool("wrapLines", fWrapLines);
 	storage.AddBool("bracesHighlighting", fBracesHighlighting);
+	storage.AddBool("useBlockCursor", fUseBlockCursor);
 	storage.AddBool("fullPathInTitle", fFullPathInTitle);
 	storage.AddBool("compactLangMenu", fCompactLangMenu);
 	storage.AddBool("toolbar", fToolbar);
@@ -188,6 +190,7 @@ Preferences::operator =(Preferences& p)
 	fLineLimitColumn = p.fLineLimitColumn;
 	fWrapLines = p.fWrapLines;
 	fBracesHighlighting = p.fBracesHighlighting;
+	fUseBlockCursor = p.fUseBlockCursor;
 	fFullPathInTitle = p.fFullPathInTitle;
 	fCompactLangMenu = p.fCompactLangMenu;
 	fToolbar = p.fToolbar;
