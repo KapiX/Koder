@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	3251374093
+1	English	x-vnd.KapiX-Koder	2781821189
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
@@ -157,6 +157,7 @@ File modified	EditorWindow		File modified
 Highlight braces	AppPreferencesWindow		Highlight braces
 Save selected	QuitAlert		Save selected
 Max. characters per line:	AppPreferencesWindow		Max. characters per line:
+Use block cursor	AppPreferencesWindow		Use block cursor
 Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
 Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
 Show indentation guides	AppPreferencesWindow		Show indentation guides
