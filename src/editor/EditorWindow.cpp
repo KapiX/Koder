@@ -594,8 +594,12 @@ EditorWindow::MessageReceived(BMessage* message)
 			if(fBookmarksWindow == nullptr) {
 				fBookmarksWindow = new BookmarksWindow(this, fEditor->BookmarksWithText());
 			}
-			fBookmarksWindow->Show();
-			fBookmarksWindow->Activate();
+			if (fBookmarksWindow->IsHidden()) {
+				fBookmarksWindow->Show();
+				fBookmarksWindow->Activate();
+			} else {
+				fBookmarksWindow->Hide();
+			}
 		} break;
 		case MAINMENU_SEARCH_TOGGLEBOOKMARK: {
 			Sci_Position pos = fEditor->SendMessage(SCI_GETCURRENTPOS);
