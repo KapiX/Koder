@@ -83,6 +83,7 @@ enum {
 	MAINMENU_LANGUAGE					= 'ml00',
 	MAINMENU_OPEN_RECENT				= 'mr00',
 
+	TOOLBAR_OPEN_RECENT					= 'tlor',
 	TOOLBAR_SPECIAL_SYMBOLS				= 'tlss',
 
 	FILE_OPEN							= 'flop',
@@ -162,7 +163,7 @@ private:
 	static	Preferences*	fPreferences;
 			FilePreferences	fFilePreferences;
 
-			void			_PopulateOpenRecentMenu();
+			void			_PopulateOpenRecentMenu(BMenu* menu);
 			void			_PopulateLanguageMenu();
 			void			_ReloadFile(entry_ref* ref = nullptr);
 			void			_SetLanguage(std::string lang);
