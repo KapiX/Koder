@@ -160,7 +160,7 @@ EditorWindow::EditorWindow(bool stagger)
 	AddShortcut('T', B_COMMAND_KEY | B_OPTION_KEY, new BMessage((uint32) OPEN_TERMINAL));
 
 	fOpenRecentMenu = fMainMenu->FindItem(MAINMENU_OPEN_RECENT)->Menu();
-	_PopulateOpenRecentMenu();
+	_PopulateOpenRecentMenu(fOpenRecentMenu);
 
 	fLanguageMenu = fMainMenu->FindItem(MAINMENU_LANGUAGE)->Menu();
 	_PopulateLanguageMenu();
@@ -187,6 +187,11 @@ EditorWindow::EditorWindow(bool stagger)
 		B_TRANSLATE("New"), "new document");
 	fToolbar->AddAction(MAINMENU_FILE_OPEN,
 		B_TRANSLATE("Open" B_UTF8_ELLIPSIS), "open");
+	BButton* openButton = fToolbar->FindButton(MAINMENU_FILE_OPEN);
+	if(openButton != nullptr) {
+		openButton->SetBehavior(BButton::B_POP_UP_BEHAVIOR);
+		openButton->SetPopUpMessage(new BMessage(TOOLBAR_OPEN_RECENT));
+	}
 	fToolbar->AddAction(MAINMENU_FILE_RELOAD,
 		B_TRANSLATE("Reload"), "reload");
 	fToolbar->SetActionEnabled(MAINMENU_FILE_RELOAD, false);
@@ -666,6 +671,21 @@ EditorWindow::MessageReceived(BMessage* message)
 		case MAINMENU_LANGUAGE: {
 			_SetLanguage(message->GetString("lang", "text"));
 		} break;
+		case TOOLBAR_OPEN_RECENT: {
+			BButton* button = fToolbar->FindButton(MAINMENU_FILE_OPEN);
+			if(button == nullptr) {
+				return;
+			}
+			BPopUpMenu* menu = new BPopUpMenu("RecentsPopUp", false, false);
+			_PopulateOpenRecentMenu(menu);
+			menu->SetTargetForItems(this);
+			BPoint menuPoint(ConvertToScreen(fToolbar->ConvertToParent(button->Frame().LeftBottom())));
+			menuPoint.x += 2;
+			menuPoint.y += 1;
+			button->SetValue(1);
+			menu->Go(menuPoint, true);
+			button->SetValue(0);
+		} break;
 		case TOOLBAR_SPECIAL_SYMBOLS: {
 			bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
 			if(pressed == true) {
@@ -910,24 +930,24 @@ EditorWindow::SetOnQuitReplyToMessage(BMessage* message)
 
 
 void
-EditorWindow::_PopulateOpenRecentMenu()
+EditorWindow::_PopulateOpenRecentMenu(BMenu* menu)
 {
 	BMessage refList;
 	be_roster->GetRecentDocuments(&refList, 10, nullptr, gAppMime);
 
 	message_property<B_REF_TYPE> refs(&refList, "refs");
 	if(refs.size() == 0) {
-		fOpenRecentMenu->ItemAt(0)->SetEnabled(false);
+		menu->ItemAt(0)->SetEnabled(false);
 	} else {
 		// Clear the menu first
-		int32 count = fOpenRecentMenu->CountItems();
-		fOpenRecentMenu->RemoveItems(0, count, true);
+		int32 count = menu->CountItems();
+		menu->RemoveItems(0, count, true);
 		for(auto ref : refs) {
 			BPath p(&ref);
 			BMessage *msg = new BMessage(B_REFS_RECEIVED);
 			msg->AddRef("refs", &ref);
 			BMenuItem *menuItem = new BMenuItem(p.Path(), msg);
-			fOpenRecentMenu->AddItem(menuItem);
+			menu->AddItem(menuItem);
 		}
 	}
 }
