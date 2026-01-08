@@ -294,18 +294,19 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 	}
 
 	BEntry entry(ref);
-	uint32 openMode = B_READ_ONLY;
-	if(!entry.Exists()) {
-		// TODO: alert/phantom mode?
-		openMode |= B_CREATE_FILE;
+
+	File file(&entry, B_READ_ONLY);
+	if(entry.Exists()) {
+		fReadOnly = !File::CanWrite(&file);
+		file.Monitor(true, this);
+		file.GetModificationTime(&fOpenedFileModificationTime);
+		fEditor->SetText(file.Read().data());
+	} else {
+		// TODO check if we have directory permissions to create a new file?
+		fReadOnly = false;
 	}
 
-	File file(&entry, openMode);
-	file.Monitor(true, this);
-	file.GetModificationTime(&fOpenedFileModificationTime);
 	fModifiedOutside = false;
-
-	fEditor->SetText(file.Read().data());
 
 	fEditor->SendMessage(SCI_SETSAVEPOINT);
 	fEditor->SendMessage(SCI_EMPTYUNDOBUFFER);
@@ -325,7 +326,6 @@ EditorWindow::OpenFile(const entry_ref* ref, Sci_Position line, Sci_Position col
 	entry.GetName(name);
 	_SetLanguageByFilename(name);
 
-	fReadOnly = !File::CanWrite(&file);
 	fEditor->SetReadOnly(fReadOnly);
 	fEditor->SetRef(*ref);
 
@@ -381,9 +381,14 @@ EditorWindow::SaveFile(entry_ref* ref)
 
 	// TODO error checking
 	File file(path.c_str(), B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
-	if(file.InitCheck() == B_PERMISSION_DENIED) {
+	status_t result = file.InitCheck();
+	if(result == B_PERMISSION_DENIED) {
 		OKAlert(B_TRANSLATE("Access denied"), B_TRANSLATE("You don't have "
 			"sufficient permissions to edit this file."), B_STOP_ALERT);
+		return;
+	} else if(result != B_OK) {
+		OKAlert(B_TRANSLATE("Save error"), B_TRANSLATE("An error occurred "
+			"while attempting to save the file."), B_STOP_ALERT);
 		return;
 	}
 	file.Monitor(false, this);
