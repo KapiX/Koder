@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	2781821189
+1	English	x-vnd.KapiX-Koder	3292494141
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
@@ -36,6 +36,7 @@ There is not enough memory available to %s% the configuration file. Try closing 
 Folds	AppPreferencesWindow		Folds
 Visual	AppPreferencesWindow		Visual
 Wrap around	FindWindow		Wrap around
+Save error	EditorWindow		Save error
 Highlight current line	AppPreferencesWindow		Highlight current line
 Left margin	AppPreferencesWindow		Left margin
 Go to line…	EditorWindow		Go to line…
@@ -162,6 +163,7 @@ Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespac
 Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
 Show indentation guides	AppPreferencesWindow		Show indentation guides
 Koder preferences	AppPreferencesWindow		Koder preferences
+An error occurred while attempting to save the file.	EditorWindow		An error occurred while attempting to save the file.
 Don't save	QuitAlert		Don't save
 Replace	FindWindow		Replace
 [read-only]	EditorWindow		[read-only]
