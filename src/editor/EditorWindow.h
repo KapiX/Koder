@@ -83,6 +83,7 @@ enum {
 	MAINMENU_LANGUAGE					= 'ml00',
 	MAINMENU_OPEN_RECENT				= 'mr00',
 
+	TOOLBAR_OPEN_BOOKMARK				= 'tlob',
 	TOOLBAR_OPEN_RECENT					= 'tlor',
 	TOOLBAR_SPECIAL_SYMBOLS				= 'tlss',
 
@@ -173,6 +174,7 @@ private:
 			void			_SyncWithPreferences();
 			void			_SyncEditMenus();
 			int32			_ShowModifiedAlert();
+			void			_ShowToolbarPopUp(BPopUpMenu* menu, BButton* button);
 			void			_ReloadAlert(const char* title, const char* message);
 			void			_Save();
 			void			_OpenTerminal(const char* path);

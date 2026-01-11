@@ -218,6 +218,11 @@ EditorWindow::EditorWindow(bool stagger)
 
 	fToolbar->AddAction(MAINMENU_SEARCH_BOOKMARKS,
 		B_TRANSLATE("Bookmarks"), "bookmarks");
+	BButton* bookmarkButton = fToolbar->FindButton(MAINMENU_SEARCH_BOOKMARKS);
+	if(bookmarkButton != nullptr) {
+		bookmarkButton->SetBehavior(BButton::B_POP_UP_BEHAVIOR);
+		bookmarkButton->SetPopUpMessage(new BMessage(TOOLBAR_OPEN_BOOKMARK));
+	}
 	fToolbar->AddAction(MAINMENU_SEARCH_PREVBOOKMARK,
 		B_TRANSLATE("Previous bookmark"), "bookmark prev");
 	fToolbar->AddAction(MAINMENU_SEARCH_NEXTBOOKMARK,
@@ -671,6 +676,33 @@ EditorWindow::MessageReceived(BMessage* message)
 		case MAINMENU_LANGUAGE: {
 			_SetLanguage(message->GetString("lang", "text"));
 		} break;
+		case TOOLBAR_OPEN_BOOKMARK: {
+			BButton* button = fToolbar->FindButton(MAINMENU_SEARCH_BOOKMARKS);
+			if(button == nullptr) {
+				return;
+			}
+			BPopUpMenu* menu = new BPopUpMenu("BookmarksPopUp", false, false);
+			BMessage bookmarks = fEditor->BookmarksWithText();
+			type_code type;
+			int32 count;
+			if(bookmarks.GetInfo("line", &type, &count) == B_OK) {
+				for(int32 i = 0; i < count; i++) {
+					int64 line = bookmarks.GetInt64("line", i, -1);
+					if(line != -1) {
+						line += 1;
+						BString bookmarkText(bookmarks.GetString("text", i, ""));
+						BString itemLabel;
+						itemLabel << line << " - " << bookmarkText.Trim();
+						// truncate to make sure our menu isn't too wide
+						itemLabel.Truncate(50);
+						BMessage* itemMessage = new BMessage(GTLW_GO);
+						itemMessage->AddInt32("line", line);
+						menu->AddItem(new BMenuItem(itemLabel.String(), itemMessage));
+					}
+				}
+			}
+			_ShowToolbarPopUp(menu, button);
+		} break;
 		case TOOLBAR_OPEN_RECENT: {
 			BButton* button = fToolbar->FindButton(MAINMENU_FILE_OPEN);
 			if(button == nullptr) {
@@ -678,13 +710,7 @@ EditorWindow::MessageReceived(BMessage* message)
 			}
 			BPopUpMenu* menu = new BPopUpMenu("RecentsPopUp", false, false);
 			_PopulateOpenRecentMenu(menu);
-			menu->SetTargetForItems(this);
-			BPoint menuPoint(ConvertToScreen(fToolbar->ConvertToParent(button->Frame().LeftBottom())));
-			menuPoint.x += 2;
-			menuPoint.y += 1;
-			button->SetValue(1);
-			menu->Go(menuPoint, true);
-			button->SetValue(0);
+			_ShowToolbarPopUp(menu, button);
 		} break;
 		case TOOLBAR_SPECIAL_SYMBOLS: {
 			bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
@@ -1266,6 +1292,20 @@ EditorWindow::_SyncEditMenus()
 		fMainMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(!selectionEmpty);
 		fContextMenu->FindItem(EDIT_COMMENTBLOCK)->SetEnabled(!selectionEmpty);
 	}
+}
+
+
+void
+EditorWindow::_ShowToolbarPopUp(BPopUpMenu* menu, BButton* button)
+{
+	menu->SetTargetForItems(this);
+	BPoint menuPoint(ConvertToScreen(fToolbar->ConvertToParent(button->Frame().LeftBottom())));
+	menuPoint.x += 2;
+	menuPoint.y += 1;
+	button->SetValue(1);
+	UpdateIfNeeded();
+	menu->Go(menuPoint, true);
+	button->SetValue(0);
 }
 
 
