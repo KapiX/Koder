@@ -197,13 +197,15 @@ FindWindow::SetFindText(const std::string text)
 void
 FindWindow::_InitInterface()
 {
+	float interfaceScale = be_plain_font->Size() / 12.0f;
+
 	fFindString = new BStringView("findString", B_TRANSLATE("Find:"));
 	fReplaceString = new BStringView("replaceString", B_TRANSLATE("Replace:"));
 	fFindTC = new find::ScintillaView("findText",
 		HistoryRequests::GET_FIND_HISTORY,
 		HistoryRequests::CLEAR_FIND_HISTORY,
 		HistoryRequests::APPLY_FIND_ITEM);
-	fFindTC->SetExplicitMinSize(BSize(200, 100));
+	fFindTC->SetExplicitMinSize(BSize(250 * interfaceScale, 75 * interfaceScale));
 	fFindTC->Target()->SetFlags(fFindTC->Target()->Flags() | B_NAVIGABLE);
 	fFindTC->SendMessage(SCI_SETMARGINWIDTHN, 1, 0);
 
@@ -211,7 +213,7 @@ FindWindow::_InitInterface()
 		HistoryRequests::GET_REPLACE_HISTORY,
 		HistoryRequests::CLEAR_REPLACE_HISTORY,
 		HistoryRequests::APPLY_REPLACE_ITEM);
-	fReplaceTC->SetExplicitMinSize(BSize(200, 100));
+	fReplaceTC->SetExplicitMinSize(BSize(250 * interfaceScale, 75 * interfaceScale));
 	fReplaceTC->Target()->SetFlags(fReplaceTC->Target()->Flags() | B_NAVIGABLE);
 	fReplaceTC->SendMessage(SCI_SETMARGINWIDTHN, 1, 0);
 
@@ -242,13 +244,12 @@ FindWindow::_InitInterface()
 				.Add(fReplaceString, 0, 1)
 				.Add(fReplaceTC, 1, 1)
 			.End()
-			.AddGroup(B_VERTICAL, B_USE_ITEM_SPACING)
+			.AddGroup(B_VERTICAL, B_USE_ITEM_SPACING, 0.0f)
 				.Add(fFindButton)
 				.Add(fReplaceButton)
 				.Add(fReplaceFindButton)
 				.Add(fReplaceAllButton)
 				.AddGlue()
-				.SetExplicitMaxSize(BSize(200, B_SIZE_UNSET))
 			.End()
 		.End()
 		.AddGrid(0.0f, 0.0f)
