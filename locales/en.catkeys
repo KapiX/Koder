@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	3292494141
+1	English	x-vnd.KapiX-Koder	2982779499
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
@@ -24,6 +24,7 @@ Special symbols	EditorWindow		Special symbols
 Show line endings	EditorWindow		Show line endings
 Undo	EditorWindow		Undo
 Comment line	EditorWindow		Comment line
+Open project website	EditorWindow		Open project website
 Show full path in title	AppPreferencesWindow		Show full path in title
 Close	EditorWindow		Close
 Spaces per tab:	AppPreferencesWindow		Spaces per tab:
@@ -76,6 +77,7 @@ save	Preferences	to _ the configuration	save
 Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty line
 Replace all	FindWindow		Replace all
 Koder	System name		Koder
+View or submit bug reports	EditorWindow		View or submit bug reports
 Extra large	AppPreferencesWindow	Toolbar icon size	Extra large
 Stack new windows	AppPreferencesWindow		Stack new windows
 Find selection	EditorWindow		Find selection
@@ -116,6 +118,7 @@ Quit	EditorWindow		Quit
 Redo	EditorWindow		Redo
 Go to line:	GoToLineWindow		Go to line:
 Editor settings	Preferences		Editor settings
+Windows	EditorWindow		Windows
 You don't have sufficient permissions to edit this file.	EditorWindow		You don't have sufficient permissions to edit this file.
 Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
 Search	EditorWindow		Search
@@ -134,6 +137,7 @@ Untitled	EditorWindow		Untitled
 Unknown error.	Preferences		Unknown error.
 Find	FindWindow		Find
 Delete	BookmarksListView		Delete
+Preferences…	EditorWindow		Preferences…
 Reload	EditorWindow		Reload
 Go to line	GoToLineWindow		Go to line
 There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.

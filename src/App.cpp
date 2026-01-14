@@ -266,6 +266,12 @@ App::MessageReceived(BMessage* message)
 	case SUPPRESS_INITIAL_WINDOW: {
 		fSuppressInitialWindow = true;
 	} break;
+	case ACTIVATE_WINDOW: {
+		BWindow* window = nullptr;
+		if(message->FindPointer("window", (void**) &window) == B_OK && window != nullptr) {
+			window->Activate();
+		}
+	} break;
 	case ACTIVE_WINDOW_CHANGED: {
 		if(message->FindPointer("window", (void**) &fLastActiveWindow) != B_OK) {
 			fLastActiveWindow = nullptr;

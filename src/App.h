@@ -25,7 +25,8 @@ class Styler;
 
 enum {
 	SUPPRESS_INITIAL_WINDOW		= 'Siwn',
-	WINDOW_NEW_WITH_QUIT_REPLY	= 'NWwn'
+	WINDOW_NEW_WITH_QUIT_REPLY	= 'NWwn',
+	ACTIVATE_WINDOW = 'actw'
 };
 
 
