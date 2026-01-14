@@ -31,7 +31,7 @@
 FindWindow::FindWindow(BMessage *state, BPath settingsPath)
 	:
 	BWindow(BRect(0, 0, 400, 300), B_TRANSLATE("Find/Replace"), B_TITLED_WINDOW,
-		B_NOT_ZOOMABLE, 0),
+		B_NOT_ZOOMABLE | B_CLOSE_ON_ESCAPE, 0),
 	fFlagsChanged(false),
 	fSettingsPath(settingsPath)
 {
