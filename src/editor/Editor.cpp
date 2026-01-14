@@ -31,6 +31,7 @@ Editor::Editor()
 	fFoldMarginEnabled(false),
 	fBookmarkMarginEnabled(false),
 	fBracesHighlightingEnabled(false),
+	fBoldFoldMarkersEnabled(false),
 	fTrailingWSHighlightingEnabled(false),
 	fType(""),
 	fReadOnly(false)
@@ -478,7 +479,7 @@ Editor::SetFoldMarginEnabled(bool enabled)
 	fFoldMarginEnabled = enabled;
 	const int foldEnabled = SendMessage(SCI_GETPROPERTYINT, (uptr_t) "fold", 0);
 	const int32 fontSize = SendMessage(SCI_STYLEGETSIZE, 32);
-	const int32 foldWidth = foldEnabled && enabled ? fontSize * 0.95 : 0;
+	const int32 foldWidth = foldEnabled && enabled ? fontSize * (fBoldFoldMarkersEnabled ? 1.25 : 0.95) : 0;
 	SendMessage(SCI_SETMARGINWIDTHN, Margin::FOLD, foldWidth);
 }
 
@@ -498,6 +499,30 @@ Editor::SetBracesHighlightingEnabled(bool enabled)
 {
 	fBracesHighlightingEnabled = enabled;
 	SendMessage(SCI_MARKERENABLEHIGHLIGHT, enabled);
+}
+
+
+void
+Editor::SetBoldFoldMarkersEnabled(bool enabled)
+{
+	if(fBoldFoldMarkersEnabled == enabled) {
+		// no changes needed
+		return;
+	}
+
+	const int32 strokeWidth = enabled ? 300 : 100;
+	SendMessage(SCI_MARKERSETSTROKEWIDTH, SC_MARKNUM_FOLDER, strokeWidth);
+	SendMessage(SCI_MARKERSETSTROKEWIDTH, SC_MARKNUM_FOLDEROPEN, strokeWidth);
+	SendMessage(SCI_MARKERSETSTROKEWIDTH, SC_MARKNUM_FOLDEREND, strokeWidth);
+	SendMessage(SCI_MARKERSETSTROKEWIDTH, SC_MARKNUM_FOLDERMIDTAIL, strokeWidth);
+	SendMessage(SCI_MARKERSETSTROKEWIDTH, SC_MARKNUM_FOLDEROPENMID, strokeWidth);
+	SendMessage(SCI_MARKERSETSTROKEWIDTH, SC_MARKNUM_FOLDEROPEN, strokeWidth);
+	SendMessage(SCI_MARKERSETSTROKEWIDTH, SC_MARKNUM_FOLDERSUB, strokeWidth);
+	SendMessage(SCI_MARKERSETSTROKEWIDTH, SC_MARKNUM_FOLDERTAIL, strokeWidth);
+
+	fBoldFoldMarkersEnabled = enabled;
+	// reset our margin width
+	SetFoldMarginEnabled(fFoldMarginEnabled);
 }
 
 

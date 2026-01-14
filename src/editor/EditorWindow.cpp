@@ -1245,6 +1245,7 @@ EditorWindow::_SyncWithPreferences()
 		fEditor->SetBookmarkMarginEnabled(fPreferences->fBookmarkMargin);
 		fEditor->SetBracesHighlightingEnabled(
 			fPreferences->fBracesHighlighting);
+		fEditor->SetBoldFoldMarkersEnabled(fPreferences->fBoldFoldMarkers);
 		fEditor->SetTrailingWSHighlightingEnabled(
 			fPreferences->fHighlightTrailingWhitespace);
 

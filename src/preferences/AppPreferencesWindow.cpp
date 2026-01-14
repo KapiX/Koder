@@ -160,6 +160,10 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			fPreferences->fUseBlockCursor = IsChecked(fBlockCursorCB);
 			_PreferencesModified();
 		} break;
+		case Actions::BOLD_FOLD_MARKERS: {
+			fPreferences->fBoldFoldMarkers = IsChecked(fBoldFoldMarkersCB);
+			_PreferencesModified();
+		} break;
 		case Actions::EDITOR_STYLE: {
 			fPreferences->fStyle = message->GetString("style", "default");
 			_PreferencesModified();
@@ -335,6 +339,7 @@ AppPreferencesWindow::_InitInterface()
 
 	fBracesHighlightingCB = new BCheckBox("bracesHighlighting", B_TRANSLATE("Highlight braces"), new BMessage((uint32) Actions::BRACES_HIGHLIGHTING));
 	fBlockCursorCB = new BCheckBox("blockCursor", B_TRANSLATE("Use block cursor"), new BMessage((uint32) Actions::BLOCK_CURSOR));
+	fBoldFoldMarkersCB = new BCheckBox("boldFoldMarkers", B_TRANSLATE("Show bold folding markers"), new BMessage((uint32) Actions::BOLD_FOLD_MARKERS));
 
 	fEditorStyleMenu = new BPopUpMenu("style");
 	fEditorStyleMF = new BMenuField("style", B_TRANSLATE("Style"), fEditorStyleMenu);
@@ -374,6 +379,7 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fFullPathInTitleCB)
 		.Add(fBracesHighlightingCB)
 		.Add(fBlockCursorCB)
+		.Add(fBoldFoldMarkersCB)
 		.Add(fToolbarBox)
 		.AddStrut(B_USE_HALF_ITEM_SPACING)
 		.Add(fLineLimitBox)
@@ -479,6 +485,7 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 
 	SetChecked(fBracesHighlightingCB, preferences->fBracesHighlighting);
 	SetChecked(fBlockCursorCB, preferences->fUseBlockCursor);
+	SetChecked(fBoldFoldMarkersCB, preferences->fBoldFoldMarkers);
 	SetChecked(fAttachNewWindowsCB, preferences->fOpenWindowsInStack);
 	SetChecked(fHighlightTrailingWSCB, preferences->fHighlightTrailingWhitespace);
 	SetChecked(fTrimTrailingWSOnSaveCB, preferences->fTrimTrailingWhitespaceOnSave);

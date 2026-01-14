@@ -90,6 +90,7 @@ public:
 	void				SetFoldMarginEnabled(bool enabled);
 	void				SetBookmarkMarginEnabled(bool enabled);
 	void				SetBracesHighlightingEnabled(bool enabled);
+	void				SetBoldFoldMarkersEnabled(bool enabled);
 	void				SetTrailingWSHighlightingEnabled(bool enabled);
 
 	std::string			SelectionText();
@@ -124,6 +125,7 @@ private:
 	bool				fFoldMarginEnabled;
 	bool				fBookmarkMarginEnabled;
 	bool				fBracesHighlightingEnabled;
+	bool				fBoldFoldMarkersEnabled;
 	bool				fTrailingWSHighlightingEnabled;
 
 	// needed for StatusView

@@ -43,6 +43,7 @@ private:
 		TOOLBAR_ICON_SIZE		= 'tlis',
 		FULL_PATH_IN_TITLE		= 'fpit',
 		BLOCK_CURSOR			= 'bloc',
+		BOLD_FOLD_MARKERS		= 'bfld',
 		TABS_TO_SPACES			= 'ttsp',
 		TAB_WIDTH				= 'tbwd',
 		LINE_HIGHLIGHTING		= 'lhlt',
@@ -136,6 +137,7 @@ private:
 
 	BCheckBox*		fBracesHighlightingCB;
 	BCheckBox*		fBlockCursorCB;
+	BCheckBox*		fBoldFoldMarkersCB;
 
 	BPopUpMenu*		fEditorStyleMenu;
 	BMenuField*		fEditorStyleMF;
