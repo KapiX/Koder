@@ -80,6 +80,9 @@ enum {
 	MAINMENU_SEARCH_PREVBOOKMARK		= 'mpbk',
 	MAINMENU_SEARCH_GOTOLINE			= 'msgl',
 
+	MAINMENU_HELP_PROJECT				= 'hlpp',
+	MAINMENU_HELP_ISSUES				= 'hlpi',
+
 	MAINMENU_LANGUAGE					= 'ml00',
 	MAINMENU_OPEN_RECENT				= 'mr00',
 
@@ -114,6 +117,7 @@ public:
 			void			WindowActivated(bool active);
 			void			FrameMoved(BPoint origin);
 			void			Show();
+			void			MenusBeginning();
 
 			bool			IsModified() { return fModified; }
 			const char*		OpenedFilePath();
@@ -148,6 +152,7 @@ private:
 			BFilePanel*		fSavePanel;
 			BMenu*			fOpenRecentMenu;
 			BMenu*			fLanguageMenu;
+			BMenu*			fWindowsMenu;
 			std::string		fCurrentLanguage;
 			ToolBar*		fToolbar;
 			StatusView*		fStatusView;

@@ -26,6 +26,7 @@
 #include <String.h>
 #include <StringFormat.h>
 #include <ToolBar.h>
+#include <Url.h>
 #include <kernel/fs_attr.h>
 
 #include "App.h"
@@ -37,6 +38,7 @@
 #include "FindReplaceHandler.h"
 #include "FindWindow.h"
 #include "GoToLineWindow.h"
+#include "IconMenuItem.h"
 #include "Languages.h"
 #include "Preferences.h"
 #include "ScintillaUtils.h"
@@ -85,8 +87,20 @@ EditorWindow::EditorWindow(bool stagger)
 	fOpenPanel->SetMessage(&openMessage);
 	fSavePanel = new BFilePanel(B_SAVE_PANEL, windowMessenger, nullptr, 0, false);
 
+	BMenu* appMenu = new BMenu("");
+	fWindowsMenu = new BMenu(B_TRANSLATE("Windows"));
+	BLayoutBuilder::Menu<>(appMenu)
+		.AddItem(B_TRANSLATE("About" B_UTF8_ELLIPSIS), B_ABOUT_REQUESTED)
+		.AddSeparator()
+		.AddMenu(fWindowsMenu)
+		.End()
+		.AddItem(B_TRANSLATE("Preferences" B_UTF8_ELLIPSIS), MAINMENU_EDIT_APP_PREFERENCES)
+		.AddSeparator()
+		.AddItem(B_TRANSLATE("Quit"), MAINMENU_FILE_QUIT, 'Q');
+
 	fMainMenu = new BMenuBar("MainMenu");
 	BLayoutBuilder::Menu<>(fMainMenu)
+		.AddItem(new IconMenuItem(appMenu, nullptr, gAppMime, B_MINI_ICON))
 		.AddMenu(B_TRANSLATE("File"))
 			.AddItem(B_TRANSLATE("New"), MAINMENU_FILE_NEW, 'N')
 			.AddSeparator()
@@ -101,7 +115,6 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem(B_TRANSLATE("Open partner file"), MAINMENU_FILE_OPEN_CORRESPONDING, 'O', B_OPTION_KEY)
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Close"), B_QUIT_REQUESTED, 'W')
-			.AddItem(B_TRANSLATE("Quit"), MAINMENU_FILE_QUIT, 'Q')
 		.End()
 		.AddMenu(B_TRANSLATE("Edit"))
 			.AddItem(B_TRANSLATE("Undo"), B_UNDO, 'Z')
@@ -123,9 +136,8 @@ EditorWindow::EditorWindow(bool stagger)
 				.AddItem(B_TRANSLATE("Windows format"), MAINMENU_EDIT_CONVERTEOLS_WINDOWS)
 				.AddItem(B_TRANSLATE("Old Mac format"), MAINMENU_EDIT_CONVERTEOLS_MAC)
 			.End()
-			.AddSeparator()
+			//.AddSeparator()
 			//.AddItem(B_TRANSLATE("File preferences" B_UTF8_ELLIPSIS), MAINMENU_EDIT_FILE_PREFERENCES)
-			.AddItem(B_TRANSLATE("Koder preferences" B_UTF8_ELLIPSIS), MAINMENU_EDIT_APP_PREFERENCES)
 		.End()
 		.AddMenu(B_TRANSLATE("View"))
 			.AddMenu(B_TRANSLATE("Special symbols"))
@@ -153,7 +165,8 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem("Dummy", MAINMENU_LANGUAGE)
 		.End()
 		.AddMenu(B_TRANSLATE("Help"))
-			.AddItem(B_TRANSLATE("About" B_UTF8_ELLIPSIS), B_ABOUT_REQUESTED)
+			.AddItem(B_TRANSLATE("Open project website"), MAINMENU_HELP_PROJECT)
+			.AddItem(B_TRANSLATE("View or submit bug reports"), MAINMENU_HELP_ISSUES)
 		.End();
 
 	// When changing this shortcut remember to update one in StatusView as well
@@ -673,6 +686,12 @@ EditorWindow::MessageReceived(BMessage* message)
 			fEditor->SendMessage(SCI_SETWRAPMODE, fPreferences->fWrapLines ?
 				SC_WRAP_WORD : SC_WRAP_NONE, 0);
 		} break;
+		case MAINMENU_HELP_PROJECT: {
+			BUrl("https://github.com/KapiX/Koder", true).OpenWithPreferredApplication();
+		} break;
+		case MAINMENU_HELP_ISSUES: {
+			BUrl("https://github.com/KapiX/Koder/issues", true).OpenWithPreferredApplication();
+		} break;
 		case MAINMENU_LANGUAGE: {
 			_SetLanguage(message->GetString("lang", "text"));
 		} break;
@@ -929,6 +948,34 @@ EditorWindow::Show()
 		_SyncWithPreferences();
 		UnlockLooper();
 	}
+}
+
+
+void
+EditorWindow::MenusBeginning()
+{
+	if(fWindowsMenu == nullptr) {
+		return;
+	}
+	for(int32 x = fWindowsMenu->CountItems() - 1; x >= 0; x--) {
+		delete fWindowsMenu->ItemAt(x);
+	}
+	for(int32 x = 0; x < be_app->CountWindows(); x++) {
+		// use a dynamic_cast to filter out other window types (find, save, bookmarks, ...)
+		EditorWindow* window = dynamic_cast<EditorWindow*>(be_app->WindowAt(x));
+		if(window == nullptr)
+			continue;
+
+		BMessage* message = new BMessage(ACTIVATE_WINDOW);
+		message->AddPointer("window", window);
+		BMenuItem* menuItem = new BMenuItem(window->Title(), message);
+		if(window == this) {
+			menuItem->SetEnabled(false);
+			menuItem->SetMarked(true);
+		}
+		fWindowsMenu->AddItem(menuItem);
+	}
+	fWindowsMenu->SetTargetForItems(be_app);
 }
 
 
