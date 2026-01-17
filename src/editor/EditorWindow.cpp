@@ -1316,6 +1316,7 @@ EditorWindow::_SyncWithPreferences()
 		fEditor->SetNumberMarginEnabled(fPreferences->fLineNumbers);
 		fEditor->SetFoldMarginEnabled(fPreferences->fFoldMargin);
 		fEditor->SetBookmarkMarginEnabled(fPreferences->fBookmarkMargin);
+		fEditor->SetChangeMarginEnabled(fPreferences->fChangeMargin);
 		fEditor->SetBracesHighlightingEnabled(
 			fPreferences->fBracesHighlighting);
 		fEditor->SetTrailingWSHighlightingEnabled(

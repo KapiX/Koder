@@ -14,6 +14,10 @@
 #include "EditorStatusView.h"
 
 
+#ifndef SC_MASK_HISTORY
+#define SC_MASK_HISTORY 0x01E00000
+#endif
+
 namespace Sci = Scintilla;
 using namespace Sci::Properties;
 
@@ -30,6 +34,7 @@ Editor::Editor()
 	fNumberMarginEnabled(false),
 	fFoldMarginEnabled(false),
 	fBookmarkMarginEnabled(false),
+	fChangeMarginEnabled(false),
 	fBracesHighlightingEnabled(false),
 	fTrailingWSHighlightingEnabled(false),
 	fType(""),
@@ -46,6 +51,9 @@ Editor::Editor()
 	SendMessage(SCI_SETMARGINTYPEN, Margin::BOOKMARKS, SC_MARGIN_SYMBOL);
 	SendMessage(SCI_SETMARGINMASKN, Margin::BOOKMARKS, (1 << Marker::BOOKMARK));
 	SendMessage(SCI_SETMARGINSENSITIVEN, Margin::BOOKMARKS, 1);
+	SendMessage(SCI_SETMARGINTYPEN, Margin::CHANGES, SC_MARGIN_SYMBOL);
+	SendMessage(SCI_SETMARGINMASKN, Margin::CHANGES, SC_MASK_HISTORY);
+	SendMessage(SCI_SETMARGINWIDTHN, Margin::CHANGES, 2);
 
 	SendMessage(SCI_MARKERDEFINE, Marker::BOOKMARK, SC_MARK_BOOKMARK);
 
@@ -56,6 +64,7 @@ Editor::Editor()
 	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDEROPENMID, SC_MARK_BOXMINUSCONNECTED);
 	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERSUB, SC_MARK_VLINE);
 	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_FOLDERTAIL, SC_MARK_LCORNER);
+	SendMessage(SCI_MARKERDEFINE, SC_MARKNUM_HISTORY_SAVED, SC_MARK_EMPTY);
 
 	SendMessage(SCI_SETMULTIPLESELECTION, true);
 	SendMessage(SCI_SETFOLDFLAGS, 16);
@@ -491,6 +500,16 @@ Editor::SetBookmarkMarginEnabled(bool enabled)
 	const int32 fontSize = SendMessage(SCI_STYLEGETSIZE, 32);
 	const int32 bookmarkWidth = enabled ? fontSize * 1.5 : 0;
 	SendMessage(SCI_SETMARGINWIDTHN, Margin::BOOKMARKS, bookmarkWidth);
+}
+
+
+void
+Editor::SetChangeMarginEnabled(bool enabled)
+{
+	fChangeMarginEnabled = enabled;
+	SendMessage(SCI_SETMARGINWIDTHN, Margin::CHANGES, enabled ? 2 : 0);
+	// toggle the flag so it doesn't switch to indicator mode when the margin width is 0
+	SendMessage(SCI_SETCHANGEHISTORY, SC_CHANGE_HISTORY_ENABLED | (enabled ? SC_CHANGE_HISTORY_MARKERS : 0));
 }
 
 

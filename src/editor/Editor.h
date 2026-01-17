@@ -38,7 +38,8 @@ public:
 	enum Margin {
 		NUMBER 		= 0,
 		FOLD,
-		BOOKMARKS
+		BOOKMARKS,
+		CHANGES
 	};
 	enum Marker {
 		BOOKMARK	= 0
@@ -89,6 +90,7 @@ public:
 	void				SetNumberMarginEnabled(bool enabled);
 	void				SetFoldMarginEnabled(bool enabled);
 	void				SetBookmarkMarginEnabled(bool enabled);
+	void				SetChangeMarginEnabled(bool enabled);
 	void				SetBracesHighlightingEnabled(bool enabled);
 	void				SetTrailingWSHighlightingEnabled(bool enabled);
 
@@ -123,6 +125,7 @@ private:
 	bool				fNumberMarginEnabled;
 	bool				fFoldMarginEnabled;
 	bool				fBookmarkMarginEnabled;
+	bool				fChangeMarginEnabled;
 	bool				fBracesHighlightingEnabled;
 	bool				fTrailingWSHighlightingEnabled;
 

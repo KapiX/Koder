@@ -115,6 +115,10 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			fPreferences->fBookmarkMargin = IsChecked(fBookmarkMarginCB);
 			_PreferencesModified();
 		} break;
+		case Actions::CHANGE_MARGIN: {
+			fPreferences->fChangeMargin = IsChecked(fChangeMarginCB);
+			_PreferencesModified();
+		} break;
 		case Actions::LINELIMIT_COLUMN: {
 			fPreferences->fLineLimitColumn =
 				std::stoi(fLineLimitColumnTC->Text());
@@ -254,12 +258,15 @@ AppPreferencesWindow::_InitInterface()
 		new BMessage((uint32) Actions::FOLD_MARGIN));
 	fBookmarkMarginCB = new BCheckBox("bookmarks", B_TRANSLATE("Bookmarks"),
 		new BMessage((uint32) Actions::BOOKMARK_MARGIN));
+	fChangeMarginCB = new BCheckBox("changes", B_TRANSLATE("Change history"),
+		new BMessage((uint32) Actions::CHANGE_MARGIN));
 
 	BLayoutBuilder::Group<>(fMarginsBox, B_VERTICAL, 0)
 		.AddStrut(B_USE_ITEM_SPACING)
 		.Add(fLineNumbersCB)
 		.Add(fFoldMarginCB)
 		.Add(fBookmarkMarginCB)
+		.Add(fChangeMarginCB)
 		.SetInsets(B_USE_ITEM_INSETS);
 
 	fToolbarBox = new BBox("toolbar");
@@ -444,6 +451,7 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 	SetChecked(fLineNumbersCB, preferences->fLineNumbers);
 	SetChecked(fFoldMarginCB, preferences->fFoldMargin);
 	SetChecked(fBookmarkMarginCB, preferences->fBookmarkMargin);
+	SetChecked(fChangeMarginCB, preferences->fChangeMargin);
 
 	BString columnString;
 	columnString << preferences->fLineLimitColumn;

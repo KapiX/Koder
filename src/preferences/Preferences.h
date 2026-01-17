@@ -38,6 +38,7 @@ public:
 	bool			fLineNumbers;
 	bool			fFoldMargin;
 	bool			fBookmarkMargin;
+	bool			fChangeMargin;
 	bool			fEOLVisible;
 	bool			fWhiteSpaceVisible;
 	bool			fIndentGuidesShow;
