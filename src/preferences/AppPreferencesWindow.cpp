@@ -353,7 +353,7 @@ AppPreferencesWindow::_InitInterface()
 	fFontBox = new BBox("fontPrefs");
 	fFontMF = new BMenuField("font", "", fFontMenu);
 	fFontSizeSpinner = new BSpinner("fontSize", "", new BMessage((uint32) Actions::FONT_SIZE_CHANGED));
-	fFontSizeSpinner->SetExplicitMaxSize(BSize(80.0f, B_SIZE_UNSET));
+	fFontSizeSpinner->SetExplicitMaxSize(BSize(80.0f * be_plain_font->Size() / 12.0f, B_SIZE_UNSET));
 	fFontSizeSpinner->SetRange(6, 72);
 
 	BLayoutBuilder::Group<>(fFontBox, B_VERTICAL, 0)
