@@ -177,6 +177,36 @@ File::CanWrite(BStatable* file)
 }
 
 
+status_t
+File::SetWritable(BStatable* file, bool writable)
+{
+	if(file == nullptr)
+		return B_ERROR;
+
+	BVolume volume;
+	if(file->GetVolume(&volume) != B_OK || volume.IsReadOnly()) {
+		return B_ERROR;
+	}
+
+	mode_t permissions;
+	if(file->GetPermissions(&permissions) != B_OK) {
+		return B_ERROR;
+	}
+
+	if(writable) {
+		mode_t mask = umask(0);
+		umask(mask);
+		permissions |= (S_IWUSR | S_IWGRP | S_IWOTH) & ~mask;
+		// force S_IWUSR in case the user has a weird umask
+		permissions |= S_IWUSR;
+	} else {
+		permissions &= ~(S_IWUSR | S_IWGRP | S_IWOTH);
+	}
+
+	return file->SetPermissions(permissions);
+}
+
+
 BackupFileGuard::BackupFileGuard(const char* path, BHandler* handler)
 	:
 	fPath(path ? path : ""),
