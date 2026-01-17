@@ -52,6 +52,7 @@ private:
 		LINE_NUMBERS			= 'lnum',
 		FOLD_MARGIN				= 'fldm',
 		BOOKMARK_MARGIN			= 'bkmm',
+		CHANGE_MARGIN			= 'chgm',
 
 		LINELIMIT_COLUMN		= 'llcl',
 		LINELIMIT_SHOW			= 'llsh',
@@ -119,6 +120,7 @@ private:
 	BCheckBox*		fLineNumbersCB;
 	BCheckBox*		fFoldMarginCB;
 	BCheckBox*		fBookmarkMarginCB;
+	BCheckBox*		fChangeMarginCB;
 
 	BCheckBox*		fLineLimitShowCB;
 	BTextControl*	fLineLimitColumnTC;

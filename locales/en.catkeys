@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	542788947
+1	English	x-vnd.KapiX-Koder	519025525
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
@@ -21,6 +21,7 @@ Koder preferences…	EditorWindow		Koder preferences…
 read	Preferences	Make sure you have _ permission for	read
 Language	EditorWindow		Language
 Special symbols	EditorWindow		Special symbols
+Change history	AppPreferencesWindow		Change history
 Show line endings	EditorWindow		Show line endings
 Undo	EditorWindow		Undo
 Comment line	EditorWindow		Comment line

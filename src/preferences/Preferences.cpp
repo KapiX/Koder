@@ -93,6 +93,7 @@ Preferences::Load(const char* filename)
 	fLineNumbers = storage.GetBool("lineNumbers", true);
 	fFoldMargin = storage.GetBool("foldMargin", true);
 	fBookmarkMargin = storage.GetBool("bookmarkMargin", true);
+	fChangeMargin = storage.GetBool("changeMargin", true);
 	fIndentGuidesShow = storage.GetBool("indentGuidesShow", true);
 	fIndentGuidesMode = storage.GetUInt8("indentGuidesMode", 1); // SC_IV_REAL
 	fWhiteSpaceVisible = storage.GetBool("whiteSpaceVisible", false);
@@ -137,6 +138,7 @@ Preferences::Save(const char* filename)
 	storage.AddBool("lineNumbers", fLineNumbers);
 	storage.AddBool("foldMargin", fFoldMargin);
 	storage.AddBool("bookmarkMargin", fBookmarkMargin);
+	storage.AddBool("changeMargin", fChangeMargin);
 	storage.AddBool("whiteSpaceVisible", fWhiteSpaceVisible);
 	storage.AddBool("EOLVisible", fEOLVisible);
 	storage.AddBool("indentGuidesShow", fIndentGuidesShow);
@@ -181,6 +183,7 @@ Preferences::operator =(Preferences& p)
 	fLineNumbers = p.fLineNumbers;
 	fFoldMargin = p.fFoldMargin;
 	fBookmarkMargin = p.fBookmarkMargin;
+	fChangeMargin = p.fChangeMargin;
 	fEOLVisible = p.fEOLVisible;
 	fWhiteSpaceVisible = p.fWhiteSpaceVisible;
 	fIndentGuidesShow = p.fIndentGuidesShow;
