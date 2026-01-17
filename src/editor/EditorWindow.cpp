@@ -77,6 +77,7 @@ EditorWindow::EditorWindow(bool stagger)
 	fBookmarksWindow = nullptr;
 	fOpenedFilePath = nullptr;
 	fOpenedFileMimeType.SetTo("text/plain");
+	fOpenedFileModificationTime = -1;
 
 	fCurrentLanguage = "text";
 
@@ -98,6 +99,7 @@ EditorWindow::EditorWindow(bool stagger)
 		.AddSeparator()
 		.AddItem(B_TRANSLATE("Quit"), MAINMENU_FILE_QUIT, 'Q');
 
+	fReadWriteMenuItem = new BMenuItem("", new BMessage(MAINMENU_FILE_TOGGLE_READONLY));
 	fMainMenu = new BMenuBar("MainMenu");
 	BLayoutBuilder::Menu<>(fMainMenu)
 		.AddItem(new IconMenuItem(appMenu, nullptr, gAppMime, B_MINI_ICON))
@@ -112,6 +114,7 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem(B_TRANSLATE("Save"), MAINMENU_FILE_SAVE, 'S')
 			.AddItem(B_TRANSLATE("Save as" B_UTF8_ELLIPSIS), MAINMENU_FILE_SAVEAS)
 			.AddSeparator()
+			.AddItem(fReadWriteMenuItem)
 			.AddItem(B_TRANSLATE("Open partner file"), MAINMENU_FILE_OPEN_CORRESPONDING, 'O', B_OPTION_KEY)
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Close"), B_QUIT_REQUESTED, 'W')
@@ -568,6 +571,17 @@ EditorWindow::MessageReceived(BMessage* message)
 				_OpenCorrespondingFile(*fOpenedFilePath, fCurrentLanguage);
 			}
 		} break;
+		case MAINMENU_FILE_TOGGLE_READONLY: {
+			if(fOpenedFilePath == nullptr || fOpenedFileModificationTime == -1) {
+				return;
+			}
+			BEntry entry(fOpenedFilePath->Path());
+			if(entry.InitCheck() != B_OK || File::SetWritable(&entry, fReadOnly) != B_OK) {
+				(new BAlert(B_TRANSLATE("Permission Error"),
+					B_TRANSLATE("An error occurred while attempting to change file permissions."),
+					B_TRANSLATE("OK"), nullptr, nullptr, B_WIDTH_FROM_LABEL, B_STOP_ALERT))->Go();
+			}
+		} break;
 		case MAINMENU_FILE_QUIT: {
 			be_app->PostMessage(B_QUIT_REQUESTED);
 		} break;
@@ -954,28 +968,40 @@ EditorWindow::Show()
 void
 EditorWindow::MenusBeginning()
 {
-	if(fWindowsMenu == nullptr) {
-		return;
-	}
-	for(int32 x = fWindowsMenu->CountItems() - 1; x >= 0; x--) {
-		delete fWindowsMenu->ItemAt(x);
-	}
-	for(int32 x = 0; x < be_app->CountWindows(); x++) {
-		// use a dynamic_cast to filter out other window types (find, save, bookmarks, ...)
-		EditorWindow* window = dynamic_cast<EditorWindow*>(be_app->WindowAt(x));
-		if(window == nullptr)
-			continue;
-
-		BMessage* message = new BMessage(ACTIVATE_WINDOW);
-		message->AddPointer("window", window);
-		BMenuItem* menuItem = new BMenuItem(window->Title(), message);
-		if(window == this) {
-			menuItem->SetEnabled(false);
-			menuItem->SetMarked(true);
+	if(fWindowsMenu != nullptr) {
+		for(int32 x = fWindowsMenu->CountItems() - 1; x >= 0; x--) {
+			delete fWindowsMenu->ItemAt(x);
 		}
-		fWindowsMenu->AddItem(menuItem);
+		for(int32 x = 0; x < be_app->CountWindows(); x++) {
+			// use a dynamic_cast to filter out other window types (find, save, bookmarks, ...)
+			EditorWindow* window = dynamic_cast<EditorWindow*>(be_app->WindowAt(x));
+			if(window == nullptr)
+				continue;
+
+			BMessage* message = new BMessage(ACTIVATE_WINDOW);
+			message->AddPointer("window", window);
+			BMenuItem* menuItem = new BMenuItem(window->Title(), message);
+			if(window == this) {
+				menuItem->SetEnabled(false);
+				menuItem->SetMarked(true);
+			}
+			fWindowsMenu->AddItem(menuItem);
+		}
+		fWindowsMenu->SetTargetForItems(be_app);
 	}
-	fWindowsMenu->SetTargetForItems(be_app);
+
+	if(fReadWriteMenuItem != nullptr) {
+		if(fOpenedFilePath == nullptr || fOpenedFileModificationTime == -1) {
+			fReadWriteMenuItem->SetEnabled(false);
+			fReadWriteMenuItem->SetLabel(B_TRANSLATE("Make file writable"));
+		} else if(fReadOnly) {
+			fReadWriteMenuItem->SetEnabled(true);
+			fReadWriteMenuItem->SetLabel(B_TRANSLATE("Make file writable"));
+		} else {
+			fReadWriteMenuItem->SetEnabled(true);
+			fReadWriteMenuItem->SetLabel(B_TRANSLATE("Make file read only"));
+		}
+	}
 }
 
 

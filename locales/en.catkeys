@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	2982779499
+1	English	x-vnd.KapiX-Koder	542788947
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
@@ -54,6 +54,7 @@ Reached the end of the target. No results found.	EditorWindow		Reached the end o
 Gigantic	AppPreferencesWindow	Toolbar icon size	Gigantic
 write	Preferences	Make sure you have _ permission for	write
 Show toolbar	AppPreferencesWindow		Show toolbar
+Make file writable	EditorWindow		Make file writable
 Select all	EditorWindow		Select all
 Do nothing	EditorWindow		Do nothing
 Trailing whitespace	AppPreferencesWindow		Trailing whitespace
@@ -78,6 +79,7 @@ Up to the next non-empty line	AppPreferencesWindow		Up to the next non-empty lin
 Replace all	FindWindow		Replace all
 Koder	System name		Koder
 View or submit bug reports	EditorWindow		View or submit bug reports
+Make file read only	EditorWindow		Make file read only
 Extra large	AppPreferencesWindow	Toolbar icon size	Extra large
 Stack new windows	AppPreferencesWindow		Stack new windows
 Find selection	EditorWindow		Find selection
@@ -92,6 +94,7 @@ Wrap lines	EditorWindow		Wrap lines
 History	FindStatusView		History
 Small	AppPreferencesWindow	Toolbar icon size	Small
 Find next	EditorWindow		Find next
+Permission Error	EditorWindow		Permission Error
 Incremental search	EditorWindow		Incremental search
 Style files	Styler		Style files
 Cut	EditorWindow		Cut
@@ -108,9 +111,9 @@ Replacement finished	EditorWindow		Replacement finished
 Always open files in new window	AppPreferencesWindow		Always open files in new window
 Your changes will be lost.	EditorWindow		Your changes will be lost.
 Find/Replace…	EditorWindow		Find/Replace…
+Replace and find	FindWindow		Replace and find
 Show white space	EditorWindow		Show white space
 Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
-Replace and find	FindWindow		Replace and find
 Huge	AppPreferencesWindow	Toolbar icon size	Huge
 Regex	FindWindow		Regex
 Go to	BookmarksListView		Go to
@@ -131,7 +134,9 @@ Clear	FindStatusView		Clear
 Style	AppPreferencesWindow		Style
 Paste	EditorWindow		Paste
 Help	EditorWindow		Help
+OK	EditorWindow		OK
 Save as…	EditorWindow		Save as…
+An error occurred while attempting to change file permissions.	EditorWindow		An error occurred while attempting to change file permissions.
 Bookmarks	EditorWindow		Bookmarks
 Untitled	EditorWindow		Untitled
 Unknown error.	Preferences		Unknown error.
@@ -167,7 +172,7 @@ Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespac
 Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
 Show indentation guides	AppPreferencesWindow		Show indentation guides
 Koder preferences	AppPreferencesWindow		Koder preferences
-An error occurred while attempting to save the file.	EditorWindow		An error occurred while attempting to save the file.
 Don't save	QuitAlert		Don't save
+An error occurred while attempting to save the file.	EditorWindow		An error occurred while attempting to save the file.
 Replace	FindWindow		Replace
 [read-only]	EditorWindow		[read-only]

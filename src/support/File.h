@@ -38,6 +38,7 @@ public:
 	static	status_t	Monitor(BStatable* file, bool enable,
 							BHandler* handler);
 	static	bool		CanWrite(BStatable* file);
+	static	status_t	SetWritable(BStatable* file, bool writable);
 };
 
 
