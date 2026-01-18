@@ -76,7 +76,6 @@ EditorWindow::EditorWindow(bool stagger)
 	fGoToLineWindow = nullptr;
 	fBookmarksWindow = nullptr;
 	fOpenedFilePath = nullptr;
-	fOpenedFileMimeType.SetTo("text/plain");
 	fOpenedFileModificationTime = -1;
 
 	fCurrentLanguage = "text";
@@ -405,6 +404,12 @@ EditorWindow::SaveFile(entry_ref* ref)
 
 	BackupFileGuard backupGuard(path.c_str(), this);
 
+	BEntry entry(path.c_str());
+	if(entry.InitCheck() == B_OK && entry.Exists() == false && fCurrentLanguage == "text") {
+		// this is a new file with an unset language so let's rescan
+		_SetLanguageByFilename(path.c_str());
+	}
+
 	// TODO error checking
 	File file(path.c_str(), B_WRITE_ONLY | B_CREATE_FILE | B_ERASE_FILE);
 	status_t result = file.InitCheck();
@@ -433,7 +438,23 @@ EditorWindow::SaveFile(entry_ref* ref)
 	file.Write(buffer);
 	fEditor->SendMessage(SCI_SETSAVEPOINT);
 
-	file.WriteMimeType(fOpenedFileMimeType.Type());
+	if(fOpenedFileMimeType.InitCheck() != B_OK) {
+		if(BMimeType::GuessMimeType(path.c_str(), &fOpenedFileMimeType) != B_OK
+			|| strcmp(fOpenedFileMimeType.Type(), "application/octet-stream") == 0) {
+			// GuessMimeType() can give generic results for things like Makefiles, so we
+			// also try update_mime_info() which is better at those files, but worse on some
+			if(update_mime_info(path.c_str(), false, true, false) == B_OK) {
+				fOpenedFileMimeType.SetTo(file.ReadMimeType().c_str());
+			} else {
+				// fall back if both of the sniffers have failed
+				fOpenedFileMimeType.SetTo("text/plain");
+				file.WriteMimeType(fOpenedFileMimeType.Type());
+			}
+		} else {
+			file.WriteMimeType(fOpenedFileMimeType.Type());
+		}
+	}
+
 	file.Monitor(true, this);
 	file.GetModificationTime(&fOpenedFileModificationTime);
 	fModifiedOutside = false;
