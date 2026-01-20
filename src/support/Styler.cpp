@@ -223,6 +223,21 @@ Styler::_ApplyGlobal(Editor* editor, const char* style, const BPath &path, const
 						editor->SendMessage(SCI_MARKERSETBACK, marker, s.bgColor);
 					}
 				}
+			} else if(name == "Fold selected") {
+				if(s.bgColor != -1) {
+					std::array<int32, 7> markers = {
+						SC_MARKNUM_FOLDER,
+						SC_MARKNUM_FOLDEROPEN,
+						SC_MARKNUM_FOLDERSUB,
+						SC_MARKNUM_FOLDERTAIL,
+						SC_MARKNUM_FOLDEREND,
+						SC_MARKNUM_FOLDEROPENMID,
+						SC_MARKNUM_FOLDERMIDTAIL
+					};
+					for(auto marker : markers) {
+						editor->SendMessage(SCI_MARKERSETBACKSELECTED, marker, s.bgColor);
+					}
+				}
 			} else if(name == "Bookmark marker") {
 				if(s.fgColor != -1) {
 					editor->SendMessage(SCI_MARKERSETFORE, Editor::Marker::BOOKMARK, s.fgColor);
