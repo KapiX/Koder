@@ -20,6 +20,8 @@ Global:
     Fold:
         foreground: "#24003E"
         background: "#322543"
+    Fold selected:
+        background: "#FF2020"
     Indent guideline:
         id: 37
         foreground: "#5F2B48"
