@@ -22,6 +22,8 @@ Global:
     Fold marker:
         foreground: "#e4e4e4"
         background: "#808080"
+    Fold selected:
+        background: "#FF2020"
     Indent guideline:
         id: 37
         foreground: "#474247"
