@@ -6,7 +6,7 @@ awk:
     extensions: [ awk ]
 bash:
     name: Bash
-    extensions: [ sh, bash, bsh, csh, ksh, configure ]
+    extensions: [ sh, bash, bsh, csh, ksh, zsh, configure ]
 c:
     name: C
     extensions: [ c ]
