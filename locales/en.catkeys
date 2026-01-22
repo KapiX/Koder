@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	1623556006
+1	English	x-vnd.KapiX-Koder	2172933300
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
@@ -7,6 +7,7 @@ In selection	FindWindow		In selection
 About…	EditorWindow		About…
 The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
 Replace:	FindWindow		Replace:
+Remove all bookmarks	EditorWindow		Remove all bookmarks
 Cancel	QuitAlert		Cancel
 Could not find Open Terminal Tracker add-on.	EditorWindow		Could not find Open Terminal Tracker add-on.
 Match entire words	FindWindow		Match entire words
