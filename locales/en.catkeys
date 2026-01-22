@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	519025525
+1	English	x-vnd.KapiX-Koder	1623556006
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
@@ -61,6 +61,7 @@ Do nothing	EditorWindow		Do nothing
 Trailing whitespace	AppPreferencesWindow		Trailing whitespace
 Cancel	GoToLineWindow		Cancel
 Large	AppPreferencesWindow	Toolbar icon size	Large
+Collapse top level folds	EditorWindow		Collapse top level folds
 Backwards	FindWindow		Backwards
 Toggle bookmark	EditorWindow		Toggle bookmark
 The file contains unsaved changes, but is read-only. What to do?	EditorWindow		The file contains unsaved changes, but is read-only. What to do?
@@ -88,6 +89,7 @@ Revert	AppPreferencesWindow		Revert
 Medium	AppPreferencesWindow	Toolbar icon size	Medium
 Only in actually indented lines	AppPreferencesWindow		Only in actually indented lines
 <empty>	FindStatusView		<empty>
+Collapse all folds	EditorWindow		Collapse all folds
 Next bookmark	EditorWindow		Next bookmark
 Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.	Preferences		Access was denied while opening the configuration file. Make sure you have %s% permission for your settings directory.
 Save	EditorWindow		Save
@@ -104,8 +106,9 @@ Ensure empty last line on save	AppPreferencesWindow		Ensure empty last line on s
 Indentation	AppPreferencesWindow		Indentation
 Replaced {0, plural, one{# occurence} other{# occurences}}.	EditorWindow		Replaced {0, plural, one{# occurence} other{# occurences}}.
 Open recent	EditorWindow		Open recent
-Show toolbar	EditorWindow		Show toolbar
 Save all	QuitAlert		Save all
+Show toolbar	EditorWindow		Show toolbar
+Expand all folds	EditorWindow		Expand all folds
 Read-only	EditorStatusView		Read-only
 New	EditorWindow		New
 Replacement finished	EditorWindow		Replacement finished
@@ -122,6 +125,7 @@ Quit	EditorWindow		Quit
 Redo	EditorWindow		Redo
 Go to line:	GoToLineWindow		Go to line:
 Editor settings	Preferences		Editor settings
+Code folding	EditorWindow		Code folding
 Windows	EditorWindow		Windows
 You don't have sufficient permissions to edit this file.	EditorWindow		You don't have sufficient permissions to edit this file.
 Convert tabs to spaces	AppPreferencesWindow		Convert tabs to spaces
