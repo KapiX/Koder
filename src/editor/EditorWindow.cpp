@@ -148,6 +148,11 @@ EditorWindow::EditorWindow(bool stagger)
 			.End()
 			.AddItem(B_TRANSLATE("Show toolbar"), MAINMENU_VIEW_TOOLBAR)
 			.AddItem(B_TRANSLATE("Wrap lines"), MAINMENU_VIEW_WRAPLINES)
+			.AddMenu(B_TRANSLATE("Code folding"))
+				.AddItem(B_TRANSLATE("Expand all folds"), MAINMENU_VIEW_EXPANDFOLDS)
+				.AddItem(B_TRANSLATE("Collapse all folds"), MAINMENU_VIEW_COLLAPSEFOLDS)
+				.AddItem(B_TRANSLATE("Collapse top level folds"), MAINMENU_VIEW_COLLAPSETOPFOLDS)
+			.End()
 		.End()
 		.AddMenu(B_TRANSLATE("Search"))
 			.AddItem(B_TRANSLATE("Find/Replace" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_FINDREPLACE, 'F')
@@ -720,6 +725,15 @@ EditorWindow::MessageReceived(BMessage* message)
 			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fWrapLines);
 			fEditor->SendMessage(SCI_SETWRAPMODE, fPreferences->fWrapLines ?
 				SC_WRAP_WORD : SC_WRAP_NONE, 0);
+		} break;
+		case MAINMENU_VIEW_EXPANDFOLDS: {
+			fEditor->SendMessage(SCI_FOLDALL, SC_FOLDACTION_EXPAND);
+		} break;
+		case MAINMENU_VIEW_COLLAPSEFOLDS: {
+			fEditor->SendMessage(SCI_FOLDALL, (SC_FOLDACTION_CONTRACT | SC_FOLDACTION_CONTRACT_EVERY_LEVEL));
+		} break;
+		case MAINMENU_VIEW_COLLAPSETOPFOLDS: {
+			fEditor->SendMessage(SCI_FOLDALL, SC_FOLDACTION_CONTRACT);
 		} break;
 		case MAINMENU_HELP_PROJECT: {
 			BUrl("https://github.com/KapiX/Koder", true).OpenWithPreferredApplication();
