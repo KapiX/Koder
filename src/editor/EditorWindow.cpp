@@ -165,6 +165,7 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem(B_TRANSLATE("Toggle bookmark"), MAINMENU_SEARCH_TOGGLEBOOKMARK, 'B')
 			.AddItem(B_TRANSLATE("Next bookmark"), MAINMENU_SEARCH_NEXTBOOKMARK, 'N', B_CONTROL_KEY)
 			.AddItem(B_TRANSLATE("Previous bookmark"), MAINMENU_SEARCH_PREVBOOKMARK, 'P', B_CONTROL_KEY)
+			.AddItem(B_TRANSLATE("Remove all bookmarks"), MAINMENU_SEARCH_REMOVEBOOKMARKS)
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Go to line" B_UTF8_ELLIPSIS), MAINMENU_SEARCH_GOTOLINE, ',')
 		.End()
@@ -692,6 +693,9 @@ EditorWindow::MessageReceived(BMessage* message)
 		case MAINMENU_SEARCH_PREVBOOKMARK: {
 			fEditor->GoToPreviousBookmark();
 		} break;
+		case MAINMENU_SEARCH_REMOVEBOOKMARKS: {
+			fEditor->SendMessage(SCI_MARKERDELETEALL, Editor::Marker::BOOKMARK);
+		} break;
 		case MAINMENU_SEARCH_GOTOLINE: {
 			if(fGoToLineWindow == nullptr) {
 				fGoToLineWindow = new GoToLineWindow(this);
@@ -768,6 +772,9 @@ EditorWindow::MessageReceived(BMessage* message)
 						menu->AddItem(new BMenuItem(itemLabel.String(), itemMessage));
 					}
 				}
+				menu->AddSeparatorItem();
+				menu->AddItem(new BMenuItem(B_TRANSLATE("Remove all bookmarks"),
+					new BMessage(MAINMENU_SEARCH_REMOVEBOOKMARKS)));
 			}
 			_ShowToolbarPopUp(menu, button);
 		} break;
