@@ -33,7 +33,7 @@ LOCALES = ca de el en en_AU en_GB es es_419 fr fur hu it ja nl pl pt ro ru sv tr
 SYMBOLS := TRUE
 DEBUGGER := TRUE
 # -gno-column-info is a workaround for Debugger issue (#15159)
-COMPILER_FLAGS = -gno-column-info -std=c++17 -Werror
+COMPILER_FLAGS = -gno-column-info -std=c++20 -Werror
 
 ## Include the Makefile-Engine
 DEVEL_DIRECTORY := \
