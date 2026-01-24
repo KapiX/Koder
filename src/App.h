@@ -26,7 +26,7 @@ class Styler;
 enum {
 	SUPPRESS_INITIAL_WINDOW		= 'Siwn',
 	WINDOW_NEW_WITH_QUIT_REPLY	= 'NWwn',
-	ACTIVATE_WINDOW = 'actw'
+	ACTIVATE_WINDOW				= 'actw'
 };
 
 
@@ -43,7 +43,6 @@ public:
 	void						AboutRequested();
 	bool						QuitRequested();
 	void						ReadyToRun();
-	void						ArgvReceived(int32 argc, char** argv);
 	void						RefsReceived(BMessage* message);
 	void						MessageReceived(BMessage* message);
 

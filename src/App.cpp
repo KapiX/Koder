@@ -200,32 +200,8 @@ App::QuitRequested()
 void
 App::ReadyToRun()
 {
-	if(CountWindows() == 0 && fSuppressInitialWindow == false) {
+	if(fSuppressInitialWindow == false && CountWindows() == 0) {
 		PostMessage(WINDOW_NEW);
-	}
-}
-
-
-void
-App::ArgvReceived(int32 argc, char** argv)
-{
-	BMessage* message = CurrentMessage();
-	BString cwd = message->GetString("cwd", "~");
-	std::unique_ptr<BWindowStack> windowStack;
-	for(int32 i = 1; i < argc; ++i) {
-		std::string arg = argv[i];
-		// FIXME: this should be handled in main.cpp probably
-		if(arg == "-w" || arg == "--wait" || arg == "-h" || arg == "--help")
-			continue;
-		int32 line, column;
-		std::string filename = ParseFileArgument(argv[i], &line, &column);
-		if(filename.find('/') != 0) {
-			BPath absolute(cwd.String(), filename.c_str(), true);
-			filename = absolute.Path();
-		}
-		entry_ref ref;
-		BEntry(filename.c_str()).GetRef(&ref);
-		_ActivateOrCreateWindow(message, ref, line, column, windowStack);
 	}
 }
 
@@ -248,8 +224,8 @@ App::RefsReceived(BMessage* message)
 				trackerMessage.AddRef("refs", &ref);
 				continue;
 			}
-			const int32 line = message->GetInt32("be:line", -1);
-			const int32 column = message->GetInt32("be:column", -1);
+			const int32 line = message->GetInt32("be:line", i, -1);
+			const int32 column = message->GetInt32("be:column", i, -1);
 			_ActivateOrCreateWindow(message, ref, line, column, windowStack);
 		}
 	}
