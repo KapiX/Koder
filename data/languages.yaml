@@ -67,6 +67,9 @@ ruby:
 rust:
     name: Rust
     extensions: [ rs ]
+toml:
+    name: TOML
+    extensions: [ toml ]
 yab:
     name: YAB
     extensions: [ yab ]
