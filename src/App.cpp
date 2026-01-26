@@ -160,6 +160,9 @@ App::AboutRequested()
 		B_TRANSLATE("Code editor for Haiku based on Scintilla editing component."));
 	window->AddSpecialThanks(specialThanksC.data());
 	window->AddExtraInfo(B_TRANSLATE("Distributed on MIT license terms."));
+	float scale = be_plain_font->Size() / 12.0f;
+	window->ResizeTo(400 * scale, 400 * scale);
+	window->CenterOnScreen();
 	window->Show();
 }
 
