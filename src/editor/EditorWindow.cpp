@@ -285,7 +285,8 @@ EditorWindow::EditorWindow(bool stagger)
 	RefreshTitle();
 
 	if(stagger == true) {
-		MoveBy(kWindowStagger, kWindowStagger);
+		float scale = be_plain_font->Size() / 12.0f;
+		MoveBy(kWindowStagger * scale, kWindowStagger * scale);
 	}
 }
 
