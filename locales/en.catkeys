@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	2172933300
+1	English	x-vnd.KapiX-Koder	3825495319
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
@@ -69,6 +69,7 @@ The file contains unsaved changes, but is read-only. What to do?	EditorWindow		T
 Old Mac format	EditorWindow		Old Mac format
 Open Terminal	EditorWindow		Open Terminal
 loaded	Preferences	settings will not be _	loaded
+Bookmark all	FindWindow		Bookmark all
 Unsaved files	QuitAlert		Unsaved files
 Bookmarks	AppPreferencesWindow		Bookmarks
 load	Preferences	to _ the configuration	load

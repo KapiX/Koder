@@ -68,33 +68,9 @@ FindWindow::MessageReceived(BMessage* message)
 			std::string replaceText(fReplaceTC->TextLength(), '\0');
 			fFindTC->GetText(0, findText.size() + 1, &findText[0]);
 			fReplaceTC->GetText(0, replaceText.size() + 1, &replaceText[0]);
-			{
-				const int32 mruMax = 10;
-				int32 count = 0;
-				std::string lastFind;
-				if(fFindHistory.GetInfo("mru", nullptr, &count) == B_OK) {
-					lastFind = fFindHistory.GetString("mru", count - 1, "");
-				}
-				if(lastFind != findText)
-					fFindHistory.AddString("mru", findText.c_str());
-				while(count >= mruMax) {
-					fFindHistory.RemoveData("mru", 0);
-					count--;
-				}
-
-				if (message->what != FINDWINDOW_FIND) {
-					count = 0;
-					std::string lastReplace;
-					if(fReplaceHistory.GetInfo("mru", nullptr, &count) == B_OK) {
-						lastReplace = fReplaceHistory.GetString("mru", count - 1, "");
-					}
-					if(lastReplace != replaceText)
-						fReplaceHistory.AddString("mru", replaceText.c_str());
-					while(count >= mruMax) {
-						fReplaceHistory.RemoveData("mru", 0);
-						count--;
-					}
-				}
+			_AppendHistoryString(fFindHistory, findText);
+			if (message->what != FINDWINDOW_FIND) {
+				_AppendHistoryString(fReplaceHistory, replaceText);
 			}
 			bool newSearch = (fFlagsChanged
 				|| fOldFindText != findText
@@ -117,6 +93,22 @@ FindWindow::MessageReceived(BMessage* message)
 			} else {
 				fFlagsChanged = false;
 			}
+		} break;
+		case FINDWINDOW_BOOKMARKALL: {
+			std::string findText(fFindTC->TextLength(), '\0');
+			fFindTC->GetText(0, findText.size() + 1, &findText[0]);
+			if(findText.empty() == true) {
+				return;
+			}
+			_AppendHistoryString(fFindHistory, findText);
+			message->AddString("findText", findText.c_str());
+			message->AddBool("matchCase", IsChecked(fMatchCaseCB));
+			message->AddBool("matchWord", IsChecked(fMatchWordCB));
+			message->AddBool("wrapAround", IsChecked(fWrapAroundCB));
+			message->AddBool("regex", IsChecked(fRegexCB));
+			message->AddBool("backwards", IsChecked(fBackwardsCB));
+			message->AddBool("inSelection", IsChecked(fInSelectionCB));
+			be_app->PostMessage(message);
 		} break;
 		case FINDWINDOW_QUITTING: {
 			if(LockLooper())
@@ -226,6 +218,8 @@ FindWindow::_InitInterface()
 	fReplaceFindButton->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNSET));
 	fReplaceAllButton = new BButton(B_TRANSLATE("Replace all"), new BMessage((uint32) FINDWINDOW_REPLACEALL));
 	fReplaceAllButton->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNSET));
+	fBookmarkAllButton = new BButton(B_TRANSLATE("Bookmark all"), new BMessage((uint32) FINDWINDOW_BOOKMARKALL));
+	fBookmarkAllButton->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNSET));
 
 	fMatchCaseCB = new BCheckBox("matchCase", B_TRANSLATE("Match case"), new BMessage((uint32) Actions::MATCH_CASE));
 	fMatchWordCB = new BCheckBox("matchWord", B_TRANSLATE("Match entire words"), new BMessage((uint32) Actions::MATCH_WORD));
@@ -249,6 +243,7 @@ FindWindow::_InitInterface()
 				.Add(fReplaceButton)
 				.Add(fReplaceFindButton)
 				.Add(fReplaceAllButton)
+				.Add(fBookmarkAllButton)
 				.AddGlue()
 			.End()
 		.End()
@@ -298,5 +293,23 @@ FindWindow::_SaveHistory()
 	if(file && file->InitCheck() == B_OK) {
 		history.Flatten(file.get());
 		backupFileGuard.SaveSuccessful();
+	}
+}
+
+
+void
+FindWindow::_AppendHistoryString(BMessage& historyMessage, std::string& itemString)
+{
+	const int32 mruMax = 10;
+	int32 count = 0;
+	std::string lastItemString;
+	if(historyMessage.GetInfo("mru", nullptr, &count) == B_OK) {
+		lastItemString = historyMessage.GetString("mru", count - 1, "");
+	}
+	if(lastItemString != itemString)
+		historyMessage.AddString("mru", itemString.c_str());
+	while(count >= mruMax) {
+		historyMessage.RemoveData("mru", 0);
+		count--;
 	}
 }
