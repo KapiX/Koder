@@ -408,6 +408,55 @@ Editor::SetBookmarks(const BMessage &lines)
 }
 
 
+void
+Editor::SetBookmarksFromSearch(const BMessage &searchMessage)
+{
+	std::string search = searchMessage.GetString("findText", "");
+	if(search.empty() == true) {
+		return;
+	}
+
+	bool inSelection = searchMessage.GetBool("inSelection", false);
+	bool wrapAround = searchMessage.GetBool("wrapAround", false);
+	bool backwards = searchMessage.GetBool("backwards", false);
+	bool regex = searchMessage.GetBool("regex", false);
+	bool wholeWord = searchMessage.GetBool("wholeWord", false);
+	bool matchCase = searchMessage.GetBool("matchCase", false);
+	Sci_Position start = 0, finish;
+
+	if(inSelection == true) {
+		start = SendMessage(SCI_GETSELECTIONSTART);
+	} else if(wrapAround == false && backwards == false) {
+		start = SendMessage(SCI_GETCURRENTPOS);
+	}
+
+	if(inSelection == true) {
+		finish = SendMessage(SCI_GETSELECTIONEND);
+	} else if(backwards == false) {
+		finish = SendMessage(SCI_GETLENGTH, 0, 0);
+	} else {
+		finish = SendMessage(SCI_GETCURRENTPOS);
+	}
+
+	Set<SearchTarget>({start, finish});
+
+	Set<SearchFlags>((wholeWord == true ? SCFIND_WHOLEWORD : 0)
+						| (matchCase == true ? SCFIND_MATCHCASE : 0)
+						| (regex == true ? (SCFIND_REGEXP | SCFIND_CXX11REGEX) : 0));
+
+	int result;
+	do {
+		result = SendMessage(SCI_SEARCHINTARGET, search.length(), (sptr_t) search.c_str());
+		if(result == -1)
+			continue;
+
+		int64 line = SendMessage(SCI_LINEFROMPOSITION, result);
+		SendMessage(SCI_MARKERADD, line, Marker::BOOKMARK);
+		Set<SearchTarget>({Get<SearchTargetEnd>(), finish});
+	} while(result != -1);
+}
+
+
 BMessage
 Editor::Bookmarks()
 {

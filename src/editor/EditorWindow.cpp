@@ -941,6 +941,9 @@ EditorWindow::MessageReceived(BMessage* message)
 			message->what = FindReplaceHandler::REPLACEFIND;
 			PostMessage(message, fFindReplaceHandler, this);
 		} break;
+		case FINDWINDOW_BOOKMARKALL: {
+			fEditor->SetBookmarksFromSearch(*message);
+		} break;
 		case OPEN_TERMINAL: {
 			if(fOpenedFilePath != nullptr) {
 				BPath directory;

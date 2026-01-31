@@ -293,6 +293,12 @@ App::MessageReceived(BMessage* message)
 		}
 		fPreferences->fFindWindowState = *message;
 	} break;
+	case FINDWINDOW_BOOKMARKALL: {
+		if(fLastActiveWindow != nullptr) {
+			BMessenger messenger((BWindow*) fLastActiveWindow);
+			messenger.SendMessage(message);
+		}
+	} break;
 	case FINDWINDOW_QUITTING: {
 		fFindWindow = nullptr;
 	} break;

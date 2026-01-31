@@ -80,6 +80,7 @@ public:
 	void				GoToLine(int64 line);
 
 	void				SetBookmarks(const BMessage &lines);
+	void				SetBookmarksFromSearch(const BMessage &searchMessage);
 	BMessage			Bookmarks();
 	BMessage			BookmarksWithText();
 

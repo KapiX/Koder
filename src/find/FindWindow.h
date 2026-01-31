@@ -30,6 +30,7 @@ enum {
 	FINDWINDOW_REPLACE		= 'fwrp',
 	FINDWINDOW_REPLACEFIND	= 'fwrf',
 	FINDWINDOW_REPLACEALL	= 'fwra',
+	FINDWINDOW_BOOKMARKALL	= 'fwba',
 	FINDWINDOW_QUITTING		= 'FWQU'
 };
 
@@ -65,6 +66,7 @@ private:
 	void			_InitInterface();
 	void			_LoadHistory();
 	void			_SaveHistory();
+	void			_AppendHistoryString(BMessage& historyMessage, std::string& itemString);
 
 	BStringView*	fFindString;
 	find::ScintillaView*	fFindTC;
@@ -75,6 +77,7 @@ private:
 	BButton*		fReplaceButton;
 	BButton*		fReplaceFindButton;
 	BButton*		fReplaceAllButton;
+	BButton*		fBookmarkAllButton;
 
 	BCheckBox*		fMatchCaseCB;
 	BCheckBox*		fMatchWordCB;
