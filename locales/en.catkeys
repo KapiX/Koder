@@ -1,10 +1,11 @@
-1	English	x-vnd.KapiX-Koder	3825495319
+1	English	x-vnd.KapiX-Koder	2012617086
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
 Use custom font	AppPreferencesWindow		Use custom font
 In selection	FindWindow		In selection
 About…	EditorWindow		About…
+Move selection up	EditorWindow		Move selection up
 The file contains unsaved changes. What to do?	EditorWindow		The file contains unsaved changes. What to do?
 Replace:	FindWindow		Replace:
 Remove all bookmarks	EditorWindow		Remove all bookmarks
@@ -61,6 +62,7 @@ Select all	EditorWindow		Select all
 Do nothing	EditorWindow		Do nothing
 Trailing whitespace	AppPreferencesWindow		Trailing whitespace
 Cancel	GoToLineWindow		Cancel
+Move selection down	EditorWindow		Move selection down
 Large	AppPreferencesWindow	Toolbar icon size	Large
 Collapse top level folds	EditorWindow		Collapse top level folds
 Backwards	FindWindow		Backwards
@@ -150,8 +152,8 @@ Unknown error.	Preferences		Unknown error.
 Find	FindWindow		Find
 Delete	BookmarksListView		Delete
 Preferences…	EditorWindow		Preferences…
-Reload	EditorWindow		Reload
 Go to line	GoToLineWindow		Go to line
+Reload	EditorWindow		Reload
 There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
 The file has been removed. What to do?	EditorWindow		The file has been removed. What to do?
 Enormous	AppPreferencesWindow	Toolbar icon size	Enormous
