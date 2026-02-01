@@ -127,6 +127,8 @@ EditorWindow::EditorWindow(bool stagger)
 			.AddItem(B_TRANSLATE("Paste"), B_PASTE, 'V')
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Select all"), B_SELECT_ALL, 'A')
+			.AddItem(B_TRANSLATE("Move selection up"), EDIT_MOVESELECTIONUP, B_UP_ARROW, B_SHIFT_KEY)
+			.AddItem(B_TRANSLATE("Move selection down"), EDIT_MOVESELECTIONDOWN, B_DOWN_ARROW, B_SHIFT_KEY)
 			.AddSeparator()
 			.AddItem(B_TRANSLATE("Comment line"), EDIT_COMMENTLINE, '/')
 			.AddItem(B_TRANSLATE("Comment block"), EDIT_COMMENTBLOCK, '/', B_SHIFT_KEY)
@@ -612,6 +614,12 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case MAINMENU_FILE_QUIT: {
 			be_app->PostMessage(B_QUIT_REQUESTED);
+		} break;
+		case EDIT_MOVESELECTIONUP: {
+			fEditor->SendMessage(SCI_MOVESELECTEDLINESUP);
+		} break;
+		case EDIT_MOVESELECTIONDOWN: {
+			fEditor->SendMessage(SCI_MOVESELECTEDLINESDOWN);
 		} break;
 		case EDIT_COMMENTLINE: {
 			fEditor->CommentLine(fEditor->Get<Selection>());
