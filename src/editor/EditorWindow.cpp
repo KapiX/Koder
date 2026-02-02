@@ -1334,7 +1334,7 @@ EditorWindow::_SyncWithPreferences()
 		fEditor->SendMessage(SCI_SETCARETLINEVISIBLEALWAYS, true, 0);
 		fEditor->SendMessage(SCI_SETCARETLINEFRAME, fPreferences->fLineHighlightingMode ? 2 : 0);
 		fEditor->SendMessage(SCI_SETCARETSTYLE,
-			fPreferences->fUseBlockCursor ? (CARETSTYLE_BLOCK | CARETSTYLE_BLOCK_AFTER) : CARETSTYLE_LINE, 0);
+			fPreferences->fUseBlockCursor ? (CARETSTYLE_BLOCK | CARETSTYLE_BLOCK_AFTER) : CARETSTYLE_LINE);
 
 		if(fFilePreferences.fEOLMode) {
 			fEditor->SendMessage(SCI_SETEOLMODE, fFilePreferences.fEOLMode.value_or(SC_EOL_LF), 0);

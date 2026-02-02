@@ -17,13 +17,13 @@
 void
 _PrintUsage(std::ostream& outStream)
 {
-	outStream
-		<< "Usage: Koder [options] file...\n"
-		<< "Options:\n"
-		<< "  -h, --help\t\tPrints this message.\n"
-		<< "  -w, --wait\t\tWait for the window to quit before returning.\n"
-		<< "\t\t\tOpening in window stacks is not supported in this mode.\n"
-		<< "\t\t\tCurrently accepts only one filename.\n";
+	outStream <<
+		"Usage: Koder [options] file...\n"
+		"Options:\n"
+		"  -h, --help\t\tPrints this message.\n"
+		"  -w, --wait\t\tWait for the window to quit before returning.\n"
+		"\t\t\tOpening in window stacks is not supported in this mode.\n"
+		"\t\t\tCurrently accepts only one filename.\n";
 }
 
 
