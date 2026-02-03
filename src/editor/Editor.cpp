@@ -420,7 +420,7 @@ Editor::SetBookmarksFromSearch(const BMessage &searchMessage)
 	bool wrapAround = searchMessage.GetBool("wrapAround", false);
 	bool backwards = searchMessage.GetBool("backwards", false);
 	bool regex = searchMessage.GetBool("regex", false);
-	bool wholeWord = searchMessage.GetBool("wholeWord", false);
+	bool wholeWord = searchMessage.GetBool("matchWord", false);
 	bool matchCase = searchMessage.GetBool("matchCase", false);
 	Sci_Position start = 0, finish;
 
