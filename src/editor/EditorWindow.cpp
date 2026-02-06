@@ -274,6 +274,8 @@ EditorWindow::EditorWindow(bool stagger)
 
 	_SyncWithPreferences();
 
+	be_app->StartWatching(this, APP_PREFERENCES_CHANGED);
+
 	fEditor->SendMessage(SCI_SETSCROLLWIDTH, fEditor->Bounds().Width());
 	fEditor->SendMessage(SCI_SETSCROLLWIDTHTRACKING, true, 0);
 	fEditor->SendMessage(SCI_SETSAVEPOINT, 0, 0);
@@ -295,6 +297,8 @@ EditorWindow::EditorWindow(bool stagger)
 
 EditorWindow::~EditorWindow()
 {
+	be_app->StopWatching(this, APP_PREFERENCES_CHANGED);
+
 	RemoveCommonFilter(fFindReplaceHandler->IncrementalSearchFilter());
 
 	delete fFindReplaceHandler;
@@ -713,17 +717,11 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case MAINMENU_VIEW_SPECIAL_WHITESPACE: {
 			fPreferences->fWhiteSpaceVisible = !fPreferences->fWhiteSpaceVisible;
-			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fWhiteSpaceVisible);
-			fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
-			bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
-			fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, pressed);
+			be_app->SendNotices(APP_PREFERENCES_CHANGED);
 		} break;
 		case MAINMENU_VIEW_SPECIAL_EOL: {
 			fPreferences->fEOLVisible = !fPreferences->fEOLVisible;
-			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fEOLVisible);
-			fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
-			bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
-			fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, pressed);
+			be_app->SendNotices(APP_PREFERENCES_CHANGED);
 		} break;
 		case MAINMENU_VIEW_TOOLBAR: {
 			fPreferences->fToolbar = !fPreferences->fToolbar;
@@ -797,19 +795,14 @@ EditorWindow::MessageReceived(BMessage* message)
 			_ShowToolbarPopUp(menu, button);
 		} break;
 		case TOOLBAR_SPECIAL_SYMBOLS: {
-			bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
-			if(pressed == true) {
+			if(fPreferences->fWhiteSpaceVisible == true && fPreferences->fEOLVisible == true) {
 				fPreferences->fWhiteSpaceVisible = false;
 				fPreferences->fEOLVisible = false;
 			} else {
 				fPreferences->fWhiteSpaceVisible = true;
 				fPreferences->fEOLVisible = true;
 			}
-			fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
-			fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
-			fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
-			fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
-			fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, !pressed);
+			be_app->SendNotices(APP_PREFERENCES_CHANGED);
 		} break;
 		case B_SAVE_REQUESTED: {
 			entry_ref ref;
