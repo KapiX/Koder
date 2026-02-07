@@ -41,6 +41,7 @@ const BString gAppName = B_TRANSLATE_SYSTEM_NAME("Koder");
 
 const uint32 ACTIVE_WINDOW_CHANGED	= 'AWCH';
 const uint32 SAVE_FILE				= 'SVFL';
+const uint32 VIEW_SPECIAL_CHANGED	= 'vsch';
 
 
 enum {
@@ -185,6 +186,7 @@ private:
 			void			_OpenCorrespondingFile(const BPath &file, const std::string lang);
 			void			_LoadEditorconfig();
 			void			_SyncWithPreferences();
+			void			_SyncSpecialSymbols();
 			void			_SyncEditMenus();
 			int32			_ShowModifiedAlert();
 			void			_ShowToolbarPopUp(BPopUpMenu* menu, BButton* button);

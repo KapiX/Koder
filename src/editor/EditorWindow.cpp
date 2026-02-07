@@ -274,6 +274,8 @@ EditorWindow::EditorWindow(bool stagger)
 
 	_SyncWithPreferences();
 
+	be_app->StartWatching(this, VIEW_SPECIAL_CHANGED);
+
 	fEditor->SendMessage(SCI_SETSCROLLWIDTH, fEditor->Bounds().Width());
 	fEditor->SendMessage(SCI_SETSCROLLWIDTHTRACKING, true, 0);
 	fEditor->SendMessage(SCI_SETSAVEPOINT, 0, 0);
@@ -295,6 +297,8 @@ EditorWindow::EditorWindow(bool stagger)
 
 EditorWindow::~EditorWindow()
 {
+	be_app->StopWatching(this, VIEW_SPECIAL_CHANGED);
+
 	RemoveCommonFilter(fFindReplaceHandler->IncrementalSearchFilter());
 
 	delete fFindReplaceHandler;
@@ -713,17 +717,11 @@ EditorWindow::MessageReceived(BMessage* message)
 		} break;
 		case MAINMENU_VIEW_SPECIAL_WHITESPACE: {
 			fPreferences->fWhiteSpaceVisible = !fPreferences->fWhiteSpaceVisible;
-			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fWhiteSpaceVisible);
-			fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
-			bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
-			fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, pressed);
+			be_app->SendNotices(VIEW_SPECIAL_CHANGED);
 		} break;
 		case MAINMENU_VIEW_SPECIAL_EOL: {
 			fPreferences->fEOLVisible = !fPreferences->fEOLVisible;
-			fMainMenu->FindItem(message->what)->SetMarked(fPreferences->fEOLVisible);
-			fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
-			bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
-			fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, pressed);
+			be_app->SendNotices(VIEW_SPECIAL_CHANGED);
 		} break;
 		case MAINMENU_VIEW_TOOLBAR: {
 			fPreferences->fToolbar = !fPreferences->fToolbar;
@@ -797,19 +795,14 @@ EditorWindow::MessageReceived(BMessage* message)
 			_ShowToolbarPopUp(menu, button);
 		} break;
 		case TOOLBAR_SPECIAL_SYMBOLS: {
-			bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
-			if(pressed == true) {
+			if(fPreferences->fWhiteSpaceVisible == true && fPreferences->fEOLVisible == true) {
 				fPreferences->fWhiteSpaceVisible = false;
 				fPreferences->fEOLVisible = false;
 			} else {
 				fPreferences->fWhiteSpaceVisible = true;
 				fPreferences->fEOLVisible = true;
 			}
-			fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
-			fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
-			fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
-			fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
-			fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, !pressed);
+			be_app->SendNotices(VIEW_SPECIAL_CHANGED);
 		} break;
 		case B_SAVE_REQUESTED: {
 			entry_ref ref;
@@ -920,6 +913,8 @@ EditorWindow::MessageReceived(BMessage* message)
 			int32 what = message->GetInt32("be:observe_change_what", 0);
 			if(what == APP_PREFERENCES_CHANGED) {
 				_SyncWithPreferences();
+			} else if(what == VIEW_SPECIAL_CHANGED) {
+				_SyncSpecialSymbols();
 			}
 		} break;
 		case GTLW_GO: {
@@ -1320,18 +1315,14 @@ EditorWindow::_SyncWithPreferences()
 			fFilePreferences.fEOLMode.reset();
 		}
 
-		bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
-		fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, pressed);
-		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
-		fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
 		fMainMenu->FindItem(MAINMENU_VIEW_TOOLBAR)->SetMarked(fPreferences->fToolbar);
 		fMainMenu->FindItem(MAINMENU_VIEW_WRAPLINES)->SetMarked(fPreferences->fWrapLines);
 
 		// reapply styles
 		_SetLanguage(fCurrentLanguage);
 
-		fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
-		fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
+		_SyncSpecialSymbols();
+
 		fEditor->SendMessage(SCI_SETTABWIDTH,
 			fFilePreferences.fTabWidth.value_or(fPreferences->fTabWidth), 0);
 		fEditor->SendMessage(SCI_SETUSETABS,
@@ -1394,6 +1385,18 @@ EditorWindow::_SyncWithPreferences()
 		// TODO Do this only if language menu preference has changed
 		_PopulateLanguageMenu();
 	}
+}
+
+
+void
+EditorWindow::_SyncSpecialSymbols()
+{
+	bool pressed = fPreferences->fWhiteSpaceVisible && fPreferences->fEOLVisible;
+	fToolbar->SetActionPressed(TOOLBAR_SPECIAL_SYMBOLS, pressed);
+	fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_WHITESPACE)->SetMarked(fPreferences->fWhiteSpaceVisible);
+	fMainMenu->FindItem(MAINMENU_VIEW_SPECIAL_EOL)->SetMarked(fPreferences->fEOLVisible);
+	fEditor->SendMessage(SCI_SETVIEWEOL, fPreferences->fEOLVisible, 0);
+	fEditor->SendMessage(SCI_SETVIEWWS, fPreferences->fWhiteSpaceVisible, 0);
 }
 
 
