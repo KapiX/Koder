@@ -104,6 +104,7 @@ enum {
 	WINDOW_CLOSE						= 'ewcl',
 
 	OPEN_TERMINAL						= 'otrm',
+	SHOW_IN_TRACKER						= 'sitr'
 };
 
 
@@ -191,6 +192,7 @@ private:
 			void			_ReloadAlert(const char* title, const char* message);
 			void			_Save();
 			void			_OpenTerminal(const char* path);
+			void			_ShowInTracker();
 
 			void			OnSavePoint(bool left);
 };
