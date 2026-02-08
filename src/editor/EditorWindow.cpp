@@ -948,11 +948,7 @@ EditorWindow::MessageReceived(BMessage* message)
 			fEditor->SetBookmarksFromSearch(*message);
 		} break;
 		case OPEN_TERMINAL: {
-			if(fOpenedFilePath != nullptr) {
-				BPath directory;
-				fOpenedFilePath->GetParent(&directory);
-				_OpenTerminal(directory.Path());
-			}
+			_OpenTerminal();
 		} break;
 		case SHOW_IN_TRACKER: {
 			_ShowInTracker();
@@ -1503,34 +1499,21 @@ EditorWindow::_Save()
 
 /**
  * Launches Terminal with current working directory set to path.
- * Uses Tracker add-on to do that, because it's easier (Terminal doesn't accept
- * paths as arguments).
- * Taken from Tracker.
  */
 void
-EditorWindow::_OpenTerminal(const char* path)
+EditorWindow::_OpenTerminal()
 {
-	const char* terminalAddonSignature = "application/x-vnd.Haiku-OpenTerminal";
-	entry_ref addonRef, directoryRef;
-	be_roster->FindApp(terminalAddonSignature, &addonRef);
-	BEntry(path).GetRef(&directoryRef);
-	image_id addonImage = load_add_on(BPath(&addonRef).Path());
-	if (addonImage >= 0) {
-		void (*processRefsFn)(entry_ref, BMessage*, void*);
-		status_t result = get_image_symbol(addonImage, "process_refs", 2,
-			(void**) &processRefsFn);
+	if(fOpenedFilePath == nullptr) {
+		return;
+	}
 
-		if (result >= 0) {
-			// call add-on code
-			(*processRefsFn)(directoryRef, new BMessage(), NULL);
-		} else {
-			OKAlert(B_TRANSLATE("Open Terminal"), B_TRANSLATE("Could not "
-				"launch Open Terminal Tracker add-on."), B_STOP_ALERT);
-		}
-		unload_add_on(addonImage);
-	} else {
-		OKAlert(B_TRANSLATE("Open Terminal"), B_TRANSLATE("Could not find "
-			"Open Terminal Tracker add-on."), B_STOP_ALERT);
+	BPath directory;
+	fOpenedFilePath->GetParent(&directory);
+	auto argv = std::to_array<const char*>({"-w", directory.Path(), nullptr});
+	status_t status = be_roster->Launch("application/x-vnd.Haiku-Terminal", 2, argv.data());
+	if(status != B_OK && status != B_ALREADY_RUNNING) {
+		OKAlert(B_TRANSLATE("Open Terminal"), B_TRANSLATE("Could not launch Terminal."),
+			B_STOP_ALERT);
 	}
 }
 
