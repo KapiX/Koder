@@ -191,7 +191,7 @@ private:
 			void			_ShowToolbarPopUp(BPopUpMenu* menu, BButton* button);
 			void			_ReloadAlert(const char* title, const char* message);
 			void			_Save();
-			void			_OpenTerminal(const char* path);
+			void			_OpenTerminal();
 			void			_ShowInTracker();
 
 			void			OnSavePoint(bool left);

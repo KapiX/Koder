@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	2324405315
+1	English	x-vnd.KapiX-Koder	4193593144
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
@@ -10,7 +10,6 @@ The file contains unsaved changes. What to do?	EditorWindow		The file contains u
 Replace:	FindWindow		Replace:
 Remove all bookmarks	EditorWindow		Remove all bookmarks
 Cancel	QuitAlert		Cancel
-Could not find Open Terminal Tracker add-on.	EditorWindow		Could not find Open Terminal Tracker add-on.
 Match entire words	FindWindow		Match entire words
 Discard	EditorWindow		Discard
 Background	AppPreferencesWindow		Background
@@ -121,11 +120,11 @@ Your changes will be lost.	EditorWindow		Your changes will be lost.
 Find/Replace…	EditorWindow		Find/Replace…
 Replace and find	FindWindow		Replace and find
 Show white space	EditorWindow		Show white space
-Could not launch Open Terminal Tracker add-on.	EditorWindow		Could not launch Open Terminal Tracker add-on.
 Huge	AppPreferencesWindow	Toolbar icon size	Huge
 Regex	FindWindow		Regex
 Go to	BookmarksListView		Go to
 Quit	EditorWindow		Quit
+Could not launch Terminal.	EditorWindow		Could not launch Terminal.
 Redo	EditorWindow		Redo
 Go to line:	GoToLineWindow		Go to line:
 Editor settings	Preferences		Editor settings
