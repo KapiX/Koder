@@ -262,6 +262,12 @@ StatusView::_ShowDirMenu()
 		// Actual shortcut is added in EditorWindow
 	openTerminal->SetTarget(Window());
 	menu->AddItem(openTerminal);
+
+	BMenuItem* showInTracker = new BMenuItem(B_TRANSLATE("Show in Tracker"),
+		new BMessage((uint32) SHOW_IN_TRACKER));
+	showInTracker->SetTarget(Window());
+	menu->AddItem(showInTracker);
+
 	menu->AddSeparatorItem();
 	menu->Populate(&entry, Window(), false, false, true, false, true);
 

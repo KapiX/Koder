@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	2012617086
+1	English	x-vnd.KapiX-Koder	2324405315
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
@@ -139,6 +139,7 @@ File removed	EditorWindow		File removed
 Use .editorconfig if possible	AppPreferencesWindow		Use .editorconfig if possible
 Line numbers	AppPreferencesWindow		Line numbers
 zuMi, for toolbar icons.	App		zuMi, for toolbar icons.
+Show in Tracker	EditorStatusView		Show in Tracker
 Clear	FindStatusView		Clear
 Style	AppPreferencesWindow		Style
 Paste	EditorWindow		Paste

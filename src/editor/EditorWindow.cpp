@@ -954,6 +954,9 @@ EditorWindow::MessageReceived(BMessage* message)
 				_OpenTerminal(directory.Path());
 			}
 		} break;
+		case SHOW_IN_TRACKER: {
+			_ShowInTracker();
+		} break;
 		default:
 			BWindow::MessageReceived(message);
 		break;
@@ -1529,6 +1532,45 @@ EditorWindow::_OpenTerminal(const char* path)
 		OKAlert(B_TRANSLATE("Open Terminal"), B_TRANSLATE("Could not find "
 			"Open Terminal Tracker add-on."), B_STOP_ALERT);
 	}
+}
+
+
+void
+EditorWindow::_ShowInTracker()
+{
+	if(fOpenedFilePath == nullptr) {
+		return;
+	}
+
+	BEntry fileEntry(fOpenedFilePath->Path());
+	if(fileEntry.InitCheck() != B_OK || fileEntry.Exists() == false) {
+		return;
+	}
+
+	BEntry parentDirectory;
+	if(fileEntry.GetParent(&parentDirectory) != B_OK) {
+		return;
+	}
+
+	entry_ref parentRef;
+	if(parentDirectory.GetRef(&parentRef) != B_OK) {
+		return;
+	}
+
+	node_ref fileNodeRef;
+	if(fileEntry.GetNodeRef(&fileNodeRef) != B_OK) {
+		return;
+	}
+
+	BMessenger tracker("application/x-vnd.Be-TRAK");
+	if(tracker.IsValid() == false) {
+		return;
+	}
+
+	BMessage message(B_REFS_RECEIVED);
+	message.AddRef("refs", &parentRef);
+	message.AddData("nodeRefToSelect", B_RAW_TYPE, (void*)&fileNodeRef, sizeof(node_ref));
+	tracker.SendMessage(&message);
 }
 
 
