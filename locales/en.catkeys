@@ -1,4 +1,4 @@
-1	English	x-vnd.KapiX-Koder	4193593144
+1	English	x-vnd.KapiX-Koder	771836523
 Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.	Preferences		Something wrong has happened while opening the configuration file. Your personal settings will not be %s%.
 Access denied	EditorWindow		Access denied
 Line endings	EditorWindow		Line endings
@@ -50,6 +50,7 @@ Match case	FindWindow		Match case
 Distributed on MIT license terms.	App		Distributed on MIT license terms.
 Couldn't find style files. Make sure you have them installed in one of your data directories.	Styler		Couldn't find style files. Make sure you have them installed in one of your data directories.
 Find:	FindWindow		Find:
+Block	AppPreferencesWindow	Cursor width or style	Block
 View	EditorWindow		View
 Neil Hodgson, for Scintilla editing component and SciTE editor.	App		Neil Hodgson, for Scintilla editing component and SciTE editor.
 Reached the end of the target. No results found.	EditorWindow		Reached the end of the target. No results found.
@@ -155,6 +156,7 @@ Preferences…	EditorWindow		Preferences…
 Go to line	GoToLineWindow		Go to line
 Reload	EditorWindow		Reload
 There are unsaved changes.\nSelect the files to save.	QuitAlert		There are unsaved changes.\nSelect the files to save.
+Cursor width (pixels)	AppPreferencesWindow		Cursor width (pixels)
 The file has been removed. What to do?	EditorWindow		The file has been removed. What to do?
 Enormous	AppPreferencesWindow	Toolbar icon size	Enormous
 Trim trailing whitespace	EditorWindow		Trim trailing whitespace
@@ -176,7 +178,6 @@ File modified	EditorWindow		File modified
 Highlight braces	AppPreferencesWindow		Highlight braces
 Save selected	QuitAlert		Save selected
 Max. characters per line:	AppPreferencesWindow		Max. characters per line:
-Use block cursor	AppPreferencesWindow		Use block cursor
 Highlight trailing whitespace	AppPreferencesWindow		Highlight trailing whitespace
 Up to the next/previous non-empty line	AppPreferencesWindow		Up to the next/previous non-empty line
 Show indentation guides	AppPreferencesWindow		Show indentation guides
