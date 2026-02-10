@@ -160,8 +160,12 @@ AppPreferencesWindow::MessageReceived(BMessage* message)
 			fPreferences->fBracesHighlighting = IsChecked(fBracesHighlightingCB);
 			_PreferencesModified();
 		} break;
+		case Actions::CURSOR_WIDTH: {
+			fPreferences->fCursorWidth = std::stoi(fCursorWidthMF->Menu()->FindMarked()->Label());
+			_PreferencesModified();
+		} break;
 		case Actions::BLOCK_CURSOR: {
-			fPreferences->fUseBlockCursor = IsChecked(fBlockCursorCB);
+			fPreferences->fCursorWidth = UINT8_MAX;
 			_PreferencesModified();
 		} break;
 		case Actions::EDITOR_STYLE: {
@@ -341,7 +345,18 @@ AppPreferencesWindow::_InitInterface()
 	fIndentGuidesBox->SetLabel(fIndentGuidesShowCB);
 
 	fBracesHighlightingCB = new BCheckBox("bracesHighlighting", B_TRANSLATE("Highlight braces"), new BMessage((uint32) Actions::BRACES_HIGHLIGHTING));
-	fBlockCursorCB = new BCheckBox("blockCursor", B_TRANSLATE("Use block cursor"), new BMessage((uint32) Actions::BLOCK_CURSOR));
+
+	BPopUpMenu* cursorMenu = new BPopUpMenu("cursorMenu");
+	auto menuBuilder = BLayoutBuilder::Menu<>(cursorMenu);
+	for(int32 x = 1; x < 6; x++) {
+		BString label;
+		label << x;
+		menuBuilder.AddItem(label.String(), CURSOR_WIDTH);
+	}
+	menuBuilder
+		.AddSeparator()
+		.AddItem(B_TRANSLATE_COMMENT("Block", "Cursor width or style"), BLOCK_CURSOR);
+	fCursorWidthMF = new BMenuField("cursorWidth", B_TRANSLATE("Cursor width (pixels)"), cursorMenu);
 
 	fEditorStyleMenu = new BPopUpMenu("style");
 	fEditorStyleMF = new BMenuField("style", B_TRANSLATE("Style"), fEditorStyleMenu);
@@ -380,7 +395,7 @@ AppPreferencesWindow::_InitInterface()
 		.Add(fCompactLangMenuCB)
 		.Add(fFullPathInTitleCB)
 		.Add(fBracesHighlightingCB)
-		.Add(fBlockCursorCB)
+		.Add(fCursorWidthMF)
 		.Add(fToolbarBox)
 		.AddStrut(B_USE_HALF_ITEM_SPACING)
 		.Add(fLineLimitBox)
@@ -485,8 +500,20 @@ AppPreferencesWindow::_SyncPreferences(Preferences* preferences)
 	fFontSizeSpinner->SetMessage(new BMessage((uint32) Actions::FONT_SIZE_CHANGED));
 	_UpdateFontMenu();
 
+	BMenu* cursorMenu = fCursorWidthMF->Menu();
+	BMenuItem* cursorItem = nullptr;
+	if(preferences->fCursorWidth == UINT8_MAX) {
+		cursorItem = cursorMenu->FindItem(BLOCK_CURSOR);
+	} else {
+		BString label;
+		label << preferences->fCursorWidth;
+		cursorItem = cursorMenu->FindItem(label.String());
+	}
+	if(cursorItem != nullptr) {
+		cursorItem->SetMarked(true);
+	}
+
 	SetChecked(fBracesHighlightingCB, preferences->fBracesHighlighting);
-	SetChecked(fBlockCursorCB, preferences->fUseBlockCursor);
 	SetChecked(fAttachNewWindowsCB, preferences->fOpenWindowsInStack);
 	SetChecked(fHighlightTrailingWSCB, preferences->fHighlightTrailingWhitespace);
 	SetChecked(fTrimTrailingWSOnSaveCB, preferences->fTrimTrailingWhitespaceOnSave);

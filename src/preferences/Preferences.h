@@ -48,7 +48,7 @@ public:
 	uint32			fLineLimitColumn;
 	bool			fWrapLines;
 	bool			fBracesHighlighting;
-	bool			fUseBlockCursor;
+	uint8			fCursorWidth;
 	bool			fFullPathInTitle;
 	bool			fCompactLangMenu;
 	bool			fToolbar;

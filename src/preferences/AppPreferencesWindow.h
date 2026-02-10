@@ -42,6 +42,7 @@ private:
 		TOOLBAR					= 'tlbr',
 		TOOLBAR_ICON_SIZE		= 'tlis',
 		FULL_PATH_IN_TITLE		= 'fpit',
+		CURSOR_WIDTH			= 'crwd',
 		BLOCK_CURSOR			= 'bloc',
 		TABS_TO_SPACES			= 'ttsp',
 		TAB_WIDTH				= 'tbwd',
@@ -137,7 +138,7 @@ private:
 	BRadioButton*	fIndentGuidesLookBothRadio;
 
 	BCheckBox*		fBracesHighlightingCB;
-	BCheckBox*		fBlockCursorCB;
+	BMenuField*		fCursorWidthMF;
 
 	BPopUpMenu*		fEditorStyleMenu;
 	BMenuField*		fEditorStyleMF;
