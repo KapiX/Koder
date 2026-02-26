@@ -93,7 +93,7 @@ StatusView::ResizeToPreferred()
 
 
 void
-StatusView::WindowActivated(bool active)
+StatusView::WindowActivated(bool /*active*/)
 {
 	// Workaround: doesn't redraw automatically
 	Invalidate();

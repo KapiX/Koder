@@ -84,7 +84,7 @@ typedef PropertyRange<SCI_GETSELECTIONSTART, SCI_GETSELECTIONEND, SCI_SETSEL>
 template<typename ...Ts>
 class Guard {
 public:
-	Guard(BScintillaView* view) {}
+	Guard(BScintillaView* /*view*/) {}
 };
 
 

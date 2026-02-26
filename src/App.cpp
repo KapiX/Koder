@@ -170,7 +170,7 @@ App::QuitRequested()
 	BObjectList<EditorWindow> unsaved;
 	std::vector<std::string> unsavedPaths;
 	EditorWindow* current;
-	for(int i = 0; current = fWindows.ItemAt(i); ++i) {
+	for(int i = 0; (current = fWindows.ItemAt(i)); ++i) {
 		if(current->IsModified()) {
 			unsaved.AddItem(current);
 			unsavedPaths.push_back(std::string(current->OpenedFilePath()));
@@ -185,7 +185,7 @@ App::QuitRequested()
 		fLastActiveWindow->Activate();
 		return false;
 	}
-	for(int i = 0; current = unsaved.ItemAt(i); ++i) {
+	for(int i = 0; (current = unsaved.ItemAt(i)); ++i) {
 		if(filesToSave[i] == false) continue;
 		BMessage reply;
 		BMessage save(SAVE_FILE);
@@ -349,7 +349,7 @@ App::_ActivateOrCreateWindow(const BMessage* message, const entry_ref& ref,
 {
 	if(!fPreferences->fAlwaysOpenInNewWindow) {
 		EditorWindow* current;
-		for(int i = 0; current = fWindows.ItemAt(i); ++i) {
+		for(int i = 0; (current = fWindows.ItemAt(i)); ++i) {
 			if(std::string(current->OpenedFilePath()) == BPath(&ref).Path()) {
 				current->Activate();
 				if(line != -1) {
@@ -385,11 +385,12 @@ App::_CreateWindow(const BMessage* message, std::unique_ptr<BWindowStack>& windo
 	bool stagger = fWindows.CountItems() > 0 &&
 		(!fPreferences->fOpenWindowsInStack || !windowStack);
 	EditorWindow* window = new EditorWindow(stagger);
-	if(fPreferences->fOpenWindowsInStack)
+	if(fPreferences->fOpenWindowsInStack) {
 		if(!windowStack)
 			windowStack.reset(new BWindowStack(window));
 		else
 			windowStack->AddWindow(window);
+	}
 	if(fAppPreferencesWindow != nullptr) {
 		fAppPreferencesWindow->StartWatching(window, APP_PREFERENCES_CHANGED);
 	}

@@ -76,11 +76,11 @@ ParseFileArgument(const std::string argument, int32* line, int32* column)
 	if(column != nullptr)
 		*column = -1;
 	// first :
-	int32 first = argument.find(':');
+	size_t first = argument.find(':');
 	if(first != std::string::npos) {
 		filename = argument.substr(0, first);
 		// second :
-		int32 second = argument.find(':', first + 1);
+		size_t second = argument.find(':', first + 1);
 		if(line != nullptr) {
 			const int32 length = second != std::string::npos ?
 				second - (first + 1) : second;
@@ -158,7 +158,7 @@ KeyDownMessageFilter::KeyDownMessageFilter(uint32 commandToSend, uint32 key,
 
 
 filter_result
-KeyDownMessageFilter::Filter(BMessage* message, BHandler** target)
+KeyDownMessageFilter::Filter(BMessage* message, BHandler** /*target*/)
 {
 	if(message->what == B_KEY_DOWN || message->what == B_UNMAPPED_KEY_DOWN) {
 		uint32 key;

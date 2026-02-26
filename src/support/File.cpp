@@ -207,7 +207,7 @@ File::SetWritable(BStatable* file, bool writable)
 }
 
 
-BackupFileGuard::BackupFileGuard(const char* path, BHandler* handler)
+BackupFileGuard::BackupFileGuard(const char* path, BHandler* /*handler*/)
 	:
 	fPath(path ? path : ""),
 	fSuccess(false)

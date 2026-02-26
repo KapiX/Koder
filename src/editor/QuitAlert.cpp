@@ -35,8 +35,8 @@ QuitAlert::QuitAlert(const std::vector<std::string> &unsavedFiles)
 	BWindow(BRect(100, 100, 200, 200), B_TRANSLATE("Unsaved files"), B_MODAL_WINDOW,
 		B_NOT_CLOSABLE | B_NOT_ZOOMABLE | B_NOT_RESIZABLE | B_AUTO_UPDATE_SIZE_LIMITS, 0),
 	fUnsavedFiles(unsavedFiles),
-	fAlertValue(0),
-	fCheckboxes(unsavedFiles.size(), nullptr)
+	fCheckboxes(unsavedFiles.size(), nullptr),
+	fAlertValue(0)
 {
 	_InitInterface();
 	CenterOnScreen();
@@ -84,10 +84,9 @@ QuitAlert::_InitInterface()
 	bar->SetRange(0.0f, fUnsavedFiles.size() > kMaxItems ?
 		(textHeight + 3.0f) * (fUnsavedFiles.size() - kMaxItems) : 0.0f);
 
-	EditorWindow* current;
 	BGroupLayout* files = filesView->GroupLayout();
 	files->SetInsets(B_USE_SMALL_INSETS);
-	for(int i = 0; i < fUnsavedFiles.size(); ++i) {
+	for(size_t i = 0; i < fUnsavedFiles.size(); ++i) {
 		fCheckboxes[i] = new BCheckBox("file", fUnsavedFiles[i].c_str(), new BMessage((uint32) i));
 		SetChecked(fCheckboxes[i]);
 		files->AddView(fCheckboxes[i]);

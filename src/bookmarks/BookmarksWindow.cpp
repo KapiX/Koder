@@ -48,9 +48,6 @@ CustomScrollView::DoLayout()
 }
 
 
-#pragma mark -
-
-
 BookmarksWindow::BookmarksWindow(BWindow* owner, const BMessage bookmarks)
 	:
 	BWindow(BRect(0, 0, 0, 0), B_TRANSLATE("Bookmarks"),

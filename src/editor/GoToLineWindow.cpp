@@ -62,6 +62,7 @@ GoToLineWindow::MessageReceived(BMessage* message)
 		message->AddInt32("line", line);
 		fOwner->PostMessage(message);
 	}
+	// fallthrough
 	case GTLW_CANCEL:
 		Hide();
 	break;
@@ -81,7 +82,7 @@ GoToLineWindow::ShowCentered(BRect ownerRect)
 
 
 void
-GoToLineWindow::WindowActivated(bool active)
+GoToLineWindow::WindowActivated(bool /*active*/)
 {
 	fLine->MakeFocus();
 	fLine->TextView()->SelectAll();
