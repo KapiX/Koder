@@ -47,7 +47,7 @@ CSSToInt(const std::string cssColor)
 
 template<>
 struct convert<Styler::Style> {
-	static Node encode(const Styler::Style& rhs) {
+	static Node encode(const Styler::Style& /*rhs*/) {
 		return Node();
 	}
 

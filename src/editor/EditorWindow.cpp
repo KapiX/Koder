@@ -493,6 +493,7 @@ EditorWindow::QuitRequested()
 		break;
 		case ModifiedAlertResult::SAVE:
 			_Save();
+		// fallthrough
 		case ModifiedAlertResult::DISCARD:
 			close = true;
 		break;
@@ -856,7 +857,7 @@ EditorWindow::MessageReceived(BMessage* message)
 		case EDITOR_MODIFIED: {
 			BMessage notice = fEditor->BookmarksWithText();
 			SendNotices(BOOKMARKS_INVALIDATED, &notice);
-		};
+		} break;
 		case B_ABOUT_REQUESTED:
 			be_app->PostMessage(message);
 		break;
@@ -1110,7 +1111,7 @@ EditorWindow::_PopulateLanguageMenu()
 	Languages::SortAlphabetically();
 	char submenuName[] = "\0";
 	BObjectList<BMenu> menus;
-	for(int32 i = 0; i < Languages::GetCount(); ++i) {
+	for(size_t i = 0; i < Languages::GetCount(); ++i) {
 		std::string lang = Languages::GetLanguage(i);
 		std::string name = Languages::GetMenuItemName(lang);
 

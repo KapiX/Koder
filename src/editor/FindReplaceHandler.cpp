@@ -92,6 +92,7 @@ FindReplaceHandler::MessageReceived(BMessage* message)
 			}
 		}
 		if(message->what != REPLACEFIND) break;
+		// fallthrough
 		case FIND: {
 			if(info.find.empty()) {
 				info = fSearchLastInfo;
@@ -217,7 +218,7 @@ FindReplaceHandler::IncrementalSearchMessageFilter::IncrementalSearchMessageFilt
 
 
 filter_result
-FindReplaceHandler::IncrementalSearchMessageFilter::Filter(BMessage* message, BHandler** target)
+FindReplaceHandler::IncrementalSearchMessageFilter::Filter(BMessage* message, BHandler** /*target*/)
 {
 	if(message->what == B_KEY_DOWN) {
 		BLooper *looper = Looper();

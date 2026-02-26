@@ -230,11 +230,11 @@ Editor::CommentBlock(Scintilla::Range range)
 	const size_t endTokenLen = fCommentBlockEndToken.length();
 	bool startTokenPresent = true;
 	bool endTokenPresent = true;
-	for(int i = 0; i < startTokenLen; i++) {
+	for(size_t i = 0; i < startTokenLen; i++) {
 		if(SendMessage(SCI_GETCHARAT, start + i, 0) != fCommentBlockStartToken[i])
 			startTokenPresent = false;
 	}
-	for(int i = 0; i < endTokenLen; i++) {
+	for(size_t i = 0; i < endTokenLen; i++) {
 		if(SendMessage(SCI_GETCHARAT, end - endTokenLen + i, 0) != fCommentBlockEndToken[i])
 			endTokenPresent = false;
 	}

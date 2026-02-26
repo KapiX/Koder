@@ -77,7 +77,7 @@ StatusView::AttachedToWindow()
 
 
 void
-StatusView::Draw(BRect updateRect)
+StatusView::Draw(BRect /*updateRect*/)
 {
 	float width, height;
 	GetPreferredSize(&width, &height);

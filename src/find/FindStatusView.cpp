@@ -66,7 +66,7 @@ StatusView::~StatusView()
 
 
 void
-StatusView::Draw(BRect updateRect)
+StatusView::Draw(BRect /*updateRect*/)
 {
 	float width, height;
 	GetPreferredSize(&width, &height);
@@ -116,7 +116,7 @@ StatusView::Draw(BRect updateRect)
 
 
 void
-StatusView::MouseDown(BPoint where)
+StatusView::MouseDown(BPoint /*where*/)
 {
 	fPressed = true;
 	Invalidate();
